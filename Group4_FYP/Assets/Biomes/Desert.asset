@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61815f0be85cba64d9d0c7822cf5e862, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  displayName: Desert
+  tiles:
+  - {fileID: 4735375665114324730, guid: 121a47ceadde4f84fb5723943b5d6a90, type: 3}
+  - {fileID: 7216629191016651444, guid: 121a47ceadde4f84fb5723943b5d6a90, type: 3}
+  - {fileID: -3332206485065865636, guid: 121a47ceadde4f84fb5723943b5d6a90, type: 3}
+  color: {r: 1, g: 0.80811393, b: 0, a: 1}
+  rules: []
+  minHeight: 0.2
+  minMoisture: 0
+  minHeat: 0.5
