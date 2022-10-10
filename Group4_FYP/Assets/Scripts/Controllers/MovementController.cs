@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float fMovementSpeed = 5f;
     [SerializeField] private float fSprintMultiplier = 2f;
     public Animator anim;
-    private Camera cam;
+    private Camera mainCamera;
     private Rigidbody2D rb2D;
     private bool bIsSprinting;
     private float fXDir, fYDir;
@@ -16,7 +16,7 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
+        mainCamera = Camera.main;
         rb2D = GetComponent<Rigidbody2D>();
     }
 
