@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class SceneController : MonoBehaviour
 {
@@ -11,15 +12,20 @@ public class SceneController : MonoBehaviour
 
     public async void ChangeScene(string sceneName)
     {
-        //canvasAcrossScenesMask.GetComponent<RectTransform>().localScale
         canvasAcrossScenes.SetActive(true);
-        await Task.Delay(1000);
+        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(0, 0), 0.5f).SetEase(Ease.OutQuad).AsyncWaitForCompletion();
         DontDestroyOnLoad(canvasAcrossScenes);
-        SceneManager.LoadScene(sceneName);
+        await WaitForSceneToLoad(sceneName);
+        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.InQuad).AsyncWaitForCompletion();
     }
 
-    private async void AnimateMask(float duration, Vector2 scale)
+    private async Task WaitForSceneToLoad(string sceneName)
     {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
+        while (!asyncOperation.isDone)
+        {
+            await Task.Yield();
+        }
     }
 }
