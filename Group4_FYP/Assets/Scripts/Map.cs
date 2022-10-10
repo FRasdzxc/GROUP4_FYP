@@ -1,7 +1,6 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Map : MonoBehaviour
 {
@@ -33,14 +32,6 @@ public class Map : MonoBehaviour
 
     void Start ()
     {
-        Random.InitState(DateTime.Now.Millisecond);
-        foreach (var wave in heightWaves)
-            wave.seed = Random.Range(1f, 1000f);
-        foreach (var wave in moistureWaves)
-            wave.seed = Random.Range(1f, 1000f);
-        foreach (var wave in heatWaves)
-            wave.seed = Random.Range(1f, 1000f);
-
         GenerateMap();
     }
 
