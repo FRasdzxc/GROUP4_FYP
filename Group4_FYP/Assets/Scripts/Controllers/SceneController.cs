@@ -9,9 +9,12 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject canvasAcrossScenes;
     [SerializeField] private GameObject canvasAcrossScenesMask;
 
-    public void ChangeScene(string sceneName)
+    public async void ChangeScene(string sceneName)
     {
         //canvasAcrossScenesMask.GetComponent<RectTransform>().localScale
+        canvasAcrossScenes.SetActive(true);
+        await Task.Delay(1000);
+        DontDestroyOnLoad(canvasAcrossScenes);
         SceneManager.LoadScene(sceneName);
     }
 

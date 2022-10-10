@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class EasingModes : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float EaseInQuad(float value)
     {
-        
+        return value * value; 
     }
 
-    // Update is called once per frame
-    void Update()
+    public float EaseOutQuad(float value)
     {
-        
+        return 1 - (1 - value) * (1 - value);
     }
 }
