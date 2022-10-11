@@ -17,6 +17,7 @@ public class SceneController : MonoBehaviour
         DontDestroyOnLoad(canvasAcrossScenes);
         await WaitForSceneToLoad(sceneName);
         await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
+        canvasAcrossScenes.SetActive(false);
     }
 
     private async Task WaitForSceneToLoad(string sceneName)
