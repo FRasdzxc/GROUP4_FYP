@@ -496,7 +496,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &114576249
 MonoBehaviour:
@@ -1623,7 +1623,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &689535814
 MonoBehaviour:
@@ -2059,7 +2059,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &884003837
 MonoBehaviour:
@@ -2233,6 +2233,7 @@ GameObject:
   - component: {fileID: 913822224}
   - component: {fileID: 913822223}
   - component: {fileID: 913822226}
+  - component: {fileID: 913822227}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2302,6 +2303,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasAcrossScenes: {fileID: 1625575405}
   canvasAcrossScenesMask: {fileID: 1168912603}
+--- !u!114 &913822227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913822222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121d5f006c9db444fb836233582233d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorDefaultTexture: {fileID: 2800000, guid: 548c21ae05f5f964c8ced3dc694505ac, type: 3}
+  cursorCrosshairTexture: {fileID: 2800000, guid: 16bdcf31c7b7985479622327f9c8f86f, type: 3}
 --- !u!1 &973420115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,7 +3228,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1166095570
 MonoBehaviour:
@@ -4079,7 +4094,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 545}
+  m_SizeDelta: {x: 0, y: 520}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1582599994
 MonoBehaviour:
@@ -4510,7 +4525,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1691502616
 MonoBehaviour:
@@ -4722,7 +4737,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1728935854
 MonoBehaviour:
@@ -4958,7 +4973,7 @@ MonoBehaviour:
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 2
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 25
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5117,7 +5132,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1875374392
 MonoBehaviour:
@@ -5621,7 +5636,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 545}
+  m_SizeDelta: {x: 350, y: 520}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2032852137
 MonoBehaviour:
