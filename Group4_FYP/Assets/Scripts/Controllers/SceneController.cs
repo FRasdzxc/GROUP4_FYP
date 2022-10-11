@@ -13,10 +13,10 @@ public class SceneController : MonoBehaviour
     public async void ChangeScene(string sceneName)
     {
         canvasAcrossScenes.SetActive(true);
-        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(0, 0), 0.5f).SetEase(Ease.OutQuad).AsyncWaitForCompletion();
+        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(0, 0), 0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         DontDestroyOnLoad(canvasAcrossScenes);
         await WaitForSceneToLoad(sceneName);
-        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.InQuad).AsyncWaitForCompletion();
+        await canvasAcrossScenesMask.GetComponent<RectTransform>().DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
     }
 
     private async Task WaitForSceneToLoad(string sceneName)

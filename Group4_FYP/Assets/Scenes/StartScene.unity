@@ -3432,7 +3432,7 @@ GameObject:
   - component: {fileID: 1180758682}
   - component: {fileID: 1180758681}
   m_Layer: 5
-  m_Name: ProfileText
+  m_Name: HeadingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4096,7 +4096,7 @@ GameObject:
   - component: {fileID: 1582599995}
   - component: {fileID: 1582599994}
   m_Layer: 5
-  m_Name: ViewportContentPanel
+  m_Name: ContentPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
