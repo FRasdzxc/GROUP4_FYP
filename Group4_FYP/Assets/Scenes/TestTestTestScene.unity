@@ -353,6 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc92de0362ed3e47a85f88b6c80a38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mage: {fileID: 1968640209}
+  fireball: {fileID: 8223818800760639309, guid: 6ad5b54d05cd81e488325f9c5f3173fc, type: 3}
 --- !u!4 &639401548
 Transform:
   m_ObjectHideFlags: 0
@@ -593,7 +595,7 @@ GameObject:
   - component: {fileID: 1968640214}
   - component: {fileID: 1968640213}
   m_Layer: 0
-  m_Name: character-1-Sheet_0
+  m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
