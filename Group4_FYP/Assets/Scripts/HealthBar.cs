@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HealthBar : MonoBehaviour
 {
@@ -29,19 +30,20 @@ public class HealthBar : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            beforeHealth = currentHealth;
-            damage = 1;
-            currentHealth -= damage;
-            getDamage = true;
+            ReduceHealth(1);
         }
         if(getDamage == true)
         {        
             float newHealth = Mathf.SmoothDamp(healthBar.value, healthBar.value - damage, ref currentVelocity, 100 * Time.deltaTime);
             healthBar.value = newHealth;
-            if((double)healthBar.value == (double)currentHealth)
+            if((double)healthBar.value <= (double)currentHealth)
             {
                 getDamage = false;
             }
         }
+    }
+    public void ReduceHealth(int damage)
+    {
+        healthBar.DOValue(healthBar.value - damage, 1f).SetEase(Ease.OutCubic);
     }
 }
