@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
         bIsOpened = false;
 
         // code for showing hudpanel and hiding osdpanel
+        pauseMenuBackground.SetActive(false);
         hudPanel.SetActive(true);
         osdPanel.SetActive(false);
 
@@ -47,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public async void ShowPauseMenu()
     {
+        pauseMenuBackground.SetActive(true);
         osdPanel.SetActive(true);
         hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
 
@@ -76,6 +78,7 @@ public class PauseMenu : MonoBehaviour
 
         await Task.Delay(250);
 
+        pauseMenuBackground.SetActive(false);
         osdPanel.SetActive(false);
         if (bShowHudPanel)
         {
