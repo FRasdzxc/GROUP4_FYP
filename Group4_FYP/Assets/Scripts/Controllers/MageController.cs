@@ -22,6 +22,7 @@ public class MageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
@@ -35,4 +36,9 @@ public class MageController : MonoBehaviour
         lineRenderer.SetPosition(0, mage.transform.position);
         lineRenderer.SetPosition(1, mousePosition);
     }
+    void AutoAttack()
+    {
+
+    }
+
 }
