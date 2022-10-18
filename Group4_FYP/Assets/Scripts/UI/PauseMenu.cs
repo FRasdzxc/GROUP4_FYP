@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject settingsMenuPanel;
     [SerializeField] private GameObject pauseMenuBackground;
     [SerializeField] private SceneController sceneController;
+    [SerializeField] private SettingsMenu settingsMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +87,8 @@ public class PauseMenu : MonoBehaviour
             hudPanel.GetComponent<CanvasGroup>().alpha = 1;
         }
 
+        settingsMenu.SaveSettings();
+
         bIsOpened = false;
     }
 
@@ -93,6 +96,8 @@ public class PauseMenu : MonoBehaviour
     {
         HidePauseMenu(false);
         await Task.Delay(250);
+
+        settingsMenu.SaveSettings();
 
         // save data to profile
 

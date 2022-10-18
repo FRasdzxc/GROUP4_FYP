@@ -9,7 +9,10 @@ public class SettingsMenu : MonoBehaviour
     // make settings save-able
 
     private Resolution[] resolutions;
+    [SerializeField] private Dropdown graphicsDropdown;
     [SerializeField] private Dropdown resolutionDropdown;
+    [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Toggle cameraShakeToggle;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider volumeSlider;
 
@@ -32,27 +35,33 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(resolutionOptions);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        // load settings
+        LoadSettings();
     }
 
     public void SetGraphics(int graphicsIndex)
     {
         QualitySettings.SetQualityLevel(graphicsIndex);
+        graphicsDropdown.value = graphicsIndex;
     }
 
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        resolutionDropdown.value = resolutionIndex;
     }
 
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+        fullscreenToggle.isOn = isFullscreen;
     }
 
     public void SetCameraShake(bool isShaking)
     {
-
+        cameraShakeToggle.isOn = isShaking;
     }
 
     public void SetVolume(float volume)
@@ -63,5 +72,43 @@ public class SettingsMenu : MonoBehaviour
     public void ChangeVolume(float volume)
     {
         volumeSlider.value += volume;
+    }
+
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetInt("graphics", graphicsDropdown.value);
+        PlayerPrefs.SetInt("resolution", resolutionDropdown.value);
+        PlayerPrefs.SetInt("fullscreen", BoolToInt(fullscreenToggle.isOn));
+        //PlayerPrefs.SetInt("cameraShake", BoolToInt(cameraShakeToggle.isOn));
+        PlayerPrefs.SetFloat("volume", volumeSlider.value);
+    }
+
+    private void LoadSettings()
+    {
+        SetGraphics(PlayerPrefs.GetInt("graphics"));
+        SetResolution(PlayerPrefs.GetInt("resolution"));
+        SetFullscreen(IntToBool(PlayerPrefs.GetInt("fullscreen")));
+        //SetCameraShake(IntToBool());
+        ChangeVolume(PlayerPrefs.GetFloat("volume"));
+    }
+
+    private bool IntToBool(int value)
+    {
+        if (value > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private int BoolToInt(bool value)
+    {
+        if (value)
+        {
+            return 1;
+        }
+
+        return 0;
     }
 }

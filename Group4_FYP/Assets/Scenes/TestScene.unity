@@ -502,7 +502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -225}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 0, y: 225}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &209722243
@@ -1488,6 +1488,7 @@ MonoBehaviour:
   settingsMenuPanel: {fileID: 962984024}
   pauseMenuBackground: {fileID: 361218507}
   sceneController: {fileID: 415524771}
+  settingsMenu: {fileID: 415524772}
 --- !u!114 &415524771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1515,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed93d26aa20d97469b7872f9a29d04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphicsDropdown: {fileID: 415480154}
   resolutionDropdown: {fileID: 1632205486}
+  fullscreenToggle: {fileID: 787697104}
+  cameraShakeToggle: {fileID: 1637168094}
   audioMixer: {fileID: 24100000, guid: dd6660b27c4939443813c1dab6bba880, type: 2}
   volumeSlider: {fileID: 534011640}
 --- !u!1 &424654459
@@ -1563,7 +1567,6 @@ GameObject:
   m_Component:
   - component: {fileID: 444965153}
   - component: {fileID: 444965152}
-  - component: {fileID: 444965151}
   m_Layer: 0
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -1571,14 +1574,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &444965151
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444965150}
-  m_Enabled: 1
 --- !u!20 &444965152
 Camera:
   m_ObjectHideFlags: 0
@@ -8943,7 +8938,6 @@ GameObject:
   - component: {fileID: 8703518573856840603}
   - component: {fileID: 8703518573856840580}
   - component: {fileID: 8703518573856840581}
-  - component: {fileID: 8703518573856840583}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -8951,21 +8945,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8703518573856840583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8703518573856840582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6bb23d06bc10b48ae214e1ec514ac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fMovementSpeed: 5
-  fSprintMultiplier: 2
-  anim: {fileID: 0}
 --- !u!4 &8703518573856840602
 Transform:
   m_ObjectHideFlags: 0
