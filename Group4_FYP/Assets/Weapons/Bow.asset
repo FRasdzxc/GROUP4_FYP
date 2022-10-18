@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d36960e5b1af348b3e44da0da3e914, type: 3}
-  m_Name: Wand
+  m_Script: {fileID: 11500000, guid: a8b2b67d32bc55f40807e4a951497205, type: 3}
+  m_Name: Bow
   m_EditorClassIdentifier: 
+  Icon: {fileID: 0}
   WeaponName: 
   WeaponMass: 0
   AttackDamage: 10
-  AttackSpeed: 2
+  AttackCooldown: 0.5
+  Projectiles:
+  - {fileID: 11400000, guid: d3740b4d3e563694a851a38508ac96ea, type: 2}
+  WeaponPrefab: {fileID: 0}
+  AutoAttack: {fileID: 0}
