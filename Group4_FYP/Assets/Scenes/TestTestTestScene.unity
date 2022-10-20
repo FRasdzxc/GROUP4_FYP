@@ -628,7 +628,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.26, y: 0.31}
+    oldSize: {x: 0.8125, y: 0.96875}
     newSize: {x: 0.26, y: 0.31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1338,7 +1338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3700220636143683328, guid: 43b45c85c32497144baa0cddd14a82f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.112
+      value: -0.347
       objectReference: {fileID: 0}
     - target: {fileID: 3700220636143683328, guid: 43b45c85c32497144baa0cddd14a82f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1649,7 +1649,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.0988193
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
