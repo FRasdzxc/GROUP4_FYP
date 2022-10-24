@@ -41,14 +41,14 @@ public class Map : MonoBehaviour
         foreach (var wave in heatWaves)
             wave.seed = Random.Range(1f, 1000f);
 
-        GenerateMap();
+        ////GenerateMap();
     }
 
     void GenerateMap ()
     {
         // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
-
+        HashSet<Vector2Int> newHeightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
         // moisture map
         moistureMap = NoiseGenerator.Generate(width, height, scale, moistureWaves, offset);
 
