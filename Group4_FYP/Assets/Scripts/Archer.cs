@@ -18,6 +18,8 @@ public class Archer : MonoBehaviour // rename and use as general character?
     {
         tLineRenderer = GetComponent<LineRenderer>();
         tLineRenderer.startWidth = 0.1f;
+
+        currentWeapon = weapons[0]; // test
     }
 
     // Update is called once per frame
@@ -41,7 +43,8 @@ public class Archer : MonoBehaviour // rename and use as general character?
 
 
 
-            await WaitFor(0.25325f); // currentWeapon.AttackCooldown
+            //await WaitFor(currentWeapon); // currentWeapon.AttackCooldown
+            canAttack = true;
         }
     }
 

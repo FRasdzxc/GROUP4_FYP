@@ -6,7 +6,7 @@ public class ProjectilesController : MonoBehaviour
 {
     private Vector3 shootDir;
     public static float projectileSpeed;
-    public LayerMask mask;
+    //public LayerMask mask;
 
     public void Setup(Vector3 shootDir)
     {
@@ -15,15 +15,17 @@ public class ProjectilesController : MonoBehaviour
         float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
         Debug.Log(angle);
         transform.eulerAngles = new Vector3(0, 0, angle);
+
+        shoot(projectileSpeed);
     }
 
     private void Update()
     {
-        shoot(projectileSpeed);
+        //shoot(projectileSpeed);
     }
-    private void shoot(float speed)
+    public void shoot(float speed)
     {
-        transform.position += shootDir * speed * Time.deltaTime;
+        GetComponent<Rigidbody2D>().AddForce(shootDir * speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
