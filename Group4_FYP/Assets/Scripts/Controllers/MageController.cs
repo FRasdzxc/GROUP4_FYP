@@ -6,6 +6,7 @@ public class MageController : MonoBehaviour
 {
     public GameObject mage;
     public Transform fireball;
+    public float projectileSpeed = 10;
     private Camera mainCamera;
     private LineRenderer lineRenderer;
     private Vector2 mousePosition;
@@ -14,6 +15,7 @@ public class MageController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ProjectilesController.projectileSpeed = projectileSpeed;
         mainCamera = Camera.main;
         lineRenderer = mainCamera.GetComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f;
@@ -37,6 +39,12 @@ public class MageController : MonoBehaviour
         lineRenderer.SetPosition(0, mage.transform.position);
         lineRenderer.SetPosition(1, mousePosition);
     }
+
+    void SetProjectileSpeed(float speed)
+    {
+
+    }
+
     void AutoAttack(Vector3 mousePosition)
     {
         Transform bulletTransform = Instantiate(fireball, mage.transform.position, Quaternion.identity);

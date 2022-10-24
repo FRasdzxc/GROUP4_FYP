@@ -5,8 +5,12 @@ using UnityEngine;
 public class ProjectilesController : MonoBehaviour
 {
     private Vector3 shootDir;
+    public static float projectileSpeed;
+    public LayerMask mask;
+
     public void Setup(Vector3 shootDir)
     {
+        Physics2D.IgnoreLayerCollision(3, 6);
         this.shootDir = shootDir;
         float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
         Debug.Log(angle);
@@ -15,6 +19,19 @@ public class ProjectilesController : MonoBehaviour
 
     private void Update()
     {
-        transform.position += shootDir * Time.deltaTime;
+        shoot(projectileSpeed);
     }
+    private void shoot(float speed)
+    {
+        transform.position += shootDir * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }
