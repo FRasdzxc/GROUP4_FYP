@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     private bool bIsOpened;
     [SerializeField] private GameObject hudPanel;
-    [SerializeField] private GameObject osdPanel;
+    [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject sideMenuPanel;
     [SerializeField] private GameObject settingsMenuPanel;
     [SerializeField] private GameObject pauseMenuBackground;
@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
         // code for showing hudpanel and hiding osdpanel
         pauseMenuBackground.SetActive(false);
         hudPanel.SetActive(true);
-        osdPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
 
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
@@ -50,7 +50,7 @@ public class PauseMenu : MonoBehaviour
     public async void ShowPauseMenu()
     {
         pauseMenuBackground.SetActive(true);
-        osdPanel.SetActive(true);
+        pauseMenuPanel.SetActive(true);
         hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0.5f, 0.25f).SetEase(Ease.OutQuart);
@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
 
         await Task.Delay(250);
 
-        osdPanel.SetActive(true);
+        pauseMenuPanel.SetActive(true);
         hudPanel.SetActive(false);
 
         bIsOpened = true;
@@ -80,7 +80,7 @@ public class PauseMenu : MonoBehaviour
         await Task.Delay(250);
 
         pauseMenuBackground.SetActive(false);
-        osdPanel.SetActive(false);
+        pauseMenuPanel.SetActive(false);
         if (bShowHudPanel)
         {
             hudPanel.SetActive(true);
