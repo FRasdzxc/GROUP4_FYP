@@ -46,14 +46,14 @@ public class Map : MonoBehaviour
 
     void GenerateMap ()
     {
-        // height map
+/*        // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
         HashSet<Vector2Int> newHeightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
         // moisture map
         moistureMap = NoiseGenerator.Generate(width, height, scale, moistureWaves, offset);
 
         // heat map
-        heatMap = NoiseGenerator.Generate(width, height, scale, heatWaves, offset);
+        heatMap = NoiseGenerator.Generate(width, height, scale, heatWaves, offset);*/
 
         int i = 0;
         Color[] pixels = new Color[width * height];

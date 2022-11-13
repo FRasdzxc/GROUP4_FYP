@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NoiseGenerator : MonoBehaviour
 {
+    /*
     public static HashSet<Vector2Int> Generate (int width, int height, float scale, Wave[] waves, Vector2 offset)
     {
         // create the noise map
@@ -34,8 +35,9 @@ public class NoiseGenerator : MonoBehaviour
             }
         }
         
-        return noiseMap;
+        return (Vector2Int)noiseMap;
     }
+    */
 }
 
 [System.Serializable]
