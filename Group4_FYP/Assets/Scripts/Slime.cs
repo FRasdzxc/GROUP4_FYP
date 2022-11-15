@@ -26,6 +26,11 @@ public class Slime : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
+        
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }
