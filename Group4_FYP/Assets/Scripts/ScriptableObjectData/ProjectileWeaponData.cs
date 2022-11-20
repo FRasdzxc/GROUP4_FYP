@@ -8,9 +8,9 @@ public class ProjectileWeaponData : ScriptableObject
     public Sprite Icon;
     public string WeaponName;
     public float WeaponMass; // mass that could slow down the character
-    public float AttackDamage;
+    public float AttackDamageMultiplier; // AttackDamageMultiplier * projectile's damage = total damage
     public float AttackCooldown; // seconds until next attack
     public ScriptableObject[] Projectiles;
-    public GameObject WeaponPrefab;
+    public Sprite WeaponPrefab;
     public GameObject AutoAttack;
 }

@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class PauseMenu : MonoBehaviour
 {
-    private bool bIsOpened;
+    private bool isOpened;
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject sideMenuPanel;
@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bIsOpened = false;
+        isOpened = false;
 
         // code for showing hudpanel and hiding osdpanel
         pauseMenuBackground.SetActive(false);
@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (bIsOpened)
+            if (isOpened)
             {
                 HidePauseMenu(true);
             }
@@ -59,14 +59,18 @@ public class PauseMenu : MonoBehaviour
 
         await Task.Delay(250);
 
+
+        Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
         hudPanel.SetActive(false);
 
-        bIsOpened = true;
+        isOpened = true;
     }
 
     public async void HidePauseMenu(bool bShowHudPanel)
     {
+        Time.timeScale = 1;
+
         if (bShowHudPanel)
         {
             hudPanel.SetActive(true);
@@ -89,7 +93,7 @@ public class PauseMenu : MonoBehaviour
 
         settingsMenu.SaveSettings();
 
-        bIsOpened = false;
+        isOpened = false;
     }
 
     public async void ExitToMenu()
