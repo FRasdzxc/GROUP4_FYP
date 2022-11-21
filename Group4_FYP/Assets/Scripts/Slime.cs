@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using TinyScript;
 
 public class Slime : MonoBehaviour
 {
     public MobData m_data;
     public string mobName;
-    public int health;
-    public int defense;
-    public int attack;
+    public float health;
+    public float defense;
+    public float attack;
     public float attackSpeed;
     public float speed;
+    public float takeDamage;
+    public bool takenDamage = false;
+    public LootDrop Loot;
+    public int RandomDropCount = 1;
+    public float DropRange = .5f;
     void Start()
     {
-
         health = m_data.health;
         defense = m_data.defense;
         attack = m_data.attack;
@@ -24,13 +29,20 @@ public class Slime : MonoBehaviour
 
     }
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
-        
+        if(health <= 0)
+        {
+            Loot.SpawnDrop(this.transform, RandomDropCount, DropRange);
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+        takeDamage = collision.gameObject.GetComponent<ProjectilesController>().damage;
+        health -= takeDamage;
+        takenDamage = true;
+        Debug.Log(health);
     }
 }

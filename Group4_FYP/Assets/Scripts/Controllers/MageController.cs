@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class MageController : MonoBehaviour
 {
+    public HeroData mageData;
     public GameObject mage;
     public Transform fireball;
     public float projectileSpeed = 10;
     private Camera mainCamera;
     private LineRenderer lineRenderer;
     private Vector2 mousePosition;
-
+    private float attackSpeed;
+    private bool[] isReady = { true, true, true, true, true};
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class MageController : MonoBehaviour
         mainCamera = Camera.main;
         lineRenderer = mainCamera.GetComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f;
+        attackSpeed = mageData.AttackSpeed;
     }
 
     // Update is called once per frame
@@ -28,13 +31,15 @@ public class MageController : MonoBehaviour
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
-            AutoAttack(mousePosition);
-            //Vector2 lookDirection = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            //float lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-            //GameObject bullet = Instantiate(fireball, mage.transform.position, Quaternion.Euler(0f, 0f, lookAngle));
-
-            //Rigidbody2D rigidbody = bullet.GetComponent<Rigidbody2D>();
-            //rigidbody.MovePosition(bullet.transform.position + Vector3.forward * 0.025f);
+            if(isReady[0] == true)
+            {
+                AutoAttack(mousePosition);
+                StartCoroutine(StartCoolDown(attackSpeed, 0));
+            }
+            else
+            {
+                Debug.Log("Not ready");
+            }
         }
         lineRenderer.SetPosition(0, mage.transform.position);
         lineRenderer.SetPosition(1, mousePosition);
@@ -44,7 +49,13 @@ public class MageController : MonoBehaviour
     {
 
     }
-
+    IEnumerator StartCoolDown(float cooldown, int status)
+    {
+        isReady[status] = false;
+        Debug.Log("Start Cooldown");
+        yield return new WaitForSeconds(cooldown);
+        isReady[status] = true;
+    }
     void AutoAttack(Vector3 mousePosition)
     {
         Transform bulletTransform = Instantiate(fireball, mage.transform.position, Quaternion.identity);
