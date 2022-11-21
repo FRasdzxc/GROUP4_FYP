@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class InventoryPanel : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,12 +16,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
+    public void UpdateInventoryPanel(List<Item> items)
     {
 
     }

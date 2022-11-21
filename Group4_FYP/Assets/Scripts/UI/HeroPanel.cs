@@ -23,23 +23,23 @@ public class HeroPanel : MonoBehaviour
         {
             if (isOpened)
             {
-                await HideInventoryScreen();
+                await HideHeroPanel();
             }
             else
             {
-                await ShowInventoryScreen();
+                await ShowHeroPanel();
             }
 
             isOpened = !isOpened;
         }
     }
 
-    private async Task ShowInventoryScreen()
+    private async Task ShowHeroPanel()
     {
         heroPanel.SetActive(true);
     }
 
-    private async Task HideInventoryScreen()
+    private async Task HideHeroPanel()
     {
         heroPanel.SetActive(false);
     }

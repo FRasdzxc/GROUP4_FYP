@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class TestCharacterController : MonoBehaviour
+public class TestHeroController : MonoBehaviour
 {
     [SerializeField] private HeroData hero;
     [SerializeField] private ProjectileWeaponData projectileWeapon;
     [SerializeField] private ProjectileData projectile;   
 
     private Sprite weaponSprite;
+    private Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
     {
         weaponSprite = projectileWeapon.WeaponPrefab;
+        inventory = new Inventory();
     }
 
     // Update is called once per frame
@@ -26,10 +28,29 @@ public class TestCharacterController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if (collider2D.CompareTag("Item"))
+        {
+            //PickUpItem();
+        }
+    }
+
     private void Attack()
     {
         Sprite clone = Instantiate(projectile.Sprite);
         //clone.
+    }
+
+    private void PickUpItem(Item item)
+    {
+        inventory.AddItem(item);
+
+    }
+
+    private void DropItem()
+    {
+
     }
 
     private async Task DestroyAfterSeconds(float seconds, GameObject gameObject)
