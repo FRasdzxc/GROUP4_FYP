@@ -4,10 +4,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TinyScript;
+using HugeScript;
 
 public class Slime : MonoBehaviour
 {
     public MobData m_data;
+    public MobSpawner ms;
+    public GameObject ememyPrefab;
     public string mobName;
     public float health;
     public float defense;
@@ -15,10 +18,11 @@ public class Slime : MonoBehaviour
     public float attackSpeed;
     public float speed;
     public float takeDamage;
-    public bool takenDamage = false;
     public LootDrop Loot;
     public int RandomDropCount = 1;
     public float DropRange = .5f;
+
+
     void Start()
     {
         health = m_data.health;
@@ -42,7 +46,6 @@ public class Slime : MonoBehaviour
     {
         takeDamage = collision.gameObject.GetComponent<ProjectilesController>().damage;
         health -= takeDamage;
-        takenDamage = true;
         Debug.Log(health);
     }
 }

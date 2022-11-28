@@ -1,18 +1,27 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HugeScript;
 
 public class MobSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public MobTable Loot;
+    public int RandomDropCount = 1;
+    public float DropRange = 5f;
+    float rangeX;
+    float rangeY;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        rangeX = GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        rangeY = GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        Loot.SpawnDrop(this.transform, RandomDropCount, rangeX, rangeY);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+
+        }
     }
 }
