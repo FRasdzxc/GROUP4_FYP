@@ -1140,6 +1140,7 @@ GameObject:
   - component: {fileID: 1968640214}
   - component: {fileID: 1968640213}
   - component: {fileID: 1968640216}
+  - component: {fileID: 1968640217}
   m_Layer: 3
   m_Name: Mage
   m_TagString: Untagged
@@ -1313,6 +1314,20 @@ MonoBehaviour:
   mage: {fileID: 1968640209}
   fireball: {fileID: 6267009946394207606, guid: 6ad5b54d05cd81e488325f9c5f3173fc, type: 3}
   projectileSpeed: 10
+--- !u!114 &1968640217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968640209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a3fcea4342c8a42b8426b14986ff19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: e5ea2d14ee2a8c64db2ed605f1cfa281, type: 2}
 --- !u!1 &3154718745290801513
 GameObject:
   m_ObjectHideFlags: 0

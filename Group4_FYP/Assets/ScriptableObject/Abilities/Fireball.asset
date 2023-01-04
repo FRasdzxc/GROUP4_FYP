@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02d0902d3b790545b858276cf99697d, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  SkillName: Fireball
-  HeroClass: 1
-  Cooldown: 5
+  abilityName: Fireball
+  heroClass: 1
+  lifeTime: 20
+  cooldownTime: 5
+  abilityState: 0
+  fireball: {fileID: 6267009946394207606, guid: 6ad5b54d05cd81e488325f9c5f3173fc, type: 3}
+  fireballCount: 8

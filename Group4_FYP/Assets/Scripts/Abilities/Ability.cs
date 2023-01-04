@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+public class Ability : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string abilityName;
+    public HeroClass heroClass;
+    public float lifeTime;
+    public float cooldownTime;
+    [HideInInspector] public AbilityState abilityState = AbilityState.ready;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void Activate(GameObject character) { }
+    public virtual void Cooldown() { }
 }
