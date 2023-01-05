@@ -11,4 +11,6 @@ public class MobData : ScriptableObject
     public int attack;
     public float attackSpeed;
     public float speed;
+    public float sightDistance;
+    public float attackDistance;
 }

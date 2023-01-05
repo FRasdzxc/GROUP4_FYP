@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class WeaponController : MonoBehaviour
+public class WeaponPositionController : MonoBehaviour
 {
     [SerializeField] private float _cycleLength = 2;
     [SerializeField] private Vector3 _offset = Vector3.one;

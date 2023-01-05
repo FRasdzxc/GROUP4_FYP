@@ -11,7 +11,8 @@ public class AbilityManager : MonoBehaviour
     {
         foreach(Ability a in abilities)
         {
-            a.abilityState = AbilityState.ready;
+            //a.abilityState = AbilityState.ready;
+            a.isReady = true;
         }
     }
 
@@ -21,6 +22,11 @@ public class AbilityManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             abilities[0].Activate(gameObject); // test
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            abilities[1].Activate(gameObject); // test
         }
     }
 }

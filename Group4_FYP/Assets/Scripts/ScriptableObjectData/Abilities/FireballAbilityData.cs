@@ -11,9 +11,12 @@ public class FireballAbilityData : Ability
 
     public override async void Activate(GameObject character)
     {
-        if (abilityState == AbilityState.ready)
+        if (isReady)
         {
+            isReady = false;
             Debug.Log("fireball ability activated on " + character.name);
+
+            Cooldown();
 
             float currentAngle = 0;
             for (int i = 0; i < fireballCount; i++)
@@ -23,12 +26,11 @@ public class FireballAbilityData : Ability
 
                 Transform fireballClone = Instantiate(fireball, character.transform.position + shootDir, Quaternion.identity);
                 fireballClone.GetComponent<ProjectilesController>().Setup(shootDir);
+                DestroyGobj(fireballClone.gameObject);
 
                 currentAngle += 360 / (float)fireballCount;
                 await Task.Delay(50);
             }
-
-            Cooldown();
         }
         else
         {
@@ -36,20 +38,5 @@ public class FireballAbilityData : Ability
 
             // maybe show some warning on ui
         }
-    }
-
-    public override async void Cooldown()
-    {
-        abilityState = AbilityState.cooldown;
-
-        float interval = 0f;
-
-        while (interval < cooldownTime)
-        {
-            interval += Time.deltaTime;
-            await Task.Yield();
-        }
-
-        abilityState = AbilityState.ready;
     }
 }

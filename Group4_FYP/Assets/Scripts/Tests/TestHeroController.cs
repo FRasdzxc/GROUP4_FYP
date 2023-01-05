@@ -15,7 +15,7 @@ public class TestHeroController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weaponSprite = projectileWeapon.WeaponPrefab;
+        //weaponSprite = projectileWeapon.WeaponPrefab;
         inventory = new Inventory();
     }
 

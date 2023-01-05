@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a666d6ab964824a4c8153165498061da, type: 3}
-  m_Name: Slime
+  m_Script: {fileID: 11500000, guid: a8b2b67d32bc55f40807e4a951497205, type: 3}
+  m_Name: TestWand
   m_EditorClassIdentifier: 
-  mobName: Slime
-  health: 20
-  defense: 1
-  attack: 2
-  attackSpeed: 0.5
-  speed: 3
-  sightDistance: 7
-  attackDistance: 3
+  weaponName: TestWand
+  cooldown: 0.25
+  projectileLifeTime: 5
+  projectileSpeed: 25
