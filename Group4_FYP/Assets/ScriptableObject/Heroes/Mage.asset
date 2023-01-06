@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b3e19f86af4b84abf72b018c44eca9, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: 
-  HeroName: Mage
-  Health: 80
-  Mana: 200
-  AttackSpeed: 1
-  Luck: 0
-  Defense: 5
-  Walkspeed: 4
+  heroName: Mage
+  health: 80
+  mana: 200
+  attackSpeed: 1
+  luck: 0
+  defense: 5
+  walkspeed: 4

@@ -18,5 +18,6 @@ MonoBehaviour:
   attack: 2
   attackSpeed: 0.5
   speed: 3
-  sightDistance: 7
-  attackDistance: 3
+  sightDistance: 5
+  attackDistance: 2.5
+  walkAroundDistance: 0

@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b3e19f86af4b84abf72b018c44eca9, type: 3}
-  m_Name: Archer
+  m_Script: {fileID: 11500000, guid: 3d005b8eecbe90346b6ca71b03bed80c, type: 3}
+  m_Name: Slimeball
   m_EditorClassIdentifier: 
-  heroName: Archer
-  health: 100
-  mana: 0
-  attackSpeed: 0
-  luck: 0
-  defense: 0
-  walkspeed: 5
+  weaponPointName: Slimeball
+  damage: 5
+  criticalDamage: 15

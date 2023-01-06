@@ -21,7 +21,7 @@ public class MageController : MonoBehaviour
         mainCamera = Camera.main;
         lineRenderer = mainCamera.GetComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f;
-        attackSpeed = mageData.AttackSpeed;
+        attackSpeed = mageData.attackSpeed;
     }
 
     // Update is called once per frame

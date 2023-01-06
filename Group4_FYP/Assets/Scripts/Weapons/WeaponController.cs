@@ -10,7 +10,7 @@ public class WeaponController : MonoBehaviour
     protected bool isReady;
 
     // Start is called before the first frame update
-    public virtual void Start()
+    protected virtual void Start()
     {
         cooldown = weaponData.cooldown;
         isReady = true;
@@ -25,9 +25,9 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public virtual void Attack(GameObject weapon) { }
+    protected virtual void Attack(GameObject weapon) { }
 
-    public async void Cooldown()
+    protected async void Cooldown()
     {
         float interval = 0f;
 
