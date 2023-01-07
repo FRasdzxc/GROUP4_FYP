@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 7677370112282327881}
   - component: {fileID: 7677370112282327880}
   m_Layer: 9
-  m_Name: Slime
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,6 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_data: {fileID: 11400000, guid: 55e3f3cd9f289994b969ea48da47aa41, type: 2}
+  ms: {fileID: 0}
   ememyPrefab: {fileID: 0}
   mobName: 
   health: 0

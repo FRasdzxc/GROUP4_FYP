@@ -5,6 +5,7 @@ using UnityEngine;
 using HugeScript;
 using System.Reflection;
 using System.Xml.Linq;
+using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
 using UnityEditorInternal;
@@ -75,19 +76,37 @@ namespace HugeScript
         }
 
 
-        public void SpawnDrop(Transform _position, int _count, float _rangeX, float _rangeY)
+        public void SpawnDrop(Tilemap _tileMap, int _count, float _rangeX, float _rangeY)
         {
             List<GameObject> guaranteed = GetGuaranteeedLoot();
             List<GameObject> randomLoot = GetRandomLoot(_count);
+            List<Vector3> availableTiles = new List<Vector3>();
+
+            for(int n = _tileMap.cellBounds.xMin; n < _tileMap.cellBounds.xMax; n++)
+            {
+                for(int p = _tileMap.cellBounds.yMin; p < _tileMap.cellBounds.yMax; p++)
+                {
+                    Vector3Int localPlace = new Vector3Int(n, p, (int)_tileMap.transform.position.y);
+                    Vector3 place = _tileMap.CellToWorld(localPlace);
+                    if (_tileMap.HasTile(localPlace))
+                    {
+                        availableTiles.Add(place);
+                    }
+                }
+            }
 
             for (int i = 0; i < guaranteed.Count; i++)
             {
-                Instantiate(guaranteed[i], new Vector3(_position.position.x + Random.Range(-_rangeX, _rangeX), _position.position.y + Random.Range(-_rangeY, _rangeY), _position.position.z), Quaternion.identity);
+                int temp = Random.Range(0, availableTiles.Count);
+                Vector3 _position = new Vector3(availableTiles[temp].x + 0.5f, availableTiles[temp].y + 0.5f, availableTiles[temp].z);
+                Instantiate(guaranteed[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
             }
 
             for (int i = 0; i < randomLoot.Count; i++)
             {
-                Instantiate(randomLoot[i], new Vector3(_position.position.x + Random.Range(-_rangeX, _rangeX), _position.position.y + Random.Range(-_rangeY, _rangeY), _position.position.z), Quaternion.identity);
+                int temp = Random.Range(0, availableTiles.Count);
+                Vector3 _position = new Vector3(availableTiles[temp].x + 0.5f, availableTiles[temp].y + 0.5f, availableTiles[temp].z);
+                Instantiate(randomLoot[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
             }
         }
     }
