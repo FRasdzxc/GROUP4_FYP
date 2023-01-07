@@ -4,11 +4,15 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TinyScript;
 
 public class Mob : MonoBehaviour
 {
     [SerializeField] protected MobData mobData;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private LootDrop loot;
+    [SerializeField] private int randomDropCount = 1;
+    [SerializeField] private float dropRange = 0.5f;
     protected float health;
     protected float sightDistance;
     protected float attackDistance;
@@ -94,6 +98,7 @@ public class Mob : MonoBehaviour
 
         if (this) // trying to prevent MissingReferenceException
         {
+            loot.SpawnDrop(transform, randomDropCount, dropRange);
             Destroy(gameObject);
         }
     }

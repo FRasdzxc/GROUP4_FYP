@@ -5,15 +5,14 @@ using UnityEngine;
 public class AbilityManager : MonoBehaviour
 {
     [SerializeField] private Ability[] abilities;
+    private Ability[] equippedAbilities;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Ability a in abilities)
-        {
-            //a.abilityState = AbilityState.ready;
-            a.isReady = true;
-        }
+        equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory lateron
+
+        ReadyEquippedAbilities();
     }
 
     // Update is called once per frame
@@ -21,12 +20,20 @@ public class AbilityManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            abilities[0].Activate(gameObject); // test
+            equippedAbilities[0].Activate(gameObject); // test
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            abilities[1].Activate(gameObject); // test
+            equippedAbilities[1].Activate(gameObject); // test
+        }
+    }
+
+    public void ReadyEquippedAbilities()
+    {
+        foreach(Ability a in equippedAbilities)
+        {
+            a.isReady = true;
         }
     }
 }

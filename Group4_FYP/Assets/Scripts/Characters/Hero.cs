@@ -9,9 +9,15 @@ using DG.Tweening;
 public class Hero : MonoBehaviour
 {
     [SerializeField] private HeroData heroData;
+
+    [SerializeField] private GameObject spawnPoint;
+
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Text healthText;
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private GameObject deathMessage;
+
+    [SerializeField] private MovementControllerV2 movementController;
+    [SerializeField] private AbilityManager abilityManager;
     //[SerializeField] private Slider manaSlider;
     //[SerializeField] private Text manaText;
     private float health;
@@ -46,6 +52,10 @@ public class Hero : MonoBehaviour
         transform.position = spawnPoint.transform.position;
         transform.localScale = Vector3.one;
         colorGrading.saturation.value = 0f;
+        movementController.enabled = true;
+        abilityManager.enabled = true;
+        abilityManager.ReadyEquippedAbilities();
+        deathMessage.SetActive(false);
     }
 
     private void TakeDamage(float damage)
@@ -68,7 +78,14 @@ public class Hero : MonoBehaviour
         health = 0;
         UpdateUI();
         colorGrading.saturation.value = -100f;
-        await Task.Delay(1000);
+        movementController.ResetAnimatorParameters();
+        movementController.enabled = false;
+        abilityManager.enabled = false;
+
+        deathMessage.SetActive(true);
+        await deathMessage.transform.DOScaleX(1, 0.25f).AsyncWaitForCompletion();
+        await Task.Delay(1500);
+        await deathMessage.transform.DOScaleX(0, 0.25f).AsyncWaitForCompletion();
         Respawn();
     }
 
