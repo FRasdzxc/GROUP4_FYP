@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5174444407015865595}
   - component: {fileID: 3127030953266186812}
   - component: {fileID: 3127030953266186809}
+  - component: {fileID: 871632835537392764}
   m_Layer: 0
   m_Name: Tornado
-  m_TagString: PlayerWeaponPoint
+  m_TagString: HeroWeaponPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,3 +167,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPointData: {fileID: 11400000, guid: e5cd847ba58aa2a4ea706dab78323332, type: 2}
+--- !u!114 &871632835537392764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127030953266186813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db0484940bc2e045a692b783355263c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

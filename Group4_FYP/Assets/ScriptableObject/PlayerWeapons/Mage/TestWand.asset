@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestWand
   m_EditorClassIdentifier: 
   weaponName: TestWand
-  cooldown: 0.25
+  cooldown: 0.5
   projectileLifeTime: 5
   projectileSpeed: 25

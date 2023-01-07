@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 
 public class Hero : MonoBehaviour
@@ -16,11 +17,13 @@ public class Hero : MonoBehaviour
     private float health;
     private SpriteRenderer sr;
     private bool isDead;
+    private ColorGrading colorGrading;
 
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
 
         Setup();
     }
@@ -28,7 +31,7 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.R)) // test
+        if (!isDead && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R)) // test
         {
             Die();
         }
@@ -42,17 +45,20 @@ public class Hero : MonoBehaviour
         UpdateUI();
         transform.position = spawnPoint.transform.position;
         transform.localScale = Vector3.one;
+        colorGrading.saturation.value = 0f;
     }
 
     private void TakeDamage(float damage)
     {
-        health -= damage;
-        UpdateUI();
-
-        if (health <= 0)
+        if (!isDead)
         {
-            
-            Die();
+            health -= damage;
+            UpdateUI();
+
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -61,7 +67,8 @@ public class Hero : MonoBehaviour
         isDead = true;
         health = 0;
         UpdateUI();
-        await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
+        colorGrading.saturation.value = -100f;
+        await Task.Delay(1000);
         Respawn();
     }
 

@@ -91,7 +91,11 @@ public class Mob : MonoBehaviour
         health = 0;
         UpdateUI();
         await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
-        Destroy(gameObject);
+
+        if (this) // trying to prevent MissingReferenceException
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void UpdateUI()
@@ -101,7 +105,7 @@ public class Mob : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerWeaponPoint") && collision.GetComponent<WeaponPoint>())
+        if (collision.CompareTag("HeroWeaponPoint") && collision.GetComponent<WeaponPoint>())
         {
             TakeDamage(collision.GetComponent<WeaponPoint>().GetDamage(false));
             sr.color = Color.red;
