@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8153043610433666335}
   - component: {fileID: 8153043610433666332}
   - component: {fileID: 8153043610433666329}
-  - component: {fileID: 1384382991116693337}
+  - component: {fileID: -4689085537987942356}
   m_Layer: 0
   m_Name: Slimeball
   m_TagString: MobWeaponPoint
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPointData: {fileID: 11400000, guid: 172f38d849401cb4bb59658719e22ddd, type: 2}
---- !u!114 &1384382991116693337
+--- !u!114 &-4689085537987942356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,6 +159,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8153043610433666323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b29e8d7ad728baa4e9188e60871acfdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6db0484940bc2e045a692b783355263c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -30,6 +30,7 @@ public class Hero : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+        deathMessage.transform.localScale = new Vector2(0, 1);
 
         Setup();
     }
@@ -50,7 +51,6 @@ public class Hero : MonoBehaviour
         healthSlider.maxValue = health;
         UpdateUI();
         transform.position = spawnPoint.transform.position;
-        transform.localScale = Vector3.one;
         colorGrading.saturation.value = 0f;
         movementController.enabled = true;
         abilityManager.enabled = true;
