@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 
-[CreateAssetMenu(fileName = "New Tornado Ability Data", menuName = "Game/Tornado Ability Data")]
+[CreateAssetMenu(fileName = "New Tornado Ability Data", menuName = "Game/Abilities/Tornado Ability Data")]
 public class TornadoAbilityData : Ability
 {
     public GameObject tornado;
-    public float speed;
+    public float projectileSpeed;
     public float endScale;
     public float scaleDuration;
 
@@ -26,9 +26,9 @@ public class TornadoAbilityData : Ability
             Vector3 projectDir = (mousePos - character.transform.position).normalized;
 
             GameObject projectileClone = Instantiate(tornado, character.transform.position + projectDir, Quaternion.identity);
-            projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * speed, ForceMode2D.Impulse);
+            projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
             projectileClone.transform.DOScale(endScale, scaleDuration);
-            DestroyGobj(projectileClone);
+            DestroyAfterLifeTime(projectileClone);
         }
         else
         {

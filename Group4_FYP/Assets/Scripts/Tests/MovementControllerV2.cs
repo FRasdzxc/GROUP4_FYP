@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class MovementControllerV2 : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 2f;
     [SerializeField] private GameObject weaponHolder;
     [SerializeField] private Animator animator;
@@ -73,7 +73,7 @@ public class MovementControllerV2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
+        rb2D.MovePosition(rb2D.position + moveDir * moveSpeed * Time.deltaTime);
     }
 
     public void ResetAnimatorParameters()
@@ -85,5 +85,10 @@ public class MovementControllerV2 : MonoBehaviour
                 animator.SetBool(parameter.name, false);
             }
         }
+    }
+
+    public void SetMovementSpeed(float value)
+    {
+        moveSpeed = value;
     }
 }

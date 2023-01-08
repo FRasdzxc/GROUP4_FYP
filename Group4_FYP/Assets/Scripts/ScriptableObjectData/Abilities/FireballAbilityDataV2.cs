@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Fireball Ability Data V2", menuName = "Game/Fireball Ability Data V2")]
+[CreateAssetMenu(fileName = "New Fireball Ability Data V2", menuName = "Game/Abilities/Fireball Ability Data V2")]
 public class FireballAbilityDataV2 : Ability
 {
     public Transform fireball;
-    public float speed;
+    public float projectileSpeed;
     public int fireballCount;
 
     public override async void Activate(GameObject character)
@@ -27,11 +27,11 @@ public class FireballAbilityDataV2 : Ability
                 float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 
                 Transform projectileClone = Instantiate(fireball, character.transform.position + projectDir, Quaternion.Euler(0, 0, projectAngle));
-                projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * speed, ForceMode2D.Impulse);
-                DestroyGobj(projectileClone.gameObject);
+                projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+                DestroyAfterLifeTime(projectileClone.gameObject);
 
                 currentAngle += 360 / (float)fireballCount;
-                await Task.Delay(50);
+                await Task.Delay(500 / fireballCount);
             }
         }
         else

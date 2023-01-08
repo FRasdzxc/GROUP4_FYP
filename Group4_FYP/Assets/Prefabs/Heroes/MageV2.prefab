@@ -528,11 +528,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: c1749e8f1730dba4f8c455b55336656e, type: 2}
   spawnPoint: {fileID: 0}
+  weaponHolder: {fileID: 812025677363876902}
   healthSlider: {fileID: 0}
+  manaSlider: {fileID: 0}
   healthText: {fileID: 0}
+  manaText: {fileID: 0}
   deathMessage: {fileID: 0}
   movementController: {fileID: 8326585109876766391}
   abilityManager: {fileID: 8326585109876766389}
+  hud: {fileID: 0}
 --- !u!114 &8326585109876766391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b447a8d655b1a4fbd6c3aaa4d276a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
+  moveSpeed: 5
   sprintMultiplier: 2
   weaponHolder: {fileID: 812025677363876902}
   animator: {fileID: 8326585109876766393}
@@ -561,9 +565,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a3fcea4342c8a42b8426b14986ff19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hero: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 979e565f8fecdbe4f934c643f22743af, type: 2}
   - {fileID: 11400000, guid: fafd1217067643b4f81d8dadab4e97cb, type: 2}
+  - {fileID: 11400000, guid: bf0287cb9bd723641a0b4d4c7e239f6a, type: 2}
 --- !u!1 &8326585110698822281
 GameObject:
   m_ObjectHideFlags: 0

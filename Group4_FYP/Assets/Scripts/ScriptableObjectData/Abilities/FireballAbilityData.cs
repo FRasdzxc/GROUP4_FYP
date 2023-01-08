@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Fireball Ability Data", menuName = "Game/Fireball Ability Data")]
+[CreateAssetMenu(fileName = "New Fireball Ability Data", menuName = "Game/Abilities/Fireball Ability Data")]
 public class FireballAbilityData : Ability
 {
     public Transform fireball;
@@ -26,7 +26,7 @@ public class FireballAbilityData : Ability
 
                 Transform fireballClone = Instantiate(fireball, character.transform.position + shootDir, Quaternion.identity);
                 fireballClone.GetComponent<ProjectilesController>().Setup(shootDir);
-                DestroyGobj(fireballClone.gameObject);
+                DestroyAfterLifeTime(fireballClone.gameObject);
 
                 currentAngle += 360 / (float)fireballCount;
                 await Task.Delay(50);

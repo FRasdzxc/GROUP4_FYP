@@ -11,15 +11,13 @@ public class Hero : MonoBehaviour
     [SerializeField] private HeroData heroData;
 
     [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private GameObject weaponHolder;
 
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private Text healthText;
-    [SerializeField] private GameObject deathMessage;
+    [SerializeField] private GameObject deathMessage; // should be moved to HUD.cs
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
-    //[SerializeField] private Slider manaSlider;
-    //[SerializeField] private Text manaText;
+    [SerializeField] private HUD hud;
     private float health;
     private SpriteRenderer sr;
     private bool isDead;
@@ -31,6 +29,8 @@ public class Hero : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         deathMessage.transform.localScale = new Vector2(0, 1);
+        movementController.SetMovementSpeed(heroData.walkspeed);
+        abilityManager.Initialize(hud, heroData);
 
         Setup();
     }
@@ -38,7 +38,8 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R)) // test
+        // test respawn
+        if (!isDead && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
         {
             Die();
         }
@@ -48,14 +49,15 @@ public class Hero : MonoBehaviour
     {
         isDead = false;
         health = heroData.health;
-        healthSlider.maxValue = health;
-        UpdateUI();
+        hud.SetupHealth(health);
         transform.position = spawnPoint.transform.position;
         colorGrading.saturation.value = 0f;
         movementController.enabled = true;
         abilityManager.enabled = true;
         abilityManager.ReadyEquippedAbilities();
         deathMessage.SetActive(false);
+        weaponHolder.SetActive(true);
+        abilityManager.Setup();
     }
 
     private void TakeDamage(float damage)
@@ -63,7 +65,7 @@ public class Hero : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
-            UpdateUI();
+            hud.UpdateHealth(health);
 
             if (health <= 0)
             {
@@ -76,28 +78,22 @@ public class Hero : MonoBehaviour
     {
         isDead = true;
         health = 0;
-        UpdateUI();
+        hud.UpdateHealth(health);
         colorGrading.saturation.value = -100f;
         movementController.ResetAnimatorParameters();
         movementController.enabled = false;
         abilityManager.enabled = false;
+        weaponHolder.SetActive(false);
 
         deathMessage.SetActive(true);
         await deathMessage.transform.DOScaleX(1, 0.25f).AsyncWaitForCompletion();
         await Task.Delay(1500);
-        await deathMessage.transform.DOScaleX(0, 0.25f).AsyncWaitForCompletion();
         Respawn();
     }
 
     private void Respawn()
     {
         Setup();
-    }
-
-    private void UpdateUI()
-    {
-        healthSlider.DOValue(health, 0.25f);
-        healthText.text = health.ToString() + " HP";
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

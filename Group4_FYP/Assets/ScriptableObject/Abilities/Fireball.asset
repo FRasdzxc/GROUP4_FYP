@@ -16,6 +16,7 @@ MonoBehaviour:
   heroClass: 1
   lifeTime: 20
   cooldownTime: 5
-  abilityState: 0
+  manaCost: 5
+  isReady: 1
   fireball: {fileID: 6267009946394207606, guid: 6ad5b54d05cd81e488325f9c5f3173fc, type: 3}
   fireballCount: 8

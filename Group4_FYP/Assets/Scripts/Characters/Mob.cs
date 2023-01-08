@@ -63,19 +63,17 @@ public class Mob : MonoBehaviour
 
     protected virtual void AttackPlayer()
     {
-        Debug.Log("AttackPlayer()");
+
     }
 
     private void ChasePlayer()
     {
-        Debug.Log("ChasePlayer()");
-
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
     private void WalkAround()
     {
-        Debug.Log("WalkAround()");
+
     }
 
     private void TakeDamage(float damage)

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Tornado
   heroClass: 1
-  lifeTime: 5
-  cooldownTime: 5
+  lifeTime: 3
+  cooldownTime: 10
+  manaCost: 35
   isReady: 0
   tornado: {fileID: 3127030953266186813, guid: c7864380fd9842b4f9ce18a0d7e70fb5, type: 3}
-  speed: 15
+  projectileSpeed: 15
   endScale: 5
   scaleDuration: 0.5

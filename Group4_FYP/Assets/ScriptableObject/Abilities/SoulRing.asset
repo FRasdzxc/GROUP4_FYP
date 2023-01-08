@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a1fab14d0d73f49a38a16fea465da3, type: 3}
-  m_Name: FireballV2
+  m_Script: {fileID: 11500000, guid: 7c7c2e4428a5b1c4a9684728ce5c3830, type: 3}
+  m_Name: SoulRing
   m_EditorClassIdentifier: 
-  abilityName: FireballV2
+  abilityName: SoulRing
   heroClass: 1
   lifeTime: 5
-  cooldownTime: 3
-  manaCost: 10
+  cooldownTime: 7.5
+  manaCost: 25
   isReady: 1
-  fireball: {fileID: 1840668930176803370, guid: b7453b80a3fda5a4d970162c7b95856a, type: 3}
-  projectileSpeed: 10
-  fireballCount: 16
+  soulRing: {fileID: 6765511620202682018, guid: 519e99703d98df6448e34406a486093a, type: 3}
+  rotationsPerSecond: 5

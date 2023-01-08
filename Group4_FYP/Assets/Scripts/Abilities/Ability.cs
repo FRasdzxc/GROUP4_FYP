@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using DG.Tweening;
 
 public class Ability : ScriptableObject
 {
@@ -9,6 +10,7 @@ public class Ability : ScriptableObject
     public HeroClass heroClass;
     public float lifeTime; // seconds until destroy
     public float cooldownTime; // seconds until next use
+    public float manaCost;
     [HideInInspector] public bool isReady = true;
 
     public virtual void Activate(GameObject character) { }
@@ -26,7 +28,7 @@ public class Ability : ScriptableObject
         isReady = true;
     }
 
-    public async void DestroyGobj(GameObject gameObject) // destroy any instantiated objects after lifeTime
+    public async void DestroyAfterLifeTime(GameObject gameObject) // destroy any instantiated objects after lifeTime
     {
         float interval = 0f;
 
@@ -36,6 +38,10 @@ public class Ability : ScriptableObject
             await Task.Yield();
         }
 
-        DestroyImmediate(gameObject);
+        if (this) // trying to prevent MissingReferenceException
+        {
+            await gameObject.transform.DOScale(Vector2.zero, 0.25f).AsyncWaitForCompletion();
+            Destroy(gameObject);
+        }
     }
 }
