@@ -9122,6 +9122,7 @@ MonoBehaviour:
   manaSlider: {fileID: 5090246130223752467}
   healthText: {fileID: 5090246129382494039}
   manaText: {fileID: 5090246128995789651}
+  deathMessage: {fileID: 0}
 --- !u!1 &5090246130816896454
 GameObject:
   m_ObjectHideFlags: 0

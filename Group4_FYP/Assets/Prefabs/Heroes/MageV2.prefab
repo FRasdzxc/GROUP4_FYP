@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 8326585109876766386}
   - component: {fileID: 8326585109876766391}
   - component: {fileID: 8326585109876766389}
+  - component: {fileID: -4911568946009028930}
   m_Layer: 0
   m_Name: MageV2
   m_TagString: Player
@@ -529,10 +530,6 @@ MonoBehaviour:
   heroData: {fileID: 11400000, guid: c1749e8f1730dba4f8c455b55336656e, type: 2}
   spawnPoint: {fileID: 0}
   weaponHolder: {fileID: 812025677363876902}
-  healthSlider: {fileID: 0}
-  manaSlider: {fileID: 0}
-  healthText: {fileID: 0}
-  manaText: {fileID: 0}
   deathMessage: {fileID: 0}
   movementController: {fileID: 8326585109876766391}
   abilityManager: {fileID: 8326585109876766389}
@@ -565,11 +562,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a3fcea4342c8a42b8426b14986ff19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: 979e565f8fecdbe4f934c643f22743af, type: 2}
   - {fileID: 11400000, guid: fafd1217067643b4f81d8dadab4e97cb, type: 2}
   - {fileID: 11400000, guid: bf0287cb9bd723641a0b4d4c7e239f6a, type: 2}
+--- !u!114 &-4911568946009028930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8326585109876766392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157ee4b8d99a84c48b808a1aa742a0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8326585110698822281
 GameObject:
   m_ObjectHideFlags: 0

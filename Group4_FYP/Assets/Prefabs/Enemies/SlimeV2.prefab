@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 507728811023831867}
   - component: {fileID: 507728811023831865}
   - component: {fileID: 507728811023831866}
+  - component: {fileID: -4350369900426014686}
   m_Layer: 0
   m_Name: SlimeV2
   m_TagString: Mob
@@ -285,6 +286,31 @@ MonoBehaviour:
   weapon: {fileID: 507728810613682366}
   projectile: {fileID: 8153043610433666323, guid: d9d46376b7fad484381884bb009bd053, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 96dd49addbf882347ba2bae4ce2a36dd, type: 2}
+--- !u!114 &-4350369900426014686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507728811023831879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcd68eebd70ba243b4dde5ed059cec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 3987170176245778866, guid: cfcdb0a54f250294a906684d45d0077e, type: 3}
+  xp: {fileID: 1754278620183716299, guid: 6504b5aa5b8f46143adc2952d2b98911, type: 3}
+  hp: {fileID: 6922525638386660479, guid: 7d31b90f3c33f4b44a746d32bfcb7494, type: 3}
+  mp: {fileID: 8938294070512015235, guid: 71646fd594a2aa74d9cb34ec0d1e3c45, type: 3}
+  coinDrop: 1
+  xpDrop: 1
+  hpDrop: 1
+  mpDrop: 1
+  coinAmount: 10
+  xpAmount: 1000
+  hpAmount: 0
+  mpAmount: 0
+  offset: 1
 --- !u!1 &507728811347102792
 GameObject:
   m_ObjectHideFlags: 0

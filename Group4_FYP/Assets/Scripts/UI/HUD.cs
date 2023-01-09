@@ -7,13 +7,17 @@ using DG.Tweening;
 
 public class HUD : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
+    [SerializeField] private Slider xpSlider;
     [SerializeField] private Text healthText;
     [SerializeField] private Text manaText;
+    [SerializeField] private Text xpText;
     [SerializeField] private GameObject deathMessage;
 
     private float maxMana;
+    private int maxXP;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +39,15 @@ public class HUD : MonoBehaviour
 
     public void SetupMana(float maxMana)
     {
-        this.maxMana = maxMana;
         manaSlider.maxValue = maxMana;
         UpdateMana(maxMana);
+    }
+
+    public void SetupXP(int maxXP)
+    {
+        this.maxXP = maxXP;
+        xpSlider.maxValue = maxXP;
+        UpdateXP(maxXP);
     }
 
     public void UpdateHealth(float health)
@@ -50,5 +60,11 @@ public class HUD : MonoBehaviour
     {
         manaSlider.DOValue(mana, 0.25f);
         manaText.text = ((int)mana).ToString() + "/" + maxMana.ToString() + " MP";
+    }
+
+    public void UpdateXP(int xp)
+    {
+        xpSlider.DOValue(xp, 0.25f);
+        xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
     }
 }
