@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: Mob Table
   m_EditorClassIdentifier: 
   GuaranteedLootTable:
-  - Weight: 10
-    Drop: {fileID: 7677370112282327893, guid: 1604032050b834346aed9d4151998f48, type: 3}
-    MinCountItem: 5
-    MaxCountItem: 5
   - Weight: 0
     Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
     MinCountItem: 10

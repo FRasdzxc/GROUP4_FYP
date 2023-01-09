@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    [SerializeField] private HUD hud;
+    private HUD hud;
     int level = 1;
     int requiredExp;
     int storedExp = 0;
@@ -12,6 +12,7 @@ public class PlayerData : MonoBehaviour
 
     void Start()
     {
+        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         requiredExp = (int)(level * 100 * 1.25);
         hud.SetupXP(requiredExp);
     }

@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private PlayerData playerData;
+    
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
     [SerializeField] private Slider xpSlider;
@@ -15,14 +15,14 @@ public class HUD : MonoBehaviour
     [SerializeField] private Text manaText;
     [SerializeField] private Text xpText;
     [SerializeField] private GameObject deathMessage;
-
+    private PlayerData playerData;
     private float maxMana;
     private int maxXP;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
     }
 
     // Update is called once per frame

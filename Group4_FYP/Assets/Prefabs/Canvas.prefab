@@ -9118,11 +9118,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5300f9fd47d0e44879f25e083ce2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
   healthSlider: {fileID: 5090246130633950997}
   manaSlider: {fileID: 5090246130223752467}
+  xpSlider: {fileID: 7331052316292547596}
   healthText: {fileID: 5090246129382494039}
   manaText: {fileID: 5090246128995789651}
-  deathMessage: {fileID: 0}
+  xpText: {fileID: 245082484024339942}
+  deathMessage: {fileID: 3829388275764926392}
 --- !u!1 &5090246130816896454
 GameObject:
   m_ObjectHideFlags: 0
