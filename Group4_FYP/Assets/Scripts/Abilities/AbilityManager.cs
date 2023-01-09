@@ -14,9 +14,7 @@ public class AbilityManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory lateron
-
-        ReadyEquippedAbilities();
+        
     }
 
     // Update is called once per frame
@@ -24,37 +22,37 @@ public class AbilityManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (equippedAbilities[0].isReady) // should be rewritten better
+            // should be rewritten better
+            if (equippedAbilities[0].IsReady() && (mana - equippedAbilities[0].manaCost) >= 0)
             {
                 mana -= equippedAbilities[0].manaCost;
+                equippedAbilities[0].Activate(gameObject); // test 
             }
-
-            equippedAbilities[0].Activate(gameObject); // test            
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (equippedAbilities[1].isReady) // should be rewritten better
+            // should be rewritten better
+            if (equippedAbilities[1].IsReady() && (mana - equippedAbilities[1].manaCost) >= 0)
             {
                 mana -= equippedAbilities[1].manaCost;
+                equippedAbilities[1].Activate(gameObject); // test
             }
-
-            equippedAbilities[1].Activate(gameObject); // test
         }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (equippedAbilities[2].isReady) // should be rewritten better
+            // should be rewritten better
+            if (equippedAbilities[2].IsReady() && (mana - equippedAbilities[2].manaCost) >= 0)
             {
                 mana -= equippedAbilities[2].manaCost;
+                equippedAbilities[2].Activate(gameObject); // test
             }
-
-            equippedAbilities[2].Activate(gameObject); // test
         }
 
         if (mana < heroData.mana)
         {
-            mana += Time.deltaTime; // temporary only
+            mana += Time.deltaTime * heroData.manaRegeneration;
             hud.UpdateMana(mana);
         }
         else
@@ -68,6 +66,12 @@ public class AbilityManager : MonoBehaviour
         {
             mana = heroData.mana;
             hud.UpdateMana(mana);
+            ReadyEquippedAbilities();
+        }
+
+        for (int i = 0; i < equippedAbilities.Length; i++)
+        {
+            hud.UpdateAbility(i, equippedAbilities[i].remainingCooldownTime);
         }
     }
 
@@ -82,13 +86,22 @@ public class AbilityManager : MonoBehaviour
     {
         mana = heroData.mana;
         hud.SetupMana(mana);
+        equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory lateron
+
+        for (int i = 0; i < equippedAbilities.Length; i++)
+        {
+            hud.SetupAbility(i, equippedAbilities[i].icon, equippedAbilities[i].cooldownTime);
+        }
+
+        ReadyEquippedAbilities();
     }
 
-    public void ReadyEquippedAbilities()
+    private void ReadyEquippedAbilities()
     {
         foreach(Ability a in equippedAbilities)
         {
-            a.isReady = true;
+            //a.isReady = true;
+            a.remainingCooldownTime = 0f;
         }
     }
 }

@@ -13,8 +13,6 @@ public class Hero : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject weaponHolder;
 
-    [SerializeField] private GameObject deathMessage; // should be moved to HUD.cs
-
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
     [SerializeField] private HUD hud;
@@ -28,7 +26,6 @@ public class Hero : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
-        deathMessage.transform.localScale = new Vector2(0, 1);
         movementController.SetMovementSpeed(heroData.walkspeed);
         abilityManager.Initialize(hud, heroData);
 
@@ -39,9 +36,23 @@ public class Hero : MonoBehaviour
     void Update()
     {
         // test respawn
-        if (!isDead && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
+        if (!isDead)
         {
-            Die();
+            if (health < heroData.health)
+            {
+                health += Time.deltaTime * heroData.healthRegeneration; // temporary only
+                hud.UpdateHealth(health);
+            }
+            else
+            {
+                health = heroData.health;
+                hud.UpdateHealth(health);
+            }
+
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
+            {
+                Die();
+            }
         }
     }
 
@@ -54,10 +65,9 @@ public class Hero : MonoBehaviour
         colorGrading.saturation.value = 0f;
         movementController.enabled = true;
         abilityManager.enabled = true;
-        abilityManager.ReadyEquippedAbilities();
-        deathMessage.SetActive(false);
-        weaponHolder.SetActive(true);
         abilityManager.Setup();
+        hud.SetDeathMessageActive(false);
+        weaponHolder.SetActive(true);
     }
 
     private void TakeDamage(float damage)
@@ -85,8 +95,7 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
-        deathMessage.SetActive(true);
-        await deathMessage.transform.DOScaleX(1, 0.25f).AsyncWaitForCompletion();
+        hud.SetDeathMessageActive(true);
         await Task.Delay(1500);
         Respawn();
     }

@@ -12,9 +12,10 @@ public class SoulRingAbility : Ability
 
     public override async void Activate(GameObject character)
     {
-        if (isReady)
+        //if (isReady)
+        if (IsReady())
         {
-            isReady = false;
+            //isReady = false;
             Debug.Log("soul ring ability activated on " + character.name);
 
             Cooldown();

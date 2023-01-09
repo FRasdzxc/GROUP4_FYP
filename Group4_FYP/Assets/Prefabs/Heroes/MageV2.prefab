@@ -58,7 +58,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8326585109876766372}
   - component: {fileID: 8326585109876766373}
-  - component: {fileID: 8326585109876766384}
+  - component: {fileID: 5108854247710406134}
   - component: {fileID: 8326585109876766387}
   - component: {fileID: 8326585109876766393}
   - component: {fileID: 8326585109876766386}
@@ -444,7 +444,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &8326585109876766384
+--- !u!60 &5108854247710406134
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -530,7 +530,6 @@ MonoBehaviour:
   heroData: {fileID: 11400000, guid: c1749e8f1730dba4f8c455b55336656e, type: 2}
   spawnPoint: {fileID: 0}
   weaponHolder: {fileID: 812025677363876902}
-  deathMessage: {fileID: 0}
   movementController: {fileID: 8326585109876766391}
   abilityManager: {fileID: 8326585109876766389}
   hud: {fileID: 0}

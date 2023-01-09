@@ -7,7 +7,9 @@ public class HeroData : ScriptableObject
 {
     public string heroName;
     public float health;
+    public float healthRegeneration;
     public float mana;
+    public float manaRegeneration;
     public float attackSpeed;
     public float luck;
     public float defense;

@@ -17,7 +17,8 @@ MonoBehaviour:
   lifeTime: 3
   cooldownTime: 10
   manaCost: 35
-  isReady: 0
+  icon: {fileID: -2105305842262875611, guid: fa9eefd21aaf599418648b1a916f6934, type: 3}
+  isReady: 1
   tornado: {fileID: 3127030953266186813, guid: c7864380fd9842b4f9ce18a0d7e70fb5, type: 3}
   projectileSpeed: 15
   endScale: 5

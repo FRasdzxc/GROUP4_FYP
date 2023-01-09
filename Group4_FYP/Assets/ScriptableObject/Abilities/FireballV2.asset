@@ -17,6 +17,7 @@ MonoBehaviour:
   lifeTime: 5
   cooldownTime: 3
   manaCost: 10
+  icon: {fileID: 21300000, guid: 487cbfd40a2cba844988db0bd406b077, type: 3}
   isReady: 1
   fireball: {fileID: 1840668930176803370, guid: b7453b80a3fda5a4d970162c7b95856a, type: 3}
   projectileSpeed: 10

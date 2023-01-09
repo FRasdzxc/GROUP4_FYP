@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroName: Mage
   health: 80
+  healthRegeneration: 1
   mana: 200
+  manaRegeneration: 4
   attackSpeed: 1
   luck: 0
   defense: 5

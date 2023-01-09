@@ -11,21 +11,27 @@ public class Ability : ScriptableObject
     public float lifeTime; // seconds until destroy
     public float cooldownTime; // seconds until next use
     public float manaCost;
-    [HideInInspector] public bool isReady = true;
+    public Sprite icon;
+    //[HideInInspector] public bool isReady = true;
+    [HideInInspector] public float remainingCooldownTime;
 
     public virtual void Activate(GameObject character) { }
 
     public async void Cooldown()
     {
-        float interval = 0f;
+        //float interval = 0f;
+        remainingCooldownTime = cooldownTime;
 
-        while (interval < cooldownTime)
+        //while (interval < cooldownTime)
+        while (remainingCooldownTime > 0f)
         {
-            interval += Time.deltaTime;
+            //interval += Time.deltaTime;
+            remainingCooldownTime -= Time.deltaTime;
             await Task.Yield();
         }
 
-        isReady = true;
+        remainingCooldownTime = 0f;
+        //isReady = true;
     }
 
     public async void DestroyAfterLifeTime(GameObject gameObject) // destroy any instantiated objects after lifeTime
@@ -43,5 +49,10 @@ public class Ability : ScriptableObject
             await gameObject.transform.DOScale(Vector2.zero, 0.25f).AsyncWaitForCompletion();
             Destroy(gameObject);
         }
+    }
+
+    public bool IsReady()
+    {
+        return (remainingCooldownTime == 0);
     }
 }

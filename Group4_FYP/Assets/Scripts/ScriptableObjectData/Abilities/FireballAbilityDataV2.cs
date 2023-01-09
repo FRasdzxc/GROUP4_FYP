@@ -12,9 +12,10 @@ public class FireballAbilityDataV2 : Ability
 
     public override async void Activate(GameObject character)
     {
-        if (isReady)
+        //if (isReady)
+        if (IsReady())
         {
-            isReady = false;
+            //isReady = false;
             Debug.Log("fireball ability activated on " + character.name);
 
             Cooldown();

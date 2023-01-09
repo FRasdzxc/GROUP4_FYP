@@ -14,9 +14,10 @@ public class TornadoAbilityData : Ability
 
     public override void Activate(GameObject character)
     {
-        if (isReady)
+        //if (isReady)
+        if (IsReady())
         {
-            isReady = false;
+            //isReady = false;
             Debug.Log("tornado ability activated on " + character.name);
 
             Cooldown();
