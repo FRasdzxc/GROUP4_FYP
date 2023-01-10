@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa80a4f21652164d8ac37ff492439b4, type: 3}
   m_Name: Loot Table
   m_EditorClassIdentifier: 
-  GuaranteedLootTable:
-  - Weight: 100
-    Drop: {fileID: 5347823573209747683, guid: 130d432e56edc0441a06b874ddf9c011, type: 3}
-    MinCountItem: 1
-    MaxCountItem: 1
+  GuaranteedLootTable: []
   OneItemFromList:
   - Weight: 20
-    Drop: {fileID: 7827379482985346450, guid: 43b45c85c32497144baa0cddd14a82f9, type: 3}
+    Drop: {fileID: 8332786637961482418, guid: 37c28ce128ecee44abff0ed08d09b4bd, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 20
+    Drop: {fileID: 5347823573209747683, guid: 130d432e56edc0441a06b874ddf9c011, type: 3}
     MinCountItem: 1
     MaxCountItem: 1
   WeightToNoDrop: 80

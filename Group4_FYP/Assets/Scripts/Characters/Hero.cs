@@ -26,6 +26,7 @@ public class Hero : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         movementController.SetMovementSpeed(heroData.walkspeed);
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
