@@ -15,7 +15,7 @@ MonoBehaviour:
   GuaranteedLootTable:
   - Weight: 0
     Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
-    MinCountItem: 25
-    MaxCountItem: 30
+    MinCountItem: 35
+    MaxCountItem: 40
   OneItemFromList: []
   WeightToNoDrop: 100

@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextSceneName: 
+  willAdvanceToNextScene: 1
 --- !u!114 &4323878802585590976
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10296,6 +10296,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8326585109876766391, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
+      propertyPath: moveSoundClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326585109876766391, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
+      propertyPath: moveSoundClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 55bddfc8433b6e44f834f891dbf49d1a, type: 3}
+    - target: {fileID: 8326585109876766391, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
+      propertyPath: moveSoundClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 488b634964be9414084da639793cc70d, type: 3}
     - target: {fileID: 8326585109876766392, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
       propertyPath: m_Name
       value: MageV2

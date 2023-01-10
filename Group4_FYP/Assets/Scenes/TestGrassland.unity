@@ -86360,6 +86360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 7346567411834790901, guid: 58f207ffba99c7e4281a1ae3b1e80bd4, type: 3}
+      propertyPath: willAdvanceToNextScene
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7346567411834790902, guid: 58f207ffba99c7e4281a1ae3b1e80bd4, type: 3}
       propertyPath: m_RootOrder
       value: 3

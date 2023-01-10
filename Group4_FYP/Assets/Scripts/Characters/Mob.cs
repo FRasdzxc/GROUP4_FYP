@@ -13,6 +13,9 @@ public class Mob : MonoBehaviour
     [SerializeField] private LootDrop loot;
     [SerializeField] private int randomDropCount = 1;
     [SerializeField] private float dropRange = 0.5f;
+    [SerializeField] private AudioClip[] damageSoundClips;
+    [SerializeField] private AudioClip[] dieSoundClips;
+    [SerializeField] private AudioSource audioSource;
     protected float health;
     protected float sightDistance;
     protected float attackDistance;
@@ -80,6 +83,7 @@ public class Mob : MonoBehaviour
     {
         health -= damage;
         UpdateUI();
+        PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
 
         if (health <= 0)
         {
@@ -91,6 +95,7 @@ public class Mob : MonoBehaviour
     {
         isDead = true;
         health = 0;
+        PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
         UpdateUI();
         await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
 
@@ -104,6 +109,12 @@ public class Mob : MonoBehaviour
     private void UpdateUI()
     {
         healthSlider.DOValue(health, 0.25f);
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

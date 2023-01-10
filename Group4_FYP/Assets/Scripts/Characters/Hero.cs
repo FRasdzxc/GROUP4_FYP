@@ -10,12 +10,11 @@ public class Hero : MonoBehaviour
 {
     [SerializeField] private HeroData heroData;
 
-    //[SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject weaponHolder;
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
-    //[SerializeField] private HUD hud;
+
     private HUD hud;
     private float health;
     private SpriteRenderer sr;

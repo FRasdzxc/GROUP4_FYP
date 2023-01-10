@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private string nextSceneName; // temporary only
+    [SerializeField] private bool willAdvanceToNextScene = true; // temporary only
 
     private bool allMobsKilled;
     private HUD hud;
@@ -29,7 +30,11 @@ public class GameController : MonoBehaviour
             // spawn portal maybe
 
             await hud.ShowHugeMessage("All Clear", 1.5f, Color.green); // temporary only
-            NextLevel();
+
+            if (willAdvanceToNextScene)
+            {
+                NextLevel();
+            }
         }
     }
 

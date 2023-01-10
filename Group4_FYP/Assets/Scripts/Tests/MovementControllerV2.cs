@@ -10,6 +10,8 @@ public class MovementControllerV2 : MonoBehaviour
     [SerializeField] private float sprintMultiplier = 2f;
     [SerializeField] private GameObject weaponHolder;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] moveSoundClips;
 
     private Vector2 moveDir;
     private Rigidbody2D rb2D;
@@ -28,42 +30,52 @@ public class MovementControllerV2 : MonoBehaviour
         {
             ResetAnimatorParameters();
         }
-        else if (moveDir.x < -0.5f)
+        else
         {
-            weaponHolder.transform.localScale = new Vector2(-1, 1);
+            if (moveDir.x < -0.5f)
+            {
+                weaponHolder.transform.localScale = new Vector2(-1, 1);
 
-            if (animator)
-            {
-                ResetAnimatorParameters();
-                animator.SetBool("A", true);
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("A", true);
+                }
             }
-        }
-        else if (moveDir.x > 0.5f)
-        {
-            weaponHolder.transform.localScale = new Vector2(1, 1);
+            else if (moveDir.x > 0.5f)
+            {
+                weaponHolder.transform.localScale = new Vector2(1, 1);
 
-            if (animator)
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("D", true);
+                }
+            }
+            else if (moveDir.y < 0.5f)
             {
-                ResetAnimatorParameters();
-                animator.SetBool("D", true);
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("S", true);
+                }
+            }
+            else if (moveDir.y > 0.5f)
+            {
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("W", true);
+                }
+            }
+
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = moveSoundClips[Random.Range(0, moveSoundClips.Length)];
+                audioSource.Play();
             }
         }
-        else if (moveDir.y < 0.5f)
-        {
-            if (animator)
-            {
-                ResetAnimatorParameters();
-                animator.SetBool("S", true);
-            }
-        }
-        else if (moveDir.y > 0.5f)
-        {
-            if (animator)
-            {
-                ResetAnimatorParameters();
-                animator.SetBool("W", true);
-            }
-        }
+        
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
