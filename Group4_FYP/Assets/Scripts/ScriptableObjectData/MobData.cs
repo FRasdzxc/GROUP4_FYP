@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewMobData", menuName = "Game/Mob")]
+[CreateAssetMenu(fileName = "New Mob Data", menuName = "Game/Mob Data")]
 public class MobData : ScriptableObject
 {
     public string mobName;

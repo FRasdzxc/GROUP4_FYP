@@ -29,7 +29,14 @@ public class GameController : MonoBehaviour
 
             // spawn portal maybe
 
-            await hud.ShowHugeMessage("All Clear", 1.5f, Color.green); // temporary only
+            if (nextSceneName != null && nextSceneName != "")
+            {
+                await hud.ShowHugeMessage("All Clear", 1.5f, Color.green); // temporary only
+            }
+            else
+            {
+                await hud.ShowHugeMessage("Game Completed", 1.5f, Color.green); // temporary only
+            }
 
             if (willAdvanceToNextScene)
             {

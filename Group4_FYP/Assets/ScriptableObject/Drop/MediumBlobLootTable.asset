@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa80a4f21652164d8ac37ff492439b4, type: 3}
+  m_Name: MediumBlobLootTable
+  m_EditorClassIdentifier: 
+  GuaranteedLootTable:
+  - Weight: 0
+    Drop: {fileID: 7188210846190620196, guid: 28e511ec50857cc46b3ef6d04c495591, type: 3}
+    MinCountItem: 4
+    MaxCountItem: 4
+  OneItemFromList:
+  - Weight: 0
+    Drop: {fileID: 0}
+    MinCountItem: 0
+    MaxCountItem: 0
+  WeightToNoDrop: 100
