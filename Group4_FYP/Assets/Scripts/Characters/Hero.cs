@@ -10,24 +10,28 @@ public class Hero : MonoBehaviour
 {
     [SerializeField] private HeroData heroData;
 
-    [SerializeField] private GameObject spawnPoint;
+    //[SerializeField] private GameObject spawnPoint;
     [SerializeField] private GameObject weaponHolder;
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
-    [SerializeField] private HUD hud;
+    //[SerializeField] private HUD hud;
+    private HUD hud;
     private float health;
     private SpriteRenderer sr;
     private bool isDead;
     private ColorGrading colorGrading;
-
+    private GameObject spawnPoint;
+    
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         movementController.SetMovementSpeed(heroData.walkspeed);
+        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         abilityManager.Initialize(hud, heroData);
+        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
 
         Setup();
     }
@@ -66,7 +70,6 @@ public class Hero : MonoBehaviour
         movementController.enabled = true;
         abilityManager.enabled = true;
         abilityManager.Setup();
-        hud.SetDeathMessageActive(false);
         weaponHolder.SetActive(true);
     }
 
@@ -95,8 +98,7 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
-        hud.SetDeathMessageActive(true);
-        await Task.Delay(1500);
+        await hud.ShowHugeMessage("You Died", 1.5f, Color.red);
         Respawn();
     }
 

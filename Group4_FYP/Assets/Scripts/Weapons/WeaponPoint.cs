@@ -7,7 +7,7 @@ using UnityEngine;
 public class WeaponPoint : MonoBehaviour
 {
     [SerializeField] private WeaponPointData weaponPointData;
-    [TextArea(5, 5)] [SerializeField] private string note = "Please assign either \"HeroWeaponPoint\" or \"MobWeaponPoint\" tag to the GameObject this script is attached to";
+    [TextArea(5, 5)] [SerializeField] private string notes = "Please assign either \"HeroWeaponPoint\", \"HeroWeaponPointStronger\" or \"MobWeaponPoint\" tag to the GameObject this script is attached to";
 
     private float damage;
     private float critialDamage;

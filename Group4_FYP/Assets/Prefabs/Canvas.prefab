@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 6631198549996777920}
   - component: {fileID: 4625699954705769999}
   m_Layer: 5
-  m_Name: DeathMessage
+  m_Name: HugeMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6862745, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2989,7 +2989,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 5090246128940633544}
   m_OnClick:
     m_PersistentCalls:
@@ -9814,7 +9814,7 @@ MonoBehaviour:
   healthText: {fileID: 5090246129382494039}
   manaText: {fileID: 5090246128995789651}
   xpText: {fileID: 245082484024339942}
-  deathMessage: {fileID: 3829388275764926392}
+  hugeMessage: {fileID: 3829388275764926392}
   regionText: {fileID: 5090246129677413206}
   abilitySliders:
   - {fileID: 7590866645206365969}

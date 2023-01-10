@@ -22,7 +22,7 @@ public class SoulRingAbility : Ability
 
             GameObject soulRingClone = Instantiate(soulRing, character.transform.position, Quaternion.identity, character.transform);
             soulRingClone.GetComponent<Spin>().Setup(rotationsPerSecond);
-            soulRingClone.transform.localScale = Vector2.zero;
+            soulRingClone.transform.localScale = new Vector2(0.5f, 0.5f);
             await soulRingClone.transform.DOScale(Vector2.one, 0.25f).AsyncWaitForCompletion();
             DestroyAfterLifeTime(soulRingClone);
         }

@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Text manaText;
     [SerializeField] private Text xpText;
 
-    [SerializeField] private GameObject deathMessage;
+    [SerializeField] private GameObject hugeMessage;
     [SerializeField] private Text regionText;
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
@@ -103,8 +103,18 @@ public class HUD : MonoBehaviour
         xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
     }
 
-    public void SetDeathMessageActive(bool value)
+    public async Task ShowHugeMessage(string message, float duration, Color color) // duration = seconds
     {
-        deathMessage.SetActive(value);
+        hugeMessage.transform.localScale = new Vector2(0, 1);
+
+        Text text = hugeMessage.GetComponent<Text>();
+        text.text = message;
+        text.color = color;
+
+        hugeMessage.SetActive(true);
+        await hugeMessage.transform.DOScaleX(1, 0.25f).AsyncWaitForCompletion();
+        await Task.Delay((int)(duration * 1000));
+        await hugeMessage.transform.DOScaleX(0, 0.25f).AsyncWaitForCompletion();
+        hugeMessage.SetActive(false);
     }
 }

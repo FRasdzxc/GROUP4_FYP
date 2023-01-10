@@ -97,6 +97,7 @@ public class StartMenu : MonoBehaviour
 
         // enter scene
         //sceneController.ChangeScene();
+        sceneController.EnterScene();
     }
 
     public async void UpdateProfile()

@@ -13,6 +13,9 @@ TagManager:
   - HeroWeaponPoint
   - PlayerWeaponPoint
   - Canvas
+  - CanvasAcrossScenesMask
+  - Border
+  - HeroWeaponPointStronger
   layers:
   - Default
   - TransparentFX

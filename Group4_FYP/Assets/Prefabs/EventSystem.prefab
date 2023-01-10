@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7346567411834790903}
   - component: {fileID: 7346567411834790856}
   - component: {fileID: 7346567411834790901}
+  - component: {fileID: 4323878802585590976}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -79,3 +80,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4846eda5be5c9b40a4f53e084052dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextSceneName: 
+--- !u!114 &4323878802585590976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346567411834790857}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121d5f006c9db444fb836233582233d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorDefaultTexture: {fileID: 2800000, guid: 548c21ae05f5f964c8ced3dc694505ac, type: 3}
+  cursorCrosshairTexture: {fileID: 2800000, guid: 16bdcf31c7b7985479622327f9c8f86f, type: 3}
