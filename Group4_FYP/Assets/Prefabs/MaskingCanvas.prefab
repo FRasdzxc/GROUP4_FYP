@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 829203855978261327}
   - component: {fileID: 829203855978261328}
   - component: {fileID: 829203855978261329}
+  - component: {fileID: 2108753965993256034}
   m_Layer: 5
-  m_Name: CanvasAcrossScenes
-  m_TagString: CanvasAcrossScenes
+  m_Name: MaskingCanvas
+  m_TagString: MaskingCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &829203855978261326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101,6 +102,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2108753965993256034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829203855978261330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef48022c7c5fece488cf0952eebf2ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask: {fileID: 829203856561771619}
 --- !u!1 &829203856561771620
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +128,7 @@ GameObject:
   - component: {fileID: 829203856561771617}
   m_Layer: 5
   m_Name: Mask
-  m_TagString: CanvasAcrossScenesMask
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

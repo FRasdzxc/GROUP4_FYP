@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
     {
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         sceneController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<SceneController>();
+
+        // load: current map
+        // with ProfileManager here with profileName gotten from PlayerPrefs.GetString("selectedProfileName")
     }
 
     // Update is called once per frame

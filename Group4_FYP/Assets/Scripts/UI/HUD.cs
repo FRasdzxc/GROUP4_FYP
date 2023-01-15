@@ -11,6 +11,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Slider manaSlider;
     [SerializeField] private Slider xpSlider;
 
+    [SerializeField] private Text profileNameText;
     [SerializeField] private Text healthText;
     [SerializeField] private Text manaText;
     [SerializeField] private Text xpText;
@@ -30,6 +31,7 @@ public class HUD : MonoBehaviour
     {
         regionText.text = ""; // temporary
         playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
+        profileNameText.text = ProfileManager.LoadProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
     }
 
     // Update is called once per frame

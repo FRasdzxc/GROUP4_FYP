@@ -14,6 +14,7 @@ public class Hero : MonoBehaviour
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
+    //[SerializeField] private MaskingCanvas maskingCanvas;
 
     private HUD hud;
     private float health;
@@ -21,7 +22,14 @@ public class Hero : MonoBehaviour
     private bool isDead;
     private ColorGrading colorGrading;
     private GameObject spawnPoint;
-    
+    private MaskingCanvas maskingCanvas;
+    private string profileName;
+
+    void Awake()
+    {
+        maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,9 +110,21 @@ public class Hero : MonoBehaviour
         Respawn();
     }
 
-    private void Respawn()
+    private async void Respawn()
     {
+        await maskingCanvas.ShowMaskingCanvas(true);
         Setup();
+        await maskingCanvas.ShowMaskingCanvas(false);
+    }
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public string GetProfileName()
+    {
+        return profileName;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

@@ -12,9 +12,18 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject profileSelectionPanel;
     [SerializeField] private GameObject profileCreationPanel;
     [SerializeField] private GameObject profileEditPanel;
+
     [SerializeField] private SceneController sceneController;
     [SerializeField] private ConfirmationPanel confirmationPanel;
-    [SerializeField] private InputField[] inputFields; // for ResetInputs() function only;
+
+    [SerializeField] private InputField profileCreationInputField;
+    [SerializeField] private InputField profileEditInputField;
+
+    [SerializeField] private GameObject profileButtonTemplate;
+    [SerializeField] private Transform profileSelectionContentPanel;
+
+    [SerializeField] private Button editButton;
+    [SerializeField] private Button startButton;
 
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
     private bool bHasEntered;
@@ -22,11 +31,15 @@ public class StartMenu : MonoBehaviour
     private CanvasGroup profileCreationPanelCanvasGroup;
     private CanvasGroup profileEditPanelCanvasGroup;
     // make variable to store profile buttons index
+    private List<GameObject> profileButtons;
+    private string selectedProfileName;
 
     // Start is called before the first frame update
     void Start()
     {
         bHasEntered = false;
+        profileButtons = new List<GameObject>();
+        SetBottomButtonsInteractable(false);
 
         // code for showing the startPanel and hiding all other panels
         for (int i = 0; i < panels.Length; i++)
@@ -65,15 +78,81 @@ public class StartMenu : MonoBehaviour
         await startPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.Linear).AsyncWaitForCompletion();
         startPanel.SetActive(false);
 
+        RefreshProfileSelectionPanel();
         await ShowPanel(PanelType.profileSelection);
 
         bHasEntered = true;
     }
 
+    public void CreateProfile()
+    {
+        // not yet implemented: regex function/class for input field?
+
+        if (profileCreationInputField.text != null && profileCreationInputField.text != "")
+        {
+            if (ProfileManager.CreateProfile(profileCreationInputField.text))
+            {
+                //sceneController.ChangeScene("PlayScene"); // see comment @SceneController for this function
+
+                ShowProfileSelectionPanel();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("profile name cannot be empty.");
+
+            // show error
+        }
+    }    
+
+    public void SelectProfile(string profileName)
+    {
+        selectedProfileName = profileName;
+
+        // make edit and start button interactable
+        SetBottomButtonsInteractable(true);
+
+        PlayerPrefs.SetString("selectedProfileName", selectedProfileName);
+    }
+
+    public void UpdateProfile()
+    {
+        if (profileEditInputField.text != null && profileEditInputField.text != "")
+        {
+            if (ProfileManager.UpdateProfile(selectedProfileName, profileEditInputField.text))
+            {
+                ShowProfileSelectionPanel();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("profile name cannot be empty.");
+
+            // show error
+        }
+    }
+
+    public void DeleteProfile()
+    {
+        if (ProfileManager.DeleteProfile(selectedProfileName, true))
+        {
+            ShowProfileSelectionPanel();
+        }
+    }
+
+    public void StartGame() // load selected profile data then enter GameScene // not finished
+    {
+        //sceneController.EnterScene();
+        sceneController.EnterPlayScene();
+    }
+
     public async void ShowProfileSelectionPanel() // hide every other panels then show profileSelectionPanel
     {
         // load all profiles data
-
+        RefreshProfileSelectionPanel();
+        selectedProfileName = null;
+        PlayerPrefs.SetString("selectedProfileName", null);
+        SetBottomButtonsInteractable(false);
         await ShowPanel(PanelType.profileSelection);
 
         ResetInputs();
@@ -87,27 +166,9 @@ public class StartMenu : MonoBehaviour
     public async void ShowProfileEditPanel() // hide every other panels then show profileEditPanel
     {
         // load profile data
+        profileEditInputField.text = selectedProfileName;
 
         await ShowPanel(PanelType.profileEdit);
-    }
-
-    public async void StartGame() // load selected profile data then enter GameScene // not finished
-    {
-        // create/load profile data
-
-        // enter scene
-        //sceneController.ChangeScene();
-        sceneController.EnterScene();
-    }
-
-    public async void UpdateProfile()
-    {
-
-    }
-
-    public async void DeleteProfile()
-    {
-
     }
 
     private async Task ShowPanel(PanelType panelType) // show inputted panelType and hide all the others
@@ -144,9 +205,59 @@ public class StartMenu : MonoBehaviour
 
     private void ResetInputs() // called by ShowProfileSelectionPanel() to reset inputs if the player clicks "Cancel" button
     {
-        for (int i = 0; i < inputFields.Length; i++)
+        profileCreationInputField.text = null;
+        profileEditInputField.text = null;
+    }
+
+    private void RefreshProfileSelectionPanel() // destroy buttons, get profiles and add buttons back
+    {
+        for (int i = 0; i < profileButtons.Count; i++) // this loop destroy all buttons
         {
-            inputFields[i].text = "";
+            Destroy(profileButtons[i]);
         }
+
+        profileButtons.Clear();
+        ProfileData[] profiles = ProfileManager.GetProfiles();
+
+        for (int i = 0; i < profiles.Length; i++)
+        {
+            GameObject clone = Instantiate(profileButtonTemplate, profileSelectionContentPanel);
+
+            RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
+            // not finished
+            // add if statement to determine hero class then show the appropriate image
+
+            int i2 = i; // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
+            clone.GetComponent<Button>().onClick.AddListener(() => SelectProfile(profiles[i2].profileName));
+            clone.SetActive(true);
+            profileButtons.Add(clone);
+        }
+    }
+
+    private Transform RecursiveFindChild(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+            {
+                return child;
+            }
+            else
+            {
+                Transform child2 = RecursiveFindChild(child, childName);
+                if (child2 != null)
+                {
+                    return child2;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void SetBottomButtonsInteractable(bool value)
+    {
+        editButton.interactable = value;
+        startButton.interactable = value;
     }
 }

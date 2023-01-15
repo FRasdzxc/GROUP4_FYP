@@ -26023,6 +26023,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5164690257240180271, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: canvasAcrossScenes
+      value: 
+      objectReference: {fileID: 1255745945}
+    - target: {fileID: 5164690257240180271, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: canvasAcrossScenesMask
+      value: 
+      objectReference: {fileID: 623064804}
     - target: {fileID: 5803334380228638868, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -26122,6 +26130,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &623064804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 829203856561771620, guid: 8635c9461b349b54186768648b66d770, type: 3}
+  m_PrefabInstance: {fileID: 1123223732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &633004209
 GameObject:
   m_ObjectHideFlags: 0
@@ -86387,6 +86400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8635c9461b349b54186768648b66d770, type: 3}
+--- !u!1 &1255745945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 829203855978261330, guid: 8635c9461b349b54186768648b66d770, type: 3}
+  m_PrefabInstance: {fileID: 1123223732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1277991611
 PrefabInstance:
   m_ObjectHideFlags: 0
