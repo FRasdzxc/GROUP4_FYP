@@ -8,7 +8,7 @@ public static class ProfileManager
 {
     private static string heroProfileDirectoryPath = Application.persistentDataPath + "/HeroProfiles/";
 
-    public static bool CreateProfile(string profileName, string className)
+    public static bool CreateProfile(string profileName, HeroClass heroClass, HeroInfo heroInfo)
     {
         CreateHeroProfileDirectory();
         string path = heroProfileDirectoryPath + profileName + ".heroprofile";
@@ -26,7 +26,7 @@ public static class ProfileManager
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = new FileStream(path, FileMode.Create);
 
-            ProfileData profileData = new ProfileData(profileName, className);
+            ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
 
             binaryFormatter.Serialize(fileStream, profileData);
             fileStream.Close();

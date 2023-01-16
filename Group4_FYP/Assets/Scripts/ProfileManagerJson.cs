@@ -8,7 +8,7 @@ public static class ProfileManagerJson
 {
     private static string heroProfileDirectoryPath = Application.persistentDataPath + "/HeroProfiles/";
 
-    public static bool CreateProfile(string profileName, string heroClass)
+    public static bool CreateProfile(string profileName, HeroClass heroClass, HeroInfo heroInfo)
     {
         CreateHeroProfileDirectory();
         string path = heroProfileDirectoryPath + profileName + ".heroprofile";
@@ -23,7 +23,7 @@ public static class ProfileManagerJson
         }
         else
         {
-            ProfileData profileData = new ProfileData(profileName, heroClass);
+            ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
             WriteProfile(profileData, path);
 
             return true;

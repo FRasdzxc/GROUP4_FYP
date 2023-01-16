@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class ProfileData
 {
     public string profileName;
@@ -14,17 +13,17 @@ public class ProfileData
     public int level;
     public int storedExp;
 
-    public ProfileData(string profileName, string heroClass) // used for creating new profiles
+    public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats)
     {
         this.profileName = profileName;
-        this.heroClass = heroClass;
+        this.heroClass = heroClass.ToString();
 
-        // if heroClass (to enum) == xxx, get scriptable object data to assign to other health and mana
-
+        health = defaultStats.health;
+        maxHealth = defaultStats.health;
+        mana = defaultStats.mana;
+        maxMana = defaultStats.mana;
         level = 1;
         storedExp = 0;
-
-        // not finished ofc
     }
 
     public ProfileData(string newProfileName, ProfileData profileData) // used for moving data when updating profiles

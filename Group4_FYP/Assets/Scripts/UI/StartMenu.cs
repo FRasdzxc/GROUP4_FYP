@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,6 +11,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject[] panels;
     [SerializeField] private GameObject profileSelectionPanel;
     [SerializeField] private GameObject profileCreationPanel;
+    [SerializeField] private GameObject profileCreationClassContainer;
     [SerializeField] private GameObject profileEditPanel;
 
     [SerializeField] private SceneController sceneController;
@@ -25,6 +26,9 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Button editButton;
     [SerializeField] private Button startButton;
 
+    [SerializeField] private HeroList heroList;
+    [SerializeField] private GameObject heroButtonPrefab;
+
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
     private bool bHasEntered;
     private CanvasGroup profileSelectionPanelCanvasGroup;
@@ -33,13 +37,14 @@ public class StartMenu : MonoBehaviour
     // make variable to store profile buttons index
     private List<GameObject> profileButtons;
     private string selectedProfileName;
-    private string selectedClassName;
+    private HeroClass? selectedClassType;
 
     // Start is called before the first frame update
     void Start()
     {
         bHasEntered = false;
         profileButtons = new List<GameObject>();
+        PrepareClassContainer();
         SetBottomButtonsInteractable(false);
 
         // code for showing the startPanel and hiding all other panels
@@ -91,9 +96,9 @@ public class StartMenu : MonoBehaviour
 
         if (profileCreationInputField.text != null && profileCreationInputField.text != "")
         {
-            if (selectedClassName != null && selectedClassName != "")
+            if (selectedClassType.HasValue)
             {
-                if (ProfileManagerJson.CreateProfile(profileCreationInputField.text, selectedClassName))
+                if (ProfileManagerJson.CreateProfile(profileCreationInputField.text, selectedClassType.Value, heroList.GetHeroInfo(selectedClassType.Value)))
                 {
                     //sceneController.ChangeScene("PlayScene"); // see comment @SceneController for this function
 
@@ -112,10 +117,49 @@ public class StartMenu : MonoBehaviour
             // show error
         }
     }
-    
-    public void SelectClass(string className)
+
+    private void PrepareClassContainer()
     {
-        selectedClassName = className;
+        if (heroList == null)
+        {
+            Debug.LogError("Missing Hero List");
+            return;
+        }
+
+        if (heroButtonPrefab == null)
+        {
+            Debug.LogError("Missing Hero Button Prefab");
+            return;
+        }
+
+        foreach (var hero in heroList.heros)
+        {
+            var buttonObj = Instantiate(heroButtonPrefab);
+            if (buttonObj == null)
+            {
+                Debug.LogError("Unable to instantiate prefab");
+                continue;
+            }
+
+            var button = buttonObj.GetComponent<Button>();
+            if (button != null)
+                button.onClick.AddListener(() => { SelectClass(hero.heroClass); });
+
+            var image = RecursiveFindChild(buttonObj.transform, "Image");
+            if (image != null)
+                (image.GetComponent<Image>()).sprite = hero.heroInfo.heroSprite;
+
+            var text = RecursiveFindChild(buttonObj.transform, "Text");
+            if (text != null)
+                (text.GetComponent<Text>()).text = hero.heroInfo.heroName;
+
+            buttonObj.transform.SetParent(profileCreationClassContainer.transform);
+        }
+    }
+    
+    public void SelectClass(HeroClass type)
+    {
+        selectedClassType = type;
     }
 
     public void SelectProfile(string profileName)
@@ -219,7 +263,7 @@ public class StartMenu : MonoBehaviour
     {
         profileCreationInputField.text = null;
         profileEditInputField.text = null;
-        selectedClassName = null;
+        selectedClassType = null;
         selectedProfileName = null;
     }
 
@@ -240,6 +284,7 @@ public class StartMenu : MonoBehaviour
             RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
             RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
             RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
+            RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = ;
             // not finished
             // add if statement to determine hero class then show the appropriate image
 

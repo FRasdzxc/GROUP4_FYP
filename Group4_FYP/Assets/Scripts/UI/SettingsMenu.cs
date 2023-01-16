@@ -36,6 +36,8 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
+        Debug.Log(PlayerPrefs.GetInt("resolution"));
+
         // load settings
         LoadSettings();
     }
@@ -78,6 +80,7 @@ public class SettingsMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("graphics", graphicsDropdown.value);
         PlayerPrefs.SetInt("resolution", resolutionDropdown.value);
+        PlayerPrefs.SetInt("resolutionChosen", 1);
         PlayerPrefs.SetInt("fullscreen", BoolToInt(fullscreenToggle.isOn));
         //PlayerPrefs.SetInt("cameraShake", BoolToInt(cameraShakeToggle.isOn));
         PlayerPrefs.SetFloat("volume", volumeSlider.value);
@@ -86,8 +89,18 @@ public class SettingsMenu : MonoBehaviour
     private void LoadSettings()
     {
         SetGraphics(PlayerPrefs.GetInt("graphics"));
-        SetResolution(PlayerPrefs.GetInt("resolution"));
-        SetFullscreen(IntToBool(PlayerPrefs.GetInt("fullscreen")));
+
+        if (PlayerPrefs.GetInt("resolutionChosen") == 1)
+        {
+            SetResolution(PlayerPrefs.GetInt("resolution"));
+            SetFullscreen(IntToBool(PlayerPrefs.GetInt("fullscreen")));
+        }
+        else
+        {
+            SetResolution(resolutions.Length - 1);
+            SetFullscreen(true);
+        }
+
         //SetCameraShake(IntToBool());
         ChangeVolume(PlayerPrefs.GetFloat("volume"));
     }

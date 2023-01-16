@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b3e19f86af4b84abf72b018c44eca9, type: 3}
+  m_Script: {fileID: 11500000, guid: c49e4d864ae2a034b86cdd2fb0f691b9, type: 3}
   m_Name: Mage
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroInfo
   heroName: Mage
-  health: 80
-  healthRegeneration: 1
-  mana: 200
-  manaRegeneration: 4
-  attackSpeed: 1
-  luck: 0
-  defense: 5
-  walkspeed: 4
+  heroDesc: Mage Description
+  heroSprite: {fileID: 1930761413316623981, guid: 49ea03deb8e28f84c8b678ed00b1fe43, type: 3}
+  defaultStats: {fileID: 11400000, guid: c1749e8f1730dba4f8c455b55336656e, type: 2}

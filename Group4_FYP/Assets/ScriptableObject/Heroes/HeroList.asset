@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db98ee0cb44f8664b957b3bf8e1b19c2, type: 3}
+  m_Name: HeroList
+  m_EditorClassIdentifier: Assembly-CSharp::HeroList
+  heros:
+  - heroClass: 2
+    heroInfo: {fileID: 11400000, guid: cc991d307520e904790242e7b5f7acbd, type: 2}
+  - heroClass: 1
+    heroInfo: {fileID: 11400000, guid: a1d668851d1f4fb448c2f00bbdf236a8, type: 2}

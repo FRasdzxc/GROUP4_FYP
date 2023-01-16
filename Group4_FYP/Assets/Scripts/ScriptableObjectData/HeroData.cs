@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Hero Data", menuName = "Game/Hero Data")]
 public class HeroData : ScriptableObject
 {
-    public string heroName;
     public float health;
     public float healthRegeneration;
     public float mana;
