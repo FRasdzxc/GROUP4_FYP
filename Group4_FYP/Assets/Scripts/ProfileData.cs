@@ -8,14 +8,22 @@ public class ProfileData
     public string profileName;
     public string heroClass;
     public float health;
+    public float maxHealth;
     public float mana;
+    public float maxMana;
     public int level;
     public int storedExp;
 
-    public ProfileData(string profileName) // used for creating new profiles
+    public ProfileData(string profileName, string heroClass) // used for creating new profiles
     {
         this.profileName = profileName;
-        
+        this.heroClass = heroClass;
+
+        // if heroClass (to enum) == xxx, get scriptable object data to assign to other health and mana
+
+        level = 1;
+        storedExp = 0;
+
         // not finished ofc
     }
 

@@ -31,7 +31,8 @@ public class HUD : MonoBehaviour
     {
         regionText.text = ""; // temporary
         playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
-        profileNameText.text = ProfileManager.LoadProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
+        //profileNameText.text = ProfileManager.LoadProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
+        profileNameText.text = ProfileManagerJson.LoadProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
     }
 
     // Update is called once per frame

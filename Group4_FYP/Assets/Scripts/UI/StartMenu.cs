@@ -33,6 +33,7 @@ public class StartMenu : MonoBehaviour
     // make variable to store profile buttons index
     private List<GameObject> profileButtons;
     private string selectedProfileName;
+    private string selectedClassName;
 
     // Start is called before the first frame update
     void Start()
@@ -90,11 +91,18 @@ public class StartMenu : MonoBehaviour
 
         if (profileCreationInputField.text != null && profileCreationInputField.text != "")
         {
-            if (ProfileManager.CreateProfile(profileCreationInputField.text))
+            if (selectedClassName != null && selectedClassName != "")
             {
-                //sceneController.ChangeScene("PlayScene"); // see comment @SceneController for this function
+                if (ProfileManagerJson.CreateProfile(profileCreationInputField.text, selectedClassName))
+                {
+                    //sceneController.ChangeScene("PlayScene"); // see comment @SceneController for this function
 
-                ShowProfileSelectionPanel();
+                    ShowProfileSelectionPanel();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("class not selected.");
             }
         }
         else
@@ -103,7 +111,12 @@ public class StartMenu : MonoBehaviour
 
             // show error
         }
-    }    
+    }
+    
+    public void SelectClass(string className)
+    {
+        selectedClassName = className;
+    }
 
     public void SelectProfile(string profileName)
     {
@@ -119,7 +132,7 @@ public class StartMenu : MonoBehaviour
     {
         if (profileEditInputField.text != null && profileEditInputField.text != "")
         {
-            if (ProfileManager.UpdateProfile(selectedProfileName, profileEditInputField.text))
+            if (ProfileManagerJson.UpdateProfile(selectedProfileName, profileEditInputField.text))
             {
                 ShowProfileSelectionPanel();
             }
@@ -134,7 +147,7 @@ public class StartMenu : MonoBehaviour
 
     public void DeleteProfile()
     {
-        if (ProfileManager.DeleteProfile(selectedProfileName, true))
+        if (ProfileManagerJson.DeleteProfile(selectedProfileName, true))
         {
             ShowProfileSelectionPanel();
         }
@@ -150,7 +163,6 @@ public class StartMenu : MonoBehaviour
     {
         // load all profiles data
         RefreshProfileSelectionPanel();
-        selectedProfileName = null;
         PlayerPrefs.SetString("selectedProfileName", null);
         SetBottomButtonsInteractable(false);
         await ShowPanel(PanelType.profileSelection);
@@ -207,6 +219,8 @@ public class StartMenu : MonoBehaviour
     {
         profileCreationInputField.text = null;
         profileEditInputField.text = null;
+        selectedClassName = null;
+        selectedProfileName = null;
     }
 
     private void RefreshProfileSelectionPanel() // destroy buttons, get profiles and add buttons back
@@ -217,13 +231,15 @@ public class StartMenu : MonoBehaviour
         }
 
         profileButtons.Clear();
-        ProfileData[] profiles = ProfileManager.GetProfiles();
+        ProfileData[] profiles = ProfileManagerJson.GetProfiles();
 
         for (int i = 0; i < profiles.Length; i++)
         {
             GameObject clone = Instantiate(profileButtonTemplate, profileSelectionContentPanel);
 
             RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
+            RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
+            RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
             // not finished
             // add if statement to determine hero class then show the appropriate image
 
