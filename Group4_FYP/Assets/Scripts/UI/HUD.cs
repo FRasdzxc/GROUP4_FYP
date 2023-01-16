@@ -15,6 +15,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Text healthText;
     [SerializeField] private Text manaText;
     [SerializeField] private Text xpText;
+    [SerializeField] private Text mobCountText;
 
     [SerializeField] private GameObject hugeMessage;
     [SerializeField] private Text regionText;
@@ -38,7 +39,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString();
     }
 
     public void SetupHealth(float maxHealth)

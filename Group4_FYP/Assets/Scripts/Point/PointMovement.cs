@@ -20,28 +20,32 @@ public class PointMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = speed * Time.deltaTime;
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-        if(distance <= 0.5f)
+        if (player != null)
         {
-            if(storedType == "coin")
+            velocity = speed * Time.deltaTime;
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if(distance <= 0.5f)
             {
-                player.GetComponent<PlayerData>().AddCoin(storedValue);
+                if(storedType == "coin")
+                {
+                    player.GetComponent<PlayerData>().AddCoin(storedValue);
+                }
+                if(storedType == "xp")
+                {
+                    player.GetComponent<PlayerData>().AddEXP(storedValue);
+                }
+                if(storedType == "hp")
+                {
+                    //add hp maybe
+                }
+                if(storedType == "mp")
+                {
+                    //add mp maybe
+                }
+                Destroy(gameObject);
             }
-            if(storedType == "xp")
-            {
-                player.GetComponent<PlayerData>().AddEXP(storedValue);
-            }
-            if(storedType == "hp")
-            {
-                //add hp maybe
-            }
-            if(storedType == "mp")
-            {
-                //add mp maybe
-            }
-            Destroy(gameObject);
         }
+
         //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocity);
     }
 
