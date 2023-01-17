@@ -284,9 +284,15 @@ public class StartMenu : MonoBehaviour
             RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
             RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
             RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
-            RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = ;
-            // not finished
-            // add if statement to determine hero class then show the appropriate image
+            
+            // assigning image
+            for (int j = 0; j < heroList.heros.Length; j++)
+            {
+                if ((HeroClass)Enum.Parse(typeof(HeroClass), profiles[i].heroClass) == heroList.heros[j].heroClass)
+                {
+                    RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = heroList.heros[j].heroInfo.heroSprite;
+                }
+            }
 
             int i2 = i; // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
             clone.GetComponent<Button>().onClick.AddListener(() => SelectProfile(profiles[i2].profileName));

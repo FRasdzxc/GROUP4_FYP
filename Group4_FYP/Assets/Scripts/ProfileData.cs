@@ -13,7 +13,7 @@ public class ProfileData
     public int level;
     public int storedExp;
 
-    public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats)
+    public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats) // used for creating a new profile
     {
         this.profileName = profileName;
         this.heroClass = heroClass.ToString();
@@ -38,8 +38,8 @@ public class ProfileData
 
     public ProfileData(Hero hero) // used for saving
     {
-        profileName = hero.GetProfileName();
         health = hero.GetHealth();
+        maxHealth = hero.GetMaxHealth();
 
         // not finished
     }

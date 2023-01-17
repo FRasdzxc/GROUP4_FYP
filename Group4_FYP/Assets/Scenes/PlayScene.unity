@@ -180,6 +180,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
+--- !u!114 &256647203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8326585109876766386, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
+  m_PrefabInstance: {fileID: 256647202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660c0c4337489d14da9589cd3ff9c2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &313069721
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +340,22 @@ PrefabInstance:
     - target: {fileID: 4134916546049759086, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090246128940633545, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 256647203}
+    - target: {fileID: 5090246128940633545, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveProfile
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090246128940633545, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hero, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090246128940633545, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5090246128954290664, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: m_AnchorMax.y

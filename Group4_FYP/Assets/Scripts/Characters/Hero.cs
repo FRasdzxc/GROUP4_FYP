@@ -18,12 +18,14 @@ public class Hero : MonoBehaviour
 
     private HUD hud;
     private float health;
+    private float maxHealth;
     private SpriteRenderer sr;
     private bool isDead;
     private ColorGrading colorGrading;
     private GameObject spawnPoint;
     private MaskingCanvas maskingCanvas;
     private string profileName;
+    private ProfileData profile;
 
     void Awake()
     {
@@ -41,6 +43,10 @@ public class Hero : MonoBehaviour
         abilityManager.Initialize(hud, heroData);
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
 
+        profile = ProfileManagerJson.LoadProfile(PlayerPrefs.GetString("selectedProfileName"));
+        health = profile.health;
+        maxHealth = profile.maxHealth;
+
         Setup();
     }
 
@@ -52,7 +58,7 @@ public class Hero : MonoBehaviour
         {
             if (health < heroData.health)
             {
-                health += Time.deltaTime * heroData.healthRegeneration; // temporary only
+                health += Time.deltaTime * heroData.healthRegeneration; // temporary only?
                 hud.UpdateHealth(health);
             }
             else
@@ -61,9 +67,14 @@ public class Hero : MonoBehaviour
                 hud.UpdateHealth(health);
             }
 
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R)) // test only
             {
                 Die();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                TakeDamage(5);
             }
         }
     }
@@ -72,7 +83,7 @@ public class Hero : MonoBehaviour
     {
         isDead = false;
         health = heroData.health;
-        hud.SetupHealth(health);
+        hud.SetupHealth(health, maxHealth);
         transform.position = spawnPoint.transform.position;
         colorGrading.saturation.value = 0f;
         movementController.enabled = true;
@@ -122,9 +133,19 @@ public class Hero : MonoBehaviour
         return health;
     }
 
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     public string GetProfileName()
     {
         return profileName;
+    }
+
+    public void SaveProfile()
+    {
+        ProfileManagerJson.SaveProfile(profile.profileName, this);
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

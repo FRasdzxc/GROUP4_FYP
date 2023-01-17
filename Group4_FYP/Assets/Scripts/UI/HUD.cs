@@ -42,10 +42,10 @@ public class HUD : MonoBehaviour
         mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString();
     }
 
-    public void SetupHealth(float maxHealth)
+    public void SetupHealth(float health, float maxHealth)
     {
         healthSlider.maxValue = maxHealth;
-        UpdateHealth(maxHealth);
+        UpdateHealth(health);
     }
 
     public void SetupMana(float maxMana)
@@ -116,9 +116,9 @@ public class HUD : MonoBehaviour
         text.color = color;
 
         hugeMessage.SetActive(true);
-        await hugeMessage.transform.DOScaleX(1, 0.25f).AsyncWaitForCompletion();
+        await hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         await Task.Delay((int)(duration * 1000));
-        await hugeMessage.transform.DOScaleX(0, 0.25f).AsyncWaitForCompletion();
+        await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         hugeMessage.SetActive(false);
     }
 }
