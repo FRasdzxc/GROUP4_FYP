@@ -83,7 +83,7 @@ public static class ProfileManagerJson
             {
                 ProfileData newProfileData = new ProfileData(newProfileName, profileData);
                 WriteProfile(newProfileData, newPath);
-                DeleteProfile(profileName, false);
+                DeleteProfile(profileName);
 
                 return true;
             }
@@ -92,7 +92,7 @@ public static class ProfileManagerJson
         return false;
     }
 
-    public static bool DeleteProfile(string profileName, bool requiresConfirmation)
+    public static bool DeleteProfile(string profileName)
     {
         // check if profile with profileName exists or not
         CreateHeroProfileDirectory();
@@ -100,12 +100,6 @@ public static class ProfileManagerJson
 
         if (File.Exists(path))
         {
-            // if requiresConfirmation, ask for confirmation using confirmation panel
-            if (requiresConfirmation)
-            {
-
-            }
-
             // delete profile
             File.Delete(path);
 

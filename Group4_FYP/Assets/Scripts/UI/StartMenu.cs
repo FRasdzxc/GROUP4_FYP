@@ -31,9 +31,6 @@ public class StartMenu : MonoBehaviour
 
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
     private bool bHasEntered;
-    private CanvasGroup profileSelectionPanelCanvasGroup;
-    private CanvasGroup profileCreationPanelCanvasGroup;
-    private CanvasGroup profileEditPanelCanvasGroup;
     // make variable to store profile buttons index
     private List<GameObject> profileButtons;
     private string selectedProfileName;
@@ -92,8 +89,6 @@ public class StartMenu : MonoBehaviour
 
     public void CreateProfile()
     {
-        // not yet implemented: regex function/class for input field?
-
         if (profileCreationInputField.text != null && profileCreationInputField.text != "")
         {
             if (selectedClassType.HasValue)
@@ -191,10 +186,7 @@ public class StartMenu : MonoBehaviour
 
     public void DeleteProfile()
     {
-        if (ProfileManagerJson.DeleteProfile(selectedProfileName, true))
-        {
-            ShowProfileSelectionPanel();
-        }
+        confirmationPanel.ShowConfirmationPanel("Delete Profile?", "Upon deletion, all your data will be lost. Do you really wish to continue?", () => { ProfileManagerJson.DeleteProfile(selectedProfileName); ShowProfileSelectionPanel(); }, true);
     }
 
     public void StartGame() // load selected profile data then enter GameScene // not finished

@@ -9,14 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b3e19f86af4b84abf72b018c44eca9, type: 3}
-  m_Name: KnightDefaultStats
+  m_Script: {fileID: 11500000, guid: c49e4d864ae2a034b86cdd2fb0f691b9, type: 3}
+  m_Name: Hunter
   m_EditorClassIdentifier: 
-  health: 150
-  healthRegeneration: 4
-  mana: 60
-  manaRegeneration: 2
-  attackSpeed: 0
-  luck: 0
-  defense: 0
-  walkspeed: 3
+  heroName: Hunter
+  heroDesc: Hunter description
+  heroSprite: {fileID: 0}
+  defaultStats: {fileID: 11400000, guid: 34349a9ed691df4418e8e243f1ba3dec, type: 2}
