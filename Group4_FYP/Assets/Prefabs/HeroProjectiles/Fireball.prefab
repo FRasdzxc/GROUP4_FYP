@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1840668930176803377}
   m_Layer: 0
   m_Name: Fireball
-  m_TagString: HeroWeaponPoint
+  m_TagString: HeroWeaponTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b77114d9bb07df468b8bcdde9ee3d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPointData: {fileID: 11400000, guid: 01c583964dd8fe54586236dfdc6ac765, type: 2}
+  weaponTriggerData: {fileID: 11400000, guid: 01c583964dd8fe54586236dfdc6ac765, type: 2}
   notes: Please assign either "HeroWeaponPoint", "HeroWeaponPointStronger" or "MobWeaponPoint"
     tag to the GameObject this script is attached to
 --- !u!114 &1840668930176803377

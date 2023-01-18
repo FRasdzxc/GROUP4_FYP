@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
 
     private async void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CompareTag("HeroWeaponPoint"))
+        if (CompareTag("HeroWeaponTrigger"))
         {
             if (collision.CompareTag("Object") || collision.CompareTag("Border"))
             {
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-        else if (CompareTag("HeroWeaponPointStronger"))
+        else if (CompareTag("HeroWeaponTriggerStronger"))
         {
             if (collision.CompareTag("Border"))
             {
@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-        else if (CompareTag("MobWeaponPoint"))
+        else if (CompareTag("MobWeaponTrigger"))
         {
             if (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border"))
             {

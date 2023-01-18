@@ -35,12 +35,4 @@ public class ProfileData
         level = profileData.level;
         storedExp = profileData.storedExp;
     }
-
-    public ProfileData(Hero hero) // used for saving
-    {
-        health = hero.GetHealth();
-        maxHealth = hero.GetMaxHealth();
-
-        // not finished
-    }
 }

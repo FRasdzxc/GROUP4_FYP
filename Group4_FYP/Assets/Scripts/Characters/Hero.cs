@@ -27,6 +27,15 @@ public class Hero : MonoBehaviour
     private string profileName;
     private ProfileData profile;
 
+    // mana
+    private float mana;
+
+    // xp
+    int level = 1;
+    int requiredExp;
+    int storedExp = 0;
+    int storedCoin = 0;
+
     void Awake()
     {
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
@@ -39,11 +48,14 @@ public class Hero : MonoBehaviour
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         movementController.SetMovementSpeed(heroData.walkspeed);
-        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         abilityManager.Initialize(hud, heroData);
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
 
-        profile = ProfileManagerJson.LoadProfile(PlayerPrefs.GetString("selectedProfileName"));
+        // xp
+        requiredExp = (int)(level * 100 * 1.25);
+        hud.SetupXP(requiredExp);
+
+        profile = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName"));
         health = profile.health;
         maxHealth = profile.maxHealth;
 
@@ -75,6 +87,16 @@ public class Hero : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 TakeDamage(5);
+            }
+
+            // xp
+            hud.UpdateXP(storedExp);
+            requiredExp = (int)(level * 100 * 1.25);
+            if(storedExp >= requiredExp)
+            {
+                storedExp -= requiredExp;
+                hud.SetupXP(requiredExp);
+                level++;
             }
         }
     }
@@ -128,31 +150,64 @@ public class Hero : MonoBehaviour
         await maskingCanvas.ShowMaskingCanvas(false);
     }
 
-    public float GetHealth()
+    // public float GetHealth()
+    // {
+    //     return health;
+    // }
+
+    // public float GetMaxHealth()
+    // {
+    //     return maxHealth;
+    // }
+
+    // public string GetProfileName()
+    // {
+    //     return profileName;
+    // }
+
+    public void SaveProfile() // test only
     {
-        return health;
+        // ProfileManagerJson.SaveProfile(profile.profileName, this);
+        profile.health = health;
     }
 
-    public float GetMaxHealth()
+    public int GetLevel()
     {
-        return maxHealth;
+        return level;
+    }
+    
+    public int GetStoredXP()
+    {
+        return storedExp;
     }
 
-    public string GetProfileName()
+    public void AddEXP(int exp)
     {
-        return profileName;
+        storedExp += exp;
+        hud.UpdateXP(storedExp);
     }
 
-    public void SaveProfile()
+    public void AddCoin(int coin)
     {
-        ProfileManagerJson.SaveProfile(profile.profileName, this);
+        storedCoin += coin;
+    }
+
+    public void DeductEXP(int exp)
+    {
+        storedExp -= exp;
+        hud.UpdateXP(storedExp);
+    }
+
+    public void DeductCoin(int coin)
+    {
+        storedCoin -= coin;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("MobWeaponPoint") && collision.GetComponent<WeaponPoint>())
+        if (collision.CompareTag("MobWeaponTrigger") && collision.GetComponent<WeaponTrigger>())
         {
-            TakeDamage(collision.GetComponent<WeaponPoint>().GetDamage(false));
+            TakeDamage(collision.GetComponent<WeaponTrigger>().GetDamage(false));
             sr.color = Color.red;
         }
     }

@@ -119,9 +119,9 @@ public class Mob : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.CompareTag("HeroWeaponPoint") || collision.CompareTag("HeroWeaponPointStronger")) && collision.GetComponent<WeaponPoint>())
+        if ((collision.CompareTag("HeroWeaponTrigger") || collision.CompareTag("HeroWeaponTriggerStronger")) && collision.GetComponent<WeaponTrigger>())
         {
-            TakeDamage(collision.GetComponent<WeaponPoint>().GetDamage(false));
+            TakeDamage(collision.GetComponent<WeaponTrigger>().GetDamage(false));
             sr.color = Color.red;
         }
     }

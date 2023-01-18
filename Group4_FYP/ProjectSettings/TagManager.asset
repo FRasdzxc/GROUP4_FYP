@@ -7,16 +7,16 @@ TagManager:
   - CanvasAcrossScenes
   - Item
   - Projectile
-  - MobWeaponPoint
   - Mob
   - Object
-  - HeroWeaponPoint
   - PlayerWeaponPoint
   - Canvas
   - CanvasAcrossScenesMask
   - Border
-  - HeroWeaponPointStronger
   - MaskingCanvas
+  - HeroWeaponTrigger
+  - HeroWeaponTriggerStronger
+  - MobWeaponTrigger
   layers:
   - Default
   - TransparentFX

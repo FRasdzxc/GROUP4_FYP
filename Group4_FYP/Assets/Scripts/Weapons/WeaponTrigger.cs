@@ -4,10 +4,10 @@ using UnityEngine;
 
 // used for player/enemy weapon that will collide with player/enemy
 
-public class WeaponPoint : MonoBehaviour
+public class WeaponTrigger : MonoBehaviour
 {
-    [SerializeField] private WeaponPointData weaponPointData;
-    [TextArea(5, 5)] [SerializeField] private string notes = "Please assign either \"HeroWeaponPoint\", \"HeroWeaponPointStronger\" or \"MobWeaponPoint\" tag to the GameObject this script is attached to";
+    [SerializeField] private WeaponTriggerData weaponTriggerData;
+    [TextArea(5, 5)] [SerializeField] private string notes = "Please assign either \"HeroWeaponTrigger\", \"HeroWeaponTriggerStronger\" or \"MobWeaponTrigger\" tag to the GameObject this script is attached to";
 
     private float damage;
     private float critialDamage;
@@ -15,8 +15,8 @@ public class WeaponPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        damage = weaponPointData.damage;
-        critialDamage = weaponPointData.criticalDamage;
+        damage = weaponTriggerData.damage;
+        critialDamage = weaponTriggerData.criticalDamage;
     }
 
     public float GetDamage(bool isCritical)

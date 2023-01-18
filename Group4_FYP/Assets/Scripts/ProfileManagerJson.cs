@@ -30,16 +30,16 @@ public static class ProfileManagerJson
         }
     }
 
-    public static void SaveProfile(string profileName, Hero hero)
-    {
-        CreateHeroProfileDirectory();
-        string path = heroProfileDirectoryPath + profileName + ".heroprofile";
+    // public static void SaveProfile(string profileName, Hero hero)
+    // {
+    //     CreateHeroProfileDirectory();
+    //     string path = heroProfileDirectoryPath + profileName + ".heroprofile";
 
-        ProfileData profileData = new ProfileData(hero);
-        WriteProfile(profileData, path);
-    }
+    //     ProfileData profileData = new ProfileData(hero);
+    //     WriteProfile(profileData, path);
+    // }
 
-    public static ProfileData LoadProfile(string profileName)
+    public static ProfileData GetProfile(string profileName)
     {
         CreateHeroProfileDirectory();
         string path = heroProfileDirectoryPath + profileName + ".heroprofile";
@@ -110,6 +110,10 @@ public static class ProfileManagerJson
             File.Delete(path);
 
             return true;
+        }
+        else
+        {
+            // show error
         }
 
         return false;
