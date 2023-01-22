@@ -32,10 +32,8 @@ public class Hero : MonoBehaviour
     private float mana;
 
     // xp
-    //int level = 1;
     int level;
     int requiredExp;
-    //int storedExp = 0;
     int storedExp;
     int storedCoin = 0;
 
