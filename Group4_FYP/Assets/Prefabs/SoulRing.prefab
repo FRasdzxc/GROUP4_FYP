@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6765511619509126595}
   m_Layer: 0
   m_Name: Item
-  m_TagString: HeroWeaponPoint
+  m_TagString: HeroWeaponTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b77114d9bb07df468b8bcdde9ee3d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPointData: {fileID: 11400000, guid: 053782354edf5e241855e8cfa397aa6b, type: 2}
+  weaponTriggerData: {fileID: 11400000, guid: 053782354edf5e241855e8cfa397aa6b, type: 2}
   notes: Please assign either "HeroWeaponPoint", "HeroWeaponPointStronger" or "MobWeaponPoint"
     tag to the GameObject this script is attached to
 --- !u!1 &6765511619997051974
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 6765511619997051972}
   m_Layer: 0
   m_Name: Item
-  m_TagString: HeroWeaponPoint
+  m_TagString: HeroWeaponTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b77114d9bb07df468b8bcdde9ee3d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPointData: {fileID: 11400000, guid: 053782354edf5e241855e8cfa397aa6b, type: 2}
+  weaponTriggerData: {fileID: 11400000, guid: 053782354edf5e241855e8cfa397aa6b, type: 2}
   notes: Please assign either "HeroWeaponPoint", "HeroWeaponPointStronger" or "MobWeaponPoint"
     tag to the GameObject this script is attached to
 --- !u!1 &6765511620202682018

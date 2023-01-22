@@ -30,14 +30,13 @@ public static class ProfileManagerJson
         }
     }
 
-    // public static void SaveProfile(string profileName, Hero hero)
-    // {
-    //     CreateHeroProfileDirectory();
-    //     string path = heroProfileDirectoryPath + profileName + ".heroprofile";
+    public static void SaveProfile(ProfileData profile)
+    {
+        CreateHeroProfileDirectory();
+        string path = heroProfileDirectoryPath + profile.profileName + ".heroprofile";
 
-    //     ProfileData profileData = new ProfileData(hero);
-    //     WriteProfile(profileData, path);
-    // }
+        WriteProfile(profile, path);
+    }
 
     public static ProfileData GetProfile(string profileName)
     {

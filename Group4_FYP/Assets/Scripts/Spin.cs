@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Spin : MonoBehaviour
 {
-    private float rotationsPerSecond;
+    [SerializeField] private float rotationsPerSecond;
 
     // Update is called once per frame
     void Update()

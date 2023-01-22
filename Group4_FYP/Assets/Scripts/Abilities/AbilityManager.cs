@@ -10,11 +10,18 @@ public class AbilityManager : MonoBehaviour
     private HUD hud;
     private HeroData heroData;
     private float mana;
+    private float maxMana;
+    private float manaRegeneration;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
+    }
+
     void Start()
     {
-        
+        Setup();
     }
 
     // Update is called once per frame
@@ -50,21 +57,21 @@ public class AbilityManager : MonoBehaviour
             }
         }
 
-        if (mana < heroData.mana)
+        if (mana < maxMana)
         {
-            mana += Time.deltaTime * heroData.manaRegeneration;
+            mana += Time.deltaTime * manaRegeneration;
             hud.UpdateMana(mana);
         }
         else
         {
-            mana = heroData.mana;
+            mana = maxMana;
             hud.UpdateMana(mana);
         }
 
         // test refill mana
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Backslash))
         {
-            mana = heroData.mana;
+            mana = maxMana;
             hud.UpdateMana(mana);
             ReadyEquippedAbilities();
         }
@@ -75,17 +82,9 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-    public void Initialize(HUD hud, HeroData heroData)
-    {
-        this.hud = hud;
-        this.heroData = heroData;
-        Setup();
-    }
-
     public void Setup()
     {
-        mana = heroData.mana;
-        hud.SetupMana(mana);
+        hud.SetupMana(mana, maxMana);
         equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory lateron
 
         for (int i = 0; i < equippedAbilities.Length; i++)
@@ -94,6 +93,36 @@ public class AbilityManager : MonoBehaviour
         }
 
         ReadyEquippedAbilities();
+    }
+
+    public void SetMana(float mana)
+    {
+        this.mana = mana;
+    }
+
+    public void SetMaxMana(float maxMana)
+    {
+        this.maxMana = maxMana;
+    }
+
+    public void SetManaRegeneration(float manaRegeneration)
+    {
+        this.manaRegeneration = manaRegeneration;
+    }
+
+    public float GetMana()
+    {
+        return mana;
+    }
+
+    public float GetMaxMana()
+    {
+        return maxMana;
+    }
+
+    public float GetManaRegeneration()
+    {
+        return manaRegeneration;
     }
 
     private void ReadyEquippedAbilities()

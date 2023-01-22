@@ -17,6 +17,7 @@ TagManager:
   - HeroWeaponTrigger
   - HeroWeaponTriggerStronger
   - MobWeaponTrigger
+  - EventSystem
   layers:
   - Default
   - TransparentFX

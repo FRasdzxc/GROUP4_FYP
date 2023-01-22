@@ -19,6 +19,7 @@ public class Hero : MonoBehaviour
     private HUD hud;
     private float health;
     private float maxHealth;
+    private float healthRegeneration;
     private SpriteRenderer sr;
     private bool isDead;
     private ColorGrading colorGrading;
@@ -31,33 +32,28 @@ public class Hero : MonoBehaviour
     private float mana;
 
     // xp
-    int level = 1;
+    //int level = 1;
+    int level;
     int requiredExp;
-    int storedExp = 0;
+    //int storedExp = 0;
+    int storedExp;
     int storedCoin = 0;
 
     void Awake()
     {
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
+        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
+        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         movementController.SetMovementSpeed(heroData.walkspeed);
-        abilityManager.Initialize(hud, heroData);
-        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
 
-        // xp
-        requiredExp = (int)(level * 100 * 1.25);
-        hud.SetupXP(requiredExp);
-
-        profile = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName"));
-        health = profile.health;
-        maxHealth = profile.maxHealth;
+        
 
         Setup();
     }
@@ -68,43 +64,39 @@ public class Hero : MonoBehaviour
         // test respawn
         if (!isDead)
         {
-            if (health < heroData.health)
+            //if (health < heroData.health)
+            if (health < maxHealth)
             {
-                health += Time.deltaTime * heroData.healthRegeneration; // temporary only?
+                health += Time.deltaTime * healthRegeneration;
                 hud.UpdateHealth(health);
             }
             else
             {
-                health = heroData.health;
+                //health = heroData.health;
+                health = maxHealth;
                 hud.UpdateHealth(health);
             }
-
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R)) // test only
-            {
-                Die();
-            }
             
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace)) // test only
             {
-                TakeDamage(5);
+                TakeDamage(15);
             }
 
             // xp
-            hud.UpdateXP(storedExp);
+            hud.UpdateXP(level, storedExp);
             requiredExp = (int)(level * 100 * 1.25);
             if(storedExp >= requiredExp)
             {
                 storedExp -= requiredExp;
-                hud.SetupXP(requiredExp);
+                hud.SetupXP(level, requiredExp);
                 level++;
             }
         }
     }
 
-    private void Setup() // useful for respawn
+    public void Setup() // useful for respawn
     {
         isDead = false;
-        health = heroData.health;
         hud.SetupHealth(health, maxHealth);
         transform.position = spawnPoint.transform.position;
         colorGrading.saturation.value = 0f;
@@ -112,6 +104,10 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = true;
         abilityManager.Setup();
         weaponHolder.SetActive(true);
+
+        // xp
+        requiredExp = (int)(level * 100 * 1.25);
+        hud.SetupXP(level, requiredExp);
     }
 
     private void TakeDamage(float damage)
@@ -146,29 +142,49 @@ public class Hero : MonoBehaviour
     private async void Respawn()
     {
         await maskingCanvas.ShowMaskingCanvas(true);
+        health = maxHealth;
         Setup();
         await maskingCanvas.ShowMaskingCanvas(false);
     }
 
-    // public float GetHealth()
-    // {
-    //     return health;
-    // }
-
-    // public float GetMaxHealth()
-    // {
-    //     return maxHealth;
-    // }
-
-    // public string GetProfileName()
-    // {
-    //     return profileName;
-    // }
-
-    public void SaveProfile() // test only
+    public void SetHealth(float health)
     {
-        // ProfileManagerJson.SaveProfile(profile.profileName, this);
-        profile.health = health;
+        this.health = health;
+    }
+
+    public void SetMaxHealth(float maxHealth)
+    {
+        this.maxHealth = maxHealth;
+    }
+
+    public void SetHealthRegeneration(float healthRegeneration)
+    {
+        this.healthRegeneration = healthRegeneration;
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+    }
+
+    public void SetStoredExp(int storedExp)
+    {
+        this.storedExp = storedExp;
+    }
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public float GetHealthRegeneration()
+    {
+        return healthRegeneration;
     }
 
     public int GetLevel()
@@ -176,7 +192,7 @@ public class Hero : MonoBehaviour
         return level;
     }
     
-    public int GetStoredXP()
+    public int GetStoredExp()
     {
         return storedExp;
     }
@@ -184,7 +200,7 @@ public class Hero : MonoBehaviour
     public void AddEXP(int exp)
     {
         storedExp += exp;
-        hud.UpdateXP(storedExp);
+        hud.UpdateXP(level, storedExp);
     }
 
     public void AddCoin(int coin)
@@ -195,7 +211,7 @@ public class Hero : MonoBehaviour
     public void DeductEXP(int exp)
     {
         storedExp -= exp;
-        hud.UpdateXP(storedExp);
+        hud.UpdateXP(level, storedExp);
     }
 
     public void DeductCoin(int coin)

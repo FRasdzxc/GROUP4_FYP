@@ -98,6 +98,9 @@ public class PauseMenu : MonoBehaviour
 
     public async void ExitToMenu()
     {
+        SaveSystem.Instance.SaveData();
+        ProfileManagerJson.DeleteProfile("_testprofile"); // test only
+
         HidePauseMenu(false);
         await Task.Delay(250);
 

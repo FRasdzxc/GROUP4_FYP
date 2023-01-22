@@ -24,14 +24,12 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject[] abilityCooldownText;
 
     private float maxMana;
-    private PlayerData playerData;
     private int maxXP;
 
     // Start is called before the first frame update
     void Start()
     {
         regionText.text = ""; // temporary
-        playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>();
         profileNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
     }
 
@@ -47,11 +45,11 @@ public class HUD : MonoBehaviour
         UpdateHealth(health);
     }
 
-    public void SetupMana(float maxMana)
+    public void SetupMana(float mana, float maxMana)
     {
         this.maxMana = maxMana;
         manaSlider.maxValue = maxMana;
-        UpdateMana(maxMana);
+        UpdateMana(mana);
     }
 
     public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime)
@@ -63,11 +61,11 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void SetupXP(int maxXP)
+    public void SetupXP(int level, int maxXP)
     {
         this.maxXP = maxXP;
         xpSlider.maxValue = maxXP;
-        UpdateXP(maxXP);
+        UpdateXP(level, maxXP);
     }
 
     public void UpdateHealth(float health)
@@ -100,10 +98,11 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void UpdateXP(int xp)
+    public void UpdateXP(int level, int storedExp)
     {
-        xpSlider.DOValue(xp, 0.25f);
-        xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
+        xpSlider.DOValue(storedExp, 0.25f);
+        //xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
+        xpText.text = "Level " + level + " (" + storedExp + "/" + maxXP.ToString() + " XP)";
     }
 
     public async Task ShowHugeMessage(string message, float duration, Color color) // duration = seconds

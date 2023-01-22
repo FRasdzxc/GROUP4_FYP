@@ -15,7 +15,6 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject profileEditPanel;
 
     [SerializeField] private SceneController sceneController;
-    [SerializeField] private ConfirmationPanel confirmationPanel;
 
     [SerializeField] private InputField profileCreationInputField;
     [SerializeField] private InputField profileEditInputField;
@@ -186,7 +185,7 @@ public class StartMenu : MonoBehaviour
 
     public void DeleteProfile()
     {
-        confirmationPanel.ShowConfirmationPanel("Delete Profile?", "Upon deletion, all your data will be lost. Do you really wish to continue?", () => { ProfileManagerJson.DeleteProfile(selectedProfileName); ShowProfileSelectionPanel(); }, true);
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Delete Profile", "Upon deletion, all your data will be lost. Do you really wish to continue?", () => { ProfileManagerJson.DeleteProfile(selectedProfileName); ShowProfileSelectionPanel(); }, true);
     }
 
     public void StartGame() // load selected profile data then enter GameScene // not finished
@@ -217,6 +216,11 @@ public class StartMenu : MonoBehaviour
         profileEditInputField.text = selectedProfileName;
 
         await ShowPanel(PanelType.profileEdit);
+    }
+
+    public void QuitGame()
+    {
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", () => { Application.Quit(); }, false);
     }
 
     private async Task ShowPanel(PanelType panelType) // show inputted panelType and hide all the others

@@ -28,11 +28,13 @@ public class PointMovement : MonoBehaviour
             {
                 if(storedType == "coin")
                 {
-                    player.GetComponent<PlayerData>().AddCoin(storedValue);
+                    //player.GetComponent<PlayerData>().AddCoin(storedValue);
+                    player.GetComponent<Hero>().AddCoin(storedValue);
                 }
                 if(storedType == "xp")
                 {
-                    player.GetComponent<PlayerData>().AddEXP(storedValue);
+                    //player.GetComponent<PlayerData>().AddEXP(storedValue);
+                    player.GetComponent<Hero>().AddEXP(storedValue);
                 }
                 if(storedType == "hp")
                 {
