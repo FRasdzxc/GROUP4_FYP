@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static class ProfileManagerJson
@@ -15,9 +13,8 @@ public static class ProfileManagerJson
 
         if (File.Exists(path)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
         {
-            Debug.LogWarning("profile " + profileName + ".heroprofile exists already.");
-
             // show error
+            _ = Notification.Instance.ShowNotification("\"" + profileName + "\" is not available, please use another name");
 
             return false;
         }
@@ -25,6 +22,8 @@ public static class ProfileManagerJson
         {
             ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
             WriteProfile(profileData, path);
+
+            _ = Notification.Instance.ShowNotification("Sucessfully created Profile \"" + profileName + "\"!");
 
             return true;
         }
@@ -55,9 +54,8 @@ public static class ProfileManagerJson
     {
         if (profileName == newProfileName)
         {
-            Debug.LogWarning("profile name has not changed.");
-
             // show error
+            _ = Notification.Instance.ShowNotification("Profile name has not changed");
 
             return false;
         }
@@ -74,15 +72,16 @@ public static class ProfileManagerJson
             // moving data to new profile
             if (File.Exists(newPath)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
             {
-                Debug.LogWarning("profile " + newProfileName + ".heroprofile exists already.");
-
                 // show error
+                _ = Notification.Instance.ShowNotification("\"" + newProfileName + "\" is not available, please use another name");
             }
             else
             {
                 ProfileData newProfileData = new ProfileData(newProfileName, profileData);
                 WriteProfile(newProfileData, newPath);
                 DeleteProfile(profileName);
+
+                _ = Notification.Instance.ShowNotification("Sucessfully changed Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
 
                 return true;
             }
@@ -101,12 +100,14 @@ public static class ProfileManagerJson
         {
             // delete profile
             File.Delete(path);
+            _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" deleted");
 
             return true;
         }
         else
         {
             // show error
+            _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" does not exist");
         }
 
         return false;

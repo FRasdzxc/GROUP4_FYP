@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +31,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -96,17 +95,26 @@ public class PauseMenu : MonoBehaviour
         isOpened = false;
     }
 
+    public void SaveGame()
+    {
+        HidePauseMenu(true);
+        SaveSystem.Instance.SaveData(true);
+    }
+
     public async void ExitToMenu()
     {
-        SaveSystem.Instance.SaveData();
-        ProfileManagerJson.DeleteProfile("_testprofile"); // test only
-
         HidePauseMenu(false);
         await Task.Delay(250);
 
+        // save settings to device
         settingsMenu.SaveSettings();
 
         // save data to profile
+        SaveSystem.Instance.SaveData(false);
+        if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
+        {
+            ProfileManagerJson.DeleteProfile("_testprofile"); // test only
+        }
 
         // exit to menu
         sceneController.ChangeScene("StartScene");

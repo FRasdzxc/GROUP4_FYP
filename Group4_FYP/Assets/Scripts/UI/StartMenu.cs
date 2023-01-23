@@ -101,14 +101,13 @@ public class StartMenu : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("class not selected.");
+                _ = Notification.Instance.ShowNotification("Please select a class");
             }
         }
         else
         {
-            Debug.LogWarning("profile name cannot be empty.");
-
             // show error
+            _ = Notification.Instance.ShowNotification("Profile name cannot be empty");
         }
     }
 
@@ -177,9 +176,8 @@ public class StartMenu : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("profile name cannot be empty.");
-
             // show error
+            _ = Notification.Instance.ShowNotification("Profile name cannot be empty");
         }
     }
 
@@ -190,7 +188,6 @@ public class StartMenu : MonoBehaviour
 
     public void StartGame() // load selected profile data then enter GameScene // not finished
     {
-        //sceneController.EnterScene();
         sceneController.EnterPlayScene();
     }
 

@@ -133,7 +133,7 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
-        await hud.ShowHugeMessage("You Died", 1.5f, Color.red);
+        await hud.ShowHugeMessage("You Died", Color.red);
         Respawn();
     }
 
@@ -143,6 +143,12 @@ public class Hero : MonoBehaviour
         health = maxHealth;
         Setup();
         await maskingCanvas.ShowMaskingCanvas(false);
+    }
+
+    public void Spawn()
+    {
+        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+        transform.position = spawnPoint.transform.position;
     }
 
     public void SetHealth(float health)

@@ -14,6 +14,7 @@ public class ProfileData
     public float manaRegeneration;
     public int level;
     public int storedExp;
+    public int map;
 
     public ProfileData() // profile for test scenes
     {
@@ -27,6 +28,7 @@ public class ProfileData
         manaRegeneration = 5;
         level = 1;
         storedExp = 0;
+        map = 0;
     }
 
     public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats) // used for creating a new profile
@@ -42,6 +44,7 @@ public class ProfileData
         manaRegeneration = defaultStats.manaRegeneration;
         level = 1;
         storedExp = 0;
+        map = 0;
     }
 
     public ProfileData(string newProfileName, ProfileData profileData) // used for moving data when updating profiles
@@ -56,5 +59,6 @@ public class ProfileData
         manaRegeneration = profileData.manaRegeneration;
         level = profileData.level;
         storedExp = profileData.storedExp;
+        map = profileData.map;
     }
 }

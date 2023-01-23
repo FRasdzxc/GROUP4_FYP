@@ -35,7 +35,7 @@ public class Archer : MonoBehaviour // rename and use as general character?
         }
     }
 
-    private async void Attack()
+    private /*async*/ void Attack()
     {
         if (canAttack)
         {

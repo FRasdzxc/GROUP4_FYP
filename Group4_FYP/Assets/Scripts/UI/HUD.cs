@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +27,7 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        regionText.text = ""; // temporary
+        regionText.text = ""; // temporary?
         profileNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
     }
 
@@ -105,7 +103,7 @@ public class HUD : MonoBehaviour
         xpText.text = "Level " + level + " (" + storedExp + "/" + maxXP.ToString() + " XP)";
     }
 
-    public async Task ShowHugeMessage(string message, float duration, Color color) // duration = seconds
+    public async Task ShowHugeMessage(string message, Color color, float duration = 1.5f) // duration = seconds
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);
 
