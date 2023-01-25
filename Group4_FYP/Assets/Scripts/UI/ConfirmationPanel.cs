@@ -61,12 +61,12 @@ public class ConfirmationPanel : MonoBehaviour
         }
 
         gameObject.SetActive(true);
-        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).AsyncWaitForCompletion();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
     }
 
     public async Task HideConfirmationPanel()
     {
-        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).AsyncWaitForCompletion();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
     }
 

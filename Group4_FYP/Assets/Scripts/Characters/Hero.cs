@@ -51,8 +51,6 @@ public class Hero : MonoBehaviour
         Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
         movementController.SetMovementSpeed(heroData.walkspeed);
 
-        
-
         Setup();
     }
 
@@ -88,6 +86,7 @@ public class Hero : MonoBehaviour
                 storedExp -= requiredExp;
                 hud.SetupXP(level, requiredExp);
                 level++;
+                _ = Notification.Instance.ShowNotification("Level Up! - " + level);
             }
         }
     }

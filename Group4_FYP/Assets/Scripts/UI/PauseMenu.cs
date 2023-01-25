@@ -98,6 +98,7 @@ public class PauseMenu : MonoBehaviour
     public void SaveGame()
     {
         HidePauseMenu(true);
+        settingsMenu.SaveSettings();
         SaveSystem.Instance.SaveData(true);
     }
 

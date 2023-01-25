@@ -68,13 +68,13 @@ public class HUD : MonoBehaviour
 
     public void UpdateHealth(float health)
     {
-        healthSlider.DOValue(health, 0.25f);
+        healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
         healthText.text = ((int)health).ToString() + " HP";
     }
 
     public void UpdateMana(float mana)
     {
-        manaSlider.DOValue(mana, 0.25f);
+        manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
         manaText.text = ((int)mana).ToString() + "/" + maxMana.ToString() + " MP";
     }
 
@@ -82,7 +82,7 @@ public class HUD : MonoBehaviour
     {
         if (slotNumber >= 0 && slotNumber < abilitySliders.Length)
         {
-            abilitySliders[slotNumber].DOValue(remainingCooldownTime, 0.25f);
+            abilitySliders[slotNumber].DOValue(remainingCooldownTime, 0.25f).SetEase(Ease.OutQuart);
 
             if (remainingCooldownTime <= 0)
             {
@@ -98,7 +98,7 @@ public class HUD : MonoBehaviour
 
     public void UpdateXP(int level, int storedExp)
     {
-        xpSlider.DOValue(storedExp, 0.25f);
+        xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
         //xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
         xpText.text = "Level " + level + " (" + storedExp + "/" + maxXP.ToString() + " XP)";
     }

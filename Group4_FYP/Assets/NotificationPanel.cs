@@ -21,7 +21,7 @@ public class NotificationPanel : MonoBehaviour
         notificationText.text = notification;
 
         gameObject.SetActive(true);
-        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).AsyncWaitForCompletion();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         await Task.Delay((int)(duration * 1000));
         await HideNotificationPanel();
@@ -29,7 +29,7 @@ public class NotificationPanel : MonoBehaviour
 
     public async Task HideNotificationPanel()
     {
-        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).AsyncWaitForCompletion();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
     }
 }
