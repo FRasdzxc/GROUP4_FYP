@@ -36,8 +36,6 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
-        Debug.Log(PlayerPrefs.GetInt("resolution"));
-
         // load settings
         LoadSettings();
     }

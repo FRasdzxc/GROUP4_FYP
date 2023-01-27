@@ -42,7 +42,7 @@ public class TestHeroController : MonoBehaviour
         //clone.
     }
 
-    private void PickUpItem(Item item)
+    private void PickUpItem(ItemData item)
     {
         inventory.AddItem(item);
 

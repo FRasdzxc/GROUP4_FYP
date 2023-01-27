@@ -81,7 +81,7 @@ public static class ProfileManagerJson
                 WriteProfile(newProfileData, newPath);
                 DeleteProfile(profileName);
 
-                _ = Notification.Instance.ShowNotification("Sucessfully changed Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
+                _ = Notification.Instance.ShowNotification("Sucessfully updated Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
 
                 return true;
             }

@@ -85,6 +85,7 @@ public class Hero : MonoBehaviour
             {
                 storedExp -= requiredExp;
                 hud.SetupXP(level, requiredExp);
+                HeroPanel.Instance.UpdateLevel(level);
                 level++;
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level);
             }
@@ -105,6 +106,9 @@ public class Hero : MonoBehaviour
         // xp
         requiredExp = (int)(level * 100 * 1.25);
         hud.SetupXP(level, requiredExp);
+        HeroPanel.Instance.UpdateLevel(level);
+
+        HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
     private void TakeDamage(float damage)
@@ -150,6 +154,7 @@ public class Hero : MonoBehaviour
         transform.position = spawnPoint.transform.position;
     }
 
+    #region Setters
     public void SetHealth(float health)
     {
         this.health = health;
@@ -175,6 +180,13 @@ public class Hero : MonoBehaviour
         this.storedExp = storedExp;
     }
 
+    public void SetStoredCoin(int coin)
+    {
+        this.storedCoin = coin;
+    }
+    #endregion
+
+    #region Getters
     public float GetHealth()
     {
         return health;
@@ -200,6 +212,12 @@ public class Hero : MonoBehaviour
         return storedExp;
     }
 
+    public int GetStoredCoin()
+    {
+        return storedCoin;
+    }
+    #endregion
+
     public void AddEXP(int exp)
     {
         storedExp += exp;
@@ -209,6 +227,7 @@ public class Hero : MonoBehaviour
     public void AddCoin(int coin)
     {
         storedCoin += coin;
+        HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
     public void DeductEXP(int exp)
@@ -228,6 +247,11 @@ public class Hero : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<WeaponTrigger>().GetDamage(false));
             sr.color = Color.red;
+        }
+
+        if (collision.CompareTag("Coin")) // ?
+        {
+            AddCoin(15);
         }
     }
 

@@ -34,7 +34,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString();
+        mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString("n0");
     }
 
     public void SetupHealth(float health, float maxHealth)
@@ -69,13 +69,13 @@ public class HUD : MonoBehaviour
     public void UpdateHealth(float health)
     {
         healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
-        healthText.text = ((int)health).ToString() + " HP";
+        healthText.text = ((int)health).ToString("n0") + " HP";
     }
 
     public void UpdateMana(float mana)
     {
         manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
-        manaText.text = ((int)mana).ToString() + "/" + maxMana.ToString() + " MP";
+        manaText.text = ((int)mana).ToString("n0") + "/" + maxMana.ToString("n0") + " MP";
     }
 
     public void UpdateAbility(int slotNumber, float remainingCooldownTime)
@@ -100,7 +100,7 @@ public class HUD : MonoBehaviour
     {
         xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
         //xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
-        xpText.text = "Level " + level + " (" + storedExp + "/" + maxXP.ToString() + " XP)";
+        xpText.text = "Level " + level.ToString("n0") + " (" + storedExp.ToString("n0") + "/" + maxXP.ToString("n0") + " XP)";
     }
 
     public async Task ShowHugeMessage(string message, Color color, float duration = 1.5f) // duration = seconds

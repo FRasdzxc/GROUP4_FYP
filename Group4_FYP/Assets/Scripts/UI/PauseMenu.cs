@@ -21,8 +21,8 @@ public class PauseMenu : MonoBehaviour
         isOpened = false;
 
         // code for showing hudpanel and hiding osdpanel
+        //hudPanel.SetActive(true);
         pauseMenuBackground.SetActive(false);
-        hudPanel.SetActive(true);
         pauseMenuPanel.SetActive(false);
 
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
@@ -43,6 +43,11 @@ public class PauseMenu : MonoBehaviour
             {
                 ShowPauseMenu();
             }
+        }
+
+        if (isOpened && Input.GetKeyDown(KeyCode.BackQuote)) // not finished: also check if saving is allowed atm
+        {
+            SaveGame();
         }
     }
 

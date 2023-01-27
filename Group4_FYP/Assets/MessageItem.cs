@@ -3,32 +3,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class NotificationPanel : MonoBehaviour
+public class MessageItem : MonoBehaviour
 {
-    [SerializeField] private Text notificationText;
+    [SerializeField] private Image image;
+    [SerializeField] private Text messageText;
     [SerializeField] private Button hideButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        hideButton.onClick.AddListener(() => { _ = HideNotificationPanel(); });
+        hideButton.onClick.AddListener(() => { HideMessageItem(); });
     }
 
-    public async Task ShowNotificationPanel(string notification, float duration)
+    public async void ShowMessageItem(string message, float duration, Sprite sprite)
     {
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
-        notificationText.text = notification;
+        messageText.text = message;
+        image.sprite = sprite;
 
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         await Task.Delay((int)(duration * 1000));
-        await HideNotificationPanel();
+        HideMessageItem();
     }
 
-    public async Task HideNotificationPanel()
+    public async void HideMessageItem()
     {
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

@@ -58,6 +58,7 @@ public class SaveSystem : MonoBehaviour
         hero.SetHealthRegeneration(profile.healthRegeneration);
         hero.SetLevel(profile.level);
         hero.SetStoredExp(profile.storedExp);
+        hero.SetStoredCoin(profile.storedCoin);
         abilityManager.SetMana(profile.mana);
         abilityManager.SetMaxMana(profile.maxMana);
         abilityManager.SetManaRegeneration(profile.manaRegeneration);
@@ -71,6 +72,7 @@ public class SaveSystem : MonoBehaviour
         profile.healthRegeneration = hero.GetHealthRegeneration();
         profile.level = hero.GetLevel();
         profile.storedExp = hero.GetStoredExp();
+        profile.storedCoin = hero.GetStoredCoin();
         profile.mana = abilityManager.GetMana();
         profile.maxMana = abilityManager.GetMaxMana();
         profile.manaRegeneration = abilityManager.GetManaRegeneration();
@@ -87,6 +89,6 @@ public class SaveSystem : MonoBehaviour
     // not yet implemented
     private void AutoSave()
     {
-        
+        // check if saving is allowed first, then save, restart the timer
     }
 }

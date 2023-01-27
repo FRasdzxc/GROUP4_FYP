@@ -14,6 +14,7 @@ public class ProfileData
     public float manaRegeneration;
     public int level;
     public int storedExp;
+    public int storedCoin;
     public int map;
 
     public ProfileData() // profile for test scenes
@@ -28,6 +29,7 @@ public class ProfileData
         manaRegeneration = 5;
         level = 1;
         storedExp = 0;
+        storedCoin = 0;
         map = 0;
     }
 
@@ -44,6 +46,7 @@ public class ProfileData
         manaRegeneration = defaultStats.manaRegeneration;
         level = 1;
         storedExp = 0;
+        storedCoin = 0;
         map = 0;
     }
 
@@ -59,6 +62,7 @@ public class ProfileData
         manaRegeneration = profileData.manaRegeneration;
         level = profileData.level;
         storedExp = profileData.storedExp;
+        storedCoin = profileData.storedCoin;
         map = profileData.map;
     }
 }

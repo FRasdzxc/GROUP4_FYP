@@ -1,37 +1,100 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory
+public class Inventory : MonoBehaviour
 {
-    //[SerializeField] private InventoryPanel inventoryPanel;
+    [SerializeField] private GameObject inventoryContentPanel;
+    [SerializeField] private GameObject inventorySlotPrefab;
+    [SerializeField] private int inventorySize = 25;
+    
+    private List<ItemData> items;
+    private List<GameObject> inventorySlots;
 
-    private List<Item> items;
-
-    public Inventory()
+    private static Inventory instance;
+    public static Inventory Instance
     {
-        items = new List<Item>();
+        get
+        {
+            return instance;
+        }
     }
 
-    public void AddItem(Item item)
+    void Awake()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+
+        items = new List<ItemData>();
+        inventorySlots = new List<GameObject>();
+    }
+
+    //public Inventory()
+    //{
+    //    items = new List<ItemData>();
+    //}
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        RefreshInventoryPanel();
+    }
+
+    public bool AddItem(ItemData item)
+    {
+        if (items.Count >= inventorySize)
+        {
+            _ = Notification.Instance.ShowNotification("Inventory is full!");
+            return false;
+        }
         items.Add(item);
 
-        //InventoryPanel.UpdateInventoryPanel(items);
+        RefreshInventoryPanel();
+
+        return true;
     }
 
-    public void RemoveItem()
+    public void RemoveItem(ItemData item)
     {
-        //items.RemoveAt();
+        items.Remove(item);
 
-        //InventoryPanel.UpdateInventoryPanel(items);
+        RefreshInventoryPanel();
     }
 
-    public void RemoveAllItems()
+    //public void RemoveAllItems()
+    //{
+    //    for (int i = 0; i < items.Count; i++)
+    //    {
+    //        items.RemoveAt(0);
+    //    }
+    //}
+
+    /* DropItem function? */
+
+    /* SetItems function */
+
+    /* GetItems function */
+
+    private void RefreshInventoryPanel()
     {
+        // destroy all the inventory slots
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            Destroy(inventorySlots[i]);
+        }
+        inventorySlots.Clear();
+
+        // add inventory slots
+        for (int i = 0; i < inventorySize; i++)
+        {
+            inventorySlots.Add(Instantiate(inventorySlotPrefab, inventoryContentPanel.transform));
+        }
+
+        // assign items to inventory slots
         for (int i = 0; i < items.Count; i++)
         {
-            items.RemoveAt(0);
+            inventorySlots[i].GetComponent<InventorySlot>().AddItem(items[i]);
         }
     }
 }
