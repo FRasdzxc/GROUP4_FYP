@@ -39,7 +39,7 @@ public class MovementControllerV2 : MonoBehaviour
                     animator.SetBool("A", true);
                 }
             }
-            else if (moveDir.x > 0.5f)
+            if (moveDir.x > 0.5f)
             {
                 weaponHolder.transform.localScale = new Vector2(1, 1);
 
@@ -49,7 +49,7 @@ public class MovementControllerV2 : MonoBehaviour
                     animator.SetBool("D", true);
                 }
             }
-            else if (moveDir.y < 0.5f)
+            if (moveDir.y < -0.5f)
             {
                 if (animator)
                 {
@@ -57,7 +57,7 @@ public class MovementControllerV2 : MonoBehaviour
                     animator.SetBool("S", true);
                 }
             }
-            else if (moveDir.y > 0.5f)
+            if (moveDir.y > 0.5f)
             {
                 if (animator)
                 {

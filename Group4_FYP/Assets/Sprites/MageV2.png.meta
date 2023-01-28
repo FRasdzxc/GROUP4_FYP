@@ -290,6 +290,18 @@ TextureImporter:
   - first:
       213: -2623122801034993346
     second: MageV2_95
+  - first:
+      213: 1788178077260792000
+    second: MageV2_96
+  - first:
+      213: 4440440142618149772
+    second: MageV2_97
+  - first:
+      213: 6845173440906137172
+    second: MageV2_98
+  - first:
+      213: 433624932125608368
+    second: MageV2_99
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -898,8 +910,8 @@ TextureImporter:
       name: MageV2_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 66
+        x: 768
+        y: 99
         width: 32
         height: 33
       alignment: 0
@@ -919,7 +931,7 @@ TextureImporter:
       name: MageV2_25
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 66
         width: 32
         height: 33
@@ -940,7 +952,7 @@ TextureImporter:
       name: MageV2_26
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 66
         width: 32
         height: 33
@@ -961,7 +973,7 @@ TextureImporter:
       name: MageV2_27
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 66
         width: 32
         height: 33
@@ -982,7 +994,7 @@ TextureImporter:
       name: MageV2_28
       rect:
         serializedVersion: 2
-        x: 128
+        x: 96
         y: 66
         width: 32
         height: 33
@@ -1003,7 +1015,7 @@ TextureImporter:
       name: MageV2_29
       rect:
         serializedVersion: 2
-        x: 160
+        x: 128
         y: 66
         width: 32
         height: 33
@@ -1024,7 +1036,7 @@ TextureImporter:
       name: MageV2_30
       rect:
         serializedVersion: 2
-        x: 192
+        x: 160
         y: 66
         width: 32
         height: 33
@@ -1045,7 +1057,7 @@ TextureImporter:
       name: MageV2_31
       rect:
         serializedVersion: 2
-        x: 224
+        x: 192
         y: 66
         width: 32
         height: 33
@@ -1066,7 +1078,7 @@ TextureImporter:
       name: MageV2_32
       rect:
         serializedVersion: 2
-        x: 256
+        x: 224
         y: 66
         width: 32
         height: 33
@@ -1087,7 +1099,7 @@ TextureImporter:
       name: MageV2_33
       rect:
         serializedVersion: 2
-        x: 288
+        x: 256
         y: 66
         width: 32
         height: 33
@@ -1108,7 +1120,7 @@ TextureImporter:
       name: MageV2_34
       rect:
         serializedVersion: 2
-        x: 320
+        x: 288
         y: 66
         width: 32
         height: 33
@@ -1129,7 +1141,7 @@ TextureImporter:
       name: MageV2_35
       rect:
         serializedVersion: 2
-        x: 352
+        x: 320
         y: 66
         width: 32
         height: 33
@@ -1150,7 +1162,7 @@ TextureImporter:
       name: MageV2_36
       rect:
         serializedVersion: 2
-        x: 384
+        x: 352
         y: 66
         width: 32
         height: 33
@@ -1171,7 +1183,7 @@ TextureImporter:
       name: MageV2_37
       rect:
         serializedVersion: 2
-        x: 416
+        x: 384
         y: 66
         width: 32
         height: 33
@@ -1192,7 +1204,7 @@ TextureImporter:
       name: MageV2_38
       rect:
         serializedVersion: 2
-        x: 448
+        x: 416
         y: 66
         width: 32
         height: 33
@@ -1213,7 +1225,7 @@ TextureImporter:
       name: MageV2_39
       rect:
         serializedVersion: 2
-        x: 480
+        x: 448
         y: 66
         width: 32
         height: 33
@@ -1234,7 +1246,7 @@ TextureImporter:
       name: MageV2_40
       rect:
         serializedVersion: 2
-        x: 512
+        x: 480
         y: 66
         width: 32
         height: 33
@@ -1255,7 +1267,7 @@ TextureImporter:
       name: MageV2_41
       rect:
         serializedVersion: 2
-        x: 544
+        x: 512
         y: 66
         width: 32
         height: 33
@@ -1276,7 +1288,7 @@ TextureImporter:
       name: MageV2_42
       rect:
         serializedVersion: 2
-        x: 576
+        x: 544
         y: 66
         width: 32
         height: 33
@@ -1297,7 +1309,7 @@ TextureImporter:
       name: MageV2_43
       rect:
         serializedVersion: 2
-        x: 608
+        x: 576
         y: 66
         width: 32
         height: 33
@@ -1318,7 +1330,7 @@ TextureImporter:
       name: MageV2_44
       rect:
         serializedVersion: 2
-        x: 640
+        x: 608
         y: 66
         width: 32
         height: 33
@@ -1339,7 +1351,7 @@ TextureImporter:
       name: MageV2_45
       rect:
         serializedVersion: 2
-        x: 672
+        x: 640
         y: 66
         width: 32
         height: 33
@@ -1360,7 +1372,7 @@ TextureImporter:
       name: MageV2_46
       rect:
         serializedVersion: 2
-        x: 704
+        x: 672
         y: 66
         width: 32
         height: 33
@@ -1381,7 +1393,7 @@ TextureImporter:
       name: MageV2_47
       rect:
         serializedVersion: 2
-        x: 736
+        x: 704
         y: 66
         width: 32
         height: 33
@@ -1402,8 +1414,8 @@ TextureImporter:
       name: MageV2_48
       rect:
         serializedVersion: 2
-        x: 0
-        y: 33
+        x: 736
+        y: 66
         width: 32
         height: 33
       alignment: 0
@@ -1423,8 +1435,8 @@ TextureImporter:
       name: MageV2_49
       rect:
         serializedVersion: 2
-        x: 32
-        y: 33
+        x: 768
+        y: 66
         width: 32
         height: 33
       alignment: 0
@@ -1444,7 +1456,7 @@ TextureImporter:
       name: MageV2_50
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 33
         width: 32
         height: 33
@@ -1465,7 +1477,7 @@ TextureImporter:
       name: MageV2_51
       rect:
         serializedVersion: 2
-        x: 96
+        x: 32
         y: 33
         width: 32
         height: 33
@@ -1486,7 +1498,7 @@ TextureImporter:
       name: MageV2_52
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 33
         width: 32
         height: 33
@@ -1507,7 +1519,7 @@ TextureImporter:
       name: MageV2_53
       rect:
         serializedVersion: 2
-        x: 160
+        x: 96
         y: 33
         width: 32
         height: 33
@@ -1528,7 +1540,7 @@ TextureImporter:
       name: MageV2_54
       rect:
         serializedVersion: 2
-        x: 192
+        x: 128
         y: 33
         width: 32
         height: 33
@@ -1549,7 +1561,7 @@ TextureImporter:
       name: MageV2_55
       rect:
         serializedVersion: 2
-        x: 224
+        x: 160
         y: 33
         width: 32
         height: 33
@@ -1570,7 +1582,7 @@ TextureImporter:
       name: MageV2_56
       rect:
         serializedVersion: 2
-        x: 256
+        x: 192
         y: 33
         width: 32
         height: 33
@@ -1591,7 +1603,7 @@ TextureImporter:
       name: MageV2_57
       rect:
         serializedVersion: 2
-        x: 288
+        x: 224
         y: 33
         width: 32
         height: 33
@@ -1612,7 +1624,7 @@ TextureImporter:
       name: MageV2_58
       rect:
         serializedVersion: 2
-        x: 320
+        x: 256
         y: 33
         width: 32
         height: 33
@@ -1633,7 +1645,7 @@ TextureImporter:
       name: MageV2_59
       rect:
         serializedVersion: 2
-        x: 352
+        x: 288
         y: 33
         width: 32
         height: 33
@@ -1654,7 +1666,7 @@ TextureImporter:
       name: MageV2_60
       rect:
         serializedVersion: 2
-        x: 384
+        x: 320
         y: 33
         width: 32
         height: 33
@@ -1675,7 +1687,7 @@ TextureImporter:
       name: MageV2_61
       rect:
         serializedVersion: 2
-        x: 416
+        x: 352
         y: 33
         width: 32
         height: 33
@@ -1696,7 +1708,7 @@ TextureImporter:
       name: MageV2_62
       rect:
         serializedVersion: 2
-        x: 448
+        x: 384
         y: 33
         width: 32
         height: 33
@@ -1717,7 +1729,7 @@ TextureImporter:
       name: MageV2_63
       rect:
         serializedVersion: 2
-        x: 480
+        x: 416
         y: 33
         width: 32
         height: 33
@@ -1738,7 +1750,7 @@ TextureImporter:
       name: MageV2_64
       rect:
         serializedVersion: 2
-        x: 512
+        x: 448
         y: 33
         width: 32
         height: 33
@@ -1759,7 +1771,7 @@ TextureImporter:
       name: MageV2_65
       rect:
         serializedVersion: 2
-        x: 544
+        x: 480
         y: 33
         width: 32
         height: 33
@@ -1780,7 +1792,7 @@ TextureImporter:
       name: MageV2_66
       rect:
         serializedVersion: 2
-        x: 576
+        x: 512
         y: 33
         width: 32
         height: 33
@@ -1801,7 +1813,7 @@ TextureImporter:
       name: MageV2_67
       rect:
         serializedVersion: 2
-        x: 608
+        x: 544
         y: 33
         width: 32
         height: 33
@@ -1822,7 +1834,7 @@ TextureImporter:
       name: MageV2_68
       rect:
         serializedVersion: 2
-        x: 640
+        x: 576
         y: 33
         width: 32
         height: 33
@@ -1843,7 +1855,7 @@ TextureImporter:
       name: MageV2_69
       rect:
         serializedVersion: 2
-        x: 672
+        x: 608
         y: 33
         width: 32
         height: 33
@@ -1864,7 +1876,7 @@ TextureImporter:
       name: MageV2_70
       rect:
         serializedVersion: 2
-        x: 704
+        x: 640
         y: 33
         width: 32
         height: 33
@@ -1885,7 +1897,7 @@ TextureImporter:
       name: MageV2_71
       rect:
         serializedVersion: 2
-        x: 736
+        x: 672
         y: 33
         width: 32
         height: 33
@@ -1906,8 +1918,8 @@ TextureImporter:
       name: MageV2_72
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 704
+        y: 33
         width: 32
         height: 33
       alignment: 0
@@ -1927,8 +1939,8 @@ TextureImporter:
       name: MageV2_73
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 736
+        y: 33
         width: 32
         height: 33
       alignment: 0
@@ -1948,8 +1960,8 @@ TextureImporter:
       name: MageV2_74
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
+        x: 768
+        y: 33
         width: 32
         height: 33
       alignment: 0
@@ -1969,7 +1981,7 @@ TextureImporter:
       name: MageV2_75
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 0
         width: 32
         height: 33
@@ -1990,7 +2002,7 @@ TextureImporter:
       name: MageV2_76
       rect:
         serializedVersion: 2
-        x: 128
+        x: 32
         y: 0
         width: 32
         height: 33
@@ -2011,7 +2023,7 @@ TextureImporter:
       name: MageV2_77
       rect:
         serializedVersion: 2
-        x: 160
+        x: 64
         y: 0
         width: 32
         height: 33
@@ -2032,7 +2044,7 @@ TextureImporter:
       name: MageV2_78
       rect:
         serializedVersion: 2
-        x: 192
+        x: 96
         y: 0
         width: 32
         height: 33
@@ -2053,7 +2065,7 @@ TextureImporter:
       name: MageV2_79
       rect:
         serializedVersion: 2
-        x: 224
+        x: 128
         y: 0
         width: 32
         height: 33
@@ -2074,7 +2086,7 @@ TextureImporter:
       name: MageV2_80
       rect:
         serializedVersion: 2
-        x: 256
+        x: 160
         y: 0
         width: 32
         height: 33
@@ -2095,7 +2107,7 @@ TextureImporter:
       name: MageV2_81
       rect:
         serializedVersion: 2
-        x: 288
+        x: 192
         y: 0
         width: 32
         height: 33
@@ -2116,7 +2128,7 @@ TextureImporter:
       name: MageV2_82
       rect:
         serializedVersion: 2
-        x: 320
+        x: 224
         y: 0
         width: 32
         height: 33
@@ -2137,7 +2149,7 @@ TextureImporter:
       name: MageV2_83
       rect:
         serializedVersion: 2
-        x: 352
+        x: 256
         y: 0
         width: 32
         height: 33
@@ -2158,7 +2170,7 @@ TextureImporter:
       name: MageV2_84
       rect:
         serializedVersion: 2
-        x: 384
+        x: 288
         y: 0
         width: 32
         height: 33
@@ -2179,7 +2191,7 @@ TextureImporter:
       name: MageV2_85
       rect:
         serializedVersion: 2
-        x: 416
+        x: 320
         y: 0
         width: 32
         height: 33
@@ -2200,7 +2212,7 @@ TextureImporter:
       name: MageV2_86
       rect:
         serializedVersion: 2
-        x: 448
+        x: 352
         y: 0
         width: 32
         height: 33
@@ -2221,7 +2233,7 @@ TextureImporter:
       name: MageV2_87
       rect:
         serializedVersion: 2
-        x: 480
+        x: 384
         y: 0
         width: 32
         height: 33
@@ -2242,7 +2254,7 @@ TextureImporter:
       name: MageV2_88
       rect:
         serializedVersion: 2
-        x: 512
+        x: 416
         y: 0
         width: 32
         height: 33
@@ -2263,7 +2275,7 @@ TextureImporter:
       name: MageV2_89
       rect:
         serializedVersion: 2
-        x: 544
+        x: 448
         y: 0
         width: 32
         height: 33
@@ -2284,7 +2296,7 @@ TextureImporter:
       name: MageV2_90
       rect:
         serializedVersion: 2
-        x: 576
+        x: 480
         y: 0
         width: 32
         height: 33
@@ -2305,7 +2317,7 @@ TextureImporter:
       name: MageV2_91
       rect:
         serializedVersion: 2
-        x: 608
+        x: 512
         y: 0
         width: 32
         height: 33
@@ -2326,7 +2338,7 @@ TextureImporter:
       name: MageV2_92
       rect:
         serializedVersion: 2
-        x: 640
+        x: 544
         y: 0
         width: 32
         height: 33
@@ -2347,7 +2359,7 @@ TextureImporter:
       name: MageV2_93
       rect:
         serializedVersion: 2
-        x: 672
+        x: 576
         y: 0
         width: 32
         height: 33
@@ -2368,7 +2380,7 @@ TextureImporter:
       name: MageV2_94
       rect:
         serializedVersion: 2
-        x: 704
+        x: 608
         y: 0
         width: 32
         height: 33
@@ -2389,7 +2401,7 @@ TextureImporter:
       name: MageV2_95
       rect:
         serializedVersion: 2
-        x: 736
+        x: 640
         y: 0
         width: 32
         height: 33
@@ -2402,6 +2414,90 @@ TextureImporter:
       bones: []
       spriteID: e31e41ad5bbc89bd0800000000000000
       internalID: -2623122801034993346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MageV2_96
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c04542bc72e0d810800000000000000
+      internalID: 1788178077260792000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MageV2_97
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c83c32388cc9f9d30800000000000000
+      internalID: 4440440142618149772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MageV2_98
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e062b2af0fefe50800000000000000
+      internalID: 6845173440906137172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MageV2_99
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9891d049b840600800000000000000
+      internalID: 433624932125608368
       vertices: []
       indices: 
       edges: []
