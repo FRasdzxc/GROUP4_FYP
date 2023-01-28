@@ -36,7 +36,7 @@ public class MovementControllerV2 : MonoBehaviour
                 if (animator)
                 {
                     ResetAnimatorParameters();
-                    animator.SetBool("A", true);
+                    animator.SetBool("Left", true); //A
                 }
             }
             if (moveDir.x > 0.5f)
@@ -46,7 +46,7 @@ public class MovementControllerV2 : MonoBehaviour
                 if (animator)
                 {
                     ResetAnimatorParameters();
-                    animator.SetBool("D", true);
+                    animator.SetBool("Right", true); //D
                 }
             }
             if (moveDir.y < -0.5f)
@@ -54,7 +54,7 @@ public class MovementControllerV2 : MonoBehaviour
                 if (animator)
                 {
                     ResetAnimatorParameters();
-                    animator.SetBool("S", true);
+                    animator.SetBool("Left", true); //S
                 }
             }
             if (moveDir.y > 0.5f)
@@ -62,9 +62,42 @@ public class MovementControllerV2 : MonoBehaviour
                 if (animator)
                 {
                     ResetAnimatorParameters();
-                    animator.SetBool("W", true);
+                    animator.SetBool("Right", true); //W
                 }
             }
+            if (moveDir.x > 0.5f && moveDir.y > 0.5f)
+            {
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("Right", true); //WD
+                }
+            }
+            if (moveDir.x < -0.5f && moveDir.y < -0.5f)
+            {
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("Left", true); //AS
+                }
+            }
+            if (moveDir.x > 0.5f && moveDir.y < -0.5f)
+            {
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("Right", true); //SD
+                }
+            }
+            if (moveDir.x < -0.5f && moveDir.y > 0.5f)
+            {
+                if (animator)
+                {
+                    ResetAnimatorParameters();
+                    animator.SetBool("Left", true); //AW
+                }
+            }
+
 
             if (!audioSource.isPlaying)
             {
