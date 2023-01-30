@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ProjectileMob : Mob
 {
-    [SerializeField] private GameObject weapon;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private ProjectileWeaponData projectileWeaponData;
-    private float projectileLifeTime;
-    private float projectileSpeed;
-    private float cooldown;
-    private bool isReady;
+    [SerializeField] protected GameObject weapon;
+    [SerializeField] protected GameObject projectile;
+    [SerializeField] protected ProjectileWeaponData projectileWeaponData;
+    protected float projectileLifeTime;
+    protected float projectileSpeed;
+    protected float cooldown;
+    protected bool isReady;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -30,16 +30,21 @@ public class ProjectileMob : Mob
         {
             isReady = false;
             Cooldown();
-
-            Vector2 projectDir = (player.transform.position - transform.position).normalized;
-            float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
-
-            GameObject projectileClone = Instantiate(projectile, weapon.transform.position, Quaternion.Euler(0, 0, projectAngle));
-            projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
-            DestroyGobj(projectileClone);
+            AttackMethod();
         }
 
         base.AttackPlayer();
+    }
+
+    protected override void AttackMethod()
+    {
+        Vector2 projectDir = (player.transform.position - transform.position).normalized;
+        float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
+
+        GameObject projectileClone = Instantiate(projectile, weapon.transform.position, projectile.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
+        projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+        DestroyGobj(projectileClone);
+        base.AttackMethod();
     }
 
     public async void Cooldown()
@@ -55,7 +60,7 @@ public class ProjectileMob : Mob
         isReady = true;
     }
 
-    private async void DestroyGobj(GameObject gameObject)
+    protected async void DestroyGobj(GameObject gameObject)
     {
         float interval = 0f;
 

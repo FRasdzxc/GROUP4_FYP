@@ -69,7 +69,12 @@ public class Mob : MonoBehaviour
 
     }
 
-    private void ChasePlayer()
+    protected virtual void AttackMethod()
+    {
+
+    }
+
+    protected virtual void ChasePlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }

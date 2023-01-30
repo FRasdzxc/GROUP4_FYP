@@ -9,15 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a666d6ab964824a4c8153165498061da, type: 3}
-  m_Name: MediumBlob
+  m_Script: {fileID: 11500000, guid: 3d005b8eecbe90346b6ca71b03bed80c, type: 3}
+  m_Name: Laser
   m_EditorClassIdentifier: 
-  mobName: MediumBlob
-  health: 35
-  defense: 2
-  attack: 0
-  attackSpeed: 0
-  speed: 2
-  sightDistance: 7
-  attackDistance: 5
-  walkAroundDistance: 0
+  weaponTriggerName: 
+  damage: 20
+  criticalDamage: 35
