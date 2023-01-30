@@ -20,18 +20,22 @@ public class NPCTalkController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (Input.GetKeyDown(KeyCode.E))
         {
             panel.SetActive(true);
-            if(firstTalking == true)
+            if (firstTalking == true)
             {
                 NPCTalk.text = content[i];
-            }   
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             i++;
-            if(i < content.Length)
+            if (i < content.Length)
             {
                 NPCTalk.text = content[i];
             }
@@ -43,7 +47,7 @@ public class NPCTalkController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            panel.SetActive(false); 
+            panel.SetActive(false);
         }
     }
 }
