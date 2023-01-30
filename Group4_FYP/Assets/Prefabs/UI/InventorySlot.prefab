@@ -143,11 +143,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
-    m_FontSize: 35
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 50
     m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -384,3 +384,4 @@ MonoBehaviour:
   inventorySlotType: 0
   image: {fileID: 7441267566803223563}
   stackSizeText: {fileID: 749547977171522540}
+  maxStackSize: 99

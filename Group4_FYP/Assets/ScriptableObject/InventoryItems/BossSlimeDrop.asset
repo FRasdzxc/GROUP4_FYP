@@ -16,5 +16,7 @@ MonoBehaviour:
   itemName: Boss Slime Drop
   itemType: 3
   itemDescription: slimeball dropped by boss slimes
+  minDropSize: 1
+  maxDropSize: 1
   itemValue: 10
   itemIcon: {fileID: 21300000, guid: 036d428e0be19b641a743453738a353d, type: 3}

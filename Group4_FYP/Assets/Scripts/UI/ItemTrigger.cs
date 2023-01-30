@@ -8,11 +8,24 @@ public class ItemTrigger : MonoBehaviour
 
     public void PickUpItem()
     {
-        if (Inventory.Instance.AddItem(item))
-        {
-            // show message
-            Message.Instance.ShowMessage("+1 " + item.itemName, item.itemIcon);
+        int random = Random.Range(item.minDropSize, item.maxDropSize);
+        int addedItemCount = 0;
 
+        for (int i = 0; i < random; i++)
+        {
+            if (Inventory.Instance.AddItem(item))
+            {
+                addedItemCount++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (addedItemCount != 0)
+        {
+            Message.Instance.ShowMessage("+" + addedItemCount + " " + item.itemName, item.itemIcon);
             Destroy(gameObject);
         }
     }

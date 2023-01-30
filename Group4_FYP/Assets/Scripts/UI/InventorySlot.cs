@@ -3,18 +3,40 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    public const int kMaxStackSize = 99;
+
     [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item?
     [SerializeField] private Image image;
     [SerializeField] private Text stackSizeText;
 
-    private ItemData item; // change to use list/array instead to support stacked items?
-    private int stackSize;
-
-    // Start is called before the first frame update
-    void Start()
+    private int _stackSize = 0;
+    public int StackSize
     {
-        item = null;
+        get => _stackSize;
+        private set
+        {
+            _stackSize = Mathf.Clamp(value, 0, kMaxStackSize);
+            if (stackSizeText != null)
+            {
+                stackSizeText.gameObject.SetActive(_stackSize > 1);
+                stackSizeText.text = _stackSize.ToString();
+            }
+        }
     }
+
+    private ItemData item = null; // change to use list/array instead to support stacked items?
+    public ItemData ItemData
+    {
+        get => item;
+        private set
+        {
+            item = value;
+            image.enabled = item != null;
+            image.sprite = item != null ? item.itemIcon : null;
+        }
+    }
+
+    private bool isOccupied = false;
 
     // Update is called once per frame
     void Update()
@@ -22,26 +44,49 @@ public class InventorySlot : MonoBehaviour
         
     }
 
-    public void AddItem(ItemData item)
+    public void Configure(ItemData item, int stackSize)
     {
-        image.enabled = true;
-        image.sprite = item.itemIcon;
+        if (this.item != null && this.item != item)
+        {
+            Debug.LogError("Mismatched item!");
+            return;
+        }
 
-        this.item = item;
+        ItemData = item;
+        StackSize = stackSize;
+    }
 
+    public bool AddItem(ItemData item)
+    {
+        if (this.item != null && this.item != item)
+            return false;
+
+        ItemData = item;
+        StackSize++;
+        Debug.Log($"{item.itemName}:{StackSize}");
+
+        isOccupied = true;
+        return true;
+        
         // if item != null && this.item == item, stack items?
         // else return? or swap item to mouse?
     }
 
-    public void RemoveItem()
+    public void ClearSlot()
     {
-        image.enabled = false;
-        image.sprite = null;
-        stackSizeText = null;
-
         item = null;
+        StackSize = 0;
 
         // get item to follow mouse, remove item from this.item
+
+        isOccupied = false;
+    }
+
+    public void UseItem()
+    {
+        // use occupied item
+        // if stackSize > 1, stackSize--, else ClearSlot()
+        // call Inventory.Instance.RefreshInventoryPanel(); ?
     }
 
     public ItemData GetItem()

@@ -3094,11 +3094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7982749462878118223, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: dialogues.Array.size
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7982749462878118223, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: dialogues.Array.data[0]
-      value: hi how are you
+      value: dsfsdfsd
       objectReference: {fileID: 0}
     - target: {fileID: 7982749462878118223, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
       propertyPath: dialogues.Array.data[1]

@@ -16,5 +16,7 @@ MonoBehaviour:
   itemName: Slime Drop
   itemType: 3
   itemDescription: slimeball dropped by slimes
+  minDropSize: 1
+  maxDropSize: 5
   itemValue: 5
   itemIcon: {fileID: 21300000, guid: 0e527af656f06f6499d7063dec21ce03, type: 3}
