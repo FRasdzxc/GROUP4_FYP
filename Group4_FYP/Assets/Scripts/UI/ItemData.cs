@@ -9,4 +9,6 @@ public class ItemData : ScriptableObject
     [TextArea(5, 5)] public string itemDescription;
     public float itemValue; // used for selling and earning money?
     public Sprite itemIcon;
+
+    // add stackSize randomly assigned
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -217,7 +218,7 @@ public class StartMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", () => { Application.Quit(); }, false);
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", async () => { await MaskingCanvas.Instance.ShowMaskingCanvas(true); Application.Quit(); }, false);
     }
 
     private async Task ShowPanel(PanelType panelType) // show inputted panelType and hide all the others
@@ -262,6 +263,11 @@ public class StartMenu : MonoBehaviour
 
     private void RefreshProfileSelectionPanel() // destroy buttons, get profiles and add buttons back
     {
+        if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
+        {
+            ProfileManagerJson.DeleteProfile("_testprofile"); // test only
+        }
+
         for (int i = 0; i < profileButtons.Count; i++) // this loop destroy all buttons
         {
             Destroy(profileButtons[i]);

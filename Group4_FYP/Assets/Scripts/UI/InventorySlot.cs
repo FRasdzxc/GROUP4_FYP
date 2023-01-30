@@ -43,4 +43,9 @@ public class InventorySlot : MonoBehaviour
 
         // get item to follow mouse, remove item from this.item
     }
+
+    public ItemData GetItem()
+    {
+        return item;
+    }
 }

@@ -8,6 +8,23 @@ public class MaskingCanvas : MonoBehaviour
 {
     [SerializeField] private Transform mask;
 
+    private static MaskingCanvas instance;
+    public static MaskingCanvas Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

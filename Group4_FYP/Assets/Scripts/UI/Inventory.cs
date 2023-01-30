@@ -43,9 +43,11 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemData item)
     {
+        FindItem(item);
+
         if (items.Count >= inventorySize)
         {
-            _ = Notification.Instance.ShowNotification("Inventory is full!");
+            Message.Instance.ShowMessage("Inventory is full!");
             return false;
         }
         items.Add(item);
@@ -75,6 +77,21 @@ public class Inventory : MonoBehaviour
     /* SetItems function */
 
     /* GetItems function */
+
+    private bool FindItem(ItemData item)
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].GetComponent<InventorySlot>().GetItem() && (inventorySlots[i].GetComponent<InventorySlot>().GetItem().itemID == item.itemID))
+            {
+                Debug.Log("item " + item.itemID + " found");
+                return true;
+            }
+        }
+
+        Debug.Log("item not found");        
+        return false;
+    }
 
     private void RefreshInventoryPanel()
     {
