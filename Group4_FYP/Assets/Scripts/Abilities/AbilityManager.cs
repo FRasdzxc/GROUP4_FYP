@@ -60,13 +60,9 @@ public class AbilityManager : MonoBehaviour
         if (mana < maxMana)
         {
             mana += Time.deltaTime * manaRegeneration;
-            hud.UpdateMana(mana);
         }
-        else
-        {
-            mana = maxMana;
-            hud.UpdateMana(mana);
-        }
+        mana = Mathf.Clamp(mana, 0, maxMana);
+        hud.UpdateMana(mana);
 
         // test refill mana
         if (Input.GetKeyDown(KeyCode.Backslash))
@@ -85,7 +81,7 @@ public class AbilityManager : MonoBehaviour
     public void Setup()
     {
         hud.SetupMana(mana, maxMana);
-        equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory lateron
+        equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory later on
 
         for (int i = 0; i < equippedAbilities.Length; i++)
         {
@@ -123,6 +119,11 @@ public class AbilityManager : MonoBehaviour
     public float GetManaRegeneration()
     {
         return manaRegeneration;
+    }
+
+    public void ChangeMana(float value)
+    {
+        mana += value;
     }
 
     private void ReadyEquippedAbilities()

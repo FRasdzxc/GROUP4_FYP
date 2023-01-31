@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public const int kMaxStackSize = 99;
 
     [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item?
     [SerializeField] private Image image;
     [SerializeField] private Text stackSizeText;
+    [SerializeField] private Button useButton;
+    [SerializeField] private Text useButtonText;
 
     private int _stackSize = 0;
     public int StackSize
@@ -33,6 +36,7 @@ public class InventorySlot : MonoBehaviour
             item = value;
             image.enabled = item != null;
             image.sprite = item != null ? item.itemIcon : null;
+            useButton.onClick.AddListener(() => { UseItem(); });
         }
     }
 
@@ -92,5 +96,22 @@ public class InventorySlot : MonoBehaviour
     public ItemData GetItem()
     {
         return item;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("cursor enters inventory slot");
+
+        if (item)
+        {
+            useButton.gameObject.SetActive(true);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("cursor exits inventory slot");
+
+        useButton.gameObject.SetActive(false);
     }
 }

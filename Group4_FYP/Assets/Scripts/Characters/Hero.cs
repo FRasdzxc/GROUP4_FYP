@@ -17,8 +17,6 @@ public class Hero : MonoBehaviour
     //[SerializeField] private MaskingCanvas maskingCanvas;
 
     private HUD hud;
-    private float health;
-    private float maxHealth;
     private float healthRegeneration;
     private SpriteRenderer sr;
     private bool isDead;
@@ -36,6 +34,21 @@ public class Hero : MonoBehaviour
     int requiredExp;
     int storedExp;
     int storedCoin = 0;
+
+    private float _health;
+    public float health
+    {
+        get
+        {
+            return _health;
+        }
+        private set
+        {
+            _health = value;
+            // hud.UpdateHealth(value);
+        }
+    }
+    private float maxHealth;
 
     void Awake()
     {
@@ -60,23 +73,13 @@ public class Hero : MonoBehaviour
         // test respawn
         if (!isDead)
         {
-            //if (health < heroData.health)
+            // health
             if (health < maxHealth)
             {
                 health += Time.deltaTime * healthRegeneration;
-                hud.UpdateHealth(health);
             }
-            else
-            {
-                //health = heroData.health;
-                health = maxHealth;
-                hud.UpdateHealth(health);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Backspace)) // test only
-            {
-                TakeDamage(15);
-            }
+            health = Mathf.Clamp(health, 0, maxHealth);
+            hud.UpdateHealth(health);
 
             // xp
             hud.UpdateXP(level, storedExp);
@@ -88,6 +91,16 @@ public class Hero : MonoBehaviour
                 HeroPanel.Instance.UpdateLevel(level);
                 level++;
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level);
+            }
+
+            // testonly
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                TakeDamage(15);
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                ChangeHealth(25f);
             }
         }
     }
@@ -218,6 +231,12 @@ public class Hero : MonoBehaviour
     }
     #endregion
 
+    #region AddDeductChange
+    public void ChangeHealth(float value)
+    {
+        health += value;
+    }
+
     public void AddEXP(int exp)
     {
         storedExp += exp;
@@ -240,6 +259,7 @@ public class Hero : MonoBehaviour
     {
         storedCoin -= coin;
     }
+    #endregion
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {

@@ -17,4 +17,9 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     {
         return itemID == other.itemID;
     }
+
+    public virtual void Use()
+    {
+        Debug.Log("using item " + itemName);
+    }
 }
