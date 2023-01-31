@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e15b1ab055d684d9325036dd2a7f18, type: 3}
-  m_Name: Pork
+  m_Name: ExpPotion
   m_EditorClassIdentifier: 
-  itemID: consumable_pork
-  itemName: Pork
+  itemID: consumable_exppotion
+  itemName: Exp Potion
   itemType: 2
-  itemDescription: shfdsdgjfdbfswegwgregwerjfghn
+  itemDescription: Boost Exp when consumed
   minDropSize: 1
-  maxDropSize: 4
-  itemValue: 5
-  itemIcon: {fileID: 0}
+  maxDropSize: 1
+  itemValue: 50
+  itemIcon: {fileID: 21300000, guid: d3107197558341240abf13cc1bec0831, type: 3}
   isUsable: 1
   effects:
-  - effectType: 0
-    value: 15
+  - effectType: 2
+    value: 2500

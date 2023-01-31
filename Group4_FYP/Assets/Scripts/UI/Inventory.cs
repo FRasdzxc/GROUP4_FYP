@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private int inventorySize = 25;
 
-    private List<InventoryEntry> items;
+    private List<InventoryEntry> items; // make it a property? refreshinventorypanel() when add/remove
     private List<GameObject> inventorySlots;
 
     private static Inventory instance;

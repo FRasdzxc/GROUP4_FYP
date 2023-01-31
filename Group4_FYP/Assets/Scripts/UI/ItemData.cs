@@ -12,6 +12,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     public int maxDropSize;
     public float itemValue; // used for selling and earning money?
     public Sprite itemIcon;
+    public bool isUsable;
 
     public bool Equals(ItemData other)
     {

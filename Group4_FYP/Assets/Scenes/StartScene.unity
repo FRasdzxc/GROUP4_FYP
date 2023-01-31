@@ -4503,6 +4503,7 @@ GameObject:
   - component: {fileID: 1180758680}
   - component: {fileID: 1180758682}
   - component: {fileID: 1180758681}
+  - component: {fileID: 1180758683}
   m_Layer: 5
   m_Name: HeadingText
   m_TagString: Untagged
@@ -4571,6 +4572,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180758679}
   m_CullTransparentMesh: 1
+--- !u!114 &1180758683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180758679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978df3df0190afc4cb1e2bf4a6e5c1b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 0}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_CallsDirty: 1
+  m_PointerStartLocalCursor: {x: 0, y: 0}
+  m_ContentStartPosition: {x: 0, y: 0}
+  m_ViewRect: {fileID: 0}
+  m_ContentBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ViewBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_Velocity: {x: 0, y: 0}
+  m_Dragging: 0
+  m_Scrolling: 0
+  m_PrevPosition: {x: 0, y: 0}
+  m_PrevContentBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_PrevViewBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_HSliderExpand: 0
+  m_VSliderExpand: 0
+  m_HSliderHeight: 0
+  m_VSliderWidth: 0
+  m_HorizontalScrollbarRect: {fileID: 0}
+  m_VerticalScrollbarRect: {fileID: 0}
 --- !u!1 &1189570620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10138,7 +10195,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763703919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b974532fdbbb7a41a38151d37475b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1582599993}
@@ -10153,9 +10210,9 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 973420117}
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 0
   m_HorizontalScrollbarSpacing: 25
-  m_VerticalScrollbarSpacing: -3
+  m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

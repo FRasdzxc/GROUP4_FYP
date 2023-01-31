@@ -11411,6 +11411,8 @@ MonoBehaviour:
   inventorySlotType: 0
   image: {fileID: 0}
   stackSizeText: {fileID: 0}
+  useButton: {fileID: 0}
+  useButtonText: {fileID: 0}
 --- !u!114 &7502825688549925029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11475,6 +11477,8 @@ MonoBehaviour:
   inventorySlotType: 0
   image: {fileID: 0}
   stackSizeText: {fileID: 0}
+  useButton: {fileID: 0}
+  useButtonText: {fileID: 0}
 --- !u!114 &1879950851838546367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13425,7 +13429,7 @@ GameObject:
   - component: {fileID: 1304153084994537918}
   - component: {fileID: 165794832979514992}
   - component: {fileID: 8454734589483384573}
-  - component: {fileID: 1069111087253199906}
+  - component: {fileID: 1850391612712260169}
   m_Layer: 5
   m_Name: InventoryScrollView
   m_TagString: Untagged
@@ -13492,7 +13496,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1069111087253199906
+--- !u!114 &1850391612712260169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13501,7 +13505,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8861248034085711691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b974532fdbbb7a41a38151d37475b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 8015015661898971408}
@@ -13515,9 +13519,9 @@ MonoBehaviour:
   m_Viewport: {fileID: 8798585102541164645}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2063029971566523465}
-  m_HorizontalScrollbarVisibility: 2
+  m_HorizontalScrollbarVisibility: 0
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: 25
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13925,7 +13929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000009396796}
+  m_AnchoredPosition: {x: 0.000015258789, y: 0.000009396796}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5412164818838333363

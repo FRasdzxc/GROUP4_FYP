@@ -2,15 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public const int kMaxStackSize = 99;
 
     [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item?
     [SerializeField] private Image image;
     [SerializeField] private Text stackSizeText;
-    [SerializeField] private Button useButton;
-    [SerializeField] private Text useButtonText;
+    [SerializeField] private GameObject useHint;
 
     private int _stackSize = 0;
     public int StackSize
@@ -36,7 +35,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             item = value;
             image.enabled = item != null;
             image.sprite = item != null ? item.itemIcon : null;
-            useButton.onClick.AddListener(() => { UseItem(); });
         }
     }
 
@@ -88,9 +86,25 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void UseItem()
     {
-        // use occupied item
+        Debug.Log("use item: " + item.itemName);
+
         // if stackSize > 1, stackSize--, else ClearSlot()
+        // remove 1 item from inventory.items
         // call Inventory.Instance.RefreshInventoryPanel(); ?
+        // above are not finished
+
+        // use occupied item
+        item.Use();
+    }
+
+    public void DropItem()
+    {
+        Debug.Log("drop item: " + item.itemName);
+        
+        // drop item to scene
+        // clear slot
+        // remove item from inventory.items
+        // refresh inventory panel
     }
 
     public ItemData GetItem()
@@ -100,18 +114,40 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("cursor enters inventory slot");
-
-        if (item)
+        if (eventData.pointerEnter == gameObject)
         {
-            useButton.gameObject.SetActive(true);
+            Debug.Log("cursor enters inventory slot");
+
+            if (item && item.isUsable)
+            {
+                useHint.SetActive(true);
+            }
         }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("cursor exits inventory slot");
+        if (eventData.pointerEnter == gameObject)
+        {
+            Debug.Log("cursor exits inventory slot");
 
-        useButton.gameObject.SetActive(false);
+            useHint.SetActive(false);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.pointerClick == gameObject && item && item.isUsable)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left) // LMB: use item
+            {
+                UseItem();
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+            {
+                DropItem();
+            }
+        }
     }
 }

@@ -98,7 +98,7 @@ public class Hero : MonoBehaviour
             {
                 TakeDamage(15);
             }
-            if (Input.GetKeyDown(KeyCode.O))
+            if (Input.GetKeyDown(KeyCode.Equals))
             {
                 ChangeHealth(25f);
             }
