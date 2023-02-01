@@ -96,7 +96,9 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(ItemData item)
     {
-        for (int i = items.Count - 1; i < 0; i--)
+        Debug.Log("RemoveItem() called");
+
+        for (int i = items.Count - 1; i >= 0; i--)
         {
             InventoryEntry entry = items[i];
             if (entry.itemData != item)
@@ -139,6 +141,12 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
+        }
+
+        Debug.Log("items.Count = " + items.Count);
+        foreach (InventoryEntry i in items)
+        {
+            Debug.Log($"{i.itemData}: {i.qty}");
         }
     }
 

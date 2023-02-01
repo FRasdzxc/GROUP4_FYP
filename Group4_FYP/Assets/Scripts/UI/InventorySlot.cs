@@ -69,9 +69,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         isOccupied = true;
         return true;
-        
-        // if item != null && this.item == item, stack items?
-        // else return? or swap item to mouse?
     }
 
     public void ClearSlot()
@@ -86,7 +83,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void UseItem()
     {
-        Debug.Log("use item: " + item.itemName);
+        Debug.Log("use item: " + ItemData.itemName);
 
         // if stackSize > 1, stackSize--, else ClearSlot()
         // remove 1 item from inventory.items
@@ -94,12 +91,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // above are not finished
 
         // use occupied item
-        item.Use();
+        ItemData.Use();
+        Inventory.Instance.RemoveItem(ItemData);
+
+        StackSize--;
     }
 
     public void DropItem()
     {
-        Debug.Log("drop item: " + item.itemName);
+        Debug.Log("drop item: " + ItemData.itemName);
         
         // drop item to scene
         // clear slot
@@ -109,7 +109,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public ItemData GetItem()
     {
-        return item;
+        return ItemData;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
