@@ -1,5 +1,5 @@
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 [Serializable]
 public class ProfileData
@@ -16,6 +16,7 @@ public class ProfileData
     public int storedExp;
     public int storedCoin;
     public int map;
+    public List<Inventory.InventoryEntry> inventory;
 
     public ProfileData() // profile for test scenes
     {
@@ -31,6 +32,7 @@ public class ProfileData
         storedExp = 0;
         storedCoin = 0;
         map = 0;
+        inventory = new List<Inventory.InventoryEntry>();
     }
 
     public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats) // used for creating a new profile
@@ -48,6 +50,7 @@ public class ProfileData
         storedExp = 0;
         storedCoin = 0;
         map = 0;
+        inventory = new List<Inventory.InventoryEntry>();
     }
 
     public ProfileData(string newProfileName, ProfileData profileData) // used for moving data when updating profiles
@@ -64,5 +67,6 @@ public class ProfileData
         storedExp = profileData.storedExp;
         storedCoin = profileData.storedCoin;
         map = profileData.map;
+        inventory = profileData.inventory;
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7346567411834790856}
   - component: {fileID: 7346567411834790901}
   - component: {fileID: 4568483801158605592}
-  - component: {fileID: 4323878802585590976}
+  - component: {fileID: 4102428676351295755}
   - component: {fileID: 1622985137029820251}
   m_Layer: 0
   m_Name: EventSystem
@@ -96,22 +96,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8c66c96cdb4254bb409643994fd46e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTestScene: 0
   maps:
   - {fileID: 1357543489387916594, guid: 7224317267dd62b489eae6dd2164780a, type: 3}
---- !u!114 &4323878802585590976
+--- !u!114 &4102428676351295755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7346567411834790857}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 121d5f006c9db444fb836233582233d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorDefaultTexture: {fileID: 2800000, guid: 548c21ae05f5f964c8ced3dc694505ac, type: 3}
-  cursorCrosshairTexture: {fileID: 2800000, guid: 16bdcf31c7b7985479622327f9c8f86f, type: 3}
+  cursors:
+  - cursorType: 0
+    texture: {fileID: 2800000, guid: 814f747b9fd926b4380c0179393b3e3c, type: 3}
+    hotspot: {x: 0, y: 0}
+  - cursorType: 1
+    texture: {fileID: 2800000, guid: 82c6faef93c16464788b023b5875c711, type: 3}
+    hotspot: {x: 16, y: 16}
+  defaultCursorType: 1
 --- !u!114 &1622985137029820251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,5 +133,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTestScene: 0
   autosaveDuration: 0
-  hero: {fileID: 0}
-  abilityManager: {fileID: 0}

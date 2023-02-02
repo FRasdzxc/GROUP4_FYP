@@ -7,3 +7,5 @@ public enum HeroClass { Knight, Mage, Archer, Hunter, Test };
 public enum ItemType { Weapon, Armor, Consumable, Misc };
 public enum InventorySlotType { Any, Weapon, Armor, Ability };
 public enum EffectType { Health, Mana, Exp };
+public enum CursorType { Arrow, Crosshair };
+public enum GameState { Playing, Paused };

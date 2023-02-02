@@ -71,24 +71,19 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         return true;
     }
 
-    public void ClearSlot()
-    {
-        item = null;
-        StackSize = 0;
+    // public void ClearSlot()
+    // {
+    //     item = null;
+    //     StackSize = 0;
 
-        // get item to follow mouse, remove item from this.item
+    //     // get item to follow mouse, remove item from this.item
 
-        isOccupied = false;
-    }
+    //     isOccupied = false;
+    // }
 
     public void UseItem()
     {
         Debug.Log("use item: " + ItemData.itemName);
-
-        // if stackSize > 1, stackSize--, else ClearSlot()
-        // remove 1 item from inventory.items
-        // call Inventory.Instance.RefreshInventoryPanel(); ?
-        // above are not finished
 
         // use occupied item
         ItemData.Use();
@@ -105,6 +100,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // clear slot
         // remove item from inventory.items
         // refresh inventory panel
+        
+        Inventory.Instance.RemoveItem(ItemData);
+
+        StackSize--;
     }
 
     public ItemData GetItem()
@@ -138,9 +137,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.pointerClick == gameObject && item && item.isUsable)
+        if (eventData.pointerClick == gameObject && item)
         {
-            if (eventData.button == PointerEventData.InputButton.Left) // LMB: use item
+            if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
             {
                 UseItem();
             }

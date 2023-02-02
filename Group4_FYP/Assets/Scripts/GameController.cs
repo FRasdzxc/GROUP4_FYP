@@ -4,22 +4,44 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private bool isTestScene; // temp only
+
     [SerializeField] private GameObject[] maps;
 
     private GameObject currentMap; // used as a clone
     private int currentMapIndex;
 
+    private GameState gameState;
+
     private Hero hero;
     private MaskingCanvas maskingCanvas;
     private HUD hud;
 
-    // Start is called before the first frame update
-    void Start()
+    private static GameController instance;
+    public static GameController Instance
     {
+        get
+        {
+            return instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+
+        gameState = GameState.Playing;
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
-        LoadMap(currentMapIndex);
+
+        if (!isTestScene)
+        {
+            LoadMap(currentMapIndex);
+        }
     }
 
     public void SetMap(int mapIndex)
@@ -30,6 +52,16 @@ public class GameController : MonoBehaviour
     public int GetMap()
     {
         return currentMapIndex;
+    }
+
+    public void SetGameState(GameState gameState)
+    {
+        this.gameState = gameState;
+    }
+
+    public GameState GetGameState()
+    {
+        return gameState;
     }
 
     private void LoadMap(int mapIndex)

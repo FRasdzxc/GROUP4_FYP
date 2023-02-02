@@ -7807,6 +7807,10 @@ PrefabInstance:
       propertyPath: abilityManager
       value: 
       objectReference: {fileID: 1608150843}
+    - target: {fileID: 4568483801158605592, guid: 58f207ffba99c7e4281a1ae3b1e80bd4, type: 3}
+      propertyPath: isTestScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7346567411834790857, guid: 58f207ffba99c7e4281a1ae3b1e80bd4, type: 3}
       propertyPath: m_Name
       value: EventSystem

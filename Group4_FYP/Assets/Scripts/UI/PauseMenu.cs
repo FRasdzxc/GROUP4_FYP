@@ -31,17 +31,17 @@ public class PauseMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isOpened)
             {
-                HidePauseMenu(true);
+                await HidePauseMenu(true);
             }
             else
             {
-                ShowPauseMenu();
+                await ShowPauseMenu();
             }
         }
 
@@ -51,8 +51,10 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public async void ShowPauseMenu()
+    public async Task ShowPauseMenu()
     {
+        GameController.Instance.SetGameState(GameState.Paused);
+
         pauseMenuBackground.SetActive(true);
         pauseMenuPanel.SetActive(true);
         hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
@@ -63,7 +65,6 @@ public class PauseMenu : MonoBehaviour
 
         await Task.Delay(250);
 
-
         Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
         hudPanel.SetActive(false);
@@ -71,7 +72,7 @@ public class PauseMenu : MonoBehaviour
         isOpened = true;
     }
 
-    public async void HidePauseMenu(bool bShowHudPanel)
+    public async Task HidePauseMenu(bool bShowHudPanel)
     {
         Time.timeScale = 1;
 
@@ -96,21 +97,27 @@ public class PauseMenu : MonoBehaviour
         }
 
         settingsMenu.SaveSettings();
+        GameController.Instance.SetGameState(GameState.Playing);
 
         isOpened = false;
     }
 
-    public void SaveGame()
+    public void ResumeGame()
     {
-        HidePauseMenu(true);
+        _ = HidePauseMenu(true);
+    }
+
+    public async void SaveGame()
+    {
+        await HidePauseMenu(true);
         settingsMenu.SaveSettings();
         SaveSystem.Instance.SaveData(true);
     }
 
     public async void ExitToMenu()
     {
-        HidePauseMenu(false);
-        await Task.Delay(250);
+        await HidePauseMenu(false);
+        // await Task.Delay(250);
 
         // save settings to device
         settingsMenu.SaveSettings();

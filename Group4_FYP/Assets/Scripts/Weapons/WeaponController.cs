@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class WeaponController : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && GameController.Instance.GetGameState() == GameState.Playing)
         {
             Attack(gameObject);
         }

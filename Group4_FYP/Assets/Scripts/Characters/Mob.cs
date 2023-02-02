@@ -113,7 +113,7 @@ public class Mob : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthSlider.DOValue(health, 0.25f);
+        healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
     }
 
     private void PlaySound(AudioClip audioClip)

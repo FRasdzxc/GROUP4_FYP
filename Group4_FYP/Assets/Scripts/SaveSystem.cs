@@ -11,6 +11,7 @@ public class SaveSystem : MonoBehaviour
     private Hero hero;
     private AbilityManager abilityManager;
     private GameController gameController;
+    private Inventory inventory;
 
     private ProfileData profile;
 
@@ -42,6 +43,7 @@ public class SaveSystem : MonoBehaviour
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
         gameController = GetComponent<GameController>();
+        inventory = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Inventory>();
         LoadData();
     }
 
@@ -63,6 +65,7 @@ public class SaveSystem : MonoBehaviour
         abilityManager.SetMaxMana(profile.maxMana);
         abilityManager.SetManaRegeneration(profile.manaRegeneration);
         gameController.SetMap(profile.map);
+        inventory.SetItems(profile.inventory);
     }
 
     public void SaveData(bool showNotification)
@@ -77,6 +80,7 @@ public class SaveSystem : MonoBehaviour
         profile.maxMana = abilityManager.GetMaxMana();
         profile.manaRegeneration = abilityManager.GetManaRegeneration();
         profile.map = gameController.GetMap();
+        profile.inventory = inventory.GetItems();
 
         ProfileManagerJson.SaveProfile(profile);
 

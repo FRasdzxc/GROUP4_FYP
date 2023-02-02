@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ItemTrigger : MonoBehaviour
 {
-    [SerializeField] private ItemData item;
+    [SerializeField]
+    private ItemData item;
+    [Tooltip("Destroy after seconds")] [SerializeField]
+    private float lifeTime = 300f; // default: 300 seconds (5 mins)
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        DestroyGobj();
+    }
 
     public void PickUpItem()
     {
@@ -28,6 +36,19 @@ public class ItemTrigger : MonoBehaviour
             Message.Instance.ShowMessage("+" + addedItemCount + " " + item.itemName, item.itemIcon);
             Destroy(gameObject);
         }
+    }
+
+    private async void DestroyGobj()
+    {
+        float interval = 0f;
+
+        while (interval < lifeTime)
+        {
+            interval += Time.deltaTime;
+            await Task.Yield();
+        }
+
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

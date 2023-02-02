@@ -93,14 +93,17 @@ public class Hero : MonoBehaviour
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level);
             }
 
-            // testonly
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (GameController.Instance.GetGameState() == GameState.Playing)
             {
-                TakeDamage(15);
-            }
-            if (Input.GetKeyDown(KeyCode.Equals))
-            {
-                ChangeHealth(25f);
+                // testonly
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    TakeDamage(15);
+                }
+                if (Input.GetKeyDown(KeyCode.Equals))
+                {
+                    ChangeHealth(25f);
+                }
             }
         }
     }

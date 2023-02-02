@@ -1,31 +1,37 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    [Serializable]
     public struct InventoryEntry
     {
         public ItemData itemData;
+        public string itemID;
         public int qty;
 
         public InventoryEntry(ItemData itemData)
         {
             this.itemData = itemData;
+            this.itemID = itemData.itemID;
             this.qty = 1;
         }
 
         public InventoryEntry(ItemData itemData, int qty)
         {
             this.itemData = itemData;
+            this.itemID = itemData.itemID;
             this.qty = qty;
         }
     }
 
+    [SerializeField] private ItemData[] gameItems;
     [SerializeField] private GameObject inventoryContentPanel;
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private int inventorySize = 25;
 
-    private List<InventoryEntry> items; // make it a property? refreshinventorypanel() when add/remove
+    private List<InventoryEntry> items = new List<InventoryEntry>();
     private List<GameObject> inventorySlots;
 
     private static Inventory instance;
@@ -44,14 +50,8 @@ public class Inventory : MonoBehaviour
             instance = this;
         }
 
-        items = new List<InventoryEntry>();
         inventorySlots = new List<GameObject>();
     }
-
-    //public Inventory()
-    //{
-    //    items = new List<ItemData>();
-    //}
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +80,6 @@ public class Inventory : MonoBehaviour
             InventoryEntry entry = items[slot];
             int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
             items[slot] = new InventoryEntry(item, newQty);
-            Debug.Log("found a slot with the same item");
         }
 
         if (items.Count >= inventorySize)
@@ -96,8 +95,6 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(ItemData item)
     {
-        Debug.Log("RemoveItem() called");
-
         for (int i = items.Count - 1; i >= 0; i--)
         {
             InventoryEntry entry = items[i];
@@ -142,32 +139,43 @@ public class Inventory : MonoBehaviour
         {
             inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
         }
-
-        Debug.Log("items.Count = " + items.Count);
-        foreach (InventoryEntry i in items)
-        {
-            Debug.Log($"{i.itemData}: {i.qty}");
-        }
     }
 
     /* DropItem function? */
 
     /* SetItems function */
-
-    /* GetItems function */
-
-    private bool FindItem(ItemData item)
+    public void SetItems(List<InventoryEntry> items)
     {
-        for (int i = 0; i < inventorySlots.Count; i++)
+        foreach (InventoryEntry ie in items)
         {
-            if (inventorySlots[i].GetComponent<InventorySlot>().GetItem() && (inventorySlots[i].GetComponent<InventorySlot>().GetItem().itemID == item.itemID))
+            foreach (ItemData i in gameItems)
             {
-                Debug.Log("item " + item.itemID + " found");
-                return true;
+                if (ie.itemID == i.itemID)
+                {
+                    this.items.Add(new InventoryEntry(i, ie.qty));
+                }
             }
         }
-
-        Debug.Log("item not found");        
-        return false;
     }
+
+    /* GetItems function */
+    public List<InventoryEntry> GetItems()
+    {
+        return items;
+    }
+
+    // private bool FindItem(ItemData item)
+    // {
+    //     for (int i = 0; i < inventorySlots.Count; i++)
+    //     {
+    //         if (inventorySlots[i].GetComponent<InventorySlot>().GetItem() && (inventorySlots[i].GetComponent<InventorySlot>().GetItem().itemID == item.itemID))
+    //         {
+    //             Debug.Log("item " + item.itemID + " found");
+    //             return true;
+    //         }
+    //     }
+
+    //     Debug.Log("item not found");        
+    //     return false;
+    // }
 }

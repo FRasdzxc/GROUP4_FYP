@@ -27,33 +27,44 @@ public class AbilityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (GameController.Instance.GetGameState() == GameState.Playing)
         {
-            // should be rewritten better
-            if (equippedAbilities[0].IsReady() && (mana - equippedAbilities[0].manaCost) >= 0)
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                mana -= equippedAbilities[0].manaCost;
-                equippedAbilities[0].Activate(gameObject); // test 
+                // should be rewritten better
+                if (equippedAbilities[0].IsReady() && (mana - equippedAbilities[0].manaCost) >= 0)
+                {
+                    mana -= equippedAbilities[0].manaCost;
+                    equippedAbilities[0].Activate(gameObject); // test 
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            // should be rewritten better
-            if (equippedAbilities[1].IsReady() && (mana - equippedAbilities[1].manaCost) >= 0)
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                mana -= equippedAbilities[1].manaCost;
-                equippedAbilities[1].Activate(gameObject); // test
+                // should be rewritten better
+                if (equippedAbilities[1].IsReady() && (mana - equippedAbilities[1].manaCost) >= 0)
+                {
+                    mana -= equippedAbilities[1].manaCost;
+                    equippedAbilities[1].Activate(gameObject); // test
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            // should be rewritten better
-            if (equippedAbilities[2].IsReady() && (mana - equippedAbilities[2].manaCost) >= 0)
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                mana -= equippedAbilities[2].manaCost;
-                equippedAbilities[2].Activate(gameObject); // test
+                // should be rewritten better
+                if (equippedAbilities[2].IsReady() && (mana - equippedAbilities[2].manaCost) >= 0)
+                {
+                    mana -= equippedAbilities[2].manaCost;
+                    equippedAbilities[2].Activate(gameObject); // test
+                }
+            }
+
+            // test refill mana
+            if (Input.GetKeyDown(KeyCode.Backslash))
+            {
+                mana = maxMana;
+                hud.UpdateMana(mana);
+                ReadyEquippedAbilities();
             }
         }
 
@@ -63,14 +74,6 @@ public class AbilityManager : MonoBehaviour
         }
         mana = Mathf.Clamp(mana, 0, maxMana);
         hud.UpdateMana(mana);
-
-        // test refill mana
-        if (Input.GetKeyDown(KeyCode.Backslash))
-        {
-            mana = maxMana;
-            hud.UpdateMana(mana);
-            ReadyEquippedAbilities();
-        }
 
         for (int i = 0; i < equippedAbilities.Length; i++)
         {
