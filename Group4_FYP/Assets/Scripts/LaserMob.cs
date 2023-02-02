@@ -7,12 +7,17 @@ public class LaserMob : ProjectileMob
 {
     [SerializeField] private GameObject defaultLaser;
     [SerializeField] private GameObject bigLaserBall;
-    private Rigidbody2D rb;
+    [SerializeField] protected GameObject UI;
+    private Quaternion UIRotation;
+    private Vector3 UIPosition;
+    private int attackCounter = 0;
 
     // Start is called before the first frame update
     protected override void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        UI = GameObject.Find("LaserMobCanvas");
+        UIRotation = UI.transform.rotation;
+        UIPosition = UI.transform.localPosition;
         base.Start();
     }
     protected override void AttackPlayer()
@@ -37,11 +42,22 @@ public class LaserMob : ProjectileMob
     {
         Vector2 projectDir = (player.transform.position - transform.position).normalized;
         float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
+        if(attackCounter < 2)
+        {
+            GameObject projectileClone = Instantiate(defaultLaser, weapon.transform.position, defaultLaser.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
+            projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+            DestroyGobj(projectileClone);
+            attackCounter++;
+        }
+        else
+        {
+            GameObject projectileClone = Instantiate(bigLaserBall, weapon.transform.position, bigLaserBall.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
+            projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+            DestroyGobj(projectileClone);
+            attackCounter = 0;
+        }
 
-        GameObject projectileClone = Instantiate(projectile, weapon.transform.position, projectile.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
-        projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
-        DestroyGobj(projectileClone);
-        base.AttackMethod();
+        //base.AttackMethod();
     }
 
 
@@ -50,5 +66,7 @@ public class LaserMob : ProjectileMob
         Vector2 projectDir = (player.transform.position - transform.position).normalized;
         float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, projectAngle+45);
+        UI.transform.rotation = UIRotation;
+        UI.transform.position = transform.position + UIPosition;
     }
 }
