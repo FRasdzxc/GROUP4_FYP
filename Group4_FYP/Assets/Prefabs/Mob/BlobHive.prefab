@@ -206,8 +206,8 @@ MonoBehaviour:
   mpDrop: 1
   coinAmount: 10
   xpAmount: 500
-  hpAmount: 0
-  mpAmount: 0
+  hpAmount: 5
+  mpAmount: 5
   offset: 1
 --- !u!82 &4982177024511606302
 AudioSource:
