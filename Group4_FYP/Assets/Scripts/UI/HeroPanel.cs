@@ -69,11 +69,13 @@ public class HeroPanel : MonoBehaviour
 
     public void UpdateLevel(int level)
     {
-        heroLevelText.text = "Level " + level.ToString();
+        heroLevelText.text = "Level " + level.ToString("n0");
     }
 
     private async Task ShowHeroPanel()
     {
+        Inventory.Instance.RefreshInventoryPanel();
+
         heroPanel.SetActive(true);
 
         hudMainPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);

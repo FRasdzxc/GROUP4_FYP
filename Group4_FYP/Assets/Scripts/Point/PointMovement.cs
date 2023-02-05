@@ -39,12 +39,12 @@ public class PointMovement : MonoBehaviour
                 if(storedType == "hp")
                 {
                     //add hp maybe
-                    player.GetComponent<Hero>().ChangeHealth(storedValue);
+                    player.GetComponent<Hero>().AddHealth(storedValue);
                 }
                 if(storedType == "mp")
                 {
                     //add mp maybe
-                    player.GetComponent<AbilityManager>().ChangeMana(storedValue);
+                    player.GetComponent<AbilityManager>().AddMana(storedValue);
                 }
                 Destroy(gameObject);
             }

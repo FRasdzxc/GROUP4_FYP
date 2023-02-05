@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image[] abilityImages;
     [SerializeField] private GameObject[] abilityCooldownText;
 
-    private float maxMana;
+    private float upgradedMaxMana;
     private int maxXP;
 
     // Start is called before the first frame update
@@ -37,18 +37,18 @@ public class HUD : MonoBehaviour
         mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString("n0");
     }
 
-    public void SetupHealth(float health, float maxHealth)
-    {
-        healthSlider.maxValue = maxHealth;
-        UpdateHealth(health);
-    }
+    // public void SetupHealth(float health, float maxHealth)
+    // {
+    //     healthSlider.maxValue = maxHealth;
+    //     UpdateHealth(health);
+    // }
 
-    public void SetupMana(float mana, float maxMana)
-    {
-        this.maxMana = maxMana;
-        manaSlider.maxValue = maxMana;
-        UpdateMana(mana);
-    }
+    // public void SetupMana(float mana, float maxMana)
+    // {
+    //     this.maxMana = maxMana;
+    //     manaSlider.maxValue = maxMana;
+    //     UpdateMana(mana);
+    // }
 
     public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime)
     {
@@ -66,16 +66,33 @@ public class HUD : MonoBehaviour
         UpdateXP(level, maxXP);
     }
 
-    public void UpdateHealth(float health)
+    // public void UpdateHealth(float health)
+    // {
+    //     healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
+    //     healthText.text = ((int)health).ToString("n0") + " HP";
+    // }
+
+    public void UpdateHealth(float health, float upgradedMaxHealth)
     {
+        healthSlider.maxValue = upgradedMaxHealth;
+
         healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
         healthText.text = ((int)health).ToString("n0") + " HP";
     }
 
-    public void UpdateMana(float mana)
+    // public void UpdateMana(float mana)
+    // {
+    //     manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
+    //     manaText.text = ((int)mana).ToString("n0") + "/" + maxMana.ToString("n0") + " MP";
+    // }
+
+    public void UpdateMana(float mana, float upgradedMaxMana)
     {
+        this.upgradedMaxMana = upgradedMaxMana;
+        manaSlider.maxValue = upgradedMaxMana;
+
         manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
-        manaText.text = ((int)mana).ToString("n0") + "/" + maxMana.ToString("n0") + " MP";
+        manaText.text = ((int)mana).ToString("n0") + "/" + this.upgradedMaxMana.ToString("n0") + " MP";
     }
 
     public void UpdateAbility(int slotNumber, float remainingCooldownTime)

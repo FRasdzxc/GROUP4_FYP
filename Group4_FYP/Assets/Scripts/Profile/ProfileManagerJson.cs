@@ -91,7 +91,7 @@ public static class ProfileManagerJson
         return false;
     }
 
-    public static bool DeleteProfile(string profileName)
+    public static bool DeleteProfile(string profileName, bool showNotification = true)
     {
         // check if profile with profileName exists or not
         CreateHeroProfileDirectory();
@@ -101,14 +101,21 @@ public static class ProfileManagerJson
         {
             // delete profile
             File.Delete(path);
-            _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" deleted");
+
+            if (showNotification)
+            {
+                _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" deleted");
+            }
 
             return true;
         }
         else
         {
             // show error
-            _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" does not exist");
+            if (showNotification)
+            {
+                _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" does not exist");
+            }
         }
 
         return false;

@@ -126,7 +126,7 @@ public class PauseMenu : MonoBehaviour
         SaveSystem.Instance.SaveData(false);
         if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
         {
-            ProfileManagerJson.DeleteProfile("_testprofile"); // test only
+            ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
         }
 
         // exit to menu

@@ -1,12 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private bool isTestScene; // temp only
 
-    [SerializeField] private GameObject[] maps;
+    // [SerializeField] private GameObject[] maps;
+
+    [Serializable]
+    public struct MapEntry
+    {
+        public GameObject map;
+        [Tooltip("Players cannot attack / take damage when Map Type is Peaceful")]
+        public MapType mapType;
+    }
+
+    [SerializeField] private MapEntry[] maps;
 
     private GameObject currentMap; // used as a clone
     private int currentMapIndex;
@@ -64,6 +73,16 @@ public class GameController : MonoBehaviour
         return gameState;
     }
 
+    public MapType GetCurrentMapType()
+    {
+        return maps[currentMapIndex].mapType;
+    }
+
+    public bool IsPlayingHostile()
+    {
+        return (gameState == GameState.Playing && maps[currentMapIndex].mapType == MapType.Hostile);
+    }
+
     private void LoadMap(int mapIndex)
     {
         // check if maps[currentMapIndex] exists or not
@@ -74,11 +93,11 @@ public class GameController : MonoBehaviour
         }
 
         // clone map
-        currentMap = Instantiate(maps[mapIndex]);
+        currentMap = Instantiate(maps[mapIndex].map);
         currentMapIndex = mapIndex;
 
         // spawn hero
         hero.Spawn();
-        _ = hud.ShowHugeMessage(maps[currentMapIndex].name, Color.white);
+        _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, Color.white);
     }
 }

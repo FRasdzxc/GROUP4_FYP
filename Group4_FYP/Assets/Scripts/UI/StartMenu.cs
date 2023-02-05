@@ -265,7 +265,7 @@ public class StartMenu : MonoBehaviour
     {
         if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
         {
-            ProfileManagerJson.DeleteProfile("_testprofile"); // test only
+            ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
         }
 
         for (int i = 0; i < profileButtons.Count; i++) // this loop destroy all buttons

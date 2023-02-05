@@ -106,6 +106,8 @@ public class Inventory : MonoBehaviour
                 items.RemoveAt(i);
             else
                 items[i] = new InventoryEntry(item, newQty);
+            
+            break;
         }
 
         RefreshInventoryPanel();

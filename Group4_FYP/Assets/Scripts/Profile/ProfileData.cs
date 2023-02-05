@@ -15,6 +15,13 @@ public class ProfileData
     public int level;
     public int storedExp;
     public int storedCoin;
+    public int orbs;
+    public int usedOrbs;
+    public float maxHealthUpgrade;
+    public float healthRegenerationUpgrade;
+    public float maxManaUpgrade;
+    public float manaRegenerationUpgrade;
+    public float expGainMultiplierUpgrade;
     public int map;
     public List<Inventory.InventoryEntry> inventory;
 
@@ -31,6 +38,13 @@ public class ProfileData
         level = 1;
         storedExp = 0;
         storedCoin = 0;
+        orbs = 0;
+        usedOrbs = 0;
+        maxHealthUpgrade = 0;
+        healthRegenerationUpgrade = 0;
+        maxManaUpgrade = 0;
+        manaRegenerationUpgrade = 0;
+        expGainMultiplierUpgrade = 1;
         map = 0;
         inventory = new List<Inventory.InventoryEntry>();
     }
@@ -49,6 +63,13 @@ public class ProfileData
         level = 1;
         storedExp = 0;
         storedCoin = 0;
+        orbs = 0;
+        usedOrbs = 0;
+        maxHealthUpgrade = 0;
+        healthRegenerationUpgrade = 0;
+        maxManaUpgrade = 0;
+        manaRegenerationUpgrade = 0;
+        expGainMultiplierUpgrade = 1;
         map = 0;
         inventory = new List<Inventory.InventoryEntry>();
     }
@@ -66,6 +87,13 @@ public class ProfileData
         level = profileData.level;
         storedExp = profileData.storedExp;
         storedCoin = profileData.storedCoin;
+        orbs = profileData.orbs;
+        usedOrbs = profileData.usedOrbs;
+        maxHealthUpgrade = profileData.maxHealthUpgrade;
+        healthRegenerationUpgrade = profileData.healthRegenerationUpgrade;
+        maxManaUpgrade = profileData.maxManaUpgrade;
+        manaRegenerationUpgrade = profileData.manaRegenerationUpgrade;
+        expGainMultiplierUpgrade = profileData.expGainMultiplierUpgrade;
         map = profileData.map;
         inventory = profileData.inventory;
     }

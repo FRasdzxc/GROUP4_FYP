@@ -12,6 +12,7 @@ public class SaveSystem : MonoBehaviour
     private AbilityManager abilityManager;
     private GameController gameController;
     private Inventory inventory;
+    private Orb orb;
 
     private ProfileData profile;
 
@@ -44,6 +45,7 @@ public class SaveSystem : MonoBehaviour
         abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
         gameController = GetComponent<GameController>();
         inventory = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Inventory>();
+        orb = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Orb>();
         LoadData();
     }
 
@@ -66,6 +68,13 @@ public class SaveSystem : MonoBehaviour
         abilityManager.SetManaRegeneration(profile.manaRegeneration);
         gameController.SetMap(profile.map);
         inventory.SetItems(profile.inventory);
+        orb.SetOrbs(profile.orbs);
+        orb.SetUsedOrbs(profile.usedOrbs);
+        hero.SetMaxHealthUpgrade(profile.maxHealthUpgrade);
+        hero.SetHealthRegenerationUpgrade(profile.healthRegenerationUpgrade);
+        abilityManager.SetMaxManaUpgrade(profile.maxManaUpgrade);
+        abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
+        hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
     }
 
     public void SaveData(bool showNotification)
@@ -81,6 +90,13 @@ public class SaveSystem : MonoBehaviour
         profile.manaRegeneration = abilityManager.GetManaRegeneration();
         profile.map = gameController.GetMap();
         profile.inventory = inventory.GetItems();
+        profile.orbs = orb.GetOrbs();
+        profile.usedOrbs = orb.GetUsedOrbs();
+        profile.maxHealthUpgrade = hero.GetMaxHealthUpgrade();
+        profile.healthRegenerationUpgrade = hero.GetHealthRegenerationUpgrade();
+        profile.maxManaUpgrade = abilityManager.GetMaxManaUpgrade();
+        profile.manaRegenerationUpgrade = abilityManager.GetManaRegenerationUpgrade();
+        profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
 
         ProfileManagerJson.SaveProfile(profile);
 

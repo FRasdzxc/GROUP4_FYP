@@ -11,11 +11,37 @@ public class AbilityManager : MonoBehaviour
     private HeroData heroData;
     private float mana;
     private float maxMana;
+    private float _maxManaUpgrade;
+    public float MaxManaUpgrade
+    {
+        get => _maxManaUpgrade;
+        private set
+        {
+            _maxManaUpgrade = value;
+            upgradedMaxMana = maxMana + _maxManaUpgrade;
+        }
+    }
+    private float upgradedMaxMana;
     private float manaRegeneration;
+    private float manaRegenerationUpgrade;
+
+    private static AbilityManager instance;
+    public static AbilityManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
 
     // Start is called before the first frame update
     void Awake()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
     }
 
@@ -27,7 +53,7 @@ public class AbilityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.Instance.GetGameState() == GameState.Playing)
+        if (GameController.Instance.IsPlayingHostile())
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -62,18 +88,20 @@ public class AbilityManager : MonoBehaviour
             // test refill mana
             if (Input.GetKeyDown(KeyCode.Backslash))
             {
-                mana = maxMana;
-                hud.UpdateMana(mana);
+                mana = upgradedMaxMana;
+                // hud.UpdateMana(mana);
+                hud.UpdateMana(mana, upgradedMaxMana);
                 ReadyEquippedAbilities();
             }
         }
 
-        if (mana < maxMana)
+        if (mana < upgradedMaxMana)
         {
-            mana += Time.deltaTime * manaRegeneration;
+            mana += Time.deltaTime * (manaRegeneration + manaRegenerationUpgrade);
         }
-        mana = Mathf.Clamp(mana, 0, maxMana);
-        hud.UpdateMana(mana);
+        mana = Mathf.Clamp(mana, 0, upgradedMaxMana);
+        // hud.UpdateMana(mana);
+        hud.UpdateMana(mana, upgradedMaxMana);
 
         for (int i = 0; i < equippedAbilities.Length; i++)
         {
@@ -83,7 +111,8 @@ public class AbilityManager : MonoBehaviour
 
     public void Setup()
     {
-        hud.SetupMana(mana, maxMana);
+        // hud.SetupMana(mana, upgradedMaxMana);
+        hud.UpdateMana(mana, upgradedMaxMana);
         equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory later on
 
         for (int i = 0; i < equippedAbilities.Length; i++)
@@ -104,9 +133,19 @@ public class AbilityManager : MonoBehaviour
         this.maxMana = maxMana;
     }
 
+    public void SetMaxManaUpgrade(float value)
+    {
+        this.MaxManaUpgrade = value;
+    }
+
     public void SetManaRegeneration(float manaRegeneration)
     {
         this.manaRegeneration = manaRegeneration;
+    }
+
+    public void SetManaRegenerationUpgrade(float value)
+    {
+        this.manaRegenerationUpgrade = value;
     }
 
     public float GetMana()
@@ -119,14 +158,35 @@ public class AbilityManager : MonoBehaviour
         return maxMana;
     }
 
+    public float GetMaxManaUpgrade()
+    {
+        return MaxManaUpgrade;
+    }
+
     public float GetManaRegeneration()
     {
         return manaRegeneration;
     }
 
-    public void ChangeMana(float value)
+    public float GetManaRegenerationUpgrade()
+    {
+        return manaRegenerationUpgrade;
+    }
+
+    public void AddMana(float value)
     {
         mana += value;
+    }
+
+    public void AddMaxManaUpgrade(float value)
+    {
+        MaxManaUpgrade += value;
+        // hud.SetupMana(mana, upgradedMaxMana);
+    }
+
+    public void AddManaRegenerationUpgrade(float value)
+    {
+        manaRegenerationUpgrade += value;
     }
 
     private void ReadyEquippedAbilities()

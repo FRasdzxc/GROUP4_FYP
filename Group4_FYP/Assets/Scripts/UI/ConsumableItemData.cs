@@ -23,11 +23,11 @@ public class ConsumableItemData : ItemData
         {
             if (effect.effectType == EffectType.Health) // health
             {
-                hero.ChangeHealth(effect.value);
+                hero.AddHealth(effect.value);
             }
             else if (effect.effectType == EffectType.Mana) // mana
             {
-                abilityManager.ChangeMana(effect.value);
+                abilityManager.AddMana(effect.value);
             }
             else // exp
             {
