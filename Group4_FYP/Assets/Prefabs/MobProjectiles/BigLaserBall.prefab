@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 198125954525059285}
   - component: {fileID: 2551216966336264800}
   m_Layer: 0
-  m_Name: LaserBall
+  m_Name: BigLaserBall
   m_TagString: MobWeaponTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b77114d9bb07df468b8bcdde9ee3d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponTriggerData: {fileID: 11400000, guid: 877a3c63ceac09f409c93a7028eb1530, type: 2}
+  weaponTriggerData: {fileID: 11400000, guid: 0bdb7285ae695c94f952916db9bb8c3f, type: 2}
   notes: Please assign either "HeroWeaponPoint", "HeroWeaponPointStronger" or "MobWeaponPoint"
     tag to the GameObject this script is attached to
 --- !u!114 &198125954525059285
