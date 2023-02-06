@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 1288767483647472407}
   - component: {fileID: 4221168656205230386}
   m_Layer: 5
-  m_Name: BodyText
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.88235295, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2976,6 +2976,7 @@ GameObject:
   - component: {fileID: 6421761732958174910}
   - component: {fileID: 5617527231325624347}
   - component: {fileID: 5824353713699074187}
+  - component: {fileID: 7154185410918517936}
   m_Layer: 5
   m_Name: TooltipPanel
   m_TagString: Untagged
@@ -3084,6 +3085,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &7154185410918517936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4033146978580834043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389c7393a98847e40aa43608c826cc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: {fileID: 5598090447383932643}
+  descriptionText: {fileID: 1288767483647472407}
+  attributeText: {fileID: 6276576935956360957}
 --- !u!1 &4097858071076826000
 GameObject:
   m_ObjectHideFlags: 0
@@ -3989,7 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
