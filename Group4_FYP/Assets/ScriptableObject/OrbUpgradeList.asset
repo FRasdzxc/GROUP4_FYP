@@ -15,16 +15,21 @@ MonoBehaviour:
   orbUpgrades:
   - orbUpgradeName: Max Health
     type: 0
+    description: Add additional health to base Max Health
     value: 10
   - orbUpgradeName: Health Regeneration
     type: 1
+    description: Increase Health Regeneration speed
     value: 0.1
   - orbUpgradeName: Max Mana
     type: 2
+    description: Add additional mana to base Max Mana
     value: 15
   - orbUpgradeName: Mana Regeneration
     type: 3
+    description: Increase Mana Regeneration speed
     value: 0.15
   - orbUpgradeName: Exp Gain Multiplier
     type: 4
+    description: Multiply collected Exp to gain more Exp
     value: 0.05

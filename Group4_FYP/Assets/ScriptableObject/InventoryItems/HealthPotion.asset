@@ -20,6 +20,7 @@ MonoBehaviour:
   maxDropSize: 1
   itemValue: 25
   itemIcon: {fileID: 21300000, guid: ac060fcc0a1d16741b190ec053f84f76, type: 3}
+  sound: {fileID: 0}
   isUsable: 1
   effects:
   - effectType: 0

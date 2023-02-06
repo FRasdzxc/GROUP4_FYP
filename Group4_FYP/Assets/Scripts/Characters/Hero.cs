@@ -107,7 +107,7 @@ public class Hero : MonoBehaviour
                 HeroPanel.Instance.UpdateLevel(level);
                 level++;
                 Orb.Instance.AddOrbs(1);
-                _ = Notification.Instance.ShowNotification("Level Up! - " + level);
+                _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
             }
 
             if (GameController.Instance.IsPlayingHostile())

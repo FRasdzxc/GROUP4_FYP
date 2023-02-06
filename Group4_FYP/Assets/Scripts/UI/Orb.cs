@@ -1,13 +1,21 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Orb : MonoBehaviour
 {
-    [SerializeField] private int baseResetPrice = 100;
+    [SerializeField] private int baseResetPrice = 150;
     [SerializeField] private Text orbText;
     [SerializeField] private OrbUpgradeList orbUpgradeList;
     [SerializeField] private Transform upgradeItemContainer;
     [SerializeField] private GameObject upgradeItemPrefab;
+    [SerializeField] private Sprite orbSprite;
+
+    //private float maxHealthUpgrade;
+    //private float healthRegenerationUpgrade;
+    //private float maxManaUpgrade;
+    //private float manaRegenerationUpgrade;
+    //private float expGainMultiplierUpgrade;
 
     private float requiredResetPrice;
  
@@ -25,20 +33,17 @@ public class Orb : MonoBehaviour
     private int usedOrbs;
     private Hero hero;
 
-    private static Orb instance;
+    private static Orb _instance;
     public static Orb Instance
     {
-        get
-        {
-            return instance;
-        }
+        get => _instance;
     }
 
     void Awake()
     {
-        if (!instance)
+        if (!_instance)
         {
-            instance = this;
+            _instance = this;
         }
 
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
@@ -69,6 +74,14 @@ public class Orb : MonoBehaviour
             upgradeItemText.GetComponent<Text>().text = upgrade.orbUpgradeName;
 
             clone.GetComponent<Button>().onClick.AddListener(() => { Upgrade(upgrade.type, upgrade.value); });
+
+            TooltipTrigger tooltipTrigger = clone.AddComponent<TooltipTrigger>();
+            //tooltipTrigger.SetHeader(upgrade.orbUpgradeName);
+            //tooltipTrigger.SetDescription()
+            //String.Format();
+            //string[] upgradeAttributes = new string[] {};
+            //tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, upgradeAttributes);
+            tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description);
         }
     }
 
@@ -144,13 +157,38 @@ public class Orb : MonoBehaviour
     #region Setters/Getters/Add
     public void SetOrbs(int value)
     {
-        this.Orbs = value;
+        Orbs = value;
     }
 
     public void SetUsedOrbs(int value)
     {
-        this.usedOrbs = value;
+        usedOrbs = value;
     }
+
+    //public void SetMaxHealthUpgrade(float value)
+    //{
+    //    maxHealthUpgrade = value;
+    //}
+
+    //public void SetHealthRegenerationUpgrade(float value)
+    //{
+    //    healthRegenerationUpgrade = value;
+    //}
+
+    //public void SetMaxManaUpgrade(float value)
+    //{
+    //    maxManaUpgrade = value;
+    //}
+
+    //public void SetManaRegenerationUpgrade(float value)
+    //{
+    //    manaRegenerationUpgrade = value;
+    //}
+
+    //public void SetExpGainMultiplierUpgrade(float value)
+    //{
+    //    expGainMultiplierUpgrade = value;
+    //}
 
     public int GetOrbs()
     {
@@ -162,9 +200,35 @@ public class Orb : MonoBehaviour
         return usedOrbs;
     }
 
+    //public float GetMaxHealthUpgrade()
+    //{
+    //    return maxHealthUpgrade;
+    //}
+
+    //public float GetHealthRegenerationUpgrade()
+    //{
+    //    return healthRegenerationUpgrade;
+    //}
+
+    //public float GetMaxManaUpgrade()
+    //{
+    //    return maxManaUpgrade;
+    //}
+
+    //public float GetManaRegenerationUpgrade()
+    //{
+    //    return manaRegenerationUpgrade;
+    //}
+
+    //public float GetExpGainMultiplierUpgrade()
+    //{
+    //    return expGainMultiplierUpgrade;
+    //}
+
     public void AddOrbs(int value)
     {
         Orbs += value;
+        Message.Instance.ShowMessage("+" + value + " Orb", orbSprite);
     }
     #endregion
 

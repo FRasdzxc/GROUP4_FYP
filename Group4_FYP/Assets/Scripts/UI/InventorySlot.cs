@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -113,26 +114,36 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerEnter == gameObject)
-        {
-            Debug.Log("cursor enters inventory slot");
+        Debug.Log("cursor enters inventory slot");
 
-            if (item && item.isUsable)
+        string attributes = "";
+        StringBuilder sb = new StringBuilder();
+        if (ItemData is ConsumableItemData)
+        {
+            var consumable = item as ConsumableItemData;
+            foreach (var e in consumable.effects)
             {
-                useHint.SetActive(true);
+                //attributes += e.ToString();
+                sb.AppendLine(e.ToString());
             }
+            attributes = sb.ToString().Substring(0, sb.Length - 1); // remove last \n char
         }
-        
+
+        //Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes);
+        Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes);
+
+        if (item && item.isUsable)
+        {
+            useHint.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerEnter == gameObject)
-        {
-            Debug.Log("cursor exits inventory slot");
+        Debug.Log("cursor exits inventory slot");
+        Tooltip.Instance.HideTooltip();
 
-            useHint.SetActive(false);
-        }
+        useHint.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -9,6 +9,11 @@ public class ConsumableItemData : ItemData
     {
         public EffectType effectType;
         public float value;
+
+        public override string ToString()
+        {
+            return String.Format("+{0} {1}", value.ToString("n0"), effectType.ToString());
+        }
     }
 
     public Effect[] effects;

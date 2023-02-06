@@ -9,6 +9,7 @@ public class OrbUpgradeList : ScriptableObject
     {
         public string orbUpgradeName;
         public OrbUpgradeType type;
+        [TextArea(2, 2)] public string description;
         public float value;
     }
 
