@@ -49,7 +49,8 @@ public class WeaponTrigger : MonoBehaviour
         return damage;
     }
 
-    public void Shoot(float speed)
+    // ***** make a child class script for shoot and split?
+    public void Shoot(Vector3 shootDir, float speed) // *****
     {
         GetComponent<Rigidbody2D>().AddForce(shootDir * speed, ForceMode2D.Impulse);
     }
@@ -70,7 +71,7 @@ public class WeaponTrigger : MonoBehaviour
             float radians = splitAngle * Mathf.Deg2Rad;
             Vector3 shootDir = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)).normalized;
             Instantiate(splitProjectile, gameObject.transform.position, Quaternion.identity);
-            Shoot()
+            Shoot(shootDir, 1); // *****
         }
         Destroy(this.gameObject);
     }
