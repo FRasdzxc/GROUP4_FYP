@@ -15,11 +15,12 @@ MonoBehaviour:
   itemID: consumable_manapotion
   itemName: Mana Potion
   itemType: 2
-  itemDescription: Boost Mana when consumed
+  itemDescription: Gain Mana when consumed
   minDropSize: 1
   maxDropSize: 1
   itemValue: 25
   itemIcon: {fileID: 21300000, guid: 02d70b22dcc1c8f44a5ae3cd5a6ff4dd, type: 3}
+  sound: {fileID: 0}
   isUsable: 1
   effects:
   - effectType: 1

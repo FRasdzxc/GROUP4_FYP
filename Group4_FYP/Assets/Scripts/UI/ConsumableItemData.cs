@@ -36,7 +36,7 @@ public class ConsumableItemData : ItemData
             }
             else // exp
             {
-                hero.AddEXP((int)effect.value);
+                hero.AddEXP((int)effect.value, false);
             }
         }
     }

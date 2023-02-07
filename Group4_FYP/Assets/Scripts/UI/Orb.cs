@@ -118,7 +118,8 @@ public class Orb : MonoBehaviour
                     break;
             }
             attributes = new string[] { currentAttribute, upgradedAttribute };
-            tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes); // use Tooltip.Instance.ShowTooltip() instead?
+            // tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes); // use Tooltip.Instance.ShowTooltip() instead?
+            tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes, new TooltipHintType[] { TooltipHintType.Use });
 
             upgradeButtons.Add(clone);
         }

@@ -2,13 +2,13 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// for basic gui elements only? or implement an event member?
+// for basic gui elements only
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private string header;
     [SerializeField] [TextArea(5, 5)] private string description;
-    [SerializeField] [TextArea(5, 5)] private string attributes;
-    [SerializeField] private string hints;
+    [SerializeField] private string[] attributes;
+    [SerializeField] private TooltipHintType[] hints;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -18,6 +18,14 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerExit(PointerEventData eventData)
     {
         Tooltip.Instance.HideTooltip();
+    }
+
+    public void SetupTooltip(string header, string description = "", string[] attributes = null, TooltipHintType[] hints = null)
+    {
+        this.header = header;
+        this.description = description;
+        this.attributes = attributes;
+        this.hints = hints;
     }
 
     //public void SetHeader(string value)
@@ -45,37 +53,37 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     //    }
     //}
 
-    public void SetupTooltip(string header, string description = "", string[] attributes = null, TooltipHintType[] tooltipHintType = null)
-    {
-        this.header = header;
-        this.description = description;
+    // public void SetupTooltip(string header, string description = "", string[] attributes = null, TooltipHintType[] tooltipHintType = null)
+    // {
+    //     this.header = header;
+    //     this.description = description;
 
-        if (attributes == null)
-        {
-            this.attributes = "";
-        }
-        else
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var v in attributes)
-            {
-                sb.AppendLine(v);
-            }
-            this.attributes = sb.ToString().Substring(0, sb.Length - 1);
-        }
+    //     if (attributes == null)
+    //     {
+    //         this.attributes = "";
+    //     }
+    //     else
+    //     {
+    //         StringBuilder sb = new StringBuilder();
+    //         foreach (var v in attributes)
+    //         {
+    //             sb.AppendLine(v);
+    //         }
+    //         this.attributes = sb.ToString().Substring(0, sb.Length - 1);
+    //     }
 
-        if (tooltipHintType == null)
-        {
-            this.hints = "";
-        }
-        else
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var h in tooltipHintType)
-            {
-                sb.Append(h.ToString() + '\t');
-            }
-            this.hints = sb.ToString().Substring(0, hints.Length - 1);
-        }
-    }
+    //     if (tooltipHintType == null)
+    //     {
+    //         this.hints = "";
+    //     }
+    //     else
+    //     {
+    //         StringBuilder sb = new StringBuilder();
+    //         foreach (var h in tooltipHintType)
+    //         {
+    //             sb.Append(h.ToString() + '\t');
+    //         }
+    //         this.hints = sb.ToString().Substring(0, hints.Length - 1);
+    //     }
+    // }
 }

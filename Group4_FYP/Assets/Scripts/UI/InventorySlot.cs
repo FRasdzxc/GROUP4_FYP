@@ -1,4 +1,4 @@
-using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -116,21 +116,26 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         Debug.Log("cursor enters inventory slot");
 
-        string attributes = "";
-        StringBuilder sb = new StringBuilder();
+        List<string> attributes = new List<string>();
+        List<TooltipHintType> hints = new List<TooltipHintType>();
+        // string attributes = "";
+        // StringBuilder sb = new StringBuilder();
         if (ItemData is ConsumableItemData)
         {
             var consumable = item as ConsumableItemData;
             foreach (var e in consumable.effects)
             {
                 //attributes += e.ToString();
-                sb.AppendLine(e.ToString());
+                // sb.AppendLine(e.ToString());
+                attributes.Add(e.ToString());
             }
-            attributes = sb.ToString().Substring(0, sb.Length - 1); // remove last \n char
+            // attributes = sb.ToString().Substring(0, sb.Length - 1); // remove last \n char
+            hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
         }
+        hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
 
         //Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes);
-        Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes);
+        Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
 
         if (item && item.isUsable)
         {
@@ -153,6 +158,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
             {
                 UseItem();
+
+                if (Input.GetKey(KeyCode.LeftShift)) // use all
+                {
+                    while (StackSize > 0)
+                    {
+                        UseItem();
+                    }
+                }
             }
             else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
             {

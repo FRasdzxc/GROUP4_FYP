@@ -300,9 +300,16 @@ public class Hero : MonoBehaviour
         healthRegenerationUpgrade += value;
     }
 
-    public void AddEXP(int exp)
+    public void AddEXP(int exp, bool accountForExpGainMultiplier = true)
     {
-        storedExp += (int)(exp * expGainMultiplierUpgrade);
+        if (accountForExpGainMultiplier)
+        {
+            storedExp += (int)(exp * expGainMultiplierUpgrade);
+        }
+        else
+        {
+            storedExp += exp;
+        }
         hud.UpdateXP(level, storedExp);
     }
 

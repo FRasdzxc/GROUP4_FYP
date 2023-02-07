@@ -15,7 +15,7 @@ MonoBehaviour:
   itemID: consumable_healthpotion
   itemName: Health Potion
   itemType: 2
-  itemDescription: Boost Health when consumed
+  itemDescription: Gain Health when consumed
   minDropSize: 1
   maxDropSize: 1
   itemValue: 25
