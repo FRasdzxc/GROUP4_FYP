@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,7 @@ public class Orb : MonoBehaviour
     //private float expGainMultiplierUpgrade;
 
     private float requiredResetPrice;
+    private List<GameObject> upgradeButtons;
  
     private int _orbs;
     public int Orbs
@@ -47,6 +48,7 @@ public class Orb : MonoBehaviour
         }
 
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
+        upgradeButtons = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -63,6 +65,14 @@ public class Orb : MonoBehaviour
 
     public void RefreshUpgradeItemContainer()
     {
+        // destroy all the upgrade buttons
+        foreach (var b in upgradeButtons)
+        {
+            Destroy(b);
+        }
+        upgradeButtons.Clear();
+
+        // add upgrade buttons
         foreach (var upgrade in orbUpgradeList.orbUpgrades)
         {
             GameObject clone = Instantiate(upgradeItemPrefab, upgradeItemContainer.transform);
@@ -76,12 +86,41 @@ public class Orb : MonoBehaviour
             clone.GetComponent<Button>().onClick.AddListener(() => { Upgrade(upgrade.type, upgrade.value); });
 
             TooltipTrigger tooltipTrigger = clone.AddComponent<TooltipTrigger>();
-            //tooltipTrigger.SetHeader(upgrade.orbUpgradeName);
-            //tooltipTrigger.SetDescription()
-            //String.Format();
-            //string[] upgradeAttributes = new string[] {};
-            //tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, upgradeAttributes);
-            tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description);
+            string[] attributes;
+            string currentAttribute = "Current: ";
+            string upgradedAttribute = "Upgraded: ";
+            switch (upgrade.type)
+            {
+                case OrbUpgradeType.MaxHealth:
+                    float currentMaxHealth = Hero.Instance.GetMaxHealth() + Hero.Instance.GetMaxHealthUpgrade();
+                    currentAttribute += currentMaxHealth;
+                    upgradedAttribute += currentMaxHealth + upgrade.value;
+                    break;
+                case OrbUpgradeType.HealthRegeneration:
+                    float currentHealthRegeneration = Hero.Instance.GetHealthRegeneration() + Hero.Instance.GetHealthRegenerationUpgrade();
+                    currentAttribute += currentHealthRegeneration;
+                    upgradedAttribute += currentHealthRegeneration + upgrade.value;
+                    break;
+                case OrbUpgradeType.MaxMana:
+                    float currentMaxMana = AbilityManager.Instance.GetMaxMana() + AbilityManager.Instance.GetMaxManaUpgrade();
+                    currentAttribute += currentMaxMana;
+                    upgradedAttribute += currentMaxMana + upgrade.value;
+                    break;
+                case OrbUpgradeType.ManaRegeneration:
+                    float currentManaRegeneration = AbilityManager.Instance.GetManaRegeneration() + AbilityManager.Instance.GetManaRegenerationUpgrade();
+                    currentAttribute += currentManaRegeneration;
+                    upgradedAttribute += currentManaRegeneration + upgrade.value;
+                    break;
+                case OrbUpgradeType.ExpGainMultiplier:
+                    float currentExpGainMultiplier = Hero.Instance.GetExpGainMultiplierUpgrade();
+                    currentAttribute += currentExpGainMultiplier;
+                    upgradedAttribute += currentExpGainMultiplier + upgrade.value;
+                    break;
+            }
+            attributes = new string[] { currentAttribute, upgradedAttribute };
+            tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes); // use Tooltip.Instance.ShowTooltip() instead?
+
+            upgradeButtons.Add(clone);
         }
     }
 
@@ -114,6 +153,8 @@ public class Orb : MonoBehaviour
 
         Orbs--;
         usedOrbs++;
+
+        RefreshUpgradeItemContainer();
     }
 
     public void ResetOrbs()
@@ -152,6 +193,8 @@ public class Orb : MonoBehaviour
                 }
             },
             true);
+
+        RefreshUpgradeItemContainer();
     }
 
     #region Setters/Getters/Add

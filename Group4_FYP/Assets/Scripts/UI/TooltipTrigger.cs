@@ -8,10 +8,11 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private string header;
     [SerializeField] [TextArea(5, 5)] private string description;
     [SerializeField] [TextArea(5, 5)] private string attributes;
+    [SerializeField] private string hints;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Tooltip.Instance.ShowTooltip(header, description, attributes);
+        Tooltip.Instance.ShowTooltip(header, description, attributes, hints);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -44,9 +45,8 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     //    }
     //}
 
-    public void SetupTooltip(string header, string description = "", string[] attributes = null)
+    public void SetupTooltip(string header, string description = "", string[] attributes = null, TooltipHintType[] tooltipHintType = null)
     {
-        //SetHeader(header)
         this.header = header;
         this.description = description;
 
@@ -61,12 +61,21 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             {
                 sb.AppendLine(v);
             }
-            this.attributes = sb.ToString();
+            this.attributes = sb.ToString().Substring(0, sb.Length - 1);
+        }
 
-            if (attributes.Length > 0)
+        if (tooltipHintType == null)
+        {
+            this.hints = "";
+        }
+        else
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var h in tooltipHintType)
             {
-                this.attributes.Substring(0, attributes.Length - 1);
+                sb.Append(h.ToString() + '\t');
             }
+            this.hints = sb.ToString().Substring(0, hints.Length - 1);
         }
     }
 }
