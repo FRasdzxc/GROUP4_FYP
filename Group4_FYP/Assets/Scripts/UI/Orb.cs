@@ -170,7 +170,7 @@ public class Orb : MonoBehaviour
 
         ConfirmationPanel.Instance.ShowConfirmationPanel(
             "Reset Orbs",
-            "This will reset all your upgrades to health or mana etc. Do you wish to continue?\nCost: " + requiredResetPrice + " Coins",
+            "This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\nCost: " + requiredResetPrice + " Coins",
             () =>
             {
                 if (hero.GetStoredCoin() >= requiredResetPrice)

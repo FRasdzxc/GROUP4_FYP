@@ -1,9 +1,47 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor;
+
+[Serializable]
+public class DialogueEvents : UnityEvent {}
+
+[Serializable]
+public class DialogueEntry : MonoBehaviour
+{
+    [TextArea(2, 5)] public string dialogue;
+    public bool hasEvents;
+    public DialogueEvents dialogueEvents;
+}
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(DialogueEntry))]
+public class DialogueEntryEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        
+        DialogueEntry script = (DialogueEntry)target;
+
+        script.dialogue = EditorGUILayout.TextArea("Dialogue", script.dialogue);
+        script.hasEvents = EditorGUILayout.Toggle("Has Events", script.hasEvents);
+        if (script.hasEvents)
+        {
+            // script.dialogueEvents = EditorGUILayout.PropertyField(serializedObject.FindProperty("dialogueEvents"), new GUIContent("Dialogue Events"));
+            // script.dialogueEvents = EditorGUILayout.ObjectField("Dialogue Events", script.dialogueEvents, typeof(DialogueEvents), true) as DialogueEvents;
+        }
+    }
+}
+#endif
 
 public class DialogueController : MonoBehaviour
 {
     [SerializeField] private string[] dialogues; // test only
+
+    
+
     private int currentDialogueIndex;
 
     // Start is called before the first frame update

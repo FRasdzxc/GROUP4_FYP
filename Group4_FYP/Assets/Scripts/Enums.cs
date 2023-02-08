@@ -12,3 +12,4 @@ public enum GameState { Playing, Paused };
 public enum MapType { Peaceful, Hostile, Dungeon }
 public enum OrbUpgradeType { MaxHealth, HealthRegeneration, MaxMana, ManaRegeneration, ExpGainMultiplier };
 public enum TooltipHintType { None, Use, Drop, UseAll, DropAll };
+public enum NPCType { Normal, Merchant };

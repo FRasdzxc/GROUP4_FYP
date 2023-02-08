@@ -114,41 +114,41 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("cursor enters inventory slot");
-
-        List<string> attributes = new List<string>();
-        List<TooltipHintType> hints = new List<TooltipHintType>();
-        // string attributes = "";
-        // StringBuilder sb = new StringBuilder();
-        if (ItemData is ConsumableItemData)
+        if (eventData.pointerEnter == gameObject)
         {
-            var consumable = item as ConsumableItemData;
-            foreach (var e in consumable.effects)
+            Debug.Log("cursor enters inventory slot");
+
+            List<string> attributes = new List<string>();
+            List<TooltipHintType> hints = new List<TooltipHintType>();
+            if (ItemData is ConsumableItemData)
             {
-                //attributes += e.ToString();
-                // sb.AppendLine(e.ToString());
-                attributes.Add(e.ToString());
+                var consumable = item as ConsumableItemData;
+                foreach (var e in consumable.effects)
+                {
+                    attributes.Add(e.ToString());
+                }
+                hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
             }
-            // attributes = sb.ToString().Substring(0, sb.Length - 1); // remove last \n char
-            hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
-        }
-        hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
+            hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
 
-        //Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes);
-        Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
+            Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
 
-        if (item && item.isUsable)
-        {
-            useHint.SetActive(true);
+            if (item && item.isUsable)
+            {
+                useHint.SetActive(true);
+            }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("cursor exits inventory slot");
-        Tooltip.Instance.HideTooltip();
+        if (eventData.pointerEnter == gameObject)
+        {
+            Debug.Log("cursor exits inventory slot");
+            Tooltip.Instance.HideTooltip();
 
-        useHint.SetActive(false);
+            useHint.SetActive(false);
+        }        
     }
 
     public void OnPointerClick(PointerEventData eventData)
