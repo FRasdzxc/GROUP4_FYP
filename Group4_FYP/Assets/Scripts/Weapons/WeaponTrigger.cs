@@ -15,7 +15,9 @@ public class WeaponTrigger : MonoBehaviour
     private float projectileSpeed;
     private bool splitable;
     private GameObject splitProjectile;
+    private GameObject projectile;
     private int splitAmount;
+    private float splitProjectileSpeed;
     private float splitTime;
     private float splitAngle = 0;
 
@@ -28,12 +30,13 @@ public class WeaponTrigger : MonoBehaviour
         splitable = weaponTriggerData.splitable;
         splitProjectile = weaponTriggerData.splitProjectile;
         splitAmount = weaponTriggerData.splitAmount;
+        splitProjectileSpeed = weaponTriggerData.splitProjectileSpeed;
         splitTime = weaponTriggerData.splitTime;
     }
 
     void Update()
     {
-        if (splitable)
+        if (splitable && this)
         {
             Split(splitProjectile);
         }
@@ -50,13 +53,14 @@ public class WeaponTrigger : MonoBehaviour
     }
 
     // ***** make a child class script for shoot and split?
-    public void Shoot(Vector3 shootDir, float speed) // *****
+    public void Shoot(Vector3 shootDir, float speed, GameObject x) // *****
     {
-        GetComponent<Rigidbody2D>().AddForce(shootDir * speed, ForceMode2D.Impulse);
+        x.GetComponent<Rigidbody2D>().AddForce(shootDir * speed, ForceMode2D.Impulse);
     }
 
     private async void Split(GameObject projectile)
     {
+        splitAngle = 0;
         float interval = 0f;
 
         while (interval < splitTime)
@@ -67,11 +71,11 @@ public class WeaponTrigger : MonoBehaviour
 
         for(int i = 0; i < splitAmount; i++)
         {
-            splitAngle += i * (360 / splitAmount);
+            splitAngle = i * (360 / splitAmount);
             float radians = splitAngle * Mathf.Deg2Rad;
             Vector3 shootDir = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)).normalized;
-            Instantiate(splitProjectile, gameObject.transform.position, Quaternion.identity);
-            Shoot(shootDir, 1); // *****
+            projectile = Instantiate(splitProjectile, gameObject.transform.position, Quaternion.identity);
+            Shoot(shootDir, splitProjectileSpeed, projectile); // *****
         }
         Destroy(this.gameObject);
     }

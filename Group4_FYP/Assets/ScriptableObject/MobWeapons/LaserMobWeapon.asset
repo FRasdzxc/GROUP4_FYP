@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LaserMobWeapon
   m_EditorClassIdentifier: 
   weaponName: LaserMobWeapon
-  cooldown: 2
+  cooldown: 1.5
   projectileLifeTime: 4
   projectileSpeed: 10

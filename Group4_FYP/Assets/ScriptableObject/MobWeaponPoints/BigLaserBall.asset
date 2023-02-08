@@ -15,7 +15,9 @@ MonoBehaviour:
   weaponTriggerName: 
   damage: 45
   criticalDamage: 70
+  projectileSpeed: 0
   splitable: 1
   splitProjectile: {fileID: 7211906764320157688, guid: 3351b4c87590b504aa8bdbcaff99ee09, type: 3}
-  splitAmount: 5
-  splitTime: 1
+  splitAmount: 10
+  splitProjectileSpeed: 4
+  splitTime: 0.5

@@ -8,6 +8,7 @@ public class LaserMob : ProjectileMob
     [SerializeField] private GameObject defaultLaser;
     [SerializeField] private GameObject bigLaserBall;
     [SerializeField] protected GameObject UI;
+    private GameObject self;
     private Quaternion UIRotation;
     private Vector3 UIPosition;
     private int attackCounter = 0;
@@ -15,7 +16,7 @@ public class LaserMob : ProjectileMob
     // Start is called before the first frame update
     protected override void Start()
     {
-        UI = GameObject.Find("LaserMobCanvas");
+        UI = GetComponentInChildren<Canvas>().gameObject;
         UIRotation = UI.transform.rotation;
         UIPosition = UI.transform.localPosition;
         base.Start();
