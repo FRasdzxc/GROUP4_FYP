@@ -5,7 +5,6 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField] private NPCData m_Data;
-    [SerializeField] private DialogueEntry[] dialogues;
 
     // Start is called before the first frame update
     void Start()

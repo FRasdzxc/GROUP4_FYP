@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class DialoguePanel : MonoBehaviour
 {
-    [SerializeField] private Text nameText;
+    [SerializeField] private Image image;
+    [SerializeField] private Text headerText;
     [SerializeField] private Text dialogueText;
     [SerializeField] private float textDisplayDelay;
 
@@ -34,26 +35,25 @@ public class DialoguePanel : MonoBehaviour
         isDisplayingDialogue = false; // preventive
     }
 
-    // rewrite how name is assigned?
-    public async Task ShowDialoguePanel(string name, string dialogue)
+    public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite)
     {
-        nameText.text = null;
+        headerText.text = header;
         dialogueText.text = null;
+        image.sprite = sprite;
 
         if (!panelIsShown)
         {
             gameObject.SetActive(true);
-            await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).AsyncWaitForCompletion();
+            await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
             panelIsShown = true;
         }
 
-        nameText.text = name;
         await DisplayDialogue(dialogue);
     }
 
-    public async void HideDialoguePanel()
+    public async Task HideDialoguePanel()
     {
-        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).AsyncWaitForCompletion();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
         panelIsShown = false;
     }    
