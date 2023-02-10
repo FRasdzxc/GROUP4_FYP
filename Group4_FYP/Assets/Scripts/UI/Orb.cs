@@ -116,6 +116,11 @@ public class Orb : MonoBehaviour
                     currentAttribute += currentExpGainMultiplier;
                     upgradedAttribute += currentExpGainMultiplier + upgrade.value;
                     break;
+                case OrbUpgradeType.Defense:
+                    float currentDefense = Hero.Instance.GetDefense() + Hero.Instance.GetDefenseUpgrade();
+                    currentAttribute += currentDefense;
+                    upgradedAttribute += currentDefense + upgrade.value;
+                    break;
             }
             attributes = new string[] { currentAttribute, upgradedAttribute };
             // tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes); // use Tooltip.Instance.ShowTooltip() instead?
@@ -149,6 +154,9 @@ public class Orb : MonoBehaviour
                 break;
             case OrbUpgradeType.ExpGainMultiplier:
                 Hero.Instance.AddExpGainMultiplierUpgrade(value);
+                break;
+            case OrbUpgradeType.Defense:
+                Hero.Instance.AddDefenseUpgrade(value);
                 break;
         }
 

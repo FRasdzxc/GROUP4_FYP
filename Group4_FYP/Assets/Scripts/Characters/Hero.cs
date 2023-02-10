@@ -50,6 +50,18 @@ public class Hero : MonoBehaviour
     private float upgradedMaxHealth;
     private float healthRegeneration;
     private float healthRegenerationUpgrade;
+    private float defense;
+    private float _defenseUpgrade;
+    public float DefenseUpgrade
+    {
+        get => _defenseUpgrade;
+        private set
+        {
+            _defenseUpgrade = value;
+            upgradedDefense = defense + _defenseUpgrade;
+        }
+    }
+    private float upgradedDefense;
 
     private static Hero instance;
     public static Hero Instance
@@ -115,7 +127,7 @@ public class Hero : MonoBehaviour
                 // testonly
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
-                    TakeDamage(15);
+                    TakeDamage(15, false);
                 }
                 if (Input.GetKeyDown(KeyCode.Equals))
                 {
@@ -145,12 +157,18 @@ public class Hero : MonoBehaviour
         HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
-    private void TakeDamage(float damage)
+    private void TakeDamage(float damage, bool accountForDefenseUpgrade = true)
     {
         if (!isDead && GameController.Instance.IsPlayingHostile())
         {
-            health -= damage;
-            // hud.UpdateHealth(health);
+            if (accountForDefenseUpgrade)
+            {
+                health -= damage / upgradedDefense;
+            }
+            else
+            {
+                health -= damage;
+            }
 
             if (health <= 0)
             {
@@ -215,6 +233,23 @@ public class Hero : MonoBehaviour
         this.healthRegenerationUpgrade = value;
     }
 
+    public void SetDefense(float value)
+    {
+        if (value < 1f) // preventive
+        {
+            defense = 1f;
+        }
+        else
+        {
+            defense = value;
+        }
+    }
+
+    public void SetDefenseUpgrade(float value)
+    {
+        DefenseUpgrade = value;
+    }
+
     public void SetLevel(int level)
     {
         this.level = level;
@@ -262,6 +297,16 @@ public class Hero : MonoBehaviour
         return healthRegenerationUpgrade;
     }
 
+    public float GetDefense()
+    {
+        return defense;
+    }
+
+    public float GetDefenseUpgrade()
+    {
+        return DefenseUpgrade;
+    }
+
     public int GetLevel()
     {
         return level;
@@ -298,6 +343,11 @@ public class Hero : MonoBehaviour
     public void AddHealthRegenerationUpgrade(float value)
     {
         healthRegenerationUpgrade += value;
+    }
+
+    public void AddDefenseUpgrade(float value)
+    {
+        DefenseUpgrade += value;
     }
 
     public void AddEXP(int exp, bool accountForExpGainMultiplier = true)

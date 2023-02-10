@@ -21,6 +21,10 @@ MonoBehaviour:
     type: 1
     description: Increase Health Regeneration value per second
     value: 0.1
+  - orbUpgradeName: Defense
+    type: 5
+    description: Divide each damage by value
+    value: 0.1
   - orbUpgradeName: Max Mana
     type: 2
     description: Add additional mana to base Max Mana

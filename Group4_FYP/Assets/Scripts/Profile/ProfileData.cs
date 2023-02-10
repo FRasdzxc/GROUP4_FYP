@@ -12,6 +12,7 @@ public class ProfileData
     public float mana;
     public float maxMana;
     public float manaRegeneration;
+    public float defense;
     public int level;
     public int storedExp;
     public int storedCoin;
@@ -19,6 +20,7 @@ public class ProfileData
     public int usedOrbs;
     public float maxHealthUpgrade;
     public float healthRegenerationUpgrade;
+    public float defenseUpgrade;
     public float maxManaUpgrade;
     public float manaRegenerationUpgrade;
     public float expGainMultiplierUpgrade;
@@ -35,6 +37,7 @@ public class ProfileData
         mana = 200;
         maxMana = 200;
         manaRegeneration = 5;
+        defense = 5;
         level = 1;
         storedExp = 0;
         storedCoin = 0;
@@ -42,6 +45,7 @@ public class ProfileData
         usedOrbs = 0;
         maxHealthUpgrade = 0;
         healthRegenerationUpgrade = 0;
+        defenseUpgrade = 0;
         maxManaUpgrade = 0;
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
@@ -57,6 +61,7 @@ public class ProfileData
         health = defaultStats.health;
         maxHealth = defaultStats.health;
         healthRegeneration = defaultStats.healthRegeneration;
+        defense = defaultStats.defense;
         mana = defaultStats.mana;
         maxMana = defaultStats.mana;
         manaRegeneration = defaultStats.manaRegeneration;
@@ -67,6 +72,7 @@ public class ProfileData
         usedOrbs = 0;
         maxHealthUpgrade = 0;
         healthRegenerationUpgrade = 0;
+        defenseUpgrade = 0;
         maxManaUpgrade = 0;
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
@@ -81,6 +87,7 @@ public class ProfileData
         health = profileData.health;
         maxHealth = profileData.maxHealth;
         healthRegeneration = profileData.healthRegeneration;
+        defense = profileData.defense;
         mana = profileData.mana;
         maxMana = profileData.maxMana;
         manaRegeneration = profileData.manaRegeneration;
@@ -91,6 +98,7 @@ public class ProfileData
         usedOrbs = profileData.usedOrbs;
         maxHealthUpgrade = profileData.maxHealthUpgrade;
         healthRegenerationUpgrade = profileData.healthRegenerationUpgrade;
+        defenseUpgrade = profileData.defenseUpgrade;
         maxManaUpgrade = profileData.maxManaUpgrade;
         manaRegenerationUpgrade = profileData.manaRegenerationUpgrade;
         expGainMultiplierUpgrade = profileData.expGainMultiplierUpgrade;

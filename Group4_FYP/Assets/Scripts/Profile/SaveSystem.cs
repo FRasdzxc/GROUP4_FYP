@@ -60,6 +60,7 @@ public class SaveSystem : MonoBehaviour
         hero.SetHealth(profile.health);
         hero.SetMaxHealth(profile.maxHealth);
         hero.SetHealthRegeneration(profile.healthRegeneration);
+        hero.SetDefense(profile.defense);
         hero.SetLevel(profile.level);
         hero.SetStoredExp(profile.storedExp);
         hero.SetStoredCoin(profile.storedCoin);
@@ -72,6 +73,7 @@ public class SaveSystem : MonoBehaviour
         orb.SetUsedOrbs(profile.usedOrbs);
         hero.SetMaxHealthUpgrade(profile.maxHealthUpgrade);
         hero.SetHealthRegenerationUpgrade(profile.healthRegenerationUpgrade);
+        hero.SetDefenseUpgrade(profile.defenseUpgrade);
         abilityManager.SetMaxManaUpgrade(profile.maxManaUpgrade);
         abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
         hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
@@ -82,6 +84,7 @@ public class SaveSystem : MonoBehaviour
         profile.health = hero.GetHealth();
         profile.maxHealth = hero.GetMaxHealth();
         profile.healthRegeneration = hero.GetHealthRegeneration();
+        profile.defense = hero.GetDefense();
         profile.level = hero.GetLevel();
         profile.storedExp = hero.GetStoredExp();
         profile.storedCoin = hero.GetStoredCoin();
@@ -94,6 +97,7 @@ public class SaveSystem : MonoBehaviour
         profile.usedOrbs = orb.GetUsedOrbs();
         profile.maxHealthUpgrade = hero.GetMaxHealthUpgrade();
         profile.healthRegenerationUpgrade = hero.GetHealthRegenerationUpgrade();
+        profile.defenseUpgrade = hero.GetDefenseUpgrade();
         profile.maxManaUpgrade = abilityManager.GetMaxManaUpgrade();
         profile.manaRegenerationUpgrade = abilityManager.GetManaRegenerationUpgrade();
         profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
