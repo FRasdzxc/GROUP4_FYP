@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ public class HUD : MonoBehaviour
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
     [SerializeField] private GameObject[] abilityCooldownText;
+
+    [SerializeField] private GameObject objectivePanel;
+    [SerializeField] private CanvasGroup objectivePanelCanvasGroup;
+    [SerializeField] private Text objectiveText;
 
     private float upgradedMaxMana;
     private int maxXP;
@@ -120,6 +125,14 @@ public class HUD : MonoBehaviour
         xpText.text = "Level " + level.ToString("n0") + " (" + storedExp.ToString("n0") + "/" + maxXP.ToString("n0") + " XP)";
     }
 
+    public void UpdateXP(int level, int storedExp, int requiredExp)
+    {
+        xpSlider.maxValue = requiredExp;
+
+        xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
+        xpText.text = String.Format("Level {0} ({1}/{2} XP)", level.ToString("n0"), storedExp.ToString("n0"), requiredExp.ToString("n0"));
+    }
+
     public async Task ShowHugeMessage(string message, Color color, float duration = 1.5f) // duration = seconds
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);
@@ -133,5 +146,19 @@ public class HUD : MonoBehaviour
         await Task.Delay((int)(duration * 1000));
         await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         hugeMessage.SetActive(false);
+    }
+
+    public void ShowObjective(string objective)
+    {
+        objectiveText.text = objective;
+
+        objectivePanel.SetActive(true);
+        objectivePanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart);
+    }
+
+    public async void HideObjective()
+    {
+        await objectivePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        objectivePanel.SetActive(false);
     }
 }

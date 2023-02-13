@@ -110,17 +110,17 @@ public class Hero : MonoBehaviour
             hud.UpdateHealth(health, upgradedMaxHealth);
 
             // xp
-            hud.UpdateXP(level, storedExp);
             requiredExp = (int)(level * 100 * 1.25);
             if(storedExp >= requiredExp)
             {
                 storedExp -= requiredExp;
-                hud.SetupXP(level, requiredExp);
+                //hud.SetupXP(level, requiredExp);
                 HeroPanel.Instance.UpdateLevel(level);
                 level++;
                 Orb.Instance.AddOrbs(1);
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
             }
+            hud.UpdateXP(level, storedExp, requiredExp);
 
             if (GameController.Instance.IsPlayingHostile())
             {
@@ -152,7 +152,8 @@ public class Hero : MonoBehaviour
 
         // xp
         requiredExp = (int)(level * 100 * 1.25);
-        hud.SetupXP(level, requiredExp);
+        //hud.SetupXP(level, requiredExp);
+        hud.UpdateXP(level, storedExp, requiredExp);
         HeroPanel.Instance.UpdateLevel(level);
         HeroPanel.Instance.UpdateCoin(storedCoin);
     }
@@ -360,7 +361,7 @@ public class Hero : MonoBehaviour
         {
             storedExp += exp;
         }
-        hud.UpdateXP(level, storedExp);
+        //hud.UpdateXP(level, storedExp);
     }
 
     public void AddExpGainMultiplierUpgrade(float value)

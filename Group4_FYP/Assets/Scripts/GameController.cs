@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
         public GameObject map;
         [Tooltip("Players cannot attack / take damage when Map Type is Peaceful")]
         public MapType mapType;
+        [TextArea(2, 5)]
+        public string objective;
     }
 
     [SerializeField] private MapEntry[] maps;
@@ -99,5 +101,11 @@ public class GameController : MonoBehaviour
         // spawn hero
         hero.Spawn();
         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, Color.white);
+
+        // set objective
+        if (maps[mapIndex].objective.Length > 0) // if objective is not empty
+        {
+            hud.ShowObjective(maps[mapIndex].objective);
+        }
     }
 }
