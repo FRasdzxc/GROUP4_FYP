@@ -13782,11 +13782,9 @@ GameObject:
   - component: {fileID: 5090246130794499717}
   - component: {fileID: 5090246130794499718}
   - component: {fileID: 5461171456818540308}
-  - component: {fileID: 4601915518058709899}
   - component: {fileID: 7502825688549925029}
   - component: {fileID: 5164690257240180271}
   - component: {fileID: 5626464308916716181}
-  - component: {fileID: 4105830557569079947}
   - component: {fileID: 1879950851838546367}
   - component: {fileID: 7982749462878118223}
   - component: {fileID: 3710203445276660926}
@@ -13902,22 +13900,6 @@ MonoBehaviour:
   heroNameText: {fileID: 8737073838629286760}
   heroLevelText: {fileID: 2241277765993093835}
   coinText: {fileID: 7965133430502307565}
---- !u!114 &4601915518058709899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090246130794499719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d6c04b1c1a18348b9357bf03057e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySlotType: 0
-  image: {fileID: 0}
-  stackSizeText: {fileID: 0}
-  useHint: {fileID: 0}
 --- !u!114 &7502825688549925029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13967,22 +13949,6 @@ MonoBehaviour:
   cameraShakeToggle: {fileID: 5090246129160334401}
   audioMixer: {fileID: 24100000, guid: dd6660b27c4939443813c1dab6bba880, type: 2}
   volumeSlider: {fileID: 5090246130397725031}
---- !u!114 &4105830557569079947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090246130794499719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d6c04b1c1a18348b9357bf03057e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventorySlotType: 0
-  image: {fileID: 0}
-  stackSizeText: {fileID: 0}
-  useHint: {fileID: 0}
 --- !u!114 &1879950851838546367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14115,6 +14081,7 @@ MonoBehaviour:
   leftPanelContentPanel: {fileID: 682827612490246544}
   rightPanelContentPanel: {fileID: 4356252182076679358}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
+  gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
 --- !u!1 &5090246130816896454
 GameObject:
   m_ObjectHideFlags: 0

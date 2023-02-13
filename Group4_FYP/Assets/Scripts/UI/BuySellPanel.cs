@@ -11,6 +11,7 @@ public class BuySellPanel : MonoBehaviour
     [SerializeField] private GameObject rightPanelContentPanel;
 
     [SerializeField] private GameObject inventorySlotPrefab;
+    [SerializeField] private GameItems gameItems;
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
