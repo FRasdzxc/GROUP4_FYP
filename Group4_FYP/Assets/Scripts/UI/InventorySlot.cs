@@ -59,18 +59,18 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         StackSize = stackSize;
     }
 
-    public bool AddItem(ItemData item)
-    {
-        if (this.item != null && this.item != item)
-            return false;
+    //public bool AddItem(ItemData item)
+    //{
+    //    if (this.item != null && this.item != item)
+    //        return false;
 
-        ItemData = item;
-        StackSize++;
-        Debug.Log($"{item.itemName}:{StackSize}");
+    //    ItemData = item;
+    //    StackSize++;
+    //    Debug.Log($"{item.itemName}:{StackSize}");
 
-        isOccupied = true;
-        return true;
-    }
+    //    isOccupied = true;
+    //    return true;
+    //}
 
     // public void ClearSlot()
     // {
@@ -170,6 +170,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
             {
                 DropItem();
+
+                if (Input.GetKey(KeyCode.LeftShift)) // drop all
+                {
+                    while (StackSize > 0)
+                    {
+                        DropItem();
+                    }
+                }
             }
         }
     }

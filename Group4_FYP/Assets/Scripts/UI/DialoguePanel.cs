@@ -8,6 +8,7 @@ public class DialoguePanel : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private Text headerText;
     [SerializeField] private Text dialogueText;
+    [SerializeField] private Text hintText;
     [SerializeField] private float textDisplayDelay;
 
     private bool panelIsShown;
@@ -35,11 +36,12 @@ public class DialoguePanel : MonoBehaviour
         isDisplayingDialogue = false; // preventive
     }
 
-    public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite)
+    public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite, string hint)
     {
         headerText.text = header;
         dialogueText.text = null;
         image.sprite = sprite;
+        hintText.text = hint;
 
         if (!panelIsShown)
         {

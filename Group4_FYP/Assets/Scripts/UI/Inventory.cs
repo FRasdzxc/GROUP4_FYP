@@ -26,7 +26,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    [SerializeField] private ItemData[] gameItems;
+    //[SerializeField] private ItemData[] gameItems;
+    [SerializeField] private GameItems gameItems;
     [SerializeField] private GameObject inventoryContentPanel;
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private int inventorySize = 25;
@@ -150,7 +151,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (InventoryEntry ie in items)
         {
-            foreach (ItemData i in gameItems)
+            foreach (ItemData i in gameItems.itemList)
             {
                 if (ie.itemID == i.itemID)
                 {

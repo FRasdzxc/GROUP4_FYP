@@ -584,7 +584,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8935147987458981478}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -603,4 +603,5 @@ MonoBehaviour:
   image: {fileID: 1975083015288752036}
   headerText: {fileID: 8694575753152118066}
   dialogueText: {fileID: 8881835422410698595}
+  hintText: {fileID: 8294530894442703646}
   textDisplayDelay: 0.01

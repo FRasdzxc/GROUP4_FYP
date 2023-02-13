@@ -26,10 +26,12 @@ public class DialogueController : MonoBehaviour
     private string[] dialogues;
     private DialogueEvents dialogueEvents;
     private Sprite sprite;
+    private string hint;
 
     private int currentDialogueIndex;
     private bool isInConversation;
     private bool canShowNextDialogue;
+    private bool canEndManually;
 
     private static DialogueController _instance;
     public static DialogueController Instance
@@ -54,14 +56,14 @@ public class DialogueController : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isInConversation)
         {
-            await NextDialogue();
-        }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                await NextDialogue();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Period))
-        {
-            if (isInConversation)
+            if (canEndManually && Input.GetKeyDown(KeyCode.Period))
             {
                 await dialoguePanel.HideDialoguePanel();
                 isInConversation = false;
@@ -70,7 +72,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEvents, Sprite sprite = null)
+    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEvents, Sprite sprite = null, bool canEndManually = true)
     {
         if (!isInConversation)
         {
@@ -92,6 +94,7 @@ public class DialogueController : MonoBehaviour
             this.header = header;
             this.dialogues = dialogues;
             this.dialogueEvents = dialogueEvents;
+            this.canEndManually = canEndManually;
 
             if (sprite)
             {
@@ -102,10 +105,17 @@ public class DialogueController : MonoBehaviour
                 sprite = defaultSprite;
             }
 
+            // can be written better?
+            hint = "[SPACE] Continue";
+            if (canEndManually)
+            {
+                hint += "; [.] End";
+            }
+
             currentDialogueIndex = 0;
             isInConversation = true;
 
-            await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite);
+            await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite, hint);
             canShowNextDialogue = true;
         }
     }
@@ -120,7 +130,7 @@ public class DialogueController : MonoBehaviour
 
             if (currentDialogueIndex < dialogues.Length)
             {
-                await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite);
+                await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite, hint);
             }
             else
             {

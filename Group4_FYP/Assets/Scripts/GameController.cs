@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private MapEntry[] maps;
 
+    [SerializeField] private string[] tutorialDialogues; // can be written better?
+
     private GameObject currentMap; // used as a clone
     private int currentMapIndex;
 

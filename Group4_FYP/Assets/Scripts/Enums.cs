@@ -13,3 +13,4 @@ public enum MapType { Peaceful, Hostile, Dungeon }
 public enum OrbUpgradeType { MaxHealth, HealthRegeneration, MaxMana, ManaRegeneration, ExpGainMultiplier, Defense };
 public enum TooltipHintType { None, Use, Drop, UseAll, DropAll };
 public enum NPCType { Normal, Merchant };
+public enum BuySellType { Buy, Sell };
