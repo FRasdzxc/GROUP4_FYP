@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -15,6 +16,8 @@ public class BuySellPanel : MonoBehaviour
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
+
+    private List<GameObject> inventorySlots;
 
     // Start is called before the first frame update
     void Start()
@@ -40,15 +43,9 @@ public class BuySellPanel : MonoBehaviour
         }
     }
 
-    private async void ShowBuySellPanel()
-    {
-        buySellPanel.SetActive(true);
+    
 
-        buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
-        await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    }
-
-    public void ShowBuySellPanel(BuySellType buySellType)
+    public async void ShowBuySellPanel(BuySellType buySellType)
     {
         if (buySellType == BuySellType.Buy) // buy items
         {
@@ -56,8 +53,13 @@ public class BuySellPanel : MonoBehaviour
         }
         else // sell items
         {
-            
+            SetupInventory();
         }
+
+        buySellPanel.SetActive(true);
+
+        buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
+        await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
     }
 
     private async void HideBuySellPanel()
@@ -66,5 +68,21 @@ public class BuySellPanel : MonoBehaviour
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanel.SetActive(false);
+    }
+
+    private void SetupInventory()
+    {
+        // destroy all the inventory slots
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            Destroy(inventorySlots[i]);
+        }
+        inventorySlots.Clear();
+
+        //foreach ()
+        //{
+        //    inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel.transform));
+        //    inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
+        //}
     }
 }
