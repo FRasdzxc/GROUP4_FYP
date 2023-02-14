@@ -8,8 +8,8 @@ public class BuySellPanel : MonoBehaviour
     [SerializeField] private GameObject buySellPanel;
     [SerializeField] private Text leftPanelTitle;
     [SerializeField] private Text rightPanelTitle;
-    [SerializeField] private GameObject leftPanelContentPanel;
-    [SerializeField] private GameObject rightPanelContentPanel;
+    [SerializeField] private Transform leftPanelContentPanel;
+    [SerializeField] private Transform rightPanelContentPanel;
 
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private GameItems gameItems;
@@ -25,8 +25,11 @@ public class BuySellPanel : MonoBehaviour
         buySellPanelCanvasGroup = buySellPanel.GetComponent<CanvasGroup>();
         buySellPanelRectTransform = buySellPanel.GetComponent<RectTransform>();
 
-        buySellPanelRectTransform.anchoredPosition = new Vector2(0, buySellPanelRectTransform.sizeDelta.y / 2);
+        buySellPanelCanvasGroup.alpha = 0;
+        buySellPanelRectTransform.anchoredPosition = new Vector2(0, -buySellPanelRectTransform.rect.height / 4);
         buySellPanel.SetActive(false);
+
+        inventorySlots = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -43,17 +46,20 @@ public class BuySellPanel : MonoBehaviour
         }
     }
 
-    
-
     public async void ShowBuySellPanel(BuySellType buySellType)
     {
+        ResetPanels();
+
         if (buySellType == BuySellType.Buy) // buy items
         {
-
+            leftPanelTitle.text = "Items";
+            rightPanelTitle.text = "Buying";
         }
         else // sell items
         {
-            SetupInventory();
+            SetupInventory(true);
+            leftPanelTitle.text = "Inventory";
+            rightPanelTitle.text = "Selling";
         }
 
         buySellPanel.SetActive(true);
@@ -62,16 +68,18 @@ public class BuySellPanel : MonoBehaviour
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
     }
 
-    private async void HideBuySellPanel()
+    public async void HideBuySellPanel()
     {
-        buySellPanelRectTransform.DOAnchorPosY(buySellPanelRectTransform.sizeDelta.y / 2, 0.25f).SetEase(Ease.OutQuart);
+        buySellPanelRectTransform.DOAnchorPosY(-buySellPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanel.SetActive(false);
     }
 
-    private void SetupInventory()
+    private void SetupInventory(bool isLeftPanel)
     {
+        List<InventoryEntry> items = Inventory.Instance.GetItems();
+
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
         {
@@ -79,10 +87,31 @@ public class BuySellPanel : MonoBehaviour
         }
         inventorySlots.Clear();
 
-        //foreach ()
-        //{
-        //    inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel.transform));
-        //    inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
-        //}
+        // add inventory slots
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (isLeftPanel)
+            {
+                inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
+            }
+            else
+            {
+                inventorySlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
+            }
+
+           inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, InventorySlotActionType.Transfer);
+        }
+    }
+
+    private void ResetPanels() // clean up left and right content panels by destroying all childs
+    {
+        foreach (Transform child in leftPanelContentPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in rightPanelContentPanel)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

@@ -38,7 +38,7 @@ public class HeroPanel : MonoBehaviour
 
         heroPanel.GetComponent<CanvasGroup>().alpha = 0;
         heroPanelRectTransform = heroPanel.GetComponent<RectTransform>();
-        heroPanelRectTransform.anchoredPosition = new Vector2(0, heroPanelRectTransform.sizeDelta.y / 2);
+        heroPanelRectTransform.anchoredPosition = new Vector2(0, -heroPanelRectTransform.rect.height / 4);
         heroPanel.SetActive(false);
 
         heroNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
@@ -90,7 +90,7 @@ public class HeroPanel : MonoBehaviour
         hudMainPanel.SetActive(true);
 
         hudMainPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart);
-        heroPanelRectTransform.DOAnchorPosY(heroPanelRectTransform.sizeDelta.y / 2, 0.25f).SetEase(Ease.OutQuart);
+        heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         heroPanel.SetActive(false);

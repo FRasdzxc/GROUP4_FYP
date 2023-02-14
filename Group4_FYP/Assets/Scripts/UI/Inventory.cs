@@ -2,30 +2,30 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+[Serializable]
+public class InventoryEntry
 {
-    [Serializable]
-    public struct InventoryEntry
+    public ItemData itemData;
+    public string itemID;
+    public int qty;
+
+    public InventoryEntry(ItemData itemData)
     {
-        public ItemData itemData;
-        public string itemID;
-        public int qty;
-
-        public InventoryEntry(ItemData itemData)
-        {
-            this.itemData = itemData;
-            this.itemID = itemData.itemID;
-            this.qty = 1;
-        }
-
-        public InventoryEntry(ItemData itemData, int qty)
-        {
-            this.itemData = itemData;
-            this.itemID = itemData.itemID;
-            this.qty = qty;
-        }
+        this.itemData = itemData;
+        this.itemID = itemData.itemID;
+        this.qty = 1;
     }
 
+    public InventoryEntry(ItemData itemData, int qty)
+    {
+        this.itemData = itemData;
+        this.itemID = itemData.itemID;
+        this.qty = qty;
+    }
+}
+
+public class Inventory : MonoBehaviour
+{
     //[SerializeField] private ItemData[] gameItems;
     [SerializeField] private GameItems gameItems;
     [SerializeField] private GameObject inventoryContentPanel;
@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
 
     private List<InventoryEntry> items = new List<InventoryEntry>();
     private List<GameObject> inventorySlots;
+    private bool messageIsShown;
 
     private static Inventory instance;
     public static Inventory Instance
@@ -73,6 +74,17 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemData item)
     {
+        if (items.Count >= inventorySize)
+        {
+            if (!messageIsShown)
+            {
+                Message.Instance.ShowMessage("Inventory is full!");
+                messageIsShown = true;
+            }
+            
+            return false;
+        }
+
         int slot = GetFreeEntry(item);
         if (slot == -1)
             items.Add(new InventoryEntry(item));
@@ -82,13 +94,7 @@ public class Inventory : MonoBehaviour
             int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
             items[slot] = new InventoryEntry(item, newQty);
         }
-
-        if (items.Count >= inventorySize)
-        {
-            Message.Instance.ShowMessage("Inventory is full!");
-            return false;
-        }
-
+        
         RefreshInventoryPanel();
 
         return true;
@@ -141,6 +147,12 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
+        }
+
+        // check if inventory isn't full
+        if (items.Count < inventorySlots.Count)
+        {
+            messageIsShown = false;
         }
     }
 

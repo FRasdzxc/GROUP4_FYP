@@ -31,7 +31,7 @@ public class DialogueController : MonoBehaviour
     private int currentDialogueIndex;
     private bool isInConversation;
     private bool canShowNextDialogue;
-    private bool canEndManually;
+    private bool canBeSkipped;
 
     private static DialogueController _instance;
     public static DialogueController Instance
@@ -63,16 +63,19 @@ public class DialogueController : MonoBehaviour
                 await NextDialogue();
             }
 
-            if (canEndManually && Input.GetKeyDown(KeyCode.Period))
+            if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
             {
                 await dialoguePanel.HideDialoguePanel();
+                dialogueEvents.Invoke();
+
+                currentDialogueIndex = 0;
                 isInConversation = false;
-                _ = Notification.Instance.ShowNotification("You ended the conversation");
+                _ = Notification.Instance.ShowNotification("You skipped the conversation");
             }
         }
     }
 
-    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEvents, Sprite sprite = null, bool canEndManually = true)
+    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEvents, Sprite sprite = null, bool canBeSkipped = true)
     {
         if (!isInConversation)
         {
@@ -94,7 +97,7 @@ public class DialogueController : MonoBehaviour
             this.header = header;
             this.dialogues = dialogues;
             this.dialogueEvents = dialogueEvents;
-            this.canEndManually = canEndManually;
+            this.canBeSkipped = canBeSkipped;
 
             if (sprite)
             {
@@ -107,9 +110,9 @@ public class DialogueController : MonoBehaviour
 
             // can be written better?
             hint = "[SPACE] Continue";
-            if (canEndManually)
+            if (canBeSkipped)
             {
-                hint += "; [.] End";
+                hint += "; [.] Skip";
             }
 
             currentDialogueIndex = 0;

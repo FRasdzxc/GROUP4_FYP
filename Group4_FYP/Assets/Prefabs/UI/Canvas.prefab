@@ -402,7 +402,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4815586858261153831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3422485709956159012}
+        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
+        m_MethodName: HideBuySellPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &632990160611540744
 GameObject:
   m_ObjectHideFlags: 0
@@ -14078,8 +14090,8 @@ MonoBehaviour:
   buySellPanel: {fileID: 3443452719384813029}
   leftPanelTitle: {fileID: 654650507430540828}
   rightPanelTitle: {fileID: 3219829827697011109}
-  leftPanelContentPanel: {fileID: 682827612490246544}
-  rightPanelContentPanel: {fileID: 4356252182076679358}
+  leftPanelContentPanel: {fileID: 7014338648052057834}
+  rightPanelContentPanel: {fileID: 3187864746833161639}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
   gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
 --- !u!1 &5090246130816896454

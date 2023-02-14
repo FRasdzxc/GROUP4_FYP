@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private string header;
     [SerializeField] [TextArea(2, 5)] private string[] dialogues;
     [SerializeField] private DialogueEvents dialogueOnCompleteEvents;
-    [SerializeField] private bool canEndManually = true;
+    [SerializeField] private bool canBeSkipped = true;
 
     [SerializeField] private bool triggerOnStart;
     [SerializeField] private float triggerDistance = 2.5f;
@@ -68,6 +68,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public async void Trigger()
     {
-        await DialogueController.Instance.ShowDialogue(header, dialogues, dialogueOnCompleteEvents, sprite, canEndManually);
+        await DialogueController.Instance.ShowDialogue(header, dialogues, dialogueOnCompleteEvents, sprite, canBeSkipped);
     }
 }

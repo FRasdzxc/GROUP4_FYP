@@ -25,7 +25,7 @@ public class ProfileData
     public float manaRegenerationUpgrade;
     public float expGainMultiplierUpgrade;
     public int map;
-    public List<Inventory.InventoryEntry> inventory;
+    public List<InventoryEntry> inventory;
 
     public ProfileData() // profile for test scenes
     {
@@ -50,7 +50,7 @@ public class ProfileData
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
         map = 0;
-        inventory = new List<Inventory.InventoryEntry>();
+        inventory = new List<InventoryEntry>();
     }
 
     public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats) // used for creating a new profile
@@ -77,7 +77,7 @@ public class ProfileData
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
         map = 0;
-        inventory = new List<Inventory.InventoryEntry>();
+        inventory = new List<InventoryEntry>();
     }
 
     public ProfileData(string newProfileName, ProfileData profileData) // used for moving data when updating profiles

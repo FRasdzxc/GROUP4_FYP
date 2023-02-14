@@ -7,7 +7,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public const int kMaxStackSize = 99;
 
-    [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item?
+    [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item? // not used?
     [SerializeField] private Image image;
     [SerializeField] private Text stackSizeText;
     [SerializeField] private GameObject useHint;
@@ -39,7 +39,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    private bool isOccupied = false;
+    // private bool isOccupied = false;
+    private InventorySlotActionType inventorySlotActionType;
 
     // Update is called once per frame
     void Update()
@@ -47,7 +48,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
     }
 
-    public void Configure(ItemData item, int stackSize)
+    public void Configure(ItemData item, int stackSize, InventorySlotActionType inventorySlotActionType = InventorySlotActionType.Use)
     {
         if (this.item != null && this.item != item)
         {
@@ -57,6 +58,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         ItemData = item;
         StackSize = stackSize;
+        this.inventorySlotActionType = inventorySlotActionType;
     }
 
     //public bool AddItem(ItemData item)
