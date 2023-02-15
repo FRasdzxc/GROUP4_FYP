@@ -28,9 +28,9 @@ public class Inventory : MonoBehaviour
 {
     //[SerializeField] private ItemData[] gameItems;
     [SerializeField] private GameItems gameItems;
-    [SerializeField] private GameObject inventoryContentPanel;
+    [SerializeField] private Transform inventoryContentPanelTransform;
     [SerializeField] private GameObject inventorySlotPrefab;
-    [SerializeField] private int inventorySize = 25;
+    [SerializeField] private int inventorySize = 32;
 
     private List<InventoryEntry> items = new List<InventoryEntry>();
     private List<GameObject> inventorySlots;
@@ -128,7 +128,7 @@ public class Inventory : MonoBehaviour
     //    }
     //}
 
-    public void RefreshInventoryPanel()
+    public void RefreshInventoryPanel(Transform contentPanelTransform, InventoryMode inventoryMode = InventoryMode.Normal)
     {
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
@@ -140,13 +140,13 @@ public class Inventory : MonoBehaviour
         // add inventory slots
         for (int i = 0; i < inventorySize; i++)
         {
-            inventorySlots.Add(Instantiate(inventorySlotPrefab, inventoryContentPanel.transform));
+            inventorySlots.Add(Instantiate(inventorySlotPrefab, contentPanelTransform));
         }
 
         // assign items to inventory slots
         for (int i = 0; i < items.Count; i++)
         {
-            inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
+            inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, inventoryMode);
         }
 
         // check if inventory isn't full
@@ -154,6 +154,11 @@ public class Inventory : MonoBehaviour
         {
             messageIsShown = false;
         }
+    }
+
+    public void RefreshInventoryPanel(InventoryMode inventoryMode = InventoryMode.Normal)
+    {
+        RefreshInventoryPanel(inventoryContentPanelTransform, inventoryMode);
     }
 
     /* DropItem function? */
@@ -177,6 +182,11 @@ public class Inventory : MonoBehaviour
     public List<InventoryEntry> GetItems()
     {
         return items;
+    }
+
+    public int GetInventorySize()
+    {
+        return inventorySize;
     }
 
     // private bool FindItem(ItemData item)

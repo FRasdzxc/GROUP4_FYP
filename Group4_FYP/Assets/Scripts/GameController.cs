@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     private Hero hero;
     private MaskingCanvas maskingCanvas;
     private HUD hud;
+    private KeyCode? previousKeyPressed;
 
     private static GameController instance;
     public static GameController Instance
@@ -85,6 +86,23 @@ public class GameController : MonoBehaviour
     public bool IsPlayingHostile()
     {
         return (gameState == GameState.Playing && maps[currentMapIndex].mapType == MapType.Hostile);
+    }
+
+    public bool GetKeyPressed(KeyCode keyCode)
+    {
+        if (previousKeyPressed == null)
+        {
+            return true;
+        }
+
+        if (keyCode == previousKeyPressed || keyCode == KeyCode.Escape)
+        {
+            previousKeyPressed = null;
+            return true;
+            
+        }
+        
+        return false;
     }
 
     private void LoadMap(int mapIndex)

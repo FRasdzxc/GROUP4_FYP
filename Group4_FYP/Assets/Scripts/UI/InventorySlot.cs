@@ -10,7 +10,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private InventorySlotType inventorySlotType; // for weapon/armor/ability inventory slots that only accept one type of item? // not used?
     [SerializeField] private Image image;
     [SerializeField] private Text stackSizeText;
-    [SerializeField] private GameObject useHint;
+    [SerializeField] private GameObject hint;
+    [SerializeField] private Text hintText;
 
     private int _stackSize = 0;
     public int StackSize
@@ -40,15 +41,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     // private bool isOccupied = false;
-    private InventorySlotActionType inventorySlotActionType;
+    private InventoryMode inventoryMode;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Configure(ItemData item, int stackSize, InventorySlotActionType inventorySlotActionType = InventorySlotActionType.Use)
+    public void Configure(ItemData item, int stackSize, InventoryMode inventoryMode = InventoryMode.Normal)
     {
         if (this.item != null && this.item != item)
         {
@@ -58,7 +53,16 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         ItemData = item;
         StackSize = stackSize;
-        this.inventorySlotActionType = inventorySlotActionType;
+        this.inventoryMode = inventoryMode;
+
+        if (inventoryMode == InventoryMode.Normal)
+        {
+            hintText.text = "Use";
+        }
+        else
+        {
+            hintText.text = "Transfer";
+        }
     }
 
     //public bool AddItem(ItemData item)
@@ -137,7 +141,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (item && item.isUsable)
             {
-                useHint.SetActive(true);
+                hint.SetActive(true);
             }
         }
     }
@@ -149,7 +153,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             Debug.Log("cursor exits inventory slot");
             Tooltip.Instance.HideTooltip();
 
-            useHint.SetActive(false);
+            hint.SetActive(false);
         }        
     }
 

@@ -47,7 +47,8 @@ public class HeroPanel : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        // if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && GameController.Instance.GetKeyPressed(KeyCode.Q))
         {
             if (isOpened)
             {

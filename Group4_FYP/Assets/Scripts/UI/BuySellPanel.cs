@@ -36,11 +36,11 @@ public class BuySellPanel : MonoBehaviour
     void Update()
     {
         // test only
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && GameController.Instance.GetKeyPressed(KeyCode.R))
         {
             ShowBuySellPanel(BuySellType.Sell);
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && GameController.Instance.GetKeyPressed(KeyCode.T))
         {
             HideBuySellPanel();
         }
@@ -57,7 +57,8 @@ public class BuySellPanel : MonoBehaviour
         }
         else // sell items
         {
-            SetupInventory(true);
+            // SetupInventory(true);
+            Inventory.Instance.RefreshInventoryPanel(leftPanelContentPanel, InventoryMode.Transfer);
             leftPanelTitle.text = "Inventory";
             rightPanelTitle.text = "Selling";
         }
@@ -76,32 +77,32 @@ public class BuySellPanel : MonoBehaviour
         buySellPanel.SetActive(false);
     }
 
-    private void SetupInventory(bool isLeftPanel)
-    {
-        List<InventoryEntry> items = Inventory.Instance.GetItems();
+    // private void SetupInventory(bool isLeftPanel)
+    // {
+    //     List<InventoryEntry> items = Inventory.Instance.GetItems();
 
-        // destroy all the inventory slots
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            Destroy(inventorySlots[i]);
-        }
-        inventorySlots.Clear();
+    //     // destroy all the inventory slots
+    //     for (int i = 0; i < inventorySlots.Count; i++)
+    //     {
+    //         Destroy(inventorySlots[i]);
+    //     }
+    //     inventorySlots.Clear();
 
-        // add inventory slots
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (isLeftPanel)
-            {
-                inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
-            }
-            else
-            {
-                inventorySlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
-            }
+    //     // add inventory slots
+    //     for (int i = 0; i < items.Count; i++)
+    //     {
+    //         if (isLeftPanel)
+    //         {
+    //             inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
+    //         }
+    //         else
+    //         {
+    //             inventorySlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
+    //         }
 
-           inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, InventorySlotActionType.Transfer);
-        }
-    }
+    //        inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
+    //     }
+    // }
 
     private void ResetPanels() // clean up left and right content panels by destroying all childs
     {

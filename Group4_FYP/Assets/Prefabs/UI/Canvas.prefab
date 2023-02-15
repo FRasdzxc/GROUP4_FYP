@@ -14039,7 +14039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
-  inventoryContentPanel: {fileID: 9176095636797844662}
+  inventoryContentPanelTransform: {fileID: 8015015661898971408}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
   inventorySize: 32
 --- !u!114 &5650897970085270006
