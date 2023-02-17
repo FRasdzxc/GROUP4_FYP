@@ -13912,6 +13912,7 @@ MonoBehaviour:
   heroNameText: {fileID: 8737073838629286760}
   heroLevelText: {fileID: 2241277765993093835}
   coinText: {fileID: 7965133430502307565}
+  panelOverridable: 1
 --- !u!114 &7502825688549925029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14094,6 +14095,7 @@ MonoBehaviour:
   rightPanelContentPanel: {fileID: 3187864746833161639}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
   gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
+  panelOverridable: 0
 --- !u!1 &5090246130816896454
 GameObject:
   m_ObjectHideFlags: 0

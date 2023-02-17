@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4568483801158605592}
   - component: {fileID: 4102428676351295755}
   - component: {fileID: 1622985137029820251}
+  - component: {fileID: 1522238214874603051}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -136,3 +137,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTestScene: 0
   autosaveDuration: 0
+--- !u!114 &1522238214874603051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346567411834790857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cd4af8619de66418d75bcac9b16343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

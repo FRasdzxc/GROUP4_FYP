@@ -29,6 +29,20 @@ public class HUD : MonoBehaviour
     private float upgradedMaxMana;
     private int maxXP;
 
+    private static HUD instance;
+    public static HUD Instance
+    {
+        get => instance;
+    }
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

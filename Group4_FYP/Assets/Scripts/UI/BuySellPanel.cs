@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class BuySellPanel : MonoBehaviour
+public class BuySellPanel : MonoBehaviour, IPanelConflictable
 {
     [SerializeField] private GameObject buySellPanel;
     [SerializeField] private Text leftPanelTitle;
@@ -13,11 +13,27 @@ public class BuySellPanel : MonoBehaviour
 
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private GameItems gameItems;
+    [SerializeField] private bool panelOverridable;
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
+    private bool isOpened;
 
     private List<GameObject> inventorySlots;
+
+    private static BuySellPanel instance;
+    public static BuySellPanel Instance
+    {
+        get => instance;
+    }
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,18 +52,29 @@ public class BuySellPanel : MonoBehaviour
     void Update()
     {
         // test only
-        if (Input.GetKeyDown(KeyCode.R) && GameController.Instance.GetKeyPressed(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
+        // if (Input.GetKeyDown(KeyCode.R) && InputManager.Instance.GetKeyDown(KeyCode.R))
         {
-            ShowBuySellPanel(BuySellType.Sell);
-        }
-        if (Input.GetKeyDown(KeyCode.T) && GameController.Instance.GetKeyPressed(KeyCode.T))
-        {
-            HideBuySellPanel();
+            if (!isOpened)
+            {
+                ShowBuySellPanel(BuySellType.Sell);
+            }
+            else
+            {
+                HideBuySellPanel();
+            }
+
+            // isOpened = !isOpened;
         }
     }
 
     public async void ShowBuySellPanel(BuySellType buySellType)
     {
+        // if (!CloseConflictingPanels())
+        // {
+        //     return;
+        // }
+
         ResetPanels();
 
         if (buySellType == BuySellType.Buy) // buy items
@@ -67,6 +94,8 @@ public class BuySellPanel : MonoBehaviour
 
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+
+        isOpened = true;
     }
 
     public async void HideBuySellPanel()
@@ -75,6 +104,8 @@ public class BuySellPanel : MonoBehaviour
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanel.SetActive(false);
+
+        isOpened = false;
     }
 
     // private void SetupInventory(bool isLeftPanel)
@@ -103,6 +134,22 @@ public class BuySellPanel : MonoBehaviour
     //        inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
     //     }
     // }
+
+    public bool CloseConflictingPanels()
+    {
+        if (HeroPanel.Instance.IsPanelOverridable())
+        {
+            _ = HeroPanel.Instance.HideHeroPanel();
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsPanelOverridable()
+    {
+        return panelOverridable;
+    }
 
     private void ResetPanels() // clean up left and right content panels by destroying all childs
     {

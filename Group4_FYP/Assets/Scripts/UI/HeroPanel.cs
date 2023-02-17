@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class HeroPanel : MonoBehaviour
+public class HeroPanel : MonoBehaviour, IPanelConflictable
 {
     [SerializeField] private GameObject hudMainPanel;
     [SerializeField] private GameObject heroPanel;
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
     [SerializeField] private Text coinText;
+    [SerializeField] private bool panelOverridable;
 
     private bool isOpened;
     private RectTransform heroPanelRectTransform;
@@ -47,8 +48,9 @@ public class HeroPanel : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Q))
-        if (Input.GetKeyDown(KeyCode.Q) && GameController.Instance.GetKeyPressed(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
+        // if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
+        // if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
         {
             if (isOpened)
             {
@@ -59,7 +61,7 @@ public class HeroPanel : MonoBehaviour
                 await ShowHeroPanel();
             }
 
-            isOpened = !isOpened;
+            // isOpened = !isOpened;
         }
     }
 
@@ -73,8 +75,13 @@ public class HeroPanel : MonoBehaviour
         heroLevelText.text = "Level " + level.ToString("n0");
     }
 
-    private async Task ShowHeroPanel()
+    public async Task ShowHeroPanel()
     {
+        // if (!CloseConflictingPanels())
+        // {
+        //     return;
+        // }
+
         Inventory.Instance.RefreshInventoryPanel();
 
         heroPanel.SetActive(true);
@@ -84,9 +91,11 @@ public class HeroPanel : MonoBehaviour
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         hudMainPanel.SetActive(false);
+
+        isOpened = true;
     }
 
-    private async Task HideHeroPanel()
+    public async Task HideHeroPanel()
     {
         hudMainPanel.SetActive(true);
 
@@ -95,5 +104,23 @@ public class HeroPanel : MonoBehaviour
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         heroPanel.SetActive(false);
+
+        isOpened = false;
+    }
+
+    public bool CloseConflictingPanels()
+    {
+        if (BuySellPanel.Instance.IsPanelOverridable())
+        {
+            BuySellPanel.Instance.HideBuySellPanel();
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsPanelOverridable()
+    {
+        return panelOverridable;
     }
 }
