@@ -271,8 +271,8 @@ public class MobEditor : Editor
                 totalWeight += loot.OneItemFromList[j].Weight;
             }
         }
-        if (0 < loot.GuaranteedLootTable.Length) 
-        { guaranteedHeight += 10; }
+        //if (0 < loot.GuaranteedLootTable.Length) 
+        //{ guaranteedHeight += 10; }
         /* Guaranteed */
         for (int i = 0; i < loot.GuaranteedLootTable.Length; i++)
         {
