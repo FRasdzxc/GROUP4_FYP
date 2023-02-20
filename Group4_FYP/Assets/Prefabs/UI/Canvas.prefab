@@ -2556,6 +2556,7 @@ GameObject:
   - component: {fileID: 8673308021756646352}
   - component: {fileID: 3909187946859033235}
   - component: {fileID: 4770235551606037296}
+  - component: {fileID: 6847564098070993616}
   m_Layer: 5
   m_Name: ApplyAllButton
   m_TagString: Untagged
@@ -2685,6 +2686,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &6847564098070993616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899452709675656289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c611548a23dee1498fe8af9ab23acf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Transfer All
+  description: Transfer all items to the right
+  attributes: []
+  hints: 06000000
 --- !u!1 &1953635296366912308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,7 +3544,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Title
+  m_Text: Selling
 --- !u!1 &3136002021625714370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,7 +5613,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4697425606764864378}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3422485709956159012}
+        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
+        m_MethodName: Confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4920478106425513915
 GameObject:
   m_ObjectHideFlags: 0
@@ -14453,6 +14482,7 @@ MonoBehaviour:
   rightPanelTitle: {fileID: 3219829827697011109}
   leftPanelContentPanel: {fileID: 7014338648052057834}
   rightPanelContentPanel: {fileID: 3187864746833161639}
+  confirmButtonText: {fileID: 5772309273547399352}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
   gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
   panelOverridable: 0
@@ -16604,6 +16634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+  m_Text: Inventory
 --- !u!1 &6457884763583299548
 GameObject:
   m_ObjectHideFlags: 0
@@ -16865,7 +16896,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy
+  m_Text: Sell
 --- !u!1 &6839441843934170630
 GameObject:
   m_ObjectHideFlags: 0
@@ -16915,6 +16946,7 @@ GameObject:
   - component: {fileID: 5832923517400177129}
   - component: {fileID: 4808482681842268073}
   - component: {fileID: 778209789705266831}
+  - component: {fileID: 4158719108464995985}
   m_Layer: 5
   m_Name: RevertAllButton
   m_TagString: Untagged
@@ -17090,6 +17122,7 @@ CanvasRenderer:
   m_GameObject: {fileID: 6927670930456086249}
   m_CullTransparentMesh: 1
 --- !u!114 &3325132135693672965
+--- !u!114 &4158719108464995985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17119,6 +17152,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+  m_GameObject: {fileID: 6867090102430375507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c611548a23dee1498fe8af9ab23acf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Transfer All
+  description: Transfer all items to the left
+  attributes: []
+  hints: 06000000
 --- !u!1 &7014143102720447987
 GameObject:
   m_ObjectHideFlags: 0

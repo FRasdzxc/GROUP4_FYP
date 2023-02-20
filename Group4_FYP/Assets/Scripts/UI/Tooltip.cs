@@ -147,6 +147,12 @@ public class Tooltip : MonoBehaviour
                     case TooltipHintType.DropAll:
                         sb.AppendLine("[LShift + RMB] - Drop All");
                         break;
+                    case TooltipHintType.Transfer:
+                        sb.AppendLine("[LMB] - Transfer");
+                        break;
+                    case TooltipHintType.TransferAll:
+                        sb.AppendLine("[LMB] - Transfer All");
+                        break;
                 }
             }
             hintText.text = sb.ToString().Substring(0, sb.Length - 1); // remove last blank line

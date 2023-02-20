@@ -24,7 +24,8 @@ public class DialogueController : MonoBehaviour
 
     private string header;
     private string[] dialogues;
-    private DialogueEvents dialogueEvents;
+    private DialogueEvents dialogueStartEvents;
+    private DialogueEvents dialogueEndEvents;
     private Sprite sprite;
     private string hint;
 
@@ -66,7 +67,7 @@ public class DialogueController : MonoBehaviour
             if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
             {
                 await dialoguePanel.HideDialoguePanel();
-                dialogueEvents.Invoke();
+                dialogueEndEvents.Invoke();
 
                 currentDialogueIndex = 0;
                 isInConversation = false;
@@ -75,7 +76,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEvents, Sprite sprite = null, bool canBeSkipped = true)
+    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
     {
         if (!isInConversation)
         {
@@ -96,7 +97,7 @@ public class DialogueController : MonoBehaviour
 
             this.header = header;
             this.dialogues = dialogues;
-            this.dialogueEvents = dialogueEvents;
+            this.dialogueEndEvents = dialogueEndEvents;
             this.canBeSkipped = canBeSkipped;
 
             if (sprite)
@@ -138,7 +139,7 @@ public class DialogueController : MonoBehaviour
             else
             {
                 await dialoguePanel.HideDialoguePanel();
-                dialogueEvents.Invoke();
+                dialogueEndEvents.Invoke();
 
                 currentDialogueIndex = 0;
                 isInConversation = false;

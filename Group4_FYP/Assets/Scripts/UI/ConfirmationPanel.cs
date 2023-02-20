@@ -37,12 +37,12 @@ public class ConfirmationPanel : MonoBehaviour
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
 
-    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant)
+    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
     {
         ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant);
     }
 
-    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant)
+    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false)
     {
         titleText.text = title;
         messageText.text = message;

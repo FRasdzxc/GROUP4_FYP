@@ -126,16 +126,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             List<string> attributes = new List<string>();
             List<TooltipHintType> hints = new List<TooltipHintType>();
-            if (ItemData is ConsumableItemData)
+
+            if (inventoryMode == InventoryMode.Normal)
             {
-                var consumable = item as ConsumableItemData;
-                foreach (var e in consumable.effects)
+                if (ItemData is ConsumableItemData)
                 {
-                    attributes.Add(e.ToString());
+                    var consumable = item as ConsumableItemData;
+                    foreach (var e in consumable.effects)
+                    {
+                        attributes.Add(e.ToString());
+                    }
+                    hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
                 }
-                hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
+                hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
             }
-            hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
+            else
+            {
+                hints.Add(TooltipHintType.Transfer);
+            }
 
             Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
 
