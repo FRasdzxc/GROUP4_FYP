@@ -20,6 +20,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     private bool isOpened;
 
     private List<GameObject> inventorySlots;
+    private List<ItemData> transferredItems;
 
     private static BuySellPanel instance;
     public static BuySellPanel Instance
@@ -46,6 +47,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         buySellPanel.SetActive(false);
 
         inventorySlots = new List<GameObject>();
+        transferredItems = new List<ItemData>();
     }
 
     // Update is called once per frame
@@ -70,10 +72,10 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
     public async void ShowBuySellPanel(BuySellType buySellType)
     {
-        // if (!CloseConflictingPanels())
-        // {
-        //     return;
-        // }
+        if (!HideConflictingPanels())
+        {
+            return;
+        }
 
         ResetPanels();
 
@@ -100,6 +102,8 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
     public async void HideBuySellPanel()
     {
+        transferredItems.Clear();
+
         buySellPanelRectTransform.DOAnchorPosY(-buySellPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
@@ -135,11 +139,30 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     //     }
     // }
 
-    public bool CloseConflictingPanels()
+    public void TransferItem(ItemData item/*, BuySellType buySellType*/)
     {
+        Debug.Log("BuySellPanel: TransferItem()");
+
+        transferredItems.Add(item);
+
+        // check buyselltype to determine which panel to transfer to
+    }
+
+    public void Confirm()
+    {
+
+    }
+
+    public bool HideConflictingPanels()
+    {
+        if (!HeroPanel.Instance.IsPanelActive())
+        {
+            return true;
+        }
+
         if (HeroPanel.Instance.IsPanelOverridable())
         {
-            _ = HeroPanel.Instance.HideHeroPanel();
+            HeroPanel.Instance.HideHeroPanel();
             return true;
         }
 
@@ -149,6 +172,11 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     public bool IsPanelOverridable()
     {
         return panelOverridable;
+    }
+
+    public bool IsPanelActive()
+    {
+        return buySellPanel.activeSelf;
     }
 
     private void ResetPanels() // clean up left and right content panels by destroying all childs

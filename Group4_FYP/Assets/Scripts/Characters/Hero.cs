@@ -115,8 +115,8 @@ public class Hero : MonoBehaviour
             {
                 storedExp -= requiredExp;
                 //hud.SetupXP(level, requiredExp);
-                HeroPanel.Instance.UpdateLevel(level);
                 level++;
+                HeroPanel.Instance.UpdateLevel(level);
                 Orb.Instance.AddOrbs(1);
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
             }

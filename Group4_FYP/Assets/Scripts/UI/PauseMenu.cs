@@ -55,9 +55,11 @@ public class PauseMenu : MonoBehaviour
     {
         GameController.Instance.SetGameState(GameState.Paused);
 
+        HUD.Instance.HideHUD();
+
         pauseMenuBackground.SetActive(true);
         pauseMenuPanel.SetActive(true);
-        hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
+        // hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0.5f, 0.25f).SetEase(Ease.OutQuart);
         sideMenuPanel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 0.25f).SetEase(Ease.OutQuart);
@@ -67,7 +69,7 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
-        hudPanel.SetActive(false);
+        // hudPanel.SetActive(false);
 
         isOpened = true;
     }
@@ -78,8 +80,9 @@ public class PauseMenu : MonoBehaviour
 
         if (bShowHudPanel)
         {
-            hudPanel.SetActive(true);
-            hudPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f);
+            // hudPanel.SetActive(true);
+            // hudPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f);
+            HUD.Instance.ShowHUD();
         }
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
@@ -90,11 +93,11 @@ public class PauseMenu : MonoBehaviour
 
         pauseMenuBackground.SetActive(false);
         pauseMenuPanel.SetActive(false);
-        if (bShowHudPanel)
-        {
-            hudPanel.SetActive(true);
-            hudPanel.GetComponent<CanvasGroup>().alpha = 1;
-        }
+        // if (bShowHudPanel)
+        // {
+        //     hudPanel.SetActive(true);
+        //     hudPanel.GetComponent<CanvasGroup>().alpha = 1;
+        // }
 
         settingsMenu.SaveSettings();
         GameController.Instance.SetGameState(GameState.Playing);

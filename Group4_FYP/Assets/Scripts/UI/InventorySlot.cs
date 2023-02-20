@@ -139,7 +139,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
 
-            if (item && item.isUsable)
+            if (inventoryMode == InventoryMode.Normal)
+            {
+                if (item && item.isUsable)
+                {
+                    hint.SetActive(true);
+                }
+            }
+            else // transfer
             {
                 hint.SetActive(true);
             }
@@ -161,28 +168,38 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (eventData.pointerClick == gameObject && item)
         {
-            if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
+            if (inventoryMode == InventoryMode.Normal) // use and drop items
             {
-                UseItem();
-
-                if (Input.GetKey(KeyCode.LeftShift)) // use all
+                if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
                 {
-                    while (StackSize > 0)
+                    UseItem();
+
+                    if (Input.GetKey(KeyCode.LeftShift)) // use all
                     {
-                        UseItem();
+                        while (StackSize > 0)
+                        {
+                            UseItem();
+                        }
+                    }
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+                {
+                    DropItem();
+
+                    if (Input.GetKey(KeyCode.LeftShift)) // drop all
+                    {
+                        while (StackSize > 0)
+                        {
+                            DropItem();
+                        }
                     }
                 }
             }
-            else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+            else // transfer
             {
-                DropItem();
-
-                if (Input.GetKey(KeyCode.LeftShift)) // drop all
+                if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    while (StackSize > 0)
-                    {
-                        DropItem();
-                    }
+                    BuySellPanel.Instance.TransferItem(ItemData);
                 }
             }
         }

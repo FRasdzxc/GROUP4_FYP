@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class HeroPanel : MonoBehaviour, IPanelConflictable
 {
-    [SerializeField] private GameObject hudMainPanel;
+    // [SerializeField] private GameObject hudMainPanel;
     [SerializeField] private GameObject heroPanel;
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
@@ -46,7 +46,7 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         // if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
@@ -54,11 +54,11 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
         {
             if (isOpened)
             {
-                await HideHeroPanel();
+                HideHeroPanel();
             }
             else
             {
-                await ShowHeroPanel();
+                ShowHeroPanel();
             }
 
             // isOpened = !isOpened;
@@ -75,41 +75,40 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
         heroLevelText.text = "Level " + level.ToString("n0");
     }
 
-    public async Task ShowHeroPanel()
+    public async void ShowHeroPanel()
     {
-        // if (!CloseConflictingPanels())
-        // {
-        //     return;
-        // }
+        if (!HideConflictingPanels())
+        {
+            return;
+        }
 
         Inventory.Instance.RefreshInventoryPanel();
 
+        HUD.Instance.HideHUDMain();
         heroPanel.SetActive(true);
-
-        hudMainPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
         heroPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-
-        hudMainPanel.SetActive(false);
 
         isOpened = true;
     }
 
-    public async Task HideHeroPanel()
+    public async void HideHeroPanel()
     {
-        hudMainPanel.SetActive(true);
-
-        hudMainPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart);
+        HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-
         heroPanel.SetActive(false);
 
         isOpened = false;
     }
 
-    public bool CloseConflictingPanels()
+    public bool HideConflictingPanels()
     {
+        if (!BuySellPanel.Instance.IsPanelActive())
+        {
+            return true;
+        }
+
         if (BuySellPanel.Instance.IsPanelOverridable())
         {
             BuySellPanel.Instance.HideBuySellPanel();
@@ -122,5 +121,10 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
     public bool IsPanelOverridable()
     {
         return panelOverridable;
+    }
+
+    public bool IsPanelActive()
+    {
+        return heroPanel.activeSelf;
     }
 }

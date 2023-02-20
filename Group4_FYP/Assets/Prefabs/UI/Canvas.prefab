@@ -13999,6 +13999,8 @@ MonoBehaviour:
   objectivePanel: {fileID: 5674464578092708588}
   objectivePanelCanvasGroup: {fileID: 3002401998693027932}
   objectiveText: {fileID: 7105619552045715431}
+  hudPanel: {fileID: 5090246129879329908}
+  mainPanel: {fileID: 3811130437082772970}
 --- !u!114 &7982749462878118223
 MonoBehaviour:
   m_ObjectHideFlags: 0

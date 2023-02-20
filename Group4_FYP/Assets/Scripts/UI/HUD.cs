@@ -26,6 +26,9 @@ public class HUD : MonoBehaviour
     [SerializeField] private CanvasGroup objectivePanelCanvasGroup;
     [SerializeField] private Text objectiveText;
 
+    [SerializeField] private GameObject hudPanel;
+    [SerializeField] private GameObject mainPanel;
+
     private float upgradedMaxMana;
     private int maxXP;
 
@@ -174,5 +177,33 @@ public class HUD : MonoBehaviour
     {
         await objectivePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         objectivePanel.SetActive(false);
+    }
+
+    public async void ShowHUD()
+    {
+        hudPanel.SetActive(true);
+        await hudPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        hudPanel.GetComponent<CanvasGroup>().alpha = 1f;
+    }
+
+    public async void HideHUD()
+    {
+        await hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        hudPanel.GetComponent<CanvasGroup>().alpha = 0f;
+        hudPanel.SetActive(false);
+    }
+
+    public async void ShowHUDMain()
+    {
+        mainPanel.SetActive(true);
+        await mainPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        mainPanel.GetComponent<CanvasGroup>().alpha = 1f;
+    }
+
+    public async void HideHUDMain()
+    {
+        await mainPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        mainPanel.GetComponent<CanvasGroup>().alpha = 0f;
+        mainPanel.SetActive(false);   
     }
 }
