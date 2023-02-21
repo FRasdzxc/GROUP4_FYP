@@ -194,7 +194,7 @@ public class Orb : MonoBehaviour
                     AbilityManager.Instance.SetManaRegenerationUpgrade(0);
                     Hero.Instance.SetExpGainMultiplierUpgrade(1);
 
-                    _ = Notification.Instance.ShowNotification("Successfully reset Orb upgrades");
+                    _ = Notification.Instance.ShowNotification("Reset Orb upgrades");
                 }
                 else
                 {

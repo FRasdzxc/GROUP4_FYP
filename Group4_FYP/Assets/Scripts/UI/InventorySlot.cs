@@ -61,10 +61,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 hintText.text = "Use";
                 break;
             case InventoryMode.Apply:
-                hintText.text = "Apply";
-                break;
             case InventoryMode.Revert:
-                hintText.text = "Revert";
+                hintText.text = "Transfer";
                 break;
             case InventoryMode.Throw:
                 hintText.text = "Throw";
