@@ -21,7 +21,8 @@ MonoBehaviour:
     Exp Gain Multiplier'
   minDropSize: 1
   maxDropSize: 1
-  itemValue: 50
+  sellPrice: 50
+  buyPrice: 75
   itemIcon: {fileID: 21300000, guid: d3107197558341240abf13cc1bec0831, type: 3}
   sound: {fileID: 0}
   isUsable: 1

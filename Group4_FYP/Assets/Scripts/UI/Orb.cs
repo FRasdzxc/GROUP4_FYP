@@ -178,7 +178,7 @@ public class Orb : MonoBehaviour
 
         ConfirmationPanel.Instance.ShowConfirmationPanel(
             "Reset Orbs",
-            "This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\nCost: " + requiredResetPrice + " Coins",
+            "This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\nCost: " + requiredResetPrice.ToString("n0") + " Coins",
             () =>
             {
                 if (hero.GetStoredCoin() >= requiredResetPrice)
@@ -194,7 +194,7 @@ public class Orb : MonoBehaviour
                     AbilityManager.Instance.SetManaRegenerationUpgrade(0);
                     Hero.Instance.SetExpGainMultiplierUpgrade(1);
 
-                    _ = Notification.Instance.ShowNotification("Reset Orb upgrades");
+                    _ = Notification.Instance.ShowNotification("Successfully reset Orb upgrades");
                 }
                 else
                 {

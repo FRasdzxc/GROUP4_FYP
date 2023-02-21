@@ -60,8 +60,11 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             case InventoryMode.Normal:
                 hintText.text = "Use";
                 break;
-            case InventoryMode.Transfer:
-                hintText.text = "Transfer";
+            case InventoryMode.Apply:
+                hintText.text = "Apply";
+                break;
+            case InventoryMode.Revert:
+                hintText.text = "Revert";
                 break;
             case InventoryMode.Throw:
                 hintText.text = "Throw";
@@ -131,20 +134,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             List<string> attributes = new List<string>();
             List<TooltipHintType> hints = new List<TooltipHintType>();
 
+            if (ItemData is ConsumableItemData)
+            {
+                var consumable = item as ConsumableItemData;
+                foreach (var e in consumable.effects)
+                {
+                    attributes.Add(e.ToString());
+                }
+            }
+
             if (inventoryMode == InventoryMode.Normal)
             {
-                if (ItemData is ConsumableItemData)
+                if (ItemData.isUsable)
                 {
-                    var consumable = item as ConsumableItemData;
-                    foreach (var e in consumable.effects)
-                    {
-                        attributes.Add(e.ToString());
-                    }
                     hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
                 }
                 hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
             }
-            else
+            else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
             {
                 hints.Add(TooltipHintType.Transfer);
             }
@@ -158,7 +165,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     hint.SetActive(true);
                 }
             }
-            else if (inventoryMode == InventoryMode.Transfer || inventoryMode == InventoryMode.Throw) // transfer
+            else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert || inventoryMode == InventoryMode.Throw) // transfer
             {
                 hint.SetActive(true);
             }
@@ -184,8 +191,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
                 {
-                    UseItem();
-
                     if (Input.GetKey(KeyCode.LeftShift)) // use all
                     {
                         while (StackSize > 0)
@@ -193,11 +198,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                             UseItem();
                         }
                     }
+                    else // use one
+                    {
+                        UseItem();
+                    }
                 }
                 else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
                 {
-                    DropItem();
-
                     if (Input.GetKey(KeyCode.LeftShift)) // drop all
                     {
                         while (StackSize > 0)
@@ -205,13 +212,44 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                             DropItem();
                         }
                     }
+                    else // drop one
+                    { 
+                        DropItem();
+                    }
                 }
             }
-            else if (inventoryMode == InventoryMode.Transfer) // transfer
+            else if (inventoryMode == InventoryMode.Apply) // apply
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    BuySellPanel.Instance.TransferItem(ItemData);
+                    if (Input.GetKey(KeyCode.LeftShift)) // apply all
+                    {
+                        for (int i = 0; i < StackSize; i++)
+                        {
+                            BuySellPanel.Instance.ApplyTransfer(ItemData);
+                        }
+                    }
+                    else // apply one
+                    {
+                        BuySellPanel.Instance.ApplyTransfer(ItemData);
+                    }
+                }
+            }
+            else if (inventoryMode == InventoryMode.Revert) // revert
+            {
+                if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    if (Input.GetKey(KeyCode.LeftShift)) // revert all
+                    {
+                        for (int i = 0; i < StackSize; i++)
+                        {
+                            BuySellPanel.Instance.RevertTransfer(ItemData);
+                        }
+                    }
+                    else // revert one
+                    {
+                        BuySellPanel.Instance.RevertTransfer(ItemData);
+                    }
                 }
             }
             else if (inventoryMode == InventoryMode.Throw)

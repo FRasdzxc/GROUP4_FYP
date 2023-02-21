@@ -23,7 +23,7 @@ public static class ProfileManagerJson
             ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
             WriteProfile(profileData, path);
 
-            _ = Notification.Instance.ShowNotification("Sucessfully created Profile \"" + profileName + "\"!");
+            _ = Notification.Instance.ShowNotification("Successfully created Profile \"" + profileName + "\"!");
 
             return true;
         }
@@ -81,7 +81,7 @@ public static class ProfileManagerJson
                 WriteProfile(newProfileData, newPath);
                 DeleteProfile(profileName);
 
-                _ = Notification.Instance.ShowNotification("Sucessfully updated Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
+                _ = Notification.Instance.ShowNotification("Successfully updated Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
 
                 return true;
             }

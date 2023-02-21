@@ -12,7 +12,8 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     public int minDropSize;
     public int maxDropSize;
     [Tooltip("Used for selling and earning money")]
-    public float itemValue; // used for selling and earning money?
+    public int sellPrice; // used for selling and earning money?
+    public int buyPrice;
     public Sprite itemIcon;
     public AudioClip sound;
     public bool isUsable;

@@ -189,6 +189,8 @@ public class Inventory : MonoBehaviour
     /* SetItems function */
     public void SetItems(List<InventoryEntry> items)
     {
+        this.items.Clear();
+
         foreach (InventoryEntry ie in items)
         {
             foreach (ItemData i in gameItems.itemList)

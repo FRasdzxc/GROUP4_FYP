@@ -18,5 +18,8 @@ MonoBehaviour:
   itemDescription: slimeball dropped by boss slimes
   minDropSize: 1
   maxDropSize: 1
-  itemValue: 10
+  sellPrice: 10
+  buyPrice: 15
   itemIcon: {fileID: 21300000, guid: 036d428e0be19b641a743453738a353d, type: 3}
+  sound: {fileID: 0}
+  isUsable: 0

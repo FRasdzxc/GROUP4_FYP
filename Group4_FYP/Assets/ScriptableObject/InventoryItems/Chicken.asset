@@ -18,6 +18,8 @@ MonoBehaviour:
   itemDescription: edible chicken description
   minDropSize: 2
   maxDropSize: 5
-  itemValue: 5
+  sellPrice: 5
+  buyPrice: 7
   itemIcon: {fileID: 21300000, guid: 036d428e0be19b641a743453738a353d, type: 3}
+  sound: {fileID: 0}
   isUsable: 1

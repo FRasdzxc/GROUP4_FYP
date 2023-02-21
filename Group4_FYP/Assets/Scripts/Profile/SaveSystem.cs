@@ -106,7 +106,7 @@ public class SaveSystem : MonoBehaviour
 
         if (showNotification)
         {
-            _ = Notification.Instance.ShowNotification("Sucessfully saved data to Profile \"" + profile.profileName + "\"!");
+            _ = Notification.Instance.ShowNotification("Successfully saved data to Profile \"" + profile.profileName + "\"!");
         }
     }
 

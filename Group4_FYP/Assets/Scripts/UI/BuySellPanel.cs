@@ -30,7 +30,9 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
     private UnityAction confirmAction;
     private List<InventoryEntry> tempItems;
-    private List<ItemData> transferredItems;
+    private List<InventoryEntry> transferredItems;
+
+    private BuySellType buySellType;
 
     private static BuySellPanel instance;
     public static BuySellPanel Instance
@@ -60,7 +62,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         shopSlots = new List<GameObject>();
         transferredSlots = new List<GameObject>();
         tempItems = new List<InventoryEntry>();
-        transferredItems = new List<ItemData>();
+        transferredItems = new List<InventoryEntry>();
     }
 
     // Update is called once per frame
@@ -101,23 +103,33 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         }
 
         ResetPanels();
+        this.buySellType = buySellType;
+
+        tempItems = new List<InventoryEntry>(Inventory.Instance.GetItems()); // new List<>() since list is reference type?
+        tempItems.AddRange(transferredItems); // used for previewing inventory-after-buy when buying items
 
         if (buySellType == BuySellType.Buy) // buy items
         {
             // Inventory.Instance.RefreshInventoryPanel(rightPanelContentPanel, InventoryMode.Transfer);
-            RefreshInventory(false, InventoryMode.Preview);
-            RefreshShop();
+            RefreshInventoryPanel(false, InventoryMode.Preview);
+            RefreshShopPanel();
             leftPanelTitle.text = "Shop";
             rightPanelTitle.text = "Inventory";
             confirmAction = Buy;
             confirmButtonText.text = "Buy";
             applyAllButton.SetActive(true);
             revertAllButton.SetActive(false);
+            /* 
+                impossible to revert manually:
+                transferred items might be added to existing slots by GetFreeEntry();
+                if not, inventory might be full even though it isn't
+            */
         }
         else // sell items
         {
             // Inventory.Instance.RefreshInventoryPanel(leftPanelContentPanel, InventoryMode.Transfer);
-            RefreshInventory(true, InventoryMode.Transfer);
+            RefreshInventoryPanel(true, InventoryMode.Apply);
+            RefreshTransferredSlots();
             leftPanelTitle.text = "Inventory";
             rightPanelTitle.text = "Selling";
             confirmAction = Sell;
@@ -126,8 +138,8 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             revertAllButton.SetActive(true);
         }
 
+        HUD.Instance.HideHUDMain();
         buySellPanel.SetActive(true);
-
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
@@ -138,18 +150,16 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     {
         transferredItems.Clear();
 
+        HUD.Instance.ShowHUDMain();
         buySellPanelRectTransform.DOAnchorPosY(-buySellPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-
         buySellPanel.SetActive(false);
 
         isOpened = false;
     }
 
-    private void RefreshInventory(bool isLeftPanel, InventoryMode inventoryMode)
+    private void RefreshInventoryPanel(bool isLeftPanel, InventoryMode inventoryMode)
     {
-        tempItems = Inventory.Instance.GetItems();
-
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
         {
@@ -177,7 +187,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         }
     }
 
-    private void RefreshShop()
+    private void RefreshShopPanel()
     {
         for (int i = 0; i < shopSlots.Count; i++)
         {
@@ -188,8 +198,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         for (int i = 0; i < gameItems.itemList.Length; i++)
         {
             shopSlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
-
-            shopSlots[i].GetComponent<InventorySlot>().Configure(gameItems.itemList[i], 1, InventoryMode.Transfer);
+            shopSlots[i].GetComponent<InventorySlot>().Configure(gameItems.itemList[i], 1, InventoryMode.Apply);
         }
     }
 
@@ -201,22 +210,155 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         }
         transferredSlots.Clear();
 
-        for (int i = 0; i < transferredSlots.Count; i++)
+        for (int i = 0; i < transferredItems.Count; i++)
         {
             transferredSlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
-
-            transferredSlots[i].GetComponent<InventorySlot>().Configure(transferredItems[i], 1, InventoryMode.Transfer);
+            transferredSlots[i].GetComponent<InventorySlot>().Configure(transferredItems[i].itemData, transferredItems[i].qty, InventoryMode.Revert);
         }
     }
 
-    public void TransferItem(ItemData item)
+    private bool RemoveItem(ItemData item, List<InventoryEntry> list)
     {
-        Debug.Log("BuySellPanel: TransferItem()");
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            InventoryEntry entry = list[i];
+            if (entry.itemData != item)
+                continue;
 
-        transferredItems.Add(item);
+            int newQty = Mathf.Clamp(entry.qty - 1, 0, InventorySlot.kMaxStackSize);
+            if (newQty == 0)
+                list.RemoveAt(i);
+            else
+                list[i] = new InventoryEntry(item, newQty);
+            
+            return true;
+        }
 
-        // check buyselltype to determine which panel to transfer to
+        return false;
+    }
+
+    int GetFreeEntry(ItemData item, List<InventoryEntry> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].itemData == item && list[i].qty < InventorySlot.kMaxStackSize)
+                return i;
+        }
+
+        return -1;
+    }
+
+    public void ApplyTransfer(ItemData item)
+    {
+        Debug.Log("BuySellPanel: ApplyTransfer()");
+
+        if (buySellType == BuySellType.Buy)
+        {
+            if (tempItems.Count > Inventory.Instance.GetInventorySize())
+            {
+                _ = Notification.Instance.ShowNotification("Inventory will be full!");
+                return;
+            }
+
+            int slot = GetFreeEntry(item, tempItems);
+            if (slot == -1)
+                tempItems.Add(new InventoryEntry(item));
+            else
+            {
+                InventoryEntry entry = tempItems[slot];
+                int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
+                tempItems[slot] = new InventoryEntry(item, newQty);
+            }
+            transferredItems.Add(new InventoryEntry(item));
+
+            RefreshInventoryPanel(false, InventoryMode.Preview);
+        }
+        else
+        {
+            // find item in tempitems; if not, return with error
+            if (!RemoveItem(item, tempItems))
+            {
+                Debug.LogError($"{this.GetType().Name}.ApplyTransfer(): {item.itemName} not found in tempItems");
+                return;
+            }
+
+            // getfreeentry and add to transferreditems
+            int slot = GetFreeEntry(item, transferredItems);
+            if (slot == -1)
+                transferredItems.Add(new InventoryEntry(item));
+            else
+            {
+                InventoryEntry entry = transferredItems[slot];
+                int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
+                transferredItems[slot] = new InventoryEntry(item, newQty);
+            }
+
+            RefreshTransferredSlots();
+            RefreshInventoryPanel(true, InventoryMode.Apply);
+        }
+    }
+
+    public void RevertTransfer(ItemData item)
+    {
+        Debug.Log("BuySellPanel: RevertTransfer()");
+
+        // find item in transferreditems; if not, return with error
+        if (!RemoveItem(item, transferredItems))
+        {
+            Debug.LogError($"{this.GetType().Name}.RevertTransfer(): {item.itemName} not found in transferredItems");
+            return;
+        }
+
+        // getfreeentry and add to tempitems
+        int slot = GetFreeEntry(item, tempItems);
+        if (slot == -1)
+            tempItems.Add(new InventoryEntry(item));
+        else
+        {
+            InventoryEntry entry = tempItems[slot];
+            int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
+            tempItems[slot] = new InventoryEntry(item, newQty);
+        }
+
+        // refresh
         RefreshTransferredSlots();
+        RefreshInventoryPanel(true, InventoryMode.Apply);   // sell only; not accounting for buy since reverting isn't support when buying atm
+    }
+
+    public void ApplyAll()
+    {
+        // check buySellType first
+        // if Buy, ApplyTransfer() all items from gameItems with a loop, check if inventory is full too
+        // if Sell, ApplyTransfer() all items from tempItems with a loop
+        if (buySellType == BuySellType.Buy)
+        {
+            foreach (ItemData item in gameItems.itemList)
+            {
+                ApplyTransfer(item);
+            }
+        }
+        else
+        {
+            while (tempItems.Any()) // this works, but very slow
+            {
+                for (int i = 0; i < tempItems[0].qty; i++)
+                {
+                    ApplyTransfer(tempItems[0].itemData);
+                }
+            }
+        }
+    }
+
+    public void RevertAll()
+    {
+        // revert and RevertTransfer() all items from transferredItems with a loop
+        while (transferredItems.Any())
+        {
+            for (int i = 0; i < transferredItems[0].qty; i++)
+            {
+                RevertTransfer(transferredItems[0].itemData);
+            }
+        }
     }
 
     public void ThrowItem(ItemData item)
@@ -243,6 +385,13 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         // get items prices
         int price = 0;
         // loop through transferred items to get price
+        foreach (InventoryEntry ie in transferredItems)
+        {
+            for (int i = 0; i < ie.qty; i++)
+            {
+                price += ie.itemData.buyPrice;
+            }
+        }
 
         ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", "Do you want to buy these items?" + "\n\nCost: " + price.ToString("n0") + " coins",
             () =>
@@ -250,9 +399,21 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
                 // buy action here
 
                 // if coins < price, shownotification, return
-                // deduct coins by price
-                // inventory.setitems(tempitems)
-            });
+                if (Hero.Instance.GetStoredCoin() >= price)
+                {
+                    // deduct coins by price
+                    // inventory.setitems(tempitems)
+                    Hero.Instance.AddCoin(-price);
+                    Inventory.Instance.SetItems(tempItems);
+
+                    HideBuySellPanel();
+                    _ = Notification.Instance.ShowNotification("Successfully bought items");
+                }
+                else
+                {
+                    _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
+                }
+            }, true);
     }
 
     public void Sell()
@@ -266,6 +427,13 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         // get items prices
         int price = 0;
         // loop through transferred items to get price
+        foreach (InventoryEntry ie in transferredItems)
+        {
+            for (int i = 0; i < ie.qty; i++)
+            {
+                price += ie.itemData.sellPrice;
+            }
+        }
 
         ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", "Do you want to sell these items?" + "\n\nGain: " + price.ToString("n0") + " coins",
             () =>
@@ -274,7 +442,12 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
                 // loop: inventory.removeitem(tempitems[index])
                 // add coins by price
-            });
+                Inventory.Instance.SetItems(tempItems);
+                Hero.Instance.AddCoin(price);
+
+                HideBuySellPanel();
+                _ = Notification.Instance.ShowNotification("Successfully sold items");
+            }, true);
     }
 
     public bool HideConflictingPanels()
