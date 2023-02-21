@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a0d1d761f0b88a24c922f8b1fba712d2, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fMovementSpeed: 5
   fSprintMultiplier: 2
+  anim: {fileID: 0}
 --- !u!1 &5798860268638807630
 GameObject:
   m_ObjectHideFlags: 0

@@ -144,7 +144,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,10 +251,10 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 0d86040ff534e904c91aeea18df9b519, type: 3}
   header: Village Chief
   dialogues: []
-  dialogueOnCompleteEvents:
+  dialogueEndEvents:
     m_PersistentCalls:
       m_Calls: []
-  canEndManually: 1
+  canBeSkipped: 1
   triggerOnStart: 0
   triggerDistance: 2.5
   dialogueBubble: {fileID: 2187621285776018778}

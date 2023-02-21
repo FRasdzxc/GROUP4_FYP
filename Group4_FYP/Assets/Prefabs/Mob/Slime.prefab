@@ -416,7 +416,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -536,13 +536,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 3987170176245778866, guid: cfcdb0a54f250294a906684d45d0077e, type: 3}
-  exp: {fileID: 1754278620183716299, guid: 6504b5aa5b8f46143adc2952d2b98911, type: 3}
+  xp: {fileID: 0}
   hp: {fileID: 6922525638386660479, guid: 7d31b90f3c33f4b44a746d32bfcb7494, type: 3}
   mp: {fileID: 8938294070512015235, guid: 71646fd594a2aa74d9cb34ec0d1e3c45, type: 3}
   coinDrop: 1
-  expDrop: 1
+  xpDrop: 0
   hpDrop: 1
   mpDrop: 1
+  coinAmount: 0
+  xpAmount: 0
+  hpAmount: 0
+  mpAmount: 0
   offset: 1
 --- !u!1 &6846914009636387732
 GameObject:
@@ -595,7 +599,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
