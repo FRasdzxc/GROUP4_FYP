@@ -14483,6 +14483,8 @@ MonoBehaviour:
   leftPanelContentPanel: {fileID: 7014338648052057834}
   rightPanelContentPanel: {fileID: 3187864746833161639}
   confirmButtonText: {fileID: 5772309273547399352}
+  applyAllButton: {fileID: 1899452709675656289}
+  revertAllButton: {fileID: 6867090102430375507}
   inventorySlotPrefab: {fileID: 9120343609961775475, guid: e0403d82abb19a24bb5e101fdfd98858, type: 3}
   gameItems: {fileID: 11400000, guid: 011687dcfee268a44805f2653d0536c0, type: 2}
   panelOverridable: 0
@@ -16515,7 +16517,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Title
+  m_Text: Inventory
 --- !u!1 &6424896950822241448
 GameObject:
   m_ObjectHideFlags: 0
@@ -16945,6 +16947,7 @@ GameObject:
   - component: {fileID: 5832923517400177129}
   - component: {fileID: 4808482681842268073}
   - component: {fileID: 778209789705266831}
+  - component: {fileID: 1893928573932973983}
   m_Layer: 5
   m_Name: RevertAllButton
   m_TagString: Untagged
@@ -17074,6 +17077,22 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1893928573932973983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867090102430375507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c611548a23dee1498fe8af9ab23acf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Transfer All
+  description: Transfer all items to the left
+  attributes: []
+  hints: 06000000
 --- !u!1 &6927670930456086249
 GameObject:
   m_ObjectHideFlags: 0

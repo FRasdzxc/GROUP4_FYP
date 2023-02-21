@@ -55,13 +55,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         StackSize = stackSize;
         this.inventoryMode = inventoryMode;
 
-        if (inventoryMode == InventoryMode.Normal)
+        switch (inventoryMode)
         {
-            hintText.text = "Use";
-        }
-        else
-        {
-            hintText.text = "Transfer";
+            case InventoryMode.Normal:
+                hintText.text = "Use";
+                break;
+            case InventoryMode.Transfer:
+                hintText.text = "Transfer";
+                break;
+            case InventoryMode.Throw:
+                hintText.text = "Throw";
+                break;
         }
     }
 
@@ -154,7 +158,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     hint.SetActive(true);
                 }
             }
-            else // transfer
+            else if (inventoryMode == InventoryMode.Transfer || inventoryMode == InventoryMode.Throw) // transfer
             {
                 hint.SetActive(true);
             }
@@ -203,11 +207,18 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     }
                 }
             }
-            else // transfer
+            else if (inventoryMode == InventoryMode.Transfer) // transfer
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
                 {
                     BuySellPanel.Instance.TransferItem(ItemData);
+                }
+            }
+            else if (inventoryMode == InventoryMode.Throw)
+            {
+                if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    BuySellPanel.Instance.ThrowItem(ItemData);
                 }
             }
         }

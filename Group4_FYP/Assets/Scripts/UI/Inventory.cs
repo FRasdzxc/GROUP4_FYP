@@ -128,7 +128,35 @@ public class Inventory : MonoBehaviour
     //    }
     //}
 
-    public void RefreshInventoryPanel(Transform contentPanelTransform, InventoryMode inventoryMode = InventoryMode.Normal)
+    // public void RefreshInventoryPanel(Transform contentPanelTransform, InventoryMode inventoryMode = InventoryMode.Normal)
+    // {
+    //     // destroy all the inventory slots
+    //     for (int i = 0; i < inventorySlots.Count; i++)
+    //     {
+    //         Destroy(inventorySlots[i]);
+    //     }
+    //     inventorySlots.Clear();
+
+    //     // add inventory slots
+    //     for (int i = 0; i < inventorySize; i++)
+    //     {
+    //         inventorySlots.Add(Instantiate(inventorySlotPrefab, contentPanelTransform));
+    //     }
+
+    //     // assign items to inventory slots
+    //     for (int i = 0; i < items.Count; i++)
+    //     {
+    //         inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, inventoryMode);
+    //     }
+
+    //     // check if inventory isn't full
+    //     if (items.Count < inventorySlots.Count)
+    //     {
+    //         messageIsShown = false;
+    //     }
+    // }
+
+    public void RefreshInventoryPanel()
     {
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
@@ -140,13 +168,13 @@ public class Inventory : MonoBehaviour
         // add inventory slots
         for (int i = 0; i < inventorySize; i++)
         {
-            inventorySlots.Add(Instantiate(inventorySlotPrefab, contentPanelTransform));
+            inventorySlots.Add(Instantiate(inventorySlotPrefab, inventoryContentPanelTransform));
         }
 
         // assign items to inventory slots
         for (int i = 0; i < items.Count; i++)
         {
-            inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, inventoryMode);
+            inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
         }
 
         // check if inventory isn't full
@@ -154,11 +182,6 @@ public class Inventory : MonoBehaviour
         {
             messageIsShown = false;
         }
-    }
-
-    public void RefreshInventoryPanel(InventoryMode inventoryMode = InventoryMode.Normal)
-    {
-        RefreshInventoryPanel(inventoryContentPanelTransform, inventoryMode);
     }
 
     /* DropItem function? */

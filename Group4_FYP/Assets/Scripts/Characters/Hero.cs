@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Rendering.PostProcessing;
-using DG.Tweening;
+// using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Hero : MonoBehaviour
 {
@@ -19,7 +16,8 @@ public class Hero : MonoBehaviour
     private HUD hud;
     private SpriteRenderer sr;
     private bool isDead;
-    private ColorGrading colorGrading;
+    // private ColorGrading colorGrading;
+    private ColorAdjustments colorAdjustments;
     private GameObject spawnPoint;
     private MaskingCanvas maskingCanvas;
     private string profileName;
@@ -88,7 +86,8 @@ public class Hero : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+        // Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Volume>().profile.TryGet(out colorAdjustments);
         movementController.SetMovementSpeed(heroData.walkspeed);
 
         Setup();
@@ -127,7 +126,14 @@ public class Hero : MonoBehaviour
                 // testonly
                 if (Input.GetKeyDown(KeyCode.Backspace))
                 {
-                    TakeDamage(15, false);
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        Die();
+                    }
+                    else
+                    {
+                        TakeDamage(15, false);
+                    }
                 }
                 if (Input.GetKeyDown(KeyCode.Equals))
                 {
@@ -143,7 +149,8 @@ public class Hero : MonoBehaviour
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
         transform.position = spawnPoint.transform.position;
-        colorGrading.saturation.value = 0f;
+        // colorGrading.saturation.value = 0f;
+        colorAdjustments.saturation.value = 0f;
         sr.color = Color.white;
         movementController.enabled = true;
         abilityManager.enabled = true;
@@ -184,7 +191,8 @@ public class Hero : MonoBehaviour
         health = 0;
         // hud.UpdateHealth(health);
         hud.UpdateHealth(health, upgradedMaxHealth);
-        colorGrading.saturation.value = -100f;
+        // colorGrading.saturation.value = -100f;
+        colorAdjustments.saturation.value = -100f;
         movementController.ResetAnimatorParameters();
         movementController.enabled = false;
         abilityManager.enabled = false;
