@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+// rewrite this class?
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public const int kMaxStackSize = 99;
@@ -143,7 +144,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (inventoryMode == InventoryMode.Normal)
             {
-                if (ItemData.isUsable)
+                if (ItemData.isUsable) // check whether class is consumableitem instead?
                 {
                     hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
                 }
@@ -151,6 +152,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
             else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
             {
+                if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
+                {
+                    attributes.Add($"Buy Price: {ItemData.buyPrice}");
+                }
+                else
+                {
+                    attributes.Add($"Sell Price: {ItemData.sellPrice}");                    
+                }
+
                 hints.Add(TooltipHintType.Transfer);
             }
 

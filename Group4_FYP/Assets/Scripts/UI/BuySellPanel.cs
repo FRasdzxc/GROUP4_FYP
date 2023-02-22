@@ -15,6 +15,9 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     [SerializeField] private Text confirmButtonText;
     [SerializeField] private GameObject applyAllButton;
     [SerializeField] private GameObject revertAllButton;
+    [SerializeField] private Text titleText;
+    [SerializeField] private Text coinText;
+    [SerializeField] private Text totalText;
 
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private GameItems gameItems;
@@ -104,6 +107,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
         ResetPanels();
         this.buySellType = buySellType;
+        coinText.text = Hero.Instance.GetStoredCoin().ToString("n0");
 
         tempItems = new List<InventoryEntry>(Inventory.Instance.GetItems()); // new List<>() since list is reference type?
         tempItems.AddRange(transferredItems); // used for previewing inventory-after-buy when buying items
@@ -113,6 +117,8 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             // Inventory.Instance.RefreshInventoryPanel(rightPanelContentPanel, InventoryMode.Transfer);
             RefreshInventoryPanel(false, InventoryMode.Preview);
             RefreshShopPanel();
+
+            titleText.text = "Buy Items";
             leftPanelTitle.text = "Shop";
             rightPanelTitle.text = "Inventory";
             confirmAction = Buy;
@@ -130,6 +136,8 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             // Inventory.Instance.RefreshInventoryPanel(leftPanelContentPanel, InventoryMode.Transfer);
             RefreshInventoryPanel(true, InventoryMode.Apply);
             RefreshTransferredSlots();
+
+            titleText.text = "Sell Items";
             leftPanelTitle.text = "Inventory";
             rightPanelTitle.text = "Selling";
             confirmAction = Sell;
@@ -137,6 +145,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             applyAllButton.SetActive(true);
             revertAllButton.SetActive(true);
         }
+        RefreshTotal();
 
         HUD.Instance.HideHUDMain();
         buySellPanel.SetActive(true);
@@ -215,6 +224,28 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             transferredSlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
             transferredSlots[i].GetComponent<InventorySlot>().Configure(transferredItems[i].itemData, transferredItems[i].qty, InventoryMode.Revert);
         }
+    }
+
+    private void RefreshTotal()
+    {
+        // get items prices
+        int price = 0;
+        // loop through transferred items to get price
+        foreach (InventoryEntry ie in transferredItems)
+        {
+            for (int i = 0; i < ie.qty; i++)
+            {
+                if (buySellType == BuySellType.Buy)
+                {
+                    price += ie.itemData.buyPrice;
+                }
+                else
+                {
+                    price += ie.itemData.sellPrice;
+                }
+            }
+        }
+        totalText.text = price.ToString("n0");
     }
 
     private bool RemoveItem(ItemData item, List<InventoryEntry> list)
@@ -296,6 +327,8 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             RefreshTransferredSlots();
             RefreshInventoryPanel(true, InventoryMode.Apply);
         }
+
+        RefreshTotal();
     }
 
     public void RevertTransfer(ItemData item)
@@ -323,6 +356,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         // refresh
         RefreshTransferredSlots();
         RefreshInventoryPanel(true, InventoryMode.Apply);   // sell only; not accounting for buy since reverting isn't support when buying atm
+        RefreshTotal();
     }
 
     public void ApplyAll()
@@ -450,6 +484,23 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
             }, true);
     }
 
+    public BuySellType GetBuySellType()
+    {
+        return buySellType;
+    }
+
+    private void ResetPanels() // clean up left and right content panels by destroying all childs
+    {
+        foreach (Transform child in leftPanelContentPanel)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in rightPanelContentPanel)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     public bool HideConflictingPanels()
     {
         if (!HeroPanel.Instance.IsPanelActive())
@@ -474,17 +525,5 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     public bool IsPanelActive()
     {
         return buySellPanel.activeSelf;
-    }
-
-    private void ResetPanels() // clean up left and right content panels by destroying all childs
-    {
-        foreach (Transform child in leftPanelContentPanel)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in rightPanelContentPanel)
-        {
-            Destroy(child.gameObject);
-        }
     }
 }

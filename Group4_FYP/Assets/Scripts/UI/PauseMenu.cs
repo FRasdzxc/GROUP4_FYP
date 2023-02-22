@@ -15,6 +15,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private SceneController sceneController;
     [SerializeField] private SettingsMenu settingsMenu;
 
+    [SerializeField] private Button giveUpButton;
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private GameObject warning;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
+
+        SetDungeonMode(false);
     }
 
     // Update is called once per frame
@@ -48,6 +55,16 @@ public class PauseMenu : MonoBehaviour
         if (isOpened && Input.GetKeyDown(KeyCode.BackQuote)) // not finished: also check if saving is allowed atm
         {
             SaveGame();
+        }
+
+        // test only
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            SetDungeonMode(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            SetDungeonMode(false);
         }
     }
 
@@ -134,5 +151,23 @@ public class PauseMenu : MonoBehaviour
 
         // exit to menu
         sceneController.ChangeScene("StartScene");
+    }
+
+    public void SetDungeonMode(bool value)
+    {
+        if (value)
+        {
+            giveUpButton.gameObject.SetActive(true);
+            saveButton.interactable = false;
+            exitButton.interactable = false;
+            warning.SetActive(true);
+        }
+        else
+        {
+            giveUpButton.gameObject.SetActive(false);
+            saveButton.interactable = true;
+            exitButton.interactable = true;
+            warning.SetActive(false);
+        }
     }
 }
