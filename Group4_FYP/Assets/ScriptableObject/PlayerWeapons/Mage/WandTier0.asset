@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8b2b67d32bc55f40807e4a951497205, type: 3}
-  m_Name: TestWand
+  m_Name: WandTier0
   m_EditorClassIdentifier: 
-  weaponName: TestWand
+  weaponName: Wand (Tier 0)
   cooldown: 0.5
+  weaponTier: 0
+  weaponGobj: {fileID: 2479174408548472528, guid: d21427122ed038c44965cc3b945302cd, type: 3}
   projectileLifeTime: 5
   projectileSpeed: 25

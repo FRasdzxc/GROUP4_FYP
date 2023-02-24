@@ -53,7 +53,7 @@ public class AbilityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.Instance.IsPlayingHostile())
+        if (GameManager.Instance.IsPlayingHostile())
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {

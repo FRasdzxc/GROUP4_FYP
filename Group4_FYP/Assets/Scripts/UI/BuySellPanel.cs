@@ -204,10 +204,23 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         }
         shopSlots.Clear();
 
-        for (int i = 0; i < gameItems.itemList.Length; i++)
+        // for (int i = 0; i < gameItems.itemList.Length; i++)
+        // {
+        //     if (gameItems.itemList[i].isBuyable)
+        //     {
+        //         shopSlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
+        //         shopSlots[i].GetComponent<InventorySlot>().Configure(gameItems.itemList[i], 1, InventoryMode.Apply);
+        //     }
+        // }
+
+        int currentSlot = 0;
+        foreach (ItemData item in gameItems.itemList)
         {
-            shopSlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
-            shopSlots[i].GetComponent<InventorySlot>().Configure(gameItems.itemList[i], 1, InventoryMode.Apply);
+            if (item.isBuyable)
+            {
+                shopSlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
+                shopSlots[currentSlot++].GetComponent<InventorySlot>().Configure(item, 1, InventoryMode.Apply);
+            }
         }
     }
 
@@ -285,7 +298,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
         if (buySellType == BuySellType.Buy)
         {
-            if (tempItems.Count > Inventory.Instance.GetInventorySize())
+            if (tempItems.Count > Inventory.Instance.GetInventorySize()) // rewrite: getfreeentry first
             {
                 _ = Notification.Instance.ShowNotification("Inventory will be full!");
                 return;
@@ -412,7 +425,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     {
         if (!transferredItems.Any())
         {
-            _ = Notification.Instance.ShowNotification("You are not buying any items");
+            _ = Notification.Instance.ShowNotification("You are not buying any item");
             return;
         }
 
@@ -454,7 +467,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
     {
         if (!transferredItems.Any())
         {
-            _ = Notification.Instance.ShowNotification("You are not selling any items");
+            _ = Notification.Instance.ShowNotification("You are not selling any item");
             return;
         }
 

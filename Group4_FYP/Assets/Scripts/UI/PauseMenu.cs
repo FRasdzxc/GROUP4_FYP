@@ -70,7 +70,7 @@ public class PauseMenu : MonoBehaviour
 
     public async Task ShowPauseMenu()
     {
-        GameController.Instance.SetGameState(GameState.Paused);
+        GameManager.Instance.SetGameState(GameState.Paused);
 
         HUD.Instance.HideHUD();
 
@@ -117,7 +117,7 @@ public class PauseMenu : MonoBehaviour
         // }
 
         settingsMenu.SaveSettings();
-        GameController.Instance.SetGameState(GameState.Playing);
+        GameManager.Instance.SetGameState(GameState.Playing);
 
         isOpened = false;
     }

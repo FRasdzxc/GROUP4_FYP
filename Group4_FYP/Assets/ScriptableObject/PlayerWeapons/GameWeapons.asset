@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db98ee0cb44f8664b957b3bf8e1b19c2, type: 3}
-  m_Name: HeroList
-  m_EditorClassIdentifier: Assembly-CSharp::HeroList
-  heros:
+  m_Script: {fileID: 11500000, guid: 7070522a26b48ee45ada2411d56bd32d, type: 3}
+  m_Name: GameWeapons
+  m_EditorClassIdentifier: 
+  weaponList:
   - heroClass: 1
-    heroInfo: {fileID: 11400000, guid: a1d668851d1f4fb448c2f00bbdf236a8, type: 2}
+    classWeapons:
+    - weaponData: {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}

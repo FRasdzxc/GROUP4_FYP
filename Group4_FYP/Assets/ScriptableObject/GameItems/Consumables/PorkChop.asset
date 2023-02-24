@@ -26,10 +26,11 @@ MonoBehaviour:
   minDropSize: 1
   maxDropSize: 3
   sellPrice: 5
-  buyPrice: 7
-  itemIcon: {fileID: 0}
+  buyPrice: 10
+  itemIcon: {fileID: -7486828745671446363, guid: 1037e6b7c6b9aa64fb4b4561b9b94ade, type: 3}
   sound: {fileID: 0}
   isUsable: 1
+  isBuyable: 1
   effects:
   - effectType: 0
-    value: 15
+    value: 35

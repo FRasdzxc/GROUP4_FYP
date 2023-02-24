@@ -103,6 +103,7 @@ MonoBehaviour:
   maps:
   - map: {fileID: 1357543489387916594, guid: 7224317267dd62b489eae6dd2164780a, type: 3}
     mapType: 1
+    mapDifficulty: 1
     objective: Kill all mobs
   tutorialDialogues: []
 --- !u!114 &4102428676351295755

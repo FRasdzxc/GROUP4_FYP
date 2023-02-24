@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] private Text headerText;
+    [SerializeField] private Text typeText;
     [SerializeField] private Text descriptionText;
     [SerializeField] private Text attributeText;
     [SerializeField] private Text hintText;
@@ -86,12 +87,23 @@ public class Tooltip : MonoBehaviour
     //     await canvasGroup.DOFade(1, 0.25f).SetDelay(0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
     // }
 
-    public async void ShowTooltip(string header, string description = "", string[] attributes = null, TooltipHintType[] hints = null)
+    public async void ShowTooltip(string header, string type = "", string description = "", string[] attributes = null, TooltipHintType[] hints = null)
     {
         KillTween();
 
         // header
         headerText.text = header;
+
+        // type
+        if (type != "")
+        {
+            typeText.gameObject.SetActive(true);
+            typeText.text = type;
+        }
+        else
+        {
+            typeText.gameObject.SetActive(false);
+        }
 
         // description
         if (description != "")

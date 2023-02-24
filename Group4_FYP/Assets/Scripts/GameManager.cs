@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool isTestScene; // temp only
 
@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
         public GameObject map;
         [Tooltip("Players cannot attack / take damage when Map Type is Peaceful")]
         public MapType mapType;
+        public MapDifficulty mapDifficulty;
         [TextArea(2, 5)]
         public string objective;
     }
@@ -30,8 +31,8 @@ public class GameController : MonoBehaviour
     private MaskingCanvas maskingCanvas;
     private HUD hud;
 
-    private static GameController instance;
-    public static GameController Instance
+    private static GameManager instance;
+    public static GameManager Instance
     {
         get
         {
@@ -102,7 +103,7 @@ public class GameController : MonoBehaviour
 
         // spawn hero
         hero.Spawn();
-        _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, Color.white);
+        _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapDifficulty.ToString());
 
         // set objective
         if (maps[mapIndex].objective.Length > 0) // if objective is not empty

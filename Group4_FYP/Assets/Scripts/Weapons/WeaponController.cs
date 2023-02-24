@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class WeaponController : MonoBehaviour
 {
@@ -18,7 +17,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && GameController.Instance.IsPlayingHostile())
+        if (Input.GetMouseButton(0) && GameManager.Instance.IsPlayingHostile())
         {
             Attack(gameObject);
         }
@@ -37,5 +36,10 @@ public class WeaponController : MonoBehaviour
         }
 
         isReady = true;
+    }
+
+    public int GetWeaponTier()
+    {
+        return weaponData.weaponTier;
     }
 }

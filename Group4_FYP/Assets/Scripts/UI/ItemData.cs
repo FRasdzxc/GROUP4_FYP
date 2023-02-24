@@ -17,6 +17,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     public Sprite itemIcon;
     public AudioClip sound;
     public bool isUsable;
+    public bool isBuyable; // won't show up in shop if false
 
     public bool Equals(ItemData other)
     {

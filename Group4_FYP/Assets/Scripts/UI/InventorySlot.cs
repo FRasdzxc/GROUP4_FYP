@@ -164,7 +164,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 hints.Add(TooltipHintType.Transfer);
             }
 
-            Tooltip.Instance.ShowTooltip(item.itemName, item.itemDescription, attributes.ToArray(), hints.ToArray());
+            Tooltip.Instance.ShowTooltip(item.itemName, item.itemType.ToString(), item.itemDescription, attributes.ToArray(), hints.ToArray());
 
             if (inventoryMode == InventoryMode.Normal)
             {

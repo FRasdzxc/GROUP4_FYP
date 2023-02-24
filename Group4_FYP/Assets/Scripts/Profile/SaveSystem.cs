@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // get every ProfileData attributes then use ProjectManagerJson to save
@@ -10,9 +11,10 @@ public class SaveSystem : MonoBehaviour
     //[SerializeField] private AbilityManager abilityManager;
     private Hero hero;
     private AbilityManager abilityManager;
-    private GameController gameController;
+    private GameManager gameController;
     private Inventory inventory;
     private Orb orb;
+    private WeaponManager weaponManager;
 
     private ProfileData profile;
 
@@ -43,9 +45,10 @@ public class SaveSystem : MonoBehaviour
 
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
-        gameController = GetComponent<GameController>();
+        gameController = GetComponent<GameManager>();
         inventory = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Inventory>();
         orb = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Orb>();
+        weaponManager = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>();
         LoadData();
     }
 
@@ -77,6 +80,7 @@ public class SaveSystem : MonoBehaviour
         abilityManager.SetMaxManaUpgrade(profile.maxManaUpgrade);
         abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
         hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
+        weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponTier);
     }
 
     public void SaveData(bool showNotification)
@@ -101,6 +105,7 @@ public class SaveSystem : MonoBehaviour
         profile.maxManaUpgrade = abilityManager.GetMaxManaUpgrade();
         profile.manaRegenerationUpgrade = abilityManager.GetManaRegenerationUpgrade();
         profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
+        profile.weaponTier = weaponManager.GetWeaponTier();
 
         ProfileManagerJson.SaveProfile(profile);
 

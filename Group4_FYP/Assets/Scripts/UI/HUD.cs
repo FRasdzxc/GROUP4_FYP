@@ -17,6 +17,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private Text mobCountText;
 
     [SerializeField] private GameObject hugeMessage;
+    [SerializeField] private Text hugeMessageTitleText;
+    [SerializeField] private Text hugeMessageSubtitleText;
     [SerializeField] private Text regionText;
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
@@ -150,13 +152,39 @@ public class HUD : MonoBehaviour
         xpText.text = String.Format("Level {0} ({1}/{2} XP)", level.ToString("n0"), storedExp.ToString("n0"), requiredExp.ToString("n0"));
     }
 
-    public async Task ShowHugeMessage(string message, Color color, float duration = 1.5f) // duration = seconds
+    #region HugeMessage
+    public async Task ShowHugeMessage(string title, Color titleColor, float duration = 1.5f) // duration = seconds
+    {
+        await ShowHugeMessage(title, titleColor, "", Color.white, duration);
+    }
+
+    public async Task ShowHugeMessage(string title, float duration = 1.5f)
+    {
+        await ShowHugeMessage(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
+    }
+
+    public async Task ShowHugeMessage(string title, string subtitle, float duration = 1.5f)
+    {
+        await ShowHugeMessage(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
+    }
+
+    public async Task ShowHugeMessage(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);
 
-        Text text = hugeMessage.GetComponent<Text>();
-        text.text = message;
-        text.color = color;
+        hugeMessageTitleText.text = title;
+        hugeMessageTitleText.color = titleColor;
+
+        if (subtitle.Length > 0 || subtitle == null)
+        {
+            hugeMessageSubtitleText.gameObject.SetActive(true);
+            hugeMessageSubtitleText.text = subtitle;
+            hugeMessageSubtitleText.color = subtitleColor;
+        }
+        else
+        {
+            hugeMessageSubtitleText.gameObject.SetActive(false);
+        }
 
         hugeMessage.SetActive(true);
         await hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
@@ -164,6 +192,7 @@ public class HUD : MonoBehaviour
         await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         hugeMessage.SetActive(false);
     }
+    #endregion
 
     public void ShowObjective(string objective)
     {

@@ -121,7 +121,7 @@ public class Hero : MonoBehaviour
             }
             hud.UpdateXP(level, storedExp, requiredExp);
 
-            if (GameController.Instance.IsPlayingHostile())
+            if (GameManager.Instance.IsPlayingHostile())
             {
                 // testonly
                 if (Input.GetKeyDown(KeyCode.Backspace))
@@ -167,7 +167,7 @@ public class Hero : MonoBehaviour
 
     private void TakeDamage(float damage, bool accountForDefenseUpgrade = true)
     {
-        if (!isDead && GameController.Instance.IsPlayingHostile())
+        if (!isDead && GameManager.Instance.IsPlayingHostile())
         {
             if (accountForDefenseUpgrade)
             {
