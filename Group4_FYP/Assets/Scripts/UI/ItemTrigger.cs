@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ItemTrigger : MonoBehaviour
+public class ItemTrigger : Interaction
 {
     [SerializeField]
     private ItemData item;
@@ -9,12 +9,14 @@ public class ItemTrigger : MonoBehaviour
     private float lifeTime = 300f; // default: 300 seconds (5 mins)
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        
         DestroyGobj();
     }
 
-    public void PickUpItem()
+    protected override void Interact() // previously: public void PickUpItem()
     {
         int random = Random.Range(item.minDropSize, item.maxDropSize);
         int addedItemCount = 0;
@@ -51,11 +53,11 @@ public class ItemTrigger : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            PickUpItem();
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.CompareTag("Player"))
+    //     {
+    //         PickUpItem();
+    //     }
+    // }
 }

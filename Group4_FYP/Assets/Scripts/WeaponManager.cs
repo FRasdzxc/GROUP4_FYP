@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour
     private HeroClass heroClass;
     private int weaponTier;
     private GameObject weaponClone;
+    private WeaponData weapon;
 
     private static WeaponManager instance;
     public static WeaponManager Instance
@@ -56,6 +57,7 @@ public class WeaponManager : MonoBehaviour
                             Destroy(weaponClone);
                         }
                         weaponClone = Instantiate(we.weaponData.weaponGobj, weaponHolder);
+                        weapon = we.weaponData;
                     }
                 }
             }
@@ -74,9 +76,19 @@ public class WeaponManager : MonoBehaviour
         this.weaponTier = weaponTier;
     }
 
+    public HeroClass GetHeroClass()
+    {
+        return heroClass;
+    }
+
     public int GetWeaponTier()
     {
         return weaponTier;
+    }
+
+    public WeaponData GetWeapon()
+    {
+        return weapon;
     }
     #endregion
 }

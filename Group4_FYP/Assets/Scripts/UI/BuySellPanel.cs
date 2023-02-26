@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class BuySellPanel : MonoBehaviour, IPanelConflictable
+public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 {
     [SerializeField] private GameObject buySellPanel;
     [SerializeField] private Text leftPanelTitle;
@@ -21,7 +21,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private GameItems gameItems;
-    [SerializeField] private bool panelOverridable;
+    // [SerializeField] private bool panelOverridable;
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
@@ -77,11 +77,19 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         {
             if (!isOpened)
             {
-                ShowBuySellPanel(BuySellType.Buy);
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    ShowSellPanel();
+                }
+                else
+                {
+                    ShowBuyPanel();
+                }
             }
             else
             {
-                HideBuySellPanel();
+                // HideBuySellPanel();
+                HidePanel();
             }
 
             // isOpened = !isOpened;
@@ -100,7 +108,11 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
 
     public async void ShowBuySellPanel(BuySellType buySellType)
     {
-        if (!HideConflictingPanels())
+        // if (!HideConflictingPanels())
+        // {
+        //     return;
+        // }
+        if (!OverridePanel())
         {
             return;
         }
@@ -155,7 +167,7 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         isOpened = true;
     }
 
-    public async void HideBuySellPanel()
+    public async override void HidePanel() // public async void HideBuySellPanel()
     {
         transferredItems.Clear();
 
@@ -453,14 +465,15 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
                     Hero.Instance.AddCoin(-price);
                     Inventory.Instance.SetItems(tempItems);
 
-                    HideBuySellPanel();
+                    // HideBuySellPanel();
+                    HidePanel();
                     _ = Notification.Instance.ShowNotification("Successfully bought items");
                 }
                 else
                 {
                     _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
                 }
-            }, true);
+            });
     }
 
     public void Sell()
@@ -492,9 +505,10 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
                 Inventory.Instance.SetItems(tempItems);
                 Hero.Instance.AddCoin(price);
 
-                HideBuySellPanel();
+                // HideBuySellPanel();
+                HidePanel();
                 _ = Notification.Instance.ShowNotification("Successfully sold items");
-            }, true);
+            });
     }
 
     public BuySellType GetBuySellType()
@@ -514,29 +528,34 @@ public class BuySellPanel : MonoBehaviour, IPanelConflictable
         }
     }
 
-    public bool HideConflictingPanels()
+    protected override GameObject GetPanel()
     {
-        if (!HeroPanel.Instance.IsPanelActive())
-        {
-            return true;
-        }
-
-        if (HeroPanel.Instance.IsPanelOverridable())
-        {
-            HeroPanel.Instance.HideHeroPanel();
-            return true;
-        }
-
-        return false;
+        return buySellPanel;
     }
 
-    public bool IsPanelOverridable()
-    {
-        return panelOverridable;
-    }
+    // public bool HideConflictingPanels()
+    // {
+    //     if (!HeroPanel.Instance.IsPanelActive())
+    //     {
+    //         return true;
+    //     }
 
-    public bool IsPanelActive()
-    {
-        return buySellPanel.activeSelf;
-    }
+    //     if (HeroPanel.Instance.IsPanelOverridable())
+    //     {
+    //         HeroPanel.Instance.HideHeroPanel();
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+    // public bool IsPanelOverridable()
+    // {
+    //     return panelOverridable;
+    // }
+
+    // public bool IsPanelActive()
+    // {
+    //     return buySellPanel.activeSelf;
+    // }
 }

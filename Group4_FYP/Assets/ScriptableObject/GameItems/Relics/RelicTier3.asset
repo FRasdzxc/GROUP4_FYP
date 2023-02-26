@@ -20,8 +20,9 @@ MonoBehaviour:
   maxDropSize: 1
   sellPrice: 5000
   buyPrice: 7500
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: ae266afcd874cfc478d9b77526d29a51, type: 3}
   sound: {fileID: 0}
   isUsable: 0
   isBuyable: 0
   tier: 3
+  upgradePrice: 7500

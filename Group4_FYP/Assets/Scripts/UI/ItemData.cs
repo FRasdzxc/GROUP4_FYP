@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item Data", menuName = "Game/Item Data")]
+[CreateAssetMenu(fileName = "New Item Data", menuName = "Game/Items/Item Data")]
 public class ItemData : ScriptableObject, IEquatable<ItemData>
 {
     public string itemID; // used for saving?

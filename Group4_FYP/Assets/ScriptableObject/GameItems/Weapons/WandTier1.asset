@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e0eaed94ae1024682a4df62f7578b2, type: 3}
+  m_Name: WandTier1
+  m_EditorClassIdentifier: 
+  itemID: weapon_wandtier1
+  itemName: Wand (Tier 1)
+  itemType: 0
+  itemDescription: Shoots out more powerful souls then that of Tier 0, with increased
+    damage and firerate
+  minDropSize: 0
+  maxDropSize: 0
+  sellPrice: 0
+  buyPrice: 0
+  itemIcon: {fileID: -4421300922047078791, guid: 03cf95018f281a34cabbb6dc1d75c9b9, type: 3}
+  sound: {fileID: 0}
+  isUsable: 0
+  isBuyable: 0
+  weapon: {fileID: 11400000, guid: a74c1050a150aaa44a2876a7eb56bd8d, type: 2}

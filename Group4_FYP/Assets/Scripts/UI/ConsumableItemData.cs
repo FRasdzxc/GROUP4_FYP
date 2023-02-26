@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Consumable Item Data", menuName = "Game/Consumable Item Data")]
+[CreateAssetMenu(fileName = "New Consumable Item Data", menuName = "Game/Items/Consumable Item Data")]
 public class ConsumableItemData : ItemData
 {
     [Serializable]
@@ -20,6 +20,8 @@ public class ConsumableItemData : ItemData
 
     public override void Use()
     {
+        base.Use();
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Hero hero = player.GetComponent<Hero>();
         AbilityManager abilityManager = player.GetComponent<AbilityManager>();

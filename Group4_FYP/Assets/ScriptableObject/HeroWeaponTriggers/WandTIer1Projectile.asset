@@ -10,8 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d005b8eecbe90346b6ca71b03bed80c, type: 3}
-  m_Name: QuickWandProjectile
+  m_Name: WandTIer1Projectile
   m_EditorClassIdentifier: 
   weaponTriggerName: 
   damage: 15
   criticalDamage: 25
+  projectileSpeed: 0
+  splitable: 0
+  splitProjectile: {fileID: 0}
+  splitAmount: 0
+  splitProjectileSpeed: 1
+  splitTime: 0

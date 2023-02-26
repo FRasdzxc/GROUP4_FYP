@@ -94,6 +94,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     //     isOccupied = false;
     // }
 
+    public void Clear()
+    {
+        ItemData = null;
+        StackSize = 0;
+        inventoryMode = InventoryMode.Preview;
+    }
+
     public void UseItem()
     {
         Debug.Log("use item: " + ItemData.itemName);
@@ -135,11 +142,28 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (ItemData is ConsumableItemData)
             {
-                var consumable = item as ConsumableItemData;
+                var consumable = ItemData as ConsumableItemData;
                 foreach (var e in consumable.effects)
                 {
                     attributes.Add(e.ToString());
                 }
+            }
+            else if (ItemData is WeaponItemData)
+            {
+                var weapon = ItemData as WeaponItemData;
+                attributes.Add("Tier: " + weapon.weapon.weaponTier);
+                attributes.Add("Cooldown: " + weapon.weapon.cooldown + " seconds");
+
+                if (weapon.weapon is ProjectileWeaponData)
+                {
+                    var projectileWeapon = weapon.weapon as ProjectileWeaponData;
+                    attributes.Add("Projectile Speed: " + projectileWeapon.projectileSpeed);
+                }
+            }
+            else if (ItemData is RelicItemData)
+            {
+                var relic = ItemData as RelicItemData;
+                attributes.Add("Tier: " + relic.tier);
             }
 
             if (inventoryMode == InventoryMode.Normal)

@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class HeroPanel : MonoBehaviour, IPanelConflictable
+public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 {
     // [SerializeField] private GameObject hudMainPanel;
     [SerializeField] private GameObject heroPanel;
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
     [SerializeField] private Text coinText;
-    [SerializeField] private bool panelOverridable;
+    // [SerializeField] private bool panelOverridable;
 
     private bool isOpened;
     private RectTransform heroPanelRectTransform;
@@ -54,7 +54,8 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
         {
             if (isOpened)
             {
-                HideHeroPanel();
+                // HideHeroPanel();
+                HidePanel();
             }
             else
             {
@@ -77,7 +78,11 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
 
     public async void ShowHeroPanel()
     {
-        if (!HideConflictingPanels())
+        // if (!HideConflictingPanels())
+        // {
+        //     return;
+        // }
+        if (!OverridePanel())
         {
             return;
         }
@@ -92,7 +97,7 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
         isOpened = true;
     }
 
-    public async void HideHeroPanel()
+    public async override void HidePanel() //public async void HideHeroPanel()
     {
         HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
@@ -102,29 +107,34 @@ public class HeroPanel : MonoBehaviour, IPanelConflictable
         isOpened = false;
     }
 
-    public bool HideConflictingPanels()
+    protected override GameObject GetPanel()
     {
-        if (!BuySellPanel.Instance.IsPanelActive())
-        {
-            return true;
-        }
-
-        if (BuySellPanel.Instance.IsPanelOverridable())
-        {
-            BuySellPanel.Instance.HideBuySellPanel();
-            return true;
-        }
-
-        return false;
+        return heroPanel;
     }
 
-    public bool IsPanelOverridable()
-    {
-        return panelOverridable;
-    }
+    // public bool HideConflictingPanels()
+    // {
+    //     if (!BuySellPanel.Instance.IsPanelActive())
+    //     {
+    //         return true;
+    //     }
 
-    public bool IsPanelActive()
-    {
-        return heroPanel.activeSelf;
-    }
+    //     if (BuySellPanel.Instance.IsPanelOverridable())
+    //     {
+    //         BuySellPanel.Instance.HideBuySellPanel();
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+    // public bool IsPanelOverridable()
+    // {
+    //     return panelOverridable;
+    // }
+
+    // public bool IsPanelActive()
+    // {
+    //     return heroPanel.activeSelf;
+    // }
 }
