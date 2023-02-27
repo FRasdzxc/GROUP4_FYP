@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2479174408548472533}
   - component: {fileID: 2012990996364981962}
   m_Layer: 0
-  m_Name: Wand (Tier 0)
+  m_Name: WandTier0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}
   projectile: {fileID: 5278577174866382799, guid: 9d396360e84f2c147b5f44bb6b9a2b3d, type: 3}
+  randomAngle: 90
 --- !u!114 &2012990996364981962
 MonoBehaviour:
   m_ObjectHideFlags: 0

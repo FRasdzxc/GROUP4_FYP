@@ -393,7 +393,10 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         {
             foreach (ItemData item in gameItems.itemList)
             {
-                ApplyTransfer(item);
+                if (item.isBuyable)
+                {
+                    ApplyTransfer(item);
+                }
             }
         }
         else

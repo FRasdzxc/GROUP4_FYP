@@ -101,6 +101,13 @@ public class GameManager : MonoBehaviour
         currentMap = Instantiate(maps[mapIndex].map);
         currentMapIndex = mapIndex;
 
+        var canvas = SceneController.Canvas;
+        if (canvas != null)
+        {
+            HUD hud = canvas.GetComponent<HUD>();
+        }
+
+
         // spawn hero
         hero.Spawn();
         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapDifficulty.ToString());

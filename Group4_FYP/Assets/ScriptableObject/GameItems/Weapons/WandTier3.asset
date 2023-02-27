@@ -15,12 +15,12 @@ MonoBehaviour:
   itemID: weapon_wandtier3
   itemName: Wand (Tier 3)
   itemType: 0
-  itemDescription: The most powerful Mage class weapon
+  itemDescription: The most powerful weapon for the Mage class
   minDropSize: 0
   maxDropSize: 0
   sellPrice: 0
   buyPrice: 0
-  itemIcon: {fileID: -4421300922047078791, guid: 03cf95018f281a34cabbb6dc1d75c9b9, type: 3}
+  itemIcon: {fileID: 21300000, guid: 38fb3a47586afcb4fb88fb3739fbb43b, type: 3}
   sound: {fileID: 0}
   isUsable: 0
   isBuyable: 0

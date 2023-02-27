@@ -6,10 +6,12 @@ public class DialogueTrigger : Interaction
     [SerializeField] private Sprite sprite;
     [SerializeField] private string header;
     [SerializeField] [TextArea(2, 5)] private string[] dialogues;
-    [SerializeField] private DialogueEvents dialogueEndEvents;
     [SerializeField] private bool canBeSkipped = true;
 
     [SerializeField] private bool triggerOnStart;
+    [SerializeField] private EventRequestType eventRequest;
+
+    private DialogueEvents dialogueEndEvents = new DialogueEvents();
     // [SerializeField] private float triggerDistance = 2.5f;
     // [SerializeField] private GameObject dialogueBubble;
     // [SerializeField] private GameObject hintPanel;
@@ -29,46 +31,22 @@ public class DialogueTrigger : Interaction
             Interact();
         }
 
-        // dialogueBubble.SetActive(true);
-        // dialogueBubbleCanvasGroup = dialogueBubble.GetComponent<CanvasGroup>();
-        // dialogueBubbleCanvasGroup.alpha = 1;
-        // hintPanel.SetActive(false);
-        // hintPanelCanvasGroup = hintPanel.GetComponent<CanvasGroup>();
-        // hintPanelCanvasGroup.alpha = 0;
-        // player = GameObject.FindGameObjectWithTag("Player");
+        switch (eventRequest)
+        {
+            case EventRequestType.ShowBuyPanel:
+                dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowBuyPanel);
+                break;
+            case EventRequestType.ShowSellPanel:
+                dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowSellPanel);
+                break;
+            case EventRequestType.ShowWeaponUpgradePanel:
+                dialogueEndEvents.AddListener(WeaponUpgradePanel.Instance.ShowWeaponUpgradePanel);
+                break;
+            case EventRequestType.ShowHeroPanel:
+                dialogueEndEvents.AddListener(HeroPanel.Instance.ShowHeroPanel);
+                break;
+        }
     }
-
-    // Update is called once per frame
-    // protected override void Update()
-    // {
-    //     base.Update();
-
-    //     // if (Vector2.Distance(transform.position, player.transform.position) <= triggerDistance)
-    //     // {
-    //     //     if (!hintPanel.activeSelf)
-    //     //     {
-    //     //         hintPanel.SetActive(true);
-    //     //         _ = hintPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    //     //         await dialogueBubbleCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    //     //         dialogueBubble.SetActive(false);
-    //     //     }
-
-    //     //     if (Input.GetKeyDown(KeyCode.E))
-    //     //     {
-    //     //         Trigger();
-    //     //     }
-    //     // }
-    //     // else
-    //     // {
-    //     //     if (hintPanel.activeSelf)
-    //     //     {
-    //     //         dialogueBubble.SetActive(true);
-    //     //         _ = dialogueBubbleCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    //     //         await hintPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    //     //         hintPanel.SetActive(false);
-    //     //     }
-    //     // }
-    // }
 
     protected async override void Interact()
     {

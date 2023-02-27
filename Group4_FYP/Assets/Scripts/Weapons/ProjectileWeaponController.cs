@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class ProjectileWeaponController : WeaponController
 {
     [SerializeField] private GameObject projectile;
+
     private ProjectileWeaponData projectileWeaponData;
     private float projectileLifeTime;
     private float projectileSpeed;
@@ -29,6 +28,7 @@ public class ProjectileWeaponController : WeaponController
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = weapon.transform.position.z;
+
             Vector2 projectDir = (mousePos - weapon.transform.position).normalized;
             float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 

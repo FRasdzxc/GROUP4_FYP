@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Wand (Tier 2)
   weaponTier: 2
-  cooldown: 0.45
+  cooldown: 0.41
   weaponGobj: {fileID: 2479174408548472528, guid: 5f0e33465b3d7d6489bdfd5d595ba749, type: 3}
   item: {fileID: 11400000, guid: 8f4566857dee15b4a9c3f8aa36cd19b7, type: 2}
   projectileLifeTime: 5
-  projectileSpeed: 45
+  projectileSpeed: 40

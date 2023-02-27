@@ -7,13 +7,35 @@ using DG.Tweening;
 
 public class SceneController : MonoBehaviour
 {
+    private static GameObject m_Instance;
+    public static GameObject Canvas
+    {
+        get
+        {
+            if (m_Instance == null)
+                Debug.LogWarning("Canvas game object does not exist");
+
+            return m_Instance;
+        }
+    }
+
     private MaskingCanvas maskingCanvas;
 
     private string selectedSceneName;
 
     void Awake()
     {
+        Debug.Assert(m_Instance == null || m_Instance == this, "More than one SceneController exists, please double check");
+        if (m_Instance == null)
+            m_Instance = gameObject;
+
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
+    }
+
+    private void OnDestroy()
+    {
+        if (m_Instance == gameObject)
+            m_Instance = null;
     }
 
     public void SetScene(string sceneName) // temporary

@@ -12,3 +12,4 @@ public enum OrbUpgradeType { MaxHealth, HealthRegeneration, MaxMana, ManaRegener
 public enum TooltipHintType { None, Use, Drop, UseAll, DropAll, Transfer, TransferAll };
 public enum NPCType { Normal, Merchant, Blacksmith };
 public enum BuySellType { Buy, Sell };
+public enum EventRequestType { None, ShowBuyPanel, ShowSellPanel, ShowWeaponUpgradePanel, ShowHeroPanel };

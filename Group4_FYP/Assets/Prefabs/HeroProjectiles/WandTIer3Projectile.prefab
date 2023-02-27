@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5278577174866382797}
   - component: {fileID: 5278577174866382798}
-  - component: {fileID: 3002839301304627413}
+  - component: {fileID: 2373565405069627771}
   - component: {fileID: 5278577174866382786}
   - component: {fileID: 6319899771320618301}
   - component: {fileID: 5278577174866382787}
   - component: {fileID: 9028928301479990405}
   - component: {fileID: 4392187773836206311}
   m_Layer: 0
-  m_Name: WandTIer3Projectile
+  m_Name: WandTier3Projectile
   m_TagString: HeroWeaponTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5278577174866382799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -5874754843300918789, guid: a710612ffddcd0041936defcb22d9f03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aebea0f3eff945d4faaa643c51417277, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &3002839301304627413
+--- !u!60 &2373565405069627771
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,14 +114,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.46875, y: 0.28125}
-      - {x: -0.5, y: 0.25}
-      - {x: -0.5, y: -0.15625}
-      - {x: -0.25, y: -0.28125}
-      - {x: 0.4375, y: -0.28125}
-      - {x: 0.5, y: -0.25}
-      - {x: 0.5, y: 0.21875}
-      - {x: 0.46875, y: 0.28125}
+    - - {x: 0.375, y: 0.28125}
+      - {x: 0.09375, y: 0.46875}
+      - {x: -0.5, y: 0.46875}
+      - {x: -0.5, y: -0.4375}
+      - {x: -0.46875, y: -0.46875}
+      - {x: -0.125, y: -0.46875}
+      - {x: 0.34375, y: -0.34375}
+      - {x: 0.5, y: -0.1875}
+      - {x: 0.5, y: 0.15625}
 --- !u!50 &5278577174866382786
 Rigidbody2D:
   serializedVersion: 4
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.7843137, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -331,7 +332,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
+  m_PointLightInnerRadius: 0.5
   m_PointLightOuterRadius: 1
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0

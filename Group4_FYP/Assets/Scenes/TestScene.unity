@@ -1352,23 +1352,9 @@ MonoBehaviour:
   header: Merchant
   dialogues:
   - Good day! What do you want to sell?
-  dialogueEndEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1370915362}
-        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
-        m_MethodName: ShowSellPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   canBeSkipped: 1
   triggerOnStart: 0
+  eventRequest: 2
 --- !u!114 &620585628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5880,23 +5866,9 @@ MonoBehaviour:
   header: Merchant
   dialogues:
   - Hello! Welcome to the shop!
-  dialogueEndEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1370915362}
-        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
-        m_MethodName: ShowBuyPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   canBeSkipped: 1
   triggerOnStart: 0
+  eventRequest: 0
 --- !u!114 &1264880097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6074,23 +6046,9 @@ MonoBehaviour:
   header: Merchant
   dialogues:
   - Hello! Welcome to the shop!
-  dialogueEndEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1370915362}
-        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
-        m_MethodName: ShowBuyPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   canBeSkipped: 1
   triggerOnStart: 0
+  eventRequest: 0
 --- !u!114 &1366015077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6203,17 +6161,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1370915362 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3422485709956159012, guid: f271770acf5f5d74b89af9793fee3291, type: 3}
-  m_PrefabInstance: {fileID: 483962958}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc5defce58937fe45a209e4dff2114c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1460667068 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3936497599223476233, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
@@ -7430,23 +7377,9 @@ MonoBehaviour:
   header: Merchant
   dialogues:
   - Hello! Welcome to the shop!
-  dialogueEndEvents:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1370915362}
-        m_TargetAssemblyTypeName: BuySellPanel, Assembly-CSharp
-        m_MethodName: ShowBuyPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   canBeSkipped: 1
   triggerOnStart: 0
+  eventRequest: 1
 --- !u!114 &5486871242976486507
 MonoBehaviour:
   m_ObjectHideFlags: 0
