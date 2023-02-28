@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
         RefreshInventoryPanel();
     }
 
-    int GetFreeEntry(ItemData item)
+    public int GetFreeEntry(ItemData item)
     {
         for (int i = 0; i < items.Count; i++)
         {
@@ -74,18 +74,22 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemData item)
     {
+        int slot = GetFreeEntry(item);
+
         if (items.Count >= inventorySize)
         {
-            if (!messageIsShown)
+            if (slot == -1) // no free slots either
             {
-                Message.Instance.ShowMessage("Inventory is full!");
-                messageIsShown = true;
+                if (!messageIsShown)
+                {
+                    Message.Instance.ShowMessage("Inventory is full!");
+                    messageIsShown = true;
+                }
+                
+                return false;
             }
-            
-            return false;
         }
 
-        int slot = GetFreeEntry(item);
         if (slot == -1)
             items.Add(new InventoryEntry(item));
         else
@@ -212,6 +216,11 @@ public class Inventory : MonoBehaviour
     public int GetInventorySize()
     {
         return inventorySize;
+    }
+
+    public bool IsFull(int alteredValue = 0)
+    {
+        return ((items.Count + alteredValue) >= inventorySize);
     }
 
     // private bool FindItem(ItemData item)

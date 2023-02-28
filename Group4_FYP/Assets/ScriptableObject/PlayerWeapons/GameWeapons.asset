@@ -15,7 +15,11 @@ MonoBehaviour:
   weaponList:
   - heroClass: 1
     classWeapons:
-    - weaponData: {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}
-    - weaponData: {fileID: 11400000, guid: a74c1050a150aaa44a2876a7eb56bd8d, type: 2}
-    - weaponData: {fileID: 11400000, guid: add6b62f40a35054ca1dde2fe6f48fc6, type: 2}
-    - weaponData: {fileID: 11400000, guid: e16f43662c054564b93133df13c283d0, type: 2}
+    - weaponId: weapon_wand
+      weaponTiers:
+      - {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}
+      - {fileID: 11400000, guid: a74c1050a150aaa44a2876a7eb56bd8d, type: 2}
+      - {fileID: 11400000, guid: add6b62f40a35054ca1dde2fe6f48fc6, type: 2}
+      - {fileID: 11400000, guid: e16f43662c054564b93133df13c283d0, type: 2}
+    - weaponId: weapon_twister
+      weaponTiers: []

@@ -80,7 +80,7 @@ public class SaveSystem : MonoBehaviour
         abilityManager.SetMaxManaUpgrade(profile.maxManaUpgrade);
         abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
         hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
-        weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponTier);
+        weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
     }
 
     public void SaveData(bool showNotification)
@@ -105,6 +105,7 @@ public class SaveSystem : MonoBehaviour
         profile.maxManaUpgrade = abilityManager.GetMaxManaUpgrade();
         profile.manaRegenerationUpgrade = abilityManager.GetManaRegenerationUpgrade();
         profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
+        profile.weaponId = weaponManager.GetWeaponId();
         profile.weaponTier = weaponManager.GetWeaponTier();
 
         ProfileManagerJson.SaveProfile(profile);

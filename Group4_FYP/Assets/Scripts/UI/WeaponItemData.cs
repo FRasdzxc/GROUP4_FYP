@@ -4,4 +4,11 @@ using UnityEngine;
 public class WeaponItemData : ItemData
 {
     public WeaponData weapon;
+
+    public override void Use()
+    {
+        base.Use();
+
+        WeaponManager.Instance.EquipWeapon(weapon);
+    }
 }

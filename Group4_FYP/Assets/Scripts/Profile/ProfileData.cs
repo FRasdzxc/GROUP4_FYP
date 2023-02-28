@@ -26,6 +26,7 @@ public class ProfileData
     public float expGainMultiplierUpgrade;
     public int map;
     public List<InventoryEntry> inventory;
+    public string weaponId;
     public int weaponTier;
 
     public ProfileData() // profile for test scenes
@@ -52,6 +53,7 @@ public class ProfileData
         expGainMultiplierUpgrade = 1;
         map = 0;
         inventory = new List<InventoryEntry>();
+        weaponId = "weapon_wand";
         weaponTier = 0;
     }
 
@@ -80,6 +82,14 @@ public class ProfileData
         expGainMultiplierUpgrade = 1;
         map = 0;
         inventory = new List<InventoryEntry>();
+
+        switch (heroClass)
+        {
+            case HeroClass.Mage:
+                weaponId = "weapon_wand";
+                break;
+        }
+
         weaponTier = 0;
     }
 
@@ -107,6 +117,7 @@ public class ProfileData
         expGainMultiplierUpgrade = profileData.expGainMultiplierUpgrade;
         map = profileData.map;
         inventory = profileData.inventory;
+        weaponId = profileData.weaponId;
         weaponTier = profileData.weaponTier;
     }
 }

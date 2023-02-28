@@ -25,6 +25,7 @@ public class WeaponUpgradePanel : PanelOverride
     private List<InventoryEntry> tempItems;
     private bool upgradable;
     private int price;
+    private string weaponId;
     private int targetTier;
 
     private static WeaponUpgradePanel instance;
@@ -84,6 +85,9 @@ public class WeaponUpgradePanel : PanelOverride
         coinText.text = Hero.Instance.GetStoredCoin().ToString("n0");
         upgradable = false;
 
+        weaponId = WeaponManager.Instance.GetWeaponId();
+        targetTier = WeaponManager.Instance.GetWeaponTier() + 1;
+
         weaponSlot.Configure(WeaponManager.Instance.GetWeapon().item, 1, InventoryMode.Preview);
 
         // check if weapon is of the highest tier
@@ -91,32 +95,37 @@ public class WeaponUpgradePanel : PanelOverride
         {
             if (cwe.heroClass == WeaponManager.Instance.GetHeroClass())
             {
-                targetTier = WeaponManager.Instance.GetWeaponTier() + 1;
-
-                if (targetTier < cwe.classWeapons.Length)
+                foreach (WeaponEntry we in cwe.classWeapons)
                 {
-                    // if weapon is not at the highest tier, find if tempItems contains relic for weapontier + 1
-                    if (FindRelic())
+                    if (weaponId == we.weaponId)
                     {
-                        warningText.gameObject.SetActive(false);
-                        equalsImage.sprite = equalsSprite;
-                        upgradable = true;
+                        // if (targetTier < cwe.classWeapons.Length)
+                        if (targetTier < we.weaponTiers.Length)
+                        {
+                            // if weapon is not at the highest tier, find if tempItems contains relic for weapontier + 1
+                            if (FindRelic())
+                            {
+                                warningText.gameObject.SetActive(false);
+                                equalsImage.sprite = equalsSprite;
+                                upgradable = true;
+                            }
+                            else
+                            {
+                                warningText.gameObject.SetActive(true);
+                                warningText.text = String.Format("You do not have the required relic - \"Relic (Tier {0})\" for this upgrade", targetTier);
+                                equalsImage.sprite = notEqualsSprite;
+                            }
+                            resultSlot.Configure(we.weaponTiers[targetTier].item, 1, InventoryMode.Preview);
+                        }
+                        else
+                        {
+                            warningText.gameObject.SetActive(true);
+                            warningText.text = "Your weapon is of the highest tier already!";
+                            equalsImage.sprite = notEqualsSprite;
+                            relicSlot.Clear();
+                            resultSlot.Clear();
+                        }
                     }
-                    else
-                    {
-                        warningText.gameObject.SetActive(true);
-                        warningText.text = String.Format("You do not have the required relic - \"Relic (Tier {0})\" for this upgrade", targetTier);
-                        equalsImage.sprite = notEqualsSprite;
-                    }
-                    resultSlot.Configure(cwe.classWeapons[targetTier].weaponData.item, 1, InventoryMode.Preview);
-                }
-                else
-                {
-                    warningText.gameObject.SetActive(true);
-                    warningText.text = "Your weapon is of the highest tier already!";
-                    equalsImage.sprite = notEqualsSprite;
-                    relicSlot.Clear();
-                    resultSlot.Clear();
                 }
             }
         }

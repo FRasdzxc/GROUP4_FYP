@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public string weaponName;
+    [HideInInspector] public string weaponId;
     public int weaponTier;
     public float cooldown;
     public GameObject weaponGobj;

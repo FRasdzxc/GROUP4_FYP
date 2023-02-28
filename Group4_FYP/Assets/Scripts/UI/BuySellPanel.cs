@@ -15,6 +15,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private Text confirmButtonText;
     [SerializeField] private GameObject applyAllButton;
     [SerializeField] private GameObject revertAllButton;
+    [SerializeField] private GameObject equalsPanel;
     [SerializeField] private Text titleText;
     [SerializeField] private Text coinText;
     [SerializeField] private Text totalText;
@@ -135,8 +136,9 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             rightPanelTitle.text = "Inventory";
             confirmAction = Buy;
             confirmButtonText.text = "Buy";
-            applyAllButton.SetActive(true);
+            applyAllButton.SetActive(false);
             revertAllButton.SetActive(false);
+            equalsPanel.SetActive(true);
             /* 
                 impossible to revert manually:
                 transferred items might be added to existing slots by GetFreeEntry();
@@ -156,6 +158,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             confirmButtonText.text = "Sell";
             applyAllButton.SetActive(true);
             revertAllButton.SetActive(true);
+            equalsPanel.SetActive(false);
         }
         RefreshTotal();
 
@@ -310,10 +313,13 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
         if (buySellType == BuySellType.Buy)
         {
-            if (tempItems.Count > Inventory.Instance.GetInventorySize()) // rewrite: getfreeentry first
+            if (tempItems.Count > Inventory.Instance.GetInventorySize()) // rewrite: getfreeentry first?
             {
-                _ = Notification.Instance.ShowNotification("Inventory will be full!");
-                return;
+                if (GetFreeEntry(item, tempItems) == -1)
+                {
+                    _ = Notification.Instance.ShowNotification("Inventory will be full!");
+                    return;
+                }
             }
 
             int slot = GetFreeEntry(item, tempItems);

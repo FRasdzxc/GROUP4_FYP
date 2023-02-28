@@ -17,12 +17,12 @@ MonoBehaviour:
   itemType: 0
   itemDescription: Another upgrade to the Wand with even faster firerate and higher
     damage
-  minDropSize: 0
-  maxDropSize: 0
-  sellPrice: 0
+  minDropSize: 1
+  maxDropSize: 1
+  sellPrice: 10000
   buyPrice: 0
   itemIcon: {fileID: -4421300922047078791, guid: 03cf95018f281a34cabbb6dc1d75c9b9, type: 3}
   sound: {fileID: 0}
-  isUsable: 0
+  isUsable: 1
   isBuyable: 0
   weapon: {fileID: 11400000, guid: add6b62f40a35054ca1dde2fe6f48fc6, type: 2}

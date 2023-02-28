@@ -19,12 +19,12 @@ MonoBehaviour:
 
     Decent weapon that
     shoots out souls, but deals low damage and has a slow fire rate.'
-  minDropSize: 0
-  maxDropSize: 0
-  sellPrice: 0
+  minDropSize: 1
+  maxDropSize: 1
+  sellPrice: 5000
   buyPrice: 0
   itemIcon: {fileID: -4421300922047078791, guid: 03cf95018f281a34cabbb6dc1d75c9b9, type: 3}
   sound: {fileID: 0}
-  isUsable: 0
+  isUsable: 1
   isBuyable: 0
   weapon: {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}

@@ -29,7 +29,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    private ItemData item = null; // change to use list/array instead to support stacked items?
+    private ItemData item = null;
     public ItemData ItemData
     {
         get => item;
@@ -107,9 +107,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         // use occupied item
         ItemData.Use();
-        Inventory.Instance.RemoveItem(ItemData);
 
-        StackSize--;
+        if (!(ItemData is WeaponItemData))
+        {
+            // WeaponManager.cs will remove the item instead
+            Inventory.Instance.RemoveItem(ItemData);
+            StackSize--;
+        }
     }
 
     public void DropItem()
@@ -131,7 +135,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         return ItemData;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) // rewrite this with switch case? it looks messy
     {
         if (eventData.pointerEnter == gameObject)
         {
@@ -215,7 +219,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }        
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) // rewrite this with switch case? it looks messy
     {
         if (eventData.pointerClick == gameObject && item)
         {

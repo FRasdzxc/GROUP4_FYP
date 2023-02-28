@@ -10,6 +10,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
     [SerializeField] private Text coinText;
+    [SerializeField] private InventorySlot weaponSlot;
     // [SerializeField] private bool panelOverridable;
 
     private bool isOpened;
@@ -110,6 +111,12 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     protected override GameObject GetPanel()
     {
         return heroPanel;
+    }
+
+    public void SetupWeaponSlot(ItemData weaponItem)
+    {
+        weaponSlot.Clear();
+        weaponSlot.Configure(weaponItem, 1, InventoryMode.Preview);
     }
 
     // public bool HideConflictingPanels()
