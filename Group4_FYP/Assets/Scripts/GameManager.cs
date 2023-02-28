@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private Hero hero;
     private MaskingCanvas maskingCanvas;
     private HUD hud;
+    private PauseMenu pauseMenu;
 
     private static GameManager instance;
     public static GameManager Instance
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
+        pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
 
         if (!isTestScene)
         {
@@ -107,10 +109,26 @@ public class GameManager : MonoBehaviour
             HUD hud = canvas.GetComponent<HUD>();
         }
 
+        // if map is a dungeon, disable saving buttons
+        if (maps[currentMapIndex].mapType == MapType.Dungeon)
+        {
+            pauseMenu.SetDungeonMode(true);
+        }
+        else
+        {
+            pauseMenu.SetDungeonMode(false);
+        }
 
         // spawn hero
         hero.Spawn();
-        _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapDifficulty.ToString());
+        if (maps[currentMapIndex].mapType == MapType.Peaceful)
+        {
+            _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapType.ToString());
+        }
+        else
+        {
+            _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, String.Format("{0} - {1}", maps[currentMapIndex].mapType.ToString(), maps[currentMapIndex].mapDifficulty.ToString()));
+        }
 
         // set objective
         if (maps[mapIndex].objective.Length > 0) // if objective is not empty

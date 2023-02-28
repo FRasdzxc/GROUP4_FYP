@@ -33,8 +33,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
-
-        SetDungeonMode(false);
     }
 
     // Update is called once per frame

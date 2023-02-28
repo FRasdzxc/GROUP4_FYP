@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Hero Data", menuName = "Game/Hero Data")]
-public class HeroData : ScriptableObject
+public class HeroData : ScriptableObject // todo: inherit characterdata
 {
     public float health;
     public float healthRegeneration;
