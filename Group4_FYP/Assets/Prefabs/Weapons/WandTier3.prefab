@@ -118,8 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: e16f43662c054564b93133df13c283d0, type: 2}
-  projectile: {fileID: 5278577174866382799, guid: 4dfcb5922ff80944c85d5e744219f858, type: 3}
-  randomAngle: 0
+  projectile: {fileID: 3339346020721938231, guid: f235f509f33c2d544bf3c80ef13b1373, type: 3}
 --- !u!114 &2012990996364981962
 MonoBehaviour:
   m_ObjectHideFlags: 0
