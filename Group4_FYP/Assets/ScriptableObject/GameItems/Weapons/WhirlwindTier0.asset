@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77e0eaed94ae1024682a4df62f7578b2, type: 3}
-  m_Name: WandTier2
+  m_Name: WhirlwindTier0
   m_EditorClassIdentifier: 
-  itemID: weapon_wandtier2
-  itemName: Wand (Tier 2)
+  itemID: weapon_whirlwindtier0
+  itemName: Whirlwind (Tier 0)
   itemType: 0
-  itemDescription: Another upgrade to the Wand with even faster firerate and higher
-    damage
+  itemDescription: Mage class weapon with fast fire rate but with lower damage compared
+    to the Wand
   minDropSize: 1
   maxDropSize: 1
-  sellPrice: 4500
+  sellPrice: 1750
   buyPrice: 0
-  itemIcon: {fileID: -4421300922047078791, guid: 03cf95018f281a34cabbb6dc1d75c9b9, type: 3}
+  itemIcon: {fileID: -274275817037578778, guid: c1f6352b4e117d94ca188256403a15ad, type: 3}
   sound: {fileID: 0}
   isUsable: 1
   isBuyable: 0
-  weapon: {fileID: 11400000, guid: add6b62f40a35054ca1dde2fe6f48fc6, type: 2}
+  weapon: {fileID: 11400000, guid: 5ec23dc127b4254439b705b4f86a20b9, type: 2}

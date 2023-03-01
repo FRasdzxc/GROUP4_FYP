@@ -21,5 +21,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: a74c1050a150aaa44a2876a7eb56bd8d, type: 2}
       - {fileID: 11400000, guid: add6b62f40a35054ca1dde2fe6f48fc6, type: 2}
       - {fileID: 11400000, guid: e16f43662c054564b93133df13c283d0, type: 2}
-    - weaponId: weapon_twister
-      weaponTiers: []
+    - weaponId: weapon_whirlwind
+      weaponTiers:
+      - {fileID: 11400000, guid: 5ec23dc127b4254439b705b4f86a20b9, type: 2}
+      - {fileID: 11400000, guid: a515289946ac30545bd390313f08cc99, type: 2}
+      - {fileID: 11400000, guid: 4a7f1fe2d1373804d806ad2388363492, type: 2}
+      - {fileID: 11400000, guid: 62dd830909dabb945b8cd216bdb34e35, type: 2}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b2b67d32bc55f40807e4a951497205, type: 3}
+  m_Name: WhirlwindTier0
+  m_EditorClassIdentifier: 
+  weaponName: Whirlwind (Tier 0)
+  weaponId: weapon_whirlwind
+  weaponTier: 0
+  cooldown: 0.35
+  weaponGobj: {fileID: 5967436969897776231, guid: 0d8b545cc83603e41bcf7322c7bba5db, type: 3}
+  item: {fileID: 11400000, guid: 77d3fe0757e5bd84b89831e1e9ead1a9, type: 2}
+  projectileLifeTime: 5
+  projectileSpeed: 35
