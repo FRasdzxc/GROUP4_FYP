@@ -7,23 +7,25 @@ public class GameManager : MonoBehaviour
 
     // [SerializeField] private GameObject[] maps;
 
-    [Serializable]
-    public struct MapEntry
-    {
-        public GameObject map;
-        [Tooltip("Players cannot attack / take damage when Map Type is Peaceful")]
-        public MapType mapType;
-        public MapDifficulty mapDifficulty;
-        [TextArea(2, 5)]
-        public string objective;
-    }
+    // [Serializable]
+    // public struct MapEntry
+    // {
+    //     public GameObject map;
+    //     [Tooltip("Players cannot attack / take damage when Map Type is Peaceful")]
+    //     public MapType mapType;
+    //     public MapDifficulty mapDifficulty;
+    //     [TextArea(2, 5)]
+    //     public string objective;
+    // }
 
-    [SerializeField] private MapEntry[] maps;
+    // [SerializeField] private MapEntry[] maps;
+    [SerializeField] private GameMaps maps;
 
     [SerializeField] private string[] tutorialDialogues; // can be written better?
 
     private GameObject currentMap; // used as a clone
-    private int currentMapIndex;
+    // private int currentMapIndex;
+    private string currentMapId;
 
     private GameState gameState;
 
@@ -56,18 +58,29 @@ public class GameManager : MonoBehaviour
 
         if (!isTestScene)
         {
-            LoadMap(currentMapIndex);
+            // LoadMap(currentMapIndex);
+            LoadMap(currentMapId);
         }
     }
 
-    public void SetMap(int mapIndex)
+    #region Setters/Getters
+    // public void SetMap(int mapIndex)
+    // {
+    //     currentMapIndex = mapIndex;
+    // }
+
+    public void SetMapId(string mapId)
     {
-        currentMapIndex = mapIndex;
+        currentMapId = mapId;
     }
 
-    public int GetMap()
+    // public int GetMap()
+    // {
+    //     return currentMapIndex;
+    // }
+    public string GetMapId()
     {
-        return currentMapIndex;
+        return currentMapId;
     }
 
     public void SetGameState(GameState gameState)
@@ -82,26 +95,76 @@ public class GameManager : MonoBehaviour
 
     public MapType GetCurrentMapType()
     {
-        return maps[currentMapIndex].mapType;
+        // return maps.maps[currentMapIndex].mapType;
+        return FindMap(currentMapId).mapType;
     }
+    #endregion
 
     public bool IsPlayingHostile()
     {
-        return (gameState == GameState.Playing && maps[currentMapIndex].mapType == MapType.Hostile);
+        // return (gameState == GameState.Playing && maps.maps[currentMapIndex].mapType == MapType.Hostile);
+        return (gameState == GameState.Playing && FindMap(currentMapId).mapType == MapType.Hostile);
     }
 
-    private void LoadMap(int mapIndex)
+    // private void LoadMap(int mapIndex)
+    // {
+    //     // check if maps[currentMapIndex] exists or not
+    //     if (!(mapIndex >= 0 && mapIndex < maps.Length))
+    //     {
+    //         Debug.LogError("Map " + mapIndex + " not found.");
+    //         return;
+    //     }
+
+    //     // clone map
+    //     currentMap = Instantiate(maps[mapIndex].map);
+    //     currentMapIndex = mapIndex;
+
+    //     var canvas = SceneController.Canvas;
+    //     if (canvas != null)
+    //     {
+    //         HUD hud = canvas.GetComponent<HUD>();
+    //     }
+
+    //     // if map is a dungeon, disable saving buttons
+    //     if (maps[currentMapIndex].mapType == MapType.Dungeon)
+    //     {
+    //         pauseMenu.SetDungeonMode(true);
+    //     }
+    //     else
+    //     {
+    //         pauseMenu.SetDungeonMode(false);
+    //     }
+
+    //     // spawn hero
+    //     hero.Spawn();
+    //     if (maps[currentMapIndex].mapType == MapType.Peaceful)
+    //     {
+    //         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapType.ToString());
+    //     }
+    //     else
+    //     {
+    //         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, String.Format("{0} - {1}", maps[currentMapIndex].mapType.ToString(), maps[currentMapIndex].mapDifficulty.ToString()));
+    //     }
+
+    //     // set objective
+    //     if (maps[mapIndex].objective.Length > 0) // if objective is not empty
+    //     {
+    //         hud.ShowObjective(maps[mapIndex].objective);
+    //     }
+    // }
+    private void LoadMap(string mapId)
     {
+        MapData mapData = FindMap(mapId);
+
         // check if maps[currentMapIndex] exists or not
-        if (!(mapIndex >= 0 && mapIndex < maps.Length))
+        if (!mapData)
         {
-            Debug.LogError("Map " + mapIndex + " not found.");
             return;
         }
 
         // clone map
-        currentMap = Instantiate(maps[mapIndex].map);
-        currentMapIndex = mapIndex;
+        currentMap = Instantiate(mapData.mapPrefab);
+        currentMapId = mapData.mapId;
 
         var canvas = SceneController.Canvas;
         if (canvas != null)
@@ -110,7 +173,7 @@ public class GameManager : MonoBehaviour
         }
 
         // if map is a dungeon, disable saving buttons
-        if (maps[currentMapIndex].mapType == MapType.Dungeon)
+        if (mapData.mapType == MapType.Dungeon)
         {
             pauseMenu.SetDungeonMode(true);
         }
@@ -121,19 +184,33 @@ public class GameManager : MonoBehaviour
 
         // spawn hero
         hero.Spawn();
-        if (maps[currentMapIndex].mapType == MapType.Peaceful)
+        if (mapData.mapType == MapType.Peaceful)
         {
-            _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapType.ToString());
+            _ = hud.ShowHugeMessage(mapData.mapName, mapData.mapType.ToString());
         }
         else
         {
-            _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, String.Format("{0} - {1}", maps[currentMapIndex].mapType.ToString(), maps[currentMapIndex].mapDifficulty.ToString()));
+            _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} - {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
         }
 
         // set objective
-        if (maps[mapIndex].objective.Length > 0) // if objective is not empty
+        if (mapData.objective.Length > 0) // if objective is not empty
         {
-            hud.ShowObjective(maps[mapIndex].objective);
+            hud.ShowObjective(mapData.objective);
         }
+    }
+
+    private MapData FindMap(string mapId)
+    {
+        foreach (MapData map in maps.maps)
+        {
+            if (map.mapId == mapId)
+            {
+                return map;
+            }
+        }
+
+        Debug.LogError($"No map with an id of {mapId} found");
+        return null;
     }
 }

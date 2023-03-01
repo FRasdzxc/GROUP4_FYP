@@ -24,7 +24,8 @@ public class ProfileData
     public float maxManaUpgrade;
     public float manaRegenerationUpgrade;
     public float expGainMultiplierUpgrade;
-    public int map;
+    // public int map; // deprecated
+    public string mapId;
     public List<InventoryEntry> inventory;
     public string weaponId;
     public int weaponTier;
@@ -51,7 +52,8 @@ public class ProfileData
         maxManaUpgrade = 0;
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
-        map = 0;
+        // map = 0;
+        mapId = "map_tutorial";
         inventory = new List<InventoryEntry>();
         weaponId = "weapon_wand";
         weaponTier = 0;
@@ -80,7 +82,8 @@ public class ProfileData
         maxManaUpgrade = 0;
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
-        map = 0;
+        // map = 0;
+        mapId = "map_tutorial";
         inventory = new List<InventoryEntry>();
 
         switch (heroClass)
@@ -115,7 +118,8 @@ public class ProfileData
         maxManaUpgrade = profileData.maxManaUpgrade;
         manaRegenerationUpgrade = profileData.manaRegenerationUpgrade;
         expGainMultiplierUpgrade = profileData.expGainMultiplierUpgrade;
-        map = profileData.map;
+        // map = profileData.map;
+        mapId = profileData.mapId;
         inventory = profileData.inventory;
         weaponId = profileData.weaponId;
         weaponTier = profileData.weaponTier;

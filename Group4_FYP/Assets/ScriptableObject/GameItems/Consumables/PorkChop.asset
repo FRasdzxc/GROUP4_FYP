@@ -25,8 +25,8 @@ MonoBehaviour:
     https://en.wikipedia.org/wiki/Pork_chop'
   minDropSize: 1
   maxDropSize: 3
-  sellPrice: 5
-  buyPrice: 10
+  sellPrice: 10
+  buyPrice: 17
   itemIcon: {fileID: -7486828745671446363, guid: 1037e6b7c6b9aa64fb4b4561b9b94ade, type: 3}
   sound: {fileID: 0}
   isUsable: 1

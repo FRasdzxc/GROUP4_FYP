@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ProjectileWeaponController : WeaponController
 {
-    [SerializeField] private GameObject projectile;
+    [SerializeField] protected GameObject projectile;
 
     private ProjectileWeaponData projectileWeaponData;
-    private float projectileLifeTime;
-    private float projectileSpeed;
+    protected float projectileLifeTime;
+    protected float projectileSpeed;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -38,7 +38,7 @@ public class ProjectileWeaponController : WeaponController
         }
     }
 
-    private async void DestroyGobj(GameObject gameObject)
+    protected async void DestroyGobj(GameObject gameObject)
     {
         float interval = 0f;
 

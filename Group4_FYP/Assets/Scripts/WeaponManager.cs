@@ -34,11 +34,6 @@ public class WeaponManager : MonoBehaviour
         SetupWeapon();
     }
 
-    void Update()
-    {
-        Debug.Log(Inventory.Instance.IsFull());
-    }
-
     public void UpgradeWeapon(int toWeaponTier)
     {
         weaponTier = toWeaponTier;
@@ -64,6 +59,7 @@ public class WeaponManager : MonoBehaviour
         weaponTier = weapon.weaponTier;
 
         SetupWeapon();
+        _ = Notification.Instance.ShowNotification($"Equipped {weapon.weaponName}");
     }
 
     private void SetupWeapon()

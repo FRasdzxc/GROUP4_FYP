@@ -70,7 +70,8 @@ public class SaveSystem : MonoBehaviour
         abilityManager.SetMana(profile.mana);
         abilityManager.SetMaxMana(profile.maxMana);
         abilityManager.SetManaRegeneration(profile.manaRegeneration);
-        gameController.SetMap(profile.map);
+        // gameController.SetMap(profile.map);
+        gameController.SetMapId(profile.mapId);
         inventory.SetItems(profile.inventory);
         orb.SetOrbs(profile.orbs);
         orb.SetUsedOrbs(profile.usedOrbs);
@@ -95,7 +96,8 @@ public class SaveSystem : MonoBehaviour
         profile.mana = abilityManager.GetMana();
         profile.maxMana = abilityManager.GetMaxMana();
         profile.manaRegeneration = abilityManager.GetManaRegeneration();
-        profile.map = gameController.GetMap();
+        // profile.map = gameController.GetMap();
+        profile.mapId = gameController.GetMapId();
         profile.inventory = inventory.GetItems();
         profile.orbs = orb.GetOrbs();
         profile.usedOrbs = orb.GetUsedOrbs();
