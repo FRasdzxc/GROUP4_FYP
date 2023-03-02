@@ -138,12 +138,12 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             confirmButtonText.text = "Buy";
             applyAllButton.SetActive(false);
             revertAllButton.SetActive(false);
-            equalsPanel.SetActive(true);
             /* 
                 impossible to revert manually:
                 transferred items might be added to existing slots by GetFreeEntry();
                 if not, inventory might be full even though it isn't
             */
+            equalsPanel.SetActive(true);
         }
         else // sell items
         {
@@ -156,9 +156,9 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             rightPanelTitle.text = "Selling";
             confirmAction = Sell;
             confirmButtonText.text = "Sell";
-            applyAllButton.SetActive(true);
-            revertAllButton.SetActive(true);
-            equalsPanel.SetActive(false);
+            applyAllButton.SetActive(false); // way too slow, may add back once there is a faster solution
+            revertAllButton.SetActive(false);
+            equalsPanel.SetActive(true);
         }
         RefreshTotal();
 

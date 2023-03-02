@@ -13,6 +13,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle cameraShakeToggle;
+    [SerializeField] private Toggle vSyncToggle;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider volumeSlider;
 
@@ -64,6 +65,11 @@ public class SettingsMenu : MonoBehaviour
         cameraShakeToggle.isOn = isShaking;
     }
 
+    public void SetVSync(bool value)
+    {
+        QualitySettings.vSyncCount = BoolToInt(value);
+    }
+
     public void SetVolume(float volume)
     {
         audioMixer.SetFloat("volume", volume);
@@ -81,6 +87,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt("resolutionChosen", 1);
         PlayerPrefs.SetInt("fullscreen", BoolToInt(fullscreenToggle.isOn));
         //PlayerPrefs.SetInt("cameraShake", BoolToInt(cameraShakeToggle.isOn));
+        PlayerPrefs.SetInt("vSync", BoolToInt(vSyncToggle.isOn));
         PlayerPrefs.SetFloat("volume", volumeSlider.value);
     }
 
@@ -98,6 +105,8 @@ public class SettingsMenu : MonoBehaviour
             SetResolution(resolutions.Length - 1);
             SetFullscreen(true);
         }
+
+        SetVSync(IntToBool(PlayerPrefs.GetInt("vSync")));
 
         //SetCameraShake(IntToBool());
         ChangeVolume(PlayerPrefs.GetFloat("volume"));

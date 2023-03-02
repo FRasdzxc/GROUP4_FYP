@@ -221,6 +221,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData) // rewrite this with switch case? it looks messy
     {
+        int tempStackSize = StackSize;
+
         if (eventData.pointerClick == gameObject && item)
         {
             if (inventoryMode == InventoryMode.Normal) // use and drop items
@@ -229,7 +231,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 {
                     if (Input.GetKey(KeyCode.LeftShift)) // use all
                     {
-                        while (StackSize > 0)
+                        // while (StackSize > 0)
+                        // {
+                        //     UseItem();
+                        // }
+
+                        for (int i = 0; i < tempStackSize; i++)
                         {
                             UseItem();
                         }
@@ -243,7 +250,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 {
                     if (Input.GetKey(KeyCode.LeftShift)) // drop all
                     {
-                        while (StackSize > 0)
+                        // while (StackSize > 0)
+                        // {
+                        //     DropItem();
+                        // }
+
+                        for (int i = 0; i < tempStackSize; i++)
                         {
                             DropItem();
                         }
