@@ -10,6 +10,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private Text descriptionText;
     [SerializeField] private Text attributeText;
     [SerializeField] private Text hintText;
+    [SerializeField] private float posXOffset;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -38,54 +39,20 @@ public class Tooltip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Input.mousePosition;
+        transform.position = Input.mousePosition + new Vector3(posXOffset, 0);
+        float pivotX = 0;
 
-        float pivotX = transform.position.x / Screen.width;
+        // if right border of the TooltipPanel is over right side of the screen
+        if ((rectTransform.transform.position.x + rectTransform.rect.width) > Screen.width)
+        {
+            transform.position = Input.mousePosition - new Vector3(posXOffset, 0);
+            pivotX = 1;
+        }
+
         float pivotY = transform.position.y / Screen.height;
-
+        
         rectTransform.pivot = new Vector2(pivotX, pivotY);
     }
-
-    // public async void ShowTooltip(string header, string description = "", string attribute = "", string hint = "")
-    // {
-    //     KillTween();
-
-    //     headerText.text = header;
-
-    //     if (description != "")
-    //     {
-    //         descriptionText.gameObject.SetActive(true);
-    //         descriptionText.text = description;
-    //     }
-    //     else
-    //     {
-    //         descriptionText.gameObject.SetActive(false);
-    //     }
-
-    //     if (attribute != "")
-    //     {
-    //         attributeText.gameObject.SetActive(true);
-    //         attributeText.text = attribute;
-    //     }
-    //     else
-    //     {
-    //         attributeText.gameObject.SetActive(false);
-    //     }
-
-    //     if (hint != "")
-    //     {
-    //         hintText.gameObject.SetActive(true);
-    //         hintText.text = hint;
-    //     }
-    //     else
-    //     {
-    //         hintText.gameObject.SetActive(false);
-    //     }
-
-    //     gameObject.SetActive(true);
-    //     //Cursor.visible = false;
-    //     await canvasGroup.DOFade(1, 0.25f).SetDelay(0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-    // }
 
     public async void ShowTooltip(string header, string type = "", string description = "", string[] attributes = null, TooltipHintType[] hints = null)
     {

@@ -29,7 +29,8 @@ public class Slime : MonoBehaviour
         defense = m_data.defense;
         attack = m_data.attack;
         attackSpeed = m_data.attackSpeed;
-        speed = m_data.speed;
+        // speed = m_data.speed;
+        speed = m_data.moveSpeed;
 
     }
     // Update is called once per frame

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -19,7 +16,7 @@ public class Mob : MonoBehaviour
     protected float health;
     protected float sightDistance;
     protected float attackDistance;
-    protected float speed;
+    protected float movementSpeed;
     protected GameObject player;
     protected bool isDead;
     protected SpriteRenderer sr;
@@ -31,7 +28,8 @@ public class Mob : MonoBehaviour
         health = mobData.health;
         sightDistance = mobData.sightDistance;
         attackDistance = mobData.attackDistance;
-        speed = mobData.speed;
+        // walkspeed = mobData.speed;
+        movementSpeed = mobData.moveSpeed;
         player = GameObject.FindWithTag("Player");
         isDead = false; // preventive
         sr = GetComponent<SpriteRenderer>();
@@ -76,7 +74,7 @@ public class Mob : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
     }
 
     private void WalkAround()

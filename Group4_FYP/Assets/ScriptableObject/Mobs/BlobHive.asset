@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a666d6ab964824a4c8153165498061da, type: 3}
   m_Name: BlobHive
   m_EditorClassIdentifier: 
-  mobName: BlobHive
+  characterName: Blob Hive
   health: 50
+  walkspeed: 0
   defense: 0
   attack: 0
   attackSpeed: 0
-  speed: 0
   sightDistance: 0
   attackDistance: 0
   walkAroundDistance: 0
