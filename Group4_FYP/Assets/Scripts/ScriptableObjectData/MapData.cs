@@ -8,7 +8,7 @@ public class MapData : ScriptableObject
     public string mapName;
     public MapType mapType;
     public MapDifficulty mapDifficulty;
-    [TextArea(5, 5)]
+    [Tooltip("Leave blank if none.")] [TextArea(5, 5)]
     public string objective;
     public GameObject mapPrefab;
 }

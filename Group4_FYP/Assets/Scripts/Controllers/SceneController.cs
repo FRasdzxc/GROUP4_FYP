@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -69,7 +67,7 @@ public class SceneController : MonoBehaviour
     {
         await maskingCanvas.ShowMaskingCanvas(true);
         await WaitForSceneToLoad("PlayScene");
-        await maskingCanvas.ShowMaskingCanvas(false);
+        // await maskingCanvas.ShowMaskingCanvas(false); // GameManager will do this operation
     }
 
     private async Task WaitForSceneToLoad(string sceneName)

@@ -84,7 +84,8 @@ public class DialogueController : MonoBehaviour
 
             if (dialogues.Length <= 0)
             {
-                Debug.LogError("dialogues is empty");
+                Debug.LogWarning("dialogues is empty");
+                dialogueEndEvents.Invoke();
                 return;
             }
 

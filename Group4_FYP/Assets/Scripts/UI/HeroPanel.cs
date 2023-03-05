@@ -95,6 +95,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         heroPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
+        heroPanel.GetComponent<CanvasGroup>().alpha = 1;
         isOpened = true;
     }
 
@@ -106,6 +107,8 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         heroPanel.SetActive(false);
 
         isOpened = false;
+
+        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
     protected override GameObject GetPanel()

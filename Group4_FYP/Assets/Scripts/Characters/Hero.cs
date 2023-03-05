@@ -148,6 +148,7 @@ public class Hero : MonoBehaviour
         isDead = false;
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
+        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
         transform.position = spawnPoint.transform.position;
         // colorGrading.saturation.value = 0f;
         colorAdjustments.saturation.value = 0f;
@@ -202,7 +203,7 @@ public class Hero : MonoBehaviour
         Respawn();
     }
 
-    private async void Respawn()
+    public async void Respawn()
     {
         await maskingCanvas.ShowMaskingCanvas(true);
         health = upgradedMaxHealth;
@@ -214,6 +215,7 @@ public class Hero : MonoBehaviour
     {
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
         transform.position = spawnPoint.transform.position;
+        Debug.Log(spawnPoint);
     }
 
     #region Setters

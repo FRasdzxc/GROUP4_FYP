@@ -142,7 +142,8 @@ public class Tooltip : MonoBehaviour
         // show tooltip
         gameObject.SetActive(true);
         //Cursor.visible = false;
-        await canvasGroup.DOFade(1, 0.25f).SetDelay(0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        await canvasGroup.DOFade(1, 0.25f).SetDelay(0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        // await canvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         // await canvasGroup.DOFade(1, 0f).SetDelay(0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
     }
 

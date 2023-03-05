@@ -135,6 +135,7 @@ public class WeaponUpgradePanel : PanelOverride
         weaponUpgradePanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await weaponUpgradePanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
+        weaponUpgradePanelCanvasGroup.alpha = 1;
         isOpened = true;
     }
 
@@ -146,6 +147,8 @@ public class WeaponUpgradePanel : PanelOverride
         weaponUpgradePanel.SetActive(false);
 
         isOpened = false;
+
+        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
     public void Upgrade()

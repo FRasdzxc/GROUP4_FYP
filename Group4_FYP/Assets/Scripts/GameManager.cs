@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -152,7 +153,7 @@ public class GameManager : MonoBehaviour
     //         hud.ShowObjective(maps[mapIndex].objective);
     //     }
     // }
-    private void LoadMap(string mapId)
+    public async void LoadMap(string mapId)
     {
         MapData mapData = FindMap(mapId);
 
@@ -162,8 +163,20 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        await maskingCanvas.ShowMaskingCanvas(true);
+
         // clone map
-        currentMap = Instantiate(mapData.mapPrefab);
+        if (currentMap)
+        {
+            Destroy(currentMap);
+        }
+        GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
+        foreach (GameObject go in mobs)
+        {
+            Destroy(go);
+        }
+
+        currentMap = Instantiate(mapData.mapPrefab); // isn't Instantiate() synchronized?
         currentMapId = mapData.mapId;
 
         var canvas = SceneController.Canvas;
@@ -181,26 +194,30 @@ public class GameManager : MonoBehaviour
         {
             pauseMenu.SetDungeonMode(false);
         }
-
+        
         // spawn hero
+        await Task.Delay(100); // need some delay for some unknown reasons
         hero.Spawn();
-        if (mapData.mapType == MapType.Peaceful)
-        {
-            _ = hud.ShowHugeMessage(mapData.mapName, mapData.mapType.ToString());
-        }
-        else
-        {
-            _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} - {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
-        }
 
         // set objective
         if (mapData.objective.Length > 0) // if objective is not empty
         {
             hud.ShowObjective(mapData.objective);
         }
+
+        await maskingCanvas.ShowMaskingCanvas(false);
+
+        if (mapData.mapType == MapType.Peaceful)
+        {
+            _ = hud.ShowHugeMessage(mapData.mapName, mapData.mapType.ToString());
+        }
+        else
+        {
+            _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
+        }
     }
 
-    private MapData FindMap(string mapId)
+    public MapData FindMap(string mapId)
     {
         foreach (MapData map in maps.maps)
         {

@@ -167,6 +167,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
+        buySellPanelCanvasGroup.alpha = 1;
         isOpened = true;
     }
 
@@ -180,6 +181,8 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         buySellPanel.SetActive(false);
 
         isOpened = false;
+
+        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
     private void RefreshInventoryPanel(bool isLeftPanel, InventoryMode inventoryMode)

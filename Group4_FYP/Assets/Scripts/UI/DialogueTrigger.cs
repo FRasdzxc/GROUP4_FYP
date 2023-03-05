@@ -9,17 +9,10 @@ public class DialogueTrigger : Interaction
     [SerializeField] private bool canBeSkipped = true;
 
     [SerializeField] private bool triggerOnStart;
-    [SerializeField] private EventRequestType eventRequest;
+    // [SerializeField] private EventRequestType eventRequest;
+    [SerializeField] private EventRequestData eventRequestData;
 
     private DialogueEvents dialogueEndEvents = new DialogueEvents();
-    // [SerializeField] private float triggerDistance = 2.5f;
-    // [SerializeField] private GameObject dialogueBubble;
-    // [SerializeField] private GameObject hintPanel;
-
-    // private CanvasGroup dialogueBubbleCanvasGroup;
-    // private CanvasGroup hintPanelCanvasGroup;
-
-    // private GameObject player;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -31,21 +24,24 @@ public class DialogueTrigger : Interaction
             Interact();
         }
 
-        switch (eventRequest)
-        {
-            case EventRequestType.ShowBuyPanel:
-                dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowBuyPanel);
-                break;
-            case EventRequestType.ShowSellPanel:
-                dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowSellPanel);
-                break;
-            case EventRequestType.ShowWeaponUpgradePanel:
-                dialogueEndEvents.AddListener(WeaponUpgradePanel.Instance.ShowWeaponUpgradePanel);
-                break;
-            case EventRequestType.ShowHeroPanel:
-                dialogueEndEvents.AddListener(HeroPanel.Instance.ShowHeroPanel);
-                break;
-        }
+        // is there a better way of doing this?
+        // switch (eventRequest)
+        // {
+        //     case EventRequestType.ShowBuyPanel:
+        //         dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowBuyPanel);
+        //         break;
+        //     case EventRequestType.ShowSellPanel:
+        //         dialogueEndEvents.AddListener(BuySellPanel.Instance.ShowSellPanel);
+        //         break;
+        //     case EventRequestType.ShowWeaponUpgradePanel:
+        //         dialogueEndEvents.AddListener(WeaponUpgradePanel.Instance.ShowWeaponUpgradePanel);
+        //         break;
+        //     case EventRequestType.ShowHeroPanel:
+        //         dialogueEndEvents.AddListener(HeroPanel.Instance.ShowHeroPanel);
+        //         break;
+        // }
+
+        dialogueEndEvents.AddListener(eventRequestData.Invoke);
     }
 
     protected async override void Interact()
