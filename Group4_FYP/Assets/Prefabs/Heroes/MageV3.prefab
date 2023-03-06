@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 6841578098152819421}
   - component: {fileID: 1632915583428590294}
   - component: {fileID: 2709453559717242066}
+  - component: {fileID: 4928983950003432878}
   m_Layer: 0
   m_Name: MageV3
   m_TagString: Player
@@ -676,6 +677,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4928983950003432878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841578098152819408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09d16ae05ebb8c40992d712428ba705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameWeapons: {fileID: 11400000, guid: 4bf7eab09e882c04eb8e0f20b2c8c265, type: 2}
+  weaponHolder: {fileID: 2754856137835292751}
+  defaultWeapon: {fileID: 2479174408548472528, guid: d21427122ed038c44965cc3b945302cd, type: 3}
 --- !u!1 &6841578098941343457
 GameObject:
   m_ObjectHideFlags: 0

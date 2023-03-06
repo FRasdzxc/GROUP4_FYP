@@ -23,7 +23,7 @@ public class MapChangeEventRequestData : EventRequestData
                 ConfirmationPanel.Instance.ShowConfirmationPanel
                 (
                     $"Enter {mapData.mapName}",
-                    $"Enter {mapData.mapName}?\n\n[!] Please note that you cannot save/quit in the middle of a dungeon battle! Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                    $"Enter {mapData.mapName}?\n\n[!] Please note that you cannot save/quit in the middle of a dungeon battle! You will have to play through the whole dungeon. Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
                     () => { GameManager.Instance.LoadMap(mapId); },
                     true
                 );

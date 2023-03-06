@@ -83,7 +83,8 @@ public class ProfileData
         manaRegenerationUpgrade = 0;
         expGainMultiplierUpgrade = 1;
         // map = 0;
-        mapId = "map_tutorial";
+        //mapId = "map_tutorial"; // original
+        mapId = "map_town"; // temp: use original once tutorial is finished
         inventory = new List<InventoryEntry>();
 
         switch (heroClass)

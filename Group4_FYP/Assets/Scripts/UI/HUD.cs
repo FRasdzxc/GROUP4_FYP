@@ -58,7 +58,7 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString("n0");
+        //mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString("n0");
     }
 
     // public void SetupHealth(float health, float maxHealth)
@@ -150,6 +150,11 @@ public class HUD : MonoBehaviour
 
         xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
         xpText.text = String.Format("Level {0} ({1}/{2} XP)", level.ToString("n0"), storedExp.ToString("n0"), requiredExp.ToString("n0"));
+    }
+
+    public void UpdateMobCount(int value)
+    {
+        mobCountText.text = $"Mob Count: {value.ToString("n0")}";
     }
 
     #region HugeMessage

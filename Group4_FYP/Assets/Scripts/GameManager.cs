@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        hud.UpdateMobCount(GameObject.FindGameObjectsWithTag("Mob").Length);
+    }
+
     #region Setters/Getters
     // public void SetMap(int mapIndex)
     // {
@@ -104,55 +109,9 @@ public class GameManager : MonoBehaviour
     public bool IsPlayingHostile()
     {
         // return (gameState == GameState.Playing && maps.maps[currentMapIndex].mapType == MapType.Hostile);
-        return (gameState == GameState.Playing && FindMap(currentMapId).mapType == MapType.Hostile);
+        return (gameState == GameState.Playing && FindMap(currentMapId).mapType != MapType.Peaceful);
     }
 
-    // private void LoadMap(int mapIndex)
-    // {
-    //     // check if maps[currentMapIndex] exists or not
-    //     if (!(mapIndex >= 0 && mapIndex < maps.Length))
-    //     {
-    //         Debug.LogError("Map " + mapIndex + " not found.");
-    //         return;
-    //     }
-
-    //     // clone map
-    //     currentMap = Instantiate(maps[mapIndex].map);
-    //     currentMapIndex = mapIndex;
-
-    //     var canvas = SceneController.Canvas;
-    //     if (canvas != null)
-    //     {
-    //         HUD hud = canvas.GetComponent<HUD>();
-    //     }
-
-    //     // if map is a dungeon, disable saving buttons
-    //     if (maps[currentMapIndex].mapType == MapType.Dungeon)
-    //     {
-    //         pauseMenu.SetDungeonMode(true);
-    //     }
-    //     else
-    //     {
-    //         pauseMenu.SetDungeonMode(false);
-    //     }
-
-    //     // spawn hero
-    //     hero.Spawn();
-    //     if (maps[currentMapIndex].mapType == MapType.Peaceful)
-    //     {
-    //         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, maps[currentMapIndex].mapType.ToString());
-    //     }
-    //     else
-    //     {
-    //         _ = hud.ShowHugeMessage(maps[currentMapIndex].map.name, String.Format("{0} - {1}", maps[currentMapIndex].mapType.ToString(), maps[currentMapIndex].mapDifficulty.ToString()));
-    //     }
-
-    //     // set objective
-    //     if (maps[mapIndex].objective.Length > 0) // if objective is not empty
-    //     {
-    //         hud.ShowObjective(maps[mapIndex].objective);
-    //     }
-    // }
     public async void LoadMap(string mapId)
     {
         MapData mapData = FindMap(mapId);
@@ -169,7 +128,6 @@ public class GameManager : MonoBehaviour
         if (currentMap)
         {
             Destroy(currentMap);
-
             while (currentMap) // wait for map to be destroyed
             {
                 await Task.Yield();
@@ -211,6 +169,10 @@ public class GameManager : MonoBehaviour
         if (mapData.objective.Length > 0) // if objective is not empty
         {
             hud.ShowObjective(mapData.objective);
+        }
+        else
+        {
+            hud.HideObjective();
         }
 
         await Task.Delay(50); // make the game look smoother

@@ -1,8 +1,11 @@
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public class MovementControllerV2 : MonoBehaviour
 {
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference sprintAction;
+
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 2f;
     [SerializeField] private GameObject weaponHolder;
@@ -11,18 +14,25 @@ public class MovementControllerV2 : MonoBehaviour
     [SerializeField] private AudioClip[] moveSoundClips;
 
     private Vector2 moveDir;
+    private bool sprinting;
     private Rigidbody2D rb2D;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        moveAction.action.Enable();
+        sprintAction.action.Enable();
+        sprintAction.action.performed += context => sprinting = true;
+        sprintAction.action.canceled += context => sprinting = false;
+
+        Debug.Log($"Press {sprintAction.action.GetBindingDisplayString()} to sprint");
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        moveDir = moveAction.action.ReadValue<Vector2>();
         if (moveDir == Vector2.zero)
         {
             ResetAnimatorParameters();
@@ -105,12 +115,9 @@ public class MovementControllerV2 : MonoBehaviour
                 audioSource.Play();
             }
         }
-        
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
+        if (sprinting)
             moveDir *= sprintMultiplier;
-        }
     }
 
     void FixedUpdate()

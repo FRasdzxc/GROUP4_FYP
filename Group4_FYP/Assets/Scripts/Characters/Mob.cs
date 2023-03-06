@@ -74,7 +74,10 @@ public class Mob : MonoBehaviour
 
     protected virtual void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+        //rb2D.MovePosition(new Vector2(player.transform.position.x, player.transform.position.y) + (movementSpeed * Time.deltaTime));
+        rb2D.MovePosition(rb2D.position + ((Vector2)player.transform.position - rb2D.position).normalized * movementSpeed * Time.deltaTime);
+        //rb2D.AddRelativeForce(((Vector2)player.transform.position - rb2D.position).normalized/* * movementSpeed*/, ForceMode2D.Impulse);
     }
 
     private void WalkAround()

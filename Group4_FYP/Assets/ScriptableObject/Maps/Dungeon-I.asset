@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00fb67ba9a7c8b744b6fe0ae910f5fbf, type: 3}
+  m_Name: Dungeon-I
+  m_EditorClassIdentifier: 
+  mapId: map_dungeoni
+  mapName: Dungeon-I
+  mapType: 2
+  mapDifficulty: 3
+  objective: Kill all the mobs without dying
+  mapPrefab: {fileID: 9080937833783401953, guid: 632738989ff713c4a87c8765670c1bbd, type: 3}
+  returnPortal: {fileID: 0}
