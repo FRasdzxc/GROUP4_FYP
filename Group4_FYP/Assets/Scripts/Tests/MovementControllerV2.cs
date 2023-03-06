@@ -3,8 +3,10 @@ using UnityEngine.InputSystem;
 
 public class MovementControllerV2 : MonoBehaviour
 {
-    [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference sprintAction;
+    // [SerializeField] private InputActionReference moveAction;
+    private InputAction moveAction;
+    // [SerializeField] private InputActionReference sprintAction;
+    private InputAction sprintAction;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 2f;
@@ -17,22 +19,37 @@ public class MovementControllerV2 : MonoBehaviour
     private bool sprinting;
     private Rigidbody2D rb2D;
 
+    private PlayerInput playerInput;
+
+    void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+
+        moveAction = playerInput.actions["Move"];
+        sprintAction = playerInput.actions["Sprint"];
+
+        moveAction.Enable();
+        sprintAction.Enable();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
-        moveAction.action.Enable();
-        sprintAction.action.Enable();
-        sprintAction.action.performed += context => sprinting = true;
-        sprintAction.action.canceled += context => sprinting = false;
+        // moveAction.action.Enable();
+        // sprintAction.action.Enable();
+        // sprintAction.action.performed += context => sprinting = true;
+        // sprintAction.action.canceled += context => sprinting = false;
 
-        Debug.Log($"Press {sprintAction.action.GetBindingDisplayString()} to sprint");
+        // Debug.Log($"Press {sprintAction.action.GetBindingDisplayString()} to sprint");
+        Debug.Log($"Press {sprintAction.GetBindingDisplayString()} to sprint");
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveDir = moveAction.action.ReadValue<Vector2>();
+        // moveDir = moveAction.action.ReadValue<Vector2>();
+        moveDir = moveAction.ReadValue<Vector2>();
         if (moveDir == Vector2.zero)
         {
             ResetAnimatorParameters();
@@ -116,8 +133,10 @@ public class MovementControllerV2 : MonoBehaviour
             }
         }
 
-        if (sprinting)
+        if (sprintAction.ReadValue<float>() == 1)
+        {
             moveDir *= sprintMultiplier;
+        }
     }
 
     void FixedUpdate()
