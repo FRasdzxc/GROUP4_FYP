@@ -169,6 +169,11 @@ public class GameManager : MonoBehaviour
         if (currentMap)
         {
             Destroy(currentMap);
+
+            while (currentMap) // wait for map to be destroyed
+            {
+                await Task.Yield();
+            }
         }
         GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
         foreach (GameObject go in mobs)
@@ -178,6 +183,10 @@ public class GameManager : MonoBehaviour
 
         currentMap = Instantiate(mapData.mapPrefab); // isn't Instantiate() synchronized?
         currentMapId = mapData.mapId;
+        while (!currentMap) // wait for map to load
+        {
+            await Task.Yield();
+        }
 
         var canvas = SceneController.Canvas;
         if (canvas != null)
@@ -196,7 +205,6 @@ public class GameManager : MonoBehaviour
         }
         
         // spawn hero
-        await Task.Delay(100); // need some delay for some unknown reasons
         hero.Spawn();
 
         // set objective
@@ -205,6 +213,7 @@ public class GameManager : MonoBehaviour
             hud.ShowObjective(mapData.objective);
         }
 
+        await Task.Delay(50); // make the game look smoother
         await maskingCanvas.ShowMaskingCanvas(false);
 
         if (mapData.mapType == MapType.Peaceful)
