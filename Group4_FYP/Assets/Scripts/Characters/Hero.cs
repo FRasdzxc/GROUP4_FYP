@@ -2,6 +2,7 @@ using UnityEngine;
 // using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class Hero : MonoBehaviour
 {
@@ -61,6 +62,9 @@ public class Hero : MonoBehaviour
     }
     private float upgradedDefense;
 
+    private PlayerInput playerInput;
+    private InputAction takeDamageAction;
+
     private static Hero instance;
     public static Hero Instance
     {
@@ -80,6 +84,10 @@ public class Hero : MonoBehaviour
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+
+        playerInput = GetComponent<PlayerInput>();
+        takeDamageAction = playerInput.actions["TakeDamage"];
+        takeDamageAction.Enable();
     }
 
     // Start is called before the first frame update
@@ -128,8 +136,11 @@ public class Hero : MonoBehaviour
             if (GameManager.Instance.IsPlayingHostile())
             {
                 // testonly
-                if (Input.GetKeyDown(KeyCode.Backspace))
+                // if (Input.GetKeyDown(KeyCode.Backspace))
+                if (takeDamageAction.triggered)
                 {
+                    Debug.Log("take damage");
+
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
                         Die();
@@ -152,8 +163,8 @@ public class Hero : MonoBehaviour
         isDead = false;
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
-        spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-        transform.position = spawnPoint.transform.position;
+        // spawnPoint = GameObject.FindGameObjectWithTag("Respawn"); // set in Spawn()
+        // transform.position = spawnPoint.transform.position;
         // colorGrading.saturation.value = 0f;
         colorAdjustments.saturation.value = 0f;
         sr.color = Color.white;

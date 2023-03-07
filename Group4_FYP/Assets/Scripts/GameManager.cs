@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameMaps maps;
 
     [SerializeField] private string[] tutorialDialogues; // can be written better?
+    [SerializeField] private string defaultMapId = "map_town";
 
     private GameObject currentMap; // used as a clone
     // private int currentMapIndex;
@@ -119,7 +120,8 @@ public class GameManager : MonoBehaviour
         // check if maps[currentMapIndex] exists or not
         if (!mapData)
         {
-            return;
+            // return;
+            mapData = FindMap(defaultMapId);
         }
 
         await maskingCanvas.ShowMaskingCanvas(true);
@@ -184,7 +186,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
+            // _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
+            _ = hud.ShowHugeMessage(mapData.mapName, $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}");
         }
     }
 

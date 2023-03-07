@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -25,6 +24,12 @@ public class AbilityManager : MonoBehaviour
     private float manaRegeneration;
     private float manaRegenerationUpgrade;
 
+    private PlayerInput playerInput;
+    private InputAction ability1Action;
+    private InputAction ability2Action;
+    private InputAction ability3Action;
+    private InputAction abilityUAction;
+
     private static AbilityManager instance;
     public static AbilityManager Instance
     {
@@ -43,6 +48,17 @@ public class AbilityManager : MonoBehaviour
         }
 
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
+
+        playerInput = GetComponent<PlayerInput>();
+        ability1Action = playerInput.actions["Ability1"];
+        ability2Action = playerInput.actions["Ability2"];
+        ability3Action = playerInput.actions["Ability3"];
+        abilityUAction = playerInput.actions["AbilityU"];
+
+        ability1Action.Enable();
+        ability2Action.Enable();
+        ability3Action.Enable();
+        abilityUAction.Enable();
     }
 
     void Start()
@@ -55,7 +71,8 @@ public class AbilityManager : MonoBehaviour
     {
         if (GameManager.Instance.IsPlayingHostile())
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            // if (Input.GetKeyDown(KeyCode.Z))
+            if (ability1Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[0].IsReady() && (mana - equippedAbilities[0].manaCost) >= 0)
@@ -65,7 +82,8 @@ public class AbilityManager : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.X))
+            // if (Input.GetKeyDown(KeyCode.X))
+            if (ability2Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[1].IsReady() && (mana - equippedAbilities[1].manaCost) >= 0)
@@ -75,7 +93,8 @@ public class AbilityManager : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.C))
+            // if (Input.GetKeyDown(KeyCode.C))
+            if (ability3Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[2].IsReady() && (mana - equippedAbilities[2].manaCost) >= 0)

@@ -20,6 +20,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "465e1d71-26e5-4855-9ab4-5497f251485d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UseAll",
+                    "type": "Button",
+                    "id": "7b6e75dc-fd50-4a8f-bcd7-b6e3eea21c31",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NextDialogue",
+                    "type": "Button",
+                    "id": "fa7ac31b-5a01-41c8-bdc1-6692ef71c613",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SkipDialogue",
+                    "type": "Button",
+                    "id": "9c7cb3b5-c000-4d54-b1c2-41f2c91d13f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -42,6 +74,50 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "ToggleInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84dd8f80-f7f7-4e26-986c-af56b05d91b0",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e114f25b-1e94-4a6e-9e43-3f09125b5d50",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "UseAll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6290acc0-ab36-4b3e-b1be-08768a81574f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "NextDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8627fd10-2b3d-41ea-808e-9aedd67d97eb",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "SkipDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -334,6 +410,52 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Interact2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Testing",
+            "id": "70220496-189f-451f-b197-065346bd2eb6",
+            "actions": [
+                {
+                    "name": "TakeDamage",
+                    "type": "Button",
+                    "id": "63c88859-6a6e-4c3e-9107-1f758875780b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Modifier",
+                    "type": "Button",
+                    "id": "374ab660-0dcd-4cd1-8aa0-c69a7c2fded9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6a4214d0-17e7-446e-8e0e-8acb3eeb1e9a",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "TakeDamage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23ca8311-ad8d-4234-8ee4-214377a84cbd",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Modifier",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

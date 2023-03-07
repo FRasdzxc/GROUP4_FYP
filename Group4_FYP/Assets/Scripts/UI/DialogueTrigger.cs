@@ -41,7 +41,10 @@ public class DialogueTrigger : Interaction
         //         break;
         // }
 
-        dialogueEndEvents.AddListener(eventRequestData.Invoke);
+        if (eventRequestData)
+        {
+            dialogueEndEvents.AddListener(eventRequestData.Invoke);
+        }
     }
 
     protected async override void Interact()

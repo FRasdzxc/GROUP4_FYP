@@ -427,8 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b447a8d655b1a4fbd6c3aaa4d276a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAction: {fileID: 0}
-  sprintAction: {fileID: 0}
   moveSpeed: 5
   sprintMultiplier: 2
   weaponHolder: {fileID: 812025677363876902}
