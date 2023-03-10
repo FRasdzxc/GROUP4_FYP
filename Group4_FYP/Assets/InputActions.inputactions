@@ -6,17 +6,9 @@
             "id": "bf304a28-8b40-4935-8ed4-2145a71c5910",
             "actions": [
                 {
-                    "name": "TogglePause",
+                    "name": "ClosePanel",
                     "type": "Button",
                     "id": "079673b4-71f3-4c65-9016-76d72ddd2ffa",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "ToggleInventory",
-                    "type": "Button",
-                    "id": "a6e93d45-1aa4-4446-af71-49d07dd17778",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -62,18 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
-                    "action": "TogglePause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f044adbb-a706-48f6-a698-8dce1058265f",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
-                    "action": "ToggleInventory",
+                    "action": "ClosePanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -187,6 +168,22 @@
                     "name": "Interact2",
                     "type": "Button",
                     "id": "96b2d38a-dd0e-4ac6-b076-06973e944311",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "OpenPause",
+                    "type": "Button",
+                    "id": "42ea2042-a9fe-466d-98d6-0faf0bc3a225",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "4393868c-99da-4bd7-995a-ede52c584b57",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -410,6 +407,28 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Interact2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6afce49-8310-46b8-830f-4cb60bb542ac",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "OpenPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5e36de0-9150-411a-bdb5-666ef104d711",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "OpenInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

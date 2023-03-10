@@ -164,7 +164,7 @@ public class Hero : MonoBehaviour
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
         // spawnPoint = GameObject.FindGameObjectWithTag("Respawn"); // set in Spawn()
-        // transform.position = spawnPoint.transform.position;
+        transform.position = spawnPoint.transform.position;
         // colorGrading.saturation.value = 0f;
         colorAdjustments.saturation.value = 0f;
         sr.color = Color.white;

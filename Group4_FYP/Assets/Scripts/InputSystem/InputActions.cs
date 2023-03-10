@@ -19,17 +19,9 @@ public class @InputActions : IInputActionCollection, IDisposable
             ""id"": ""bf304a28-8b40-4935-8ed4-2145a71c5910"",
             ""actions"": [
                 {
-                    ""name"": ""TogglePause"",
+                    ""name"": ""ClosePanel"",
                     ""type"": ""Button"",
                     ""id"": ""079673b4-71f3-4c65-9016-76d72ddd2ffa"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ToggleInventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""a6e93d45-1aa4-4446-af71-49d07dd17778"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -75,18 +67,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""TogglePause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f044adbb-a706-48f6-a698-8dce1058265f"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""ToggleInventory"",
+                    ""action"": ""ClosePanel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -200,6 +181,22 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""name"": ""Interact2"",
                     ""type"": ""Button"",
                     ""id"": ""96b2d38a-dd0e-4ac6-b076-06973e944311"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpenPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""42ea2042-a9fe-466d-98d6-0faf0bc3a225"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""4393868c-99da-4bd7-995a-ede52c584b57"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -425,6 +422,28 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Interact2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6afce49-8310-46b8-830f-4cb60bb542ac"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""OpenPause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5e36de0-9150-411a-bdb5-666ef104d711"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -507,8 +526,7 @@ public class @InputActions : IInputActionCollection, IDisposable
 }");
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_TogglePause = m_UI.FindAction("TogglePause", throwIfNotFound: true);
-        m_UI_ToggleInventory = m_UI.FindAction("ToggleInventory", throwIfNotFound: true);
+        m_UI_ClosePanel = m_UI.FindAction("ClosePanel", throwIfNotFound: true);
         m_UI_UseItem = m_UI.FindAction("UseItem", throwIfNotFound: true);
         m_UI_UseAll = m_UI.FindAction("UseAll", throwIfNotFound: true);
         m_UI_NextDialogue = m_UI.FindAction("NextDialogue", throwIfNotFound: true);
@@ -523,6 +541,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Gameplay_AbilityU = m_Gameplay.FindAction("AbilityU", throwIfNotFound: true);
         m_Gameplay_Interact1 = m_Gameplay.FindAction("Interact1", throwIfNotFound: true);
         m_Gameplay_Interact2 = m_Gameplay.FindAction("Interact2", throwIfNotFound: true);
+        m_Gameplay_OpenPause = m_Gameplay.FindAction("OpenPause", throwIfNotFound: true);
+        m_Gameplay_OpenInventory = m_Gameplay.FindAction("OpenInventory", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_TakeDamage = m_Testing.FindAction("TakeDamage", throwIfNotFound: true);
@@ -576,8 +596,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_TogglePause;
-    private readonly InputAction m_UI_ToggleInventory;
+    private readonly InputAction m_UI_ClosePanel;
     private readonly InputAction m_UI_UseItem;
     private readonly InputAction m_UI_UseAll;
     private readonly InputAction m_UI_NextDialogue;
@@ -586,8 +605,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     {
         private @InputActions m_Wrapper;
         public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @TogglePause => m_Wrapper.m_UI_TogglePause;
-        public InputAction @ToggleInventory => m_Wrapper.m_UI_ToggleInventory;
+        public InputAction @ClosePanel => m_Wrapper.m_UI_ClosePanel;
         public InputAction @UseItem => m_Wrapper.m_UI_UseItem;
         public InputAction @UseAll => m_Wrapper.m_UI_UseAll;
         public InputAction @NextDialogue => m_Wrapper.m_UI_NextDialogue;
@@ -601,12 +619,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @TogglePause.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTogglePause;
-                @TogglePause.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTogglePause;
-                @TogglePause.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTogglePause;
-                @ToggleInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
-                @ToggleInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
-                @ToggleInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleInventory;
+                @ClosePanel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
+                @ClosePanel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
+                @ClosePanel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
                 @UseItem.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
@@ -623,12 +638,9 @@ public class @InputActions : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @TogglePause.started += instance.OnTogglePause;
-                @TogglePause.performed += instance.OnTogglePause;
-                @TogglePause.canceled += instance.OnTogglePause;
-                @ToggleInventory.started += instance.OnToggleInventory;
-                @ToggleInventory.performed += instance.OnToggleInventory;
-                @ToggleInventory.canceled += instance.OnToggleInventory;
+                @ClosePanel.started += instance.OnClosePanel;
+                @ClosePanel.performed += instance.OnClosePanel;
+                @ClosePanel.canceled += instance.OnClosePanel;
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
@@ -657,6 +669,8 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_AbilityU;
     private readonly InputAction m_Gameplay_Interact1;
     private readonly InputAction m_Gameplay_Interact2;
+    private readonly InputAction m_Gameplay_OpenPause;
+    private readonly InputAction m_Gameplay_OpenInventory;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -669,6 +683,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @AbilityU => m_Wrapper.m_Gameplay_AbilityU;
         public InputAction @Interact1 => m_Wrapper.m_Gameplay_Interact1;
         public InputAction @Interact2 => m_Wrapper.m_Gameplay_Interact2;
+        public InputAction @OpenPause => m_Wrapper.m_Gameplay_OpenPause;
+        public InputAction @OpenInventory => m_Wrapper.m_Gameplay_OpenInventory;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -702,6 +718,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
                 @Interact2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
                 @Interact2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
+                @OpenPause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
+                @OpenPause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
+                @OpenPause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
+                @OpenInventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
+                @OpenInventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -730,6 +752,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact2.started += instance.OnInteract2;
                 @Interact2.performed += instance.OnInteract2;
                 @Interact2.canceled += instance.OnInteract2;
+                @OpenPause.started += instance.OnOpenPause;
+                @OpenPause.performed += instance.OnOpenPause;
+                @OpenPause.canceled += instance.OnOpenPause;
+                @OpenInventory.started += instance.OnOpenInventory;
+                @OpenInventory.performed += instance.OnOpenInventory;
+                @OpenInventory.canceled += instance.OnOpenInventory;
             }
         }
     }
@@ -795,8 +823,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
-        void OnTogglePause(InputAction.CallbackContext context);
-        void OnToggleInventory(InputAction.CallbackContext context);
+        void OnClosePanel(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnUseAll(InputAction.CallbackContext context);
         void OnNextDialogue(InputAction.CallbackContext context);
@@ -812,6 +839,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnAbilityU(InputAction.CallbackContext context);
         void OnInteract1(InputAction.CallbackContext context);
         void OnInteract2(InputAction.CallbackContext context);
+        void OnOpenPause(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {
