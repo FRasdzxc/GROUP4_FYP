@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class PanelOverride : MonoBehaviour
+public abstract class PanelOverride : Panel
 {
     [Serializable]
     public struct OverridingPanels
@@ -37,6 +37,6 @@ public abstract class PanelOverride : MonoBehaviour
         return true;
     }
 
-    public abstract void HidePanel();
+    //public abstract void HidePanel();
     protected abstract GameObject GetPanel();
 }

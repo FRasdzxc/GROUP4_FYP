@@ -19,7 +19,7 @@ public class @InputActions : IInputActionCollection, IDisposable
             ""id"": ""bf304a28-8b40-4935-8ed4-2145a71c5910"",
             ""actions"": [
                 {
-                    ""name"": ""ClosePanel"",
+                    ""name"": ""HidePanel"",
                     ""type"": ""Button"",
                     ""id"": ""079673b4-71f3-4c65-9016-76d72ddd2ffa"",
                     ""expectedControlType"": ""Button"",
@@ -57,6 +57,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""HideInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ed35440-1d44-4af8-a63b-8cdebb8883ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -67,7 +75,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""ClosePanel"",
+                    ""action"": ""HidePanel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -112,6 +120,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""SkipDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afe90d89-0b2a-4e72-b986-2b0bae14ca50"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""HideInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -186,7 +205,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""OpenPause"",
+                    ""name"": ""ShowPause"",
                     ""type"": ""Button"",
                     ""id"": ""42ea2042-a9fe-466d-98d6-0faf0bc3a225"",
                     ""expectedControlType"": ""Button"",
@@ -194,7 +213,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""OpenInventory"",
+                    ""name"": ""ShowInventory"",
                     ""type"": ""Button"",
                     ""id"": ""4393868c-99da-4bd7-995a-ede52c584b57"",
                     ""expectedControlType"": ""Button"",
@@ -430,7 +449,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""OpenPause"",
+                    ""action"": ""ShowPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -441,7 +460,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""OpenInventory"",
+                    ""action"": ""ShowInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -526,11 +545,12 @@ public class @InputActions : IInputActionCollection, IDisposable
 }");
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_ClosePanel = m_UI.FindAction("ClosePanel", throwIfNotFound: true);
+        m_UI_HidePanel = m_UI.FindAction("HidePanel", throwIfNotFound: true);
         m_UI_UseItem = m_UI.FindAction("UseItem", throwIfNotFound: true);
         m_UI_UseAll = m_UI.FindAction("UseAll", throwIfNotFound: true);
         m_UI_NextDialogue = m_UI.FindAction("NextDialogue", throwIfNotFound: true);
         m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
+        m_UI_HideInventory = m_UI.FindAction("HideInventory", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
@@ -541,8 +561,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Gameplay_AbilityU = m_Gameplay.FindAction("AbilityU", throwIfNotFound: true);
         m_Gameplay_Interact1 = m_Gameplay.FindAction("Interact1", throwIfNotFound: true);
         m_Gameplay_Interact2 = m_Gameplay.FindAction("Interact2", throwIfNotFound: true);
-        m_Gameplay_OpenPause = m_Gameplay.FindAction("OpenPause", throwIfNotFound: true);
-        m_Gameplay_OpenInventory = m_Gameplay.FindAction("OpenInventory", throwIfNotFound: true);
+        m_Gameplay_ShowPause = m_Gameplay.FindAction("ShowPause", throwIfNotFound: true);
+        m_Gameplay_ShowInventory = m_Gameplay.FindAction("ShowInventory", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_TakeDamage = m_Testing.FindAction("TakeDamage", throwIfNotFound: true);
@@ -596,20 +616,22 @@ public class @InputActions : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_ClosePanel;
+    private readonly InputAction m_UI_HidePanel;
     private readonly InputAction m_UI_UseItem;
     private readonly InputAction m_UI_UseAll;
     private readonly InputAction m_UI_NextDialogue;
     private readonly InputAction m_UI_SkipDialogue;
+    private readonly InputAction m_UI_HideInventory;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
         public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ClosePanel => m_Wrapper.m_UI_ClosePanel;
+        public InputAction @HidePanel => m_Wrapper.m_UI_HidePanel;
         public InputAction @UseItem => m_Wrapper.m_UI_UseItem;
         public InputAction @UseAll => m_Wrapper.m_UI_UseAll;
         public InputAction @NextDialogue => m_Wrapper.m_UI_NextDialogue;
         public InputAction @SkipDialogue => m_Wrapper.m_UI_SkipDialogue;
+        public InputAction @HideInventory => m_Wrapper.m_UI_HideInventory;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -619,9 +641,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @ClosePanel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
-                @ClosePanel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
-                @ClosePanel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClosePanel;
+                @HidePanel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnHidePanel;
+                @HidePanel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnHidePanel;
+                @HidePanel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnHidePanel;
                 @UseItem.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUseItem;
@@ -634,13 +656,16 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @SkipDialogue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
+                @HideInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
+                @HideInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
+                @HideInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @ClosePanel.started += instance.OnClosePanel;
-                @ClosePanel.performed += instance.OnClosePanel;
-                @ClosePanel.canceled += instance.OnClosePanel;
+                @HidePanel.started += instance.OnHidePanel;
+                @HidePanel.performed += instance.OnHidePanel;
+                @HidePanel.canceled += instance.OnHidePanel;
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
@@ -653,6 +678,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @SkipDialogue.started += instance.OnSkipDialogue;
                 @SkipDialogue.performed += instance.OnSkipDialogue;
                 @SkipDialogue.canceled += instance.OnSkipDialogue;
+                @HideInventory.started += instance.OnHideInventory;
+                @HideInventory.performed += instance.OnHideInventory;
+                @HideInventory.canceled += instance.OnHideInventory;
             }
         }
     }
@@ -669,8 +697,8 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_AbilityU;
     private readonly InputAction m_Gameplay_Interact1;
     private readonly InputAction m_Gameplay_Interact2;
-    private readonly InputAction m_Gameplay_OpenPause;
-    private readonly InputAction m_Gameplay_OpenInventory;
+    private readonly InputAction m_Gameplay_ShowPause;
+    private readonly InputAction m_Gameplay_ShowInventory;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -683,8 +711,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @AbilityU => m_Wrapper.m_Gameplay_AbilityU;
         public InputAction @Interact1 => m_Wrapper.m_Gameplay_Interact1;
         public InputAction @Interact2 => m_Wrapper.m_Gameplay_Interact2;
-        public InputAction @OpenPause => m_Wrapper.m_Gameplay_OpenPause;
-        public InputAction @OpenInventory => m_Wrapper.m_Gameplay_OpenInventory;
+        public InputAction @ShowPause => m_Wrapper.m_Gameplay_ShowPause;
+        public InputAction @ShowInventory => m_Wrapper.m_Gameplay_ShowInventory;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -718,12 +746,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact2.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
                 @Interact2.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
                 @Interact2.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract2;
-                @OpenPause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
-                @OpenPause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
-                @OpenPause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenPause;
-                @OpenInventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
-                @OpenInventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
-                @OpenInventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenInventory;
+                @ShowPause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowPause;
+                @ShowPause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowPause;
+                @ShowPause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowPause;
+                @ShowInventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
+                @ShowInventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
+                @ShowInventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -752,12 +780,12 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Interact2.started += instance.OnInteract2;
                 @Interact2.performed += instance.OnInteract2;
                 @Interact2.canceled += instance.OnInteract2;
-                @OpenPause.started += instance.OnOpenPause;
-                @OpenPause.performed += instance.OnOpenPause;
-                @OpenPause.canceled += instance.OnOpenPause;
-                @OpenInventory.started += instance.OnOpenInventory;
-                @OpenInventory.performed += instance.OnOpenInventory;
-                @OpenInventory.canceled += instance.OnOpenInventory;
+                @ShowPause.started += instance.OnShowPause;
+                @ShowPause.performed += instance.OnShowPause;
+                @ShowPause.canceled += instance.OnShowPause;
+                @ShowInventory.started += instance.OnShowInventory;
+                @ShowInventory.performed += instance.OnShowInventory;
+                @ShowInventory.canceled += instance.OnShowInventory;
             }
         }
     }
@@ -823,11 +851,12 @@ public class @InputActions : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
-        void OnClosePanel(InputAction.CallbackContext context);
+        void OnHidePanel(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnUseAll(InputAction.CallbackContext context);
         void OnNextDialogue(InputAction.CallbackContext context);
         void OnSkipDialogue(InputAction.CallbackContext context);
+        void OnHideInventory(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {
@@ -839,8 +868,8 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnAbilityU(InputAction.CallbackContext context);
         void OnInteract1(InputAction.CallbackContext context);
         void OnInteract2(InputAction.CallbackContext context);
-        void OnOpenPause(InputAction.CallbackContext context);
-        void OnOpenInventory(InputAction.CallbackContext context);
+        void OnShowPause(InputAction.CallbackContext context);
+        void OnShowInventory(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

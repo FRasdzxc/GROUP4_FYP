@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class HeroPanel : PanelOverride/*, IPanelConflictable*/
@@ -15,6 +16,8 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
     private bool isOpened;
     private RectTransform heroPanelRectTransform;
+    private InputAction showInventoryAction;
+    private InputAction hideInventoryAction;
 
     private static HeroPanel instance;
     public static HeroPanel Instance
@@ -25,17 +28,31 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         }
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (!instance)
         {
             instance = this;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
+        OnHide += OnHidePanel;
+    }
+
+    private void OnDisable()
+    {
+        OnHide -= OnHidePanel;
+    }
+
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+
         isOpened = false;
 
         heroPanel.GetComponent<CanvasGroup>().alpha = 0;
@@ -44,26 +61,44 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         heroPanel.SetActive(false);
 
         heroNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
+
+        showInventoryAction = playerInput.actions["ShowInventory"];
+        hideInventoryAction = playerInput.actions["HideInventory"];
+        showInventoryAction.Enable();
+        hideInventoryAction.Enable();
+        Debug.Log("show inventory action binding " + showInventoryAction.GetBindingDisplayString());
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        // if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
-        // if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
-        {
-            if (isOpened)
-            {
-                // HideHeroPanel();
-                HidePanel();
-            }
-            else
-            {
-                ShowHeroPanel();
-            }
+        base.Update();
 
-            // isOpened = !isOpened;
+        ////if (Input.GetKeyDown(KeyCode.Q))
+        //if (showInventoryAction.triggered)
+        //// if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
+        //// if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
+        //{
+        //    if (isOpened)
+        //    {
+        //        // HideHeroPanel();
+        //        HidePanel();
+        //    }
+        //    else
+        //    {
+        //        ShowPanel();
+        //    }
+
+        //    // isOpened = !isOpened;
+        //}
+
+        if (showInventoryAction.triggered)
+        {
+            ShowPanel();
+        }
+        else if (hideInventoryAction.triggered)
+        {
+            HidePanel();
         }
     }
 
@@ -77,8 +112,10 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         heroLevelText.text = "Level " + level.ToString("n0");
     }
 
-    public async void ShowHeroPanel()
+    public async override void ShowPanel()
     {
+        base.ShowPanel();
+
         // if (!HideConflictingPanels())
         // {
         //     return;
@@ -99,7 +136,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         isOpened = true;
     }
 
-    public async override void HidePanel() //public async void HideHeroPanel()
+    public async void OnHidePanel()
     {
         HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);

@@ -48,6 +48,6 @@ public class ProjectileWeaponController : WeaponController
             await Task.Yield();
         }
 
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -21,6 +21,7 @@ public class Mob : MonoBehaviour
     protected bool isDead;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb2D;
+    protected Vector2 moveDir;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -76,8 +77,25 @@ public class Mob : MonoBehaviour
     {
         //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
         //rb2D.MovePosition(new Vector2(player.transform.position.x, player.transform.position.y) + (movementSpeed * Time.deltaTime));
-        rb2D.MovePosition(rb2D.position + ((Vector2)player.transform.position - rb2D.position).normalized * movementSpeed * Time.deltaTime);
+        moveDir = ((Vector2)player.transform.position - rb2D.position).normalized;
+        //Debug.Log($"moveDir = {moveDir}");
+        //rb2D.MovePosition(rb2D.position + ((Vector2)player.transform.position - rb2D.position).normalized * movementSpeed * Time.deltaTime);
+        rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
         //rb2D.AddRelativeForce(((Vector2)player.transform.position - rb2D.position).normalized/* * movementSpeed*/, ForceMode2D.Impulse);
+
+        LookAt();
+    }
+
+    protected virtual void LookAt()
+    {
+        if (moveDir.x < -0.5f)
+        {
+            transform.localScale = new Vector2(-1, 1);      // todo: make a sprite child for the sprite only and only change the scale of the sprite child
+        }
+        else if (moveDir.x > 0.5f)
+        {
+            transform.localScale = Vector2.one;
+        }
     }
 
     private void WalkAround()

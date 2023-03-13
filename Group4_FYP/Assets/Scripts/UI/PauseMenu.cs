@@ -2,9 +2,10 @@ using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : Panel
 {
     private bool isOpened;
     [SerializeField] private GameObject hudPanel;
@@ -20,9 +21,13 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private GameObject warning;
 
+    private InputAction showPauseAction;
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         isOpened = false;
 
         // code for showing hudpanel and hiding osdpanel
@@ -33,21 +38,31 @@ public class PauseMenu : MonoBehaviour
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
+
+        showPauseAction = playerInput.actions["showPause"];
+        showPauseAction.Enable();
     }
 
     // Update is called once per frame
-    async void Update()
+    protected async override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        base.Update();
+
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (isOpened)
+        //    {
+        //        await HidePauseMenu(true);
+        //    }
+        //    else
+        //    {
+        //        /*await */ShowPanel();
+        //    }
+        //}
+
+        if (showPauseAction.triggered)
         {
-            if (isOpened)
-            {
-                await HidePauseMenu(true);
-            }
-            else
-            {
-                await ShowPauseMenu();
-            }
+            ShowPanel();
         }
 
         if (isOpened && Input.GetKeyDown(KeyCode.BackQuote)) // not finished: also check if saving is allowed atm
@@ -66,8 +81,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public async Task ShowPauseMenu()
+    //public async Task ShowPauseMenu()
+    public async override void ShowPanel()
     {
+        base.ShowPanel();
+
         GameManager.Instance.SetGameState(GameState.Paused);
 
         HUD.Instance.HideHUD();
@@ -118,6 +136,13 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.SetGameState(GameState.Playing);
 
         isOpened = false;
+    }
+
+    public override void HidePanel()
+    {
+        base.HidePanel();
+
+        ResumeGame();
     }
 
     public void ResumeGame()
