@@ -34,8 +34,10 @@ public class WeaponUpgradePanel : PanelOverride
         get => instance;
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (!instance)
         {
             instance = this;
@@ -130,6 +132,13 @@ public class WeaponUpgradePanel : PanelOverride
             }
         }
 
+        ShowPanel();
+    }
+
+    public async override void ShowPanel()
+    {
+        base.ShowPanel();
+
         HUD.Instance.HideHUDMain();
         weaponUpgradePanel.SetActive(true);
         weaponUpgradePanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
@@ -141,6 +150,8 @@ public class WeaponUpgradePanel : PanelOverride
 
     public async override void HidePanel()
     {
+        base.HidePanel();
+
         HUD.Instance.ShowHUDMain();
         weaponUpgradePanelRectTransform.DOAnchorPosY(-weaponUpgradePanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await weaponUpgradePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();

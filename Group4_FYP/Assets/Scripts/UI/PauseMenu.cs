@@ -24,9 +24,16 @@ public class PauseMenu : Panel
     private InputAction showPauseAction;
 
     // Start is called before the first frame update
-    protected override void Start()
+    // protected override void Start()
+
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+    }
+
+    void Start()
+    {
+        // base.Start();
 
         isOpened = false;
 
@@ -44,9 +51,10 @@ public class PauseMenu : Panel
     }
 
     // Update is called once per frame
-    protected async override void Update()
+    // protected async override void Update()
+    void Update()
     {
-        base.Update();
+        // base.Update();
 
         //if (Input.GetKeyDown(KeyCode.Escape))
         //{

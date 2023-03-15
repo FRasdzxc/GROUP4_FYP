@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fb67ba9a7c8b744b6fe0ae910f5fbf, type: 3}
+  m_Script: {fileID: 11500000, guid: c02a294cfd518bf4a9981b89db0054cf, type: 3}
   m_Name: Dungeon-I
   m_EditorClassIdentifier: 
   mapId: map_dungeoni
@@ -18,4 +18,5 @@ MonoBehaviour:
   mapDifficulty: 3
   objective: Kill all the mobs without dying
   mapPrefab: {fileID: 9080937833783401953, guid: 632738989ff713c4a87c8765670c1bbd, type: 3}
-  returnPortal: {fileID: 0}
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: 0, y: -5}

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private GameObject currentMap; // used as a clone
     // private int currentMapIndex;
     private string currentMapId;
+    private bool mapClearChecked;
 
     private GameState gameState;
 
@@ -67,7 +68,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        hud.UpdateMobCount(GameObject.FindGameObjectsWithTag("Mob").Length);
+        int mobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
+        hud.UpdateMobCount(mobCount);
+
+        if (mobCount <= 0 && !mapClearChecked) {
+            mapClearChecked = true;
+            Debug.Log("map is cleared@!");
+
+            MapData mapData = FindMap(currentMapId);
+            if (mapData is DungeonMapData)
+            {
+                DungeonMapData dungeonMapData = mapData as DungeonMapData;
+                dungeonMapData.SpawnPortal();
+            }
+        }
     }
 
     #region Setters/Getters
@@ -98,6 +112,11 @@ public class GameManager : MonoBehaviour
     public GameState GetGameState()
     {
         return gameState;
+    }
+
+    public GameObject GetCurrentMap()
+    {
+        return currentMap;
     }
 
     public MapType GetCurrentMapType()
@@ -137,6 +156,11 @@ public class GameManager : MonoBehaviour
         }
         GameObject[] mobs = GameObject.FindGameObjectsWithTag("Mob");
         foreach (GameObject go in mobs)
+        {
+            Destroy(go);
+        }
+        GameObject[] drops = GameObject.FindGameObjectsWithTag("Drop");
+        foreach (GameObject go in drops)
         {
             Destroy(go);
         }
@@ -189,6 +213,8 @@ public class GameManager : MonoBehaviour
             // _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
             _ = hud.ShowHugeMessage(mapData.mapName, $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}");
         }
+
+        mapClearChecked = false;
     }
 
     public MapData FindMap(string mapId)

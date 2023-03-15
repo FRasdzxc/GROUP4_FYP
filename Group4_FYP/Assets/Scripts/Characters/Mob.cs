@@ -83,7 +83,7 @@ public class Mob : MonoBehaviour
         rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
         //rb2D.AddRelativeForce(((Vector2)player.transform.position - rb2D.position).normalized/* * movementSpeed*/, ForceMode2D.Impulse);
 
-        LookAt();
+        // LookAt();
     }
 
     protected virtual void LookAt()

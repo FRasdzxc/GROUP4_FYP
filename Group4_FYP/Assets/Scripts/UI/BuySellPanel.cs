@@ -44,8 +44,10 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         get => instance;
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (!instance)
         {
             instance = this;
@@ -162,17 +164,26 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         }
         RefreshTotal();
 
+        ShowPanel();
+    }
+
+    public async override void ShowPanel()
+    {
+        base.ShowPanel();
+
         HUD.Instance.HideHUDMain();
         buySellPanel.SetActive(true);
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanelCanvasGroup.alpha = 1;
-        isOpened = true;
+        isOpened = true;    
     }
 
     public async override void HidePanel() // public async void HideBuySellPanel()
     {
+        base.HidePanel();
+
         transferredItems.Clear();
 
         HUD.Instance.ShowHUDMain();

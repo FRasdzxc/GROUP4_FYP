@@ -28,6 +28,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         }
     }
 
+    // protected override void Awake()
     protected override void Awake()
     {
         base.Awake();
@@ -40,18 +41,19 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
     private void OnEnable()
     {
-        OnHide += OnHidePanel;
+        // OnHide += OnHidePanel;
     }
 
     private void OnDisable()
     {
-        OnHide -= OnHidePanel;
+        // OnHide -= OnHidePanel;
     }
 
     // Start is called before the first frame update
-    protected override void Start()
+    // protected override void Start()
+    void Start()
     {
-        base.Start();
+        // base.Start();
 
         isOpened = false;
 
@@ -70,9 +72,10 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     }
 
     // Update is called once per frame
-    protected override void Update()
+    // protected override void Update()
+    void Update()
     {
-        base.Update();
+        // base.Update();
 
         ////if (Input.GetKeyDown(KeyCode.Q))
         //if (showInventoryAction.triggered)
@@ -134,6 +137,20 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
         heroPanel.GetComponent<CanvasGroup>().alpha = 1;
         isOpened = true;
+    }
+
+    public async override void HidePanel()
+    {
+        base.HidePanel();
+
+        HUD.Instance.ShowHUDMain();
+        heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
+        await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        heroPanel.SetActive(false);
+
+        isOpened = false;
+
+        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
     public async void OnHidePanel()

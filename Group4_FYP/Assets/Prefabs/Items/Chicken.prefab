@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7395439681757065100}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Drop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,5 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e78512f59f92c44b58a25dfb72aee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 2ffc8d25107136944bbca7af4ad30da8, type: 2}
+  keyHintCanvas: {fileID: 0}
+  placeholder: {fileID: 0}
+  keyHintPanel: {fileID: 0}
+  keyText: {fileID: 0}
+  hintText: {fileID: 0}
+  hint: 
+  interactionKey: 0
+  interactionDistance: 2.5
+  item: {fileID: 0}
   lifeTime: 300
