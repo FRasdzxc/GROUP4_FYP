@@ -12,6 +12,8 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private Text heroLevelText;
     [SerializeField] private Text coinText;
     [SerializeField] private InventorySlot weaponSlot;
+    [SerializeField] private InventorySlot armorSlot;
+    [SerializeField] private ArmorItemData tempArmor; // temp
     // [SerializeField] private bool panelOverridable;
 
     private bool isOpened;
@@ -69,6 +71,9 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         showInventoryAction.Enable();
         hideInventoryAction.Enable();
         Debug.Log("show inventory action binding " + showInventoryAction.GetBindingDisplayString());
+
+        // temp: will implement the whole thing in the future
+        armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
     }
 
     // Update is called once per frame

@@ -164,20 +164,20 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         }
         RefreshTotal();
 
-        ShowPanel();
-    }
-
-    public async override void ShowPanel()
-    {
-        base.ShowPanel();
-
         HUD.Instance.HideHUDMain();
         buySellPanel.SetActive(true);
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanelCanvasGroup.alpha = 1;
-        isOpened = true;    
+        isOpened = true; 
+
+        ShowPanel();
+    }
+
+    public override void ShowPanel()
+    {
+        base.ShowPanel();
     }
 
     public async override void HidePanel() // public async void HideBuySellPanel()

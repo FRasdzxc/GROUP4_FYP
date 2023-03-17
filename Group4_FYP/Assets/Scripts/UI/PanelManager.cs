@@ -44,8 +44,11 @@ public class PanelManager : MonoBehaviour
     {
         if (hidePanelAction.triggered)
         {
-            shownPanels[shownPanels.Count - 1].HidePanel();
-            Debug.Log("hidepanelactiontriggered");
+            if (shownPanels.Count > 0)
+            {
+                shownPanels[shownPanels.Count - 1].HidePanel();
+                Debug.Log("hidepanelactiontriggered");
+            }
         }
 
         Debug.Log(playerInput.currentActionMap);
@@ -85,7 +88,7 @@ public class PanelManager : MonoBehaviour
     {
         foreach (Panel p in shownPanels)
         {
-            if (panel.name.Equals(panel.name))
+            if (panel.name.Equals(p.name))
             {
                 return true;
             }

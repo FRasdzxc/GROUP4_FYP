@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class ConfirmationPanel : MonoBehaviour
+public class ConfirmationPanel : Panel
 {
     [SerializeField] private Text titleText;
     [SerializeField] private Text messageText;
@@ -26,8 +26,10 @@ public class ConfirmationPanel : MonoBehaviour
         }
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (!instance)
         {
             instance = this;
@@ -62,6 +64,8 @@ public class ConfirmationPanel : MonoBehaviour
 
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+
+        ShowPanel();
     }
 
     public async Task HideConfirmationPanel()
@@ -70,15 +74,29 @@ public class ConfirmationPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public async void Confirm()
+    public override void ShowPanel()
     {
-        await HideConfirmationPanel();
+        base.ShowPanel();
+    }
+
+    public override void HidePanel()
+    {
+        base.HidePanel();
+
+        _ = HideConfirmationPanel();
+    }
+
+    public void Confirm()
+    {
+        // await HideConfirmationPanel();
+        HidePanel();
         confirmAction.Invoke();
     }
 
-    public async void Cancel()
+    public void Cancel()
     {
-        await HideConfirmationPanel();
+        // await HideConfirmationPanel();
+        HidePanel();
         cancelAction.Invoke();
     }
 }

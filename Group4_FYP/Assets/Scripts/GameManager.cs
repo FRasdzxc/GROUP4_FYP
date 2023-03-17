@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        gameState = GameState.Playing;
+        gameState = GameState.Paused;
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         {
             // LoadMap(currentMapIndex);
             LoadMap(currentMapId);
+        }
+        else
+        {
+            gameState = GameState.Playing;
         }
     }
 
@@ -214,6 +218,7 @@ public class GameManager : MonoBehaviour
             _ = hud.ShowHugeMessage(mapData.mapName, $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}");
         }
 
+        gameState = GameState.Playing;
         mapClearChecked = false;
     }
 

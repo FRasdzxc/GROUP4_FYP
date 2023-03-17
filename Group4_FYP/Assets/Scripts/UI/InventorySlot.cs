@@ -155,19 +155,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             else if (ItemData is WeaponItemData)
             {
                 var weapon = ItemData as WeaponItemData;
-                attributes.Add("Tier: " + weapon.weapon.weaponTier);
-                attributes.Add("Cooldown: " + weapon.weapon.cooldown + " seconds");
+                attributes.Add($"Tier: {weapon.weapon.weaponTier}");
+                attributes.Add($"Cooldown: {weapon.weapon.cooldown} seconds");
 
                 if (weapon.weapon is ProjectileWeaponData)
                 {
                     var projectileWeapon = weapon.weapon as ProjectileWeaponData;
-                    attributes.Add("Projectile Speed: " + projectileWeapon.projectileSpeed);
+                    attributes.Add($"Projectile Speed: {projectileWeapon.projectileSpeed}");
                 }
+            }
+            else if (ItemData is ArmorItemData)
+            {
+                var armor = ItemData as ArmorItemData;
+                attributes.Add($"Defense: {armor.defense}");
             }
             else if (ItemData is RelicItemData)
             {
                 var relic = ItemData as RelicItemData;
-                attributes.Add("Tier: " + relic.tier);
+                attributes.Add($"Tier: {relic.tier}");
             }
 
             if (inventoryMode == InventoryMode.Normal)

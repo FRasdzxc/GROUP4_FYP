@@ -4869,6 +4869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SignTownMC
       objectReference: {fileID: 0}
+    - target: {fileID: 6685184809226932483, guid: 79a659168f343e74e9e871b5ba9e39ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6685184809226932537, guid: 79a659168f343e74e9e871b5ba9e39ab, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -5002,6 +5006,10 @@ PrefabInstance:
     - target: {fileID: 2481237813978156049, guid: 80daa1a5a94da0c4ebb9063a99a106fa, type: 3}
       propertyPath: m_Name
       value: SignTutorialMC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2481237813978156049, guid: 80daa1a5a94da0c4ebb9063a99a106fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2481237813978156075, guid: 80daa1a5a94da0c4ebb9063a99a106fa, type: 3}
       propertyPath: m_RootOrder

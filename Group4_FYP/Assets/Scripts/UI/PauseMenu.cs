@@ -22,6 +22,8 @@ public class PauseMenu : Panel
     [SerializeField] private GameObject warning;
 
     private InputAction showPauseAction;
+    private InputAction saveGameAction;
+    private InputAction exitToMenuAction;
 
     // Start is called before the first frame update
     // protected override void Start()
@@ -46,8 +48,13 @@ public class PauseMenu : Panel
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
 
-        showPauseAction = playerInput.actions["showPause"];
+        showPauseAction = playerInput.actions["ShowPause"];
+        saveGameAction = playerInput.actions["SaveGame"];
+        exitToMenuAction = playerInput.actions["ExitToMenu"];
+
         showPauseAction.Enable();
+        saveGameAction.Enable();
+        exitToMenuAction.Enable();
     }
 
     // Update is called once per frame
@@ -70,12 +77,24 @@ public class PauseMenu : Panel
 
         if (showPauseAction.triggered)
         {
-            ShowPanel();
+            if (GameManager.Instance.GetGameState() == GameState.Playing)
+            {
+                ShowPanel();
+            }
         }
 
-        if (isOpened && Input.GetKeyDown(KeyCode.BackQuote)) // not finished: also check if saving is allowed atm
+        if (isOpened) // not finished: also check if saving is allowed atm
         {
-            SaveGame();
+            // if (Input.GetKeyDown(KeyCode.BackQuote))
+            if (saveGameAction.triggered)
+            {
+                SaveGame();
+            }
+            // if (Input.GetKeyDown(KeyCode.End))
+            if (exitToMenuAction.triggered)
+            {
+                ExitToMenu();
+            }
         }
 
         // test only
@@ -149,18 +168,19 @@ public class PauseMenu : Panel
     public override void HidePanel()
     {
         base.HidePanel();
-
-        ResumeGame();
-    }
-
-    public void ResumeGame()
-    {
         _ = HidePauseMenu(true);
+        // ResumeGame();
     }
 
-    public async void SaveGame()
+    // public void ResumeGame()
+    // {
+    //     _ = HidePauseMenu(true);
+    // }
+
+    public void SaveGame()
     {
-        await HidePauseMenu(true);
+        // await HidePauseMenu(true);
+        HidePanel();
         settingsMenu.SaveSettings();
         SaveSystem.Instance.SaveData(true);
     }

@@ -172,7 +172,7 @@ MonoBehaviour:
   sprite: {fileID: -3456532010920386237, guid: 133e6c11b7be2104fb7515bf4b3caecd, type: 3}
   header: Merchant
   dialogues:
-  - Good day! What do you want to sell?
+  - Good day. What do you want to sell?
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: eaae17b0f881d5e45935ba6f8b05e4ac, type: 2}

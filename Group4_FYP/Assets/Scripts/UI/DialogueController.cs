@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class DialogueEvents : UnityEvent {}
@@ -34,6 +35,10 @@ public class DialogueController : MonoBehaviour
     private bool canShowNextDialogue;
     private bool canBeSkipped;
 
+    private PlayerInput playerInput;
+    private InputAction nextDialogueAction;
+    private InputAction skipDialogueAction;
+
     private static DialogueController _instance;
     public static DialogueController Instance
     {
@@ -46,12 +51,18 @@ public class DialogueController : MonoBehaviour
         {
             _instance = this;
         }
+
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        nextDialogueAction = playerInput.actions["NextDialogue"];
+        skipDialogueAction = playerInput.actions["SkipDialogue"];
 
+        nextDialogueAction.Enable();
+        skipDialogueAction.Enable();
     }
 
     // Update is called once per frame
@@ -59,12 +70,14 @@ public class DialogueController : MonoBehaviour
     {
         if (isInConversation)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            // if (Input.GetKeyDown(KeyCode.Space))
+            if (nextDialogueAction.triggered)
             {
                 await NextDialogue();
             }
 
-            if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
+            // if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
+            if (canBeSkipped && skipDialogueAction.triggered)
             {
                 await dialoguePanel.HideDialoguePanel();
                 dialogueEndEvents.Invoke();

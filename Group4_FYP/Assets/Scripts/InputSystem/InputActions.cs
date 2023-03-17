@@ -43,25 +43,25 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""NextDialogue"",
-                    ""type"": ""Button"",
-                    ""id"": ""fa7ac31b-5a01-41c8-bdc1-6692ef71c613"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""SkipDialogue"",
-                    ""type"": ""Button"",
-                    ""id"": ""9c7cb3b5-c000-4d54-b1c2-41f2c91d13f3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""HideInventory"",
                     ""type"": ""Button"",
                     ""id"": ""8ed35440-1d44-4af8-a63b-8cdebb8883ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SaveGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""961a0564-f8a6-4574-8d6d-d7e116518abf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ExitToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""0eff651f-c60b-465c-9a0a-752d80b27891"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -103,34 +103,34 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6290acc0-ab36-4b3e-b1be-08768a81574f"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""NextDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8627fd10-2b3d-41ea-808e-9aedd67d97eb"",
-                    ""path"": ""<Keyboard>/period"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""SkipDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""afe90d89-0b2a-4e72-b986-2b0bae14ca50"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""HideInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f936db1-5fd4-4742-b0aa-eaa3099e4216"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""SaveGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acc26776-5054-4228-b2a8-54b082c64060"",
+                    ""path"": ""<Keyboard>/end"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""ExitToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -216,6 +216,30 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""name"": ""ShowInventory"",
                     ""type"": ""Button"",
                     ""id"": ""4393868c-99da-4bd7-995a-ede52c584b57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""NextDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f58a1e1-8f4d-428c-89c0-e76f5f12c163"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SkipDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""15a7f698-e0c1-42ac-b678-7a7249d53bfd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EnterGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""99a90c5a-a8ff-462e-8c6c-d5e1d8b6581b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -463,6 +487,39 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""ShowInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61390fbb-4d03-4738-a423-10038d18a183"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""NextDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4528e856-3238-4fc5-a2bb-92ba2d33351b"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""SkipDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d83e10de-1b1a-48b7-b74e-59c8745d1d51"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""EnterGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -548,9 +605,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_UI_HidePanel = m_UI.FindAction("HidePanel", throwIfNotFound: true);
         m_UI_UseItem = m_UI.FindAction("UseItem", throwIfNotFound: true);
         m_UI_UseAll = m_UI.FindAction("UseAll", throwIfNotFound: true);
-        m_UI_NextDialogue = m_UI.FindAction("NextDialogue", throwIfNotFound: true);
-        m_UI_SkipDialogue = m_UI.FindAction("SkipDialogue", throwIfNotFound: true);
         m_UI_HideInventory = m_UI.FindAction("HideInventory", throwIfNotFound: true);
+        m_UI_SaveGame = m_UI.FindAction("SaveGame", throwIfNotFound: true);
+        m_UI_ExitToMenu = m_UI.FindAction("ExitToMenu", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
@@ -563,6 +620,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Gameplay_Interact2 = m_Gameplay.FindAction("Interact2", throwIfNotFound: true);
         m_Gameplay_ShowPause = m_Gameplay.FindAction("ShowPause", throwIfNotFound: true);
         m_Gameplay_ShowInventory = m_Gameplay.FindAction("ShowInventory", throwIfNotFound: true);
+        m_Gameplay_NextDialogue = m_Gameplay.FindAction("NextDialogue", throwIfNotFound: true);
+        m_Gameplay_SkipDialogue = m_Gameplay.FindAction("SkipDialogue", throwIfNotFound: true);
+        m_Gameplay_EnterGame = m_Gameplay.FindAction("EnterGame", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_TakeDamage = m_Testing.FindAction("TakeDamage", throwIfNotFound: true);
@@ -619,9 +679,9 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_HidePanel;
     private readonly InputAction m_UI_UseItem;
     private readonly InputAction m_UI_UseAll;
-    private readonly InputAction m_UI_NextDialogue;
-    private readonly InputAction m_UI_SkipDialogue;
     private readonly InputAction m_UI_HideInventory;
+    private readonly InputAction m_UI_SaveGame;
+    private readonly InputAction m_UI_ExitToMenu;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -629,9 +689,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @HidePanel => m_Wrapper.m_UI_HidePanel;
         public InputAction @UseItem => m_Wrapper.m_UI_UseItem;
         public InputAction @UseAll => m_Wrapper.m_UI_UseAll;
-        public InputAction @NextDialogue => m_Wrapper.m_UI_NextDialogue;
-        public InputAction @SkipDialogue => m_Wrapper.m_UI_SkipDialogue;
         public InputAction @HideInventory => m_Wrapper.m_UI_HideInventory;
+        public InputAction @SaveGame => m_Wrapper.m_UI_SaveGame;
+        public InputAction @ExitToMenu => m_Wrapper.m_UI_ExitToMenu;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -650,15 +710,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @UseAll.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUseAll;
                 @UseAll.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUseAll;
                 @UseAll.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUseAll;
-                @NextDialogue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNextDialogue;
-                @NextDialogue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNextDialogue;
-                @NextDialogue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNextDialogue;
-                @SkipDialogue.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
-                @SkipDialogue.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
-                @SkipDialogue.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkipDialogue;
                 @HideInventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
                 @HideInventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
                 @HideInventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnHideInventory;
+                @SaveGame.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSaveGame;
+                @SaveGame.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSaveGame;
+                @SaveGame.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSaveGame;
+                @ExitToMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExitToMenu;
+                @ExitToMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExitToMenu;
+                @ExitToMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExitToMenu;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -672,15 +732,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @UseAll.started += instance.OnUseAll;
                 @UseAll.performed += instance.OnUseAll;
                 @UseAll.canceled += instance.OnUseAll;
-                @NextDialogue.started += instance.OnNextDialogue;
-                @NextDialogue.performed += instance.OnNextDialogue;
-                @NextDialogue.canceled += instance.OnNextDialogue;
-                @SkipDialogue.started += instance.OnSkipDialogue;
-                @SkipDialogue.performed += instance.OnSkipDialogue;
-                @SkipDialogue.canceled += instance.OnSkipDialogue;
                 @HideInventory.started += instance.OnHideInventory;
                 @HideInventory.performed += instance.OnHideInventory;
                 @HideInventory.canceled += instance.OnHideInventory;
+                @SaveGame.started += instance.OnSaveGame;
+                @SaveGame.performed += instance.OnSaveGame;
+                @SaveGame.canceled += instance.OnSaveGame;
+                @ExitToMenu.started += instance.OnExitToMenu;
+                @ExitToMenu.performed += instance.OnExitToMenu;
+                @ExitToMenu.canceled += instance.OnExitToMenu;
             }
         }
     }
@@ -699,6 +759,9 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Interact2;
     private readonly InputAction m_Gameplay_ShowPause;
     private readonly InputAction m_Gameplay_ShowInventory;
+    private readonly InputAction m_Gameplay_NextDialogue;
+    private readonly InputAction m_Gameplay_SkipDialogue;
+    private readonly InputAction m_Gameplay_EnterGame;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -713,6 +776,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Interact2 => m_Wrapper.m_Gameplay_Interact2;
         public InputAction @ShowPause => m_Wrapper.m_Gameplay_ShowPause;
         public InputAction @ShowInventory => m_Wrapper.m_Gameplay_ShowInventory;
+        public InputAction @NextDialogue => m_Wrapper.m_Gameplay_NextDialogue;
+        public InputAction @SkipDialogue => m_Wrapper.m_Gameplay_SkipDialogue;
+        public InputAction @EnterGame => m_Wrapper.m_Gameplay_EnterGame;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -752,6 +818,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ShowInventory.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
                 @ShowInventory.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
                 @ShowInventory.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShowInventory;
+                @NextDialogue.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextDialogue;
+                @NextDialogue.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextDialogue;
+                @NextDialogue.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextDialogue;
+                @SkipDialogue.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @EnterGame.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
+                @EnterGame.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
+                @EnterGame.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -786,6 +861,15 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @ShowInventory.started += instance.OnShowInventory;
                 @ShowInventory.performed += instance.OnShowInventory;
                 @ShowInventory.canceled += instance.OnShowInventory;
+                @NextDialogue.started += instance.OnNextDialogue;
+                @NextDialogue.performed += instance.OnNextDialogue;
+                @NextDialogue.canceled += instance.OnNextDialogue;
+                @SkipDialogue.started += instance.OnSkipDialogue;
+                @SkipDialogue.performed += instance.OnSkipDialogue;
+                @SkipDialogue.canceled += instance.OnSkipDialogue;
+                @EnterGame.started += instance.OnEnterGame;
+                @EnterGame.performed += instance.OnEnterGame;
+                @EnterGame.canceled += instance.OnEnterGame;
             }
         }
     }
@@ -854,9 +938,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnHidePanel(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnUseAll(InputAction.CallbackContext context);
-        void OnNextDialogue(InputAction.CallbackContext context);
-        void OnSkipDialogue(InputAction.CallbackContext context);
         void OnHideInventory(InputAction.CallbackContext context);
+        void OnSaveGame(InputAction.CallbackContext context);
+        void OnExitToMenu(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {
@@ -870,6 +954,9 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnInteract2(InputAction.CallbackContext context);
         void OnShowPause(InputAction.CallbackContext context);
         void OnShowInventory(InputAction.CallbackContext context);
+        void OnNextDialogue(InputAction.CallbackContext context);
+        void OnSkipDialogue(InputAction.CallbackContext context);
+        void OnEnterGame(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

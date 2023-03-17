@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class StartMenu : MonoBehaviour
@@ -17,6 +18,7 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] private SceneController sceneController;
 
+    [SerializeField] private Text enterGameHintText;
     [SerializeField] private InputField profileCreationInputField;
     [SerializeField] private InputField profileEditInputField;
 
@@ -35,6 +37,14 @@ public class StartMenu : MonoBehaviour
     private List<GameObject> profileButtons;
     private string selectedProfileName;
     private HeroClass? selectedClassType;
+
+    private PlayerInput playerInput;
+    private InputAction enterGameAction;
+
+    void Awake()
+    {
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,13 +69,18 @@ public class StartMenu : MonoBehaviour
             }
         }
 
+        enterGameAction = playerInput.actions["EnterGame"];
+        enterGameAction.Enable();
+        enterGameHintText.text = $"- Press {enterGameAction.GetBindingDisplayString()} to Continue -";
+
         // play startmenu music
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // if (Input.GetKeyDown(KeyCode.Space))
+        if (enterGameAction.triggered)
         {
             if (!bHasEntered)
             {
