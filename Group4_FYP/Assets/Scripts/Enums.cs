@@ -13,3 +13,4 @@ public enum TooltipHintType { None, Use, Drop, UseAll, DropAll, Transfer, Transf
 public enum NPCType { Normal, Merchant, Blacksmith };
 public enum BuySellType { Buy, Sell };
 public enum EventRequestType { None, ShowBuyPanel, ShowSellPanel, ShowWeaponUpgradePanel, ShowHeroPanel, GoToTown };
+public enum SelectionType { Map, Dungeon };
