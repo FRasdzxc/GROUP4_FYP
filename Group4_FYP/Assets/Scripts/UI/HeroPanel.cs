@@ -11,6 +11,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
     [SerializeField] private Text coinText;
+    [SerializeField] private Text keyHintText;
     [SerializeField] private InventorySlot weaponSlot;
     [SerializeField] private InventorySlot armorSlot;
     [SerializeField] private ArmorItemData tempArmor; // temp
@@ -70,6 +71,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         hideInventoryAction = playerInput.actions["HideInventory"];
         showInventoryAction.Enable();
         hideInventoryAction.Enable();
+        keyHintText.text = showInventoryAction.GetBindingDisplayString();
         Debug.Log("show inventory action binding " + showInventoryAction.GetBindingDisplayString());
 
         // temp: will implement the whole thing in the future

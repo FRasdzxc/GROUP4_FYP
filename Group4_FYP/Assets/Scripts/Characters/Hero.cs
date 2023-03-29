@@ -12,6 +12,7 @@ public class Hero : MonoBehaviour
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
+    [SerializeField] private int orbObtainLevel = 5;
     //[SerializeField] private MaskingCanvas maskingCanvas;
 
     private HUD hud;
@@ -126,7 +127,7 @@ public class Hero : MonoBehaviour
                 HeroPanel.Instance.UpdateLevel(level);
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
 
-                if (level % 5 == 0)
+                if (level % orbObtainLevel == 0)
                 {
                     Orb.Instance.AddOrbs(1);
                 }
@@ -215,7 +216,13 @@ public class Hero : MonoBehaviour
         weaponHolder.SetActive(false);
 
         await hud.ShowHugeMessage("You Died", Color.red);
+
         Respawn();
+        if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
+        {
+            GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
+            SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
+        }
     }
 
     public async void Respawn()

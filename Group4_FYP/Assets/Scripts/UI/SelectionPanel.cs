@@ -39,15 +39,14 @@ public class SelectionPanel : Panel
             instance = this;
         }
 
-        //gameObject.SetActive(false);
-        //gameObject.GetComponent<CanvasGroup>().alpha = 0;
+        gameObject.SetActive(false);
+        gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
 
-    private void Start()
-    {
-        ShowSelectionPanel(SelectionType.Dungeon); // test
-
-    }
+    // private void Start()
+    // {
+    //     ShowSelectionPanel(SelectionType.Dungeon); // test
+    // }
 
     //public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
     //{
@@ -80,19 +79,53 @@ public class SelectionPanel : Panel
 
     public void ShowSelectionPanel(SelectionType selectionType)
     {
+        RefreshContents();
+
         switch (selectionType)
         {
+            case SelectionType.Map:
+                {
+                    titleText.text = "Maps";
+                    messageText.text = "Select a map from the list below...";
+
+                    foreach (MapData mapData in gameMaps.maps)
+                    {
+                        GameObject button = Instantiate(buttonPrefab, contentTransform);
+                            button.GetComponent<Button>().onClick.AddListener(delegate
+                            {
+                                ConfirmationPanel.Instance.ShowConfirmationPanel
+                                (
+                                    $"Enter {mapData.mapName}",
+                                    $"Enter {mapData.mapName}?\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                                    () =>
+                                    {
+                                        GameManager.Instance.LoadMap(mapData.mapId);
+                                        HidePanel();
+                                    },
+                                    true
+                                );
+                            });
+
+                            Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
+                            buttonTitle.text = mapData.mapName;
+
+                            Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
+                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
+                    }
+                }
+                break;
             case SelectionType.Dungeon:
                 {
-                    titleText.text = "Select Dungeon...";
-                    messageText.text = "Choose a dungeon from below";
+                    titleText.text = "Dungeons";
+                    messageText.text = "Select a dungeon from the list below...";
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
                         if (mapData.mapType == MapType.Dungeon)
                         {
                             GameObject button = Instantiate(buttonPrefab, contentTransform);
-                            button.GetComponent<Button>().onClick.AddListener(delegate {
+                            button.GetComponent<Button>().onClick.AddListener(delegate
+                            {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
                                     $"Enter {mapData.mapName}",
@@ -106,8 +139,11 @@ public class SelectionPanel : Panel
                                 );
                             });
 
-                            Text buttonText = Common.RecursiveFindChild(button.transform, "Text").GetComponent<Text>();
-                            buttonText.text = mapData.mapName;
+                            Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
+                            buttonTitle.text = mapData.mapName;
+
+                            Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
+                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
                         }
                     }
                 }
@@ -128,8 +164,18 @@ public class SelectionPanel : Panel
         gameObject.SetActive(false);
     }
 
-    public override void ShowPanel()
+    private void RefreshContents()
     {
+        foreach (Transform child in contentTransform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public override async void ShowPanel()
+    {
+        gameObject.SetActive(true);
+        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         base.ShowPanel();
     }
 

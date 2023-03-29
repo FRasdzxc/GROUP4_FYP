@@ -84,8 +84,17 @@ public class SaveSystem : MonoBehaviour
         weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
     }
 
-    public void SaveData(bool showNotification)
+    public void SaveData(bool showNotification = true, bool accountForMapType = true)
     {
+        if (accountForMapType)
+        {
+            if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
+            {
+                _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle");
+                return;
+            }
+        }
+
         profile.health = hero.GetHealth();
         profile.maxHealth = hero.GetMaxHealth();
         profile.healthRegeneration = hero.GetHealthRegeneration();

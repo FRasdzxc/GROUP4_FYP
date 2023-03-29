@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
         if (mapData.mapType == MapType.Dungeon)
         {
             pauseMenu.SetDungeonMode(true);
+            SaveSystem.Instance.SaveData(false, false);
         }
         else
         {

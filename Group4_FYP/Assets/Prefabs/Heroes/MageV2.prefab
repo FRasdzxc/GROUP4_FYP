@@ -415,6 +415,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 812025677363876902}
   movementController: {fileID: 8326585109876766391}
   abilityManager: {fileID: 8326585109876766389}
+  orbObtainLevel: 2
 --- !u!114 &8326585109876766391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +602,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: KeyboardAndMouse
-  m_DefaultActionMap: 0ea1d748-92df-486d-85a8-08211a48fe31
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &8326585110698822281
