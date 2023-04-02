@@ -13,7 +13,7 @@ public class MovementControllerV3 : MonoBehaviour
     protected float sprintMultiplier;
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
 
@@ -22,12 +22,12 @@ public class MovementControllerV3 : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         
     }
 
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         rb2D.MovePosition(rb2D.position + moveDir * moveSpeed * Time.deltaTime);
     }
