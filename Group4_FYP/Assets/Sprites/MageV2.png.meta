@@ -303,7 +303,7 @@ TextureImporter:
       213: 433624932125608368
     second: MageV2_99
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -324,6 +324,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -333,8 +334,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -362,6 +363,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -389,6 +391,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -2512,6 +2538,107 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      MageV2_65: -6037129356109344214
+      MageV2_32: 2730666810298286596
+      MageV2_14: 2384048483570165132
+      MageV2_29: 5106781579205084081
+      MageV2_31: -1677611424542136067
+      MageV2_30: 5449209798484540356
+      MageV2_85: -952547706734610891
+      MageV2_44: -429650262843820116
+      MageV2_16: -7536837016945751998
+      MageV2_60: 2036035673754950288
+      MageV2_84: 8272590956271935956
+      MageV2_95: -2623122801034993346
+      MageV2_52: 4371761503043389592
+      MageV2_74: 3276023167776205952
+      MageV2_82: -2126821296188648257
+      MageV2_93: 3507504477608889644
+      MageV2_53: 1490502526015574078
+      MageV2_22: 5633574288856941496
+      MageV2_80: -2806661137804747851
+      MageV2_69: 9094714156896536771
+      MageV2_34: -8149372520326301398
+      MageV2_86: 3809578588774640067
+      MageV2_0: 1930761413316623981
+      MageV2_50: 7285627950343800887
+      MageV2_38: 3142771578701896572
+      MageV2_91: -3769234936322666414
+      MageV2_2: 6062709775487880495
+      MageV2_27: -6280738069601347149
+      MageV2_9: -4279704161605319465
+      MageV2_49: -1353696885430724410
+      MageV2_35: -3428166907577397562
+      MageV2_88: -6373891319193231323
+      MageV2_20: -5276184944887167196
+      MageV2_56: 7922363632986974521
+      MageV2_71: -573872907978781191
+      MageV2_78: -8267604563661154453
+      MageV2_54: -4799460209863347784
+      MageV2_73: -135895623299306551
+      MageV2_7: 1528980958860700475
+      MageV2_89: 4923550919555281198
+      MageV2_51: 7633566986558288556
+      MageV2_17: -2786054735885588544
+      MageV2_25: 8344373436445229240
+      MageV2_12: 2118266645771177012
+      MageV2_68: -4973345820907038190
+      MageV2_70: 2719445615383080486
+      MageV2_11: -6788161731624262522
+      MageV2_43: -4560395016742999840
+      MageV2_40: 4241416018426696987
+      MageV2_96: 1788178077260792000
+      MageV2_45: 2466233614684482582
+      MageV2_1: 5446822429975541998
+      MageV2_23: -2480092502688173169
+      MageV2_99: 433624932125608368
+      MageV2_10: 2517567483865884539
+      MageV2_75: -1571512673282405149
+      MageV2_83: 4184941594763620148
+      MageV2_5: -8177759700677681578
+      MageV2_98: 6845173440906137172
+      MageV2_90: 8938618797530951556
+      MageV2_28: 9214191721813252681
+      MageV2_33: -8921517420356195605
+      MageV2_47: 7058513259960471235
+      MageV2_3: -333763993542553129
+      MageV2_59: 8302277492837545813
+      MageV2_26: -1098627974818652387
+      MageV2_19: -4707301266214145751
+      MageV2_13: -4824604278124957882
+      MageV2_58: 3267832667347349091
+      MageV2_4: 4742421203668772066
+      MageV2_41: -3809025621028963946
+      MageV2_66: 7315022270251286174
+      MageV2_8: -4604974030700268037
+      MageV2_48: -2526608473023435891
+      MageV2_81: 6595358091768682390
+      MageV2_62: 1565823837193384279
+      MageV2_37: -1993149660344653414
+      MageV2_18: -4645081615395329654
+      MageV2_67: 1040532633451682420
+      MageV2_97: 4440440142618149772
+      MageV2_76: 1057286010888324634
+      MageV2_94: -607053854415708329
+      MageV2_61: -7735566814652523614
+      MageV2_15: -3876913144367648455
+      MageV2_79: -3758066692509971663
+      MageV2_42: 4141785962364920040
+      MageV2_92: -8144846279624299637
+      MageV2_46: 6150822909026086748
+      MageV2_64: 7222114574379848046
+      MageV2_55: -2040752738472632063
+      MageV2_87: -7432939677145563235
+      MageV2_6: 5753298882446685162
+      MageV2_39: 4848077983520160231
+      MageV2_36: -8335375273590673826
+      MageV2_72: -2283727310334171381
+      MageV2_77: -2406096160946168451
+      MageV2_21: -2679155417129528725
+      MageV2_57: -8671257186982429493
+      MageV2_63: 2871500578357428051
+      MageV2_24: -2060939338603382469
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

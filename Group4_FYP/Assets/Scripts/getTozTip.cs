@@ -1,8 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-//using static System.Net.Mime.MediaTypeNames;
 
 public class getTozTip : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {

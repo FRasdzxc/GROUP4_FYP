@@ -255,7 +255,7 @@ TextureImporter:
       213: 5694637615555970075
     second: Worm_83
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -276,6 +276,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -285,8 +286,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -314,6 +315,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -353,6 +355,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -2140,6 +2166,91 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Worm_77: 5941644679475624230
+      Worm_11: 4480071127862098185
+      Worm_59: 2997785406591195684
+      Worm_20: -5515006661947016780
+      Worm_46: -1549607548094211993
+      Worm_55: -5458872075710844516
+      Worm_79: 2590526134237580370
+      Worm_81: 559206688303049593
+      Worm_63: 4804703763632557088
+      Worm_54: -105362799732774556
+      Worm_67: 9185905071153004990
+      Worm_32: 5677777685175303156
+      Worm_25: -1666009441500653506
+      Worm_60: 2646201801543529080
+      Worm_78: -8080346789488913403
+      Worm_40: 5266229635577989296
+      Worm_18: 143581720093659803
+      Worm_44: 2084483747395792557
+      Worm_9: 901015957453635049
+      Worm_4: -1688427032042944706
+      Worm_24: 5814482536816682533
+      Worm_47: -2332343653229791454
+      Worm_33: 8172395263501772211
+      Worm_36: 2450169307439748695
+      Worm_17: -1193057614541404633
+      Worm_72: -7171452145330071545
+      Worm_56: -578267828093693553
+      Worm_66: 3795353385817746864
+      Worm_21: 7561061500693734771
+      Worm_51: -8782130642940455769
+      Worm_7: 4525640198422860362
+      Worm_10: 5182979089588906634
+      Worm_22: 1906589903823791379
+      Worm_49: -2268987953169469970
+      Worm_38: -4983658501206237226
+      Worm_14: -4644459737093894307
+      Worm_45: 8330130174524665060
+      Worm_69: 4048741037975474498
+      Worm_26: 1438624820335524418
+      Worm_28: 3526168592616737191
+      Worm_70: -31836212104088551
+      Worm_83: 5694637615555970075
+      Worm_48: 7230743792114464637
+      Worm_65: 1865136332497460887
+      Worm_74: -4820523978834027460
+      Worm_76: -5091994666442883313
+      Worm_16: -601009922843046161
+      Worm_35: 6925664668377043897
+      Worm_37: -6075771566350596626
+      Worm_42: -7502571403455079649
+      Worm_34: 2192852732989533947
+      Worm_13: -7547282180997528207
+      Worm_2: 7142516469680083159
+      Worm_15: 8169048616943460750
+      Worm_5: -858658928856247996
+      Worm_12: -4925000866256529923
+      Worm_53: 5552221499934810645
+      Worm_71: 5623619604633420022
+      Worm_58: -725373712034582958
+      Worm_52: -3738473651157363266
+      Worm_68: 7521974274752599018
+      Worm_6: 4291772212426863004
+      Worm_41: -854130363608353795
+      Worm_61: 3089201106283738789
+      Worm_75: 7924861002657003598
+      Worm_73: -2108404969786576411
+      Worm_29: 6129257721185287900
+      Worm_3: -6131971823601528324
+      Worm_80: -1336933347897033774
+      Worm_19: -3139050004828331935
+      Worm_64: -3044353430219389260
+      Worm_1: -9177039919303097523
+      Worm_39: -2170747202551907785
+      Worm_62: 8834980458152538548
+      Worm_57: 3654611370155621552
+      Worm_27: 5091850497028670279
+      Worm_43: -2063121655005788124
+      Worm_30: -2440687657069814972
+      Worm_23: 3860414114191675161
+      Worm_8: 2465622324099999395
+      Worm_82: -7685856410643564367
+      Worm_50: 1318534941103404021
+      Worm_31: 7429070356939094374
+      Worm_0: 2865906195106238846
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

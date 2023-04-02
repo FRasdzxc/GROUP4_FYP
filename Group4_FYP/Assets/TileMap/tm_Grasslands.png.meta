@@ -360,7 +360,7 @@ TextureImporter:
       213: -2168538527448329485
     second: tm_Grasslands_118
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -381,6 +381,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -390,8 +391,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -419,6 +420,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -458,6 +460,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -2980,6 +3006,126 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tm_Grasslands_78: 9216379682440802824
+      tm_Grasslands_36: -8608881087239818205
+      tm_Grasslands_64: 979259447347879414
+      tm_Grasslands_52: 3663073909443593047
+      tm_Grasslands_1: -4128996549983212565
+      tm_Grasslands_63: -6743135783323728168
+      tm_Grasslands_111: 1098036046124359888
+      tm_Grasslands_101: -3870382563909781958
+      tm_Grasslands_15: -4119217534140299939
+      tm_Grasslands_106: -4696817483715313652
+      tm_Grasslands_93: -996881249658498268
+      tm_Grasslands_19: -3816749948433396443
+      tm_Grasslands_6: 3539963698858349890
+      tm_Grasslands_39: -8720972967284791302
+      tm_Grasslands_26: -1664068343969816066
+      tm_Grasslands_25: 8538159371468901225
+      tm_Grasslands_91: 9140393437287771531
+      tm_Grasslands_44: -4686668474928005913
+      tm_Grasslands_0: -2245956340031700854
+      tm_Grasslands_60: -6126777245884261393
+      tm_Grasslands_90: 48445576212125861
+      tm_Grasslands_40: -5530174642387626254
+      tm_Grasslands_41: -5044125941509187828
+      tm_Grasslands_104: 5446814739197302221
+      tm_Grasslands_53: 5694681128919871778
+      tm_Grasslands_5: -4660965451527425561
+      tm_Grasslands_56: -8791417243903629495
+      tm_Grasslands_29: -686468940873802728
+      tm_Grasslands_37: -24591032380347805
+      tm_Grasslands_118: -2168538527448329485
+      tm_Grasslands_10: 1029708937043666786
+      tm_Grasslands_70: -7507786729628091926
+      tm_Grasslands_74: -1060470860777055205
+      tm_Grasslands_113: 8611601456085263247
+      tm_Grasslands_4: 2853956602243056764
+      tm_Grasslands_28: -916993089199756292
+      tm_Grasslands_48: -8399622918294540655
+      tm_Grasslands_34: -2511622220878835214
+      tm_Grasslands_76: -6464984805189801643
+      tm_Grasslands_96: 6081746437897957599
+      tm_Grasslands_77: -7304872439171145940
+      tm_Grasslands_81: -5835118351887329661
+      tm_Grasslands_83: 2611466974289652917
+      tm_Grasslands_99: -5388016763127736911
+      tm_Grasslands_50: 3454639022576214299
+      tm_Grasslands_16: 8990679922577098916
+      tm_Grasslands_59: 4736831743030974452
+      tm_Grasslands_43: 5631444549133576035
+      tm_Grasslands_8: -3102971493158467804
+      tm_Grasslands_66: 3171372562523231989
+      tm_Grasslands_86: 6751466178450076002
+      tm_Grasslands_47: -8453206902601503144
+      tm_Grasslands_11: 4132620385629184016
+      tm_Grasslands_65: -8862319321021840933
+      tm_Grasslands_35: -6449683953256274185
+      tm_Grasslands_87: 2236522135074716163
+      tm_Grasslands_13: 8815309012708342446
+      tm_Grasslands_17: -8493290127084718481
+      tm_Grasslands_12: -1366217666190615066
+      tm_Grasslands_38: -6695663682005796356
+      tm_Grasslands_23: -5285426693841192524
+      tm_Grasslands_54: -3341353011650797150
+      tm_Grasslands_72: -4565734452946383333
+      tm_Grasslands_3: -5157648644111072040
+      tm_Grasslands_100: 3287635757579497360
+      tm_Grasslands_92: 6087747913485747423
+      tm_Grasslands_2: -104770050927605134
+      tm_Grasslands_31: -9081628712056751438
+      tm_Grasslands_85: 1135845532297302005
+      tm_Grasslands_115: 1517382248646711674
+      tm_Grasslands_18: 6941144441263680635
+      tm_Grasslands_68: 3100803912434762818
+      tm_Grasslands_95: -556249763143597406
+      tm_Grasslands_62: 5960148671049977441
+      tm_Grasslands_55: 4185875225018383965
+      tm_Grasslands_67: -1190305763849261812
+      tm_Grasslands_14: -9185582189486538336
+      tm_Grasslands_105: 8797097155769063566
+      tm_Grasslands_49: -3939729092236190145
+      tm_Grasslands_114: 7114734895251626353
+      tm_Grasslands_21: -4891968398658243325
+      tm_Grasslands_69: 4878035727309418167
+      tm_Grasslands_103: -1553997775781055980
+      tm_Grasslands_7: 4523623888248403183
+      tm_Grasslands_89: 1170370029821124643
+      tm_Grasslands_88: 8675722841450139976
+      tm_Grasslands_27: 5459097827180554660
+      tm_Grasslands_80: 3385887371051875895
+      tm_Grasslands_94: -319214129171898445
+      tm_Grasslands_98: 1456669546328218590
+      tm_Grasslands_84: 4178035220368269089
+      tm_Grasslands_102: -3239656192715464309
+      tm_Grasslands_109: 2867425946375837821
+      tm_Grasslands_9: 3450826573519914472
+      tm_Grasslands_22: -1590812388487758172
+      tm_Grasslands_73: -4545763049928494919
+      tm_Grasslands_75: -6776394882822668789
+      tm_Grasslands_45: 8918692047274859899
+      tm_Grasslands_33: 1398236231244779832
+      tm_Grasslands_71: -8633859945840719664
+      tm_Grasslands_97: 4623981119387699367
+      tm_Grasslands_110: 6359144287466578385
+      tm_Grasslands_108: -2936620618441051100
+      tm_Grasslands_79: -8502569864063675532
+      tm_Grasslands_58: -725827592376811482
+      tm_Grasslands_57: 4004878800828718945
+      tm_Grasslands_117: -370153602804714241
+      tm_Grasslands_32: -4117017011355617161
+      tm_Grasslands_24: -4831520884442350620
+      tm_Grasslands_30: 6581957716356131956
+      tm_Grasslands_51: -2007425730917195008
+      tm_Grasslands_107: -4967014513619050182
+      tm_Grasslands_112: 8362882252454795355
+      tm_Grasslands_46: 5689968166734938234
+      tm_Grasslands_61: -3192786437015325288
+      tm_Grasslands_42: 6864655791804907133
+      tm_Grasslands_82: -1718853190535046351
+      tm_Grasslands_20: -4399165767346900133
+      tm_Grasslands_116: -1971145539497609201
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

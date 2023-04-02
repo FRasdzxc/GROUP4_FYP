@@ -75,7 +75,7 @@ TextureImporter:
       213: 239049637485583912
     second: DungeonWall_23
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -96,6 +96,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -105,8 +106,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -134,6 +135,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -161,6 +163,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -688,6 +714,31 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DungeonWall_13: -1821241124143105232
+      DungeonWall_14: 6802347528579632256
+      DungeonWall_19: 4764075689084479700
+      DungeonWall_8: 6147606618807958269
+      DungeonWall_12: 7483381456121515025
+      DungeonWall_7: 922219214071159610
+      DungeonWall_4: 7358033416408713314
+      DungeonWall_2: 8075802458241383588
+      DungeonWall_15: 3533983018150178586
+      DungeonWall_11: 8366216749652041265
+      DungeonWall_6: -5745395987994151260
+      DungeonWall_17: -3637917794664081690
+      DungeonWall_20: 5041272885674551596
+      DungeonWall_21: 4803477179502796481
+      DungeonWall_9: -5380215747394087236
+      DungeonWall_10: -2850612050057055761
+      DungeonWall_16: -4555390834138060048
+      DungeonWall_3: -728224900159677469
+      DungeonWall_5: 6773471995893730283
+      DungeonWall_18: 3614352517366284633
+      DungeonWall_22: 3198247132507975786
+      DungeonWall_1: 7946113512652147174
+      DungeonWall_23: 239049637485583912
+      DungeonWall_0: 860373061823680899
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

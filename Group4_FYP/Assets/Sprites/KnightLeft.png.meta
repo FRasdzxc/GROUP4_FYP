@@ -135,7 +135,7 @@ TextureImporter:
       213: 1616376923803182677
     second: Knight_43
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -156,6 +156,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -165,8 +166,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -194,6 +195,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -209,6 +211,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -1156,6 +1182,51 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Knight_8: -3132395524043622482
+      Knight_43: 1616376923803182677
+      Knight_25: -838537513500199956
+      Knight_33: -7861573357357442326
+      Knight_35: 8152962870561592963
+      Knight_11: 8050277750723066518
+      Knight_4: 8480205167599975839
+      Knight_21: 1834488996138295012
+      Knight_26: -1542469255227862975
+      Knight_27: 2191548177814091055
+      Knight_0: -5711848221618334454
+      Knight_9: -3454224475449390428
+      Knight_12: 2970891327743047638
+      Knight_14: -5975492866275850269
+      Knight_24: 3512217387855826278
+      Knight_15: -2842457401268938568
+      Knight_39: -1355384412716578851
+      Knight_19: 704507623093092579
+      Knight_42: 4488630342384328366
+      Knight_5: 1086178698101399146
+      Knight_2: 7827260208125532704
+      Knight_18: -147784537767356358
+      Knight_22: -7390346120022462700
+      Knight_3: 5457420103614929235
+      Knight_37: -7178041665637711116
+      Knight_28: 6233677863790552796
+      Knight_36: 7781842191666192434
+      Knight_40: 7015058601114618844
+      Knight_7: -7232600524240232993
+      Knight_34: 1908704770266616795
+      Knight_31: -5761138208794630004
+      Knight_13: -6829252746764741924
+      Knight_32: -576961472236008984
+      Knight_10: -1931806161188048838
+      Knight_29: -1107112461086146938
+      Knight_20: 3976178806821576110
+      Knight_17: 5239619439560480652
+      Knight_30: 7458251115238873156
+      Knight_38: -5743060623258373447
+      Knight_1: -8985680732576350864
+      Knight_16: 4295182413440860059
+      Knight_23: -2385440076330715168
+      Knight_6: 5891436520834976337
+      Knight_41: 2317419742878148383
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

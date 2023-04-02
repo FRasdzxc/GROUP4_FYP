@@ -156,7 +156,7 @@ TextureImporter:
       213: -2745133248851386852
     second: NewDungeon_50
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -177,6 +177,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -186,8 +187,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -215,6 +216,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -242,6 +244,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -1336,6 +1362,58 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      NewDungeon_43: 6266785670151333543
+      NewDungeon_33: 211064190371516819
+      NewDungeon_40: -6057537013705834541
+      NewDungeon_45: -3302285793555636496
+      NewDungeon_32: 5714358019434927105
+      NewDungeon_9: 73471547942421046
+      NewDungeon_14: -3248259351645031431
+      NewDungeon_0: -7728734712619024100
+      NewDungeon_39: -538987358612886985
+      NewDungeon_30: 388521015417089594
+      NewDungeon_48: 8466120124079477924
+      NewDungeon_35: 6904394645844640293
+      NewDungeon_44: 3195632869170494734
+      NewDungeon_27: -955993647131960739
+      NewDungeon_29: -580578081195761949
+      NewDungeon_41: -9154607755708753010
+      NewDungeon_22: -7921368046657255761
+      NewDungeon_38: -4199792276253234309
+      NewDungeon_34: -6045365427110979356
+      NewDungeon_26: 4456436418205591651
+      NewDungeon_12: 8317950347490469117
+      NewDungeon_7: 261284388851234216
+      NewDungeon_19: 5099500909779668275
+      NewDungeon_2: 5134372928556801431
+      NewDungeon_4: 3302957028109567175
+      NewDungeon_15: -8049255922980300556
+      NewDungeon_46: 8913905124675242616
+      NewDungeon_8: -1044117485983006582
+      NewDungeon_31: 7097913379652283234
+      NewDungeon_16: 8213704022260293979
+      NewDungeon_1: -2433934624136998673
+      NewDungeon_13: 7921438545492710773
+      NewDungeon_23: 1060541320156040565
+      NewDungeon_37: 5362593125536500168
+      NewDungeon_3: 1850037733161223809
+      NewDungeon_11: 4714068894175630706
+      NewDungeon_21: 8470883556061606027
+      NewDungeon_25: 7686544691452197216
+      NewDungeon_24: -8148496449537174788
+      NewDungeon_47: 8629185226362768740
+      NewDungeon_28: -6201107125145976860
+      NewDungeon_18: -8342239653966177605
+      NewDungeon_10: 5090135720426931306
+      NewDungeon_17: 4014925195028540892
+      NewDungeon_36: 8789446373842359801
+      NewDungeon_20: -7514266058263186729
+      NewDungeon_5: -7018279913849960455
+      NewDungeon_50: -2745133248851386852
+      NewDungeon_49: 3727950855507903895
+      NewDungeon_6: 7317818228252258260
+      NewDungeon_42: -1217497589547380774
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -168,7 +168,7 @@ TextureImporter:
       213: 6159649639506686507
     second: FantasyInterior_54
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -189,6 +189,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -198,8 +199,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -227,6 +228,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -266,6 +268,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -1444,6 +1470,62 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      FantasyInterior_32: -6408385073722018984
+      FantasyInterior_14: -6948604079586760457
+      FantasyInterior_36: -446501073010820447
+      FantasyInterior_46: 1776503844577851216
+      FantasyInterior_19: 5034940311087283779
+      FantasyInterior_1: -8384941842947743137
+      FantasyInterior_21: -4878880259007671028
+      FantasyInterior_33: 7693835779018668291
+      FantasyInterior_26: 2647432701188996501
+      FantasyInterior_24: -5158364998630448248
+      FantasyInterior_49: -5263687344656304975
+      FantasyInterior_27: 7890266115934121196
+      FantasyInterior_42: 6111831878838017427
+      FantasyInterior_23: 2379474281694812757
+      FantasyInterior_5: -6835976356046923500
+      FantasyInterior_41: 7949778354005704676
+      FantasyInterior_53: -3699177185950374002
+      FantasyInterior_28: 1065269651515049740
+      FantasyInterior_45: -7363420942379883991
+      FantasyInterior_9: -4453104732335007747
+      FantasyInterior_0: 8425282495162413528
+      FantasyInterior_16: -3710559222514143107
+      FantasyInterior_25: -8279832237166880463
+      FantasyInterior_43: -6125352981743657262
+      FantasyInterior_3: -289818716154328134
+      FantasyInterior_6: 8933650462378866799
+      FantasyInterior_30: 4101411405881170952
+      FantasyInterior_20: 338512345314394231
+      FantasyInterior_48: -302825778357933020
+      FantasyInterior_10: -5007728047467033166
+      FantasyInterior_22: -3770661291158367925
+      FantasyInterior_4: 2404113967578260926
+      FantasyInterior_44: 9103298483795535034
+      FantasyInterior_18: 5310873176666272207
+      FantasyInterior_52: -5139091056061269987
+      FantasyInterior_11: -1855355299864335783
+      FantasyInterior_34: 8583171024647426476
+      FantasyInterior_40: -7301463125150807062
+      FantasyInterior_31: 1806217190894611988
+      FantasyInterior_37: -8528912058204722328
+      FantasyInterior_7: -3452524349983926530
+      FantasyInterior_15: 7187244226466307448
+      FantasyInterior_17: 8680735950243720182
+      FantasyInterior_8: 5616590527075617036
+      FantasyInterior_12: -1013019135282735717
+      FantasyInterior_39: -5303044541146258489
+      FantasyInterior_54: 6159649639506686507
+      FantasyInterior_38: 214283442480192601
+      FantasyInterior_13: 3536601305405795777
+      FantasyInterior_35: 658125627839120072
+      FantasyInterior_47: -5375066198973943856
+      FantasyInterior_50: 4782039981256320705
+      FantasyInterior_51: 4217483825961501297
+      FantasyInterior_2: 2194163864899091417
+      FantasyInterior_29: 1308665034800406778
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
