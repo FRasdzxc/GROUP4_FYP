@@ -8,6 +8,11 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.83F126EB" = "playscene"
+	"m_ShownPanels.83F126EB" = "3"
+	"m_SideBarSplitter.83F126EB" = "180"
+	"m_DetailsPanelSplitter.83F126EB" = "700"
+	"currentGroup.83F126EB" = "asset"
 }
 providers = {
 	asset = {
@@ -72,5 +77,6 @@ providers = {
 	}
 }
 recentSearches = [
+	"playscene"
 ]
 savedSearchesSortOrder = 0

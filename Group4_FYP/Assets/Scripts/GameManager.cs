@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         return (gameState == GameState.Playing && FindMap(currentMapId).mapType != MapType.Peaceful);
     }
 
-    public async void LoadMap(string mapId)
+    public async void LoadMap(string mapId, bool saveOnLoaded = false)
     {
         MapData mapData = FindMap(mapId);
 
@@ -147,9 +147,21 @@ public class GameManager : MonoBehaviour
             mapData = FindMap(defaultMapId);
         }
 
+        // if map is a dungeon, disable saving buttons
+        if (mapData.mapType == MapType.Dungeon)
+        {
+            pauseMenu.SetDungeonMode(true);
+            SaveSystem.Instance.SaveData(false, false);
+        }
+        else
+        {
+            pauseMenu.SetDungeonMode(false);
+        }
+
+        // start load map operation
         await maskingCanvas.ShowMaskingCanvas(true);
 
-        // clone map
+        // destroy current map and its mobs
         if (currentMap)
         {
             Destroy(currentMap);
@@ -169,6 +181,7 @@ public class GameManager : MonoBehaviour
             Destroy(go);
         }
 
+        // clone new map
         currentMap = Instantiate(mapData.mapPrefab); // isn't Instantiate() synchronized?
         currentMapId = mapData.mapId;
         while (!currentMap) // wait for map to load
@@ -180,17 +193,6 @@ public class GameManager : MonoBehaviour
         if (canvas != null)
         {
             HUD hud = canvas.GetComponent<HUD>();
-        }
-
-        // if map is a dungeon, disable saving buttons
-        if (mapData.mapType == MapType.Dungeon)
-        {
-            pauseMenu.SetDungeonMode(true);
-            SaveSystem.Instance.SaveData(false, false);
-        }
-        else
-        {
-            pauseMenu.SetDungeonMode(false);
         }
         
         // spawn hero
@@ -221,6 +223,11 @@ public class GameManager : MonoBehaviour
 
         gameState = GameState.Playing;
         mapClearChecked = false;
+
+        if (saveOnLoaded)
+        {
+            SaveSystem.Instance.SaveData(true, false);
+        }
     }
 
     public MapData FindMap(string mapId)

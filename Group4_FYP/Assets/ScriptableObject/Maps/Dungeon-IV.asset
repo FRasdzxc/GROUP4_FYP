@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02a294cfd518bf4a9981b89db0054cf, type: 3}
+  m_Name: Dungeon-IV
+  m_EditorClassIdentifier: 
+  mapId: map_dungeoniv
+  mapName: Corridors
+  mapType: 2
+  mapDifficulty: 3
+  objective: Kill all the mobs without dying, then enter the portal
+  mapPrefab: {fileID: 9118655621788734078, guid: 929bfff330a97fb468f4c4a288b9962e, type: 3}
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: -76.5, y: 4.5}

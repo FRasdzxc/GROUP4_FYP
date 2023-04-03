@@ -9,7 +9,7 @@ public class DungeonMapData : MapData
 
     public async void SpawnPortal()
     {
-        SaveSystem.Instance.SaveData(false, false);
+        //SaveSystem.Instance.SaveData(false, false);
 
         GameObject clone = Instantiate(portalPrefab, portalPos, Quaternion.identity, GameManager.Instance.GetCurrentMap().transform);
         clone.transform.localScale = Vector2.zero;

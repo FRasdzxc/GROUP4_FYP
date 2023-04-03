@@ -193,7 +193,7 @@ public class Inventory : MonoBehaviour
     /* SetItems function */
     public void SetItems(List<InventoryEntry> items)
     {
-        this.items.Clear();
+        this.items = new List<InventoryEntry>();
 
         foreach (InventoryEntry ie in items)
         {

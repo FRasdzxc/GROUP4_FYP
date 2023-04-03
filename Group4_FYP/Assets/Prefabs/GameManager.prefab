@@ -102,6 +102,7 @@ MonoBehaviour:
   isTestScene: 0
   maps: {fileID: 11400000, guid: 3adb39b44db0775498888bbbe94578bc, type: 2}
   tutorialDialogues: []
+  defaultMapId: map_town
 --- !u!114 &4102428676351295755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTestScene: 0
-  autosaveDuration: 0
+  autosaveDuration: 5
 --- !u!114 &1522238214874603051
 MonoBehaviour:
   m_ObjectHideFlags: 0
