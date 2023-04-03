@@ -10,6 +10,7 @@ public class WeaponTriggerData : ScriptableObject
     public float damage;
     public float criticalDamage;
     public float projectileSpeed;
+    public float force;
     public bool splitable;
     public GameObject splitProjectile;
     public int splitAmount;

@@ -424,6 +424,7 @@ public class Hero : MonoBehaviour
         if (collision.CompareTag("MobWeaponTrigger") && collision.GetComponent<WeaponTrigger>())
         {
             TakeDamage(collision.GetComponent<WeaponTrigger>().GetDamage(false));
+            collision.GetComponent<WeaponTrigger>().push(gameObject);
             sr.color = Color.red;
         }
 

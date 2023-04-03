@@ -47,6 +47,7 @@ public class LaserMob : ProjectileMob
         {
             GameObject projectileClone = Instantiate(defaultLaser, weapon.transform.position, defaultLaser.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
             projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+            projectileClone.GetComponent<WeaponTrigger>().SetShootDir(projectDir);
             DestroyGobj(projectileClone);
             attackCounter++;
         }
@@ -54,6 +55,7 @@ public class LaserMob : ProjectileMob
         {
             GameObject projectileClone = Instantiate(bigLaserBall, weapon.transform.position, bigLaserBall.transform.rotation * Quaternion.Euler(0, 0, projectAngle));
             projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+            projectileClone.GetComponent<WeaponTrigger>().SetShootDir(projectDir);
             DestroyGobj(projectileClone);
             attackCounter = 0;
         }

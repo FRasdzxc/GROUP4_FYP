@@ -17,7 +17,8 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Object") || collision.CompareTag("Border"))
             {
-                await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
 
                 if (this) // trying to prevent MissingReferenceException
                 {
@@ -29,7 +30,8 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Border"))
             {
-                await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
 
                 if (this) // trying to prevent MissingReferenceException
                 {
@@ -41,7 +43,8 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border"))
             {
-                await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
+                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
 
                 if (this) // trying to prevent MissingReferenceException
                 {
