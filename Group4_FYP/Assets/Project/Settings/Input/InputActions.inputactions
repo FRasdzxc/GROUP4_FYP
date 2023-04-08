@@ -11,7 +11,8 @@
                     "id": "079673b4-71f3-4c65-9016-76d72ddd2ffa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "UseItem",
@@ -19,7 +20,8 @@
                     "id": "465e1d71-26e5-4855-9ab4-5497f251485d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "UseAll",
@@ -27,7 +29,8 @@
                     "id": "7b6e75dc-fd50-4a8f-bcd7-b6e3eea21c31",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HideInventory",
@@ -35,7 +38,8 @@
                     "id": "8ed35440-1d44-4af8-a63b-8cdebb8883ce",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SaveGame",
@@ -43,7 +47,8 @@
                     "id": "961a0564-f8a6-4574-8d6d-d7e116518abf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ExitToMenu",
@@ -51,21 +56,11 @@
                     "id": "0eff651f-c60b-465c-9a0a-752d80b27891",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "59dcd6ab-f903-44f8-bfd1-c6eec7d8ff7a",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardAndMouse",
-                    "action": "HidePanel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "84dd8f80-f7f7-4e26-986c-af56b05d91b0",
@@ -120,6 +115,17 @@
                     "action": "ExitToMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59dcd6ab-f903-44f8-bfd1-c6eec7d8ff7a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "HidePanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -133,7 +139,8 @@
                     "id": "0eabcbf6-ea03-4dd7-a178-5dac88d6a257",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Sprint",
@@ -141,7 +148,8 @@
                     "id": "49dcf7b1-c014-4f0c-b396-d87b309609b4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Ability1",
@@ -149,7 +157,8 @@
                     "id": "a7f1e384-02a3-4aac-b571-94251fd7f5a2",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Ability2",
@@ -157,7 +166,8 @@
                     "id": "2655efdd-6f0e-4349-9f47-0b82b3f490ad",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Ability3",
@@ -165,7 +175,8 @@
                     "id": "b53e4770-3075-4496-a25b-37513352acdf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "AbilityU",
@@ -173,7 +184,8 @@
                     "id": "3cc047c7-1e64-4c97-ad0b-d00b6110ca5d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact1",
@@ -181,7 +193,8 @@
                     "id": "53b67cd5-f70c-42ad-85c0-8e292059cf0a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Interact2",
@@ -189,7 +202,8 @@
                     "id": "96b2d38a-dd0e-4ac6-b076-06973e944311",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ShowPause",
@@ -197,7 +211,8 @@
                     "id": "42ea2042-a9fe-466d-98d6-0faf0bc3a225",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ShowInventory",
@@ -205,7 +220,8 @@
                     "id": "4393868c-99da-4bd7-995a-ede52c584b57",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "NextDialogue",
@@ -213,7 +229,8 @@
                     "id": "1f58a1e1-8f4d-428c-89c0-e76f5f12c163",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SkipDialogue",
@@ -221,7 +238,8 @@
                     "id": "15a7f698-e0c1-42ac-b678-7a7249d53bfd",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "EnterGame",
@@ -229,7 +247,8 @@
                     "id": "99a90c5a-a8ff-462e-8c6c-d5e1d8b6581b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -520,7 +539,8 @@
                     "id": "63c88859-6a6e-4c3e-9107-1f758875780b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Modifier",
@@ -528,7 +548,8 @@
                     "id": "374ab660-0dcd-4cd1-8aa0-c69a7c2fded9",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

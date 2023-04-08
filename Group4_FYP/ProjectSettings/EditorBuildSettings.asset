@@ -35,5 +35,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayScene.unity
     guid: ab0056f8023666f4d8cb1a94f007bde1
+  - enabled: 1
+    path: Assets/Project/Scenes/Shared/Controllers.unity
+    guid: d9730ba2225848b4aba38a72ec6578f5
+  - enabled: 1
+    path: Assets/Project/Scenes/Shared/Gameplay.unity
+    guid: e9446100013099e42a6eb5974a4f5921
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c007efaea4412034f8bb3ef04369ec8f, type: 2}

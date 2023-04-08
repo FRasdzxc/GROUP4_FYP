@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04846c698f07a54d8c18beab94516d6, type: 3}
+  m_Name: HeroMage
+  m_EditorClassIdentifier: 
+  m_Class: 0
+  m_MovementType: 1
+  m_MoveSpeed: 5
+  m_SprintFactor: 2
+  m_StepStartDelay: 0
+  m_StepDistance: 0
+  m_StepTime: 0
+  m_CanPickupItems: 1
+  m_BaseHealth: 100
+  m_DamageEffectTime: 0.3
+  m_AIControllable: 0
+  m_DetectionRadius: 0
+  m_AttackDistance: 0
