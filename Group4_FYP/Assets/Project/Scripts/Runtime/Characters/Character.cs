@@ -1,7 +1,9 @@
 using UnityEngine;
-using PathOfHero.Characters.Data;
-using PathOfHero.Items;
+using UnityEngine.Events;
 using DG.Tweening;
+using PathOfHero.Characters.Data;
+using PathOfHero.Managers;
+using PathOfHero.Items;
 
 namespace PathOfHero.Characters
 {
@@ -16,16 +18,19 @@ namespace PathOfHero.Characters
         private Animator m_Animator;
 
         private CharacterProfileRuntime m_Profile;
-        public CharacterProfileRuntime Profile => m_Profile;
 
         private int m_Health;
-        public int Health => m_Health;
-
         private int m_MaxHealth;
-        public int MaxHealth => m_MaxHealth;
+        private bool m_IsDead;
 
         private float m_LastDamageTime;
         private float m_NextStepTime;
+
+        public int Health => m_Health;
+        public int MaxHealth => m_MaxHealth;
+        public CharacterProfileRuntime Profile => m_Profile;
+
+        public UnityAction OnDeath;
 
         private void Awake()
         {
@@ -44,6 +49,8 @@ namespace PathOfHero.Characters
             }
             m_MaxHealth = m_Profile.BaseHealth;
             m_Health = m_Profile.BaseHealth;
+
+            CharacterManager.Instance?.Register(this);
         }
 
         private void Update()
@@ -51,6 +58,9 @@ namespace PathOfHero.Characters
             if (m_SpriteRenderer.color != Color.white && (Time.time - m_LastDamageTime) > m_Profile.DamageEffectTime)
                 m_SpriteRenderer.color = Color.white;
         }
+
+        private void OnDestroy()
+            => CharacterManager.Instance?.Unregister(this);
 
         #region IDamageable
         public void TakeDamage(int amount)

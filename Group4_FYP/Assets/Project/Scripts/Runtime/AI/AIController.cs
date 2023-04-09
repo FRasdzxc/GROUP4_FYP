@@ -1,5 +1,6 @@
 using UnityEngine;
 using PathOfHero.Characters;
+using PathOfHero.Managers;
 
 namespace PathOfHero.AI
 {
@@ -21,36 +22,27 @@ namespace PathOfHero.AI
             if (m_Character.Health <= 0)
                 return;
 
-            // Detection
-            float targetDistance = float.MaxValue;
-            Transform target = null;
-            foreach (var hit in Physics2D.OverlapCircleAll(transform.position, m_Character.Profile.DetectionRadius))
+            var manager = CharacterManager.Instance;
+            if (manager == null)
             {
-                // Ignore self
-                if (hit.gameObject == gameObject)
-                    continue;
-
-                // Ignore non-character objects
-                if (!hit.TryGetComponent<Character>(out var character))
-                    continue;
-
-                // Ignore non-hero characters
-                if (!character.Profile.IsHero())
-                    continue;
-
-                var colliderDistance = hit.Distance(m_Collider);
-                if (colliderDistance.distance < targetDistance)
-                {
-                    targetDistance = colliderDistance.distance;
-                    target = hit.transform;
-                }
+                Debug.LogError("[AI Controller] Character Manager is missing.");
+                enabled = false;
+                return;
             }
-
-            // Chase
-            if (target != null && targetDistance > m_Character.Profile.AttackDistance)
+            Transform playerTransform = manager.Player?.transform;
+            if (playerTransform != null)
             {
-                var direction = (target.position - transform.position).normalized;
-                m_Character.Move(direction);
+                var playerDistance = Vector2.Distance(transform.position, playerTransform.position);
+                if (playerDistance < m_Character.Profile.AttackDistance)
+                {
+                    // TODO: Attack the player
+                }
+                else if (playerDistance < m_Character.Profile.DetectionRadius)
+                {
+                    // Chase the player
+                    var direction = (playerTransform.position - transform.position).normalized;
+                    m_Character.Move(direction);
+                }
             }
         }
     }

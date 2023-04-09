@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using PathOfHero.Controllers;
 using PathOfHero.Characters;
@@ -16,6 +15,8 @@ namespace PathOfHero.Player
 
         private Vector2 m_MoveDirection;
         private bool m_IsSprinting;
+
+        private Coroutine m_DeathCoroutine;
 
         private void Start()
         {
@@ -41,6 +42,16 @@ namespace PathOfHero.Player
             m_ControllingCharacter?.Move(m_MoveDirection, m_IsSprinting);
         }
 
+        private void Update()
+        {
+            // Death
+            if (m_ControllingCharacter.Health <= 0)
+            {
+                OnCharacterDeath();
+                return;
+            }
+        }
+
         private void OnMove(Vector2 direction)
             => m_MoveDirection = direction;
 
@@ -49,5 +60,18 @@ namespace PathOfHero.Player
 
         private void OnSprintCanceled()
             => m_IsSprinting = false;
+
+        private void OnCharacterDeath()
+        {
+            if (m_DeathCoroutine != null)
+                return;
+
+            m_DeathCoroutine = StartCoroutine(DeathAnimation());
+        }
+
+        private IEnumerator DeathAnimation()
+        {
+            yield break;
+        }
     }
 }

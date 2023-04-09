@@ -12,12 +12,6 @@ namespace PathOfHero.Utilities
     {
 #if UNITY_EDITOR
         [SerializeField]
-        private string m_ControllerSceneName;
-
-        [SerializeField]
-        private string m_GameplaySceneName;
-
-        [SerializeField]
         private bool m_IsGameplay;
 
         [Header("Player Profile")]
@@ -26,20 +20,15 @@ namespace PathOfHero.Utilities
 
         [SerializeField]
         private PlayerProfile m_EditorProfile;
-
-        [Header("Cursor")]
-        [SerializeField]
-        private CursorController m_CursorController;
 #endif
 
         private void Awake()
         {
 #if UNITY_EDITOR
             m_PlayerProfileController.LoadFromObject(m_EditorProfile);
-            m_CursorController.ChangeCursor(m_IsGameplay ? CursorController.CursorType.Crosshair : CursorController.CursorType.Default);
-            LoadSceneAdditively(m_ControllerSceneName);
+            LoadSceneAdditively(SceneController.k_ControllerSceneName);
             if (m_IsGameplay)
-                LoadSceneAdditively(m_GameplaySceneName);
+                LoadSceneAdditively(SceneController.k_GameplaySceneName);
 #endif
             Destroy(gameObject);
         }
