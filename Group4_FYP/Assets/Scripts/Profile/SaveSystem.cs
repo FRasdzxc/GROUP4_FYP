@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using System.Threading.Tasks;
 
 // get every ProfileData attributes then use ProjectManagerJson to save
 public class SaveSystem : MonoBehaviour
 {
     [SerializeField] private bool isTestScene; // useful for testing
-    [SerializeField] private float autosaveDuration;
+    [Tooltip("Unit: minutes")] [SerializeField] private float autosaveDuration;
 
     //[SerializeField] private Hero hero;
     //[SerializeField] private AbilityManager abilityManager;
@@ -50,6 +51,9 @@ public class SaveSystem : MonoBehaviour
         orb = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Orb>();
         weaponManager = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>();
         LoadData();
+
+        autosaveDuration *= 60f;
+        AutoSave();
     }
 
     // Update is called once per frame
@@ -85,7 +89,7 @@ public class SaveSystem : MonoBehaviour
     }
 
     public void SaveData(bool showNotification = true, bool accountForMapType = true)
-    {
+        {
         if (accountForMapType)
         {
             if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
@@ -128,8 +132,23 @@ public class SaveSystem : MonoBehaviour
     }
 
     // not yet implemented
-    private void AutoSave()
+    private async void AutoSave()
     {
         // check if saving is allowed first, then save, restart the timer
+        float interval = 0f;
+
+        while (interval < autosaveDuration)
+        {
+            interval += Time.deltaTime;
+            await Task.Yield();
+        }
+
+        if (GameManager.Instance.GetCurrentMapType() != MapType.Dungeon)
+        {
+            await Notification.Instance.ShowNotification("Autosaving data...");
+            SaveData();
+        }
+
+        AutoSave();
     }
 }

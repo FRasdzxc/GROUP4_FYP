@@ -13,6 +13,7 @@ public class WeaponTrigger : MonoBehaviour
     private float damage;
     private float critialDamage;
     private float projectileSpeed;
+    private float force;
     private bool splitable;
     private GameObject splitProjectile;
     private GameObject projectile;
@@ -20,6 +21,7 @@ public class WeaponTrigger : MonoBehaviour
     private float splitProjectileSpeed;
     private float splitTime;
     private float splitAngle = 0;
+    private Vector3 shootDir;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class WeaponTrigger : MonoBehaviour
         damage = weaponTriggerData.damage;
         critialDamage = weaponTriggerData.criticalDamage;
         projectileSpeed = weaponTriggerData.projectileSpeed;
+        force = weaponTriggerData.force;
         splitable = weaponTriggerData.splitable;
         splitProjectile = weaponTriggerData.splitProjectile;
         splitAmount = weaponTriggerData.splitAmount;
@@ -52,6 +55,18 @@ public class WeaponTrigger : MonoBehaviour
         return damage;
     }
 
+    public void SetShootDir(Vector2 dir)
+    {
+        shootDir = dir;
+    }
+
+    public void push(GameObject obj)
+    {
+        obj.GetComponent<Rigidbody2D>().AddForce(shootDir * force, ForceMode2D.Force);
+        Debug.Log(shootDir);
+        Debug.Log(force);
+    }
+
     // ***** make a child class script for shoot and split?
     public void Shoot(Vector3 shootDir, float speed, GameObject x) // *****
     {
@@ -73,7 +88,7 @@ public class WeaponTrigger : MonoBehaviour
         {
             splitAngle = i * (360 / splitAmount);
             float radians = splitAngle * Mathf.Deg2Rad;
-            Vector3 shootDir = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)).normalized;
+            shootDir = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)).normalized;
             projectile = Instantiate(splitProjectile, gameObject.transform.position, Quaternion.identity);
             Shoot(shootDir, splitProjectileSpeed, projectile); // *****
         }

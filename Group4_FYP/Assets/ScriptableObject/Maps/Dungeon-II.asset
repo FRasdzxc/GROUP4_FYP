@@ -15,7 +15,7 @@ MonoBehaviour:
   mapId: map_dungeonii
   mapName: Square Hall
   mapType: 2
-  mapDifficulty: 1
+  mapDifficulty: 2
   objective: Kill all the mobs without dying
   mapPrefab: {fileID: 4032373878222675134, guid: bfe29b8d7e2e28a43a4fa233698e202c, type: 3}
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}

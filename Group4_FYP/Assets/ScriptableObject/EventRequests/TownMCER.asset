@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: TownMCER
   m_EditorClassIdentifier: 
   mapId: map_town
+  requiresConfirmation: 1
+  saveOnMapLoaded: 1
