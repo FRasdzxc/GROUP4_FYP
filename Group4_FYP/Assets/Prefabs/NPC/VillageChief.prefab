@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2187621286011602462}
   - component: {fileID: 2187621286011602466}
   - component: {fileID: 2187621286011602467}
-  - component: {fileID: 2187621286011602460}
   - component: {fileID: 2187621286011602461}
   m_Layer: 0
   m_Name: VillageChief
@@ -31,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543307384586144585}
   m_Father: {fileID: 0}
@@ -135,19 +135,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &2187621286011602460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2187621286011602457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d81b5f9eaf94fa4895d2cc2375bbe23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Data: {fileID: 11400000, guid: d1fd41a1b847e724884961cffe1a9b24, type: 2}
 --- !u!114 &2187621286011602461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +158,9 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 0d86040ff534e904c91aeea18df9b519, type: 3}
   header: Village Chief
   dialogues: []
-  dialogueEndEvents:
-    m_PersistentCalls:
-      m_Calls: []
   canBeSkipped: 1
   triggerOnStart: 0
+  eventRequestData: {fileID: 0}
 --- !u!1001 &3542934902586358592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,6 +262,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
+--- !u!114 &543307384466090281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3936497599343530601, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
+  m_PrefabInstance: {fileID: 3542934902586358592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &543307384586144585 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3936497599223476233, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
@@ -287,30 +283,19 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 3936497599223476234, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
   m_PrefabInstance: {fileID: 3542934902586358592}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &543307386421457476 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3936497598898178308, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
-  m_PrefabInstance: {fileID: 3542934902586358592}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &543307386294513570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3936497599024993506, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
   m_PrefabInstance: {fileID: 3542934902586358592}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &543307386421457476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3936497598898178308, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
+  m_PrefabInstance: {fileID: 3542934902586358592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &543307386428355565 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3936497598891182253, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
-  m_PrefabInstance: {fileID: 3542934902586358592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &543307384466090281 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3936497599343530601, guid: 51009a6f1f5e49d4d9003f6f7dec97e3, type: 3}
   m_PrefabInstance: {fileID: 3542934902586358592}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
