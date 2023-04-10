@@ -46,7 +46,7 @@ namespace PathOfHero.Controllers
             m_Current = ProfileType.Default;
         }
 
-        public void ChangeVolume(ProfileType type)
+        public void ChangeVolume(ProfileType type, bool animated = true)
         {
             if (!m_Volumes.ContainsKey(type))
             {
@@ -59,8 +59,16 @@ namespace PathOfHero.Controllers
 
             var oldVolume = m_Volumes[m_Current];
             var newVolume = m_Volumes[type];
-            DOTween.To(() => oldVolume.weight, v => oldVolume.weight = v, 0f, 1f).SetEase(Ease.InQuart);
-            DOTween.To(() => newVolume.weight, v => newVolume.weight = v, 1f, 1f).SetEase(Ease.OutQuart);
+            if (animated)
+            {
+                DOTween.To(() => oldVolume.weight, v => oldVolume.weight = v, 0f, 1f).SetEase(Ease.InQuart);
+                DOTween.To(() => newVolume.weight, v => newVolume.weight = v, 1f, 1f).SetEase(Ease.OutQuart);
+            }
+            else
+            {
+                oldVolume.weight = 0f;
+                newVolume.weight = 1f;
+            }
             m_Current = type;
         }
 

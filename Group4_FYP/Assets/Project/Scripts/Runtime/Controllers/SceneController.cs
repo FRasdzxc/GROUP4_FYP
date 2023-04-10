@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
@@ -11,6 +12,20 @@ namespace PathOfHero.Controllers
         public const string k_GameplaySceneName = "Gameplay";
 
         private bool m_IsLoading;
+        private bool m_IsGameplaySceneLoaded;
+        private string m_SceneToLoad;
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        }
 
         public void ChangeScene(string name, bool isGameplay, bool skipFadeIn = false)
         {
@@ -28,42 +43,52 @@ namespace PathOfHero.Controllers
                 yield break;
 
             m_IsLoading = true;
+            m_SceneToLoad = name;
             yield return StartCoroutine(LoadingScreen.Instance.FadeIn(!skipFadeIn));
             yield return StartCoroutine(UnloadScene(activeScene.name));
 
-            var gameplaySceneLoaded = IsSceneLoaded(k_GameplaySceneName);
-            if (isGameplay && !gameplaySceneLoaded)
+            if (isGameplay && !m_IsGameplaySceneLoaded)
                 yield return StartCoroutine(LoadScene(k_GameplaySceneName));
-            else if (gameplaySceneLoaded)
+            else if (m_IsGameplaySceneLoaded)
                 yield return StartCoroutine(UnloadScene(k_GameplaySceneName));
 
-            yield return StartCoroutine(LoadScene(name));
-            var scene = SceneManager.GetSceneByName(name);
-            if (scene.IsValid())
-                SceneManager.SetActiveScene(scene);
+            yield return StartCoroutine(LoadScene(m_SceneToLoad));
 
-            yield return LoadingScreen.Instance.FadeOut();
+            if (!isGameplay)
+                yield return LoadingScreen.Instance.FadeOut();
+
             m_IsLoading = false;
         }
 
         private IEnumerator LoadScene(string name)
         {
-            var load = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
-            while (!load.isDone)
-                yield return null;
+            var operation = SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+            yield return new WaitUntil(() => operation.isDone);
         }
 
         private IEnumerator UnloadScene(string name)
         {
-            var unload = SceneManager.UnloadSceneAsync(name);
-            while (!unload.isDone)
-                yield return null;
+            var operation = SceneManager.UnloadSceneAsync(name);
+            yield return new WaitUntil(() => operation.isDone);
         }
 
-        private bool IsSceneLoaded(string name)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            var scene = SceneManager.GetSceneByName(name);
-            return scene.IsValid();
+            if (mode != LoadSceneMode.Additive)
+            {
+                Debug.LogError("[Scene Controller] A scene is loaded in single mode, controller scene might be lost");
+                return;
+            }
+
+            if (scene.name == k_GameplaySceneName)
+                m_IsGameplaySceneLoaded = true;
+            else if (scene.name == m_SceneToLoad)
+                SceneManager.SetActiveScene(scene);
+        }
+
+        private void OnSceneUnloaded(Scene scene)
+        {
+            m_IsGameplaySceneLoaded = scene.name == k_GameplaySceneName;
         }
     }
 }

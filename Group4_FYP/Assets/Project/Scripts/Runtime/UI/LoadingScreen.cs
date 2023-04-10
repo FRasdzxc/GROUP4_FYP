@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -41,15 +42,23 @@ namespace PathOfHero.UI
             DisplayLogo = false;
         }
 
-        public IEnumerator FadeIn(bool animated = true) => PerformFade(false, animated);
-        public IEnumerator FadeOut(bool animated = true) => PerformFade(true, animated);
+        public IEnumerator FadeIn(bool animated = true)
+        {
+            var task = PerformFadeAsync(false, animated);
+            yield return new WaitUntil(() => task.IsCompleted);
+        }
+        public IEnumerator FadeOut(bool animated = true)
+        {
+            var task = PerformFadeAsync(true, animated);
+            yield return new WaitUntil(() => task.IsCompleted);
+        }
 
-        private IEnumerator PerformFade(bool fadeOut, bool animated = true)
+        public async Task PerformFadeAsync(bool fadeOut, bool animated = true)
         {
             if (m_Fading)
             {
                 Debug.LogWarning("[Loading Screen] A fade is already in progress, skipping...");
-                yield break;
+                return;
             }
 
             m_GraphicRaycaster.enabled = !fadeOut;
@@ -60,7 +69,7 @@ namespace PathOfHero.UI
             var newScale = fadeOut ? Vector3.one : Vector3.zero;
             var ease = fadeOut ? Ease.InQuart : Ease.OutQuart;
             if (animated)
-                yield return m_MaskTransform.DOScale(newScale, m_Duration).SetEase(ease).WaitForCompletion();
+                await m_MaskTransform.DOScale(newScale, m_Duration).SetEase(ease).AsyncWaitForCompletion();
             else
                 m_MaskTransform.localScale = newScale;
             m_Fading = false;
