@@ -1,60 +1,28 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
+using PathOfHero.Utilities;
 
-public class SceneController : MonoBehaviour
+public class SceneController : Singleton<MonoBehaviour>
 {
     private static GameObject m_Instance;
-    public static GameObject Canvas
-    {
-        get
-        {
-            if (m_Instance == null)
-                Debug.LogWarning("Canvas game object does not exist");
-
-            return m_Instance;
-        }
-    }
-
-    private MaskingCanvas maskingCanvas;
 
     private string selectedSceneName;
 
-    void Awake()
-    {
-        Debug.Assert(m_Instance == null || m_Instance == this, "More than one SceneController exists, please double check");
-        if (m_Instance == null)
-            m_Instance = gameObject;
-
-        maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
-    }
-
-    private void OnDestroy()
-    {
-        if (m_Instance == gameObject)
-            m_Instance = null;
-    }
-
-    public void SetScene(string sceneName) // temporary
-    {
-        selectedSceneName = sceneName;
-    }
-
     public async void ChangeScene(string sceneName) // not used for now?; instead use EnterScene() in the future
     {
-        await maskingCanvas.ShowMaskingCanvas(true);
+        await MaskingCanvas.Instance.ShowMaskingCanvas(true);
         await WaitForSceneToLoad(sceneName);
-        await maskingCanvas.ShowMaskingCanvas(false);
+        await MaskingCanvas.Instance.ShowMaskingCanvas(false);
     }
 
     public async void EnterScene() // temporary; change to WaitForSceneToLoad("PlayScene") in the future; remove SceneSelected()? idk
     {
         if (SceneSelected())
         {
-            await maskingCanvas.ShowMaskingCanvas(true);
+            await MaskingCanvas.Instance.ShowMaskingCanvas(true);
             await WaitForSceneToLoad(selectedSceneName);
-            await maskingCanvas.ShowMaskingCanvas(false);
+            await MaskingCanvas.Instance.ShowMaskingCanvas(false);
         }
     }
 
@@ -65,7 +33,7 @@ public class SceneController : MonoBehaviour
 
     public async void EnterPlayScene() // newest, EnterScene() and SceneSelected() unused?
     {
-        await maskingCanvas.ShowMaskingCanvas(true);
+        await MaskingCanvas.Instance.ShowMaskingCanvas(true);
         await WaitForSceneToLoad("PlayScene");
         // await maskingCanvas.ShowMaskingCanvas(false); // GameManager will do this operation
     }

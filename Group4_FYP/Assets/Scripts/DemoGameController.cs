@@ -23,7 +23,7 @@ public class DemoGameController : MonoBehaviour
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         if (!allMobsKilled && GameObject.FindGameObjectsWithTag("Mob").Length <= 0)
         {
@@ -33,13 +33,9 @@ public class DemoGameController : MonoBehaviour
             // spawn portal maybe
 
             if (nextSceneName != null && nextSceneName != "")
-            {
-                await hud.ShowHugeMessage("All Clear", Color.green); // temporary only
-            }
+                StartCoroutine(hud.ShowHugeMessage("All Clear", Color.green)); // temporary only
             else
-            {
-                await hud.ShowHugeMessage("Game Completed", Color.green); // temporary only
-            }
+                StartCoroutine(hud.ShowHugeMessage("Game Completed", Color.green)); // temporary only
 
             if (willAdvanceToNextScene)
             {

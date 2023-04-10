@@ -36,7 +36,6 @@ public class PanelManager : MonoBehaviour
     {
         hidePanelAction = playerInput.actions["HidePanel"];
         hidePanelAction.Enable();
-        Debug.Log(hidePanelAction.GetBindingDisplayString());
     }
 
     // Update is called once per frame
@@ -50,8 +49,6 @@ public class PanelManager : MonoBehaviour
                 Debug.Log("hidepanelactiontriggered");
             }
         }
-
-        Debug.Log(playerInput.currentActionMap);
     }
 
     public void AddPanel(Panel panel)

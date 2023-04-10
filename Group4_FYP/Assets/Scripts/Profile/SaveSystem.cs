@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using System.Threading.Tasks;
+using PathOfHero.Utilities;
 
 // get every ProfileData attributes then use ProjectManagerJson to save
-public class SaveSystem : MonoBehaviour
+public class SaveSystem : Singleton<SaveSystem>
 {
     [SerializeField] private bool isTestScene; // useful for testing
     [Tooltip("Unit: minutes")] [SerializeField] private float autosaveDuration;
@@ -18,31 +18,14 @@ public class SaveSystem : MonoBehaviour
     private WeaponManager weaponManager;
 
     private ProfileData profile;
+    private float nextSaveTime;
 
-    private static SaveSystem instance;
-    public static SaveSystem Instance
+    public string ProfileName => profile.profileName;
+
+    protected override void Awake()
     {
-        get
-        {
-            return instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-
-        if (!isTestScene)
-        {
-            profile = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName"));
-        }
-        else
-        {
-            profile = new ProfileData();
-        }
+        base.Awake();
+        profile = isTestScene ? new() : ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName"));
 
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
@@ -53,13 +36,23 @@ public class SaveSystem : MonoBehaviour
         LoadData();
 
         autosaveDuration *= 60f;
-        AutoSave();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        // autosave operation?
+        nextSaveTime = Time.unscaledTime + autosaveDuration;
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
+            return;
+
+        if (Time.unscaledTime >= nextSaveTime)
+        {
+            SaveData();
+            nextSaveTime = Time.unscaledTime + autosaveDuration;
+        }
     }
 
     public void LoadData()
@@ -89,7 +82,7 @@ public class SaveSystem : MonoBehaviour
     }
 
     public void SaveData(bool showNotification = true, bool accountForMapType = true)
-        {
+    {
         if (accountForMapType)
         {
             if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
@@ -126,29 +119,6 @@ public class SaveSystem : MonoBehaviour
         ProfileManagerJson.SaveProfile(profile);
 
         if (showNotification)
-        {
             _ = Notification.Instance.ShowNotification("Successfully saved data to Profile \"" + profile.profileName + "\"!");
-        }
-    }
-
-    // not yet implemented
-    private async void AutoSave()
-    {
-        // check if saving is allowed first, then save, restart the timer
-        float interval = 0f;
-
-        while (interval < autosaveDuration)
-        {
-            interval += Time.deltaTime;
-            await Task.Yield();
-        }
-
-        if (GameManager.Instance.GetCurrentMapType() != MapType.Dungeon)
-        {
-            await Notification.Instance.ShowNotification("Autosaving data...");
-            SaveData();
-        }
-
-        AutoSave();
     }
 }

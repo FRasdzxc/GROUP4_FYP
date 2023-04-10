@@ -1,15 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.Linq;
 
 public class SettingsMenu : MonoBehaviour
 {
     // make settings save-able
 
-    private Resolution[] resolutions;
-    [SerializeField] private Dropdown graphicsDropdown;
     [SerializeField] private Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Toggle cameraShakeToggle;
@@ -17,39 +15,32 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider volumeSlider;
 
+    private List<ResolutionEntry> resolutions;
+
+    private void Awake()
+    {
+        resolutions = Screen.resolutions
+            .Select(r => new ResolutionEntry { width = r.width, height = r.height })
+            .Distinct()
+            .OrderBy(r => r.height)
+            .OrderBy(r => r.width)
+            .ToList();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
-        List<string> resolutionOptions = new List<string>();
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            resolutionOptions.Add(resolutions[i].width + " x " + resolutions[i].height);
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-        resolutionDropdown.AddOptions(resolutionOptions);
-        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.AddOptions(resolutions.Select(r => r.ToString()).ToList());
         resolutionDropdown.RefreshShownValue();
 
         // load settings
         LoadSettings();
     }
 
-    public void SetGraphics(int graphicsIndex)
-    {
-        QualitySettings.SetQualityLevel(graphicsIndex);
-        graphicsDropdown.value = graphicsIndex;
-    }
-
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        var resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         resolutionDropdown.value = resolutionIndex;
     }
@@ -82,10 +73,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void SaveSettings()
     {
-        PlayerPrefs.SetInt("graphics", graphicsDropdown.value);
-        PlayerPrefs.SetInt("resolution", resolutionDropdown.value);
-        PlayerPrefs.SetInt("resolutionChosen", 1);
-        PlayerPrefs.SetInt("fullscreen", BoolToInt(fullscreenToggle.isOn));
         //PlayerPrefs.SetInt("cameraShake", BoolToInt(cameraShakeToggle.isOn));
         PlayerPrefs.SetInt("vSync", BoolToInt(vSyncToggle.isOn));
         PlayerPrefs.SetFloat("volume", volumeSlider.value);
@@ -93,19 +80,10 @@ public class SettingsMenu : MonoBehaviour
 
     private void LoadSettings()
     {
-        SetGraphics(PlayerPrefs.GetInt("graphics"));
-
-        if (PlayerPrefs.GetInt("resolutionChosen") == 1)
-        {
-            SetResolution(PlayerPrefs.GetInt("resolution"));
-            SetFullscreen(IntToBool(PlayerPrefs.GetInt("fullscreen")));
-        }
-        else
-        {
-            SetResolution(resolutions.Length - 1);
-            SetFullscreen(true);
-        }
-
+        // Resolution
+        var currentResolution = Screen.currentResolution;
+        resolutionDropdown.value = resolutions.FindIndex(r => r.width == currentResolution.width && r.height == currentResolution.height);
+        fullscreenToggle.isOn = Screen.fullScreen;
         SetVSync(IntToBool(PlayerPrefs.GetInt("vSync")));
 
         //SetCameraShake(IntToBool());
@@ -130,5 +108,13 @@ public class SettingsMenu : MonoBehaviour
         }
 
         return 0;
+    }
+
+    struct ResolutionEntry
+    {
+        public int width;
+        public int height;
+
+        public override string ToString() => $"{width} x {height}";
     }
 }

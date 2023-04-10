@@ -153,7 +153,7 @@ TextureImporter:
       213: -2037862049251173424
     second: DungeonV2_49
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -174,6 +174,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -183,8 +184,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -212,6 +213,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -275,6 +277,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -1348,6 +1362,57 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DungeonV2_30: -1870627006014987378
+      DungeonV2_10: 8062280901681791476
+      DungeonV2_38: -3407391952652406473
+      DungeonV2_23: -8425166176230531191
+      DungeonV2_28: -544667051101309201
+      DungeonV2_47: 4203249038817662669
+      DungeonV2_3: 3961491641763545505
+      DungeonV2_7: -5865231527795006252
+      DungeonV2_27: -8269124774476373119
+      DungeonV2_6: 3678245639879945934
+      DungeonV2_15: 4774963978647202029
+      DungeonV2_37: -7020668750122720160
+      DungeonV2_8: 4095759244649467996
+      DungeonV2_43: -41648587857203470
+      DungeonV2_5: 935520085465893681
+      DungeonV2_25: -6275273461391600852
+      DungeonV2_2: -6339710414663170488
+      DungeonV2_18: 3027421462557547383
+      DungeonV2_21: 8782302538410733059
+      DungeonV2_12: -3039107003863752182
+      DungeonV2_16: 7394339540387711476
+      DungeonV2_45: 3265045843863110998
+      DungeonV2_46: -8968401367548163227
+      DungeonV2_14: 9166516597669383371
+      DungeonV2_9: -5942266190654621530
+      DungeonV2_17: -8476945814147426273
+      DungeonV2_20: 1288831337609242385
+      DungeonV2_1: -5302428505371303476
+      DungeonV2_13: -8824933279195824431
+      DungeonV2_32: -6457403429416173678
+      DungeonV2_41: -7688606326507357395
+      DungeonV2_22: 7935744902243836713
+      DungeonV2_11: 9202730102548872558
+      DungeonV2_36: 1263873035402610176
+      DungeonV2_39: -8216925131238573739
+      DungeonV2_34: -6716520219077732036
+      DungeonV2_40: -6675349791182956330
+      DungeonV2_48: -1902885316375288418
+      DungeonV2_31: 5467991468150025256
+      DungeonV2_19: 4852780507262451536
+      DungeonV2_44: 8220265261898273441
+      DungeonV2_26: -284457458635861064
+      DungeonV2_29: -8328488025002288702
+      DungeonV2_24: 790679655824521087
+      DungeonV2_42: -2419909247823610925
+      DungeonV2_33: -1218958647764691695
+      DungeonV2_0: -8782655458239090244
+      DungeonV2_49: -2037862049251173424
+      DungeonV2_35: 8232153883256578422
+      DungeonV2_4: 2515787651131231875
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

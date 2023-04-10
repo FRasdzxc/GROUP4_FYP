@@ -1,8 +1,8 @@
 using UnityEngine;
-// using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
+using PathOfHero.Controllers;
+using System.Collections;
+using PathOfHero.UI;
 
 public class Hero : MonoBehaviour
 {
@@ -13,15 +13,11 @@ public class Hero : MonoBehaviour
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
     [SerializeField] private int orbObtainLevel = 5;
-    //[SerializeField] private MaskingCanvas maskingCanvas;
 
     private HUD hud;
     private SpriteRenderer sr;
     private bool isDead;
-    // private ColorGrading colorGrading;
-    private ColorAdjustments colorAdjustments;
     private GameObject spawnPoint;
-    private MaskingCanvas maskingCanvas;
     private string profileName;
     private ProfileData profile;
 
@@ -82,7 +78,6 @@ public class Hero : MonoBehaviour
             instance = this;
         }
 
-        maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
 
@@ -95,8 +90,6 @@ public class Hero : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        // Camera.main.GetComponent<PostProcessVolume>().profile.TryGetSettings(out colorGrading);
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Volume>().profile.TryGet(out colorAdjustments);
         movementController.SetMovementSpeed(heroData.walkspeed);
 
         Setup();
@@ -140,21 +133,13 @@ public class Hero : MonoBehaviour
                 // if (Input.GetKeyDown(KeyCode.Backspace))
                 if (takeDamageAction.triggered)
                 {
-                    Debug.Log("take damage");
-
                     if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        Die();
-                    }
+                        TakeDamage(health, false);
                     else
-                    {
                         TakeDamage(15, false);
-                    }
                 }
                 if (Input.GetKeyDown(KeyCode.Equals))
-                {
                     AddHealth(25f);
-                }
             }
         }
     }
@@ -164,10 +149,7 @@ public class Hero : MonoBehaviour
         isDead = false;
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
-        // spawnPoint = GameObject.FindGameObjectWithTag("Respawn"); // set in Spawn()
-        transform.position = spawnPoint.transform.position;
-        // colorGrading.saturation.value = 0f;
-        colorAdjustments.saturation.value = 0f;
+        PostProcessController.Instance?.ChangeVolume(PostProcessController.ProfileType.Default, false);
         sr.color = Color.white;
         movementController.enabled = true;
         abilityManager.enabled = true;
@@ -196,48 +178,51 @@ public class Hero : MonoBehaviour
             }
 
             if (health <= 0)
-            {
-                Die();
-            }
+                StartCoroutine(Die());
         }
     }
 
-    private async void Die()
+    private IEnumerator Die()
     {
         isDead = true;
         health = 0;
         // hud.UpdateHealth(health);
         hud.UpdateHealth(health, upgradedMaxHealth);
-        // colorGrading.saturation.value = -100f;
-        colorAdjustments.saturation.value = -100f;
+        PostProcessController.Instance?.ChangeVolume(PostProcessController.ProfileType.Death);
         movementController.ResetAnimatorParameters();
         movementController.enabled = false;
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
-        await hud.ShowHugeMessage("You Died", Color.red);
+        yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
 
-        Respawn();
+        var loadingScreen = LoadingScreen.Instance;
+        if (loadingScreen != null)
+            yield return StartCoroutine(loadingScreen.FadeIn());
+
+        health = upgradedMaxHealth;
+        Setup();
+        Spawn();
+
         if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
         {
             GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
             SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
         }
-    }
 
-    public async void Respawn()
-    {
-        await maskingCanvas.ShowMaskingCanvas(true);
-        health = upgradedMaxHealth;
-        Setup();
-        await maskingCanvas.ShowMaskingCanvas(false);
+        yield return loadingScreen.FadeOut();
     }
 
     public void Spawn()
     {
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+        if (spawnPoint == null)
+        {
+            Debug.LogWarning("[Hero] Spawn point not found.");
+            return;
+        }
+
         transform.position = spawnPoint.transform.position;
-        Debug.Log(spawnPoint);
     }
 
     #region Setters

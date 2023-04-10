@@ -19,6 +19,7 @@ public class Mob : MonoBehaviour
     protected float movementSpeed;
     protected GameObject player;
     protected bool isDead;
+    protected PointDrop point;
     protected SpriteRenderer sr;
     protected Rigidbody2D rb2D;
     protected Vector2 moveDir;
@@ -33,6 +34,7 @@ public class Mob : MonoBehaviour
         movementSpeed = mobData.moveSpeed;
         player = GameObject.FindWithTag("Player");
         isDead = false; // preventive
+        point = GetComponent<PointDrop>();
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         healthSlider.maxValue = health;
@@ -126,6 +128,7 @@ public class Mob : MonoBehaviour
         if (this) // trying to prevent MissingReferenceException
         {
             loot.SpawnDrop(transform, randomDropCount, dropRange);
+            point.SpawnDrop();
             Destroy(gameObject);
         }
     }

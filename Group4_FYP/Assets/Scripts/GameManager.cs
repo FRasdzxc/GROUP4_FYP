@@ -1,3 +1,4 @@
+using PathOfHero.UI;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -33,7 +34,6 @@ public class GameManager : MonoBehaviour
     private GameState gameState;
 
     private Hero hero;
-    private MaskingCanvas maskingCanvas;
     private HUD hud;
     private PauseMenu pauseMenu;
 
@@ -55,14 +55,13 @@ public class GameManager : MonoBehaviour
 
         gameState = GameState.Paused;
         hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
-        maskingCanvas = GameObject.FindGameObjectWithTag("MaskingCanvas").GetComponent<MaskingCanvas>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
 
         if (!isTestScene)
         {
             // LoadMap(currentMapIndex);
-            LoadMap(currentMapId);
+            LoadMap(currentMapId, skipFadeIn: true);
         }
         else
         {
@@ -72,6 +71,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (gameState != GameState.Playing)
+            return;
+
         int mobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
         hud.UpdateMobCount(mobCount);
 
@@ -136,7 +138,7 @@ public class GameManager : MonoBehaviour
         return (gameState == GameState.Playing && FindMap(currentMapId).mapType != MapType.Peaceful);
     }
 
-    public async void LoadMap(string mapId, bool saveOnLoaded = false)
+    public async void LoadMap(string mapId, bool saveOnLoaded = false, bool skipFadeIn = false)
     {
         MapData mapData = FindMap(mapId);
 
@@ -159,7 +161,8 @@ public class GameManager : MonoBehaviour
         }
 
         // start load map operation
-        await maskingCanvas.ShowMaskingCanvas(true);
+        if (!skipFadeIn)
+            await LoadingScreen.Instance.PerformFadeAsync(false);
 
         // destroy current map and its mobs
         if (currentMap)
@@ -188,12 +191,6 @@ public class GameManager : MonoBehaviour
         {
             await Task.Yield();
         }
-
-        var canvas = SceneController.Canvas;
-        if (canvas != null)
-        {
-            HUD hud = canvas.GetComponent<HUD>();
-        }
         
         // spawn hero
         hero.Spawn();
@@ -209,16 +206,16 @@ public class GameManager : MonoBehaviour
         }
 
         await Task.Delay(50); // make the game look smoother
-        await maskingCanvas.ShowMaskingCanvas(false);
+        await LoadingScreen.Instance.PerformFadeAsync(true);
 
         if (mapData.mapType == MapType.Peaceful)
         {
-            _ = hud.ShowHugeMessage(mapData.mapName, mapData.mapType.ToString());
+            StartCoroutine(hud.ShowHugeMessage(mapData.mapName, mapData.mapType.ToString()));
         }
         else
         {
-            // _ = hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString()));
-            _ = hud.ShowHugeMessage(mapData.mapName, $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}");
+            // StartCoroutine(hud.ShowHugeMessage(mapData.mapName, String.Format("{0} | {1}", mapData.mapType.ToString(), mapData.mapDifficulty.ToString())));
+            StartCoroutine(hud.ShowHugeMessage(mapData.mapName, $"{mapData.mapType} | {mapData.mapDifficulty}"));
         }
 
         gameState = GameState.Playing;

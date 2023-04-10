@@ -14,7 +14,6 @@ public class PointMovement : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(storedType + " " + storedValue);
     }
 
     // Update is called once per frame
@@ -27,25 +26,13 @@ public class PointMovement : MonoBehaviour
             if(distance <= 0.5f)
             {
                 if(storedType == "coin")
-                {
-                    //player.GetComponent<PlayerData>().AddCoin(storedValue);
                     player.GetComponent<Hero>().AddCoin(storedValue);
-                }
                 if(storedType == "xp")
-                {
-                    //player.GetComponent<PlayerData>().AddEXP(storedValue);
                     player.GetComponent<Hero>().AddEXP(storedValue);
-                }
                 if(storedType == "hp")
-                {
-                    //add hp maybe
                     player.GetComponent<Hero>().AddHealth(storedValue);
-                }
                 if(storedType == "mp")
-                {
-                    //add mp maybe
                     player.GetComponent<AbilityManager>().AddMana(storedValue);
-                }
                 Destroy(gameObject);
             }
         }

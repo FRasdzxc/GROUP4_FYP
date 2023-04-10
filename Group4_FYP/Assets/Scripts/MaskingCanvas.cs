@@ -1,34 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
+using PathOfHero.Utilities;
 
-public class MaskingCanvas : MonoBehaviour
+public class MaskingCanvas : SingletonPersistent<MaskingCanvas>
 {
     [SerializeField] private Transform mask;
-
-    private static MaskingCanvas instance;
-    public static MaskingCanvas Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         gameObject.SetActive(false);
     }
 

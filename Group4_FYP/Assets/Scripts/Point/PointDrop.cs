@@ -18,19 +18,7 @@ public class PointDrop : MonoBehaviour
     public int mpAmount;
     public float offset;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnDestroy()
+    public void SpawnDrop()
     {
         if(coinDrop == true)
         {

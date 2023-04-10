@@ -32,7 +32,7 @@ public class ProfileData
 
     public ProfileData() // profile for test scenes
     {
-        profileName = "_testprofile";
+        profileName = "demo";
         heroClass = HeroClass.Mage.ToString();
         health = 200;
         maxHealth = 200;

@@ -1,10 +1,11 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using PathOfHero.Utilities;
+using System.Collections;
 
-public class HUD : MonoBehaviour
+public class HUD : Singleton<HUD>
 {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
@@ -31,28 +32,13 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject mainPanel;
 
-    private float upgradedMaxMana;
     private int maxXP;
-
-    private static HUD instance;
-    public static HUD Instance
-    {
-        get => instance;
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
     {
         regionText.text = ""; // temporary?
-        profileNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
+        profileNameText.text = SaveSystem.Instance.ProfileName;
     }
 
     // Update is called once per frame
@@ -98,6 +84,9 @@ public class HUD : MonoBehaviour
 
     public void UpdateHealth(float health, float upgradedMaxHealth)
     {
+        if (healthSlider.value == health && healthSlider.maxValue == upgradedMaxHealth)
+            return;
+
         healthSlider.maxValue = upgradedMaxHealth;
 
         healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
@@ -112,11 +101,13 @@ public class HUD : MonoBehaviour
 
     public void UpdateMana(float mana, float upgradedMaxMana)
     {
-        this.upgradedMaxMana = upgradedMaxMana;
+        if (manaSlider.value == mana && manaSlider.maxValue == upgradedMaxMana)
+            return;
+
         manaSlider.maxValue = upgradedMaxMana;
 
         manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
-        manaText.text = ((int)mana).ToString("n0") + "/" + this.upgradedMaxMana.ToString("n0") + " MP";
+        manaText.text = ((int)mana).ToString("n0") + "/" + manaSlider.maxValue.ToString("n0") + " MP";
     }
 
     public void UpdateAbility(int slotNumber, float remainingCooldownTime)
@@ -140,7 +131,6 @@ public class HUD : MonoBehaviour
     public void UpdateXP(int level, int storedExp)
     {
         xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
-        //xpText.text = "level " + playerData.GetLevel() + " (" + playerData.GetStoredXP() + "/" + maxXP.ToString() + " XP)";
         xpText.text = "Level " + level.ToString("n0") + " (" + storedExp.ToString("n0") + "/" + maxXP.ToString("n0") + " XP)";
     }
 
@@ -158,22 +148,22 @@ public class HUD : MonoBehaviour
     }
 
     #region HugeMessage
-    public async Task ShowHugeMessage(string title, Color titleColor, float duration = 1.5f) // duration = seconds
+    public IEnumerator ShowHugeMessage(string title, Color titleColor, float duration = 1.5f) // duration = seconds
     {
-        await ShowHugeMessage(title, titleColor, "", Color.white, duration);
+        return ShowHugeMessage(title, titleColor, "", Color.white, duration);
     }
 
-    public async Task ShowHugeMessage(string title, float duration = 1.5f)
+    public IEnumerator ShowHugeMessage(string title, float duration = 1.5f)
     {
-        await ShowHugeMessage(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
+        return ShowHugeMessage(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
     }
 
-    public async Task ShowHugeMessage(string title, string subtitle, float duration = 1.5f)
+    public IEnumerator ShowHugeMessage(string title, string subtitle, float duration = 1.5f)
     {
-        await ShowHugeMessage(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
+        return ShowHugeMessage(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
     }
 
-    public async Task ShowHugeMessage(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
+    private IEnumerator ShowHugeMessage(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);
 
@@ -192,9 +182,9 @@ public class HUD : MonoBehaviour
         }
 
         hugeMessage.SetActive(true);
-        await hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-        await Task.Delay((int)(duration * 1000));
-        await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
+        yield return hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
+        yield return new WaitForSeconds(duration);
+        yield return hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).WaitForCompletion();
         hugeMessage.SetActive(false);
     }
     #endregion

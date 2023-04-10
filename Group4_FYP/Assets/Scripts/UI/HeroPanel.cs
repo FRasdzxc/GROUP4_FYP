@@ -65,14 +65,13 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         heroPanelRectTransform.anchoredPosition = new Vector2(0, -heroPanelRectTransform.rect.height / 4);
         heroPanel.SetActive(false);
 
-        heroNameText.text = ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName")).profileName;
+        heroNameText.text = SaveSystem.Instance.ProfileName;
 
         showInventoryAction = playerInput.actions["ShowInventory"];
         hideInventoryAction = playerInput.actions["HideInventory"];
         showInventoryAction.Enable();
         hideInventoryAction.Enable();
         keyHintText.text = showInventoryAction.GetBindingDisplayString();
-        Debug.Log("show inventory action binding " + showInventoryAction.GetBindingDisplayString());
 
         // temp: will implement the whole thing in the future
         armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
