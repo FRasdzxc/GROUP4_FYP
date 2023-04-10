@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b6f96d89ddd6c48a2d995dcdc3ad9c, type: 3}
+  m_Name: WaveDungeon-I
+  m_EditorClassIdentifier: 
+  mapId: map_wavedungeoni
+  mapName: Snow Colosseum
+  mapType: 2
+  mapDifficulty: 2
+  objective: Go through all the waves and kill all the mobs without dying, then enter
+    the portal
+  mapPrefab: {fileID: 3978102400795909892, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: 0, y: 0}
+  waves:
+  - {fileID: 11400000, guid: 247a65acb919c284fb8d100b68d45ac6, type: 2}
+  - {fileID: 11400000, guid: 031a6e017ebed6840aaeaae606d6dde6, type: 2}

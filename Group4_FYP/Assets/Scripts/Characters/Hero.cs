@@ -315,6 +315,11 @@ public class Hero : MonoBehaviour
         return maxHealth;
     }
 
+    public float GetUpgradedMaxHealth()
+    {
+        return upgradedMaxHealth;
+    }
+
     public float GetMaxHealthUpgrade()
     {
         return MaxHealthUpgrade;
