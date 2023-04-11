@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 public class ItemTrigger : Interaction
@@ -8,12 +8,10 @@ public class ItemTrigger : Interaction
     [Tooltip("Destroy after seconds")] [SerializeField]
     private float lifeTime = 300f; // default: 300 seconds (5 mins)
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        
-        DestroyGobj();
+        StartCoroutine(TimeoutDestroy(Time.time + lifeTime));
     }
 
     protected override void Interact() // previously: public void PickUpItem()
@@ -40,15 +38,10 @@ public class ItemTrigger : Interaction
         }
     }
 
-    private async void DestroyGobj()
+    private IEnumerator TimeoutDestroy(float lifeTime)
     {
-        float interval = 0f;
-
-        while (interval < lifeTime)
-        {
-            interval += Time.deltaTime;
-            await Task.Yield();
-        }
+        while (Time.time < lifeTime)
+            yield return null;
 
         Destroy(gameObject);
     }

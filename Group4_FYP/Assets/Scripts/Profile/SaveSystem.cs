@@ -45,9 +45,6 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void Update()
     {
-        if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
-            return;
-
         if (Time.unscaledTime >= nextSaveTime)
         {
             SaveData();
@@ -68,7 +65,7 @@ public class SaveSystem : Singleton<SaveSystem>
         abilityManager.SetMaxMana(profile.maxMana);
         abilityManager.SetManaRegeneration(profile.manaRegeneration);
         // gameController.SetMap(profile.map);
-        gameController.SetMapId(profile.mapId);
+        gameController.MapId = profile.mapId;
         inventory.SetItems(profile.inventory);
         orb.SetOrbs(profile.orbs);
         orb.SetUsedOrbs(profile.usedOrbs);
@@ -85,7 +82,7 @@ public class SaveSystem : Singleton<SaveSystem>
     {
         if (accountForMapType)
         {
-            if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
+            if (GameManager.Instance.MapType == MapType.Dungeon)
             {
                 _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle");
                 return;
@@ -103,7 +100,7 @@ public class SaveSystem : Singleton<SaveSystem>
         profile.maxMana = abilityManager.GetMaxMana();
         profile.manaRegeneration = abilityManager.GetManaRegeneration();
         // profile.map = gameController.GetMap();
-        profile.mapId = gameController.GetMapId();
+        profile.mapId = gameController.MapId;
         profile.inventory = inventory.GetItems();
         profile.orbs = orb.GetOrbs();
         profile.usedOrbs = orb.GetUsedOrbs();

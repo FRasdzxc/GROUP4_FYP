@@ -77,7 +77,7 @@ public class PauseMenu : Panel
 
         if (showPauseAction.triggered)
         {
-            if (GameManager.Instance.GetGameState() == GameState.Playing)
+            if (GameManager.Instance.GameState == GameState.Playing)
             {
                 ShowPanel();
             }
@@ -113,7 +113,7 @@ public class PauseMenu : Panel
     {
         base.ShowPanel();
 
-        GameManager.Instance.SetGameState(GameState.Paused);
+        GameManager.Instance.GameState = GameState.Paused;
 
         HUD.Instance.HideHUD();
 
@@ -160,7 +160,7 @@ public class PauseMenu : Panel
         // }
 
         settingsMenu.SaveSettings();
-        GameManager.Instance.SetGameState(GameState.Playing);
+        GameManager.Instance.GameState = GameState.Playing;
 
         isOpened = false;
     }

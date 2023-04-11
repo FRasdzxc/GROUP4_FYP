@@ -39949,7 +39949,6 @@ GameObject:
   - component: {fileID: 3372562555507056017}
   - component: {fileID: 3372562555507056045}
   - component: {fileID: 3372562555507056044}
-  - component: {fileID: 3372562555507056019}
   - component: {fileID: 3372562555507056018}
   m_Layer: 0
   m_Name: VillageChief
@@ -40073,19 +40072,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &3372562555507056019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372562555507056022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d81b5f9eaf94fa4895d2cc2375bbe23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Data: {fileID: 11400000, guid: d1fd41a1b847e724884961cffe1a9b24, type: 2}
 --- !u!114 &3372562555507056018
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TinyScript;
+using PathOfHero.Telemetry;
 
 public class Mob : MonoBehaviour
 {
@@ -129,6 +130,7 @@ public class Mob : MonoBehaviour
         {
             loot.SpawnDrop(transform, randomDropCount, dropRange);
             point.SpawnDrop();
+            DataCollector.Instance?.MobsKilled(mobData.characterName);
             Destroy(gameObject);
         }
     }

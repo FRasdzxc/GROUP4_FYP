@@ -11,7 +11,7 @@ public class DungeonMapData : MapData
     {
         //SaveSystem.Instance.SaveData(false, false);
 
-        GameObject clone = Instantiate(portalPrefab, portalPos, Quaternion.identity, GameManager.Instance.GetCurrentMap().transform);
+        GameObject clone = Instantiate(portalPrefab, portalPos, Quaternion.identity, GameManager.Instance.MapTransform);
         clone.transform.localScale = Vector2.zero;
         await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         _ = Notification.Instance.ShowNotification("Portal is opened!");

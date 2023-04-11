@@ -204,7 +204,7 @@ public class Hero : MonoBehaviour
         Setup();
         Spawn();
 
-        if (GameManager.Instance.GetCurrentMapType() == MapType.Dungeon)
+        if (GameManager.Instance.MapType == MapType.Dungeon)
         {
             GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
             SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon

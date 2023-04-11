@@ -1,45 +1,27 @@
-using System.Threading.Tasks;
+using PathOfHero.Telemetry;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public abstract class WeaponController : MonoBehaviour
 {
-    [SerializeField] protected WeaponData weaponData;
-    private float cooldown;
-    protected bool isReady;
+    [SerializeField]
+    protected WeaponData weaponData;
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        cooldown = weaponData.cooldown;
-        isReady = true;
-    }
+    public int WeaponTier => weaponData.weaponTier;
 
-    // Update is called once per frame
-    void Update()
+    protected float nextAttackTime;
+
+    protected virtual void Update()
     {
-        if (Input.GetMouseButton(0) && GameManager.Instance.IsPlayingHostile())
+        if (!GameManager.Instance.IsPlayingHostile())
+            return;
+
+        if (Input.GetMouseButton(0) && Time.time >= nextAttackTime)
         {
             Attack(gameObject);
+            DataCollector.Instance?.WeaponUsed(weaponData.weaponName);
+            nextAttackTime = Time.time + weaponData.cooldown;
         }
     }
 
-    protected virtual void Attack(GameObject weapon) { }
-
-    protected async void Cooldown()
-    {
-        float interval = 0f;
-
-        while (interval < cooldown)
-        {
-            interval += Time.deltaTime;
-            await Task.Yield();
-        }
-
-        isReady = true;
-    }
-
-    public int GetWeaponTier()
-    {
-        return weaponData.weaponTier;
-    }
+    protected abstract void Attack(GameObject weapon);
 }
