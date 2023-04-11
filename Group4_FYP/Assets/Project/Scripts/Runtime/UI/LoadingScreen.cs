@@ -8,7 +8,7 @@ using PathOfHero.Utilities;
 namespace PathOfHero.UI
 {
     [RequireComponent(typeof(GraphicRaycaster))]
-    public class LoadingScreen : Singleton<LoadingScreen>
+    public class LoadingScreen : SingletonPersistent<LoadingScreen>
     {
         [SerializeField]
         private Transform m_MaskTransform;
@@ -52,8 +52,10 @@ namespace PathOfHero.UI
             var task = PerformFadeAsync(true, animated);
             yield return new WaitUntil(() => task.IsCompleted);
         }
+        public Task FadeInAsync(bool animated = true) => PerformFadeAsync(false, animated);
+        public Task FadeOutAsync(bool animated = true) => PerformFadeAsync(true, animated);
 
-        public async Task PerformFadeAsync(bool fadeOut, bool animated = true)
+        private async Task PerformFadeAsync(bool fadeOut, bool animated = true)
         {
             if (m_Fading)
             {

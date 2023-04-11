@@ -11,9 +11,6 @@ namespace PathOfHero.Utilities
     public class EditorPlay : MonoBehaviour
     {
 #if UNITY_EDITOR
-        [SerializeField]
-        private bool m_IsGameplay;
-
         [Header("Player Profile")]
         [SerializeField]
         private PlayerProfileController m_PlayerProfileController;
@@ -27,8 +24,6 @@ namespace PathOfHero.Utilities
 #if UNITY_EDITOR
             m_PlayerProfileController.LoadFromObject(m_EditorProfile);
             LoadSceneAdditively(SceneController.k_ControllerSceneName);
-            if (m_IsGameplay)
-                LoadSceneAdditively(SceneController.k_GameplaySceneName);
 #endif
             Destroy(gameObject);
         }

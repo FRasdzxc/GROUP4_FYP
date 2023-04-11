@@ -9,7 +9,10 @@ namespace PathOfHero.Utilities
         protected virtual void Awake()
         {
             if (Instance == null)
+            {
+                Debug.Log($"[Singleton] {typeof(T)} initialized");
                 Instance = this as T;
+            }
             else
                 Destroy(gameObject);
         }
@@ -17,7 +20,10 @@ namespace PathOfHero.Utilities
         protected virtual void OnDestroy()
         {
             if (Instance == this)
+            {
+                Debug.Log($"[Singleton] {typeof(T)} released");
                 Instance = null;
+            }
         }
     }
 
@@ -29,6 +35,7 @@ namespace PathOfHero.Utilities
         {
             if (Instance == null)
             {
+                Debug.Log($"[Singleton] {typeof(T)} initialized");
                 Instance = this as T;
                 DontDestroyOnLoad(gameObject);
             }
@@ -39,7 +46,10 @@ namespace PathOfHero.Utilities
         protected virtual void OnDestroy()
         {
             if (Instance == this)
+            {
+                Debug.Log($"[Singleton] {typeof(T)} released");
                 Instance = null;
+            }
         }
     }
 

@@ -6,18 +6,17 @@ namespace PathOfHero.UI
     public class InstructionPanel : Panel
     {
         [SerializeField]
-        private string m_GameplaySceneToLoad;
+        private float m_DemoTimeLimit;
 
         public void OnReady()
         {
-            var sceneController = SceneController.Instance;
-            if (sceneController == null)
+            var demoController = DemoController.Instance;
+            if (demoController == null)
             {
-                Debug.LogError("[Instruction Panel] Scene controller missing! Unable to start.");
+                Debug.LogError("[Instruction Panel] Demo controller missing! Unable to start.");
                 return;
             }
-
-            sceneController.ChangeScene(m_GameplaySceneToLoad, true);
+            demoController.StartDemo(m_DemoTimeLimit);
         }
     }
 }

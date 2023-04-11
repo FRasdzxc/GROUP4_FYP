@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/InGameScene.unity
     guid: 901389776f527e24288feae5cd04223b
   - enabled: 1
+    path: Assets/Project/Scenes/EndScene.unity
+    guid: e1549725f62a3e144b68c2c1c7922631
+  - enabled: 1
     path: Assets/Project/Scenes/Shared/Controllers.unity
     guid: d9730ba2225848b4aba38a72ec6578f5
-  - enabled: 1
-    path: Assets/Project/Scenes/Shared/Gameplay.unity
-    guid: e9446100013099e42a6eb5974a4f5921
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c007efaea4412034f8bb3ef04369ec8f, type: 2}
