@@ -84,21 +84,24 @@ namespace PathOfHero.Controllers
         public void OnCaptureScreenshot(InputAction.CallbackContext context)
         {
 #if UNITY_EDITOR
-            var dir = Path.Combine(Environment.CurrentDirectory, "Screenshots");
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            int i = 0;
-            string path;
-            do
+            if (context.performed)
             {
-                i++;
-                path = Path.Combine(dir, $"Screenshot{i}.png");
-            }
-            while (File.Exists(path));
+                var dir = Path.Combine(Environment.CurrentDirectory, "Screenshots");
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
 
-            ScreenCapture.CaptureScreenshot(path, 2);
-            Debug.Log($"[Screenshot] Saved to {path}");
+                int i = 0;
+                string path;
+                do
+                {
+                    i++;
+                    path = Path.Combine(dir, $"Screenshot{i}.png");
+                }
+                while (File.Exists(path));
+
+                ScreenCapture.CaptureScreenshot(path, 2);
+                Debug.Log($"[Screenshot] Saved to {path}");
+            }
 #endif
         }
     }
