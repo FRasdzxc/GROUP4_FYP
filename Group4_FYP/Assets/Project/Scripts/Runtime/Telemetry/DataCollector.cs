@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 using PathOfHero.Utilities;
-using System.Collections.Generic;
 
 namespace PathOfHero.Telemetry
 {
@@ -29,6 +31,12 @@ namespace PathOfHero.Telemetry
         public void StepsTaken()
             => m_CurrentStats.stepsTaken += 1;
 
+        public void DamageGiven(float amount)
+            => m_CurrentStats.damageGiven += amount;
+
+        public void DamageTaken(float amount)
+            => m_CurrentStats.damageTaken += amount;
+
         public void WeaponUsed(string weponName)
         {
             if (string.IsNullOrWhiteSpace(weponName))
@@ -38,6 +46,17 @@ namespace PathOfHero.Telemetry
                 m_CurrentStats.weaponUsage[weponName] = 0;
 
             m_CurrentStats.weaponUsage[weponName]++;
+        }
+
+        public void AbilityUsed(string abilityName)
+        {
+            if (string.IsNullOrWhiteSpace(abilityName))
+                return;
+
+            if (!m_CurrentStats.abilityUsage.ContainsKey(abilityName))
+                m_CurrentStats.abilityUsage[abilityName] = 0;
+
+            m_CurrentStats.abilityUsage[abilityName]++;
         }
 
         public void MobsKilled(string mobName)
@@ -65,24 +84,38 @@ namespace PathOfHero.Telemetry
         public class SessionStats
         {
             public int stepsTaken;
+            public float damageGiven;
+            public float damageTaken;
             public Dictionary<string, int> weaponUsage;
+            public Dictionary<string, int> abilityUsage;
             public Dictionary<string, int> mobsKilled;
+
+            public int WeaponUsage => weaponUsage.Sum(w => w.Value);
+            public int AbilityUsage => abilityUsage.Sum(a => a.Value);
+            public int MobsKilled => mobsKilled.Sum(m => m.Value);
 
             public SessionStats()
             {
                 weaponUsage = new();
+                abilityUsage = new();
                 mobsKilled = new();
             }
 
             public WWWForm ToForm()
             {
                 var retVal = new WWWForm();
-                retVal.AddField("timestamp", DateTime.Now.Ticks.ToString());
-                foreach (var entry in weaponUsage)
-                    retVal.AddField($"weapon:{entry.Key}", entry.Value);
-                foreach (var entry in mobsKilled)
-                    retVal.AddField($"mob:{entry.Key}", entry.Value);
-
+                retVal.AddField("stepsTaken", stepsTaken);
+                retVal.AddField("damageGiven", damageGiven.ToString());
+                retVal.AddField("damageTaken", damageTaken.ToString());
+                retVal.AddField("weaponUsage", WeaponUsage);
+                retVal.AddField("abilityUsage", AbilityUsage);
+                retVal.AddField("mobKilled", MobsKilled);
+                var json = JsonConvert.SerializeObject(weaponUsage);
+                retVal.AddField("weaponUsageDetail", json);
+                json = JsonConvert.SerializeObject(abilityUsage);
+                retVal.AddField("abilityUsageDetail", json);
+                json = JsonConvert.SerializeObject(mobsKilled);
+                retVal.AddField("mobKilledDetail", json);
                 return retVal;
             }
         }

@@ -39,11 +39,17 @@ namespace PathOfHero.Player
 
         private void FixedUpdate()
         {
-            m_ControllingCharacter?.Move(m_MoveDirection, m_IsSprinting);
+            if (m_ControllingCharacter == null)
+                return;
+
+            m_ControllingCharacter.Move(m_MoveDirection, m_IsSprinting);
         }
 
         private void Update()
         {
+            if (m_ControllingCharacter == null)
+                return;
+
             // Death
             if (m_ControllingCharacter.Health <= 0)
             {

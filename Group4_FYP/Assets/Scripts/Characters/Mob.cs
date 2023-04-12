@@ -108,10 +108,10 @@ public class Mob : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        health -= damage;
         UpdateUI();
         PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
-
+        DataCollector.Instance?.DamageGiven(damage);
+        health = Mathf.Clamp(health - damage, 0, mobData.health);
         if (health <= 0)
         {
             Die();

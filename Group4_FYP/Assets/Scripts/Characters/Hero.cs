@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PathOfHero.Controllers;
 using System.Collections;
+using PathOfHero.Telemetry;
 using PathOfHero.UI;
 
 public class Hero : MonoBehaviour
@@ -168,15 +169,9 @@ public class Hero : MonoBehaviour
     {
         if (!isDead && GameManager.Instance.IsPlayingHostile())
         {
-            if (accountForDefenseUpgrade)
-            {
-                health -= damage / upgradedDefense;
-            }
-            else
-            {
-                health -= damage;
-            }
-
+            var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
+            DataCollector.Instance?.DamageTaken(amount);
+            health = Mathf.Clamp(health - damage, 0, maxHealth);
             if (health <= 0)
                 StartCoroutine(Die());
         }

@@ -22,6 +22,15 @@ namespace PathOfHero.UI
         private TMP_Text m_WeaponAttacks;
 
         [SerializeField]
+        private TMP_Text m_AbilityAttacks;
+
+        [SerializeField]
+        private TMP_Text m_DamageGiven;
+
+        [SerializeField]
+        private TMP_Text m_DamageTaken;
+
+        [SerializeField]
         private TMP_Text m_MobsKilled;
 
         private void Start()
@@ -35,16 +44,11 @@ namespace PathOfHero.UI
 
                 // Configure end screen
                 m_StepsTaken.text = dataCollector.CurrentStats.stepsTaken.ToString();
-
-                int weaponAttacks = 0;
-                foreach (var entry in dataCollector.CurrentStats.weaponUsage)
-                    weaponAttacks += entry.Value;
-                m_WeaponAttacks.text = weaponAttacks.ToString();
-
-                int mobsKilled = 0;
-                foreach (var entry in dataCollector.CurrentStats.mobsKilled)
-                    mobsKilled += entry.Value;
-                m_MobsKilled.text = mobsKilled.ToString();
+                m_WeaponAttacks.text = dataCollector.CurrentStats.WeaponUsage.ToString();
+                m_AbilityAttacks.text = dataCollector.CurrentStats.AbilityUsage.ToString();
+                m_DamageGiven.text = dataCollector.CurrentStats.damageGiven.ToString("N0");
+                m_DamageTaken.text = dataCollector.CurrentStats.damageTaken.ToString("N0");
+                m_MobsKilled.text = dataCollector.CurrentStats.MobsKilled.ToString();
             }
         }
 
