@@ -75,7 +75,7 @@ public class AbilityManager : MonoBehaviour
             if (ability1Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
-                if (equippedAbilities[0].IsReady() && (mana - equippedAbilities[0].manaCost) >= 0)
+                if (equippedAbilities[0].IsReady && (mana - equippedAbilities[0].manaCost) >= 0)
                 {
                     mana -= equippedAbilities[0].manaCost;
                     equippedAbilities[0].Activate(gameObject); // test 
@@ -86,7 +86,7 @@ public class AbilityManager : MonoBehaviour
             if (ability2Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
-                if (equippedAbilities[1].IsReady() && (mana - equippedAbilities[1].manaCost) >= 0)
+                if (equippedAbilities[1].IsReady && (mana - equippedAbilities[1].manaCost) >= 0)
                 {
                     mana -= equippedAbilities[1].manaCost;
                     equippedAbilities[1].Activate(gameObject); // test
@@ -97,7 +97,7 @@ public class AbilityManager : MonoBehaviour
             if (ability3Action.ReadValue<float>() == 1)
             {
                 // should be rewritten better
-                if (equippedAbilities[2].IsReady() && (mana - equippedAbilities[2].manaCost) >= 0)
+                if (equippedAbilities[2].IsReady && (mana - equippedAbilities[2].manaCost) >= 0)
                 {
                     mana -= equippedAbilities[2].manaCost;
                     equippedAbilities[2].Activate(gameObject); // test
@@ -124,7 +124,7 @@ public class AbilityManager : MonoBehaviour
 
         for (int i = 0; i < equippedAbilities.Length; i++)
         {
-            hud.UpdateAbility(i, equippedAbilities[i].remainingCooldownTime);
+            hud.UpdateAbility(i, equippedAbilities[i].Cooldown);
         }
     }
 
@@ -213,7 +213,7 @@ public class AbilityManager : MonoBehaviour
         foreach(Ability a in equippedAbilities)
         {
             //a.isReady = true;
-            a.remainingCooldownTime = 0f;
+            a.Cooldown = 0f;
         }
     }
 }

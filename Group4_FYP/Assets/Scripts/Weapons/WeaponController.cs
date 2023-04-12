@@ -18,7 +18,7 @@ public abstract class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time >= nextAttackTime)
         {
             Attack(gameObject);
-            DataCollector.Instance?.WeaponUsed(weaponData.weaponName);
+            DataCollector.Instance?.WeaponUsed(weaponData.item?.itemID);
             nextAttackTime = Time.time + weaponData.cooldown;
         }
     }

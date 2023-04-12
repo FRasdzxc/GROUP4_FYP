@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using PathOfHero.Telemetry;
 using UnityEngine;
-using DG.Tweening;
 
 public class Ability : ScriptableObject
 {
@@ -12,47 +9,23 @@ public class Ability : ScriptableObject
     public float cooldownTime; // seconds until next use
     public float manaCost;
     public Sprite icon;
-    //[HideInInspector] public bool isReady = true;
-    [HideInInspector] public float remainingCooldownTime;
 
-    public virtual void Activate(GameObject character) { }
-
-    public async void Cooldown()
+    public float Cooldown
     {
-        //float interval = 0f;
-        remainingCooldownTime = cooldownTime;
-
-        //while (interval < cooldownTime)
-        while (remainingCooldownTime > 0f)
-        {
-            //interval += Time.deltaTime;
-            remainingCooldownTime -= Time.deltaTime;
-            await Task.Yield();
-        }
-
-        remainingCooldownTime = 0f;
-        //isReady = true;
+        get => IsReady ? 0f : nextActivateTime - Time.time;
+        set => nextActivateTime = Time.time + value;
     }
 
-    public async void DestroyAfterLifeTime(GameObject gameObject) // destroy any instantiated objects after lifeTime
+    protected float nextActivateTime;
+
+    public bool IsReady => Time.time >= nextActivateTime;
+
+    public virtual void Activate(GameObject character)
     {
-        float interval = 0f;
+        if (!IsReady)
+            return;
 
-        while (interval < lifeTime)
-        {
-            interval += Time.deltaTime;
-            await Task.Yield();
-        }
-
-        if (this) // trying to prevent MissingReferenceException
-        {
-            await gameObject.transform.DOScale(Vector2.zero, 0.25f).AsyncWaitForCompletion();
-            Destroy(gameObject);
-        }
-    }
-
-    public bool IsReady()
-    {
-        return (remainingCooldownTime == 0);
+        DataCollector.Instance?.AbilityUsed(abilityName);
+        nextActivateTime = Time.time + cooldownTime;
     }
 }

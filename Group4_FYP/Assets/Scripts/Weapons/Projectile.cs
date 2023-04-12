@@ -1,56 +1,37 @@
+using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
 public class Projectile : MonoBehaviour
 {
-    //[SerializeField] private Animator animator;
+    private bool m_Destorying;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool SelfDestruct { get; set; }
+    public float SelfDestructTime { get; set; }
+
+    private void FixedUpdate()
     {
-        
+        if (SelfDestruct && Time.time >= SelfDestructTime)
+            StartCoroutine(AnimatedDestroy(0.25f));
     }
 
-    private async void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CompareTag("HeroWeaponTrigger"))
-        {
-            if (collision.CompareTag("Object") || collision.CompareTag("Border"))
-            {
-                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
-                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
+        if (CompareTag("HeroWeaponTrigger") && (collision.CompareTag("Object") || collision.CompareTag("Border")))
+            StartCoroutine(AnimatedDestroy(0.05f));
+        else if (CompareTag("HeroWeaponTriggerStronger") && collision.CompareTag("Border"))
+            StartCoroutine(AnimatedDestroy(0.05f));
+        else if (CompareTag("MobWeaponTrigger") && (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border")))
+            StartCoroutine(AnimatedDestroy(0.05f));
+    }
 
-                if (this) // trying to prevent MissingReferenceException
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
-        else if (CompareTag("HeroWeaponTriggerStronger"))
-        {
-            if (collision.CompareTag("Border"))
-            {
-                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
-                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
+    public IEnumerator AnimatedDestroy(float duration)
+    {
+        if (m_Destorying)
+            yield break;
 
-                if (this) // trying to prevent MissingReferenceException
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
-        else if (CompareTag("MobWeaponTrigger"))
-        {
-            if (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border"))
-            {
-                //await transform.DOScale(0, 0.25f).AsyncWaitForCompletion();
-                await transform.DOScale(0, 0.05f).AsyncWaitForCompletion();
-
-                if (this) // trying to prevent MissingReferenceException
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
+        m_Destorying = true;
+        yield return transform.DOScale(Vector3.zero, duration).WaitForCompletion();
+        Destroy(gameObject);
     }
 }

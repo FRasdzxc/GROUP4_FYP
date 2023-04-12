@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,27 +7,17 @@ public class SoulRingAbility : Ability
     public GameObject soulRing;
     public float rotationsPerSecond;
 
-    public override async void Activate(GameObject character)
+    public async override void Activate(GameObject character)
     {
-        //if (isReady)
-        if (IsReady())
+        base.Activate(character);
+        GameObject soulRingClone = Instantiate(soulRing, character.transform.position, Quaternion.identity, character.transform);
+        if (soulRingClone.TryGetComponent<Spin>(out var spin))
         {
-            //isReady = false;
-            Debug.Log("soul ring ability activated on " + character.name);
-
-            Cooldown();
-
-            GameObject soulRingClone = Instantiate(soulRing, character.transform.position, Quaternion.identity, character.transform);
-            soulRingClone.GetComponent<Spin>().Setup(rotationsPerSecond);
-            soulRingClone.transform.localScale = new Vector2(0.5f, 0.5f);
-            await soulRingClone.transform.DOScale(Vector2.one, 0.25f).AsyncWaitForCompletion();
-            DestroyAfterLifeTime(soulRingClone);
+            spin.SelfDestruct = true;
+            spin.SelfDestructTime = Time.time + lifeTime;
+            spin.Setup(rotationsPerSecond);
         }
-        else
-        {
-            Debug.Log("soul ring ability not ready");
-
-            // maybe show some warning on ui
-        }
+        soulRingClone.transform.localScale = new Vector2(0.5f, 0.5f);
+        await soulRingClone.transform.DOScale(Vector2.one, 0.25f).AsyncWaitForCompletion();
     }
 }
