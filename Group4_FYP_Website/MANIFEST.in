@@ -1,0 +1,6 @@
+include LICENSE.rst
+include poh/schema.sql
+graft poh/static
+graft poh/templates
+graft tests
+global-exclude *.pyc

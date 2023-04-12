@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div class="container pb-3">
+  <div class="card text-bg-primary">
+    <h4 class="card-header">
+      Accumulated
+    </h4>
+    <div class="card-body pb-0 text-md-center">
+      <div class="row">
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Steps Taken</h5>
+            <h5 class="card-text">{{ accumulated['steps_taken'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Damage Given</h5>
+            <h5 class="card-text">{{ accumulated['damage_given'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Damage Taken</h5>
+            <h5 class="card-text">{{ accumulated['damage_taken'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Weapon Attacks</h5>
+            <h5 class="card-text">{{ accumulated['weapon_attacks'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Ability Attacks</h5>
+            <h5 class="card-text">{{ accumulated['ability_attacks'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Mobs Killed</h5>
+            <h5 class="card-text">{{ accumulated['mobs_killed'] }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      Total sessions: {{ accumulated['session_count'] }}
+    </div>
+  </div>
+</div>
+<div class="container pb-3">
+  <div class="card text-bg-secondary">
+    <h4 class="card-header">
+      Weapon
+    </h4>
+    <div class="card-body pb-0 text-md-center">
+      <div class="row">
+        <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Wand</h5>
+            <h5 class="card-text">{{ weapon['wand'] }}</p>
+        </div>
+        <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Whirlwind</h5>
+            <h5 class="card-text">{{ weapon['whirlwind'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container pb-3">
+  <div class="card text-bg-secondary">
+    <h4 class="card-header">
+      Ability
+    </h4>
+    <div class="card-body pb-0 text-md-center">
+      <div class="row">
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Fireball</h5>
+            <h5 class="card-text">{{ ability['fireball'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Soul Ring</h5>
+            <h5 class="card-text">{{ ability['soul_ring'] }}</p>
+        </div>
+        <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Tornado</h5>
+            <h5 class="card-text">{{ ability['tornado'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container pb-3">
+  <div class="card text-bg-secondary">
+    <h4 class="card-header">
+      Mobs
+    </h4>
+    <div class="card-body pb-0 text-md-center">
+      <div class="row">
+        <div class="col pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
+          <h4 class="card-title">Slime</h5>
+            <h5 class="card-text">{{ mobs['slime'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

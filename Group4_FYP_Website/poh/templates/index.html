@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Time Limited Demo{% endblock %}
+
+{% block head %}
+<style>
+    .hero {
+        background-image: url("{{ url_for('static', filename='images/background.png') }}");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hero-content {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container pb-3 border-bottom">
+    <div class="hero col rounded-3 border shadow-sm">
+        <div class="hero-content rounded-3 row flex-lg-row-reverse align-items-center mx-0 px-4 py-5">
+            <div class="col-12 col-lg-6">
+                <img src="{{ url_for('static', filename='images/game-logo.png') }}" class="d-block mx-lg-auto img-fluid"
+                    alt="Path of Hero Logo" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3 text-light">Time Limited Demo</h1>
+                <p class="lead text-light">Test your skills and tryout features in our time limited demo. Download now!
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a class="btn btn-primary btn-lg px-4 me-md-2"
+                        href="{{ url_for('static', filename='releases/poh-limited-demo.zip') }}">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Statistics</h1>
+    <p class="fs-5 text-muted">This time limited demo will collect play session data for game balance purposes. Thank
+        you for taking part in inproving the game!</p>
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Sessions Played</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title">{{ quick_stats['session_played'] }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Steps Taken</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title">{{ quick_stats['steps_taken'] }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Mobs Killed</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title">{{ quick_stats['mobs_killed'] }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-lg2" href="{{ url_for('stats.index') }}">View detailed statistics</a>
+</div>
+{% endblock %}
