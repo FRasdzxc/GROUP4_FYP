@@ -25,6 +25,8 @@ public class Mob : MonoBehaviour
     protected Rigidbody2D rb2D;
     protected Vector2 moveDir;
 
+    private int sliderValue;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -38,7 +40,6 @@ public class Mob : MonoBehaviour
         point = GetComponent<PointDrop>();
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
-        healthSlider.maxValue = health;
         UpdateUI();
     }
 
@@ -108,14 +109,12 @@ public class Mob : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        UpdateUI();
         PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
         DataCollector.Instance?.DamageGiven(damage);
         health = Mathf.Clamp(health - damage, 0, mobData.health);
+        UpdateUI();
         if (health <= 0)
-        {
             Die();
-        }
     }
 
     private async void Die()
@@ -137,7 +136,18 @@ public class Mob : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
+        bool forceUpdate = false;
+        if (healthSlider.maxValue != mobData.health)
+        {
+            healthSlider.maxValue = mobData.health;
+            forceUpdate = true;
+        }
+
+        if (forceUpdate || sliderValue != (int)health)
+        {
+            healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
+            sliderValue = (int)health;
+        }
     }
 
     private void PlaySound(AudioClip audioClip)

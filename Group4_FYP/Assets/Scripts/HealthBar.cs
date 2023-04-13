@@ -1,34 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthBar;
-    private MobData m_data;
-    public GameObject obj;
-    public float maxHealth;
-    public float beforeHealth;
-    public float currentHealth;
-    public float damage;
-    float currentVelocity = 0;
-    float takeDamage;
-    bool takenDamage;
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_data = obj.GetComponent<Slime>().m_data;
-        maxHealth = m_data.health;
-        currentHealth = m_data.health;
-        healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
-    }
+    [SerializeField]
+    private Slider healthBar;
 
-    // Update is called once per frame
-    void Update()
+    private Slime m_slime;
+    private MobData m_data;
+    private int m_health;
+
+    private void Awake()
     {
-        healthBar.DOValue(gameObject.GetComponentInParent<Slime>().health, 1f).SetEase(Ease.OutCubic);
+        m_slime = gameObject.GetComponentInParent<Slime>();
+        m_data = m_slime.m_data;
+    }
+    
+    private void Update()
+    {
+        bool forceUpdate = false;
+        if (healthBar.maxValue != m_data.health)
+        {
+            healthBar.maxValue = m_data.health;
+            forceUpdate = true;
+        }
+
+        if (forceUpdate || m_health != (int)m_slime.health)
+        {
+            healthBar.DOValue(m_slime.health, 1f).SetEase(Ease.OutCubic);
+            m_health = (int)m_slime.health;
+        }
     }
 }

@@ -32,7 +32,9 @@ public class HUD : Singleton<HUD>
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject mainPanel;
 
-    private int maxXP;
+    private int m_CurrentHealth;
+    private int m_CurrentMana;
+    private int m_CurrentXP;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +73,10 @@ public class HUD : Singleton<HUD>
 
     public void SetupXP(int level, int maxXP)
     {
-        this.maxXP = maxXP;
         xpSlider.maxValue = maxXP;
-        UpdateXP(level, maxXP);
+        xpSlider.value = maxXP;
+        xpText.text = "Level " + level.ToString("n0") + " (" + maxXP.ToString("n0") + "/" + maxXP.ToString("n0") + " XP)";
+        m_CurrentXP = maxXP;
     }
 
     // public void UpdateHealth(float health)
@@ -84,13 +87,20 @@ public class HUD : Singleton<HUD>
 
     public void UpdateHealth(float health, float upgradedMaxHealth)
     {
-        if (healthSlider.value == health && healthSlider.maxValue == upgradedMaxHealth)
-            return;
+        bool forceUpdate = false;
+        if (healthSlider.maxValue != upgradedMaxHealth)
+        {
+            healthSlider.maxValue = upgradedMaxHealth;
+            forceUpdate = true;
+        }
 
-        healthSlider.maxValue = upgradedMaxHealth;
+        if (forceUpdate || m_CurrentHealth != (int)health)
+        {
+            healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
+            m_CurrentHealth = (int)health;
+        }
 
-        healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
-        healthText.text = ((int)health).ToString("n0") + " HP";
+        healthText.text = $"{(int)health} HP";
     }
 
     // public void UpdateMana(float mana)
@@ -101,45 +111,56 @@ public class HUD : Singleton<HUD>
 
     public void UpdateMana(float mana, float upgradedMaxMana)
     {
-        if (manaSlider.value == mana && manaSlider.maxValue == upgradedMaxMana)
-            return;
+        bool forceUpdate = false;
+        if (manaSlider.maxValue != upgradedMaxMana)
+        {
+            manaSlider.maxValue = upgradedMaxMana;
+            forceUpdate = true;
+        }
 
-        manaSlider.maxValue = upgradedMaxMana;
-
-        manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
-        manaText.text = ((int)mana).ToString("n0") + "/" + manaSlider.maxValue.ToString("n0") + " MP";
+        if (forceUpdate || m_CurrentMana != (int)mana)
+        {
+            manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
+            m_CurrentMana = (int)mana;
+        }
+        manaText.text = $"{(int)mana} / {(int)manaSlider.maxValue} MP";
     }
 
     public void UpdateAbility(int slotNumber, float remainingCooldownTime)
     {
-        if (slotNumber >= 0 && slotNumber < abilitySliders.Length)
+        if (0 > slotNumber || slotNumber >= abilitySliders.Length)
+            return;
+        
+        var slider = abilitySliders[slotNumber];
+        var text = abilityCooldownText[slotNumber].GetComponent<Text>();
+        if (remainingCooldownTime <= 0)
         {
-            abilitySliders[slotNumber].DOValue(remainingCooldownTime, 0.25f).SetEase(Ease.OutQuart);
-
-            if (remainingCooldownTime <= 0)
-            {
-                abilityCooldownText[slotNumber].SetActive(false);
-            }
-            else
-            {
-                abilityCooldownText[slotNumber].SetActive(true);
-                abilityCooldownText[slotNumber].GetComponent<Text>().text = remainingCooldownTime.ToString("0.0");
-            }
+            slider.value = 0;
+            text.text = string.Empty;
         }
-    }
-
-    public void UpdateXP(int level, int storedExp)
-    {
-        xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
-        xpText.text = "Level " + level.ToString("n0") + " (" + storedExp.ToString("n0") + "/" + maxXP.ToString("n0") + " XP)";
+        else if (slider.value != remainingCooldownTime)
+        {
+            slider.value = remainingCooldownTime;
+            text.text = remainingCooldownTime.ToString("0.0");
+        }
     }
 
     public void UpdateXP(int level, int storedExp, int requiredExp)
     {
-        xpSlider.maxValue = requiredExp;
+        bool forceUpdate = false;
+        if (xpSlider.maxValue != requiredExp)
+        {
+            xpSlider.maxValue = requiredExp;
+            forceUpdate = true;
+        }
 
-        xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
-        xpText.text = String.Format("Level {0} ({1}/{2} XP)", level.ToString("n0"), storedExp.ToString("n0"), requiredExp.ToString("n0"));
+        if (forceUpdate || m_CurrentXP != storedExp)
+        {
+            xpSlider.DOValue(storedExp, 0.25f).SetEase(Ease.OutQuart);
+            m_CurrentXP = storedExp;
+        }
+
+        xpText.text = string.Format("Level {0} ({1}/{2} XP)", level.ToString("n0"), storedExp.ToString("n0"), requiredExp.ToString("n0"));
     }
 
     public void UpdateMobCount(int value)

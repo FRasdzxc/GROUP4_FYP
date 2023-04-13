@@ -14,30 +14,33 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private GameObject hint;
     [SerializeField] private Text hintText;
 
-    private int _stackSize = 0;
+    private int m_StackSize = 0;
     public int StackSize
     {
-        get => _stackSize;
+        get => m_StackSize;
         private set
         {
-            _stackSize = Mathf.Clamp(value, 0, kMaxStackSize);
-            if (stackSizeText != null)
-            {
-                stackSizeText.gameObject.SetActive(_stackSize > 1);
-                stackSizeText.text = _stackSize.ToString();
-            }
+            if (m_StackSize == value)
+                return;
+
+            m_StackSize = Mathf.Clamp(value, 0, kMaxStackSize);
+            stackSizeText.gameObject.SetActive(m_StackSize > 1);
+            stackSizeText.text = m_StackSize.ToString();
         }
     }
 
-    private ItemData item = null;
+    private ItemData m_Item;
     public ItemData ItemData
     {
-        get => item;
+        get => m_Item;
         private set
         {
-            item = value;
-            image.enabled = item != null;
-            image.sprite = item != null ? item.itemIcon : null;
+            if (m_Item == value)
+                return;
+
+            m_Item = value;
+            image.enabled = m_Item != null;
+            image.sprite = m_Item != null ? m_Item.itemIcon : null;
         }
     }
 
@@ -46,9 +49,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void Configure(ItemData item, int stackSize, InventoryMode inventoryMode = InventoryMode.Normal)
     {
-        if (this.item != null && this.item != item)
+        if (m_Item != null && m_Item != item)
         {
-            Debug.LogError("Mismatched item!");
+            Debug.LogError("[Inventory Slot] Switching item data is not allowed.");
             return;
         }
 
@@ -130,187 +133,177 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         StackSize--;
     }
 
-    public ItemData GetItem()
-    {
-        return ItemData;
-    }
-
     public void OnPointerEnter(PointerEventData eventData) // rewrite this with switch case? it looks messy
     {
-        if (eventData.pointerEnter == gameObject)
+        if (m_Item == null)
+            return;
+
+        List<string> attributes = new List<string>();
+        List<TooltipHintType> hints = new List<TooltipHintType>();
+
+        if (ItemData is ConsumableItemData)
         {
-            Debug.Log("cursor enters inventory slot");
-
-            List<string> attributes = new List<string>();
-            List<TooltipHintType> hints = new List<TooltipHintType>();
-
-            if (ItemData is ConsumableItemData)
+            var consumable = ItemData as ConsumableItemData;
+            foreach (var e in consumable.effects)
             {
-                var consumable = ItemData as ConsumableItemData;
-                foreach (var e in consumable.effects)
-                {
-                    attributes.Add(e.ToString());
-                }
+                attributes.Add(e.ToString());
             }
-            else if (ItemData is WeaponItemData)
-            {
-                var weapon = ItemData as WeaponItemData;
-                attributes.Add($"Tier: {weapon.weapon.weaponTier}");
-                attributes.Add($"Cooldown: {weapon.weapon.cooldown} seconds");
+        }
+        else if (ItemData is WeaponItemData)
+        {
+            var weapon = ItemData as WeaponItemData;
+            attributes.Add($"Tier: {weapon.weapon.weaponTier}");
+            attributes.Add($"Cooldown: {weapon.weapon.cooldown} seconds");
 
-                if (weapon.weapon is ProjectileWeaponData)
-                {
-                    var projectileWeapon = weapon.weapon as ProjectileWeaponData;
-                    attributes.Add($"Projectile Speed: {projectileWeapon.projectileSpeed}");
-                }
-            }
-            else if (ItemData is ArmorItemData)
+            if (weapon.weapon is ProjectileWeaponData)
             {
-                var armor = ItemData as ArmorItemData;
-                attributes.Add($"Defense: {armor.defense}");
+                var projectileWeapon = weapon.weapon as ProjectileWeaponData;
+                attributes.Add($"Projectile Speed: {projectileWeapon.projectileSpeed}");
             }
-            else if (ItemData is RelicItemData)
-            {
-                var relic = ItemData as RelicItemData;
-                attributes.Add($"Tier: {relic.tier}");
-            }
+        }
+        else if (ItemData is ArmorItemData)
+        {
+            var armor = ItemData as ArmorItemData;
+            attributes.Add($"Defense: {armor.defense}");
+        }
+        else if (ItemData is RelicItemData)
+        {
+            var relic = ItemData as RelicItemData;
+            attributes.Add($"Tier: {relic.tier}");
+        }
 
-            if (inventoryMode == InventoryMode.Normal)
+        if (inventoryMode == InventoryMode.Normal)
+        {
+            if (ItemData.isUsable) // check whether class is consumableitem instead?
             {
-                if (ItemData.isUsable) // check whether class is consumableitem instead?
-                {
-                    hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
-                }
-                hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
+                hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
             }
-            else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
+            hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
+        }
+        else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
+        {
+            if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
             {
-                if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
-                {
-                    attributes.Add($"Buy Price: {ItemData.buyPrice}");
-                }
-                else
-                {
-                    attributes.Add($"Sell Price: {ItemData.sellPrice}");                    
-                }
-
-                hints.Add(TooltipHintType.Transfer);
+                attributes.Add($"Buy Price: {ItemData.buyPrice}");
+            }
+            else
+            {
+                attributes.Add($"Sell Price: {ItemData.sellPrice}");                    
             }
 
-            Tooltip.Instance.ShowTooltip(item.itemName, item.itemType.ToString(), item.itemDescription, attributes.ToArray(), hints.ToArray());
+            hints.Add(TooltipHintType.Transfer);
+        }
 
-            if (inventoryMode == InventoryMode.Normal)
-            {
-                if (item && item.isUsable)
-                {
-                    hint.SetActive(true);
-                }
-            }
-            else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert || inventoryMode == InventoryMode.Throw) // transfer
+        Tooltip.Instance.ShowTooltip(m_Item.itemName, m_Item.itemType.ToString(), m_Item.itemDescription, attributes.ToArray(), hints.ToArray());
+
+        if (inventoryMode == InventoryMode.Normal)
+        {
+            if (m_Item && m_Item.isUsable)
             {
                 hint.SetActive(true);
             }
+        }
+        else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert || inventoryMode == InventoryMode.Throw) // transfer
+        {
+            hint.SetActive(true);
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerEnter == gameObject)
-        {
-            Debug.Log("cursor exits inventory slot");
-            Tooltip.Instance.HideTooltip();
+        if (m_Item == null)
+            return;
 
-            hint.SetActive(false);
-        }        
+        Tooltip.Instance.HideTooltip();
+        hint.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData) // rewrite this with switch case? it looks messy
     {
+        if (m_Item == null)
+            return;
+
         int tempStackSize = StackSize;
-
-        if (eventData.pointerClick == gameObject && item)
+        if (inventoryMode == InventoryMode.Normal) // use and drop items
         {
-            if (inventoryMode == InventoryMode.Normal) // use and drop items
+            if (eventData.button == PointerEventData.InputButton.Left && m_Item.isUsable) // LMB: use item
             {
-                if (eventData.button == PointerEventData.InputButton.Left && item.isUsable) // LMB: use item
+                if (Input.GetKey(KeyCode.LeftShift)) // use all
                 {
-                    if (Input.GetKey(KeyCode.LeftShift)) // use all
-                    {
-                        // while (StackSize > 0)
-                        // {
-                        //     UseItem();
-                        // }
+                    // while (StackSize > 0)
+                    // {
+                    //     UseItem();
+                    // }
 
-                        for (int i = 0; i < tempStackSize; i++)
-                        {
-                            UseItem();
-                        }
-                    }
-                    else // use one
+                    for (int i = 0; i < tempStackSize; i++)
                     {
                         UseItem();
                     }
                 }
-                else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+                else // use one
                 {
-                    if (Input.GetKey(KeyCode.LeftShift)) // drop all
-                    {
-                        // while (StackSize > 0)
-                        // {
-                        //     DropItem();
-                        // }
+                    UseItem();
+                }
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+            {
+                if (Input.GetKey(KeyCode.LeftShift)) // drop all
+                {
+                    // while (StackSize > 0)
+                    // {
+                    //     DropItem();
+                    // }
 
-                        for (int i = 0; i < tempStackSize; i++)
-                        {
-                            DropItem();
-                        }
-                    }
-                    else // drop one
-                    { 
+                    for (int i = 0; i < tempStackSize; i++)
+                    {
                         DropItem();
                     }
                 }
+                else // drop one
+                { 
+                    DropItem();
+                }
             }
-            else if (inventoryMode == InventoryMode.Apply) // apply
+        }
+        else if (inventoryMode == InventoryMode.Apply) // apply
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                if (Input.GetKey(KeyCode.LeftShift)) // apply all
                 {
-                    if (Input.GetKey(KeyCode.LeftShift)) // apply all
-                    {
-                        for (int i = 0; i < StackSize; i++)
-                        {
-                            BuySellPanel.Instance.ApplyTransfer(ItemData);
-                        }
-                    }
-                    else // apply one
+                    for (int i = 0; i < StackSize; i++)
                     {
                         BuySellPanel.Instance.ApplyTransfer(ItemData);
                     }
                 }
-            }
-            else if (inventoryMode == InventoryMode.Revert) // revert
-            {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                else // apply one
                 {
-                    if (Input.GetKey(KeyCode.LeftShift)) // revert all
-                    {
-                        for (int i = 0; i < StackSize; i++)
-                        {
-                            BuySellPanel.Instance.RevertTransfer(ItemData);
-                        }
-                    }
-                    else // revert one
+                    BuySellPanel.Instance.ApplyTransfer(ItemData);
+                }
+            }
+        }
+        else if (inventoryMode == InventoryMode.Revert) // revert
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (Input.GetKey(KeyCode.LeftShift)) // revert all
+                {
+                    for (int i = 0; i < StackSize; i++)
                     {
                         BuySellPanel.Instance.RevertTransfer(ItemData);
                     }
                 }
-            }
-            else if (inventoryMode == InventoryMode.Throw)
-            {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                else // revert one
                 {
-                    BuySellPanel.Instance.ThrowItem(ItemData);
+                    BuySellPanel.Instance.RevertTransfer(ItemData);
                 }
+            }
+        }
+        else if (inventoryMode == InventoryMode.Throw)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                BuySellPanel.Instance.ThrowItem(ItemData);
             }
         }
     }
