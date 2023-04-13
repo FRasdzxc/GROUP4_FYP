@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-lg-6 p-0 rounded-3 border shadow-sm">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Score</th>
+            <th scope="col">Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(leaderboard|length) %}
+          {% if i == 0 %}
+          <tr class="table-success">
+            {% elif i == 1 %}
+          <tr class="table-danger">
+            {% elif i == 2 %}
+          <tr class="table-warning">
+            {% else %}
+          <tr>
+            {% endif %}
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ leaderboard[i][0] }}</td>
+            <td>{{ leaderboard[i][1] }}</td>
+            {% if leaderboard[i][2] != -1 %}
+              <td><a href="/stats/{{ leaderboard[i][2] }}">Detail</a></td>
+              {% else %}
+              <td></td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

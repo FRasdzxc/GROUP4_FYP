@@ -33,8 +33,10 @@ def create_app(test_config=None):
 
     # apply the blueprints to the app
     from poh import stats
+    from poh import leaderboard
 
     app.register_blueprint(stats.bp)
+    app.register_blueprint(leaderboard.bp)
 
     @app.route("/")
     def index():

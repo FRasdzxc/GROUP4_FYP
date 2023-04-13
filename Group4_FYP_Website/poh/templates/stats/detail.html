@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Statistics{% endblock %}
+{% block title %}Sesion Detail{% endblock %}
 
 {% block content %}
-<h1 class="mb-3">Accumulated</h1>
+<h1 class="mb-3">{{ play_session['player_name'] }}</h1>
+<h2 class="mb-3">{{ play_session['final_score'] }}</h2>
 <div class="mb-3 card text-bg-primary">
   <h4 class="card-header">
     General
@@ -12,36 +13,33 @@
     <div class="row">
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Steps Taken</h5>
-          <h5 class="card-text">{{ accumulated['steps_taken'] }}</p>
+          <h5 class="card-text">{{ play_session['steps_taken'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Damage Given</h5>
-          <h5 class="card-text">{{ accumulated['damage_given'] }}</p>
+          <h5 class="card-text">{{ play_session['damage_given'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Damage Taken</h5>
-          <h5 class="card-text">{{ accumulated['damage_taken'] }}</p>
+          <h5 class="card-text">{{ play_session['damage_taken'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Weapon Attacks</h5>
-          <h5 class="card-text">{{ accumulated['weapon_attacks'] }}</p>
+          <h5 class="card-text">{{ play_session['weapon_usage'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Ability Attacks</h5>
-          <h5 class="card-text">{{ accumulated['ability_attacks'] }}</p>
+          <h5 class="card-text">{{ play_session['ability_usage'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Mobs Killed</h5>
-          <h5 class="card-text">{{ accumulated['mobs_killed'] }}</p>
+          <h5 class="card-text">{{ play_session['mobs_killed'] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Dungeons Cleared</h5>
-          <h5 class="card-text">{{ accumulated['dungeons_cleared'] }}</p>
+          <h5 class="card-text">{{ play_session['dungeons_cleared'] }}</p>
       </div>
     </div>
-  </div>
-  <div class="card-footer">
-    Total sessions: {{ accumulated['session_count'] }}
   </div>
 </div>
 <div class="mb-3 card text-bg-secondary">
@@ -52,11 +50,11 @@
     <div class="row">
       <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Wand</h5>
-          <h5 class="card-text">{{ weapon['wand'] }}</p>
+          <h5 class="card-text">{{ play_session["weapon_usage_detail"]["wand"] }}</p>
       </div>
       <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Whirlwind</h5>
-          <h5 class="card-text">{{ weapon['whirlwind'] }}</p>
+          <h5 class="card-text">{{ play_session["weapon_usage_detail"]["whirlwind"] }}</p>
       </div>
     </div>
   </div>
@@ -69,15 +67,15 @@
     <div class="row">
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Fireball</h5>
-          <h5 class="card-text">{{ ability['fireball'] }}</p>
+          <h5 class="card-text">{{ play_session["ability_usage_detail"]["fireball"] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Soul Ring</h5>
-          <h5 class="card-text">{{ ability['soul_ring'] }}</p>
+          <h5 class="card-text">{{ play_session["ability_usage_detail"]["soul_ring"] }}</p>
       </div>
       <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Tornado</h5>
-          <h5 class="card-text">{{ ability['tornado'] }}</p>
+          <h5 class="card-text">{{ play_session["ability_usage_detail"]["tornado"] }}</p>
       </div>
     </div>
   </div>
@@ -90,9 +88,10 @@
     <div class="row">
       <div class="col pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
         <h4 class="card-title">Slime</h5>
-          <h5 class="card-text">{{ mobs['slime'] }}</p>
+          <h5 class="card-text">{{ play_session["mob_killed_detail"]["slime"] }}</p>
       </div>
     </div>
   </div>
 </div>
+{{ play_session }}
 {% endblock %}
