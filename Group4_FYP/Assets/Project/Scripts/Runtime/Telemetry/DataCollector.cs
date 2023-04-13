@@ -10,8 +10,13 @@ namespace PathOfHero.Telemetry
 {
     public class DataCollector : SingletonPersistent<DataCollector>
     {
-        //private const string k_TelemetryEndpoint = "http://192.168.19.188:8080/upload_stats";
-        private const string k_TelemetryEndpoint = "http://127.0.0.1:5000/upload_stats";
+        private const string k_TelemetryEndpoint =
+#if UNITY_EDITOR
+            "http://127.0.0.1:5000/upload_stats";
+#else
+            "http://192.168.19.188:8080/upload_stats";
+#endif
+
         private SessionStats m_CurrentStats;
         public SessionStats CurrentStats => m_CurrentStats;
 

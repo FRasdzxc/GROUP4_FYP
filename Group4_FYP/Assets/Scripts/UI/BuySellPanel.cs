@@ -71,33 +71,23 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         transferredItems = new List<InventoryEntry>();
     }
 
-    // Update is called once per frame
+#if UNITY_EDITOR
     void Update()
     {
-        // test only
         if (Input.GetKeyDown(KeyCode.R))
-        // if (Input.GetKeyDown(KeyCode.R) && InputManager.Instance.GetKeyDown(KeyCode.R))
         {
             if (!isOpened)
             {
                 if (Input.GetKey(KeyCode.LeftControl))
-                {
                     ShowSellPanel();
-                }
                 else
-                {
                     ShowBuyPanel();
-                }
             }
             else
-            {
-                // HideBuySellPanel();
                 HidePanel();
-            }
-
-            // isOpened = !isOpened;
         }
     }
+#endif
 
     public void ShowBuyPanel()
     {

@@ -57,22 +57,18 @@ public class WeaponUpgradePanel : PanelOverride
         tempItems = new List<InventoryEntry>();
     }
 
-    // Update is called once per frame
+#if UNITY_EDITOR
     void Update()
     {
-        // test only
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (!isOpened)
-            {
                 ShowWeaponUpgradePanel();
-            }
             else
-            {
                 HidePanel();
-            }
         }
     }
+#endif
 
     public async void ShowWeaponUpgradePanel()
     {
