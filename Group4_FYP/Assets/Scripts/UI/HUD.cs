@@ -1,4 +1,4 @@
-using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -169,22 +169,34 @@ public class HUD : Singleton<HUD>
     }
 
     #region HugeMessage
+    public Task ShowHugeMessageAsync(string title, Color titleColor, float duration = 1.5f) // duration = seconds
+        => ShowHugeMessageAsync(title, titleColor, "", Color.white, duration);
+
+    public Task ShowHugeMessageAsync(string title, float duration = 1.5f)
+        => ShowHugeMessageAsync(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
+
+    public Task ShowHugeMessageAsync(string title, string subtitle, float duration = 1.5f)
+        => ShowHugeMessageAsync(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
+
     public IEnumerator ShowHugeMessage(string title, Color titleColor, float duration = 1.5f) // duration = seconds
     {
-        return ShowHugeMessage(title, titleColor, "", Color.white, duration);
+        var task = ShowHugeMessageAsync(title, titleColor, "", Color.white, duration);
+        yield return new WaitUntil(() => task.IsCompleted);
     }
 
     public IEnumerator ShowHugeMessage(string title, float duration = 1.5f)
     {
-        return ShowHugeMessage(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
+        var task = ShowHugeMessageAsync(title, new Color32(150, 255, 150, 255), "", Color.white, duration);
+        yield return new WaitUntil(() => task.IsCompleted);
     }
 
     public IEnumerator ShowHugeMessage(string title, string subtitle, float duration = 1.5f)
     {
-        return ShowHugeMessage(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
+        var task = ShowHugeMessageAsync(title, new Color32(150, 255, 150, 255), subtitle, Color.white, duration);
+        yield return new WaitUntil(() => task.IsCompleted);
     }
 
-    private IEnumerator ShowHugeMessage(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
+    public async Task ShowHugeMessageAsync(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);
 
@@ -203,9 +215,9 @@ public class HUD : Singleton<HUD>
         }
 
         hugeMessage.SetActive(true);
-        yield return hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
-        yield return new WaitForSeconds(duration);
-        yield return hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).WaitForCompletion();
+        await hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        await Task.Delay((int)(duration * 1000));
+        await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         hugeMessage.SetActive(false);
     }
     #endregion

@@ -9,27 +9,27 @@ public class WaveDungeonMapData : DungeonMapData
     public MobTable[] waves;
     private int currentWave = -1;
 
-    public async void NextWave() {
+    public async void NextWave()
+    {
         Debug.Log($"currentWave {currentWave}");
         
-        if (waves == null) {
+        if (waves == null || currentWave + 1 == waves.Length)
+        {
+            _ = HUD.Instance.ShowHugeMessageAsync("Dungeon", "cleared");
             SpawnPortal();
             return;
         }
 
-        await HUD.Instance.ShowHugeMessage("Wave", "cleared");
         currentWave++;
-        if (currentWave < waves.Length - 1) {
-            await Task.Delay(5000);
-            await HUD.Instance.ShowHugeMessage($"Wave {currentWave + 1}", new Color32(255, 125, 0, 255), $"of {waves.Length}", Color.white);
-
-            MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
-            ground.SetMobTable(waves[currentWave]);
-            ground.Spawn();
-        }
-        else
+        if (currentWave != 0)
         {
-            SpawnPortal();
+            await HUD.Instance.ShowHugeMessageAsync("Wave", "cleared");
+            await Task.Delay(5000);
         }
+
+        await HUD.Instance.ShowHugeMessageAsync($"Wave {currentWave + 1}", new Color32(255, 125, 0, 255), $"of {waves.Length}", Color.white);
+        MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
+        ground.SetMobTable(waves[currentWave]);
+        ground.Spawn();
     }
 }
