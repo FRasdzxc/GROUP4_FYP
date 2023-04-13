@@ -6,9 +6,9 @@ using HugeScript;
 
 public class MobSpawner : MonoBehaviour
 {
-    public MobTable Loot;
-    public int RandomDropCount = 1;
-    public float DropRange = 5f;
+    [SerializeField] private MobTable Loot;
+    [SerializeField] private int RandomDropCount = 1;
+    [SerializeField] private float DropRange = 5f;
     float rangeX;
     float rangeY;
 
@@ -16,7 +16,8 @@ public class MobSpawner : MonoBehaviour
     {
         //rangeX = GetComponent<SpriteRenderer>().bounds.size.x / 2;
         //rangeY = GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+        //Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+        Spawn();
     }
     private void Update()
     {
@@ -24,5 +25,13 @@ public class MobSpawner : MonoBehaviour
         {
 
         }
+    }
+    public void Spawn()
+    {
+        Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+    }
+    public void SetMobTable(MobTable mobTable)
+    {
+        Loot = mobTable;
     }
 }
