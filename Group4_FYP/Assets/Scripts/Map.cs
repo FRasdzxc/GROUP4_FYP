@@ -55,9 +55,7 @@ public class Map : MonoBehaviour
         // heat map
         heatMap = NoiseGenerator.Generate(width, height, scale, heatWaves, offset);*/
 
-        int i = 0;
         Color[] pixels = new Color[width * height];
-
         for(int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)

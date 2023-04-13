@@ -63,8 +63,6 @@ public class WeaponTrigger : MonoBehaviour
     public void push(GameObject obj)
     {
         obj.GetComponent<Rigidbody2D>().AddForce(shootDir * force, ForceMode2D.Force);
-        Debug.Log(shootDir);
-        Debug.Log(force);
     }
 
     // ***** make a child class script for shoot and split?
