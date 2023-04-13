@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using PathOfHero.Controllers;
 using PathOfHero.Telemetry;
 
 #if UNITY_EDITOR
@@ -9,11 +8,10 @@ using UnityEditor;
 
 namespace PathOfHero.UI
 {
-    // This is a standalone panel in EndScene, thus not inherting Panel class
-    public class EndPanel : MonoBehaviour
+    public class EndPanel : Panel
     {
         [SerializeField]
-        private CursorController m_CursorController;
+        private TMP_Text m_Score;
 
         [SerializeField]
         private TMP_Text m_StepsTaken;
@@ -33,22 +31,22 @@ namespace PathOfHero.UI
         [SerializeField]
         private TMP_Text m_MobsKilled;
 
-        private void Start()
-        {
-            m_CursorController.ChangeCursor(CursorController.CursorType.Default);
+        [SerializeField]
+        private TMP_Text m_DungeonsCleared;
 
+        public override void OnActivate()
+        {
             var dataCollector = DataCollector.Instance;
             if (dataCollector != null && dataCollector.CurrentStats != null)
             {
-                dataCollector.UploadSession();
-
-                // Configure end screen
+                m_Score.text = dataCollector.CurrentStats.CalculateScore().ToString();
                 m_StepsTaken.text = dataCollector.CurrentStats.stepsTaken.ToString();
                 m_WeaponAttacks.text = dataCollector.CurrentStats.WeaponUsage.ToString();
                 m_AbilityAttacks.text = dataCollector.CurrentStats.AbilityUsage.ToString();
                 m_DamageGiven.text = dataCollector.CurrentStats.damageGiven.ToString("N0");
                 m_DamageTaken.text = dataCollector.CurrentStats.damageTaken.ToString("N0");
                 m_MobsKilled.text = dataCollector.CurrentStats.MobsKilled.ToString();
+                m_DungeonsCleared.text = dataCollector.CurrentStats.DungeonsCleared.ToString();
             }
         }
 

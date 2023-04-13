@@ -189,6 +189,7 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
+        DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
 
         var loadingScreen = LoadingScreen.Instance;

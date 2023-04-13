@@ -111,6 +111,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Slow Motion",
+                    "type": "Button",
+                    "id": "ad6eb406-6286-401f-91b4-e9a5e6c4a5aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fast Motion",
+                    "type": "Button",
+                    "id": "cdebc815-b9da-4adb-b483-d81fe7dbe2d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Kill Mobs",
+                    "type": "Button",
+                    "id": "c29e9f67-cf5b-4eba-8f13-98b69ea83a16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "End Demo",
+                    "type": "Button",
+                    "id": "ea86e128-da42-48e8-9dda-749b33822999",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -122,6 +158,50 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Capture Screenshot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "783767f3-d00a-4e34-be3b-1ad1f0931c6c",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Slow Motion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46f672ac-1eb4-4c8d-9a75-f7636e259405",
+                    "path": "<Keyboard>/f7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Fast Motion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9bb1342-615a-4780-be37-1beb13ff1e8f",
+                    "path": "<Keyboard>/f11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "End Demo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d31aaed3-3d1d-4d87-8fe7-9630cc6466cf",
+                    "path": "<Keyboard>/f9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Kill Mobs",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

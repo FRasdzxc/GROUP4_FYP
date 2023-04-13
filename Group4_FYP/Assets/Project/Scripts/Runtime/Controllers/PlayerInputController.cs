@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using PathOfHero.Input;
+using PathOfHero.Telemetry;
 
 #if UNITY_EDITOR
 using System.IO;
@@ -102,6 +103,42 @@ namespace PathOfHero.Controllers
                 ScreenCapture.CaptureScreenshot(path, 2);
                 Debug.Log($"[Screenshot] Saved to {path}");
             }
+#endif
+        }
+
+        public void OnSlowMotion(InputAction.CallbackContext context)
+        {
+#if UNITY_EDITOR
+            if (context.performed)
+                Time.timeScale = Time.timeScale != 0.5f ? 0.5f : 1f;
+#endif
+        }
+
+        public void OnFastMotion(InputAction.CallbackContext context)
+        {
+#if UNITY_EDITOR
+            if (context.performed)
+                Time.timeScale = Time.timeScale != 2f ? 2f : 1f;
+#endif
+        }
+
+        public void OnKillMobs(InputAction.CallbackContext context)
+        {
+#if UNITY_EDITOR
+            if (context.performed)
+            {
+                var mobs = GameObject.FindGameObjectsWithTag("Mob");
+                foreach (var mob in mobs)
+                    Destroy(mob);
+            }
+#endif
+        }
+
+        public void OnEndDemo(InputAction.CallbackContext context)
+        {
+#if UNITY_EDITOR
+            if (context.performed)
+                DemoController.Instance?.EndDemo();
 #endif
         }
     }

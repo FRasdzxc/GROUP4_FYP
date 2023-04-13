@@ -22,5 +22,7 @@ namespace PathOfHero.UI
 
             m_CanvasGroup = GetComponent<CanvasGroup>();
         }
+
+        public virtual void OnActivate() { }
     }
 }

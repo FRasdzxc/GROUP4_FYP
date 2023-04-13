@@ -14,6 +14,9 @@ namespace PathOfHero.Controllers
         [SerializeField]
         private TMP_Text m_CountdownText;
 
+        [SerializeField]
+        private PlayerInputController m_PlayerInputController;
+
         private bool m_Started;
         private float m_TimeRemaining;
 
@@ -71,6 +74,12 @@ namespace PathOfHero.Controllers
             while (sceneController.IsLoading);
 
             m_Countdown.SetActive(true);
+            Paused = false;
+        }
+        
+        public void EndDemo()
+        {
+            m_TimeRemaining = 0;
             Paused = false;
         }
     }

@@ -135,6 +135,42 @@ namespace PathOfHero.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slow Motion"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad6eb406-6286-401f-91b4-e9a5e6c4a5aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fast Motion"",
+                    ""type"": ""Button"",
+                    ""id"": ""cdebc815-b9da-4adb-b483-d81fe7dbe2d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kill Mobs"",
+                    ""type"": ""Button"",
+                    ""id"": ""c29e9f67-cf5b-4eba-8f13-98b69ea83a16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""End Demo"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea86e128-da42-48e8-9dda-749b33822999"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -146,6 +182,50 @@ namespace PathOfHero.Input
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Capture Screenshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""783767f3-d00a-4e34-be3b-1ad1f0931c6c"",
+                    ""path"": ""<Keyboard>/f6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Slow Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46f672ac-1eb4-4c8d-9a75-f7636e259405"",
+                    ""path"": ""<Keyboard>/f7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Fast Motion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9bb1342-615a-4780-be37-1beb13ff1e8f"",
+                    ""path"": ""<Keyboard>/f11"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""End Demo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d31aaed3-3d1d-4d87-8fe7-9630cc6466cf"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Kill Mobs"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -191,6 +271,10 @@ namespace PathOfHero.Input
             // Developer
             m_Developer = asset.FindActionMap("Developer", throwIfNotFound: true);
             m_Developer_CaptureScreenshot = m_Developer.FindAction("Capture Screenshot", throwIfNotFound: true);
+            m_Developer_SlowMotion = m_Developer.FindAction("Slow Motion", throwIfNotFound: true);
+            m_Developer_FastMotion = m_Developer.FindAction("Fast Motion", throwIfNotFound: true);
+            m_Developer_KillMobs = m_Developer.FindAction("Kill Mobs", throwIfNotFound: true);
+            m_Developer_EndDemo = m_Developer.FindAction("End Demo", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -317,11 +401,19 @@ namespace PathOfHero.Input
         private readonly InputActionMap m_Developer;
         private IDeveloperActions m_DeveloperActionsCallbackInterface;
         private readonly InputAction m_Developer_CaptureScreenshot;
+        private readonly InputAction m_Developer_SlowMotion;
+        private readonly InputAction m_Developer_FastMotion;
+        private readonly InputAction m_Developer_KillMobs;
+        private readonly InputAction m_Developer_EndDemo;
         public struct DeveloperActions
         {
             private @GameInput m_Wrapper;
             public DeveloperActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @CaptureScreenshot => m_Wrapper.m_Developer_CaptureScreenshot;
+            public InputAction @SlowMotion => m_Wrapper.m_Developer_SlowMotion;
+            public InputAction @FastMotion => m_Wrapper.m_Developer_FastMotion;
+            public InputAction @KillMobs => m_Wrapper.m_Developer_KillMobs;
+            public InputAction @EndDemo => m_Wrapper.m_Developer_EndDemo;
             public InputActionMap Get() { return m_Wrapper.m_Developer; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -334,6 +426,18 @@ namespace PathOfHero.Input
                     @CaptureScreenshot.started -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnCaptureScreenshot;
                     @CaptureScreenshot.performed -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnCaptureScreenshot;
                     @CaptureScreenshot.canceled -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnCaptureScreenshot;
+                    @SlowMotion.started -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnSlowMotion;
+                    @SlowMotion.performed -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnSlowMotion;
+                    @SlowMotion.canceled -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnSlowMotion;
+                    @FastMotion.started -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnFastMotion;
+                    @FastMotion.performed -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnFastMotion;
+                    @FastMotion.canceled -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnFastMotion;
+                    @KillMobs.started -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnKillMobs;
+                    @KillMobs.performed -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnKillMobs;
+                    @KillMobs.canceled -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnKillMobs;
+                    @EndDemo.started -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnEndDemo;
+                    @EndDemo.performed -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnEndDemo;
+                    @EndDemo.canceled -= m_Wrapper.m_DeveloperActionsCallbackInterface.OnEndDemo;
                 }
                 m_Wrapper.m_DeveloperActionsCallbackInterface = instance;
                 if (instance != null)
@@ -341,6 +445,18 @@ namespace PathOfHero.Input
                     @CaptureScreenshot.started += instance.OnCaptureScreenshot;
                     @CaptureScreenshot.performed += instance.OnCaptureScreenshot;
                     @CaptureScreenshot.canceled += instance.OnCaptureScreenshot;
+                    @SlowMotion.started += instance.OnSlowMotion;
+                    @SlowMotion.performed += instance.OnSlowMotion;
+                    @SlowMotion.canceled += instance.OnSlowMotion;
+                    @FastMotion.started += instance.OnFastMotion;
+                    @FastMotion.performed += instance.OnFastMotion;
+                    @FastMotion.canceled += instance.OnFastMotion;
+                    @KillMobs.started += instance.OnKillMobs;
+                    @KillMobs.performed += instance.OnKillMobs;
+                    @KillMobs.canceled += instance.OnKillMobs;
+                    @EndDemo.started += instance.OnEndDemo;
+                    @EndDemo.performed += instance.OnEndDemo;
+                    @EndDemo.canceled += instance.OnEndDemo;
                 }
             }
         }
@@ -374,6 +490,10 @@ namespace PathOfHero.Input
         public interface IDeveloperActions
         {
             void OnCaptureScreenshot(InputAction.CallbackContext context);
+            void OnSlowMotion(InputAction.CallbackContext context);
+            void OnFastMotion(InputAction.CallbackContext context);
+            void OnKillMobs(InputAction.CallbackContext context);
+            void OnEndDemo(InputAction.CallbackContext context);
         }
     }
 }

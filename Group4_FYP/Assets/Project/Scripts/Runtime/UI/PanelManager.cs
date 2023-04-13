@@ -10,7 +10,9 @@ namespace PathOfHero.UI
     public enum PanelType
     {
         Start,
-        Instruction
+        Instruction,
+        Score,
+        End
     }
 
     public class PanelManager : MonoBehaviour
@@ -18,6 +20,8 @@ namespace PathOfHero.UI
         [Header("Panels")]
         [SerializeField]
         private PanelEntry[] m_Panels;
+        [SerializeField]
+        private PanelType m_DefaultPanel;
         [SerializeField]
         private float m_FadeDuration;
 
@@ -35,7 +39,7 @@ namespace PathOfHero.UI
                 entry.panel.gameObject.SetActive(false);
             }
 
-            yield return SwitchPanel(PanelType.Start, false);
+            yield return SwitchPanel(m_DefaultPanel, false);
             m_CursorController.ChangeCursor(CursorController.CursorType.Default);
         }
 
@@ -68,6 +72,7 @@ namespace PathOfHero.UI
 
             // Fade in new panel
             entry.panel.gameObject.SetActive(true);
+            entry.panel.OnActivate();
             if (animated)
             {
                 entry.panel.CanvasAlpha = 0f;

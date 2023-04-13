@@ -1,0 +1,174 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 4da8f0dbf61a24b4f8c469af136f64bf, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: e1f64c004c115584a8e784bfedaf4ba4, type: 3}
+  - {fileID: 21300000, guid: ab8f415020bfefc499c9eea9e8e000bd, type: 3}
+  - {fileID: 21300000, guid: 6db4841146cf19641bb584177a555bf4, type: 3}
+  - {fileID: 21300000, guid: c74de021c0c53594588251e219cad5ca, type: 3}
+  - {fileID: 21300000, guid: a0d110417b60eb74d90ba756552b74d9, type: 3}
+  - {fileID: 21300000, guid: 81a79841d9e247f4ea0b77ecebc36927, type: 3}
+  - {fileID: 21300000, guid: 2344f5a167566be4b95759dba25b1443, type: 3}
+  - {fileID: 21300000, guid: a09320b1e52f0714e9e201155af37457, type: 3}
+  - {fileID: 21300000, guid: 17ab7fd16331c2e42a767f8f98fec1a9, type: 3}
+  - {fileID: 21300000, guid: 4412c1e13136f284fbbb3ea49a6d63c4, type: 3}
+  - {fileID: 21300000, guid: 42e783022f87cfb498ad31111d7fc931, type: 3}
+  - {fileID: 21300000, guid: 89ca4a22b10c6e441933c4d0164cc7f1, type: 3}
+  - {fileID: 21300000, guid: 1fa7ae723be295a4e83db6854b86c20d, type: 3}
+  - {fileID: 21300000, guid: 3cc5b792ad46da940925b58d78652026, type: 3}
+  - {fileID: 21300000, guid: 9eb986a2888fda54084aa031a7b17800, type: 3}
+  - {fileID: 21300000, guid: 114684d2fa7d0974ab2cebb2e6a2386b, type: 3}
+  - {fileID: 21300000, guid: 18d45a1328b8a8147b9e11a4b7c3f9d7, type: 3}
+  - {fileID: 21300000, guid: 0948d9432250d6e4fa850f528c000383, type: 3}
+  - {fileID: 21300000, guid: 1ead2163b97b95441bb8576eebb60c24, type: 3}
+  - {fileID: 21300000, guid: 5dd04804bdb66b3418273852bd96fa34, type: 3}
+  - {fileID: 21300000, guid: 3b56d634b1b0d134f819afcb661c47bd, type: 3}
+  - {fileID: 21300000, guid: 04ee073454473484bbd7aa700142edd3, type: 3}
+  - {fileID: 21300000, guid: c9b2d1947b507c843be0091d0ff5ddfc, type: 3}
+  - {fileID: 21300000, guid: b04350b450279fc439ef2e397499bba3, type: 3}
+  - {fileID: 21300000, guid: 8febfbb48a8b70b4d92ecb232c569d0d, type: 3}
+  - {fileID: 21300000, guid: d20007c47c6251149aa4f8e81ef94fbe, type: 3}
+  - {fileID: 21300000, guid: 77685cd4848206c46a51937f9ab20880, type: 3}
+  - {fileID: 21300000, guid: 8b378ed431324324b8e7b5813e5b500f, type: 3}
+  - {fileID: 21300000, guid: 099d94354843d5444a29299844cc83df, type: 3}
+  - {fileID: 21300000, guid: 5a0f9b4554e75284f9a505b188fdfe0f, type: 3}
+  - {fileID: 21300000, guid: bcb9915548c73af4a98b25bc9617b3bd, type: 3}
+  - {fileID: 21300000, guid: b5888795317075a479c8323abd8be175, type: 3}
+  - {fileID: 21300000, guid: ac4abe95ee806b44e8d23042c4222c61, type: 3}
+  - {fileID: 21300000, guid: 365637c53e21f8c44b5ca92bbda32779, type: 3}
+  - {fileID: 21300000, guid: 770c9c4666ca3834987d93e888be6d8a, type: 3}
+  - {fileID: 21300000, guid: 66fae7b67fdebf8449cc30412ff4cfc6, type: 3}
+  - {fileID: 21300000, guid: 3f66b7d6b846102499a425e5437f1664, type: 3}
+  - {fileID: 21300000, guid: 970065577cc29a846a47a35a68da30b4, type: 3}
+  - {fileID: 21300000, guid: 7fee907768aad8749843d9324d3a44e7, type: 3}
+  - {fileID: 21300000, guid: fc6efae76d15944438045dd238680e74, type: 3}
+  - {fileID: 21300000, guid: 95f22f08b64aeff4a9b64b993b86dc84, type: 3}
+  - {fileID: 21300000, guid: 441d10f8457dfc943aefddeae97ed01e, type: 3}
+  - {fileID: 21300000, guid: 834f2429293544a46960fd9d9004fe6c, type: 3}
+  - {fileID: 21300000, guid: 2f9e30593a16fd548908d4aa05bb08cb, type: 3}
+  - {fileID: 21300000, guid: 5cf4a079313c56e4498f1f6c0d18f023, type: 3}
+  - {fileID: 21300000, guid: f76a8bb9d831fe34fafc64e2c3b98c9b, type: 3}
+  - {fileID: 21300000, guid: 048809e99a070bd4a82f8ef65ecb21db, type: 3}
+  - {fileID: 21300000, guid: 02918e0a2653c2a4cb309a00d347a64c, type: 3}
+  - {fileID: 21300000, guid: ad49664a756d51e489194a7da72b493c, type: 3}
+  - {fileID: 21300000, guid: 5feadfba653338546818a912a96a7e24, type: 3}
+  - {fileID: 21300000, guid: f7f9530bd73886745946076f78473844, type: 3}
+  - {fileID: 21300000, guid: 71401f5b5a052124585f8593b572e05f, type: 3}
+  - {fileID: 21300000, guid: 1747d4cb30c482f4f93fcec79edcf7e7, type: 3}
+  - {fileID: 21300000, guid: 03fef0ebb53adbe4d95fa71ec9663205, type: 3}
+  - {fileID: 21300000, guid: 17037a5dbe80b494c8b3a3fede1f96f1, type: 3}
+  - {fileID: 21300000, guid: 4abb91fd479e5664e80858756247cd1c, type: 3}
+  - {fileID: 21300000, guid: 08e8badea7656de4aafdaca1e2d549b7, type: 3}
+  - {fileID: 21300000, guid: 1a71fa9f948749546a9d1c86046a5f6e, type: 3}
+  - {fileID: 21300000, guid: 319e16cfefb9654449935315df3c3b83, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - UIButton2Pressed1
+  - DialogueBubble
+  - Mana
+  - AbilitySlotBackground
+  - Gradient
+  - Health
+  - Exp
+  - UIButton1Pressed
+  - RevertAll
+  - UIPanel5
+  - Divider
+  - ApplyAll
+  - UIButton2Pressed3
+  - HealthRegeneration
+  - ManaRegeneration
+  - UIButton1Selected
+  - LeftArrow
+  - InventoryItemSlot
+  - Equals
+  - UIPanel1
+  - UIButton3Disabled1
+  - UIPanel3
+  - UIButton1Normal
+  - HeroStatsBarSliderBackground
+  - AbilitySlotCooldown
+  - Add
+  - UIButton2Selected1
+  - RightArrow
+  - UIDropdown1Arrow1
+  - UIButton2Highlighted1
+  - UIButton2Normal1
+  - UIPanel4
+  - HeroStatsBarSliderFill
+  - UIButton3Pressed1
+  - UIButton2Pressed2
+  - UISlider1Fill1
+  - UIButton2Highlighted3
+  - UIButton1Highlighted
+  - MapPanelBackground
+  - UISlider1Background1
+  - UIButton2Disabled1
+  - NotEquals
+  - UIMask1
+  - UIButton2Highlighted2
+  - UIToggle1Checkmark1
+  - UIButton3Default1
+  - UIPanel2
+  - UIButton3Selected1
+  - MessageBackground
+  - button
+  - UIButton1Disabled
+  - GameIcon
+  - DefaultMessageSprite
+  - UIButton3Highlighted1
+  - UIScrollbarHandle1Normal
+  - HeroStatsPanelBackground
+  - Plus
+  - Orb
+  - Power
+  m_RenderDataMap: {}
+  m_Tag: UIAtlas
+  m_IsVariant: 0

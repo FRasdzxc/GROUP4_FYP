@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Countdown: {fileID: 8872196724246093375}
   m_CountdownText: {fileID: 2830476643327583521}
+  m_PlayerInputController: {fileID: 11400000, guid: 82587c269964f3c44a4157ed010c1b9e, type: 2}
 --- !u!1 &2830476643327583532
 GameObject:
   m_ObjectHideFlags: 0

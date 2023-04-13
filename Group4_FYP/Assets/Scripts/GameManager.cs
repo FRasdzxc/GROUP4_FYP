@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 using UnityEngine;
+using PathOfHero.Telemetry;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
-using System.Collections;
-using SceneControl = PathOfHero.Controllers.SceneController;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -51,7 +50,12 @@ public class GameManager : Singleton<GameManager>
             if (mobCount <= 0)
             {
                 if (currentMapData is DungeonMapData dungeon)
+                {
+                    if (currentMapData.mapType == MapType.Dungeon)
+                        DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
+
                     dungeon.SpawnPortal();
+                }
 
                 mapCleared = true;
             }
@@ -69,6 +73,8 @@ public class GameManager : Singleton<GameManager>
         currentMapData = FindMap(mapId);
         if (!currentMapData)
             return;
+
+        DataCollector.Instance?.MapVisited(mapId);
 
         // if map is a dungeon, disable saving buttons
         if (currentMapData.mapType == MapType.Dungeon)
