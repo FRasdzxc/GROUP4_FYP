@@ -12,7 +12,7 @@ namespace PathOfHero.Telemetry
     {
         private const string k_TelemetryEndpoint =
 #if UNITY_EDITOR
-            "http://127.0.0.1:5000/upload_stats";
+            "http://172.18.38.53/upload_stats";
 #else
             "http://192.168.19.188:8080/upload_stats";
 #endif

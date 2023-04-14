@@ -104,6 +104,7 @@ public class AbilityManager : MonoBehaviour
                 }
             }
 
+#if UNITY_EDITOR
             // test refill mana
             if (Input.GetKeyDown(KeyCode.Backslash))
             {
@@ -113,6 +114,7 @@ public class AbilityManager : MonoBehaviour
                 ReadyEquippedAbilities();
             }
         }
+#endif
 
         if (mana < upgradedMaxMana)
         {

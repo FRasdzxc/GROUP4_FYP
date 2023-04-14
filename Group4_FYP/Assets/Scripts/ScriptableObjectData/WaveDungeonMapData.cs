@@ -15,7 +15,6 @@ public class WaveDungeonMapData : DungeonMapData
         
         if (waves == null || currentWave + 1 == waves.Length)
         {
-            _ = HUD.Instance.ShowHugeMessageAsync("Dungeon", "cleared");
             SpawnPortal();
             return;
         }
