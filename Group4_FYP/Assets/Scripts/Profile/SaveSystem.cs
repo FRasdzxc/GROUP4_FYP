@@ -76,6 +76,7 @@ public class SaveSystem : Singleton<SaveSystem>
         abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
         hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
         weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
+        abilityManager.SetAbilityOutputUpgrade(profile.abilityOutputUpgrade);
     }
 
     public void SaveData(bool showNotification = true, bool accountForMapType = true)
@@ -112,6 +113,7 @@ public class SaveSystem : Singleton<SaveSystem>
         profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
         profile.weaponId = weaponManager.GetWeaponId();
         profile.weaponTier = weaponManager.GetWeaponTier();
+        profile.abilityOutputUpgrade = abilityManager.GetAbilityOutputUpgrade();
 
         ProfileManagerJson.SaveProfile(profile);
 

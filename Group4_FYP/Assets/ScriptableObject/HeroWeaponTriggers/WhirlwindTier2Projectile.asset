@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: WhirlwindTier2Projectile
   m_EditorClassIdentifier: 
   weaponTriggerName: 
-  damage: 12
-  criticalDamage: 23
+  damage: 8.7
+  criticalDamage: 15.2
   projectileSpeed: 0
+  force: 0
   splitable: 0
   splitProjectile: {fileID: 0}
   splitAmount: 0

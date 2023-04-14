@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using HugeScript;
-using FYP;
+using PathOfHero.Others;
 
 [CreateAssetMenu(fileName = "New Wave Dungeon Map Data", menuName = "Game/Wave Dungeon Map Data")]
 public class WaveDungeonMapData : DungeonMapData

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: WandTier3Projectile
   m_EditorClassIdentifier: 
   weaponTriggerName: 
-  damage: 35
-  criticalDamage: 45
+  damage: 26
+  criticalDamage: 34
   projectileSpeed: 0
+  force: 0
   splitable: 0
   splitProjectile: {fileID: 0}
   splitAmount: 0

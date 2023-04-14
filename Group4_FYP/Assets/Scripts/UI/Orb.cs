@@ -121,6 +121,11 @@ public class Orb : MonoBehaviour
                     currentAttribute += currentDefense;
                     upgradedAttribute += currentDefense + upgrade.value;
                     break;
+                case OrbUpgradeType.AbilityOutput:
+                    float currentAbilityOutput = AbilityManager.Instance.GetAbilityOutputUpgrade();
+                    currentAttribute += currentAbilityOutput;
+                    upgradedAttribute += currentAbilityOutput + upgrade.value;
+                    break;
             }
             attributes = new string[] { currentAttribute, upgradedAttribute };
             // tooltipTrigger.SetupTooltip(upgrade.orbUpgradeName, upgrade.description, attributes); // use Tooltip.Instance.ShowTooltip() instead?
@@ -158,6 +163,9 @@ public class Orb : MonoBehaviour
             case OrbUpgradeType.Defense:
                 Hero.Instance.AddDefenseUpgrade(value);
                 break;
+            case OrbUpgradeType.AbilityOutput:
+                AbilityManager.Instance.AddAbilityOutputUpgrade(value);
+                break;
         }
 
         Orbs--;
@@ -193,6 +201,8 @@ public class Orb : MonoBehaviour
                     AbilityManager.Instance.SetMaxManaUpgrade(0);
                     AbilityManager.Instance.SetManaRegenerationUpgrade(0);
                     Hero.Instance.SetExpGainMultiplierUpgrade(1);
+                    Hero.Instance.SetDefenseUpgrade(1);
+                    AbilityManager.Instance.SetAbilityOutputUpgrade(1);
 
                     _ = Notification.Instance.ShowNotification("Reset Orb upgrades");
                 }

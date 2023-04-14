@@ -29,6 +29,7 @@ public class ProfileData
     public List<InventoryEntry> inventory;
     public string weaponId;
     public int weaponTier;
+    public float abilityOutputUpgrade;
 
     public ProfileData() // profile for test scenes
     {
@@ -57,6 +58,7 @@ public class ProfileData
         inventory = new List<InventoryEntry>();
         weaponId = "weapon_wand";
         weaponTier = 0;
+        abilityOutputUpgrade = 1f;
     }
 
     public ProfileData(string profileName, HeroClass heroClass, HeroData defaultStats) // used for creating a new profile
@@ -95,6 +97,7 @@ public class ProfileData
         }
 
         weaponTier = 0;
+        abilityOutputUpgrade = 1f;
     }
 
     public ProfileData(string newProfileName, ProfileData profileData) // used for moving data when updating profiles
@@ -124,5 +127,6 @@ public class ProfileData
         inventory = profileData.inventory;
         weaponId = profileData.weaponId;
         weaponTier = profileData.weaponTier;
+        abilityOutputUpgrade = profileData.abilityOutputUpgrade;
     }
 }

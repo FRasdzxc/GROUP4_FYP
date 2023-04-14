@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
-using FYP;
+using PathOfHero.Others;
 
 public class SelectionPanel : Panel
 {

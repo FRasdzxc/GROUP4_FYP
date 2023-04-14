@@ -23,6 +23,7 @@ public class AbilityManager : MonoBehaviour
     private float upgradedMaxMana;
     private float manaRegeneration;
     private float manaRegenerationUpgrade;
+    private float abilityOutputUpgrade;
 
     private PlayerInput playerInput;
     private InputAction ability1Action;
@@ -144,6 +145,8 @@ public class AbilityManager : MonoBehaviour
         ReadyEquippedAbilities();
     }
 
+    #region Setters/Getters/AddSubtract
+    // Setters
     public void SetMana(float mana)
     {
         this.mana = mana;
@@ -169,6 +172,12 @@ public class AbilityManager : MonoBehaviour
         this.manaRegenerationUpgrade = value;
     }
 
+    public void SetAbilityOutputUpgrade(float value)
+    {
+        this.abilityOutputUpgrade = value;
+    }
+
+    // Getters
     public float GetMana()
     {
         return mana;
@@ -194,6 +203,12 @@ public class AbilityManager : MonoBehaviour
         return manaRegenerationUpgrade;
     }
 
+    public float GetAbilityOutputUpgrade()
+    {
+        return abilityOutputUpgrade;
+    }
+
+    // AddSubtract
     public void AddMana(float value)
     {
         mana += value;
@@ -209,6 +224,12 @@ public class AbilityManager : MonoBehaviour
     {
         manaRegenerationUpgrade += value;
     }
+
+    public void AddAbilityOutputUpgrade(float value)
+    {
+        abilityOutputUpgrade += value;
+    }
+    #endregion
 
     private void ReadyEquippedAbilities()
     {

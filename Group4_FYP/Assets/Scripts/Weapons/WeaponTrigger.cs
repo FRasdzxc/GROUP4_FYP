@@ -92,4 +92,28 @@ public class WeaponTrigger : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
+    #region Setters/Getters
+    //
+    public void SetDamage(float value)
+    {
+        damage = value;
+    }
+
+    public void SetCriticalDamage(float value)
+    {
+        critialDamage = value;
+    }
+
+    // Getters
+    public float GetDamage()
+    {
+        return damage;
+    }
+
+    public float GetCriticalDamage()
+    {
+        return critialDamage;
+    }
+    #endregion
 }

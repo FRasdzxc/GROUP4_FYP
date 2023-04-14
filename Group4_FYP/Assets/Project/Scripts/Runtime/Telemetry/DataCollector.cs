@@ -143,12 +143,12 @@ namespace PathOfHero.Telemetry
             public int CalculateScore()
             {
                 int score = 0;
-                score += stepsTaken / 100;
-                score += Mathf.CeilToInt(damageGiven / 25f);
+                score += stepsTaken / 95;
+                score += Mathf.CeilToInt(damageGiven / 22.5f);
                 foreach (var entry in mobsKilled)
-                    score += entry.Value * 5;
+                    score += entry.Value * 6;
                 foreach (var entry in dungeonsCleared)
-                    score += entry.Value * 25;
+                    score += entry.Value * 23;
                 return score;
             }
 

@@ -20,6 +20,8 @@ public class Ability : ScriptableObject
 
     public bool IsReady => Time.time >= nextActivateTime;
 
+    protected float abilityOutputUpgrade;
+
     public virtual void Activate(GameObject character)
     {
         if (!IsReady)
@@ -27,5 +29,15 @@ public class Ability : ScriptableObject
 
         DataCollector.Instance?.AbilityUsed(abilityName);
         nextActivateTime = Time.time + cooldownTime;
+
+        abilityOutputUpgrade = AbilityManager.Instance.GetAbilityOutputUpgrade();
+        calculateAbilityOutput();
+    }
+    
+    protected virtual void calculateAbilityOutput()
+    {
+        lifeTime *= abilityOutputUpgrade;
+        cooldownTime /= abilityOutputUpgrade;
+        manaCost /= abilityOutputUpgrade;
     }
 }

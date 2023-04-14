@@ -10,6 +10,7 @@ public class SoulRingAbility : Ability
     public async override void Activate(GameObject character)
     {
         base.Activate(character);
+        
         GameObject soulRingClone = Instantiate(soulRing, character.transform.position, Quaternion.identity, character.transform);
         if (soulRingClone.TryGetComponent<Spin>(out var spin))
         {
