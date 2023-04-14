@@ -11,9 +11,11 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.E))
         {
             Loot.SpawnDrop(this.transform, RandomDropCount, DropRange);
         }
+#endif
     }
 }

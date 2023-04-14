@@ -128,6 +128,7 @@ public class Hero : MonoBehaviour
             }
             hud.UpdateXP(level, storedExp, requiredExp);
 
+#if UNITY_EDITOR
             if (GameManager.Instance.IsPlayingHostile())
             {
                 // testonly
@@ -142,6 +143,7 @@ public class Hero : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Equals))
                     AddHealth(25f);
             }
+#endif
         }
     }
 

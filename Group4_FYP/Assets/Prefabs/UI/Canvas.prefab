@@ -365,9 +365,9 @@ RectTransform:
   m_Father: {fileID: 6560060353882480357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2673007149870965261
@@ -8805,7 +8805,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20293,7 +20293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6560060353882480357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20313,7 +20313,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 153}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &1007214369553475698
 CanvasRenderer:
@@ -24364,6 +24364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryItemSlotAbility
       objectReference: {fileID: 0}
+    - target: {fileID: 4273062708568082412, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6604826587537480939, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -24465,6 +24469,10 @@ PrefabInstance:
     - target: {fileID: 4273062708568082412, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
       propertyPath: m_Name
       value: InventoryItemSlotAbility (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273062708568082412, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6604826587537480939, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
       propertyPath: m_Pivot.x
@@ -26067,6 +26075,10 @@ PrefabInstance:
     - target: {fileID: 4273062708568082412, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
       propertyPath: m_Name
       value: InventoryItemSlotAbility (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273062708568082412, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6604826587537480939, guid: a8b0ba3134ffa8b4696fed2d5c8ef600, type: 3}
       propertyPath: m_Pivot.x
