@@ -16,8 +16,6 @@ namespace PathOfHero.Controllers
         private string m_SceneToLoad;
         private string m_CurrentScene;
 
-        public bool IsLoading => m_IsLoading;
-
         private void Start()
         {
             m_CurrentScene = SceneManager.GetActiveScene().name;
@@ -34,12 +32,9 @@ namespace PathOfHero.Controllers
         }
 
         public void ChangeScene(string name, bool isGameplay, bool skipFadeIn = false)
-        {
-            LoadingScreen.Instance.DisplayLogo = true;
-            StartCoroutine(SwitchScene(name, isGameplay, skipFadeIn));
-        }
+            => StartCoroutine(SwitchScene(name, isGameplay, skipFadeIn));
 
-        private IEnumerator SwitchScene(string name, bool isGameplay, bool skipFadeIn = false)
+        public IEnumerator SwitchScene(string name, bool isGameplay, bool skipFadeIn = false)
         {
             if (m_IsLoading)
                 yield break;

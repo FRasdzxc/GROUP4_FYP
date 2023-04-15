@@ -113,8 +113,8 @@ public class AbilityManager : MonoBehaviour
                 hud.UpdateMana(mana, upgradedMaxMana);
                 ReadyEquippedAbilities();
             }
-        }
 #endif
+        }
 
         if (mana < upgradedMaxMana)
         {

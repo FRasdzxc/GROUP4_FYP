@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -9,29 +9,49 @@ public class MessageItem : MonoBehaviour
     [SerializeField] private Text messageText;
     [SerializeField] private Button hideButton;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool m_Visible;
+    private float m_HideTime;
+
+    private void Awake()
+        => hideButton.onClick.AddListener(() => { HideMessageItem(); });
+
+    private void Update()
     {
-        hideButton.onClick.AddListener(() => { HideMessageItem(); });
+        if (!m_Visible || Time.time < m_HideTime)
+            return;
+
+        StartCoroutine(AnimatedDestroy());
     }
 
-    public async void ShowMessageItem(string message, float duration, Sprite sprite)
+    public void ShowMessageItem(string message, float duration, Sprite sprite)
     {
-        gameObject.GetComponent<CanvasGroup>().alpha = 0;
         messageText.text = message;
         image.sprite = sprite;
 
         gameObject.SetActive(true);
-        await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-
-        await Task.Delay((int)(duration * 1000));
-        HideMessageItem();
+        StartCoroutine(AnimatedDisplay(duration));
     }
 
-    public async void HideMessageItem()
+    public void HideMessageItem() => StartCoroutine(AnimatedDestroy());
+
+    private IEnumerator AnimatedDisplay(float duration)
     {
-        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-        gameObject.SetActive(false);
+        if (TryGetComponent<CanvasGroup>(out var canvasGroup))
+        {
+            canvasGroup.alpha = 0;
+            yield return canvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
+        }
+
+        m_HideTime = Time.time + duration;
+        m_Visible = true;
+    }
+
+    private IEnumerator AnimatedDestroy()
+    {
+        m_Visible = false;
+        if (TryGetComponent<CanvasGroup>(out var canvasGroup))
+            yield return canvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
+
         Destroy(gameObject);
     }
 }

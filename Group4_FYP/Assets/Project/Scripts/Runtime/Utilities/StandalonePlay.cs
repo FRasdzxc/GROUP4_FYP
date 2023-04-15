@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using PathOfHero.Controllers;
 using DG.Tweening;
+using PathOfHero.Controllers;
+using PathOfHero.Telemetry;
 
 namespace PathOfHero.Utilities
 {
@@ -14,18 +16,26 @@ namespace PathOfHero.Utilities
 
         private void Start()
         {
-            DOTween.Init().SetCapacity(500, 50);
+            DOTween.Init();
             var load = SceneManager.LoadSceneAsync(SceneController.k_ControllerSceneName, LoadSceneMode.Additive);
-            load.completed += OnLoadComplete;
+            load.completed += handle => StartCoroutine(OnLoadComplete(handle));
         }
 
-        private void OnLoadComplete(AsyncOperation handle)
+        private IEnumerator OnLoadComplete(AsyncOperation handle)
         {
+            var dataCollector = DataCollector.Instance;
+            if (dataCollector == null)
+            {
+                Debug.LogError("[Bootstrap] Data collector missing! Unable to continue.");
+                yield break;
+            }
+            yield return StartCoroutine(dataCollector.Activate());
+
             var sceneController = SceneController.Instance;
             if (sceneController == null)
             {
                 Debug.LogError("[Bootstrap] Scene controller missing! Unable to continue.");
-                return;
+                yield break;
             }
 
             sceneController.ChangeScene(m_SceneNameToLoad, m_IsGameplayScene, true);

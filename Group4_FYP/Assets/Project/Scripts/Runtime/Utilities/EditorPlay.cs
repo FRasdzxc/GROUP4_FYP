@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using PathOfHero.Controllers;
 using PathOfHero.Save;
+using PathOfHero.Telemetry;
 #endif
 
 namespace PathOfHero.Utilities
@@ -24,11 +25,21 @@ namespace PathOfHero.Utilities
 #if UNITY_EDITOR
             m_PlayerProfileController.LoadFromObject(m_EditorProfile);
             LoadSceneAdditively(SceneController.k_ControllerSceneName);
-#endif
+#else
             Destroy(gameObject);
+#endif
         }
 
 #if UNITY_EDITOR
+        private void Start()
+        {
+            var dataCollector = DataCollector.Instance;
+            if (dataCollector != null && dataCollector.CurrentStats == null)
+                dataCollector.StartNewSession();
+
+            Destroy(gameObject);
+        }
+
         private void LoadSceneAdditively(string name)
         {
             var scene = SceneManager.GetSceneByName(name);

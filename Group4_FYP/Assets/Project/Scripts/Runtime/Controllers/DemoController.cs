@@ -1,8 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using PathOfHero.Utilities;
 using PathOfHero.Telemetry;
-using System.Threading.Tasks;
 
 namespace PathOfHero.Controllers
 {
@@ -52,34 +52,34 @@ namespace PathOfHero.Controllers
             }
         }
 
-        public async void StartDemo(float seconds)
+        public void StartDemo(float timeLimit)
+            => StartCoroutine(ChangeScene(timeLimit));
+        
+        public void EndDemo()
         {
+            m_TimeRemaining = 0;
+            Paused = false;
+        }
+
+        private IEnumerator ChangeScene(float timeLimit)
+        {
+            var sceneController = SceneController.Instance;
+            if (sceneController == null)
+            {
+                Debug.LogError("[Demo Controller] Scene controller missing! Unable to start.");
+                yield break;
+            }
+
             DataCollector.Instance?.StartNewSession();
 
-            m_TimeRemaining = seconds;
+            m_TimeRemaining = timeLimit;
             m_CountdownText.text = SecondsRemaining.ToString();
             m_CountdownText.color = Color.white;
             m_Started = true;
             Paused = true;
 
-            var sceneController = SceneController.Instance;
-            if (sceneController == null)
-            {
-                Debug.LogError("[Demo Controller] Scene controller missing! Unable to start.");
-                return;
-            }
-            sceneController.ChangeScene(SceneController.k_InGameSceneName, false);
-            do
-                await Task.Yield();
-            while (sceneController.IsLoading);
-
+            yield return StartCoroutine(sceneController.SwitchScene(SceneController.k_InGameSceneName, false));
             m_Countdown.SetActive(true);
-            Paused = false;
-        }
-        
-        public void EndDemo()
-        {
-            m_TimeRemaining = 0;
             Paused = false;
         }
     }

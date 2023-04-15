@@ -1,40 +1,16 @@
 using UnityEngine;
+using PathOfHero.Utilities;
 
-public class Message : MonoBehaviour
+public class Message : Singleton<Message>
 {
     [SerializeField] private GameObject messagePanel;
     [SerializeField] private GameObject messageItemPrefab;
     [SerializeField] private Sprite defaultMessageSprite; // preventive
-    private GameObject clone;
-
-    private static Message instance;
-    public static Message Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-    }
 
     public void ShowMessage(string message, Sprite sprite = null, float duration = 1.5f)
     {
-        clone = Instantiate(messageItemPrefab, messagePanel.transform);
-
-        if (sprite)
-        {
-            clone.GetComponent<MessageItem>().ShowMessageItem(message, duration, sprite);
-        }
-        else
-        {
-            clone.GetComponent<MessageItem>().ShowMessageItem(message, duration, defaultMessageSprite);
-        }
+        var clone = Instantiate(messageItemPrefab, messagePanel.transform);
+        if (clone.TryGetComponent<MessageItem>(out var messageItem))
+            messageItem.ShowMessageItem(message, duration, sprite != null ? sprite : defaultMessageSprite);
     }
 }

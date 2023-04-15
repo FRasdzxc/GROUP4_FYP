@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using PathOfHero.Telemetry;
@@ -33,8 +34,9 @@ public class GameManager : Singleton<GameManager>
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return new WaitUntil(() => DataCollector.Instance != null && DataCollector.Instance.CurrentStats != null);
         LoadMap(MapId, skipFadeIn: true);
     }
 

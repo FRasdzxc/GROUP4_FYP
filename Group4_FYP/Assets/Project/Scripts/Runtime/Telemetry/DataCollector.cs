@@ -5,33 +5,34 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using PathOfHero.Utilities;
+using System;
 
 namespace PathOfHero.Telemetry
 {
     public class DataCollector : SingletonPersistent<DataCollector>
     {
-        private const string k_TelemetryEndpoint =
+        private const string k_Endpoint =
 #if UNITY_EDITOR
-            "http://172.18.38.53/upload_stats";
+            "http://127.0.0.1";
 #else
-            "http://192.168.19.188:8080/upload_stats";
+            "http://172.18.38.53";
 #endif
+        private const string k_ActivationEndpoint = k_Endpoint + "/activation";
+        private const string k_TelemetryEndpoint = k_Endpoint + "/upload_stats";
 
+        private Activation m_Activation;
         private SessionStats m_CurrentStats;
         public SessionStats CurrentStats => m_CurrentStats;
 
         public void StartNewSession()
-        {
-            m_CurrentStats = new SessionStats();
-        }
+            => m_CurrentStats = new SessionStats();
 
         public void UploadSession(string name)
         {
-            if (m_CurrentStats == null)
+            if (m_Activation == null || m_CurrentStats == null)
                 return;
 
-            m_CurrentStats.playerName = name;
-            StartCoroutine(UploadSession(m_CurrentStats));
+            StartCoroutine(UploadSession(m_CurrentStats, name));
         }
 
         public void StepsTaken()
@@ -101,9 +102,36 @@ namespace PathOfHero.Telemetry
             m_CurrentStats.dungeonsCleared[mapId]++;
         }
 
-        private IEnumerator UploadSession(SessionStats session)
+        public IEnumerator Activate()
         {
-            var form = session.ToForm();
+            var userName =
+#if UNITY_EDITOR
+            $"Editor (123456789)";
+#else
+            Environment.UserName;
+#endif
+
+            var form = new WWWForm();
+            form.AddField("user", userName);
+            using UnityWebRequest www = UnityWebRequest.Post(k_ActivationEndpoint, form);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+#if UNITY_EDITOR
+                Debug.LogError($"[Data Collector] Activation failed\n{www.result}: {www.error}");
+                yield break;
+#else
+                Application.OpenURL("https://it.vtc.edu.hk/en/programmes/detail/it114107/");
+                Application.Quit();
+#endif
+            }
+            m_Activation = JsonUtility.FromJson<Activation>(www.downloadHandler.text);
+        }
+
+        private IEnumerator UploadSession(SessionStats session, string name)
+        {
+            var form = session.ToForm(m_Activation.sessionToken, name);
             using UnityWebRequest www = UnityWebRequest.Post(k_TelemetryEndpoint, form);
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
@@ -112,9 +140,15 @@ namespace PathOfHero.Telemetry
                 Debug.Log($"[Data Collector] Uploaded session stats successfully.");
         }
 
+        [Serializable]
+        class Activation
+        {
+            public string sessionToken;
+            public string sessionDesc;
+        }
+
         public class SessionStats
         {
-            public string playerName;
             public int stepsTaken;
             public float damageGiven;
             public float damageTaken;
@@ -152,9 +186,10 @@ namespace PathOfHero.Telemetry
                 return score;
             }
 
-            public WWWForm ToForm()
+            public WWWForm ToForm(string sessionToken, string playerName)
             {
                 var retVal = new WWWForm();
+                retVal.AddField("sessionToken", sessionToken);
                 retVal.AddField("playerName", playerName);
                 retVal.AddField("finalScore", CalculateScore());
                 retVal.AddField("stepsTaken", stepsTaken);
