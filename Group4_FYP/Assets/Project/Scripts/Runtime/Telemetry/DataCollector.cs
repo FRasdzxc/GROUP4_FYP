@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using PathOfHero.Utilities;
-using System;
 
 namespace PathOfHero.Telemetry
 {
@@ -15,7 +15,7 @@ namespace PathOfHero.Telemetry
 #if UNITY_EDITOR
             "http://127.0.0.1";
 #else
-            "http://172.18.38.53";
+            "http://172.18.38.18";
 #endif
         private const string k_ActivationEndpoint = k_Endpoint + "/activation";
         private const string k_TelemetryEndpoint = k_Endpoint + "/upload_stats";
@@ -103,7 +103,7 @@ namespace PathOfHero.Telemetry
         }
 
         public IEnumerator Activate()
-        {
+        {   
             var userName =
 #if UNITY_EDITOR
             $"Editor (123456789)";
