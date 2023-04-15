@@ -1,55 +1,31 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PathOfHero.Others;
+using PathOfHero.Gameplay;
 
 public abstract class Panel : MonoBehaviour
 {
     protected PlayerInput playerInput;
-    // protected InputAction hidePanelAction;
-
-    // public HideEvent OnHide = new HideEvent(() => { });
-
-    // public delegate void HideEvent();
     protected bool allowHiding = true;
 
     protected virtual void Awake()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-        // playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogWarning("[Panel] GameObject 'Player' not found.");
+            return;
+        }
+
+        if (!player.TryGetComponent(out playerInput))
+            Debug.LogWarning("[Panel] Component 'Player Input' not found.");
     }
-
-    // // Start is called before the first frame update
-    // protected virtual void Start()
-    // {
-    //     hidePanelAction = playerInput.actions["HidePanel"];
-    //     hidePanelAction.Enable();
-    //     Debug.Log(hidePanelAction.GetBindingDisplayString());
-    // }
-
-    // // Update is called once per frame
-    // protected virtual void Update()
-    // {
-    //     if (hidePanelAction.triggered)
-    //     {
-    //         HidePanel();
-    //         Debug.Log("hidepanelactiontriggered");
-    //     }
-
-    //     Debug.Log(playerInput.currentActionMap);
-    // }
 
     public virtual void ShowPanel()
-    {
-        // playerInput.currentActionMap = playerInput.actions.FindActionMap("UI");
-        PanelManager.Instance.AddPanel(this);
-    }
+        => PanelManager.Instance.AddPanel(this);
 
     public virtual void HidePanel()
     {
-        // playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
-        // OnHide?.Invoke();
-        if (allowHiding) {
+        if (allowHiding)
             PanelManager.Instance.RemovePanel(this);
-        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using PathOfHero.Gameplay;
 
 public abstract class PanelOverride : Panel
 {
@@ -20,23 +21,18 @@ public abstract class PanelOverride : Panel
         foreach (PanelOverride panel in overridingPanels.blockedBy)
         {
             if (panel.GetPanel().activeSelf)
-            {
                 return false;
-            }
         }
 
         // hide panels
         foreach (PanelOverride panel in overridingPanels.overrides)
         {
             if (panel.GetPanel().activeSelf)
-            {
                 panel.HidePanel();
-            }
         }
 
         return true;
     }
 
-    //public abstract void HidePanel();
     protected abstract GameObject GetPanel();
 }

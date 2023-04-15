@@ -26,13 +26,6 @@ public class PauseMenu : Panel
     private InputAction exitToMenuAction;
 
     // Start is called before the first frame update
-    // protected override void Start()
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     void Start()
     {
         // base.Start();

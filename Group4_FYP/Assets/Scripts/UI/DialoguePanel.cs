@@ -14,24 +14,9 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
     private bool panelIsShown;
     private bool isDisplayingDialogue;
 
-    private static DialoguePanel instance;
-    public static DialoguePanel Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
     protected override void Awake()
     {
         base.Awake();
-
-        if (!instance)
-        {
-            instance = this;
-        }
-
         gameObject.SetActive(false);
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
         panelIsShown = false; // preventive

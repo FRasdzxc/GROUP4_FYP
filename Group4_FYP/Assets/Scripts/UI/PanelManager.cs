@@ -1,107 +1,77 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PathOfHero.Utilities;
 
-namespace PathOfHero.Others
+namespace PathOfHero.Gameplay
 {
-    public class PanelManager : MonoBehaviour
+    public class PanelManager : Singleton<PanelManager>
     {
-        protected PlayerInput playerInput;
-        protected InputAction hidePanelAction;
-
-        public HideEvent OnHide = new HideEvent(() => { });
-
-        public delegate void HideEvent();
+        private PlayerInput playerInput;
+        private InputActionMap gameplayActionMap;
+        private InputActionMap uiActionMap;
+        private InputAction hidePanelAction;
 
         private List<Panel> shownPanels;
-
-        private static PanelManager instance;
-        public static PanelManager Instance {
-            get => instance;
-        }
-
-        void Awake()
+        protected override void Awake()
         {
-            if (!instance)
+            base.Awake();
+            shownPanels = new();
+
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
             {
-                instance = this;
+                Debug.LogWarning("[Panel Manager] GameObject 'Player' not found.");
+                return;
             }
 
-            shownPanels = new List<Panel>();
-
-            playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-            playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
-        }
-
-        // Start is called before the first frame update
-        protected virtual void Start()
-        {
-            hidePanelAction = playerInput.actions["HidePanel"];
-            hidePanelAction.Enable();
-        }
-
-        // Update is called once per frame
-        protected virtual void Update()
-        {
-            if (hidePanelAction.triggered)
+            if (!player.TryGetComponent(out playerInput))
             {
-                if (shownPanels.Count > 0)
-                {
-                    shownPanels[shownPanels.Count - 1].HidePanel();
-                    Debug.Log("hidepanelactiontriggered");
-                }
+                Debug.LogWarning("[Panel Manager] Component 'Player Input' not found.");
+                return;
             }
 
-            Debug.LogWarning($"[PanelManager (In Game)]: ShownPanels.Count = {shownPanels.Count}");
+            gameplayActionMap = playerInput.actions.FindActionMap("Gameplay", throwIfNotFound: true);
+            uiActionMap = playerInput.actions.FindActionMap("UI", throwIfNotFound: true);
+            hidePanelAction = uiActionMap.FindAction("HidePanel", throwIfNotFound: true);
         }
+
+        private void Start()
+            => SelectCurrentActionMap();
+
+        private void OnEnable()
+            => hidePanelAction.performed += OnHidePanel;
+
+        private void OnDisable()
+            => hidePanelAction.performed -= OnHidePanel;
+
+        private void OnHidePanel(InputAction.CallbackContext content)
+        {
+            if (content.performed && shownPanels.Count > 0)
+            {
+                var index = shownPanels.Count - 1;
+                var panel = shownPanels[index];
+                shownPanels.RemoveAt(index);
+                panel.HidePanel();
+            }
+        }
+
+        private void SelectCurrentActionMap()
+            => playerInput.currentActionMap = (shownPanels.Count > 0) ? uiActionMap : gameplayActionMap;
 
         public void AddPanel(Panel panel)
         {
-            if (FindPanel(panel))
-            {
-                Debug.Log("panel is shown already");
-            }
-            else
-            {
-                shownPanels.Add(panel);
-                playerInput.currentActionMap = playerInput.actions.FindActionMap("UI");
-            }
+            if (shownPanels.Contains(panel))
+                return;
+
+            shownPanels.Add(panel);
+            SelectCurrentActionMap();
         }
 
         public void RemovePanel(Panel panel)
         {
-            if (FindPanel(panel))
-            {
-                shownPanels.Remove(panel);
-
-                if (shownPanels.Count <= 0)
-                {
-                    playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
-                }
-            }
-            else
-            {
-                Debug.LogError("could not find panel to remove");
-            }
-        }
-
-        private bool FindPanel(Panel panel)
-        {
-            foreach (Panel p in shownPanels)
-            {
-                if (panel.name.Equals(p.name))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool PanelsAreShowing()
-        {
-            return (shownPanels.Count > 0);
+            shownPanels.Remove(panel);
+            SelectCurrentActionMap();
         }
     }
 }
-
