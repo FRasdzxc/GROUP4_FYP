@@ -21,14 +21,14 @@ def index():
             SUM(mobs_killed) as mobs_killed,
             SUM(dungeons_cleared) as dungeons_cleared
         FROM
-            play_sessions
+            session_records
     """).fetchone()
 
     weapon = {
         'wand': 0,
         'whirlwind': 0
     }
-    rows = db.execute("SELECT weapon_usage_detail FROM play_sessions").fetchall()
+    rows = db.execute("SELECT weapon_usage_detail FROM session_records").fetchall()
     for row in rows:
         detail_json = json.loads(row[0])
         wands = ('weapon_wandtier0', 'weapon_wandtier1', 'weapon_wandtier2', 'weapon_wandtier3')
@@ -45,7 +45,7 @@ def index():
         'soul_ring': 0,
         'tornado': 0
     }
-    rows = db.execute("SELECT ability_usage_detail FROM play_sessions").fetchall()
+    rows = db.execute("SELECT ability_usage_detail FROM session_records").fetchall()
     for row in rows:
         detail_json = json.loads(row[0])
         if 'FireballV2' in detail_json:
@@ -58,7 +58,7 @@ def index():
     mobs = {
         'slime': 0,
     }
-    rows = db.execute("SELECT mob_killed_detail FROM play_sessions").fetchall()
+    rows = db.execute("SELECT mob_killed_detail FROM session_records").fetchall()
     for row in rows:
         detail_json = json.loads(row[0])
         if 'Slime' in detail_json:
@@ -67,7 +67,7 @@ def index():
     return render_template("stats/index.html", accumulated=accumulated, weapon=weapon, ability=ability, mobs=mobs)
 
 def get_session(id):
-    play_session = get_db().execute("SELECT * FROM play_sessions WHERE id = ?", (id,)).fetchone()
+    play_session = get_db().execute("SELECT * FROM session_records WHERE id = ?", (id,)).fetchone()
     if play_session is None:
         abort(404, f"Play session id {id} doesn't exist.")
 
@@ -133,8 +133,9 @@ def upload_stats():
     print()
     db = get_db()
     db.execute("""
-        INSERT INTO play_sessions
-            (player_name,
+        INSERT INTO session_records (
+            session_token,
+            player_name,
             final_score,
             steps_taken,
             damage_given,
@@ -147,10 +148,11 @@ def upload_stats():
             ability_usage_detail,
             mob_killed_detail,
             maps_visited,
-            dungeons_cleared_detail)
-        VALUES
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            dungeons_cleared_detail
+        ) VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
+        request.form["sessionToken"],
         request.form["playerName"],
         int(request.form["finalScore"]),
         request.form["stepsTaken"],

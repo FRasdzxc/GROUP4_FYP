@@ -13,7 +13,7 @@ def index():
         SELECT
             id, player_name, final_score
         FROM
-            play_sessions
+            session_records
         ORDER BY
             final_score DESC
         LIMIT
