@@ -108,6 +108,7 @@ public class DialogueController : MonoBehaviour
             }
             clone = Instantiate(dialoguePanelPrefab, dialoguePanelContainer.transform);
             dialoguePanel = clone.GetComponent<DialoguePanel>();
+            dialoguePanel.SetAllowHiding(canBeSkipped);
 
             this.header = header;
             this.dialogues = dialogues;
@@ -152,6 +153,7 @@ public class DialogueController : MonoBehaviour
             }
             else
             {
+                dialoguePanel.SetAllowHiding(true);
                 await dialoguePanel.HideDialoguePanel();
                 dialogueEndEvents.Invoke();
 

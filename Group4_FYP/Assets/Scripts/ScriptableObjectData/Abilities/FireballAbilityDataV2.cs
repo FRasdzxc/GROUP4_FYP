@@ -31,4 +31,17 @@ public class FireballAbilityDataV2 : Ability
             await Task.Delay(500 / fireballCount);
         }
     }
+
+    protected override void calculateAbilityOutput()
+    {
+        base.calculateAbilityOutput();
+
+        if (fireball.TryGetComponent<WeaponTrigger>(out WeaponTrigger weaponTrigger))
+        {
+            weaponTrigger.SetDamage(weaponTrigger.GetDamage() * abilityOutputUpgrade);
+            weaponTrigger.SetCriticalDamage(weaponTrigger.GetCriticalDamage() * abilityOutputUpgrade);
+        }
+        projectileSpeed *= abilityOutputUpgrade;
+        fireballCount += Mathf.FloorToInt(abilityOutputUpgrade - 1);
+    }
 }

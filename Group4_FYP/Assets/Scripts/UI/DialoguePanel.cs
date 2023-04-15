@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class DialoguePanel : MonoBehaviour
+public class DialoguePanel : PanelOverride /*MonoBehaviour*/
 {
     [SerializeField] private Image image;
     [SerializeField] private Text headerText;
@@ -23,8 +23,10 @@ public class DialoguePanel : MonoBehaviour
         }
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (!instance)
         {
             instance = this;
@@ -38,6 +40,8 @@ public class DialoguePanel : MonoBehaviour
 
     public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite, string hint)
     {
+        ShowPanel();
+
         headerText.text = header;
         dialogueText.text = null;
         image.sprite = sprite;
@@ -55,10 +59,17 @@ public class DialoguePanel : MonoBehaviour
 
     public async Task HideDialoguePanel()
     {
+        HidePanel();
+
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
         panelIsShown = false;
-    }    
+    }
+
+    public void SetAllowHiding(bool allowHiding)
+    {
+        this.allowHiding = allowHiding;
+    }
 
     private async Task DisplayDialogue(string dialogue)
     {
@@ -76,5 +87,10 @@ public class DialoguePanel : MonoBehaviour
 
             isDisplayingDialogue = false;
         }
+    }
+
+    protected override GameObject GetPanel()
+    {
+        return gameObject;
     }
 }

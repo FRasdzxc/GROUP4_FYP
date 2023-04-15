@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FYP
+namespace PathOfHero.Others
 {
     public static class Common
     {

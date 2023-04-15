@@ -15,9 +15,8 @@ MonoBehaviour:
   abilityName: SoulRing
   heroClass: 1
   lifeTime: 5
-  cooldownTime: 7.5
+  cooldownTime: 8.5
   manaCost: 25
   icon: {fileID: -5874754843300918789, guid: a710612ffddcd0041936defcb22d9f03, type: 3}
-  isReady: 1
   soulRing: {fileID: 6765511620202682018, guid: 519e99703d98df6448e34406a486093a, type: 3}
   rotationsPerSecond: 5

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PathOfHero.Others;
 
 public abstract class Panel : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public abstract class Panel : MonoBehaviour
     // public HideEvent OnHide = new HideEvent(() => { });
 
     // public delegate void HideEvent();
+    protected bool allowHiding = true;
 
     protected virtual void Awake()
     {
@@ -46,6 +48,8 @@ public abstract class Panel : MonoBehaviour
     {
         // playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
         // OnHide?.Invoke();
-        PanelManager.Instance.RemovePanel(this);
+        if (allowHiding) {
+            PanelManager.Instance.RemovePanel(this);
+        }
     }
 }

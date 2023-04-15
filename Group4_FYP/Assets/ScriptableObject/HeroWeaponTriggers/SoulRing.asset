@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d005b8eecbe90346b6ca71b03bed80c, type: 3}
   m_Name: SoulRing
   m_EditorClassIdentifier: 
-  weaponPointName: SoulRing
-  damage: 5
-  criticalDamage: 10
+  weaponTriggerName: 
+  damage: 3.5
+  criticalDamage: 5
+  projectileSpeed: 0
+  force: 0
+  splitable: 0
+  splitProjectile: {fileID: 0}
+  splitAmount: 0
+  splitProjectileSpeed: 1
+  splitTime: 0

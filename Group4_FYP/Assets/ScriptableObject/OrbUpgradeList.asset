@@ -37,3 +37,7 @@ MonoBehaviour:
     type: 4
     description: Multiply collected Exp to gain more Exp
     value: 0.05
+  - orbUpgradeName: Ability Output
+    type: 6
+    description: Calculate Ability damage and cooldown etc. to make abilities stronger
+    value: 0.02
