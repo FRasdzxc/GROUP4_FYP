@@ -25,8 +25,6 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
 
     public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite, string hint)
     {
-        ShowPanel();
-
         headerText.text = header;
         dialogueText.text = null;
         image.sprite = sprite;
@@ -35,6 +33,7 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
         if (!panelIsShown)
         {
             gameObject.SetActive(true);
+            ShowPanel();
             await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
             panelIsShown = true;
         }
@@ -44,6 +43,9 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
 
     public async Task HideDialoguePanel()
     {
+        if (!panelIsShown)
+            return;
+
         HidePanel();
 
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();

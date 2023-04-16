@@ -28,7 +28,7 @@ public class WaveDungeonMapData : DungeonMapData
 
         await HUD.Instance.ShowHugeMessageAsync($"Wave {currentWave + 1}", new Color32(255, 125, 0, 255), $"of {waves.Length}", Color.white);
         MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
-        ground.SetMobTable(waves[currentWave]);
+        ground.MobTable = waves[currentWave];
         ground.Spawn();
     }
 }
