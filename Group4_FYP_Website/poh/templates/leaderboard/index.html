@@ -3,42 +3,56 @@
 {% block title %}Leaderboard{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col col-lg-6 p-0 rounded-3 border shadow-sm">
-      <table class="table mb-0">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Score</th>
-            <th scope="col">Detail</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in range(leaderboard|length) %}
-          {% if i == 0 %}
-          <tr class="table-success">
-            {% elif i == 1 %}
-          <tr class="table-danger">
-            {% elif i == 2 %}
-          <tr class="table-warning">
-            {% else %}
-          <tr>
-            {% endif %}
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ leaderboard[i][0] }}</td>
-            <td>{{ leaderboard[i][1] }}</td>
-            {% if leaderboard[i][2] != -1 %}
-              <td><a href="/stats/{{ leaderboard[i][2] }}">Detail</a></td>
-              {% else %}
-              <td></td>
+<div class="text-center pb-3">
+  {% if session_info is defined %}
+    <h1 class="display-4 mb-3">{{ session_info['session_desc'] }}</h1>
+    <p class="fs-5 text-muted">{{ session_info['start_time'] }} - {{ session_info['end_time'] }}</p>
+  {% else %}
+    <h1 class="display-4 mb-3">Leaderboard</h1>
+  {% endif %}
+</div>
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10 row row-cols-1 row-cols-lg-3">
+    {% for entry in leaderboard[:3] %}
+    <div class="col pb-3">
+      <div class="card text-bg-light shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              {% if entry[1] != None %}
+              <div class="fs-5 text-muted">{{ entry[1]["player_name"] }}</div>
+              <div class="fs-4">{{ entry[1]["final_score"] }}</div>
               {% endif %}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+            </div>
+            <h1 class="display-5 mb-0">{{ entry[0] }}</h1>
+          </div>
+        </div>
+        <a href="{% if entry[1] != None %}/stats/{{ entry[1]['id'] }}{% else %}#{% endif %}"
+          class="stretched-link"></a>
+      </div>
     </div>
+    {% endfor %}
+  </div>
+  <div class="col-12 col-lg-8 row row-cols-1 row-cols-lg-3">
+    {% for entry in leaderboard[3:] %}
+    <div class="col pb-3">
+      <div class="card text-bg-light shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              {% if entry[1] != None %}
+              <div class="fs-5 text-muted">{{ entry[1]["player_name"] }}</div>
+              <div class="fs-4">{{ entry[1]["final_score"] }}</div>
+              {% endif %}
+            </div>
+            <h1 class="display-6 text-muted mb-0">{{ entry[0] }}</h1>
+          </div>
+        </div>
+        <a href="{% if entry[1] != None %}/stats/{{ entry[1]['id'] }}{% else %}#{% endif %}"
+          class="stretched-link"></a>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

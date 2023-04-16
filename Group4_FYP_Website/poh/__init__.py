@@ -29,16 +29,11 @@ def create_app():
     app.register_blueprint(leaderboard.bp)
     app.register_blueprint(stats.bp)
 
+    from poh.models import SessionRecord
+
     @app.route("/")
     def index():
-        quick_stats = db.get_db().execute("""
-            SELECT 
-                COUNT(id) as session_played,
-                SUM(steps_taken) as steps_taken,
-                SUM(mobs_killed) as mobs_killed
-            FROM
-                session_records
-        """).fetchone()
+        quick_stats = SessionRecord.get_quick_stats(db.get_db())
         return render_template('index.html', quick_stats=quick_stats)
 
     return app

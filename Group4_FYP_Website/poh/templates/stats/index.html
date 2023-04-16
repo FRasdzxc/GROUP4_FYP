@@ -2,96 +2,285 @@
 
 {% block title %}Statistics{% endblock %}
 
+{% block head %}
+<style>
+  .img-pixel-art {
+    height: 64px;
+  }
+
+  .card.text-bg-light .list-group-item {
+    background-color: transparent;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1 class="mb-3">Accumulated</h1>
-<div class="mb-3 card text-bg-primary">
-  <h4 class="card-header">
-    General
-  </h4>
-  <div class="card-body pb-0 text-md-center">
+<div class="mb-3 border-bottom">
+  <h1>Accumulated stats</h1>
+  <h3 class="text-muted">
+    From {{ session_count }} session{% if session_count > 1 %}s{% endif %}
+  </h3>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <h2 clsss="mb-3">Hero</h2>
+    <h4 class="text-muted">
+      {{ record.exp_gained }} EXP gained
+    </h4>
+    <div class="mb-3 card text-bg-light">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Highest level reached</div>
+            <div class="fs-5">
+              {% if highest_level_id != -1 %}
+                <a href="/stats/{{ highest_level_id }}">{{ highest_level }}</a>
+              {% else %}
+                1
+              {% endif %}
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Coins earned</div>
+            <div class="fs-5">{{ "{:,.0f}".format(record.coins_earned) }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Coins spent</div>
+            <div class="fs-5">{{ "{:,.0f}".format(record.coins_spent) }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Orb upgrades</div>
+            <div class="fs-5">{{ record.count_orb_upgrades() }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h2 clsss="mb-3">Exploration</h2>
+    <h4 class="text-muted">
+      {{ record.count_maps_visited() }} areas{% if record.count_maps_visited() > 1 %}s{% endif %} explored
+    </h4>
+    <div class="mb-3 card text-bg-light">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Steps Taken</div>
+            <div class="fs-5">{{ record.steps_taken }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Damage Given</div>
+            <div class="fs-5">{{ "{:,.0f}".format(record.damage_given) }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Damage Taken</div>
+            <div class="fs-5">{{ "{:,.0f}".format(record.damage_taken) }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Deaths</div>
+            <div class="fs-5">{{ record.deaths }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h2 clsss="mb-3">Dungeons</h2>
+    <h4 class="text-muted">{{ record.count_dungeons_cleared() }} cleared</h4>
+    <div class="mb-3 card text-bg-light">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Laser Frenzy</div>
+            <div class="fs-5">{{ record.count_dungeons_cleared('map_dungeoni') }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Square Hall</div>
+            <div class="fs-5">{{ record.count_dungeons_cleared('map_dungeonii') }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Maze</div>
+            <div class="fs-5">{{ record.count_dungeons_cleared('map_dungeoniii') }}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-5">Corridors</div>
+            <div class="fs-5">{{ record.count_dungeons_cleared('map_dungeoniv') }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <h2 clsss="mb-3">Weapons</h2>
+    <h4 class="text-muted">
+      {{ record.count_weapon_usage() }} attack{% if record.count_weapon_usage() > 1 %}s{% endif %} recorded
+    </h4>
     <div class="row">
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Steps Taken</h5>
-          <h5 class="card-text">{{ accumulated['steps_taken'] }}</p>
+      <div class="col-md-6 mb-3">
+        <div class="card text-bg-light">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+              <img class="img-fluid img-pixel-art" src="{{ url_for('static', filename='images/weapon/wand.png' )}}">
+              <div class="text-end">
+                <div class="fs-5 text-muted">Wand</div>
+                <div class="fs-4">
+                  {{ record.count_weapon_usage(
+                  'weapon_wandtier0',
+                  'weapon_wandtier1',
+                  'weapon_wandtier2',
+                  'weapon_wandtier3'
+                  )}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-0 border-top">
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 0</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_wandtier0') }}</div>
+            </div>
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 1</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_wandtier1') }}</div>
+            </div>
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 2</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_wandtier2') }}</div>
+            </div>
+            <div class="col p-2 text-center">
+              <div class="fs-5 text-muted">Tier 3</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_wandtier3') }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Damage Given</h5>
-          <h5 class="card-text">{{ accumulated['damage_given'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Damage Taken</h5>
-          <h5 class="card-text">{{ accumulated['damage_taken'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Weapon Attacks</h5>
-          <h5 class="card-text">{{ accumulated['weapon_attacks'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Ability Attacks</h5>
-          <h5 class="card-text">{{ accumulated['ability_attacks'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Mobs Killed</h5>
-          <h5 class="card-text">{{ accumulated['mobs_killed'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Dungeons Cleared</h5>
-          <h5 class="card-text">{{ accumulated['dungeons_cleared'] }}</p>
+      <div class="col-md-6 mb-3">
+        <div class="card text-bg-light">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+              <img class="img-fluid img-pixel-art"
+                src="{{ url_for('static', filename='images/weapon/whirlwind.png' )}}">
+              <div class="text-end">
+                <div class="fs-5 text-muted">Whirlwind</div>
+                <div class="fs-4">
+                  {{ record.count_weapon_usage(
+                  'weapon_whirlwindtier0',
+                  'weapon_whirlwindtier1',
+                  'weapon_whirlwindtier2',
+                  'weapon_whirlwindtier3'
+                  )}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-0 border-top">
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 0</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_whirlwindtier0') }}</div>
+            </div>
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 1</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_whirlwindtier1') }}</div>
+            </div>
+            <div class="col p-2 text-center border-end">
+              <div class="fs-5 text-muted">Tier 2</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_whirlwindtier2') }}</div>
+            </div>
+            <div class="col p-2 text-center">
+              <div class="fs-5 text-muted">Tier 3</div>
+              <div class="fs-5">{{ record.count_weapon_usage('weapon_whirlwindtier3') }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card-footer">
-    Total sessions: {{ accumulated['session_count'] }}
-  </div>
-</div>
-<div class="mb-3 card text-bg-secondary">
-  <h4 class="card-header">
-    Weapon
-  </h4>
-  <div class="card-body pb-0 text-md-center">
-    <div class="row">
-      <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Wand</h5>
-          <h5 class="card-text">{{ weapon['wand'] }}</p>
-      </div>
-      <div class="col-md-6 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Whirlwind</h5>
-          <h5 class="card-text">{{ weapon['whirlwind'] }}</p>
-      </div>
+  <div class="col-md-4">
+    <h2 clsss="mb-3">Abilities</h2>
+    <h4 class="text-muted">
+      {{ record.count_ability_usage() }} abilit{% if record.count_ability_usage() > 1 %}ies{% else %}s{% endif %} casted
+    </h4>
+    <div class="mb-3 card text-bg-light">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <img class="img-fluid img-pixel-art" src="{{ url_for('static', filename='images/ability/fireball.png' )}}">
+            <div class="text-end">
+              <div class="fs-5 text-muted">Fireball</div>
+              <div class="fs-4">{{ record.count_ability_usage('FireballV2') }}</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <img class="img-fluid img-pixel-art" src="{{ url_for('static', filename='images/ability/soul-ring.png' )}}">
+            <div class="text-end">
+              <div class="fs-5 text-muted">Soul Ring</div>
+              <div class="fs-4">{{ record.count_ability_usage('SoulRing') }}</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <img class="img-fluid img-pixel-art" src="{{ url_for('static', filename='images/ability/tornado.png' )}}">
+            <div class="text-end">
+              <div class="fs-5 text-muted">Tornado</div>
+              <div class="fs-4">{{ record.count_ability_usage('Tornado') }}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
-<div class="mb-3 card text-bg-secondary">
-  <h4 class="card-header">
-    Ability
-  </h4>
-  <div class="card-body pb-0 text-md-center">
-    <div class="row">
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Fireball</h5>
-          <h5 class="card-text">{{ ability['fireball'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Soul Ring</h5>
-          <h5 class="card-text">{{ ability['soul_ring'] }}</p>
-      </div>
-      <div class="col-md-4 pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Tornado</h5>
-          <h5 class="card-text">{{ ability['tornado'] }}</p>
-      </div>
+<h2 clsss="mb-3">Mobs</h2>
+<h4 class="text-muted">{{ record.count_mob_killed() }} defeated</h4>
+<div class="card text-bg-light mb-3">
+  <div class="row g-0">
+    <div class="col-6 col-md p-3 text-center">
+      <img class="img-fluid img-pixel-art mb-2" src="{{ url_for('static', filename='images/mob/slime.png' )}}">
+      <div class="fs-5 text-muted">Slime</div>
+      <div class="fs-4">{{ record.count_mob_killed('Slime') }}</div>
     </div>
-  </div>
-</div>
-<div class="mb-3 card text-bg-secondary">
-  <h4 class="card-header">
-    Mobs
-  </h4>
-  <div class="card-body pb-0 text-md-center">
-    <div class="row">
-      <div class="col pb-3 d-flex flex-md-column justify-content-between justify-content-md-start">
-        <h4 class="card-title">Slime</h5>
-          <h5 class="card-text">{{ mobs['slime'] }}</p>
-      </div>
+    <div class="col-6 col-md p-3 text-center">
+      <img class="img-fluid img-pixel-art mb-2" src="{{ url_for('static', filename='images/mob/hive.png' )}}">
+      <div class="fs-5 text-muted">Hive</div>
+      <div class="fs-4">{{ record.count_mob_killed('Blob Hive') }}</div>
+    </div>
+    <div class="col-6 col-md p-3 text-center">
+      <img class="img-fluid img-pixel-art mb-2" src="{{ url_for('static', filename='images/mob/blob-medium.png' )}}">
+      <div class="fs-5 text-muted">Blob (Medium)</div>
+      <div class="fs-4">{{ record.count_mob_killed('Medium Blob') }}</div>
+    </div>
+    <div class="col-6 col-md p-3 text-center">
+      <img class="img-fluid img-pixel-art mb-2" src="{{ url_for('static', filename='images/mob/blob-small.png' )}}">
+      <div class="fs-5 text-muted">Blob (Small)</div>
+      <div class="fs-4">{{ record.count_mob_killed('Small Blob') }}</div>
+    </div>
+    <div class="col-6 col-md p-3 text-center">
+      <img class="img-fluid img-pixel-art mb-2" src="{{ url_for('static', filename='images/mob/laser.png' )}}">
+      <div class="fs-5 text-muted">Laser</div>
+      <div class="fs-4">{{ record.count_mob_killed('Laser Mob') }}</div>
     </div>
   </div>
 </div>

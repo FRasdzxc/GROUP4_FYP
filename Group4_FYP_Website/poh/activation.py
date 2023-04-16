@@ -26,7 +26,7 @@ def activation():
     db = get_db()
     fetch = db.execute("""
         SELECT
-            id, session_desc
+            id, session_desc, students_only
         FROM
             timeslots
         WHERE
@@ -36,41 +36,29 @@ def activation():
         abort(403)
     session_id = fetch['id']
     session_desc = fetch['session_desc']
+    validate = fetch['students_only'] == 1
 
-    user = request.form.get("user")
-    if user == None:
+    username = request.form.get("user")
+    if username == None:
         abort(403)
 
-    validation = re.search("([A-Za-z0-9 ]+) \(([\d]{9})\)", user)
-    if validation is None:
-        abort(403)
+    if validate:
+        validation = re.match("^[\d]{9}$", username)
+        if validation is None:
+            abort(403)
 
-    student_id = validation.group(2)
-    student_name = validation.group(1)
-
-    session_token = None
-    fetch = db.execute("""
-        SELECT session_token
-        FROM activations
-        WHERE
-            session_id = ? AND student_id = ? AND student_name = ?
-    """, (session_id, student_id, student_name,)).fetchone()
-    if fetch is None:
-        session_token = generate_session_token(db)
-        db.execute("""
-            INSERT INTO activations
-                (session_token, session_id, student_id, student_name)
-            VALUES
-                (?, ?, ?, ?)
-        """, (
-            session_token,
-            session_id,
-            student_id,
-            student_name
-        ))
-        db.commit()
-    else:
-        session_token = fetch["session_token"]
+    session_token = generate_session_token(db)
+    db.execute("""
+        INSERT INTO activations
+            (session_token, session_id, username)
+        VALUES
+            (?, ?, ?)
+    """, (
+        session_token,
+        session_id,
+        username
+    ))
+    db.commit()
 
     return {
         'sessionToken': session_token,
