@@ -18,11 +18,43 @@ namespace PathOfHero.Telemetry
             "http://172.18.38.18";
 #endif
         private const string k_ActivationEndpoint = k_Endpoint + "/activation";
-        private const string k_TelemetryEndpoint = k_Endpoint + "/upload_stats";
+        private const string k_TelemetryEndpoint = k_Endpoint + "/stats";
 
         private Activation m_Activation;
         private SessionStats m_CurrentStats;
+        private int? m_UploadedSessionId;
+
         public SessionStats CurrentStats => m_CurrentStats;
+
+#if UNITY_EDITOR
+        private void Start()
+        {
+            //m_CurrentStats = new SessionStats()
+            //{
+            //    heroLevel = 2,
+            //    expGained = 255,
+            //    mapsVisited = new() { "map_tutorial" }
+            //};
+            //m_Activation = new Activation()
+            //{
+            //    sessionToken = "deadbeef",
+            //    sessionDesc = "Testing"
+            //};
+            //UploadSession("EDT");
+        }
+#endif
+
+        private void OnApplicationQuit()
+        {
+            if (m_UploadedSessionId.HasValue)
+            {
+#if UNITY_EDITOR
+                Debug.Log($"[Data Collector] OpenURL: {k_Endpoint}/stats/{m_UploadedSessionId.Value}");
+#else
+                Application.OpenURL($"{k_Endpoint}/stats/{m_UploadedSessionId.Value}");
+#endif
+            }
+        }
 
         public void StartNewSession()
             => m_CurrentStats = new SessionStats();
@@ -33,6 +65,29 @@ namespace PathOfHero.Telemetry
                 return;
 
             StartCoroutine(UploadSession(m_CurrentStats, name));
+        }
+
+        public int HeroLevel(int value)
+            => m_CurrentStats.heroLevel = value;
+
+        public void ExpGained(int amount)
+            => m_CurrentStats.expGained += amount;
+
+        public void CoinsEarned(int amount)
+            => m_CurrentStats.coinsEarned += amount;
+
+        public void CoinsSpent(int amount)
+            => m_CurrentStats.coinsSpent += amount;
+
+        public void OrbUpgradeUsed(string type)
+        {
+            if (string.IsNullOrWhiteSpace(type))
+                return;
+
+            if (!m_CurrentStats.orbUpgrades.ContainsKey(type))
+                m_CurrentStats.orbUpgrades[type] = 0;
+
+            m_CurrentStats.orbUpgrades[type]++;
         }
 
         public void StepsTaken()
@@ -137,7 +192,14 @@ namespace PathOfHero.Telemetry
             if (www.result != UnityWebRequest.Result.Success)
                 Debug.LogWarning($"[Data Collector] Upload session stats failed\n{www.result}: {www.error}");
             else
-                Debug.Log($"[Data Collector] Uploaded session stats successfully.");
+            {
+                var response = JsonConvert.DeserializeObject<Dictionary<string, int>>(www.downloadHandler.text);
+                if (response != null && response.TryGetValue("session_id", out var sessionId))
+                {
+                    m_UploadedSessionId = sessionId;
+                    Debug.Log($"[Data Collector] Uploaded session stats successfully. (ID: {m_UploadedSessionId.Value})");
+                }
+            }
         }
 
         [Serializable]
@@ -149,6 +211,14 @@ namespace PathOfHero.Telemetry
 
         public class SessionStats
         {
+            public int heroLevel;
+            public int expGained;
+
+            public int coinsEarned;
+            public int coinsSpent;
+
+            public Dictionary<string, int> orbUpgrades;
+
             public int stepsTaken;
             public float damageGiven;
             public float damageTaken;
@@ -167,6 +237,7 @@ namespace PathOfHero.Telemetry
 
             public SessionStats()
             {
+                orbUpgrades = new();
                 weaponUsage = new();
                 abilityUsage = new();
                 mobsKilled = new();
@@ -192,23 +263,44 @@ namespace PathOfHero.Telemetry
                 retVal.AddField("sessionToken", sessionToken);
                 retVal.AddField("playerName", playerName);
                 retVal.AddField("finalScore", CalculateScore());
+                retVal.AddField("heroLevel", heroLevel);
+                retVal.AddField("expGained", expGained);
+                retVal.AddField("coinsEarned", coinsEarned);
+                retVal.AddField("coinsSpent", coinsSpent);
+                if (orbUpgrades.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(orbUpgrades);
+                    retVal.AddField("orbUpgrades", json);
+                }
                 retVal.AddField("stepsTaken", stepsTaken);
                 retVal.AddField("damageGiven", damageGiven.ToString());
                 retVal.AddField("damageTaken", damageTaken.ToString());
-                retVal.AddField("weaponUsage", WeaponUsage);
-                retVal.AddField("abilityUsage", AbilityUsage);
-                retVal.AddField("mobKilled", MobsKilled);
-                retVal.AddField("dungeonsCleared", DungeonsCleared);
-                var json = JsonConvert.SerializeObject(weaponUsage);
-                retVal.AddField("weaponUsageDetail", json);
-                json = JsonConvert.SerializeObject(abilityUsage);
-                retVal.AddField("abilityUsageDetail", json);
-                json = JsonConvert.SerializeObject(mobsKilled);
-                retVal.AddField("mobKilledDetail", json);
-                json = JsonConvert.SerializeObject(mapsVisited);
-                retVal.AddField("mapsVisited", json);
-                json = JsonConvert.SerializeObject(dungeonsCleared);
-                retVal.AddField("dungeonsClearedDetail", json);
+                retVal.AddField("deaths", deaths);
+                if (weaponUsage.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(weaponUsage);
+                    retVal.AddField("weaponUsage", json);
+                }
+                if (abilityUsage.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(abilityUsage);
+                    retVal.AddField("abilityUsage", json);
+                }
+                if (mobsKilled.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(mobsKilled);
+                    retVal.AddField("mobKilled", json);
+                }
+                if (mapsVisited.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(mapsVisited);
+                    retVal.AddField("mapsVisited", json);
+                }
+                if (dungeonsCleared.Count > 0)
+                {
+                    var json = JsonConvert.SerializeObject(dungeonsCleared);
+                    retVal.AddField("dungeonsCleared", json);
+                }
                 return retVal;
             }
         }

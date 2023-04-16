@@ -118,6 +118,7 @@ public class Hero : MonoBehaviour
                 storedExp -= requiredExp;
                 //hud.SetupXP(level, requiredExp);
                 level++;
+                DataCollector.Instance?.HeroLevel(level);
                 HeroPanel.Instance.UpdateLevel(level);
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
 
@@ -373,15 +374,9 @@ public class Hero : MonoBehaviour
 
     public void AddEXP(int exp, bool accountForExpGainMultiplier = true)
     {
-        if (accountForExpGainMultiplier)
-        {
-            storedExp += (int)(exp * expGainMultiplierUpgrade);
-        }
-        else
-        {
-            storedExp += exp;
-        }
-        //hud.UpdateXP(level, storedExp);
+        var amount = accountForExpGainMultiplier ? (int)(exp * expGainMultiplierUpgrade) : exp;
+        storedExp += amount;
+        DataCollector.Instance?.ExpGained(amount);
     }
 
     public void AddExpGainMultiplierUpgrade(float value)
@@ -392,6 +387,12 @@ public class Hero : MonoBehaviour
     public void AddCoin(int coin)
     {
         storedCoin += coin;
+
+        if (coin > 0)
+            DataCollector.Instance?.CoinsEarned(coin);
+        else if (coin < 0)
+            DataCollector.Instance?.CoinsSpent(coin * -1);
+        
         HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
