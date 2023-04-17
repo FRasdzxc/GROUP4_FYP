@@ -1,7 +1,7 @@
 import random
 import re
 import string
-from flask import Blueprint, request, abort
+from flask import Blueprint, request, current_app, abort
 
 from poh.db import get_db
 
@@ -43,8 +43,10 @@ def activation():
         abort(403)
 
     if validate:
-        validation = re.match("^[\d]{9}$", username)
-        if validation is None:
+        student_cna = re.match("^[\d]{9}$", username)
+        fallback = username == "cwitstudent" or username == "cwitteacher"
+        if student_cna is None and not fallback:
+            current_app.logger.warn("User '%s' is not allowed, rejecting", username)
             abort(403)
 
     session_token = generate_session_token(db)

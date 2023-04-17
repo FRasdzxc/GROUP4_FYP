@@ -88,7 +88,7 @@ class SessionRecord:
         if dungeon_id != None:
             return self.dungeons_cleared[dungeon_id] if dungeon_id in self.dungeons_cleared else 0
         else:
-            return len(self.dungeons_cleared) if getattr(self, 'dungeons_cleared', None) != None else 0
+            return sum(x for x in self.dungeons_cleared.values()) if getattr(self, 'dungeons_cleared', None) != None else 0
     def save(self, db):
         if getattr(self, 'id', None) is not None:
             return
@@ -160,6 +160,15 @@ class SessionRecord:
             'mobs_killed': mobs_killed
         }
     @staticmethod
+    def update_sum(a: dict, b:dict) -> dict:
+        if a is None or b is None:
+            abort(500)
+
+        return {
+            key: a.get(key, 0) + b.get(key, 0)
+            for key in set(a) | set(b)
+        }
+    @staticmethod
     def get_accumulated(db):
         higest_level = 0
         higest_level_id = -1
@@ -178,46 +187,50 @@ class SessionRecord:
                 higest_level = record.hero_level
                 higest_level_id = record.id
 
-                result.exp_gained += record.exp_gained
-                result.coins_earned += record.coins_earned
-                result.coins_spent += record.coins_spent
+            result.exp_gained += record.exp_gained
+            result.coins_earned += record.coins_earned
+            result.coins_spent += record.coins_spent
 
-                if record.orb_upgrades is not None:
-                    if result.orb_upgrades is None:
-                        result.orb_upgrades = dict()
+            if record.orb_upgrades is not None:
+                if result.orb_upgrades is None:
+                    result.orb_upgrades = record.orb_upgrades
+                else:
+                    result.orb_upgrades = SessionRecord.update_sum(result.orb_upgrades, record.orb_upgrades)
 
-                    result.orb_upgrades.update(record.orb_upgrades)
-                
-                result.steps_taken += record.steps_taken
-                result.damage_given += record.damage_given
-                result.damage_taken += record.damage_taken
-                result.deaths += record.deaths
+            result.steps_taken += record.steps_taken
+            result.damage_given += record.damage_given
+            result.damage_taken += record.damage_taken
+            result.deaths += record.deaths
 
-                if record.weapon_usage is not None:
-                    if result.weapon_usage is None:
-                        result.weapon_usage = dict()
+            if record.weapon_usage is not None:
+                if result.weapon_usage is None:
+                    result.weapon_usage = record.weapon_usage
+                else:
+                    result.weapon_usage = SessionRecord.update_sum(result.weapon_usage, record.weapon_usage)
 
-                    result.weapon_usage.update(record.weapon_usage)
-                if record.ability_usage is not None:
-                    if result.ability_usage is None:
-                        result.ability_usage = dict()
+            if record.ability_usage is not None:
+                if result.ability_usage is None:
+                    result.ability_usage = record.ability_usage
+                else:
+                    result.ability_usage = SessionRecord.update_sum(result.ability_usage, record.ability_usage)
 
-                    result.ability_usage.update(record.ability_usage)
-                if record.mob_killed is not None:
-                    if result.mob_killed is None:
-                        result.mob_killed = dict()
+            if record.mob_killed is not None:
+                if result.mob_killed is None:
+                    result.mob_killed = record.mob_killed
+                else:
+                    result.mob_killed = SessionRecord.update_sum(result.mob_killed, record.mob_killed)
 
-                    result.mob_killed.update(record.mob_killed)
-                if record.maps_visited is not None:
-                    if result.maps_visited is None:
-                        result.maps_visited = list()
+            if record.maps_visited is not None:
+                if result.maps_visited is None:
+                    result.maps_visited = record.maps_visited
+                else:
+                    result.maps_visited += record.maps_visited
 
-                    result.maps_visited.append(record.maps_visited)
-                if record.dungeons_cleared is not None:
-                    if result.dungeons_cleared is None:
-                        result.dungeons_cleared = dict()
-
-                    result.dungeons_cleared.update(record.dungeons_cleared)
+            if record.dungeons_cleared is not None:
+                if result.dungeons_cleared is None:
+                    result.dungeons_cleared = record.dungeons_cleared
+                else:
+                    result.dungeons_cleared = SessionRecord.update_sum(result.dungeons_cleared, record.dungeons_cleared)
 
         return (session_count, higest_level, higest_level_id, result)
     @staticmethod
