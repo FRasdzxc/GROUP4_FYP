@@ -13,6 +13,7 @@ namespace PathOfHero.Gameplay
         private InputAction hidePanelAction;
 
         private List<Panel> shownPanels;
+
         protected override void Awake()
         {
             base.Awake();
@@ -57,14 +58,19 @@ namespace PathOfHero.Gameplay
         }
 
         private void SelectCurrentActionMap()
-            => playerInput.currentActionMap = (shownPanels.Count > 0) ? uiActionMap : gameplayActionMap;
+        {
+            uiActionMap.Disable();
+            gameplayActionMap.Disable();
+
+            playerInput.currentActionMap = (shownPanels.Count > 0) ? uiActionMap : gameplayActionMap;
+            playerInput.currentActionMap.Enable();
+        }
 
         public void AddPanel(Panel panel)
         {
-            if (shownPanels.Contains(panel))
-                return;
+            if (!shownPanels.Contains(panel))
+                shownPanels.Add(panel);
 
-            shownPanels.Add(panel);
             SelectCurrentActionMap();
         }
 

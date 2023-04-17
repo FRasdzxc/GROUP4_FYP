@@ -79,7 +79,8 @@ public class DialogueController : MonoBehaviour
             // if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
             if (canBeSkipped && skipDialogueAction.triggered)
             {
-                await dialoguePanel.HideDialoguePanel();
+                //await dialoguePanel.HideDialoguePanel();
+                dialoguePanel.HidePanel();
                 dialogueEndEvents.Invoke();
 
                 currentDialogueIndex = 0;
@@ -154,7 +155,8 @@ public class DialogueController : MonoBehaviour
             else
             {
                 dialoguePanel.SetAllowHiding(true);
-                await dialoguePanel.HideDialoguePanel();
+                //await dialoguePanel.HideDialoguePanel();
+                dialoguePanel.HidePanel();
                 dialogueEndEvents.Invoke();
 
                 currentDialogueIndex = 0;
@@ -163,5 +165,10 @@ public class DialogueController : MonoBehaviour
 
             canShowNextDialogue = true;
         }
+    }
+
+    public void SetIsInConversation(bool value)
+    {
+        isInConversation = value;
     }
 }

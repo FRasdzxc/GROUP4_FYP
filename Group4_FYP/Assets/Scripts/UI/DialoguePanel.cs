@@ -46,11 +46,18 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
         if (!panelIsShown)
             return;
 
-        HidePanel();
+        //HidePanel();
 
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
         panelIsShown = false;
+        DialogueController.Instance.SetIsInConversation(false);
+    }
+
+    public async override void HidePanel()
+    {
+        base.HidePanel();
+        await HideDialoguePanel();
     }
 
     public void SetAllowHiding(bool allowHiding)
