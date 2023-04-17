@@ -161,7 +161,7 @@ namespace PathOfHero.Telemetry
         {   
             var userName =
 #if UNITY_EDITOR
-            $"Editor (123456789)";
+            $"Editor";
 #else
             Environment.UserName;
 #endif

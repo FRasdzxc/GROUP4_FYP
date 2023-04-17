@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using PathOfHero.Telemetry;
 
 public class Orb : MonoBehaviour
 {
@@ -143,6 +144,7 @@ public class Orb : MonoBehaviour
             return;
         }
 
+        DataCollector.Instance?.OrbUpgradeUsed(orbUpgradeType.ToString());
         switch (orbUpgradeType)
         {
             case OrbUpgradeType.MaxHealth:
