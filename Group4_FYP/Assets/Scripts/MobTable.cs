@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using HugeScript;
-using System.Reflection;
-using System.Xml.Linq;
 using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
@@ -223,78 +220,133 @@ public class MobEditor : Editor
 
         EditorGUI.BeginChangeCheck();
 
-        reorderableGuaranteed.DoLayoutList();
-        reorderableChange.DoLayoutList();
+        /* Fixed by D9Construct */
+            serializedObject.Update();
+            ValidateGuaranteedList(loot);
+            reorderableGuaranteed.DoLayoutList();
+            ValidateOneItemFromList(loot);
+            reorderableChange.DoLayoutList();
+            serializedObject.ApplyModifiedProperties();
 
-        if (EditorGUI.EndChangeCheck())
-        {
-            //loot.GuaranteedLootTable
-            for (int index = 0; index < loot.OneItemFromList.Length; index++)
+            if (EditorGUI.EndChangeCheck())
             {
-                // Not Guaranteed
-                SerializedProperty element = reorderableChange.serializedProperty.GetArrayElementAtIndex(index);
-                loot.OneItemFromList[index].Weight = element.FindPropertyRelative("Weight").floatValue;
-                loot.OneItemFromList[index].Drop = (GameObject)element.FindPropertyRelative("Drop").objectReferenceValue;
-                loot.OneItemFromList[index].MinCountItem = element.FindPropertyRelative("MinCountItem").intValue;
-                loot.OneItemFromList[index].MaxCountItem = element.FindPropertyRelative("MaxCountItem").intValue;
-
-                // Guaranteed
-                SerializedProperty element2 = reorderableGuaranteed.serializedProperty.GetArrayElementAtIndex(index);
-                loot.GuaranteedLootTable[index].Weight = element2.FindPropertyRelative("Weight").floatValue;
-                loot.GuaranteedLootTable[index].Drop = (GameObject)element2.FindPropertyRelative("Drop").objectReferenceValue;
-                loot.GuaranteedLootTable[index].MinCountItem = element2.FindPropertyRelative("MinCountItem").intValue;
-                loot.GuaranteedLootTable[index].MaxCountItem = element2.FindPropertyRelative("MaxCountItem").intValue;
+                for (int index = 0; index < loot.OneItemFromList.Length; index++)
+                {
+                    SerializedProperty OIFElement = reorderableChange.serializedProperty.GetArrayElementAtIndex(index);
+                    loot.OneItemFromList[index].Weight = OIFElement.FindPropertyRelative("Weight").floatValue;
+                    loot.OneItemFromList[index].Drop = (GameObject)OIFElement.FindPropertyRelative("Drop").objectReferenceValue;
+                    loot.OneItemFromList[index].MinCountItem = OIFElement.FindPropertyRelative("MinCountItem").intValue;
+                    loot.OneItemFromList[index].MaxCountItem = OIFElement.FindPropertyRelative("MaxCountItem").intValue;
+                }
+                for (int index = 0; index < loot.GuaranteedLootTable.Length; index++)
+                {
+                    SerializedProperty GuaranteedElement = reorderableGuaranteed.serializedProperty.GetArrayElementAtIndex(index);
+                    loot.GuaranteedLootTable[index].Weight = GuaranteedElement.FindPropertyRelative("Weight").floatValue;
+                    loot.GuaranteedLootTable[index].Drop = (GameObject)GuaranteedElement.FindPropertyRelative("Drop").objectReferenceValue;
+                    loot.GuaranteedLootTable[index].MinCountItem = GuaranteedElement.FindPropertyRelative("MinCountItem").intValue;
+                    loot.GuaranteedLootTable[index].MaxCountItem = GuaranteedElement.FindPropertyRelative("MaxCountItem").intValue;
+                }
             }
-        }
+        /* Fixed by D9Construct */
 
         // Nothing Weight
-        loot.WeightToNoDrop = EditorGUILayout.FloatField("No Spawn Weight", loot.WeightToNoDrop);
+        loot.WeightToNoDrop = EditorGUILayout.FloatField("No Drop Weight", loot.WeightToNoDrop);
 
-        EditorGUILayout.EndVertical();
+            EditorGUILayout.EndVertical();
 
-        EditorGUILayout.Space();
+            EditorGUILayout.Space();
 
-        Rect r = EditorGUILayout.BeginVertical("box");
-        myStyle.fontStyle = FontStyle.Bold;
-        myStyle.fontSize = 20;
+            Rect r = EditorGUILayout.BeginVertical("box");
+            myStyle.fontStyle = FontStyle.Bold;
+            myStyle.fontSize = 20;
 
-        EditorGUILayout.Space(5);
-        EditorGUILayout.LabelField($"Spawn Chance", myStyle);
+            EditorGUILayout.Space(5);
+            EditorGUILayout.LabelField($"Drop Change", myStyle);
 
-        float totalWeight = loot.WeightToNoDrop;
-        float guaranteedHeight = 0;
+            float totalWeight = loot.WeightToNoDrop;
+            float guaranteedHeight = 0;
 
-        if (loot.OneItemFromList != null)
-        {
-            for (int j = 0; j < loot.OneItemFromList.Length; j++)
+            if (loot.OneItemFromList != null)
             {
-                totalWeight += loot.OneItemFromList[j].Weight;
+                for (int j = 0; j < loot.OneItemFromList.Length; j++)
+                {
+                    totalWeight += loot.OneItemFromList[j].Weight;
+                }
             }
+
+            
+            var _oldColor = GUI.backgroundColor;
+
+            if (0 < loot.GuaranteedLootTable.Length) { guaranteedHeight += 10; }
+
+            /* Guaranteed */
+            GUI.backgroundColor = Color.green;
+            for (int i = 0; i < loot.GuaranteedLootTable.Length; i++)
+            {
+                string _tmpString = "";
+                guaranteedHeight += 25;
+                if (loot.GuaranteedLootTable[i].Drop == null) { _tmpString = " --- No Drop Object --- "; } else { _tmpString = loot.GuaranteedLootTable[i].Drop.name; }
+                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i), r.width - 10, 20), 1, $"{_tmpString} [{loot.GuaranteedLootTable[i].MinCountItem}-{loot.GuaranteedLootTable[i].MaxCountItem}]   -   Guaranteed");
+            }
+            GUI.backgroundColor = _oldColor;
+
+            /* Not Guaranteed */
+            for (int i = 0; i < loot.OneItemFromList.Length; i++)
+            {
+                string _tmpString = "";
+                if (loot.OneItemFromList[i].Drop == null) { _tmpString = "!!! No Drop Object Attackhment !!!"; } else { _tmpString = loot.OneItemFromList[i].Drop.name; }
+                if (loot.OneItemFromList[i].Weight / totalWeight < 0) { 
+                    GUI.backgroundColor = Color.red;
+                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), 1, "Error");
+                } else {
+                    EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), loot.OneItemFromList[i].Weight / totalWeight, $"{_tmpString} [{loot.OneItemFromList[i].MinCountItem}-{loot.OneItemFromList[i].MaxCountItem}]   -   {(loot.OneItemFromList[i].Weight / totalWeight * 100).ToString("f2")}%");
+                }
+                GUI.backgroundColor = _oldColor;
+            }
+
+            GUI.backgroundColor = Color.gray;
+            EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * loot.OneItemFromList.Length + 10) + guaranteedHeight, r.width - 10, 20), loot.WeightToNoDrop / totalWeight, $"Nothing Additional   -   {(loot.WeightToNoDrop / totalWeight * 100).ToString("f2")}%");
+            GUI.backgroundColor = _oldColor;
+
+            EditorGUILayout.Space(25 * loot.OneItemFromList.Length + 45 + guaranteedHeight);
+
+            EditorGUILayout.EndVertical();
         }
-        //if (0 < loot.GuaranteedLootTable.Length) 
-        //{ guaranteedHeight += 10; }
-        /* Guaranteed */
-        for (int i = 0; i < loot.GuaranteedLootTable.Length; i++)
+
+        void ValidateOneItemFromList(MobTable loot)
         {
-            string fesfsefsf = "";
-            guaranteedHeight += 25;
-            if (loot.GuaranteedLootTable[i].Drop == null) { fesfsefsf = " --- No Spawn Object --- "; } else { fesfsefsf = loot.GuaranteedLootTable[i].Drop.name; }
-            EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i), r.width - 10, 20), 1, $"{fesfsefsf} [{loot.GuaranteedLootTable[i].MinCountItem}-{loot.GuaranteedLootTable[i].MaxCountItem}]   -   Guaranteed");
+            bool _countError = false;
+            bool _prefabError = false;
+            bool _weightError = false;
+
+            for (int index = 0; index < loot.OneItemFromList.Length; index++)
+            {
+                if (loot.OneItemFromList[index].Drop == null) { _prefabError = true; }
+                if (loot.OneItemFromList[index].MinCountItem <= 0) { _countError = true; }
+                if (loot.OneItemFromList[index].MinCountItem > loot.OneItemFromList[index].MaxCountItem) { _countError = true; }
+                if (loot.OneItemFromList[index].Weight < 0) { _weightError = true; }
+            }
+            if (_prefabError == true) { EditorGUILayout.HelpBox("One of the List Items does not have ''Item To Drop'' assigned, which will cause an error if it is drawn", MessageType.Error, true); }
+            if (_countError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect number of items, which will result in items not appearing when drawn", MessageType.Warning, true); }
+            if (_weightError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect Weight, this will cause erroneous data readings or the whole system will crash", MessageType.Error, true); }
         }
-        /* Not Guaranteed */
-        for (int i = 0; i < loot.OneItemFromList.Length; i++)
+        void ValidateGuaranteedList(MobTable loot)
         {
-            string fesfsefsf = "";
-            if (loot.OneItemFromList[i].Drop == null) { fesfsefsf = "!!! No Spawn Object Attackhment !!!"; } else { fesfsefsf = loot.OneItemFromList[i].Drop.name; }
-            EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), loot.OneItemFromList[i].Weight / totalWeight, $"{fesfsefsf} [{loot.OneItemFromList[i].MinCountItem}-{loot.OneItemFromList[i].MaxCountItem}]   -   {(loot.OneItemFromList[i].Weight / totalWeight * 100).ToString("f2")}%");
+            bool _countError = false;
+            bool _prefabError = false;
+            bool _weightError = false;
+
+            for (int index = 0; index < loot.GuaranteedLootTable.Length; index++)
+            {
+                if (loot.GuaranteedLootTable[index].Drop == null) { _prefabError = true; }
+                if (loot.GuaranteedLootTable[index].MinCountItem <= 0) { _countError = true; }
+                if (loot.GuaranteedLootTable[index].MinCountItem > loot.GuaranteedLootTable[index].MaxCountItem) { _countError = true; }
+                if (loot.GuaranteedLootTable[index].Weight < 0) { _weightError = true; }
+            }
+            if (_prefabError == true) { EditorGUILayout.HelpBox("One of the List Items does not have ''Item To Drop'' assigned, which will cause an error if it is drawn", MessageType.Error, true); }
+            if (_countError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect number of items, which will result in items not appearing when drawn", MessageType.Warning, true); }
+            if (_weightError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect Weight, this will cause erroneous data readings or the whole system will crash", MessageType.Error, true); }
         }
-
-        EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * loot.OneItemFromList.Length + 10) + guaranteedHeight, r.width - 10, 20), loot.WeightToNoDrop / totalWeight, $"Nothing Additional   -   {(loot.WeightToNoDrop / totalWeight * 100).ToString("f2")}%");
-
-        EditorGUILayout.Space(25 * loot.OneItemFromList.Length + 45 + guaranteedHeight);
-
-        EditorGUILayout.EndVertical();
-    }
 }
 
 /* --------------------- */

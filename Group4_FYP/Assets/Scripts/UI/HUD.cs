@@ -24,6 +24,7 @@ public class HUD : Singleton<HUD>
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
     [SerializeField] private GameObject[] abilityCooldownText;
+    [SerializeField] private Text[] abilityKeyHintText;
 
     [SerializeField] private GameObject objectivePanel;
     [SerializeField] private CanvasGroup objectivePanelCanvasGroup;
@@ -62,12 +63,13 @@ public class HUD : Singleton<HUD>
     //     UpdateMana(mana);
     // }
 
-    public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime)
+    public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime, string hintText)
     {
         if (slotNumber >= 0 && slotNumber < abilitySliders.Length)
         {
             abilityImages[slotNumber].sprite = icon;
             abilitySliders[slotNumber].maxValue = cooldownTime;
+            abilityKeyHintText[slotNumber].text = hintText;
         }
     }
 

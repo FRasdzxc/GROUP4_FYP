@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa80a4f21652164d8ac37ff492439b4, type: 3}
+  m_Name: UncommonChestLootTable
+  m_EditorClassIdentifier: 
+  GuaranteedLootTable:
+  - Weight: 0
+    Drop: {fileID: 3973265384867567476, guid: 5ce1973feb69802418471e0b1dd89b3a, type: 3}
+    MinCountItem: 2
+    MaxCountItem: 3
+  OneItemFromList:
+  - Weight: 100
+    Drop: {fileID: 9099298838796875334, guid: 055d5324f11a79f49aa48068864f1065, type: 3}
+    MinCountItem: 2
+    MaxCountItem: 3
+  - Weight: 100
+    Drop: {fileID: 6041747765723977447, guid: 9f70cef844e3bec46a46278a16635011, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 2
+  - Weight: 100
+    Drop: {fileID: 4662188481859080816, guid: 4ea5fd16ca80d554eba3e80e104d9350, type: 3}
+    MinCountItem: 3
+    MaxCountItem: 4
+  - Weight: 1
+    Drop: {fileID: 3451127804669126986, guid: 282dab6a0327af841b5c1be6a4148e88, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  WeightToNoDrop: 100

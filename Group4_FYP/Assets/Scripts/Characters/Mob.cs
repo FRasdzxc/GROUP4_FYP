@@ -109,7 +109,9 @@ public class Mob : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+        if (damageSoundClips.Length > 0)
+            PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+
         DataCollector.Instance?.DamageGiven(damage);
         health = Mathf.Clamp(health - damage, 0, mobData.health);
         UpdateUI();
@@ -121,7 +123,10 @@ public class Mob : MonoBehaviour
     {
         isDead = true;
         health = 0;
-        PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
+
+        if (dieSoundClips.Length > 0)
+            PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
+            
         UpdateUI();
         await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
 

@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using TinyScript;
-using System.Reflection;
-using System.Xml.Linq;
 
 #if UNITY_EDITOR
     using UnityEditorInternal;
@@ -15,7 +12,7 @@ namespace TinyScript {
     [CreateAssetMenu(fileName = "Loot Table", menuName = "Tiny Slime Studio/Loot Table SO")]
     public class LootDrop : ScriptableObject
     {
-        public DropChangeItem[] GuaranteedLootTable;
+        public DropChangeItem[] GuaranteedLootTable = new DropChangeItem[0];
         public DropChangeItem[] OneItemFromList = new DropChangeItem[1];
         public float WeightToNoDrop = 100;
 
@@ -203,29 +200,35 @@ namespace TinyScript {
 
             EditorGUI.BeginChangeCheck();
 
+
+        /* Fixed by D9Construct */
+            serializedObject.Update();
+            ValidateGuaranteedList(loot);
             reorderableGuaranteed.DoLayoutList();
+            ValidateOneItemFromList(loot);
             reorderableChange.DoLayoutList();
+            serializedObject.ApplyModifiedProperties();
 
             if (EditorGUI.EndChangeCheck())
             {
-                //loot.GuaranteedLootTable
                 for (int index = 0; index < loot.OneItemFromList.Length; index++)
                 {
-                    // Not Guaranteed
-                    SerializedProperty element = reorderableChange.serializedProperty.GetArrayElementAtIndex(index);
-                    loot.OneItemFromList[index].Weight = element.FindPropertyRelative("Weight").floatValue;
-                    loot.OneItemFromList[index].Drop = (GameObject)element.FindPropertyRelative("Drop").objectReferenceValue;
-                    loot.OneItemFromList[index].MinCountItem = element.FindPropertyRelative("MinCountItem").intValue;
-                    loot.OneItemFromList[index].MaxCountItem = element.FindPropertyRelative("MaxCountItem").intValue;
-
-                    // Guaranteed
-                    SerializedProperty element2 = reorderableGuaranteed.serializedProperty.GetArrayElementAtIndex(index);
-                    loot.GuaranteedLootTable[index].Weight = element2.FindPropertyRelative("Weight").floatValue;
-                    loot.GuaranteedLootTable[index].Drop = (GameObject)element2.FindPropertyRelative("Drop").objectReferenceValue;
-                    loot.GuaranteedLootTable[index].MinCountItem = element2.FindPropertyRelative("MinCountItem").intValue;
-                    loot.GuaranteedLootTable[index].MaxCountItem = element2.FindPropertyRelative("MaxCountItem").intValue;
+                    SerializedProperty OIFElement = reorderableChange.serializedProperty.GetArrayElementAtIndex(index);
+                    loot.OneItemFromList[index].Weight = OIFElement.FindPropertyRelative("Weight").floatValue;
+                    loot.OneItemFromList[index].Drop = (GameObject)OIFElement.FindPropertyRelative("Drop").objectReferenceValue;
+                    loot.OneItemFromList[index].MinCountItem = OIFElement.FindPropertyRelative("MinCountItem").intValue;
+                    loot.OneItemFromList[index].MaxCountItem = OIFElement.FindPropertyRelative("MaxCountItem").intValue;
+                }
+                for (int index = 0; index < loot.GuaranteedLootTable.Length; index++)
+                {
+                    SerializedProperty GuaranteedElement = reorderableGuaranteed.serializedProperty.GetArrayElementAtIndex(index);
+                    loot.GuaranteedLootTable[index].Weight = GuaranteedElement.FindPropertyRelative("Weight").floatValue;
+                    loot.GuaranteedLootTable[index].Drop = (GameObject)GuaranteedElement.FindPropertyRelative("Drop").objectReferenceValue;
+                    loot.GuaranteedLootTable[index].MinCountItem = GuaranteedElement.FindPropertyRelative("MinCountItem").intValue;
+                    loot.GuaranteedLootTable[index].MaxCountItem = GuaranteedElement.FindPropertyRelative("MaxCountItem").intValue;
                 }
             }
+        /* Fixed by D9Construct */
 
         // Nothing Weight
         loot.WeightToNoDrop = EditorGUILayout.FloatField("No Drop Weight", loot.WeightToNoDrop);
@@ -251,28 +254,79 @@ namespace TinyScript {
                     totalWeight += loot.OneItemFromList[j].Weight;
                 }
             }
-        if (0 < loot.GuaranteedLootTable.Length) { guaranteedHeight += 10; }
-        /* Guaranteed */
-        for (int i = 0; i < loot.GuaranteedLootTable.Length; i++)
+
+            
+            var _oldColor = GUI.backgroundColor;
+
+            if (0 < loot.GuaranteedLootTable.Length) { guaranteedHeight += 10; }
+
+            /* Guaranteed */
+            GUI.backgroundColor = Color.green;
+            for (int i = 0; i < loot.GuaranteedLootTable.Length; i++)
             {
-                string fesfsefsf = "";
+                string _tmpString = "";
                 guaranteedHeight += 25;
-                if (loot.GuaranteedLootTable[i].Drop == null) { fesfsefsf = " --- No Drop Object --- "; } else { fesfsefsf = loot.GuaranteedLootTable[i].Drop.name; }
-                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i), r.width - 10, 20), 1, $"{fesfsefsf} [{loot.GuaranteedLootTable[i].MinCountItem}-{loot.GuaranteedLootTable[i].MaxCountItem}]   -   Guaranteed");
+                if (loot.GuaranteedLootTable[i].Drop == null) { _tmpString = " --- No Drop Object --- "; } else { _tmpString = loot.GuaranteedLootTable[i].Drop.name; }
+                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i), r.width - 10, 20), 1, $"{_tmpString} [{loot.GuaranteedLootTable[i].MinCountItem}-{loot.GuaranteedLootTable[i].MaxCountItem}]   -   Guaranteed");
             }
+            GUI.backgroundColor = _oldColor;
+
             /* Not Guaranteed */
             for (int i = 0; i < loot.OneItemFromList.Length; i++)
             {
-                string fesfsefsf = "";
-                if (loot.OneItemFromList[i].Drop == null) { fesfsefsf = "!!! No Drop Object Attackhment !!!"; } else { fesfsefsf = loot.OneItemFromList[i].Drop.name; }
-                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), loot.OneItemFromList[i].Weight / totalWeight, $"{fesfsefsf} [{loot.OneItemFromList[i].MinCountItem}-{loot.OneItemFromList[i].MaxCountItem}]   -   {(loot.OneItemFromList[i].Weight / totalWeight * 100).ToString("f2")}%");
+                string _tmpString = "";
+                if (loot.OneItemFromList[i].Drop == null) { _tmpString = "!!! No Drop Object Attackhment !!!"; } else { _tmpString = loot.OneItemFromList[i].Drop.name; }
+                if (loot.OneItemFromList[i].Weight / totalWeight < 0) { 
+                    GUI.backgroundColor = Color.red;
+                EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), 1, "Error");
+                } else {
+                    EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * i) + guaranteedHeight, r.width - 10, 20), loot.OneItemFromList[i].Weight / totalWeight, $"{_tmpString} [{loot.OneItemFromList[i].MinCountItem}-{loot.OneItemFromList[i].MaxCountItem}]   -   {(loot.OneItemFromList[i].Weight / totalWeight * 100).ToString("f2")}%");
+                }
+                GUI.backgroundColor = _oldColor;
             }
 
+            GUI.backgroundColor = Color.gray;
             EditorGUI.ProgressBar(new Rect(r.x + 5, r.y + 40 + (25 * loot.OneItemFromList.Length + 10) + guaranteedHeight, r.width - 10, 20), loot.WeightToNoDrop / totalWeight, $"Nothing Additional   -   {(loot.WeightToNoDrop / totalWeight * 100).ToString("f2")}%");
+            GUI.backgroundColor = _oldColor;
 
             EditorGUILayout.Space(25 * loot.OneItemFromList.Length + 45 + guaranteedHeight);
 
             EditorGUILayout.EndVertical();
+        }
+
+        void ValidateOneItemFromList(LootDrop loot)
+        {
+            bool _countError = false;
+            bool _prefabError = false;
+            bool _weightError = false;
+
+            for (int index = 0; index < loot.OneItemFromList.Length; index++)
+            {
+                if (loot.OneItemFromList[index].Drop == null) { _prefabError = true; }
+                if (loot.OneItemFromList[index].MinCountItem <= 0) { _countError = true; }
+                if (loot.OneItemFromList[index].MinCountItem > loot.OneItemFromList[index].MaxCountItem) { _countError = true; }
+                if (loot.OneItemFromList[index].Weight < 0) { _weightError = true; }
+            }
+            if (_prefabError == true) { EditorGUILayout.HelpBox("One of the List Items does not have ''Item To Drop'' assigned, which will cause an error if it is drawn", MessageType.Error, true); }
+            if (_countError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect number of items, which will result in items not appearing when drawn", MessageType.Warning, true); }
+            if (_weightError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect Weight, this will cause erroneous data readings or the whole system will crash", MessageType.Error, true); }
+        }
+        void ValidateGuaranteedList(LootDrop loot)
+        {
+            bool _countError = false;
+            bool _prefabError = false;
+            bool _weightError = false;
+
+            for (int index = 0; index < loot.GuaranteedLootTable.Length; index++)
+            {
+                if (loot.GuaranteedLootTable[index].Drop == null) { _prefabError = true; }
+                if (loot.GuaranteedLootTable[index].MinCountItem <= 0) { _countError = true; }
+                if (loot.GuaranteedLootTable[index].MinCountItem > loot.GuaranteedLootTable[index].MaxCountItem) { _countError = true; }
+                if (loot.GuaranteedLootTable[index].Weight < 0) { _weightError = true; }
+            }
+            if (_prefabError == true) { EditorGUILayout.HelpBox("One of the List Items does not have ''Item To Drop'' assigned, which will cause an error if it is drawn", MessageType.Error, true); }
+            if (_countError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect number of items, which will result in items not appearing when drawn", MessageType.Warning, true); }
+            if (_weightError == true) { EditorGUILayout.HelpBox("One of the List Items has an incorrect Weight, this will cause erroneous data readings or the whole system will crash", MessageType.Error, true); }
         }
     }
 
@@ -285,7 +339,9 @@ namespace TinyScript {
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            var _oldColor = GUI.backgroundColor;
             EditorGUI.BeginProperty(position, label, property);
+            //GUI.backgroundColor = Color.red;
 
             var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
@@ -294,13 +350,17 @@ namespace TinyScript {
             var weightRect = new Rect(position.x, position.y + 20, 55, 18);
 
             EditorGUI.LabelField(weightRectLabel, "Weight");
+            if(property.FindPropertyRelative("Weight").floatValue < 0) { GUI.backgroundColor = Color.red; }
             EditorGUI.PropertyField(weightRect, property.FindPropertyRelative("Weight"), GUIContent.none);
+            GUI.backgroundColor = _oldColor;
 
             var ItemRectLabel = new Rect(position.x + 60, position.y, position.width - 60, 18);
             var ItemRect = new Rect(position.x + 60, position.y + 20, position.width - 60 - 75, 18);
 
             EditorGUI.LabelField(ItemRectLabel, "Item To Drop");
+            if(property.FindPropertyRelative("Drop").objectReferenceValue == null) { GUI.backgroundColor = Color.red; }
             EditorGUI.PropertyField(ItemRect, property.FindPropertyRelative("Drop"), GUIContent.none);
+            GUI.backgroundColor = _oldColor;
 
             var MinMaxRectLabel = new Rect(position.x + position.width - 70, position.y, 70, 18);
 
@@ -308,13 +368,17 @@ namespace TinyScript {
             var MinMaxRect = new Rect(position.x + position.width - 39, position.y + 20, 9, 18);
             var MaxRect = new Rect(position.x + position.width - 30, position.y + 20, 30, 18);
 
+            if(property.FindPropertyRelative("MinCountItem").intValue < 0) { GUI.backgroundColor = Color.red; }
+            if (property.FindPropertyRelative("MaxCountItem").intValue < property.FindPropertyRelative("MinCountItem").intValue) { GUI.backgroundColor = Color.red; }
+
             EditorGUI.LabelField(MinMaxRectLabel, "Min  -  Max");
             EditorGUI.PropertyField(MinRect, property.FindPropertyRelative("MinCountItem"), GUIContent.none);
             EditorGUI.LabelField(MinMaxRect, "-");
-            EditorGUI.PropertyField(MaxRect, property.FindPropertyRelative("MaxCountItem"), GUIContent.none);
+            EditorGUI.PropertyField(MaxRect, property.FindPropertyRelative("MaxCountItem"), GUIContent.none); 
+            GUI.backgroundColor = _oldColor;
 
-            EditorGUI.EndProperty();
-        }
+            EditorGUI.EndProperty(); 
+    }
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return 40;

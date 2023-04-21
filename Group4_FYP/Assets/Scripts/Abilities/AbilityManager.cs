@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,10 +27,7 @@ public class AbilityManager : MonoBehaviour
     private float abilityOutputUpgrade;
 
     private PlayerInput playerInput;
-    private InputAction ability1Action;
-    private InputAction ability2Action;
-    private InputAction ability3Action;
-    private InputAction abilityUAction;
+    private List<InputAction> abilityActions;
 
     private static AbilityManager instance;
     public static AbilityManager Instance
@@ -51,15 +49,14 @@ public class AbilityManager : MonoBehaviour
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
 
         playerInput = GetComponent<PlayerInput>();
-        ability1Action = playerInput.actions["Ability1"];
-        ability2Action = playerInput.actions["Ability2"];
-        ability3Action = playerInput.actions["Ability3"];
-        abilityUAction = playerInput.actions["AbilityU"];
+        abilityActions = new List<InputAction>();
+        abilityActions.Add(playerInput.actions["Ability1"]);
+        abilityActions.Add(playerInput.actions["Ability2"]);
+        abilityActions.Add(playerInput.actions["Ability3"]);
+        abilityActions.Add(playerInput.actions["AbilityU"]);
 
-        ability1Action.Enable();
-        ability2Action.Enable();
-        ability3Action.Enable();
-        abilityUAction.Enable();
+        foreach (InputAction action in abilityActions)
+            action.Enable();
     }
 
     void Start()
@@ -73,7 +70,8 @@ public class AbilityManager : MonoBehaviour
         if (GameManager.Instance.IsPlayingHostile())
         {
             // if (Input.GetKeyDown(KeyCode.Z))
-            if (ability1Action.ReadValue<float>() == 1)
+            // if (ability1Action.ReadValue<float>() == 1)
+            if (abilityActions[0].ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[0].IsReady && (mana - equippedAbilities[0].manaCost) >= 0)
@@ -84,7 +82,8 @@ public class AbilityManager : MonoBehaviour
             }
 
             // if (Input.GetKeyDown(KeyCode.X))
-            if (ability2Action.ReadValue<float>() == 1)
+            // if (ability2Action.ReadValue<float>() == 1)
+            if (abilityActions[1].ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[1].IsReady && (mana - equippedAbilities[1].manaCost) >= 0)
@@ -95,7 +94,8 @@ public class AbilityManager : MonoBehaviour
             }
 
             // if (Input.GetKeyDown(KeyCode.C))
-            if (ability3Action.ReadValue<float>() == 1)
+            // if (ability3Action.ReadValue<float>() == 1)
+            if (abilityActions[2].ReadValue<float>() == 1)
             {
                 // should be rewritten better
                 if (equippedAbilities[2].IsReady && (mana - equippedAbilities[2].manaCost) >= 0)
@@ -139,7 +139,7 @@ public class AbilityManager : MonoBehaviour
 
         for (int i = 0; i < equippedAbilities.Length; i++)
         {
-            hud.SetupAbility(i, equippedAbilities[i].icon, equippedAbilities[i].cooldownTime);
+            hud.SetupAbility(i, equippedAbilities[i].icon, equippedAbilities[i].cooldownTime, abilityActions[i].GetBindingDisplayString());
         }
 
         ReadyEquippedAbilities();
