@@ -36,8 +36,10 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => DataCollector.Instance != null && DataCollector.Instance.CurrentStats != null);
+        //yield return new WaitUntil(() => DataCollector.Instance != null && DataCollector.Instance.CurrentStats != null);
         LoadMap(MapId, skipFadeIn: true);
+        return null;
+
     }
 
     void Update()
@@ -53,8 +55,8 @@ public class GameManager : Singleton<GameManager>
             {
                 if (currentMapData is DungeonMapData dungeon)
                 {
-                    if (currentMapData.mapType == MapType.Dungeon)
-                        DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
+                    //if (currentMapData.mapType == MapType.Dungeon)
+                    //    DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
 
                     dungeon.SpawnPortal();
                 }
@@ -76,7 +78,7 @@ public class GameManager : Singleton<GameManager>
         if (!currentMapData)
             return;
 
-        DataCollector.Instance?.MapVisited(mapId);
+        //DataCollector.Instance?.MapVisited(mapId);
 
         // if map is a dungeon, disable saving buttons
         if (currentMapData.mapType == MapType.Dungeon)

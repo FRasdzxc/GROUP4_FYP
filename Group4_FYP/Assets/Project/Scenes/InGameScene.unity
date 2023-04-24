@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc40f66cf68fe44789a6f672c7a5753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTestScene: 1
+  isTestScene: 0
   autosaveDuration: 5
 --- !u!114 &7669577005581385814
 MonoBehaviour:

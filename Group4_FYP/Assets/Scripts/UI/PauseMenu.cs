@@ -108,7 +108,7 @@ public class PauseMenu : Panel
 
         GameManager.Instance.GameState = GameState.Paused;
 
-        HUD.Instance.HideHUD();
+        //HUD.Instance.HideHUD();
 
         pauseMenuBackground.SetActive(true);
         pauseMenuPanel.SetActive(true);
@@ -135,7 +135,7 @@ public class PauseMenu : Panel
         {
             // hudPanel.SetActive(true);
             // hudPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f);
-            HUD.Instance.ShowHUD();
+            //HUD.Instance.ShowHUD();
         }
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
@@ -194,7 +194,8 @@ public class PauseMenu : Panel
         }
 
         // exit to menu
-        sceneController.ChangeScene("StartScene");
+        //sceneController.ChangeScene("StartScene");
+        PathOfHero.Controllers.SceneController.Instance.ChangeScene("StartScene", false);
     }
 
     public void SetDungeonMode(bool value)

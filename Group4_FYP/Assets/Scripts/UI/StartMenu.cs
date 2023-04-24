@@ -5,7 +5,9 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEditor;
 using DG.Tweening;
+using PathOfHero.UI;
 
 public class StartMenu : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject profileCreationClassContainer;
     [SerializeField] private GameObject profileEditPanel;
 
-    [SerializeField] private SceneController sceneController;
+    //[SerializeField] private SceneController sceneController;
 
     [SerializeField] private Text enterGameHintText;
     [SerializeField] private InputField profileCreationInputField;
@@ -165,7 +167,7 @@ public class StartMenu : MonoBehaviour
             buttonObj.transform.SetParent(profileCreationClassContainer.transform);
         }
     }
-    
+
     public void SelectClass(HeroClass type)
     {
         selectedClassType = type;
@@ -204,7 +206,8 @@ public class StartMenu : MonoBehaviour
 
     public void StartGame() // load selected profile data then enter GameScene // not finished
     {
-        sceneController.EnterPlayScene();
+        //SceneController.Instance.ChangeScene("PlayScene", true);
+        PathOfHero.Controllers.SceneController.Instance.ChangeScene("InGameScene", true);
     }
 
     public async void ShowProfileSelectionPanel() // hide every other panels then show profileSelectionPanel
@@ -233,7 +236,16 @@ public class StartMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", async () => { await MaskingCanvas.Instance.ShowMaskingCanvas(true); Application.Quit(); }, false);
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", async () =>
+        {
+            //await MaskingCanvas.Instance.ShowMaskingCanvas(true); 
+            await LoadingScreen.Instance.FadeInAsync();
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }, false);
     }
 
     private async Task ShowPanel(PanelType panelType) // show inputted panelType and hide all the others
@@ -298,7 +310,7 @@ public class StartMenu : MonoBehaviour
             RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
             RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
             RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
-            
+
             // assigning image
             for (int j = 0; j < heroList.heros.Length; j++)
             {

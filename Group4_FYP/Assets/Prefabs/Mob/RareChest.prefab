@@ -194,7 +194,7 @@ MonoBehaviour:
   mobData: {fileID: 11400000, guid: 348fd1fa0ca793d4d9b5b556814061dc, type: 2}
   healthSlider: {fileID: 7408008873096805214}
   loot: {fileID: 11400000, guid: 2364f65a092992c44ad5700e40d61163, type: 2}
-  randomDropCount: 2
+  randomDropCount: 1
   dropRange: 1
   damageSoundClips: []
   dieSoundClips: []

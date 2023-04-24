@@ -27,7 +27,7 @@ public class Ability : ScriptableObject
         if (!IsReady)
             return;
 
-        DataCollector.Instance?.AbilityUsed(abilityName);
+        //DataCollector.Instance?.AbilityUsed(abilityName);
         nextActivateTime = Time.time + cooldownTime;
 
         abilityOutputUpgrade = AbilityManager.Instance.GetAbilityOutputUpgrade();

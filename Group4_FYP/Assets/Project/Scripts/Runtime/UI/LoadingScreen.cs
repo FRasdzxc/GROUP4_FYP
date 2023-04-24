@@ -39,7 +39,7 @@ namespace PathOfHero.UI
         private void Start()
         {
             // Hide logo by default
-            DisplayLogo = false;
+            //DisplayLogo = false;
         }
 
         public IEnumerator FadeIn(bool animated = true)

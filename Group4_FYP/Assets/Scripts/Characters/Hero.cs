@@ -118,7 +118,7 @@ public class Hero : MonoBehaviour
                 storedExp -= requiredExp;
                 //hud.SetupXP(level, requiredExp);
                 level++;
-                DataCollector.Instance?.HeroLevel(level);
+                // DataCollector.Instance?.HeroLevel(level);
                 HeroPanel.Instance.UpdateLevel(level);
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
 
@@ -173,7 +173,7 @@ public class Hero : MonoBehaviour
         if (!isDead && GameManager.Instance.IsPlayingHostile())
         {
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
-            DataCollector.Instance?.DamageTaken(amount);
+            // DataCollector.Instance?.DamageTaken(amount);
             health = Mathf.Clamp(health - damage, 0, maxHealth);
             if (health <= 0)
                 StartCoroutine(Die());
@@ -192,7 +192,7 @@ public class Hero : MonoBehaviour
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
 
-        DataCollector.Instance?.PlayerDied();
+        // DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
 
         var loadingScreen = LoadingScreen.Instance;
@@ -376,7 +376,7 @@ public class Hero : MonoBehaviour
     {
         var amount = accountForExpGainMultiplier ? (int)(exp * expGainMultiplierUpgrade) : exp;
         storedExp += amount;
-        DataCollector.Instance?.ExpGained(amount);
+        // DataCollector.Instance?.ExpGained(amount);
     }
 
     public void AddExpGainMultiplierUpgrade(float value)
@@ -388,10 +388,10 @@ public class Hero : MonoBehaviour
     {
         storedCoin += coin;
 
-        if (coin > 0)
-            DataCollector.Instance?.CoinsEarned(coin);
-        else if (coin < 0)
-            DataCollector.Instance?.CoinsSpent(coin * -1);
+        //if (coin > 0)
+        //    // DataCollector.Instance?.CoinsEarned(coin);
+        //else if (coin < 0)
+        //    // DataCollector.Instance?.CoinsSpent(coin * -1);
         
         HeroPanel.Instance.UpdateCoin(storedCoin);
     }

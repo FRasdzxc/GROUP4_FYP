@@ -135,7 +135,7 @@ public class WeaponUpgradePanel : PanelOverride
     {
         base.ShowPanel();
 
-        HUD.Instance.HideHUDMain();
+        //HUD.Instance.HideHUDMain();
         weaponUpgradePanel.SetActive(true);
         weaponUpgradePanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await weaponUpgradePanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
@@ -148,7 +148,7 @@ public class WeaponUpgradePanel : PanelOverride
     {
         base.HidePanel();
 
-        HUD.Instance.ShowHUDMain();
+        //HUD.Instance.ShowHUDMain();
         weaponUpgradePanelRectTransform.DOAnchorPosY(-weaponUpgradePanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await weaponUpgradePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         weaponUpgradePanel.SetActive(false);

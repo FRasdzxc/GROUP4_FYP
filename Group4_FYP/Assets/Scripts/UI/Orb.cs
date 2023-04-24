@@ -144,7 +144,7 @@ public class Orb : MonoBehaviour
             return;
         }
 
-        DataCollector.Instance?.OrbUpgradeUsed(orbUpgradeType.ToString());
+        //DataCollector.Instance?.OrbUpgradeUsed(orbUpgradeType.ToString());
         switch (orbUpgradeType)
         {
             case OrbUpgradeType.MaxHealth:

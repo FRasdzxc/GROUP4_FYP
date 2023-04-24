@@ -154,7 +154,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         }
         RefreshTotal();
 
-        HUD.Instance.HideHUDMain();
+        //HUD.Instance.HideHUDMain();
         buySellPanel.SetActive(true);
         buySellPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
@@ -176,7 +176,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
         transferredItems.Clear();
 
-        HUD.Instance.ShowHUDMain();
+        //HUD.Instance.ShowHUDMain();
         buySellPanelRectTransform.DOAnchorPosY(-buySellPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         buySellPanel.SetActive(false);

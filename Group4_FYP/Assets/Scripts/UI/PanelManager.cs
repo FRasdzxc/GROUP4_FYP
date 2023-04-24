@@ -72,12 +72,17 @@ namespace PathOfHero.Gameplay
                 shownPanels.Add(panel);
 
             SelectCurrentActionMap();
+
+            HUD.Instance.HideHUDMain();
         }
 
         public void RemovePanel(Panel panel)
         {
             shownPanels.Remove(panel);
             SelectCurrentActionMap();
+
+            if (shownPanels.Count <= 0)
+                HUD.Instance.ShowHUDMain();
         }
     }
 }

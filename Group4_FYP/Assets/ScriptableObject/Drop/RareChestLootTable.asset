@@ -20,20 +20,20 @@ MonoBehaviour:
   OneItemFromList:
   - Weight: 100
     Drop: {fileID: 8332786637961482418, guid: 37c28ce128ecee44abff0ed08d09b4bd, type: 3}
-    MinCountItem: 7
-    MaxCountItem: 8
+    MinCountItem: 1
+    MaxCountItem: 1
   - Weight: 100
     Drop: {fileID: 3973265384867567476, guid: 5ce1973feb69802418471e0b1dd89b3a, type: 3}
-    MinCountItem: 4
-    MaxCountItem: 5
+    MinCountItem: 1
+    MaxCountItem: 1
   - Weight: 100
     Drop: {fileID: 4662188481859080816, guid: 4ea5fd16ca80d554eba3e80e104d9350, type: 3}
-    MinCountItem: 15
-    MaxCountItem: 25
+    MinCountItem: 1
+    MaxCountItem: 1
   - Weight: 100
     Drop: {fileID: 5633386431801478656, guid: 76fcf027b4bc3e14aa3470955c87b061, type: 3}
-    MinCountItem: 12
-    MaxCountItem: 14
+    MinCountItem: 1
+    MaxCountItem: 1
   - Weight: 35
     Drop: {fileID: 3713180625581896163, guid: cc3b57860a2599e4ab5307424b98b77b, type: 3}
     MinCountItem: 2

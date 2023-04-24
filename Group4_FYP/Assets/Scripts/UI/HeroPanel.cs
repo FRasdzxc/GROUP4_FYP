@@ -136,7 +136,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
         Inventory.Instance.RefreshInventoryPanel();
 
-        HUD.Instance.HideHUDMain();
+        //HUD.Instance.HideHUDMain();
         heroPanel.SetActive(true);
         heroPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
@@ -149,7 +149,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     {
         base.HidePanel();
 
-        HUD.Instance.ShowHUDMain();
+        //HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
@@ -161,7 +161,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
     public async void OnHidePanel()
     {
-        HUD.Instance.ShowHUDMain();
+        //HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
