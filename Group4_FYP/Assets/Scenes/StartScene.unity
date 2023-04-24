@@ -1001,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &257117241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2182,7 +2182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &520738718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3696,7 +3696,7 @@ GameObject:
   - component: {fileID: 913822227}
   - component: {fileID: 913822228}
   - component: {fileID: 913822229}
-  - component: {fileID: 913822231}
+  - component: {fileID: 913822230}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Player
@@ -3875,7 +3875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecac19e72c6d2a2408ccde330b458197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &913822231
+--- !u!114 &913822230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17839,7 +17839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1255806783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20164,7 +20164,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: -100
+  m_ScrollSensitivity: -25
   m_Viewport: {fileID: 1089289081}
   m_HorizontalScrollbar: {fileID: 973420117}
   m_VerticalScrollbar: {fileID: 0}
@@ -20251,7 +20251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1818619819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20835,7 +20835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2046007067
 RectTransform:
   m_ObjectHideFlags: 0

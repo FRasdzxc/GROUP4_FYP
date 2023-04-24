@@ -174,7 +174,7 @@ public class Hero : MonoBehaviour
         {
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
             // DataCollector.Instance?.DamageTaken(amount);
-            health = Mathf.Clamp(health - damage, 0, maxHealth);
+            health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
             if (health <= 0)
                 StartCoroutine(Die());
         }

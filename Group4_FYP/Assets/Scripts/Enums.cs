@@ -7,7 +7,7 @@ public enum EffectType { Health, Mana, Exp };
 public enum CursorType { Arrow, Crosshair };
 public enum GameState { Playing, Paused };
 public enum MapType { Peaceful, Hostile, Dungeon }
-public enum MapDifficulty { Peaceful, Easy, Medium, Hard, Varies }
+public enum MapDifficulty { Peaceful, Easy, Medium, Hard, Extreme, Varies }
 public enum OrbUpgradeType { MaxHealth, HealthRegeneration, MaxMana, ManaRegeneration, ExpGainMultiplier, Defense, AbilityOutput };
 public enum TooltipHintType { None, Use, Drop, UseAll, DropAll, Transfer, TransferAll };
 public enum NPCType { Normal, Merchant, Blacksmith };

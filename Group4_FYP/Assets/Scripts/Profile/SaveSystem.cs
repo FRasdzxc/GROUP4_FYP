@@ -45,7 +45,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void Update()
     {
-        if (Time.unscaledTime >= nextSaveTime)
+        if (Time.unscaledTime >= nextSaveTime && GameManager.Instance.MapType != MapType.Dungeon)
         {
             SaveData();
             nextSaveTime = Time.unscaledTime + autosaveDuration;

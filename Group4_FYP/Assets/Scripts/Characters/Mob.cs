@@ -41,6 +41,8 @@ public class Mob : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         UpdateUI();
+
+        MobDirectionController.Instance.AddDirection(gameObject.transform);
     }
 
     // Update is called once per frame

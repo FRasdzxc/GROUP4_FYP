@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbffcbac496b2844afd802185b04be4, type: 3}
+  m_Name: GoldenBlobDrop
+  m_EditorClassIdentifier: 
+  itemID: misc_goldenblobdrop
+  itemName: Golden Blob Drop
+  itemType: 3
+  itemDescription: Slimeball dropped by Golden Blobs
+  minDropSize: 1
+  maxDropSize: 1
+  sellPrice: 125
+  buyPrice: 150
+  itemIcon: {fileID: 21300000, guid: 66368cce0f5c59a448c278b414976bce, type: 3}
+  sound: {fileID: 0}
+  isUsable: 0
+  isBuyable: 0

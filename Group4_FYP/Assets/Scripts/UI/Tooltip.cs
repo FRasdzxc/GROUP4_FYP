@@ -130,7 +130,7 @@ public class Tooltip : MonoBehaviour
                         sb.AppendLine("[LMB] - Transfer");
                         break;
                     case TooltipHintType.TransferAll:
-                        sb.AppendLine("[LMB] - Transfer All");
+                        sb.AppendLine("[LShift + LMB] - Transfer All");
                         break;
                 }
             }

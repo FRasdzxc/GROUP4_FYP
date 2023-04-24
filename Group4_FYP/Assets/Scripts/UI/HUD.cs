@@ -102,7 +102,8 @@ public class HUD : Singleton<HUD>
             m_CurrentHealth = (int)health;
         }
 
-        healthText.text = $"{(int)health} HP";
+        // healthText.text = $"{(int)health} HP";
+        healthText.text = $"{health.ToString("n0")} HP";
     }
 
     // public void UpdateMana(float mana)
@@ -125,7 +126,9 @@ public class HUD : Singleton<HUD>
             manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
             m_CurrentMana = (int)mana;
         }
-        manaText.text = $"{(int)mana} / {(int)manaSlider.maxValue} MP";
+
+        // manaText.text = $"{(int)mana} / {(int)manaSlider.maxValue} MP";
+        manaText.text = $"{mana.ToString("n0")} / {manaSlider.maxValue.ToString("n0")} MP";
     }
 
     public void UpdateAbility(int slotNumber, float remainingCooldownTime)

@@ -90,6 +90,9 @@ public class SelectionPanel : Panel
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
+                        if (mapData.mapId == GameManager.Instance.MapId)
+                            continue;
+
                         GameObject button = Instantiate(buttonPrefab, contentTransform);
                             button.GetComponent<Button>().onClick.AddListener(delegate
                             {
@@ -110,7 +113,11 @@ public class SelectionPanel : Panel
                             buttonTitle.text = mapData.mapName;
 
                             Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
-                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
+
+                            if (mapData.mapType == MapType.Peaceful)
+                                buttonDescription.text = $"{mapData.mapType.ToString()}";
+                            else
+                                buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
                     }
                 }
                 break;

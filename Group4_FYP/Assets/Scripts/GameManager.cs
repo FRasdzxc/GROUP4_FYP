@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     private MapData currentMapData;
     private GameObject currentMap;
     private bool mapCleared;
+    public int MobCount { get; set; }
 
     protected override void Awake()
     {
@@ -47,11 +48,12 @@ public class GameManager : Singleton<GameManager>
         if (GameState != GameState.Playing)
             return;
 
+        MobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
+
         if (!mapCleared)
         {
-            int mobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
-            hud.UpdateMobCount(mobCount);
-            if (mobCount <= 0)
+            hud.UpdateMobCount(MobCount);
+            if (MobCount <= 0)
             {
                 if (currentMapData is DungeonMapData dungeon)
                 {
@@ -100,6 +102,8 @@ public class GameManager : Singleton<GameManager>
             DestroyImmediate(currentMap);
         foreach (var mob in GameObject.FindGameObjectsWithTag("Mob"))
             Destroy(mob);
+        foreach (var chest in GameObject.FindGameObjectsWithTag("Chest"))
+            Destroy(chest);
         foreach (var drop in GameObject.FindGameObjectsWithTag("Drop"))
             Destroy(drop);
 
@@ -127,6 +131,7 @@ public class GameManager : Singleton<GameManager>
 
         GameState = GameState.Playing;
         mapCleared = false;
+        MobDirectionController.Instance.Activated = false; // reset arrows indicating mob directions
 
         if (saveOnLoaded)
             SaveSystem.Instance.SaveData(true, false);
