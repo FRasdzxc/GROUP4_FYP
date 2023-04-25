@@ -23,13 +23,13 @@ namespace PathOfHero.Utilities
 
         private IEnumerator OnLoadComplete(AsyncOperation handle)
         {
-            var dataCollector = DataCollector.Instance;
-            if (dataCollector == null)
-            {
-                Debug.LogError("[Bootstrap] Data collector missing! Unable to continue.");
-                yield break;
-            }
-            yield return StartCoroutine(dataCollector.Activate());
+            // var dataCollector = DataCollector.Instance;
+            // if (dataCollector == null)
+            // {
+            //     Debug.LogError("[Bootstrap] Data collector missing! Unable to continue.");
+            //     yield break;
+            // }
+            // yield return StartCoroutine(dataCollector.Activate());
 
             var sceneController = SceneController.Instance;
             if (sceneController == null)

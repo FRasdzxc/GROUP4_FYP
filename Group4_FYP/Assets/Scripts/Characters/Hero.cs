@@ -17,7 +17,7 @@ public class Hero : MonoBehaviour
 
     private HUD hud;
     private SpriteRenderer sr;
-    private bool isDead;
+    public bool IsDead { get; private set; }
     private GameObject spawnPoint;
     private string profileName;
     private ProfileData profile;
@@ -100,7 +100,7 @@ public class Hero : MonoBehaviour
     void Update()
     {
         // test respawn
-        if (!isDead)
+        if (!IsDead)
         {
             // health
             if (health < upgradedMaxHealth)
@@ -150,7 +150,7 @@ public class Hero : MonoBehaviour
 
     public void Setup() // useful for respawn
     {
-        isDead = false;
+        IsDead = false;
         // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
         PostProcessController.Instance?.ChangeVolume(PostProcessController.ProfileType.Default, false);
@@ -170,7 +170,7 @@ public class Hero : MonoBehaviour
 
     private void TakeDamage(float damage, bool accountForDefenseUpgrade = true)
     {
-        if (!isDead && GameManager.Instance.IsPlayingHostile())
+        if (!IsDead && GameManager.Instance.IsPlayingHostile())
         {
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
             // DataCollector.Instance?.DamageTaken(amount);
@@ -182,7 +182,7 @@ public class Hero : MonoBehaviour
 
     private IEnumerator Die()
     {
-        isDead = true;
+        IsDead = true;
         health = 0;
         // hud.UpdateHealth(health);
         hud.UpdateHealth(health, upgradedMaxHealth);

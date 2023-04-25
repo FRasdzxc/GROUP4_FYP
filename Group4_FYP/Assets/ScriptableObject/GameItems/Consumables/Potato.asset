@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e15b1ab055d684d9325036dd2a7f18, type: 3}
-  m_Name: Chicken
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  itemID: consumable_chicken
-  itemName: Chicken
+  itemID: consumable_potato
+  itemName: Potato
   itemType: 2
-  itemDescription: Cooked chicken (probably edible)
-  minDropSize: 2
-  maxDropSize: 5
-  sellPrice: 7
-  buyPrice: 12
-  itemIcon: {fileID: 21300000, guid: 11df5d1a9d0316a48b04b939e1a2deb5, type: 3}
+  itemDescription: Crunchy as an apple.
+  minDropSize: 1
+  maxDropSize: 4
+  sellPrice: 6
+  buyPrice: 8
+  itemIcon: {fileID: 21300000, guid: e2c553dd9e9e95e469b8e4022faeeaf1, type: 3}
   sound: {fileID: 0}
   isUsable: 1
   isBuyable: 1
   effects:
   - effectType: 0
-    value: 25
+    value: 17

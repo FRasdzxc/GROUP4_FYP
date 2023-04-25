@@ -9,15 +9,16 @@ public class WaveDungeonMapData : DungeonMapData
     public MobTable[] waves;
     [Tooltip("Unit: ms")] public int intermission = 1000;
     private int currentWave;
+    private MobSpawner mobSpawner;
 
     public async Task NextWave()
     {
         currentWave++;
 
         await HUD.Instance.ShowHugeMessageAsync($"Wave {currentWave + 1}", new Color32(255, 125, 0, 255), $"of {waves.Length}", Color.white);
-        MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
-        ground.MobTable = waves[currentWave];
-        ground.Spawn();
+        // MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
+        mobSpawner.MobTable = waves[currentWave];
+        mobSpawner.Spawn();
 
         while (GameManager.Instance.MobCount <= 0) // wait for mobs to finish spawning
             await Task.Yield();
@@ -27,7 +28,8 @@ public class WaveDungeonMapData : DungeonMapData
     {
         base.SetUp();
         currentWave = -1;
-        Debug.Log($"current wave {currentWave}");
+        mobSpawner = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
+        mobSpawner.MobTable = null;
     }
 
     public override async Task CheckCompletion()
@@ -41,10 +43,18 @@ public class WaveDungeonMapData : DungeonMapData
 
         while (currentWave < waves.Length - 1)
         {
+            if (Hero.Instance.IsDead)
+                break;
+
             await NextWave();
 
             while (GameManager.Instance.MobCount > 0)
-                await Task.Yield();
+            {
+                if (Hero.Instance.IsDead)
+                    break;
+
+                await Task.Yield();                
+            }
 
             await HUD.Instance.ShowHugeMessageAsync("Wave", "cleared");
             await Task.Delay(intermission);
