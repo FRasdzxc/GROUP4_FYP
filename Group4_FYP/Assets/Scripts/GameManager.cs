@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     private MapData currentMapData;
     private GameObject currentMap;
-    private bool mapCleared;
+    // private bool mapCleared;
     public int MobCount { get; set; }
 
     protected override void Awake()
@@ -49,23 +49,23 @@ public class GameManager : Singleton<GameManager>
             return;
 
         MobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
+        hud.UpdateMobCount(MobCount);
 
-        if (!mapCleared)
-        {
-            hud.UpdateMobCount(MobCount);
-            if (MobCount <= 0)
-            {
-                if (currentMapData is DungeonMapData dungeon)
-                {
-                    //if (currentMapData.mapType == MapType.Dungeon)
-                    //    DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
+        // if (!mapCleared)
+        // {
+            // if (MobCount <= 0)
+            // {
+            //     if (currentMapData is DungeonMapData dungeon)
+            //     {
+            //         //if (currentMapData.mapType == MapType.Dungeon)
+            //         //    DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
 
-                    dungeon.SpawnPortal();
-                }
+            //         dungeon.SpawnPortal();
+            //     }
 
-                mapCleared = true;
-            }
-        }
+            //     mapCleared = true;
+            // }
+        // }
     }
 
     public bool IsPlayingHostile()
@@ -79,19 +79,6 @@ public class GameManager : Singleton<GameManager>
         currentMapData = FindMap(mapId);
         if (!currentMapData)
             return;
-
-        //DataCollector.Instance?.MapVisited(mapId);
-
-        // if map is a dungeon, disable saving buttons
-        if (currentMapData.mapType == MapType.Dungeon)
-        {
-            pauseMenu.SetDungeonMode(true);
-            SaveSystem.Instance.SaveData(false, false);
-        }
-        else
-        {
-            pauseMenu.SetDungeonMode(false);
-        }
 
         // start load map operation
         if (!skipFadeIn)
@@ -115,22 +102,13 @@ public class GameManager : Singleton<GameManager>
         // spawn hero
         hero.Spawn();
 
-        // set objective
-        if (currentMapData.objective.Length > 0) // if objective is not empty
-            hud.ShowObjective(currentMapData.objective);
-        else
-            hud.HideObjective();
-
         await Task.Delay(50); // make the game look smoother
         await LoadingScreen.Instance.FadeOutAsync();
 
-        if (currentMapData.mapType == MapType.Peaceful)
-            StartCoroutine(hud.ShowHugeMessage(currentMapData.mapName, currentMapData.mapType.ToString()));
-        else
-            StartCoroutine(hud.ShowHugeMessage(currentMapData.mapName, $"{currentMapData.mapType} | {currentMapData.mapDifficulty}"));
+        currentMapData.SetUp();
 
         GameState = GameState.Playing;
-        mapCleared = false;
+        // mapCleared = false;
         MobDirectionController.Instance.Activated = false; // reset arrows indicating mob directions
 
         if (saveOnLoaded)

@@ -22,5 +22,8 @@ MonoBehaviour:
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 0}
   waves:
-  - {fileID: 11400000, guid: 247a65acb919c284fb8d100b68d45ac6, type: 2}
-  - {fileID: 11400000, guid: 031a6e017ebed6840aaeaae606d6dde6, type: 2}
+  - {fileID: 11400000, guid: 6271dc8cb8cda364ba94a804cebac882, type: 2}
+  - {fileID: 11400000, guid: 9027802581b68054989230264e09aaba, type: 2}
+  - {fileID: 11400000, guid: d3380e2c95e7cb545b7a5be490b2e4ed, type: 2}
+  - {fileID: 11400000, guid: 924e5d89a6fa19344bd1f0a26d6ac809, type: 2}
+  intermission: 1000

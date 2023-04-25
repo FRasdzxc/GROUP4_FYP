@@ -25,6 +25,17 @@ public class PauseMenu : Panel
     private InputAction saveGameAction;
     private InputAction exitToMenuAction;
 
+    private static PauseMenu m_instance;
+    public static PauseMenu Instance => m_instance;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (!m_instance)
+            m_instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

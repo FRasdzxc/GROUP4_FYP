@@ -619,6 +619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dungeon-V
       objectReference: {fileID: 0}
+    - target: {fileID: 645493463298389015, guid: e1890257b93179a4f833416b02aff0c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1890257b93179a4f833416b02aff0c3, type: 3}
 --- !u!1001 &3978102398846576122
@@ -678,7 +682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978102400795909892, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}

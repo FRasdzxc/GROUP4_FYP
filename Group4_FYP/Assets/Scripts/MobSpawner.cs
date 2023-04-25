@@ -6,7 +6,7 @@ public class MobSpawner : MonoBehaviour
 {
     [SerializeField] private MobTable Loot;
     [SerializeField] private int RandomDropCount = 1;
-    [SerializeField] private float DropRange = 5f;
+    [SerializeField] private float DropRange = 0.1f;
 
     public MobTable MobTable
     {
@@ -17,6 +17,12 @@ public class MobSpawner : MonoBehaviour
     private void Start()
         => Spawn();
 
+    // public void Spawn()
+    //     => Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+
     public void Spawn()
-        => Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+    {
+        for (int i = 0; i < 5; i++)
+            Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+    }
 }
