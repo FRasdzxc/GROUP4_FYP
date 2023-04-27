@@ -101,6 +101,8 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
     public async void ShowBuySellPanel(BuySellType buySellType)
     {
+        ShowPanel();
+
         // if (!HideConflictingPanels())
         // {
         //     return;
@@ -161,13 +163,6 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
         buySellPanelCanvasGroup.alpha = 1;
         isOpened = true; 
-
-        ShowPanel();
-    }
-
-    public override void ShowPanel()
-    {
-        base.ShowPanel();
     }
 
     public async override void HidePanel() // public async void HideBuySellPanel()

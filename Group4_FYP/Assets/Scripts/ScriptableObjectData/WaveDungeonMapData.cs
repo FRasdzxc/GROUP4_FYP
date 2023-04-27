@@ -13,10 +13,10 @@ public class WaveDungeonMapData : DungeonMapData
 
     public async Task NextWave()
     {
+        await Task.Delay(intermission);
         currentWave++;
 
         await HUD.Instance.ShowHugeMessageAsync($"Wave {currentWave + 1}", new Color32(255, 125, 0, 255), $"of {waves.Length}", Color.white);
-        // MobSpawner ground = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
         mobSpawner.MobTable = waves[currentWave];
         mobSpawner.Spawn();
 
@@ -28,11 +28,10 @@ public class WaveDungeonMapData : DungeonMapData
     {
         base.SetUp();
         currentWave = -1;
-        mobSpawner = Common.RecursiveFindTag(mapPrefab.transform, "MobGround").GetComponent<MobSpawner>();
-        mobSpawner.MobTable = null;
+        Common.RecursiveFindTag(mapPrefab.transform, "MobGround").TryGetComponent<MobSpawner>(out mobSpawner);
     }
 
-    public override async Task CheckCompletion()
+    public override async Task CheckCompletion() // TODO: fix; reason: mobs spawn after return to town after dying right after wave is cleared
     {
         if (waves == null)
         {
@@ -43,23 +42,23 @@ public class WaveDungeonMapData : DungeonMapData
 
         while (currentWave < waves.Length - 1)
         {
-            if (Hero.Instance.IsDead)
-                break;
-
             await NextWave();
 
             while (GameManager.Instance.MobCount > 0)
             {
                 if (Hero.Instance.IsDead)
-                    break;
+                {
+                    mobSpawner.MobTable = null;
+                    return;
+                }
 
-                await Task.Yield();                
+                await Task.Yield();
             }
 
             await HUD.Instance.ShowHugeMessageAsync("Wave", "cleared");
-            await Task.Delay(intermission);
         }
 
+        mobSpawner.MobTable = null; // important!! or else the mobtable will be stuck at the last wave's mobtable forever
         SpawnPortal();
     }
 }

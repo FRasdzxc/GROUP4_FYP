@@ -10,6 +10,9 @@ public class DungeonMapData : MapData
 
     public async void SpawnPortal()
     {
+        if (isStopped)
+            return;
+
         //SaveSystem.Instance.SaveData(false, false);
         _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");
 

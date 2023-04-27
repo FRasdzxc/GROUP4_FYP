@@ -32,8 +32,8 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
 
         if (!panelIsShown)
         {
-            gameObject.SetActive(true);
             ShowPanel();
+            gameObject.SetActive(true);
             await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
             panelIsShown = true;
         }

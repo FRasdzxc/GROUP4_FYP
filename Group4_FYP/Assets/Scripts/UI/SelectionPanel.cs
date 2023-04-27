@@ -181,9 +181,9 @@ public class SelectionPanel : Panel
 
     public override async void ShowPanel()
     {
+        base.ShowPanel();
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-        base.ShowPanel();
     }
 
     public override void HidePanel()

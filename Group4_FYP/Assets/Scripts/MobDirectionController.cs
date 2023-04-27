@@ -6,6 +6,9 @@ public class MobDirectionController : MonoBehaviour
     private int activateCount = 5;
 
     [SerializeField]
+    private int activateLimit = 10;
+
+    [SerializeField]
     private GameObject mobDirectionGobj;
 
     [SerializeField]
@@ -24,13 +27,21 @@ public class MobDirectionController : MonoBehaviour
 
     void Update()
     {
-        if (!Activated && GameManager.Instance.MapType != MapType.Peaceful && GameManager.Instance.MobCount == activateCount)
-            Activated = true;
+        // if (!Activated && GameManager.Instance.MapType != MapType.Peaceful && GameManager.Instance.MobCount == activateCount)
+        //     Activated = true;
 
         if (Activated)
+        {
             mobDirectionHolder.SetActive(true);
+            if (GameManager.Instance.MobCount > activateLimit)
+                Activated = false;
+        }
         else
+        {
             mobDirectionHolder.SetActive(false);
+            if (GameManager.Instance.MapType != MapType.Peaceful && GameManager.Instance.MobCount <= activateCount)
+                Activated = true;
+        }
     }
 
     public void AddDirection(Transform mobTransform)

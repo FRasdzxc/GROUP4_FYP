@@ -13,6 +13,8 @@ public class MapData : ScriptableObject
     public string objective;
     public GameObject mapPrefab;
 
+    protected bool isStopped;
+
     public async virtual void SetUp()
     {
         // setting up pausemenu mode
@@ -38,8 +40,12 @@ public class MapData : ScriptableObject
         else
             await HUD.Instance.ShowHugeMessageAsync(mapName, $"{mapType} | {mapDifficulty}");
 
+        isStopped = false;
         await CheckCompletion();
     }
 
     public async virtual Task CheckCompletion() {}
+
+    public void Stop()
+        => isStopped = true;
 }

@@ -23,7 +23,6 @@ public class GameManager : Singleton<GameManager>
 
     private MapData currentMapData;
     private GameObject currentMap;
-    // private bool mapCleared;
     public int MobCount { get; set; }
 
     protected override void Awake()
@@ -50,22 +49,6 @@ public class GameManager : Singleton<GameManager>
 
         MobCount = GameObject.FindGameObjectsWithTag("Mob").Length;
         hud.UpdateMobCount(MobCount);
-
-        // if (!mapCleared)
-        // {
-            // if (MobCount <= 0)
-            // {
-            //     if (currentMapData is DungeonMapData dungeon)
-            //     {
-            //         //if (currentMapData.mapType == MapType.Dungeon)
-            //         //    DataCollector.Instance?.DungeonCleared(currentMapData.mapId);
-
-            //         dungeon.SpawnPortal();
-            //     }
-
-            //     mapCleared = true;
-            // }
-        // }
     }
 
     public bool IsPlayingHostile()
@@ -108,7 +91,6 @@ public class GameManager : Singleton<GameManager>
         currentMapData.SetUp();
 
         GameState = GameState.Playing;
-        // mapCleared = false;
         MobDirectionController.Instance.Activated = false; // reset arrows indicating mob directions
 
         if (saveOnLoaded)
@@ -125,5 +107,15 @@ public class GameManager : Singleton<GameManager>
 
         Debug.LogError($"[Game Manager] No map with an id of {mapId} found");
         return null;
+    }
+
+    public void GiveUp()
+    {
+        if (MapType != MapType.Dungeon)
+            Debug.LogWarning("[GameManager] Failed trying to give up in a non-dungeon map");
+
+        currentMapData.Stop();
+        GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
+        SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
     }
 }

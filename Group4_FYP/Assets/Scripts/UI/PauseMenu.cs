@@ -181,6 +181,19 @@ public class PauseMenu : Panel
     //     _ = HidePauseMenu(true);
     // }
 
+    public void GiveUp()
+    {
+        HidePanel();
+
+        ConfirmationPanel.Instance.ShowConfirmationPanel
+        (
+            "Give Up",
+            "You will lose all your progress earned in this dungeon!\nAre you sure you want to give up?",
+            () => { GameManager.Instance.GiveUp(); },
+            true
+        );
+    }
+
     public void SaveGame()
     {
         // await HidePauseMenu(true);
