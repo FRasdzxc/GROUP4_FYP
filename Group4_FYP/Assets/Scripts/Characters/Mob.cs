@@ -51,33 +51,19 @@ public class Mob : MonoBehaviour
         if (!isDead)
         {
             if (Vector2.Distance(transform.position, player.transform.position) <= attackDistance)
-            {
                 AttackPlayer();
-            }
             else if (Vector2.Distance(transform.position, player.transform.position) <= sightDistance)
-            {
                 ChasePlayer();
-            }
             else
-            {
                 WalkAround();
-            }
         }
         else
-        {
             sr.color = Color.red;
-        }
     }
 
-    protected virtual void AttackPlayer()
-    {
+    protected virtual void AttackPlayer() { }
 
-    }
-
-    protected virtual void AttackMethod()
-    {
-
-    }
+    protected virtual void AttackMethod() { }
 
     protected virtual void ChasePlayer()
     {
@@ -104,10 +90,7 @@ public class Mob : MonoBehaviour
         }
     }
 
-    private void WalkAround()
-    {
-
-    }
+    private void WalkAround() { }
 
     private void TakeDamage(float damage)
     {

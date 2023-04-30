@@ -12,6 +12,7 @@ public class MapData : ScriptableObject
     [Tooltip("Leave blank if none.")] [TextArea(5, 5)]
     public string objective;
     public GameObject mapPrefab;
+    public MusicEntry[] musics;
 
     protected bool isStopped;
 
@@ -33,6 +34,10 @@ public class MapData : ScriptableObject
             HUD.Instance.ShowObjective(objective);
         else
             HUD.Instance.HideObjective();
+
+        // set music
+        MusicManager.Instance.SetMusics(musics);
+        MusicManager.Instance.PlayMusic();
         
         // show huge message
         if (mapType == MapType.Peaceful)

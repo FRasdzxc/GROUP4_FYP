@@ -8,17 +8,13 @@ namespace PathOfHero.Others
         {
             foreach (Transform child in parent)
             {
-                if (child.name == childName)
-                {
+                if (child.name.Equals(childName))
                     return child;
-                }
                 else
                 {
                     Transform child2 = RecursiveFindChild(child, childName);
-                    if (child2 != null)
-                    {
+                    if (child2)
                         return child2;
-                    }
                 }
             }
 
@@ -30,16 +26,12 @@ namespace PathOfHero.Others
             foreach (Transform child in parent)
             {
                 if (child.CompareTag(tagName))
-                {
                     return child;
-                }
                 else
                 {
                     Transform child2 = RecursiveFindChild(child, tagName);
-                    if (child2 != null)
-                    {
+                    if (child2)
                         return child2;
-                    }
                 }
             }
 

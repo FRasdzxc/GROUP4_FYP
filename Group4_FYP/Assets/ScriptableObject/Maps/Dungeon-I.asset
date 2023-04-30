@@ -18,5 +18,18 @@ MonoBehaviour:
   mapDifficulty: 3
   objective: Kill all the mobs without dying
   mapPrefab: {fileID: 9080937833783401953, guid: 632738989ff713c4a87c8765670c1bbd, type: 3}
+  musics:
+  - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: c46a41e31c93e2b41a3905d27f33cbe3, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 44fe9c981f6248c4e9fd7811368c1c11, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 8cf767292d3d7a64fb3ba1709b81bd32, type: 3}
+    volume: 1
+    pitch: 1
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: -5}

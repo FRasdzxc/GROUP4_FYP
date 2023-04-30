@@ -63,6 +63,9 @@ public class GameManager : Singleton<GameManager>
         if (!currentMapData)
             return;
 
+        // stop music
+        MusicManager.Instance.StopMusic();
+
         // start load map operation
         if (!skipFadeIn)
             await LoadingScreen.Instance.FadeInAsync();

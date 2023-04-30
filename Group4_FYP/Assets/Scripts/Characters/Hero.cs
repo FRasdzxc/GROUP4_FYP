@@ -13,7 +13,9 @@ public class Hero : MonoBehaviour
 
     [SerializeField] private MovementControllerV2 movementController;
     [SerializeField] private AbilityManager abilityManager;
-    [SerializeField] private int orbObtainLevel = 5;
+    [SerializeField] private int orbObtainLevel = 2;
+    [SerializeField] private AudioClip[] damageSoundClips;
+    [SerializeField] private AudioClip[] dieSoundClips;
 
     private HUD hud;
     private SpriteRenderer sr;
@@ -63,6 +65,8 @@ public class Hero : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction takeDamageAction;
 
+    private AudioSource audioSource;
+
     private static Hero instance;
     public static Hero Instance
     {
@@ -92,6 +96,7 @@ public class Hero : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         movementController.SetMovementSpeed(heroData.walkspeed);
+        TryGetComponent<AudioSource>(out audioSource);
 
         Setup();
     }
@@ -175,6 +180,10 @@ public class Hero : MonoBehaviour
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
             // DataCollector.Instance?.DamageTaken(amount);
             health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
+
+            if (damageSoundClips.Length > 0)
+            PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+
             if (health <= 0)
                 StartCoroutine(Die());
         }
@@ -191,6 +200,9 @@ public class Hero : MonoBehaviour
         movementController.enabled = false;
         abilityManager.enabled = false;
         weaponHolder.SetActive(false);
+
+        if (dieSoundClips.Length > 0)
+            PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
 
         // DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
@@ -218,6 +230,12 @@ public class Hero : MonoBehaviour
         }
 
         transform.position = spawnPoint.transform.position;
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     #region Setters

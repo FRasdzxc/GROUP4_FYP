@@ -489,6 +489,10 @@ MonoBehaviour:
   movementController: {fileID: 8326585109876766391}
   abilityManager: {fileID: 8326585109876766389}
   orbObtainLevel: 2
+  damageSoundClips:
+  - {fileID: 8300000, guid: 0444b6cffc027d24c8752dcf61050a61, type: 3}
+  dieSoundClips:
+  - {fileID: 8300000, guid: b852ca0f9c6313f43b65ca1bba397b20, type: 3}
 --- !u!114 &8326585109876766391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateCount: 5
+  activateLimit: 10
   mobDirectionGobj: {fileID: 7297098698954881669, guid: 82f8db6030279ef4c8346d300c99acf5, type: 3}
   mobDirectionHolder: {fileID: 4841582503376072201}
 --- !u!1 &8326585110698822281
