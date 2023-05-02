@@ -1067,7 +1067,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401310886}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5
@@ -1721,7 +1721,6 @@ GameObject:
   - component: {fileID: 401310882}
   - component: {fileID: 401310881}
   - component: {fileID: 401310880}
-  - component: {fileID: 401310886}
   - component: {fileID: 401310885}
   - component: {fileID: 401310884}
   m_Layer: 5
@@ -1863,18 +1862,6 @@ MonoBehaviour:
   startButton: {fileID: 479398449}
   heroList: {fileID: 11400000, guid: b9d53cb8a800e654b97ad46253e85fec, type: 2}
   heroButtonPrefab: {fileID: 5950124309927006245, guid: ff4edb5ca11100c4796801cd45b22033, type: 3}
---- !u!114 &401310886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401310879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4b154b5fe493943a3aa07a9334cb56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &431582859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2235,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401310886}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5
@@ -3692,13 +3679,13 @@ GameObject:
   m_Component:
   - component: {fileID: 913822225}
   - component: {fileID: 913822224}
-  - component: {fileID: 913822226}
   - component: {fileID: 913822227}
   - component: {fileID: 913822228}
   - component: {fileID: 913822229}
   - component: {fileID: 913822230}
   - component: {fileID: 913822232}
   - component: {fileID: 913822231}
+  - component: {fileID: 913822233}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Player
@@ -3736,26 +3723,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &913822226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913822222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121d5f006c9db444fb836233582233d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursors:
-  - cursorType: 0
-    texture: {fileID: 2800000, guid: 814f747b9fd926b4380c0179393b3e3c, type: 3}
-    hotspot: {x: 0, y: 0}
-  - cursorType: 1
-    texture: {fileID: 2800000, guid: 82c6faef93c16464788b023b5875c711, type: 3}
-    hotspot: {x: 16, y: 16}
-  defaultCursorType: 0
 --- !u!114 &913822227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3919,6 +3886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e9ec37fa86b254f91011f0cee36bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 0.5
+  musics: []
 --- !u!82 &913822232
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4015,6 +3984,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &913822233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913822222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d762370534ecc4d856c948bf6a99b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &927541596
 GameObject:
   m_ObjectHideFlags: 0
@@ -18015,7 +17998,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401310886}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5
@@ -20427,7 +20410,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401310886}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5
@@ -21011,7 +20994,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 401310886}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 5

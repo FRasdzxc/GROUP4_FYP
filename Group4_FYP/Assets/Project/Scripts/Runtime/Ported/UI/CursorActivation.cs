@@ -5,8 +5,7 @@ using PathOfHero.Controllers;
 public class CursorActivation : MonoBehaviour, IPointerEnterHandler/*, IPointerExitHandler*/
 {
     [SerializeField] private CursorController.CursorType cursorType;
-
-    private CursorController cursorController;
+    [SerializeField] private CursorController cursorController;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -16,21 +15,15 @@ public class CursorActivation : MonoBehaviour, IPointerEnterHandler/*, IPointerE
         }
     }
 
-    // public void OnPointerExit(PointerEventData eventData)
-    // {
-    //     if (eventData.pointerEnter == gameObject)
-    //     {
-    //         SetDefaultCursor();
-    //     }
-    // }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter == gameObject)
+            SetDefaultCursor();
+    }
 
-    // private void OnDisable()
-    // {
-    //     SetDefaultCursor();
-    // }
+    private void OnDisable()
+        => SetDefaultCursor();
 
-    // private void SetDefaultCursor()
-    // {
-    //     cursorController.Instance.SetDefaultCursor();
-    // }
+    private void SetDefaultCursor()
+        => cursorController.ChangeCursor(CursorManager.Instance.GetDefaultCursorType());
 }

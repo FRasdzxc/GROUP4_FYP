@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using PathOfHero.Controllers;
 
 public class DemoGameController : MonoBehaviour
 {
@@ -48,11 +49,11 @@ public class DemoGameController : MonoBehaviour
     {
         if (nextSceneName != null && nextSceneName != "")
         {
-            sceneController.ChangeScene(nextSceneName);
+            sceneController.ChangeScene(nextSceneName, true);
         }
         else
         {
-            sceneController.ChangeScene("StartScene");
+            sceneController.ChangeScene("StartScene", false);
         }
     }
 }

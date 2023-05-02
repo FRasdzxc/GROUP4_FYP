@@ -5737,6 +5737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &3592812946997335703
 GameObject:
   m_ObjectHideFlags: 0
@@ -10897,6 +10898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &5090246128995789654
 GameObject:
   m_ObjectHideFlags: 0
@@ -17218,7 +17220,6 @@ GameObject:
   - component: {fileID: 5090246130794499718}
   - component: {fileID: 5461171456818540308}
   - component: {fileID: 7502825688549925029}
-  - component: {fileID: 5164690257240180271}
   - component: {fileID: 5626464308916716181}
   - component: {fileID: 1879950851838546367}
   - component: {fileID: 7982749462878118223}
@@ -17365,24 +17366,12 @@ MonoBehaviour:
   sideMenuPanel: {fileID: 5090246129528231747}
   settingsMenuPanel: {fileID: 5090246129817774023}
   pauseMenuBackground: {fileID: 5090246130570780244}
-  sceneController: {fileID: 5164690257240180271}
+  sceneController: {fileID: 0}
   settingsMenu: {fileID: 5626464308916716181}
   giveUpButton: {fileID: 6069510783256543876}
   saveButton: {fileID: 5090246128940633545}
   exitButton: {fileID: 5090246129958101501}
   warning: {fileID: 5185123592023468341}
---- !u!114 &5164690257240180271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090246130794499719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4b154b5fe493943a3aa07a9334cb56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5626464308916716181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17935,6 +17924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &5341296745794321464
 GameObject:
   m_ObjectHideFlags: 0
@@ -18762,6 +18752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &5674464578092708588
 GameObject:
   m_ObjectHideFlags: 0

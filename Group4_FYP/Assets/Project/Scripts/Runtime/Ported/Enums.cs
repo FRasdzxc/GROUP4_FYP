@@ -4,7 +4,7 @@ public enum ItemType { Weapon, Armor, Consumable, Misc, Relic }; // might not be
 public enum InventorySlotType { Any, Weapon, Armor, Ability };
 public enum InventoryMode { Normal, Apply, Revert, Throw, Preview };
 public enum EffectType { Health, Mana, Exp };
-public enum CursorType { Arrow, Crosshair };
+// public enum CursorType { Arrow, Crosshair };
 public enum GameState { Playing, Paused };
 public enum MapType { Peaceful, Hostile, Dungeon }
 public enum MapDifficulty { Peaceful, Easy, Medium, Hard, Extreme, Varies }

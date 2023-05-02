@@ -1187,6 +1187,7 @@ GameObject:
   - component: {fileID: 4623332038812992869}
   - component: {fileID: 7919453829245573704}
   - component: {fileID: 7919453829245573703}
+  - component: {fileID: 7919453829245573705}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1326,6 +1327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e9ec37fa86b254f91011f0cee36bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 0.5
   musics: []
 --- !u!82 &7919453829245573704
 AudioSource:
@@ -1423,3 +1425,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7919453829245573705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529991195262335111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d762370534ecc4d856c948bf6a99b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursorType: 1
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
