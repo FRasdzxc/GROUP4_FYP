@@ -40891,9 +40891,9 @@ MonoBehaviour:
   interactionKey: 101
   interactionDistance: 2.5
   sprite: {fileID: 21300000, guid: 4a9efd92bd67aff43884c7a5661a110e, type: 3}
-  header: You
+  header: Sign
   dialogues:
-  - 'Sign reads: "These doorways leads to every available maps."'
+  - '"These doorways leads to every available maps."'
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 1e5c554e43e795143985be8f3dfbba40, type: 2}
@@ -41996,9 +41996,9 @@ MonoBehaviour:
   interactionKey: 101
   interactionDistance: 2.5
   sprite: {fileID: 21300000, guid: 4a9efd92bd67aff43884c7a5661a110e, type: 3}
-  header: You
+  header: Sign
   dialogues:
-  - 'Sign reads: "These doorways leads to some dungeons."'
+  - '"These doorways leads to some dungeons."'
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 332b1359e96cdd9479e83a799d379ec3, type: 2}

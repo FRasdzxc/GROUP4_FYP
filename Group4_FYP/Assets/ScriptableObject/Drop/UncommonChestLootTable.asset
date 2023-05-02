@@ -38,6 +38,10 @@ MonoBehaviour:
     Drop: {fileID: 6344872860887252594, guid: 11198133b313e8448a966c87f4b82c39, type: 3}
     MinCountItem: 1
     MaxCountItem: 1
+  - Weight: 100
+    Drop: {fileID: 2029789369709086384, guid: dc383a4422b40814c887c58d2579714c, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
   - Weight: 2
     Drop: {fileID: 4256888354833000798, guid: ee97050c403f8fe4199a4d54fc68b8a1, type: 3}
     MinCountItem: 1

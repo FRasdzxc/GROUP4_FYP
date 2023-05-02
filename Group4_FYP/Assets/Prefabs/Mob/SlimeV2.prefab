@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5468477058089870180}
   m_RootOrder: 0
@@ -101,6 +102,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 507728811347102799}
   m_RootOrder: 0
@@ -115,11 +117,11 @@ GameObject:
   m_Component:
   - component: {fileID: 507728811023831877}
   - component: {fileID: 507728811023831878}
-  - component: {fileID: 507728811023831864}
+  - component: {fileID: 8308590813762375220}
   - component: {fileID: 507728811023831867}
-  - component: {fileID: 507728811023831865}
   - component: {fileID: 507728811023831866}
   - component: {fileID: -4350369900426014686}
+  - component: {fileID: 6057428682251227746}
   - component: {fileID: 5440191874023795710}
   m_Layer: 0
   m_Name: SlimeV2
@@ -138,6 +140,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 507728811347102799}
   - {fileID: 6529413892892979033}
@@ -185,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8713120321045492238, guid: 9727513a30c63f44fbb0f2880ce08685, type: 3}
+  m_Sprite: {fileID: -38972068, guid: e04ad0f7b3f09d44ba66388fcfe613a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -196,7 +199,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &507728811023831864
+--- !u!60 &8308590813762375220
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +216,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.84375, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -221,12 +224,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.296875, y: 0.25}
-      - {x: -0.421875, y: 0.09375}
-      - {x: -0.421875, y: -0.25}
-      - {x: 0.421875, y: -0.25}
-      - {x: 0.421875, y: 0.15625}
-      - {x: 0.359375, y: 0.25}
+    - - {x: 0.21875, y: 0.0625}
+      - {x: -0.21875, y: 0.0625}
+      - {x: -0.46875, y: -0.21875}
+      - {x: -0.5, y: -0.40625}
+      - {x: -0.4375, y: -0.5}
+      - {x: 0.4375, y: -0.5}
+      - {x: 0.46875, y: -0.46875}
+      - {x: 0.46875, y: -0.1875}
 --- !u!50 &507728811023831867
 Rigidbody2D:
   serializedVersion: 4
@@ -248,25 +253,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &507728811023831865
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507728811023831879}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b6ab6ef5a026f0c44a14a10503b17776, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &507728811023831866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobData: {fileID: 11400000, guid: 55e3f3cd9f289994b969ea48da47aa41, type: 2}
+  mobGobj: {fileID: 0}
   healthSlider: {fileID: 7136731778224898414}
   loot: {fileID: 11400000, guid: e6a6c685cd5541d4298a443b5ef73825, type: 2}
   randomDropCount: 1
@@ -290,6 +277,7 @@ MonoBehaviour:
   dieSoundClips:
   - {fileID: 8300000, guid: c806c01fa78ead84986fedf264944562, type: 3}
   audioSource: {fileID: 5440191874023795710}
+  smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   weapon: {fileID: 507728810613682366}
   projectile: {fileID: 8153043610433666323, guid: d9d46376b7fad484381884bb009bd053, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 96dd49addbf882347ba2bae4ce2a36dd, type: 2}
@@ -318,6 +306,26 @@ MonoBehaviour:
   hpAmount: 1
   mpAmount: 1
   offset: 1
+--- !u!95 &6057428682251227746
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507728811023831879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6ab6ef5a026f0c44a14a10503b17776, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!82 &5440191874023795710
 AudioSource:
   m_ObjectHideFlags: 0
@@ -440,6 +448,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 507728810613682365}
   m_Father: {fileID: 507728811023831877}
@@ -472,6 +481,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 567025403725809213}
   - {fileID: 5468477058089870180}
@@ -563,6 +573,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7088770034881261934}
   m_Father: {fileID: 507728811023831877}
@@ -660,6 +671,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6995178195904092164}
   m_Father: {fileID: 7088770034881261934}
@@ -698,6 +710,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7088770034881261934}
   m_RootOrder: 0

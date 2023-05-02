@@ -471,6 +471,7 @@ MonoBehaviour:
   dieSoundClips:
   - {fileID: 8300000, guid: c806c01fa78ead84986fedf264944562, type: 3}
   audioSource: {fileID: 5174809094978773523}
+  smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   weapon: {fileID: 5174809093882355902}
   projectile: {fileID: 6456023801555002155, guid: 0aece814d0118474b9e5bce2f236bcf3, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: acbaf303542f2384bbe40cd822c422ab, type: 2}

@@ -4,7 +4,10 @@ using DG.Tweening;
 
 public class Projectile : MonoBehaviour
 {
-    private bool m_Destorying;
+    [SerializeField]
+    private GameObject smoke;
+
+    private bool m_Destroying;
 
     public bool SelfDestruct { get; set; }
     public float SelfDestructTime { get; set; }
@@ -27,10 +30,14 @@ public class Projectile : MonoBehaviour
 
     public IEnumerator AnimatedDestroy(float duration)
     {
-        if (m_Destorying)
+        if (m_Destroying)
             yield break;
 
-        m_Destorying = true;
+        m_Destroying = true;
+
+        if (smoke)
+            Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+            
         yield return transform.DOScale(Vector3.zero, duration).WaitForCompletion();
         Destroy(gameObject);
     }

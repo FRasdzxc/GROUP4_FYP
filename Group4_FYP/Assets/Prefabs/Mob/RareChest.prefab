@@ -200,7 +200,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b2dba4a5676c735498c87c0e3c737207, type: 3}
   - {fileID: 8300000, guid: bb86ae7d61902914e8916becf4da4451, type: 3}
   - {fileID: 8300000, guid: b9c2626d4ee16374a9938a1a385ae642, type: 3}
+  - {fileID: 8300000, guid: ee664808070559c4382e29b7f3ce415c, type: 3}
   dieSoundClips:
+  - {fileID: 8300000, guid: b2dba4a5676c735498c87c0e3c737207, type: 3}
+  - {fileID: 8300000, guid: bb86ae7d61902914e8916becf4da4451, type: 3}
+  - {fileID: 8300000, guid: b9c2626d4ee16374a9938a1a385ae642, type: 3}
   - {fileID: 8300000, guid: ee664808070559c4382e29b7f3ce415c, type: 3}
   audioSource: {fileID: 7408008872827545679}
 --- !u!114 &7408008872827545678

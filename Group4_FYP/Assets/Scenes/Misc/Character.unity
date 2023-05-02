@@ -2143,6 +2143,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a4f30990f12680418370a1a00f6ae50, type: 3}
+--- !u!1001 &2090527252914549062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4382753041927794282, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753041927794282, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959116999, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_Name
+      value: BlobTentacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382753042959117007, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
 --- !u!1001 &2591473662025264474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2420,15 +2485,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5174809093711521471, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5174809093711521471, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5174809094978773522, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
       propertyPath: m_Name
       value: GoldenBlob
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174809094978773522, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5174809094978773530, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
       propertyPath: m_RootOrder

@@ -52,10 +52,10 @@ public static class ProfileManagerJson
 
     public static bool UpdateProfile(string profileName, string newProfileName)
     {
-        if (profileName == newProfileName)
+        if (profileName.Equals(newProfileName))
         {
             // show error
-            _ = Notification.Instance.ShowNotification("Profile name has not changed");
+            _ = Notification.Instance.ShowNotification("No changes detected");
 
             return false;
         }
