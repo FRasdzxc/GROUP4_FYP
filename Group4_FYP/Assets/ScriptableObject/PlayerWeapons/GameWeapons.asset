@@ -27,3 +27,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: a515289946ac30545bd390313f08cc99, type: 2}
       - {fileID: 11400000, guid: 4a7f1fe2d1373804d806ad2388363492, type: 2}
       - {fileID: 11400000, guid: 62dd830909dabb945b8cd216bdb34e35, type: 2}
+    - weaponId: weapon_elements
+      weaponTiers:
+      - {fileID: 11400000, guid: a2bb68e959a6375448d088e702df0567, type: 2}
+      - {fileID: 11400000, guid: 3223eeb18eef52f489be4571a34a346e, type: 2}
+      - {fileID: 11400000, guid: bf376c0b112d347498caa47f4f7f38b1, type: 2}
+      - {fileID: 11400000, guid: 6f7e43658586c8946b3079f90c8d8786, type: 2}

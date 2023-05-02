@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e0eaed94ae1024682a4df62f7578b2, type: 3}
+  m_Name: ElementsTier0
+  m_EditorClassIdentifier: 
+  itemID: weapon_elementstier0
+  itemName: Elements (Tier 0)
+  itemType: 0
+  itemDescription: Is this a test tube or a weapon? Who knows...
+  minDropSize: 1
+  maxDropSize: 1
+  sellPrice: 1350
+  buyPrice: 0
+  itemIcon: {fileID: -2046203153, guid: 2101723698c240048afd9f244f5ecd49, type: 3}
+  useSound: {fileID: 0}
+  isUsable: 1
+  isBuyable: 0
+  weapon: {fileID: 11400000, guid: a2bb68e959a6375448d088e702df0567, type: 2}

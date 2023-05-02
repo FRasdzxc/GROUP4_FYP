@@ -106,7 +106,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void UseItem()
     {
-        Debug.Log("use item: " + ItemData.itemName);
+        // Debug.Log("use item: " + ItemData.itemName);
 
         // use occupied item
         ItemData.Use();

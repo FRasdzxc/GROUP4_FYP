@@ -166,7 +166,7 @@ public class WeaponUpgradePanel : PanelOverride
             ConfirmationPanel.Instance.ShowConfirmationPanel
             (
                 "Upgrade Weapon",
-                $"Do you want to upgrade weapon to Tier {targetTier}?\n\nCost: {price.ToString("n0")} coins, Relic (Tier {targetTier})",
+                $"Do you want to upgrade this weapon to Tier {targetTier}?\n\nCost: {price.ToString("n0")} coins, Relic (Tier {targetTier})",
                 () =>
                 {
                     if (Hero.Instance.GetStoredCoin() >= price)

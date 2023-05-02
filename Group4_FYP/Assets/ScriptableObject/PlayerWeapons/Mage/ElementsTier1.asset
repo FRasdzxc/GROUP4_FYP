@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9e3d112829bfb408835967e9721491, type: 3}
+  m_Name: ElementsTier1
+  m_EditorClassIdentifier: 
+  weaponName: Elements (Tier 1)
+  weaponId: weapon_elements
+  weaponTier: 1
+  cooldown: 0.86
+  weaponGobj: {fileID: 6772836777944917472, guid: 1f866d6613f2b3e4fa3c2842b4833e5d, type: 3}
+  item: {fileID: 11400000, guid: 2be69446153416f4c8576eecfb709778, type: 2}
+  projectileLifeTime: 5
+  projectileSpeed: 32
+  projectilePerBurst: 3
+  burstCooldown: 0.12

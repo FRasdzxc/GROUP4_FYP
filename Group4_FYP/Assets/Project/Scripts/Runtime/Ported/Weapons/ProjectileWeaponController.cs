@@ -5,7 +5,7 @@ public class ProjectileWeaponController : WeaponController
     [SerializeField]
     protected GameObject projectile;
 
-    private ProjectileWeaponData projectileWeaponData;
+    protected ProjectileWeaponData projectileWeaponData;
     protected float projectileLifeTime;
     protected float projectileSpeed;
 

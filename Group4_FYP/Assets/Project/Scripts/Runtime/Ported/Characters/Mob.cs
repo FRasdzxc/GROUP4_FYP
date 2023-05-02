@@ -7,13 +7,15 @@ using PathOfHero.Telemetry;
 public class Mob : MonoBehaviour
 {
     [SerializeField] protected MobData mobData;
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private LootDrop loot;
-    [SerializeField] private int randomDropCount = 1;
-    [SerializeField] private float dropRange = 0.5f;
-    [SerializeField] private AudioClip[] damageSoundClips;
-    [SerializeField] private AudioClip[] dieSoundClips;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] protected GameObject mobGobj;
+    [SerializeField] protected Slider healthSlider;
+    [SerializeField] protected LootDrop loot;
+    [SerializeField] protected int randomDropCount = 1;
+    [SerializeField] protected float dropRange = 0.5f;
+    [SerializeField] protected AudioClip[] damageSoundClips;
+    [SerializeField] protected AudioClip[] dieSoundClips;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected GameObject smoke;
     protected float health;
     protected float sightDistance;
     protected float attackDistance;
@@ -38,9 +40,13 @@ public class Mob : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         isDead = false; // preventive
         point = GetComponent<PointDrop>();
-        sr = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         UpdateUI();
+
+        if (mobGobj)
+            sr = mobGobj.GetComponent<SpriteRenderer>();
+        else
+            sr = GetComponent<SpriteRenderer>();
 
         MobDirectionController.Instance.AddDirection(gameObject.transform);
     }
@@ -70,19 +76,18 @@ public class Mob : MonoBehaviour
         moveDir = ((Vector2)player.transform.position - rb2D.position).normalized;
         rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
         
-        // LookAt();
+        LookAt();
     }
 
     protected virtual void LookAt()
     {
+        if (!mobGobj)
+            return;
+
         if (moveDir.x < -0.5f)
-        {
-            transform.localScale = new Vector2(-1, 1);      // todo: make a sprite child for the sprite only and only change the scale of the sprite child
-        }
+            mobGobj.transform.localScale = new Vector2(-1, 1);      // todo: make a sprite child for the sprite only and only change the scale of the sprite child
         else if (moveDir.x > 0.5f)
-        {
-            transform.localScale = Vector2.one;
-        }
+            mobGobj.transform.localScale = Vector2.one;
     }
 
     private void WalkAround() { }
@@ -108,6 +113,10 @@ public class Mob : MonoBehaviour
             PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
             
         UpdateUI();
+
+        if (smoke)
+            Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+
         await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
 
         if (this) // trying to prevent MissingReferenceException

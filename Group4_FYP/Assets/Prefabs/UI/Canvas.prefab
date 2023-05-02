@@ -2084,8 +2084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Coins
   type: Currency
-  description: General currency of this game. Used for upgrading weapons, doing payments
-    and showing off etc.
+  description: General currency of this game. Used for upgrading weapons, buying
+    items and showing off etc.
   attributes: []
   hints: 
 --- !u!1 &1135195586084180902
@@ -6667,8 +6667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Coins
   type: Currency
-  description: General currency of this game. Used for upgrading weapons, doing payments
-    and showing off etc.
+  description: General currency of this game. Used for upgrading weapons, buying
+    items and showing off etc.
   attributes: []
   hints: 
 --- !u!1 &4027070803004280528

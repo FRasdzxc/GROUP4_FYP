@@ -15,7 +15,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     public int sellPrice; // used for selling and earning money?
     public int buyPrice;
     public Sprite itemIcon;
-    public AudioClip sound;
+    public AudioClip useSound;
     public bool isUsable;
     public bool isBuyable; // won't show up in shop if false
 
@@ -26,13 +26,13 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
 
     public virtual void Use()
     {
-        Debug.Log("using item " + itemName);
+        // Debug.Log("using item " + itemName);
 
         // play sound on player
-        if (sound)
+        if (useSound)
         {
             AudioSource audioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-            audioSource.clip = sound;
+            audioSource.clip = useSound;
             audioSource.Play();
         }
     }
