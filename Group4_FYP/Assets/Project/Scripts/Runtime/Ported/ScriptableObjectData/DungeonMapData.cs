@@ -20,6 +20,8 @@ public class DungeonMapData : MapData
         clone.transform.localScale = Vector2.zero;
         await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         _ = Notification.Instance.ShowNotification("Portal is opened!");
+
+        DirectionArrowController.Instance.AddDirection(DirectionType.ReturnPortal, clone.transform);
     }
 
     public async override Task CheckCompletion()

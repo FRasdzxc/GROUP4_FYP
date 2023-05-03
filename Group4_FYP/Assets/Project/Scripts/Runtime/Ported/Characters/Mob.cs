@@ -48,7 +48,8 @@ public class Mob : MonoBehaviour
         else
             sr = GetComponent<SpriteRenderer>();
 
-        MobDirectionController.Instance.AddDirection(gameObject.transform);
+        if (CompareTag("Mob"))
+            DirectionArrowController.Instance.AddDirection(DirectionType.Mob, gameObject.transform);
     }
 
     // Update is called once per frame

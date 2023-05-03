@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GuaranteedLootTable:
   - Weight: 0
-    Drop: {fileID: 671210741965604519, guid: 380c721a3cb2c4a4d84f9d30ed0b2cab, type: 3}
-    MinCountItem: 5
-    MaxCountItem: 7
+    Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
+    MinCountItem: 11
+    MaxCountItem: 13
+  - Weight: 0
+    Drop: {fileID: 7188210846190620196, guid: 28e511ec50857cc46b3ef6d04c495591, type: 3}
+    MinCountItem: 2
+    MaxCountItem: 3
   OneItemFromList: []
   WeightToNoDrop: 100

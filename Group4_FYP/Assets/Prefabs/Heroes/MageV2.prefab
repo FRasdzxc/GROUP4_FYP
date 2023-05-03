@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4375844527964805213}
   m_Layer: 0
-  m_Name: MobDirectionHolder
+  m_Name: DirectionArrowHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,8 +684,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateCount: 5
   activateLimit: 10
-  mobDirectionGobj: {fileID: 7297098698954881669, guid: 82f8db6030279ef4c8346d300c99acf5, type: 3}
-  mobDirectionHolder: {fileID: 4841582503376072201}
+  directionArrow: {fileID: 7297098698954881669, guid: 82f8db6030279ef4c8346d300c99acf5, type: 3}
+  directionArrowHolder: {fileID: 4841582503376072201}
 --- !u!1 &8326585110698822281
 GameObject:
   m_ObjectHideFlags: 0

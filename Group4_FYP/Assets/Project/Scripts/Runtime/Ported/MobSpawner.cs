@@ -15,8 +15,10 @@ public class MobSpawner : MonoBehaviour
     }
 
     private void Start()
-        => Spawn();
+    {
+        Spawn();
+    }
 
     public void Spawn()
-        => Loot.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
+        => Loot?.SpawnDrop(GetComponent<Tilemap>(), RandomDropCount, 0.1f, 0.1f);
 }

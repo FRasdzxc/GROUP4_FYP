@@ -1522,6 +1522,7 @@ GameObject:
   - component: {fileID: 1052529797393445793}
   - component: {fileID: 1052529797393445796}
   - component: {fileID: 5898923877207380741}
+  - component: {fileID: 5359834561443974536}
   m_Layer: 5
   m_Name: SelectionPanel
   m_TagString: Untagged
@@ -1618,6 +1619,20 @@ MonoBehaviour:
   contentTransform: {fileID: 7042272479334456928}
   buttonPrefab: {fileID: 2543435491405334919, guid: 7a70676a44f73aa458f60dee55529e4b, type: 3}
   gameMaps: {fileID: 11400000, guid: 3adb39b44db0775498888bbbe94578bc, type: 2}
+--- !u!114 &5359834561443974536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052529797393445807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7716b9ddd7eb1247a78029366a03b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorType: 0
+  cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
 --- !u!1 &1052529797404567023
 GameObject:
   m_ObjectHideFlags: 0

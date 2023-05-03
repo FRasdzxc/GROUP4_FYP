@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e921b9d0b616d2f43a728bbd2b5593b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 121a3b4233e7e234e861df3be465dc81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8356554789499952421}
   - component: {fileID: 3284744285691448005}
   m_Layer: 0
-  m_Name: MobDirection
+  m_Name: DirectionArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,3 +129,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab472c51364f2d4fb3c265697a13aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1031360981834763055}

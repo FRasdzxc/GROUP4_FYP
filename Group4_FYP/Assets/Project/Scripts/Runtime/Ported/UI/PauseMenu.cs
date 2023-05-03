@@ -83,34 +83,26 @@ public class PauseMenu : Panel
         if (showPauseAction.triggered)
         {
             if (GameManager.Instance.GameState == GameState.Playing)
-            {
                 ShowPanel();
-            }
         }
 
         if (isOpened) // not finished: also check if saving is allowed atm
         {
             // if (Input.GetKeyDown(KeyCode.BackQuote))
             if (saveGameAction.triggered)
-            {
                 SaveGame();
-            }
             // if (Input.GetKeyDown(KeyCode.End))
             if (exitToMenuAction.triggered)
-            {
                 ExitToMenu();
-            }
         }
 
+#if UNITY_EDITOR
         // test only
         if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
             SetDungeonMode(true);
-        }
         if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
             SetDungeonMode(false);
-        }
+#endif
     }
 
     //public async Task ShowPauseMenu()
@@ -220,7 +212,7 @@ public class PauseMenu : Panel
 
         // exit to menu
         //sceneController.ChangeScene("StartScene");
-        PathOfHero.Controllers.SceneController.Instance.ChangeScene("StartScene", false);
+        SceneController.Instance.ChangeScene("StartScene", false);
     }
 
     public void SetDungeonMode(bool value)

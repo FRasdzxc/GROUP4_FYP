@@ -28,4 +28,9 @@ public abstract class Panel : MonoBehaviour
         if (allowHiding)
             PanelManager.Instance.RemovePanel(this);
     }
+
+    public bool GetAllowHiding()
+    {
+        return allowHiding;
+    }
 }

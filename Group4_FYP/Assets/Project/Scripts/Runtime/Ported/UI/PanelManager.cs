@@ -52,6 +52,10 @@ namespace PathOfHero.Gameplay
             {
                 var index = shownPanels.Count - 1;
                 var panel = shownPanels[index];
+
+                if (!panel.GetAllowHiding())
+                    return;
+
                 shownPanels.RemoveAt(index);
                 panel.HidePanel();
             }

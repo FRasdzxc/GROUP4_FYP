@@ -1,6 +1,7 @@
 using UnityEngine;
+using PathOfHero.Utilities;
 
-public class MobDirectionController : MonoBehaviour
+public class DirectionArrowController : Singleton<DirectionArrowController>
 {
     [SerializeField]
     private int activateCount = 5;
@@ -9,21 +10,12 @@ public class MobDirectionController : MonoBehaviour
     private int activateLimit = 10;
 
     [SerializeField]
-    private GameObject mobDirectionGobj;
+    private GameObject directionArrow;
 
     [SerializeField]
-    private GameObject mobDirectionHolder;
+    private GameObject directionArrowHolder;
 
     public bool Activated { get; set; } = false;
-
-    private static MobDirectionController m_instance;
-    public static MobDirectionController Instance => m_instance;
-
-    void Awake()
-    {
-        if (!m_instance)
-            m_instance = this;
-    }
 
     void Update()
     {
@@ -32,24 +24,21 @@ public class MobDirectionController : MonoBehaviour
 
         if (Activated)
         {
-            mobDirectionHolder.SetActive(true);
+            directionArrowHolder.SetActive(true);
             if (GameManager.Instance.MobCount > activateLimit)
                 Activated = false;
         }
         else
         {
-            mobDirectionHolder.SetActive(false);
+            directionArrowHolder.SetActive(false);
             if (GameManager.Instance.MapType != MapType.Peaceful && GameManager.Instance.MobCount <= activateCount)
                 Activated = true;
         }
     }
 
-    public void AddDirection(Transform mobTransform)
+    public void AddDirection(DirectionType directionType, Transform mobTransform)
     {
-        if (!mobTransform.CompareTag("Mob"))
-            return;
-
-        MobDirection clone = Instantiate(mobDirectionGobj, transform.position, Quaternion.identity, mobDirectionHolder.transform).GetComponent<MobDirection>();
-        clone.MobTransform = mobTransform;
+        DirectionArrow clone = Instantiate(directionArrow, transform.position, Quaternion.identity, directionArrowHolder.transform).GetComponent<DirectionArrow>();
+        clone.SetUp(directionType, mobTransform);
     }
 }

@@ -94,7 +94,7 @@ public class GameManager : Singleton<GameManager>
         currentMapData.SetUp();
 
         GameState = GameState.Playing;
-        MobDirectionController.Instance.Activated = false; // reset arrows indicating mob directions
+        DirectionArrowController.Instance.Activated = false; // reset arrows indicating mob directions
 
         if (saveOnLoaded)
             SaveSystem.Instance.SaveData(true, false);
@@ -120,5 +120,10 @@ public class GameManager : Singleton<GameManager>
         currentMapData.Stop();
         GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
         SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
+    }
+
+    public GameObject GetMap()
+    {
+        return currentMap;
     }
 }
