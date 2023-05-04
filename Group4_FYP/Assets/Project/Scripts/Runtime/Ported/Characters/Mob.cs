@@ -26,6 +26,7 @@ public class Mob : MonoBehaviour
     protected SpriteRenderer sr;
     protected Rigidbody2D rb2D;
     protected Vector2 moveDir;
+    protected Animator animator;
 
     private int sliderValue;
 
@@ -41,6 +42,8 @@ public class Mob : MonoBehaviour
         isDead = false; // preventive
         point = GetComponent<PointDrop>();
         rb2D = GetComponent<Rigidbody2D>();
+        animator = mobGobj.GetComponent<Animator>();
+        Debug.Log(animator);
         UpdateUI();
 
         if (mobGobj)
@@ -63,6 +66,13 @@ public class Mob : MonoBehaviour
                 ChasePlayer();
             else
                 WalkAround();
+
+            if (animator)
+            {if (rb2D.velocity.magnitude <= 0f)
+                    animator.SetBool("IsMoving", false);
+                else
+                    animator.SetBool("IsMoving", true);
+            }
         }
         else
             sr.color = Color.red;

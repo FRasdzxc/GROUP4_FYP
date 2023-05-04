@@ -1862,6 +1862,8 @@ MonoBehaviour:
   startButton: {fileID: 479398449}
   heroList: {fileID: 11400000, guid: b9d53cb8a800e654b97ad46253e85fec, type: 2}
   heroButtonPrefab: {fileID: 5950124309927006245, guid: ff4edb5ca11100c4796801cd45b22033, type: 3}
+  audioSource: {fileID: 913822232}
+  enterGameSound: {fileID: 8300000, guid: 3a223c9846b3bad419e0f90b5a2f0e1c, type: 3}
 --- !u!1 &431582859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,8 +3888,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e9ec37fa86b254f91011f0cee36bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.5
-  musics: []
+  fadeDuration: 1
+  musics:
+  - music: {fileID: 8300000, guid: edcaaaea317c99343ac36b2ec122b736, type: 3}
+    volume: 1
+    pitch: 1
 --- !u!82 &913822232
 AudioSource:
   m_ObjectHideFlags: 0

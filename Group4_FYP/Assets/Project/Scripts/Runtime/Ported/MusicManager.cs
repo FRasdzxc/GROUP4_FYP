@@ -18,7 +18,7 @@ public class MusicManager : Singleton<MusicManager>
     private AudioSource audioSource;
 
     [SerializeField]
-    private float fadeDuration = 0.5f;
+    private float fadeDuration = 1f;
 
     [SerializeField]
     private List<MusicEntry> musics = new List<MusicEntry>();

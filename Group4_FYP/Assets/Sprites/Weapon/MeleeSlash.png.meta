@@ -1,34 +1,7 @@
 fileFormatVersion: 2
-guid: 925e480615b880b4cabf19805c43e6a3
+guid: 4518a52986f1f364d8f5abb74ca3106c
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -1999011962680276853
-    second: BlobExpanded_0
-  - first:
-      213: -8283440255431832520
-    second: BlobExpanded_1
-  - first:
-      213: 6490858359044939837
-    second: BlobExpanded_2
-  - first:
-      213: 888541948597547675
-    second: BlobExpanded_3
-  - first:
-      213: 8022106561606467337
-    second: BlobExpanded_4
-  - first:
-      213: -4916402121024961848
-    second: BlobExpanded_5
-  - first:
-      213: 2888124028003857406
-    second: BlobExpanded_6
-  - first:
-      213: -4077824599387062758
-    second: BlobExpanded_7
-  - first:
-      213: 1519397627205488393
-    second: BlobExpanded_8
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -90,7 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -108,31 +81,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: 4
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -144,7 +93,7 @@ TextureImporter:
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -153,10 +102,22 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -168,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlobExpanded_0
+      name: MeleeSlash_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b888fae06351244e0800000000000000
-      internalID: -1999011962680276853
+      spriteID: 79f7ac307ce1d4d448f1480f01b09094
+      internalID: -1062895096
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlobExpanded_1
+      name: MeleeSlash_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 32
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +164,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83c80d8a9fe4b0d80800000000000000
-      internalID: -8283440255431832520
+      spriteID: 5c4b72572295fab40948f0f1eb5e38df
+      internalID: 2021136213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlobExpanded_2
+      name: MeleeSlash_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a5f7d2c3021ca046a228c169263c8ba
+      internalID: 1111866481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeSlash_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d30af3a9949241a50800000000000000
-      internalID: 6490858359044939837
+      spriteID: e3da601b04f9d944a9c91095bcc53816
+      internalID: 767790063
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlobExpanded_3
+      name: MeleeSlash_4
       rect:
         serializedVersion: 2
-        x: 144
+        x: 128
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +227,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b92b03ec13cb45c00800000000000000
-      internalID: 888541948597547675
+      spriteID: c42573b9cee342a4196fadd4a70cbf46
+      internalID: -1079498345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlobExpanded_4
+      name: MeleeSlash_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f686ef23b0556f478a133c9258dff32
+      internalID: 671097028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MeleeSlash_6
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +269,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90f32e23a6f345f60800000000000000
-      internalID: 8022106561606467337
+      spriteID: b9f6ea7e4dd1beb42b3246856f07c397
+      internalID: 456934511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlobExpanded_5
+      name: MeleeSlash_7
       rect:
         serializedVersion: 2
-        x: 240
+        x: 224
         y: 0
-        width: 48
-        height: 48
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,71 +290,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c28453b15e65cbb0800000000000000
-      internalID: -4916402121024961848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BlobExpanded_6
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef3b074608da41820800000000000000
-      internalID: 2888124028003857406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BlobExpanded_7
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1e3f21d128a867c0800000000000000
-      internalID: -4077824599387062758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BlobExpanded_8
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90f8722871cf51510800000000000000
-      internalID: 1519397627205488393
+      spriteID: 51d265774fb79724ab4f510fcff5807f
+      internalID: -1881199581
       vertices: []
       indices: 
       edges: []
@@ -367,15 +307,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BlobExpanded_0: -1999011962680276853
-      BlobExpanded_1: -8283440255431832520
-      BlobExpanded_2: 6490858359044939837
-      BlobExpanded_5: -4916402121024961848
-      BlobExpanded_6: 2888124028003857406
-      BlobExpanded_7: -4077824599387062758
-      BlobExpanded_8: 1519397627205488393
-      BlobExpanded_3: 888541948597547675
-      BlobExpanded_4: 8022106561606467337
+      MeleeSlash_2: 1111866481
+      MeleeSlash_7: -1881199581
+      MeleeSlash_1: 2021136213
+      MeleeSlash_3: 767790063
+      MeleeSlash_5: 671097028
+      MeleeSlash_6: 456934511
+      MeleeSlash_4: -1079498345
+      MeleeSlash_0: -1062895096
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

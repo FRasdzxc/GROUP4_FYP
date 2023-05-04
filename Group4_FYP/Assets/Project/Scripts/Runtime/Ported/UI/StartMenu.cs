@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEditor;
 using DG.Tweening;
 using PathOfHero.UI;
+using PathOfHero.Controllers;
 
 public class StartMenu : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] private HeroList heroList;
     [SerializeField] private GameObject heroButtonPrefab;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip enterGameSound;
 
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
     private bool bHasEntered;
@@ -94,6 +97,7 @@ public class StartMenu : MonoBehaviour
     private async void EnterGame() // hide startPanel then show profileSelectionPanel
     {
         // play some sound effects maybe
+        audioSource.PlayOneShot(enterGameSound);
 
         await startPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.Linear).AsyncWaitForCompletion();
         startPanel.SetActive(false);
@@ -207,7 +211,8 @@ public class StartMenu : MonoBehaviour
     public void StartGame() // load selected profile data then enter GameScene // not finished
     {
         //SceneController.Instance.ChangeScene("PlayScene", true);
-        PathOfHero.Controllers.SceneController.Instance.ChangeScene("InGameScene", true);
+        SceneController.Instance.ChangeScene("InGameScene", true);
+        MusicManager.Instance.StopMusic();
     }
 
     public async void ShowProfileSelectionPanel() // hide every other panels then show profileSelectionPanel
@@ -238,6 +243,8 @@ public class StartMenu : MonoBehaviour
     {
         ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", async () =>
         {
+            MusicManager.Instance.StopMusic();
+
             //await MaskingCanvas.Instance.ShowMaskingCanvas(true); 
             await LoadingScreen.Instance.FadeInAsync();
 #if UNITY_EDITOR

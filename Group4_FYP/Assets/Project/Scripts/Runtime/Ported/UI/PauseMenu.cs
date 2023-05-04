@@ -213,6 +213,7 @@ public class PauseMenu : Panel
         // exit to menu
         //sceneController.ChangeScene("StartScene");
         SceneController.Instance.ChangeScene("StartScene", false);
+        MusicManager.Instance.StopMusic();
     }
 
     public void SetDungeonMode(bool value)

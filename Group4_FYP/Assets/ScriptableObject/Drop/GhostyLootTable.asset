@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa80a4f21652164d8ac37ff492439b4, type: 3}
+  m_Name: GhostyLootTable
+  m_EditorClassIdentifier: 
+  GuaranteedLootTable: []
+  OneItemFromList:
+  - Weight: 25
+    Drop: {fileID: 2029789369709086384, guid: dc383a4422b40814c887c58d2579714c, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 20
+    Drop: {fileID: 5347823573209747683, guid: 130d432e56edc0441a06b874ddf9c011, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 5
+    Drop: {fileID: 9099298838796875334, guid: 055d5324f11a79f49aa48068864f1065, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 5
+    Drop: {fileID: 3395594544174090495, guid: 7569faf933815b34c91351755f9a38f1, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 5
+    Drop: {fileID: 6041747765723977447, guid: 9f70cef844e3bec46a46278a16635011, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  - Weight: 2.5
+    Drop: {fileID: 4256888354833000798, guid: ee97050c403f8fe4199a4d54fc68b8a1, type: 3}
+    MinCountItem: 1
+    MaxCountItem: 1
+  WeightToNoDrop: 80
