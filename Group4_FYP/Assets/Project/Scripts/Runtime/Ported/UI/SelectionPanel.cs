@@ -128,7 +128,7 @@ public class SelectionPanel : Panel
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
-                        if (mapData.mapType == MapType.Dungeon)
+                        if (mapData.mapType == MapType.Dungeon || mapData.mapType == MapType.WaveDungeon)
                         {
                             GameObject button = Instantiate(buttonPrefab, contentTransform);
                             button.GetComponent<Button>().onClick.AddListener(delegate

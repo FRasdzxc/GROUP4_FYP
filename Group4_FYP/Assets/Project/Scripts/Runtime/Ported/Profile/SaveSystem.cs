@@ -45,7 +45,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void Update()
     {
-        if (Time.unscaledTime >= nextSaveTime && GameManager.Instance.MapType != MapType.Dungeon)
+        if (Time.unscaledTime >= nextSaveTime && (GameManager.Instance.MapType != MapType.Dungeon || GameManager.Instance.MapType != MapType.WaveDungeon))
         {
             SaveData();
             nextSaveTime = Time.unscaledTime + autosaveDuration;
@@ -83,7 +83,7 @@ public class SaveSystem : Singleton<SaveSystem>
     {
         if (accountForMapType)
         {
-            if (GameManager.Instance.MapType == MapType.Dungeon)
+            if (GameManager.Instance.MapType == MapType.Dungeon || GameManager.Instance.MapType == MapType.WaveDungeon)
             {
                 _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle");
                 return;

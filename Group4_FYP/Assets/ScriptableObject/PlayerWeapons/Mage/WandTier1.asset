@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: WandTier1
   m_EditorClassIdentifier: 
   weaponName: Wand (Tier 1)
+  weaponId: weapon_wand
   weaponTier: 1
   cooldown: 0.65
   weaponGobj: {fileID: 2479174408548472528, guid: 0c610f2b76f229b449c60eda1271627c, type: 3}
   item: {fileID: 11400000, guid: 578e2134ae3e6b64c939142da44f7fdd, type: 2}
   projectileLifeTime: 5
   projectileSpeed: 30
+  projectileOffset: {x: 0, y: 0.5}

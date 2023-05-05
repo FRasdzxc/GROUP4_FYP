@@ -686,6 +686,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
+--- !u!1001 &6920223519259679376
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6920223518521875086, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_Name
+      value: Dungeon-VIII HauntedMansion
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875086, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920223518521875120, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
 --- !u!1001 &7127511525127759607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -740,6 +801,10 @@ PrefabInstance:
     - target: {fileID: 7127511525629261590, guid: 0792e81601911ba46ad5c43b1b46ba40, type: 3}
       propertyPath: m_Name
       value: Dungeon-VII
+      objectReference: {fileID: 0}
+    - target: {fileID: 7127511525629261590, guid: 0792e81601911ba46ad5c43b1b46ba40, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0792e81601911ba46ad5c43b1b46ba40, type: 3}
@@ -804,3 +869,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e829ffa0a2fe344e9aae05a8c7b357c, type: 3}
+--- !u!1001 &8459538900292169436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283097, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459538900643283103, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
+      propertyPath: m_Name
+      value: Dungeon-IX TreasureHunt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}

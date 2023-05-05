@@ -33,7 +33,6 @@ public class StartMenu : MonoBehaviour
 
     [SerializeField] private HeroList heroList;
     [SerializeField] private GameObject heroButtonPrefab;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip enterGameSound;
 
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
@@ -97,7 +96,7 @@ public class StartMenu : MonoBehaviour
     private async void EnterGame() // hide startPanel then show profileSelectionPanel
     {
         // play some sound effects maybe
-        audioSource.PlayOneShot(enterGameSound);
+        AudioManager.Instance.PlaySound(enterGameSound);
 
         await startPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.Linear).AsyncWaitForCompletion();
         startPanel.SetActive(false);
@@ -212,7 +211,7 @@ public class StartMenu : MonoBehaviour
     {
         //SceneController.Instance.ChangeScene("PlayScene", true);
         SceneController.Instance.ChangeScene("InGameScene", true);
-        MusicManager.Instance.StopMusic();
+        AudioManager.Instance.StopMusic();
     }
 
     public async void ShowProfileSelectionPanel() // hide every other panels then show profileSelectionPanel
@@ -243,7 +242,7 @@ public class StartMenu : MonoBehaviour
     {
         ConfirmationPanel.Instance.ShowConfirmationPanel("Quit Game", "Take a rest?", async () =>
         {
-            MusicManager.Instance.StopMusic();
+            AudioManager.Instance.StopMusic();
 
             //await MaskingCanvas.Instance.ShowMaskingCanvas(true); 
             await LoadingScreen.Instance.FadeInAsync();

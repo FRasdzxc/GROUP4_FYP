@@ -19,7 +19,7 @@ public class MapData : ScriptableObject
     public async virtual void SetUp()
     {
         // setting up pausemenu mode
-        if (mapType == MapType.Dungeon)
+        if (mapType == MapType.Dungeon || mapType == MapType.WaveDungeon)
         {
             PauseMenu.Instance.SetDungeonMode(true);
             SaveSystem.Instance.SaveData(false, false);
@@ -36,8 +36,8 @@ public class MapData : ScriptableObject
             HUD.Instance.HideObjective();
 
         // set music
-        MusicManager.Instance.SetMusics(musics);
-        MusicManager.Instance.PlayMusic();
+        AudioManager.Instance.SetMusics(musics);
+        AudioManager.Instance.PlayMusic();
         
         // show huge message
         if (mapType == MapType.Peaceful)

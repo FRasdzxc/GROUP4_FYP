@@ -230,9 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7c022050ca8a5408fb5ebe2a01543c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobData: {fileID: 11400000, guid: 348fd1fa0ca793d4d9b5b556814061dc, type: 2}
+  mobData: {fileID: 11400000, guid: ac9077c1ff8989d40907601b4b1ebef2, type: 2}
+  mobGobj: {fileID: 0}
   healthSlider: {fileID: 2591473662290260762}
-  loot: {fileID: 11400000, guid: 2364f65a092992c44ad5700e40d61163, type: 2}
+  loot: {fileID: 11400000, guid: 100bccd4c815c1b44ae03e44b7519c4c, type: 2}
   randomDropCount: 1
   dropRange: 1
   damageSoundClips:
@@ -246,6 +247,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b9c2626d4ee16374a9938a1a385ae642, type: 3}
   - {fileID: 8300000, guid: ee664808070559c4382e29b7f3ce415c, type: 3}
   audioSource: {fileID: 2591473661711781078}
+  smoke: {fileID: 0}
 --- !u!114 &2591473661711781079
 MonoBehaviour:
   m_ObjectHideFlags: 0

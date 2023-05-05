@@ -14,4 +14,5 @@ public class ProjectileWeaponData : WeaponData
 
     public float projectileLifeTime;
     public float projectileSpeed;
+    public Vector2 projectileOffset = Vector2.zero;
 }

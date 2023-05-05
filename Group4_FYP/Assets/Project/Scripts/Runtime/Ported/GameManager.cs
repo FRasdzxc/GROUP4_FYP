@@ -64,7 +64,7 @@ public class GameManager : Singleton<GameManager>
             return;
 
         // stop music
-        MusicManager.Instance.StopMusic();
+        AudioManager.Instance.StopMusic();
 
         // start load map operation
         if (!skipFadeIn)
@@ -114,7 +114,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GiveUp()
     {
-        if (MapType != MapType.Dungeon)
+        if (MapType != MapType.Dungeon || MapType != MapType.WaveDungeon)
             Debug.LogWarning("[GameManager] Failed trying to give up in a non-dungeon map");
 
         currentMapData.Stop();

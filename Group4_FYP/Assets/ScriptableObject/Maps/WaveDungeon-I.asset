@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapId: map_wavedungeoni
   mapName: Snow Colosseum
-  mapType: 2
+  mapType: 3
   mapDifficulty: 2
   objective: Go through all the waves and kill all the mobs without dying, then enter
     the portal
   mapPrefab: {fileID: 3978102400795909892, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
+  musics: []
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 0}
   waves:

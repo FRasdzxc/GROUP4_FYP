@@ -20,3 +20,4 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 16d2c22810934de40bbda1b8d13c1532, type: 2}
   projectileLifeTime: 5
   projectileSpeed: 65
+  projectileOffset: {x: 0, y: 0.175}

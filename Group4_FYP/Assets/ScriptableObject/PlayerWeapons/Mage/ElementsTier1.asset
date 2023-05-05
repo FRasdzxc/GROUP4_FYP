@@ -20,5 +20,6 @@ MonoBehaviour:
   item: {fileID: 11400000, guid: 2be69446153416f4c8576eecfb709778, type: 2}
   projectileLifeTime: 5
   projectileSpeed: 32
+  projectileOffset: {x: 0, y: 0.49}
   projectilePerBurst: 3
   burstCooldown: 0.12

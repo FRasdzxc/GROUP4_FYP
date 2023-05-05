@@ -9994,6 +9994,7 @@ GameObject:
   - component: {fileID: 5090246128844480755}
   - component: {fileID: 5090246128844480756}
   - component: {fileID: 5090246128844480757}
+  - component: {fileID: 1149931052593672198}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -10080,7 +10081,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 100
+  m_ScrollSensitivity: 25
   m_Viewport: {fileID: 5090246129483834804}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 5090246129458133212}
@@ -10091,6 +10092,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1149931052593672198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090246128844480759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5090246128846998534
 GameObject:
   m_ObjectHideFlags: 0
@@ -15495,7 +15509,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5090246130228818542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17124,6 +17138,7 @@ GameObject:
   - component: {fileID: 5090246130688427034}
   - component: {fileID: 5090246130688427035}
   - component: {fileID: 5090246130688427036}
+  - component: {fileID: 1456369513457398439}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -17206,11 +17221,11 @@ MonoBehaviour:
   m_Content: {fileID: 5090246129523021061}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 100
+  m_ScrollSensitivity: 25
   m_Viewport: {fileID: 5090246129868541392}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 5090246128832591415}
@@ -17221,6 +17236,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1456369513457398439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090246130688427038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5090246130794499719
 GameObject:
   m_ObjectHideFlags: 0

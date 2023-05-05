@@ -13,7 +13,7 @@ public class MusicEntry
 }
 
 [RequireComponent(typeof(AudioSource))]
-public class MusicManager : Singleton<MusicManager>
+public class AudioManager : Singleton<AudioManager>
 {
     private AudioSource audioSource;
 
@@ -69,4 +69,7 @@ public class MusicManager : Singleton<MusicManager>
 
         this.musics = new List<MusicEntry>(musics);
     }
+
+    public void PlaySound(AudioClip sound)
+        => audioSource.PlayOneShot(sound);
 }
