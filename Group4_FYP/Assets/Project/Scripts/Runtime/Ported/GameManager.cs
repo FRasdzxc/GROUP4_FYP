@@ -79,6 +79,8 @@ public class GameManager : Singleton<GameManager>
             Destroy(chest);
         foreach (var drop in GameObject.FindGameObjectsWithTag("Drop"))
             Destroy(drop);
+        foreach (var coin in GameObject.FindGameObjectsWithTag("Coin"))
+            Destroy(coin);
 
         // clone new map
         currentMap = Instantiate(currentMapData.mapPrefab); // isn't Instantiate() synchronized?
@@ -118,8 +120,8 @@ public class GameManager : Singleton<GameManager>
             Debug.LogWarning("[GameManager] Failed trying to give up in a non-dungeon map");
 
         currentMapData.Stop();
-        GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
         SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
+        GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
     }
 
     public GameObject GetMap()

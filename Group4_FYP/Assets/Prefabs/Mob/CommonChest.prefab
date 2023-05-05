@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobData: {fileID: 11400000, guid: 348fd1fa0ca793d4d9b5b556814061dc, type: 2}
+  mobGobj: {fileID: 0}
   healthSlider: {fileID: 3713216166158761170}
   loot: {fileID: 11400000, guid: 2364f65a092992c44ad5700e40d61163, type: 2}
   randomDropCount: 1
@@ -359,6 +360,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b9c2626d4ee16374a9938a1a385ae642, type: 3}
   - {fileID: 8300000, guid: ee664808070559c4382e29b7f3ce415c, type: 3}
   audioSource: {fileID: 2013756095445636674}
+  smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
 --- !u!114 &1381862157460270494
 MonoBehaviour:
   m_ObjectHideFlags: 0

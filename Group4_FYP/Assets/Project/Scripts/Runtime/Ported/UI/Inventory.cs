@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using PathOfHero.Utilities;
 
 [Serializable]
 public class InventoryEntry
@@ -24,7 +25,7 @@ public class InventoryEntry
     }
 }
 
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
     //[SerializeField] private ItemData[] gameItems;
     [SerializeField] private GameItems gameItems;
@@ -33,33 +34,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int inventorySize = 32;
 
     private List<InventoryEntry> items = new List<InventoryEntry>();
-    private List<GameObject> inventorySlots;
+    private List<GameObject> inventorySlots = new List<GameObject>();
     private bool messageIsShown;
-
-    private static Inventory instance;
-    public static Inventory Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-
-        inventorySlots = new List<GameObject>();
-    }
 
     // Start is called before the first frame update
     void Start()
-    {
-        RefreshInventoryPanel();
-    }
+        => RefreshInventoryPanel();
 
     public int GetFreeEntry(ItemData item)
     {
@@ -100,7 +80,6 @@ public class Inventory : MonoBehaviour
         }
         
         RefreshInventoryPanel();
-
         return true;
     }
 
@@ -132,60 +111,24 @@ public class Inventory : MonoBehaviour
     //    }
     //}
 
-    // public void RefreshInventoryPanel(Transform contentPanelTransform, InventoryMode inventoryMode = InventoryMode.Normal)
-    // {
-    //     // destroy all the inventory slots
-    //     for (int i = 0; i < inventorySlots.Count; i++)
-    //     {
-    //         Destroy(inventorySlots[i]);
-    //     }
-    //     inventorySlots.Clear();
-
-    //     // add inventory slots
-    //     for (int i = 0; i < inventorySize; i++)
-    //     {
-    //         inventorySlots.Add(Instantiate(inventorySlotPrefab, contentPanelTransform));
-    //     }
-
-    //     // assign items to inventory slots
-    //     for (int i = 0; i < items.Count; i++)
-    //     {
-    //         inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty, inventoryMode);
-    //     }
-
-    //     // check if inventory isn't full
-    //     if (items.Count < inventorySlots.Count)
-    //     {
-    //         messageIsShown = false;
-    //     }
-    // }
-
     public void RefreshInventoryPanel()
     {
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
-        {
             Destroy(inventorySlots[i]);
-        }
         inventorySlots.Clear();
 
         // add inventory slots
         for (int i = 0; i < inventorySize; i++)
-        {
             inventorySlots.Add(Instantiate(inventorySlotPrefab, inventoryContentPanelTransform));
-        }
 
         // assign items to inventory slots
         for (int i = 0; i < items.Count; i++)
-        {
             inventorySlots[i].GetComponent<InventorySlot>().Configure(items[i].itemData, items[i].qty);
-        }
 
         // check if inventory isn't full
         if (items.Count < inventorySlots.Count)
-        {
             messageIsShown = false;
-        }
     }
 
     /* DropItem function? */
@@ -193,24 +136,16 @@ public class Inventory : MonoBehaviour
     /* SetItems function */
     public void SetItems(List<InventoryEntry> items)
     {
-        this.items = new List<InventoryEntry>();
-
-        foreach (InventoryEntry ie in items)
-        {
-            foreach (ItemData i in gameItems.itemList)
-            {
-                if (ie.itemID == i.itemID)
-                {
-                    this.items.Add(new InventoryEntry(i, ie.qty));
-                }
-            }
-        }
+        this.items = new List<InventoryEntry>(items);
+        RefreshInventoryPanel();
     }
 
     /* GetItems function */
     public List<InventoryEntry> GetItems()
     {
-        return items;
+        // clone list to prevent pass-by-reference
+        List<InventoryEntry> clone = new List<InventoryEntry>(items);
+        return clone;
     }
 
     public int GetInventorySize()

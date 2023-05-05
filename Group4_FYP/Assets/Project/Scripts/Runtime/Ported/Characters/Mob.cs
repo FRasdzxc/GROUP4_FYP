@@ -42,12 +42,13 @@ public class Mob : MonoBehaviour
         isDead = false; // preventive
         point = GetComponent<PointDrop>();
         rb2D = GetComponent<Rigidbody2D>();
-        animator = mobGobj.GetComponent<Animator>();
-        Debug.Log(animator);
         UpdateUI();
 
         if (mobGobj)
+        {
             sr = mobGobj.GetComponent<SpriteRenderer>();
+            animator = mobGobj.GetComponent<Animator>();
+        }
         else
             sr = GetComponent<SpriteRenderer>();
 

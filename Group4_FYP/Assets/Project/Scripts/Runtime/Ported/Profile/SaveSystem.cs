@@ -85,7 +85,7 @@ public class SaveSystem : Singleton<SaveSystem>
         {
             if (GameManager.Instance.MapType == MapType.Dungeon || GameManager.Instance.MapType == MapType.WaveDungeon)
             {
-                _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle");
+                _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle!");
                 return;
             }
         }

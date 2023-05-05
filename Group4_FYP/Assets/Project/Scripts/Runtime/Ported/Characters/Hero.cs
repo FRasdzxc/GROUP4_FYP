@@ -4,8 +4,9 @@ using PathOfHero.Controllers;
 using System.Collections;
 using PathOfHero.Telemetry;
 using PathOfHero.UI;
+using PathOfHero.Utilities;
 
-public class Hero : MonoBehaviour
+public class Hero : Singleton<Hero>
 {
     [SerializeField] private HeroData heroData;
 
@@ -67,21 +68,9 @@ public class Hero : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private static Hero instance;
-    public static Hero Instance
+    protected override void Awake()
     {
-        get
-        {
-            return instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
+        base.Awake();
 
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
@@ -123,8 +112,7 @@ public class Hero : MonoBehaviour
                 storedExp -= requiredExp;
                 //hud.SetupXP(level, requiredExp);
                 level++;
-                // DataCollector.Instance?.HeroLevel(level);
-                HeroPanel.Instance.UpdateLevel(level);
+                
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
 
                 if (level % orbObtainLevel == 0)
@@ -133,6 +121,9 @@ public class Hero : MonoBehaviour
                 }
             }
             hud.UpdateXP(level, storedExp, requiredExp);
+            // DataCollector.Instance?.HeroLevel(level);
+            HeroPanel.Instance.UpdateLevel(level);
+            HeroPanel.Instance.UpdateCoin(storedCoin);
 
 #if UNITY_EDITOR
             if (GameManager.Instance.IsPlayingHostile())
@@ -407,7 +398,7 @@ public class Hero : MonoBehaviour
         //else if (coin < 0)
         //    // DataCollector.Instance?.CoinsSpent(coin * -1);
         
-        HeroPanel.Instance.UpdateCoin(storedCoin);
+        // HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
     // public void DeductEXP(int exp)

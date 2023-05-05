@@ -1862,7 +1862,6 @@ MonoBehaviour:
   startButton: {fileID: 479398449}
   heroList: {fileID: 11400000, guid: b9d53cb8a800e654b97ad46253e85fec, type: 2}
   heroButtonPrefab: {fileID: 5950124309927006245, guid: ff4edb5ca11100c4796801cd45b22033, type: 3}
-  audioSource: {fileID: 913822232}
   enterGameSound: {fileID: 8300000, guid: 3a223c9846b3bad419e0f90b5a2f0e1c, type: 3}
 --- !u!1 &431582859
 GameObject:
@@ -4452,7 +4451,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
     m_FontSize: 75
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 75

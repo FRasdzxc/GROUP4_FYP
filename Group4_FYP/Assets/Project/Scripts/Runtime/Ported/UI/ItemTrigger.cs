@@ -22,13 +22,9 @@ public class ItemTrigger : Interaction
         for (int i = 0; i < random; i++)
         {
             if (Inventory.Instance.AddItem(item))
-            {
                 addedItemCount++;
-            }
             else
-            {
                 break;
-            }
         }
 
         if (addedItemCount != 0)

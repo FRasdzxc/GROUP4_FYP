@@ -70,7 +70,7 @@ public class WeaponUpgradePanel : PanelOverride
     }
 #endif
 
-    public async void ShowWeaponUpgradePanel()
+    public void ShowWeaponUpgradePanel()
     {
         if (!OverridePanel())
         {

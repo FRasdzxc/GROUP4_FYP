@@ -29,13 +29,9 @@ public abstract class Interaction : MonoBehaviour
 
         keyText.text = interactionKey.ToString();
         if (hint.Length > 0 || hint == null)
-        {
             hintText.text = hint;
-        }
         else
-        {
             hintText.text = "Interact";
-        }
         
         keyHintPanel.SetActive(false);
         keyHintPanelCanvasGroup = keyHintPanel.GetComponent<CanvasGroup>();
@@ -69,9 +65,7 @@ public abstract class Interaction : MonoBehaviour
             }
 
             if (Input.GetKeyDown(interactionKey))
-            {
                 Interact();
-            }
         }
         else
         {

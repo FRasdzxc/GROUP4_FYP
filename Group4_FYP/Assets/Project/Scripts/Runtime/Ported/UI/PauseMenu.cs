@@ -192,7 +192,7 @@ public class PauseMenu : Panel
         // await HidePauseMenu(true);
         HidePanel();
         settingsMenu.SaveSettings();
-        SaveSystem.Instance.SaveData(true);
+        SaveSystem.Instance.SaveData();
     }
 
     public async void ExitToMenu()

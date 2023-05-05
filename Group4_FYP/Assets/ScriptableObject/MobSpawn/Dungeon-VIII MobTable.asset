@@ -10,28 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ec84f69d21092b46890b657da0d79f1, type: 3}
-  m_Name: BossSceneMobTable
+  m_Name: Dungeon-VIII MobTable
   m_EditorClassIdentifier: 
   GuaranteedLootTable:
   - Weight: 0
-    Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
-    MinCountItem: 30
-    MaxCountItem: 40
-  - Weight: 0
-    Drop: {fileID: 671210741965604519, guid: 380c721a3cb2c4a4d84f9d30ed0b2cab, type: 3}
-    MinCountItem: 5
-    MaxCountItem: 7
+    Drop: {fileID: 4408933230094901699, guid: df20a60ab12cde640a67b31184c03a59, type: 3}
+    MinCountItem: 41
+    MaxCountItem: 45
   - Weight: 0
     Drop: {fileID: 6306989434864250619, guid: 65842008efe6c8342b7023afc2985132, type: 3}
-    MinCountItem: 2
-    MaxCountItem: 2
-  - Weight: 0
-    Drop: {fileID: 4382753042959116999, guid: 841f541d1eeb9f447b121b0e5842fcb4, type: 3}
-    MinCountItem: 1
-    MaxCountItem: 2
+    MinCountItem: 3
+    MaxCountItem: 4
   OneItemFromList:
   - Weight: 100
-    Drop: {fileID: 5089372464591535795, guid: d8fefa693a8e81945893190cc7a8cdd1, type: 3}
+    Drop: {fileID: 6306989434864250619, guid: 65842008efe6c8342b7023afc2985132, type: 3}
     MinCountItem: 1
     MaxCountItem: 2
   - Weight: 35

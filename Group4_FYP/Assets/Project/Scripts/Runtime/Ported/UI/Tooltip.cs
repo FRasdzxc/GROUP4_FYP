@@ -2,8 +2,9 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using PathOfHero.Utilities;
 
-public class Tooltip : MonoBehaviour
+public class Tooltip : Singleton<Tooltip>
 {
     [SerializeField] private Text headerText;
     [SerializeField] private Text typeText;
@@ -14,17 +15,6 @@ public class Tooltip : MonoBehaviour
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-
-    private static Tooltip _instance;
-    public static Tooltip Instance
-    {
-        get => _instance;
-    }
-
-    void Awake()
-    {
-        _instance = this;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -68,9 +58,7 @@ public class Tooltip : MonoBehaviour
             typeText.text = type;
         }
         else
-        {
             typeText.gameObject.SetActive(false);
-        }
 
         // description
         if (description != "")
@@ -79,32 +67,23 @@ public class Tooltip : MonoBehaviour
             descriptionText.text = description;
         }
         else
-        {
             descriptionText.gameObject.SetActive(false);
-        }
 
         // attributes
         if (attributes == null || attributes.Length <= 0)
-        {
             attributeText.gameObject.SetActive(false);
-        }
         else
         {
             StringBuilder sb = new StringBuilder();
             foreach (var v in attributes)
-            {
                 sb.AppendLine(v);
-            }
             attributeText.text = sb.ToString().Substring(0, sb.Length - 1); // remove last blank line
-
             attributeText.gameObject.SetActive(true);
         }
 
         // hints
         if (hints == null || hints.Length <= 0)
-        {
             hintText.gameObject.SetActive(false);
-        }
         else
         {
             StringBuilder sb = new StringBuilder();
@@ -135,7 +114,6 @@ public class Tooltip : MonoBehaviour
                 }
             }
             hintText.text = sb.ToString().Substring(0, sb.Length - 1); // remove last blank line
-
             hintText.gameObject.SetActive(true);
         }
 
@@ -160,8 +138,6 @@ public class Tooltip : MonoBehaviour
     private void KillTween()
     {
         if (DOTween.IsTweening(canvasGroup, true))
-        {
             DOTween.Kill(canvasGroup);
-        }
     }
 }
