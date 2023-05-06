@@ -138,7 +138,7 @@ public class Inventory : Singleton<Inventory>
     {
         List<InventoryEntry> clone = new List<InventoryEntry>(items);
 
-        foreach (InventoryEntry ie in items)
+        foreach (InventoryEntry ie in clone)
         {
             foreach (ItemData i in gameItems.itemList)
             {
