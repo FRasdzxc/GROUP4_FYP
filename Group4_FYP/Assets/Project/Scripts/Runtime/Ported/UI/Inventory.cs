@@ -136,26 +136,15 @@ public class Inventory : Singleton<Inventory>
     /* SetItems function */
     public void SetItems(List<InventoryEntry> items)
     {
-        List<InventoryEntry> clone = new List<InventoryEntry>(items);
-
-        foreach (InventoryEntry ie in clone)
-        {
-            foreach (ItemData i in gameItems.itemList)
-            {
-                if (ie.itemID == i.itemID)
-                    this.items.Add(new InventoryEntry(i, ie.qty));
-            }
-        }
-
+        this.items = new List<InventoryEntry>(items);
         RefreshInventoryPanel();
     }
 
     /* GetItems function */
     public List<InventoryEntry> GetItems()
     {
-        // clone list to prevent pass-by-reference
-        List<InventoryEntry> clone = new List<InventoryEntry>(items);
-        return clone;
+        // clone new list to prevent pass-by-reference
+        return new List<InventoryEntry>(items);
     }
 
     public int GetInventorySize()
