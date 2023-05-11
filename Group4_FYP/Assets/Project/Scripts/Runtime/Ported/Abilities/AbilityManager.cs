@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PathOfHero.Utilities;
 
-public class AbilityManager : MonoBehaviour
+public class AbilityManager : Singleton<AbilityManager>
 {
     [SerializeField] private Ability[] abilities;
 
@@ -24,27 +25,15 @@ public class AbilityManager : MonoBehaviour
     private float upgradedMaxMana;
     private float manaRegeneration;
     private float manaRegenerationUpgrade;
-    private float abilityOutputUpgrade;
+    private float abilityDamageUpgrade;
 
     private PlayerInput playerInput;
     private List<InputAction> abilityActions;
 
-    private static AbilityManager instance;
-    public static AbilityManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
-        if (!instance)
-        {
-            instance = this;
-        }
+        base.Awake();
 
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
 
@@ -172,9 +161,9 @@ public class AbilityManager : MonoBehaviour
         this.manaRegenerationUpgrade = value;
     }
 
-    public void SetAbilityOutputUpgrade(float value)
+    public void SetAbilityDamageUpgrade(float value)
     {
-        this.abilityOutputUpgrade = value;
+        this.abilityDamageUpgrade = value;
     }
 
     // Getters
@@ -203,9 +192,9 @@ public class AbilityManager : MonoBehaviour
         return manaRegenerationUpgrade;
     }
 
-    public float GetAbilityOutputUpgrade()
+    public float GetAbilityDamageUpgrade()
     {
-        return abilityOutputUpgrade;
+        return abilityDamageUpgrade;
     }
 
     // AddSubtract
@@ -225,9 +214,9 @@ public class AbilityManager : MonoBehaviour
         manaRegenerationUpgrade += value;
     }
 
-    public void AddAbilityOutputUpgrade(float value)
+    public void AddAbilityDamageUpgrade(float value)
     {
-        abilityOutputUpgrade += value;
+        abilityDamageUpgrade += value;
     }
     #endregion
 

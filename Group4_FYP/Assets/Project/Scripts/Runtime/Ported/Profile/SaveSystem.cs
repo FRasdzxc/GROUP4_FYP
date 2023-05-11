@@ -45,7 +45,7 @@ public class SaveSystem : Singleton<SaveSystem>
 
     private void Update()
     {
-        if (Time.unscaledTime >= nextSaveTime && (GameManager.Instance.MapType != MapType.Dungeon || GameManager.Instance.MapType != MapType.WaveDungeon))
+        if (Time.unscaledTime >= nextSaveTime && GameManager.Instance.MapType != MapType.Dungeon)
         {
             SaveData();
             nextSaveTime = Time.unscaledTime + autosaveDuration;
@@ -76,14 +76,14 @@ public class SaveSystem : Singleton<SaveSystem>
         abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
         hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
         weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
-        abilityManager.SetAbilityOutputUpgrade(profile.abilityOutputUpgrade);
+        abilityManager.SetAbilityDamageUpgrade(profile.abilityDamageUpgrade);
     }
 
     public void SaveData(bool showNotification = true, bool accountForMapType = true)
     {
         if (accountForMapType)
         {
-            if (GameManager.Instance.MapType == MapType.Dungeon || GameManager.Instance.MapType == MapType.WaveDungeon)
+            if (GameManager.Instance.MapType == MapType.Dungeon)
             {
                 _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle!");
                 return;
@@ -113,7 +113,7 @@ public class SaveSystem : Singleton<SaveSystem>
         profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
         profile.weaponId = weaponManager.GetWeaponId();
         profile.weaponTier = weaponManager.GetWeaponTier();
-        profile.abilityOutputUpgrade = abilityManager.GetAbilityOutputUpgrade();
+        profile.abilityDamageUpgrade = abilityManager.GetAbilityDamageUpgrade();
 
         ProfileManagerJson.SaveProfile(profile);
 

@@ -19,7 +19,7 @@ public class MapData : ScriptableObject
     public async virtual void SetUp()
     {
         // setting up pausemenu mode
-        if (mapType == MapType.Dungeon || mapType == MapType.WaveDungeon)
+        if (mapType == MapType.Dungeon)
         {
             PauseMenu.Instance.SetDungeonMode(true);
             SaveSystem.Instance.SaveData(false, false);

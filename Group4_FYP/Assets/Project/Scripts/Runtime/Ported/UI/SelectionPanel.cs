@@ -94,6 +94,25 @@ public class SelectionPanel : Panel
                             continue;
 
                         GameObject button = Instantiate(buttonPrefab, contentTransform);
+                        if (mapData.mapType == MapType.Dungeon)
+                        {
+                            button.GetComponent<Button>().onClick.AddListener(delegate
+                            {
+                                ConfirmationPanel.Instance.ShowConfirmationPanel
+                                (
+                                    $"Enter {mapData.mapName}",
+                                    $"Enter {mapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                                    () =>
+                                    {
+                                        GameManager.Instance.LoadMap(mapData.mapId);
+                                        HidePanel();
+                                    },
+                                    true
+                                );
+                            });
+                        }
+                        else
+                        {
                             button.GetComponent<Button>().onClick.AddListener(delegate
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
@@ -108,16 +127,17 @@ public class SelectionPanel : Panel
                                     true
                                 );
                             });
+                        }
 
-                            Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
-                            buttonTitle.text = mapData.mapName;
+                        Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
+                        buttonTitle.text = mapData.mapName;
 
-                            Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
+                        Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
 
-                            if (mapData.mapType == MapType.Peaceful)
-                                buttonDescription.text = $"{mapData.mapType.ToString()}";
-                            else
-                                buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
+                        if (mapData.mapType == MapType.Peaceful)
+                            buttonDescription.text = $"{mapData.mapType.ToString()}";
+                        else
+                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
                     }
                 }
                 break;
@@ -128,7 +148,7 @@ public class SelectionPanel : Panel
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
-                        if (mapData.mapType == MapType.Dungeon || mapData.mapType == MapType.WaveDungeon)
+                        if (mapData.mapType == MapType.Dungeon)
                         {
                             GameObject button = Instantiate(buttonPrefab, contentTransform);
                             button.GetComponent<Button>().onClick.AddListener(delegate

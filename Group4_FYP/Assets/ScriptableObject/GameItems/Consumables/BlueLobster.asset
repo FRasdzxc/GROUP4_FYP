@@ -19,16 +19,16 @@ MonoBehaviour:
     It is believed that it gives magical powers when consumed.
   minDropSize: 1
   maxDropSize: 1
-  sellPrice: 6940
-  buyPrice: 7568
+  sellPrice: 10940
+  buyPrice: 11568
   itemIcon: {fileID: 21300000, guid: 618c436b42b05dc44b4dd80a710a087a, type: 3}
-  sound: {fileID: 0}
+  useSound: {fileID: 0}
   isUsable: 1
   isBuyable: 1
   effects:
   - effectType: 0
-    value: 153
+    value: 213
   - effectType: 1
-    value: 256
+    value: 372
   - effectType: 2
-    value: 105237
+    value: 150237

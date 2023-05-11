@@ -23,6 +23,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private GameItems gameItems;
     // [SerializeField] private bool panelOverridable;
+    [SerializeField] private AudioClip buySellSound;
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
@@ -476,6 +477,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                     // HideBuySellPanel();
                     HidePanel();
                     _ = Notification.Instance.ShowNotification("Successfully bought items");
+                    AudioManager.Instance.PlaySound(buySellSound);
                 }
                 else
                 {
@@ -516,6 +518,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 // HideBuySellPanel();
                 HidePanel();
                 _ = Notification.Instance.ShowNotification("Successfully sold items");
+                AudioManager.Instance.PlaySound(buySellSound);
             });
     }
 

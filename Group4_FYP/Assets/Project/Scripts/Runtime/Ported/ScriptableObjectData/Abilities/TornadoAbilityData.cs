@@ -9,15 +9,15 @@ public class TornadoAbilityData : Ability
     public float endScale;
     public float scaleDuration;
 
+    private GameObject projectileClone;
+
     public override void Activate(GameObject character)
-    {
-        base.Activate(character);
-        
+    {        
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = character.transform.position.z;
         Vector3 projectDir = (mousePos - character.transform.position).normalized;
 
-        GameObject projectileClone = Instantiate(tornado, character.transform.position + projectDir, Quaternion.identity);
+        projectileClone = Instantiate(tornado, character.transform.position + projectDir, Quaternion.identity);
         if (projectileClone.TryGetComponent<Projectile>(out var projectile))
         {
             projectile.SelfDestruct = true;
@@ -25,18 +25,18 @@ public class TornadoAbilityData : Ability
         }
         projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
         projectileClone.transform.DOScale(endScale, scaleDuration);
+
+        base.Activate(character);
     }
 
-    protected override void calculateAbilityOutput()
+    protected override void calculateAbilityDamage()
     {
-        base.calculateAbilityOutput();
+        base.calculateAbilityDamage();
 
-        if (tornado.TryGetComponent<WeaponTrigger>(out WeaponTrigger weaponTrigger))
+        if (projectileClone.TryGetComponent<WeaponTrigger>(out WeaponTrigger weaponTrigger))
         {
-            weaponTrigger.SetDamage(weaponTrigger.GetDamage() * abilityOutputUpgrade);
-            weaponTrigger.SetCriticalDamage(weaponTrigger.GetCriticalDamage() * abilityOutputUpgrade);
+            weaponTrigger.SetDamage(weaponTrigger.GetDamage() + abilityDamageUpgrade);
+            weaponTrigger.SetCriticalDamage(weaponTrigger.GetCriticalDamage() + abilityDamageUpgrade);
         }
-        projectileSpeed *= abilityOutputUpgrade;
-        endScale *= abilityOutputUpgrade;
     }
 }

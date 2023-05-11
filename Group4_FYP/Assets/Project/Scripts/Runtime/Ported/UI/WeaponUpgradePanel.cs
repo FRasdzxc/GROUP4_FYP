@@ -16,7 +16,8 @@ public class WeaponUpgradePanel : PanelOverride
     [SerializeField] private Sprite notEqualsSprite;
     [SerializeField] private Text warningText;
     [SerializeField] private Text coinText;
-    [SerializeField] private Text costText; 
+    [SerializeField] private Text costText;
+    [SerializeField] private AudioClip weaponUpgradeSound;
 
     private bool isOpened;
     private CanvasGroup weaponUpgradePanelCanvasGroup;
@@ -177,6 +178,7 @@ public class WeaponUpgradePanel : PanelOverride
 
                         HidePanel();
                         _ = Notification.Instance.ShowNotification("Successfully upgraded weapon!");
+                        AudioManager.Instance.PlaySound(weaponUpgradeSound);
                     }
                     else
                     {

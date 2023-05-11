@@ -37,3 +37,7 @@ MonoBehaviour:
     type: 4
     description: Multiply collected Exp to gain more Exp
     value: 0.05
+  - orbUpgradeName: Ability Damage
+    type: 6
+    description: Increase damage of all abilities by value
+    value: 0.05

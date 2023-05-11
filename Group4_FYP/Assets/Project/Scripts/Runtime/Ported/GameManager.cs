@@ -116,7 +116,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GiveUp()
     {
-        if (MapType != MapType.Dungeon || MapType != MapType.WaveDungeon)
+        if (MapType != MapType.Dungeon)
             Debug.LogWarning("[GameManager] Failed trying to give up in a non-dungeon map");
 
         currentMapData.Stop();

@@ -29,16 +29,6 @@ public class MapChangeEventRequestData : EventRequestData
                     true
                 );
             }
-            else if (mapData.mapType == MapType.WaveDungeon)
-            {
-                ConfirmationPanel.Instance.ShowConfirmationPanel
-                (
-                    $"Enter {mapData.mapName}",
-                    $"Enter {mapData.mapName}?\n\n[!] Please note that you cannot save/quit in the middle of a dungeon battle! You will have to play through all the waves. Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
-                    () => { GameManager.Instance.LoadMap(mapId, saveOnMapLoaded); },
-                    true
-                );
-            }
             else
             {
                 ConfirmationPanel.Instance.ShowConfirmationPanel

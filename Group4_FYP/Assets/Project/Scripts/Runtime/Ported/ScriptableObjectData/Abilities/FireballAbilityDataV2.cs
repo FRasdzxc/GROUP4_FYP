@@ -8,10 +8,10 @@ public class FireballAbilityDataV2 : Ability
     public float projectileSpeed;
     public int fireballCount;
 
+    private Transform projectileClone;
+
     public override async void Activate(GameObject character)
     {
-        base.Activate(character);
-
         float currentAngle = 0;
         for (int i = 0; i < fireballCount; i++)
         {
@@ -19,29 +19,28 @@ public class FireballAbilityDataV2 : Ability
             Vector3 projectDir = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)).normalized;
             float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 
-            Transform projectileClone = Instantiate(fireball, character.transform.position + projectDir, Quaternion.Euler(0, 0, projectAngle));
+            projectileClone = Instantiate(fireball, character.transform.position + projectDir, Quaternion.Euler(0, 0, projectAngle));
             if (projectileClone.TryGetComponent<Projectile>(out var projectile))
             {
                 projectile.SelfDestruct = true;
                 projectile.SelfDestructTime = Time.time + lifeTime;
             }
             projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
+            base.Activate(character);
 
             currentAngle += 360 / (float)fireballCount;
             await Task.Delay(500 / fireballCount);
         }
     }
 
-    protected override void calculateAbilityOutput()
+    protected override void calculateAbilityDamage()
     {
-        base.calculateAbilityOutput();
+        base.calculateAbilityDamage();
 
-        if (fireball.TryGetComponent<WeaponTrigger>(out WeaponTrigger weaponTrigger))
+        if (projectileClone.TryGetComponent<WeaponTrigger>(out WeaponTrigger weaponTrigger))
         {
-            weaponTrigger.SetDamage(weaponTrigger.GetDamage() * abilityOutputUpgrade);
-            weaponTrigger.SetCriticalDamage(weaponTrigger.GetCriticalDamage() * abilityOutputUpgrade);
+            weaponTrigger.SetDamage(weaponTrigger.GetDamage() + abilityDamageUpgrade);
+            weaponTrigger.SetCriticalDamage(weaponTrigger.GetCriticalDamage() + abilityDamageUpgrade);
         }
-        projectileSpeed *= abilityOutputUpgrade;
-        fireballCount += Mathf.FloorToInt(abilityOutputUpgrade - 1);
     }
 }

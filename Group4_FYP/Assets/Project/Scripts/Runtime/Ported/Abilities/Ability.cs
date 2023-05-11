@@ -20,7 +20,7 @@ public class Ability : ScriptableObject
 
     public bool IsReady => Time.time >= nextActivateTime;
 
-    protected float abilityOutputUpgrade;
+    protected float abilityDamageUpgrade;
 
     public virtual void Activate(GameObject character)
     {
@@ -30,14 +30,9 @@ public class Ability : ScriptableObject
         //DataCollector.Instance?.AbilityUsed(abilityName);
         nextActivateTime = Time.time + cooldownTime;
 
-        abilityOutputUpgrade = AbilityManager.Instance.GetAbilityOutputUpgrade();
-        calculateAbilityOutput();
+        abilityDamageUpgrade = AbilityManager.Instance.GetAbilityDamageUpgrade();
+        calculateAbilityDamage();
     }
     
-    protected virtual void calculateAbilityOutput()
-    {
-        lifeTime *= abilityOutputUpgrade;
-        cooldownTime /= abilityOutputUpgrade;
-        manaCost /= abilityOutputUpgrade;
-    }
+    protected virtual void calculateAbilityDamage() { }
 }
