@@ -17506,6 +17506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPanel: {fileID: 271957611893753461, guid: 983382575e1c9a74baaeb2425a67e67c, type: 3}
+  notificationSound: {fileID: 8300000, guid: 8b4e8db67e8fe3d4588a9fd64727af59, type: 3}
 --- !u!114 &7176775381447257137
 MonoBehaviour:
   m_ObjectHideFlags: 0

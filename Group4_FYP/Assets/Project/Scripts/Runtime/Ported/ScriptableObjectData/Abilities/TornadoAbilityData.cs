@@ -12,7 +12,9 @@ public class TornadoAbilityData : Ability
     private GameObject projectileClone;
 
     public override void Activate(GameObject character)
-    {        
+    {
+        base.Activate(character);
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = character.transform.position.z;
         Vector3 projectDir = (mousePos - character.transform.position).normalized;
@@ -25,8 +27,7 @@ public class TornadoAbilityData : Ability
         }
         projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
         projectileClone.transform.DOScale(endScale, scaleDuration);
-
-        base.Activate(character);
+        calculateAbilityDamage();
     }
 
     protected override void calculateAbilityDamage()

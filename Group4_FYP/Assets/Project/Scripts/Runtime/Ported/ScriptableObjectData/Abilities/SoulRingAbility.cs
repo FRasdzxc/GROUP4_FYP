@@ -10,7 +10,9 @@ public class SoulRingAbility : Ability
     private GameObject soulRingClone;
 
     public async override void Activate(GameObject character)
-    {        
+    {
+        base.Activate(character);
+
         soulRingClone = Instantiate(soulRing, character.transform.position, Quaternion.identity, character.transform);
         if (soulRingClone.TryGetComponent<Spin>(out var spin))
         {
@@ -19,7 +21,7 @@ public class SoulRingAbility : Ability
             spin.Setup(rotationsPerSecond);
         }
         soulRingClone.transform.localScale = new Vector2(0.5f, 0.5f);
-        base.Activate(character);
+        calculateAbilityDamage();
 
         await soulRingClone.transform.DOScale(Vector2.one, 0.25f).AsyncWaitForCompletion();
     }

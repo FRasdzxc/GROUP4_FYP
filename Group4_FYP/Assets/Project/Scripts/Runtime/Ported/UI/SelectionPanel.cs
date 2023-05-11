@@ -93,18 +93,21 @@ public class SelectionPanel : Panel
                         if (mapData.mapId == GameManager.Instance.MapId)
                             continue;
 
+                        // set up confirmation panel when button is clicked
                         GameObject button = Instantiate(buttonPrefab, contentTransform);
                         if (mapData.mapType == MapType.Dungeon)
                         {
+                            DungeonMapData dungeonMapData = mapData as DungeonMapData;
+
                             button.GetComponent<Button>().onClick.AddListener(delegate
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
-                                    $"Enter {mapData.mapName}",
-                                    $"Enter {mapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                                    $"Enter {dungeonMapData.mapName}",
+                                    $"Enter {dungeonMapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {dungeonMapData.dungeonType} {dungeonMapData.mapType}\nDifficulty: {dungeonMapData.mapDifficulty}",
                                     () =>
                                     {
-                                        GameManager.Instance.LoadMap(mapData.mapId);
+                                        GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
                                     },
                                     true
@@ -129,6 +132,7 @@ public class SelectionPanel : Panel
                             });
                         }
 
+                        // set up button text
                         Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
                         buttonTitle.text = mapData.mapName;
 
@@ -136,8 +140,13 @@ public class SelectionPanel : Panel
 
                         if (mapData.mapType == MapType.Peaceful)
                             buttonDescription.text = $"{mapData.mapType.ToString()}";
+                        else if (mapData.mapType == MapType.Dungeon)
+                        {
+                            DungeonMapData dungeonMapData = mapData as DungeonMapData;
+                            buttonDescription.text = $"{dungeonMapData.dungeonType} {dungeonMapData.mapType.ToString()} / {dungeonMapData.mapDifficulty.ToString()}";
+                        }
                         else
-                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
+                            buttonDescription.text = $"{mapData.mapType.ToString()} / {mapData.mapDifficulty.ToString()}";
                     }
                 }
                 break;
@@ -150,16 +159,18 @@ public class SelectionPanel : Panel
                     {
                         if (mapData.mapType == MapType.Dungeon)
                         {
+                            DungeonMapData dungeonMapData = mapData as DungeonMapData;
+
                             GameObject button = Instantiate(buttonPrefab, contentTransform);
                             button.GetComponent<Button>().onClick.AddListener(delegate
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
-                                    $"Enter {mapData.mapName}",
-                                    $"Enter {mapData.mapName}?\n\n[!] Please note that you cannot save/quit in the middle of a dungeon battle! You will have to play through the whole dungeon. Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                                    $"Enter {dungeonMapData.mapName}",
+                                    $"Enter {dungeonMapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {dungeonMapData.dungeonType} {dungeonMapData.mapType}\nDifficulty: {dungeonMapData.mapDifficulty}",
                                     () =>
                                     {
-                                        GameManager.Instance.LoadMap(mapData.mapId);
+                                        GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
                                     },
                                     true
@@ -167,10 +178,10 @@ public class SelectionPanel : Panel
                             });
 
                             Text buttonTitle = Common.RecursiveFindChild(button.transform, "Title").GetComponent<Text>();
-                            buttonTitle.text = mapData.mapName;
+                            buttonTitle.text = dungeonMapData.mapName;
 
                             Text buttonDescription = Common.RecursiveFindChild(button.transform, "Description").GetComponent<Text>();
-                            buttonDescription.text = $"{mapData.mapType.ToString()} | {mapData.mapDifficulty.ToString()}";
+                            buttonDescription.text = $"{dungeonMapData.mapType.ToString()} ({dungeonMapData.dungeonType}) / {dungeonMapData.mapDifficulty.ToString()}";
                         }
                     }
                 }

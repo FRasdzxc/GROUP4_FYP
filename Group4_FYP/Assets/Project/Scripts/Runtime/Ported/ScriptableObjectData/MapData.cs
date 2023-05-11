@@ -40,16 +40,21 @@ public class MapData : ScriptableObject
         AudioManager.Instance.PlayMusic();
         
         // show huge message
-        if (mapType == MapType.Peaceful)
-            await HUD.Instance.ShowHugeMessageAsync(mapName, mapType.ToString());
-        else
-            await HUD.Instance.ShowHugeMessageAsync(mapName, $"{mapType} | {mapDifficulty}");
+        await ShowMapMessage();
 
         isStopped = false;
         await CheckCompletion();
     }
 
     public async virtual Task CheckCompletion() {}
+
+    public async virtual Task ShowMapMessage()
+    {
+        if (mapType == MapType.Peaceful)
+            await HUD.Instance.ShowHugeMessageAsync(mapName, mapType.ToString());
+        else
+            await HUD.Instance.ShowHugeMessageAsync(mapName, $"{mapType} / {mapDifficulty}");
+    }
 
     public void Stop()
         => isStopped = true;

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec84f69d21092b46890b657da0d79f1, type: 3}
+  m_Name: WaveDungeon-II MobTable2
+  m_EditorClassIdentifier: 
+  GuaranteedLootTable:
+  - Weight: 0
+    Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
+    MinCountItem: 9
+    MaxCountItem: 12
+  - Weight: 0
+    Drop: {fileID: 7226978476898237298, guid: 826b3668e9914ef44b3027fb2c3d7930, type: 3}
+    MinCountItem: 7
+    MaxCountItem: 9
+  - Weight: 0
+    Drop: {fileID: 671210741965604519, guid: 380c721a3cb2c4a4d84f9d30ed0b2cab, type: 3}
+    MinCountItem: 3
+    MaxCountItem: 4
+  OneItemFromList:
+  - Weight: 35
+    Drop: {fileID: 5174809094978773522, guid: 7b2451b4dd9eda9488d22fdf651347a9, type: 3}
+    MinCountItem: 2
+    MaxCountItem: 3
+  WeightToNoDrop: 100

@@ -23,8 +23,7 @@ public class WeaponTrigger : MonoBehaviour
     private float splitAngle = 0;
     private Vector3 shootDir;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         damage = weaponTriggerData.damage;
         critialDamage = weaponTriggerData.criticalDamage;
@@ -48,9 +47,7 @@ public class WeaponTrigger : MonoBehaviour
     public float GetDamage(bool isCritical)
     {
         if (isCritical)
-        {
             return critialDamage;
-        }
         
         return damage;
     }

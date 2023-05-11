@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50b6f96d89ddd6c48a2d995dcdc3ad9c, type: 3}
-  m_Name: WaveDungeon-I
+  m_Name: WaveDungeon-I SnowColosseum
   m_EditorClassIdentifier: 
   mapId: map_wavedungeoni
   mapName: Snow Colosseum
@@ -19,7 +19,17 @@ MonoBehaviour:
   objective: Go through all the waves and kill all the mobs without dying, then enter
     the portal
   mapPrefab: {fileID: 3978102400795909892, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
-  musics: []
+  musics:
+  - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 55874187a9b662b46ad1d07a09c72316, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
+    volume: 1
+    pitch: 1
+  dungeonType: 1
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 0}
   waves:

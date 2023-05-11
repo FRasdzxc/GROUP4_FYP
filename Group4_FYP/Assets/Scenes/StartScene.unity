@@ -1831,6 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPanel: {fileID: 271957611893753461, guid: 983382575e1c9a74baaeb2425a67e67c, type: 3}
+  notificationSound: {fileID: 0}
 --- !u!114 &401310885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3887,12 +3888,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e9ec37fa86b254f91011f0cee36bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intermission: 1.5
   fadeDuration: 1
   musics:
   - music: {fileID: 8300000, guid: edcaaaea317c99343ac36b2ec122b736, type: 3}
     volume: 1
     pitch: 1
   - music: {fileID: 8300000, guid: bc913708854eb6e4b85aa0dfe98ac304, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 79bb6924b9caca24abe1802fca1b03d9, type: 3}
     volume: 1
     pitch: 1
 --- !u!82 &913822232

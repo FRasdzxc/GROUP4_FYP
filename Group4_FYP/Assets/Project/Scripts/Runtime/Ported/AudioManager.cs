@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 using PathOfHero.Utilities;
@@ -18,12 +19,17 @@ public class AudioManager : Singleton<AudioManager>
     private AudioSource audioSource;
 
     [SerializeField] [Tooltip("Unit: seconds")]
+    private float intermission = 1.5f;
+
+    [SerializeField] [Tooltip("Unit: seconds")]
     private float fadeDuration = 1f;
 
     [SerializeField]
     private List<MusicEntry> musics = new List<MusicEntry>();
 
     private int lastMusicIndex = -1;
+
+    private bool musicPlaying = false;
 
     private bool stopRequested = false;
 
@@ -34,7 +40,7 @@ public class AudioManager : Singleton<AudioManager>
     // Update is called once per frame
     void Update()
     {
-        if (!audioSource.isPlaying)
+        if (!musicPlaying && !audioSource.isPlaying)
             PlayMusic();
         else
         {
@@ -65,6 +71,8 @@ public class AudioManager : Singleton<AudioManager>
 
         PlayMusic(musics[random]);
         lastMusicIndex = random;
+        musicPlaying = true;
+        stopRequested = false;
     }
 
     public async void StopMusic()
@@ -72,6 +80,8 @@ public class AudioManager : Singleton<AudioManager>
         stopRequested = true;
         await audioSource.DOFade(0, fadeDuration).AsyncWaitForCompletion();
         audioSource.Stop();
+        await Task.Delay((int)(intermission * 1000));
+        musicPlaying = false;
     }
 
     public void SetMusics(MusicEntry[] musics)

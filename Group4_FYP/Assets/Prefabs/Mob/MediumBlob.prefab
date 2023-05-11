@@ -655,7 +655,7 @@ MonoBehaviour:
   healthSlider: {fileID: 7226978475144938584}
   loot: {fileID: 11400000, guid: 3931fd1505a27a94da7dce0913cb2cd2, type: 2}
   randomDropCount: 1
-  dropRange: 2
+  dropRange: 0.5
   damageSoundClips:
   - {fileID: 8300000, guid: 057bf4f18100b884aa97e1e4fd07fb3d, type: 3}
   - {fileID: 8300000, guid: 44c09af41e61e92438ffd8467310cabb, type: 3}

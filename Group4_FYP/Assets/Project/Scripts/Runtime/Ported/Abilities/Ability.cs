@@ -31,7 +31,7 @@ public class Ability : ScriptableObject
         nextActivateTime = Time.time + cooldownTime;
 
         abilityDamageUpgrade = AbilityManager.Instance.GetAbilityDamageUpgrade();
-        calculateAbilityDamage();
+        // calculateAbilityDamage();    -> changed to be manually called
     }
     
     protected virtual void calculateAbilityDamage() { }

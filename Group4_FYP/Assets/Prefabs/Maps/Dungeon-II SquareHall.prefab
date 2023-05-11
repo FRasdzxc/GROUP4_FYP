@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4032373878171475125}
   - component: {fileID: 4032373878171475083}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: MobGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5123,7 +5123,7 @@ GameObject:
   - component: {fileID: 4032373878222675132}
   - component: {fileID: 4032373878222675133}
   m_Layer: 0
-  m_Name: Dungeon-II
+  m_Name: Dungeon-II SquareHall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5839,7 +5839,7 @@ GameObject:
   - component: {fileID: 4032373878816685198}
   - component: {fileID: 4032373878816685199}
   m_Layer: 0
-  m_Name: HeroSpawnGround
+  m_Name: SafeGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6568,8 +6568,8 @@ GameObject:
   - component: {fileID: 4032373878920377573}
   - component: {fileID: 4032373878920377574}
   m_Layer: 0
-  m_Name: Border
-  m_TagString: Border
+  m_Name: Walls
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

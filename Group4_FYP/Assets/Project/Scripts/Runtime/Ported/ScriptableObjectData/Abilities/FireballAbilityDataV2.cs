@@ -12,6 +12,8 @@ public class FireballAbilityDataV2 : Ability
 
     public override async void Activate(GameObject character)
     {
+        base.Activate(character);
+
         float currentAngle = 0;
         for (int i = 0; i < fireballCount; i++)
         {
@@ -26,7 +28,7 @@ public class FireballAbilityDataV2 : Ability
                 projectile.SelfDestructTime = Time.time + lifeTime;
             }
             projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
-            base.Activate(character);
+            calculateAbilityDamage();
 
             currentAngle += 360 / (float)fireballCount;
             await Task.Delay(500 / fireballCount);

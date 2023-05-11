@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 [CreateAssetMenu(fileName = "New Dungeon Map Data", menuName = "Game/Dungeon Map Data")]
 public class DungeonMapData : MapData
 {
+    public DungeonType dungeonType;
     public GameObject portalPrefab;
     public Vector2 portalPos;
 
@@ -31,4 +32,7 @@ public class DungeonMapData : MapData
 
         SpawnPortal();
     }
+
+    // public async override Task ShowMapMessage()  // until tutorial uses a custom mapdata or else this function will stay commented
+    //     => await HUD.Instance.ShowHugeMessageAsync(mapName, $"{dungeonType} {mapType} / {mapDifficulty}");
 }

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b6f96d89ddd6c48a2d995dcdc3ad9c, type: 3}
+  m_Name: WaveDungeon-II SpringColosseum
+  m_EditorClassIdentifier: 
+  mapId: map_wavedungeonii
+  mapName: Spring Colosseum
+  mapType: 2
+  mapDifficulty: 3
+  objective: Go through all the waves and kill all the mobs without dying, then enter
+    the portal
+  mapPrefab: {fileID: 9189386269216229620, guid: 58e83d863302b5c44bc68db655789b0e, type: 3}
+  musics:
+  - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 55874187a9b662b46ad1d07a09c72316, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
+    volume: 1
+    pitch: 1
+  dungeonType: 1
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: 0, y: 0}
+  waves:
+  - {fileID: 11400000, guid: 7c355135defc8e14788218d12f2324ad, type: 2}
+  - {fileID: 11400000, guid: ee4d81699dc72f84fb32f6577ab2f5d4, type: 2}
+  - {fileID: 11400000, guid: cdba9780c5f457e46833f9558b5c9b16, type: 2}
+  - {fileID: 11400000, guid: 2310f2d98ac5ecb49b6fee2e8d741823, type: 2}
+  - {fileID: 11400000, guid: ed54d304ac80df446912137f894e1dee, type: 2}
+  intermission: 1000
