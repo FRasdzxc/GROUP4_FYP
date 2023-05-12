@@ -53,13 +53,13 @@ public class PauseMenu : Panel
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
 
-        showPauseAction = playerInput.actions["ShowPause"];
-        saveGameAction = playerInput.actions["SaveGame"];
-        exitToMenuAction = playerInput.actions["ExitToMenu"];
+        // showPauseAction = playerInput.actions["ShowPause"];
+        // saveGameAction = playerInput.actions["SaveGame"];
+        // exitToMenuAction = playerInput.actions["ExitToMenu"];
 
-        showPauseAction.Enable();
-        saveGameAction.Enable();
-        exitToMenuAction.Enable();
+        // showPauseAction.Enable();
+        // saveGameAction.Enable();
+        // exitToMenuAction.Enable();
     }
 
     // Update is called once per frame
@@ -232,5 +232,18 @@ public class PauseMenu : Panel
             exitButton.interactable = true;
             warning.SetActive(false);
         }
+    }
+
+    protected override void SetUp()
+    {
+        base.SetUp();
+
+        showPauseAction = playerInput.actions["ShowPause"];
+        saveGameAction = playerInput.actions["SaveGame"];
+        exitToMenuAction = playerInput.actions["ExitToMenu"];
+
+        showPauseAction.Enable();
+        saveGameAction.Enable();
+        exitToMenuAction.Enable();
     }
 }

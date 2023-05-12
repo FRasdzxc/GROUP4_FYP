@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using PathOfHero.Telemetry;
+using PathOfHero.Utilities;
 
-public class Orb : MonoBehaviour
+public class Orb : Singleton<Orb>
 {
     [SerializeField] private int baseResetPrice = 150;
     [SerializeField] private Text orbText;
@@ -11,12 +12,6 @@ public class Orb : MonoBehaviour
     [SerializeField] private Transform upgradeItemContainer;
     [SerializeField] private GameObject upgradeItemPrefab;
     [SerializeField] private Sprite orbSprite;
-
-    //private float maxHealthUpgrade;
-    //private float healthRegenerationUpgrade;
-    //private float maxManaUpgrade;
-    //private float manaRegenerationUpgrade;
-    //private float expGainMultiplierUpgrade;
 
     private float requiredResetPrice;
     private List<GameObject> upgradeButtons;
@@ -33,35 +28,11 @@ public class Orb : MonoBehaviour
     }
 
     private int usedOrbs;
-    private Hero hero;
 
-    private static Orb _instance;
-    public static Orb Instance
+    protected override void Awake()
     {
-        get => _instance;
-    }
-
-    void Awake()
-    {
-        if (!_instance)
-        {
-            _instance = this;
-        }
-
-        hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
+        base.Awake();
         upgradeButtons = new List<GameObject>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        RefreshUpgradeItemContainer();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void RefreshUpgradeItemContainer()
@@ -191,9 +162,9 @@ public class Orb : MonoBehaviour
             "This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\nCost: " + requiredResetPrice.ToString("n0") + " Coins",
             () =>
             {
-                if (hero.GetStoredCoin() >= requiredResetPrice)
+                if (Hero.Instance.GetStoredCoin() >= requiredResetPrice)
                 {
-                    hero.AddCoin(-(int)requiredResetPrice);
+                    Hero.Instance.AddCoin(-(int)requiredResetPrice);
                     Orbs += usedOrbs;
                     usedOrbs = 0;
 
@@ -220,74 +191,16 @@ public class Orb : MonoBehaviour
 
     #region Setters/Getters/Add
     public void SetOrbs(int value)
-    {
-        Orbs = value;
-    }
+        => Orbs = value;
 
     public void SetUsedOrbs(int value)
-    {
-        usedOrbs = value;
-    }
-
-    //public void SetMaxHealthUpgrade(float value)
-    //{
-    //    maxHealthUpgrade = value;
-    //}
-
-    //public void SetHealthRegenerationUpgrade(float value)
-    //{
-    //    healthRegenerationUpgrade = value;
-    //}
-
-    //public void SetMaxManaUpgrade(float value)
-    //{
-    //    maxManaUpgrade = value;
-    //}
-
-    //public void SetManaRegenerationUpgrade(float value)
-    //{
-    //    manaRegenerationUpgrade = value;
-    //}
-
-    //public void SetExpGainMultiplierUpgrade(float value)
-    //{
-    //    expGainMultiplierUpgrade = value;
-    //}
+        => usedOrbs = value;
 
     public int GetOrbs()
-    {
-        return Orbs;
-    }
+        => Orbs;
 
     public int GetUsedOrbs()
-    {
-        return usedOrbs;
-    }
-
-    //public float GetMaxHealthUpgrade()
-    //{
-    //    return maxHealthUpgrade;
-    //}
-
-    //public float GetHealthRegenerationUpgrade()
-    //{
-    //    return healthRegenerationUpgrade;
-    //}
-
-    //public float GetMaxManaUpgrade()
-    //{
-    //    return maxManaUpgrade;
-    //}
-
-    //public float GetManaRegenerationUpgrade()
-    //{
-    //    return manaRegenerationUpgrade;
-    //}
-
-    //public float GetExpGainMultiplierUpgrade()
-    //{
-    //    return expGainMultiplierUpgrade;
-    //}
+        => usedOrbs;
 
     public void AddOrbs(int value)
     {
@@ -316,4 +229,13 @@ public class Orb : MonoBehaviour
 
         return null;
     }
+
+    void OnEnable()
+        => GameManager.onPlayerSetUp += SetUp;
+
+    void OnDisable()
+        => GameManager.onPlayerSetUp -= SetUp;
+
+    private void SetUp()
+        => RefreshUpgradeItemContainer();
 }

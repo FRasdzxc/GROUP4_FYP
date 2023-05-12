@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using PathOfHero.Utilities;
 
 [Serializable]
 public class DialogueEvents : UnityEvent {}
@@ -15,7 +16,7 @@ public class DialogueEvents : UnityEvent {}
 //     // public DialogueEvents dialogueEvents; // this takes up to much space
 // }
 
-public class DialogueController : MonoBehaviour
+public class DialogueController : Singleton<DialogueController>
 {
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private GameObject dialoguePanelPrefab;
@@ -39,31 +40,11 @@ public class DialogueController : MonoBehaviour
     private InputAction nextDialogueAction;
     private InputAction skipDialogueAction;
 
-    private static DialogueController _instance;
-    public static DialogueController Instance
-    {
-        get => _instance;
-    }
-
-    void Awake()
-    {
-        if (!_instance)
-        {
-            _instance = this;
-        }
-
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        nextDialogueAction = playerInput.actions["NextDialogue"];
-        skipDialogueAction = playerInput.actions["SkipDialogue"];
-
-        nextDialogueAction.Enable();
-        skipDialogueAction.Enable();
-    }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+        
+    // }
 
     // Update is called once per frame
     async void Update()
@@ -171,4 +152,22 @@ public class DialogueController : MonoBehaviour
     {
         isInConversation = value;
     }
+
+    void OnEnable()
+        => GameManager.onPlayerSetUp += SetUp;
+    
+    void OnDisable()
+        => GameManager.onPlayerSetUp -= SetUp;
+
+    public void SetUp()
+    {
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
+        nextDialogueAction = playerInput.actions["NextDialogue"];
+        skipDialogueAction = playerInput.actions["SkipDialogue"];
+
+        nextDialogueAction.Enable();
+        skipDialogueAction.Enable();
+    }
+    
 }

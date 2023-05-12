@@ -13,6 +13,7 @@ public class MapData : ScriptableObject
     public string objective;
     public GameObject mapPrefab;
     public MusicEntry[] musics;
+    public PlayerType playerType = PlayerType.TopDown;
 
     protected bool isStopped;
 

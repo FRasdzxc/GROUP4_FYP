@@ -30,7 +30,8 @@ public class DungeonMapData : MapData
         while (GameManager.Instance.MobCount > 0)
             await Task.Yield();
 
-        SpawnPortal();
+        if (portalPrefab)
+            SpawnPortal();
     }
 
     // public async override Task ShowMapMessage()  // until tutorial uses a custom mapdata or else this function will stay commented

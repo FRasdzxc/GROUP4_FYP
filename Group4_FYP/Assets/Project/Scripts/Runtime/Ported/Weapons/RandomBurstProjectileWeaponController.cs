@@ -13,8 +13,10 @@ public class RandomBurstProjectileWeaponController : WeaponController
     protected int projectilePerBurst;
     protected float burstCooldown;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
+
         burstProjectileWeaponData = (BurstProjectileWeaponData)weaponData;
         projectileLifeTime = burstProjectileWeaponData.projectileLifeTime;
         projectileSpeed = burstProjectileWeaponData.projectileSpeed;
@@ -23,18 +25,19 @@ public class RandomBurstProjectileWeaponController : WeaponController
         burstCooldown = burstProjectileWeaponData.burstCooldown;
     }
 
-    protected async override void Attack(GameObject weapon)
+    protected async override void Attack()
     {
         for (int i = 0; i < projectilePerBurst; i++)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = weapon.transform.position.z;
+            mousePos.z = transform.position.z;
 
-            Vector2 projectDir = (mousePos - (weapon.transform.position + new Vector3(projectileOffset.x, projectileOffset.y))).normalized;
+            var projectPos = transform.position + new Vector3(projectileOffset.x * player.localScale.x, projectileOffset.y * player.localScale.y);
+            Vector2 projectDir = (mousePos - projectPos).normalized;
             float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 
             GameObject projectile = projectiles[Random.Range(0, projectiles.Length)];
-            GameObject projectileClone = Instantiate(projectile, weapon.transform.position + new Vector3(projectileOffset.x, projectileOffset.y), Quaternion.Euler(0, 0, projectAngle));
+            GameObject projectileClone = Instantiate(projectile, projectPos, Quaternion.Euler(0, 0, projectAngle));
             projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
             Destroy(projectileClone, projectileLifeTime);
 

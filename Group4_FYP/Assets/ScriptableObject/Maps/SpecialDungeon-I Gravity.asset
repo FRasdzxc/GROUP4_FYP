@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02a294cfd518bf4a9981b89db0054cf, type: 3}
+  m_Name: SpecialDungeon-I Gravity
+  m_EditorClassIdentifier: 
+  mapId: map_specialdungeoni
+  mapName: Gravity
+  mapType: 2
+  mapDifficulty: 2
+  objective: 'Press ''C'' to change gravity.
+
+    Traverse the whole dungeon without
+    dying, then enter the portal'
+  mapPrefab: {fileID: 2896789635098870256, guid: 0d4fbbf9457f4404f96f00fb8606d3dc, type: 3}
+  musics:
+  - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 55874187a9b662b46ad1d07a09c72316, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
+    volume: 1
+    pitch: 1
+  playerType: 1
+  dungeonType: 3
+  portalPrefab: {fileID: 0}
+  portalPos: {x: 0, y: 0}

@@ -22,7 +22,7 @@ MonoBehaviour:
   sellPrice: 1750
   buyPrice: 0
   itemIcon: {fileID: -274275817037578778, guid: c1f6352b4e117d94ca188256403a15ad, type: 3}
-  sound: {fileID: 0}
+  useSound: {fileID: 8300000, guid: 100d2ac8a8a39dd4dbd73a565100165c, type: 3}
   isUsable: 1
   isBuyable: 0
   weapon: {fileID: 11400000, guid: 5ec23dc127b4254439b705b4f86a20b9, type: 2}

@@ -38,15 +38,13 @@ public class SelectionPanel : Panel
         {
             instance = this;
         }
+    }
 
+    private void Start()
+    {
         gameObject.SetActive(false);
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
-
-    // private void Start()
-    // {
-    //     ShowSelectionPanel(SelectionType.Dungeon); // test
-    // }
 
     //public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
     //{

@@ -19,9 +19,6 @@ MonoBehaviour:
   objective: 
   mapPrefab: {fileID: 1222998455637610401, guid: 06e7e7de897f6f5449fe422512a99459, type: 3}
   musics:
-  - music: {fileID: 8300000, guid: 44a0c292a4f42854d8e8afe7ba5a35f7, type: 3}
-    volume: 1
-    pitch: 1
   - music: {fileID: 8300000, guid: 4ab3e8f3cc870dd448de4e2f0479151a, type: 3}
     volume: 0.75
     pitch: 1
@@ -34,3 +31,4 @@ MonoBehaviour:
   - music: {fileID: 8300000, guid: 875aaad5bc256d6469feba5e56c5b4fe, type: 3}
     volume: 1
     pitch: 1
+  playerType: 0

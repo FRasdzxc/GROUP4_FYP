@@ -18,33 +18,21 @@ namespace PathOfHero.Gameplay
         {
             base.Awake();
             shownPanels = new();
-
-            var player = GameObject.FindGameObjectWithTag("Player");
-            if (player == null)
-            {
-                Debug.LogWarning("[Panel Manager] GameObject 'Player' not found.");
-                return;
-            }
-
-            if (!player.TryGetComponent(out playerInput))
-            {
-                Debug.LogWarning("[Panel Manager] Component 'Player Input' not found.");
-                return;
-            }
-
-            gameplayActionMap = playerInput.actions.FindActionMap("Gameplay", throwIfNotFound: true);
-            uiActionMap = playerInput.actions.FindActionMap("UI", throwIfNotFound: true);
-            hidePanelAction = uiActionMap.FindAction("HidePanel", throwIfNotFound: true);
         }
 
-        private void Start()
-            => SelectCurrentActionMap();
-
         private void OnEnable()
-            => hidePanelAction.performed += OnHidePanel;
+        {
+            GameManager.onPlayerSetUp += SetUp;
+            StartMenu.onPlayerSetUp += SetUp;
+        }
 
         private void OnDisable()
-            => hidePanelAction.performed -= OnHidePanel;
+        {
+            GameManager.onPlayerSetUp -= SetUp;
+            StartMenu.onPlayerSetUp -= SetUp;
+
+            hidePanelAction.performed -= OnHidePanel;
+        }
 
         private void OnHidePanel(InputAction.CallbackContext content)
         {
@@ -88,6 +76,31 @@ namespace PathOfHero.Gameplay
 
             if (shownPanels.Count <= 0 && HUD.Instance)
                 HUD.Instance.ShowHUDMain();
+        }
+
+        private void SetUp()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+            {
+                Debug.LogWarning("[Panel Manager] GameObject 'Player' not found.");
+                return;
+            }
+
+            if (!player.TryGetComponent(out playerInput))
+            {
+                Debug.LogWarning("[Panel Manager] Component 'Player Input' not found.");
+                return;
+            }
+
+            gameplayActionMap = playerInput.actions.FindActionMap("Gameplay", throwIfNotFound: true);
+            uiActionMap = playerInput.actions.FindActionMap("UI", throwIfNotFound: true);
+            hidePanelAction = uiActionMap.FindAction("HidePanel", throwIfNotFound: true);
+            hidePanelAction.performed += OnHidePanel;
+
+            Debug.Log(uiActionMap);
+
+            SelectCurrentActionMap();
         }
     }
 }

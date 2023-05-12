@@ -9,8 +9,9 @@ using UnityEditor;
 using DG.Tweening;
 using PathOfHero.UI;
 using PathOfHero.Controllers;
+using PathOfHero.Utilities;
 
-public class StartMenu : MonoBehaviour
+public class StartMenu : Singleton<StartMenu>
 {
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject[] panels;
@@ -45,8 +46,11 @@ public class StartMenu : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction enterGameAction;
 
-    void Awake()
+    public static event Action onPlayerSetUp;
+
+    protected override void Awake()
     {
+        base.Awake();
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
     }
 
@@ -77,7 +81,7 @@ public class StartMenu : MonoBehaviour
         enterGameAction.Enable();
         enterGameHintText.text = $"- Press {enterGameAction.GetBindingDisplayString()} to Continue -";
 
-        // play startmenu music
+        onPlayerSetUp?.Invoke();
     }
 
     // Update is called once per frame

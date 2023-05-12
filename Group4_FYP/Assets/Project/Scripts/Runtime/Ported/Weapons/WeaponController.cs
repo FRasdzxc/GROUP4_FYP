@@ -10,6 +10,13 @@ public abstract class WeaponController : MonoBehaviour
 
     protected float nextAttackTime;
 
+    protected Transform player;
+
+    protected virtual void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     protected virtual void Update()
     {
         if (!GameManager.Instance.IsPlayingHostile())
@@ -17,11 +24,11 @@ public abstract class WeaponController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && Time.time >= nextAttackTime)
         {
-            Attack(gameObject);
+            Attack();
             //DataCollector.Instance?.WeaponUsed(weaponData.item?.itemID);
             nextAttackTime = Time.time + weaponData.cooldown;
         }
     }
 
-    protected abstract void Attack(GameObject weapon);
+    protected abstract void Attack();
 }

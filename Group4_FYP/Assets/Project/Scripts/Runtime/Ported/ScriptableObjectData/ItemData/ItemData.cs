@@ -20,20 +20,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     public bool isBuyable; // won't show up in shop if false
 
     public bool Equals(ItemData other)
-    {
-        return itemID == other.itemID;
-    }
+        => itemID == other.itemID;
 
-    public virtual void Use()
-    {
-        // Debug.Log("using item " + itemName);
-
-        // play sound on player
-        if (useSound)
-        {
-            AudioSource audioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-            audioSource.clip = useSound;
-            audioSource.Play();
-        }
-    }
+    public virtual void Use() { }
 }

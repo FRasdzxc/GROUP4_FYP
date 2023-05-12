@@ -11,23 +11,26 @@ public class ProjectileWeaponController : WeaponController
     protected Vector2 projectileOffset;
     protected GameObject projectileClone;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
+
         projectileWeaponData = (ProjectileWeaponData)weaponData;
         projectileLifeTime = projectileWeaponData.projectileLifeTime;
         projectileSpeed = projectileWeaponData.projectileSpeed;
         projectileOffset = projectileWeaponData.projectileOffset;
     }
 
-    protected override void Attack(GameObject weapon)
+    protected override void Attack()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = weapon.transform.position.z;
+        mousePos.z = transform.position.z;
 
-        Vector2 projectDir = (mousePos - (weapon.transform.position + new Vector3(projectileOffset.x, projectileOffset.y))).normalized;
+        var projectPos = transform.position + new Vector3(projectileOffset.x * player.localScale.x, projectileOffset.y * player.localScale.y);
+        Vector2 projectDir = (mousePos - projectPos).normalized;
         float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 
-        projectileClone = Instantiate(projectile, weapon.transform.position + new Vector3(projectileOffset.x, projectileOffset.y), Quaternion.Euler(0, 0, projectAngle));
+        projectileClone = Instantiate(projectile, projectPos, Quaternion.Euler(0, 0, projectAngle));
         projectileClone.GetComponent<Rigidbody2D>().AddForce(projectDir * projectileSpeed, ForceMode2D.Impulse);
         Destroy(projectileClone, projectileLifeTime);
     }

@@ -34,7 +34,10 @@ public class ConfirmationPanel : Panel
         {
             instance = this;
         }
+    }
 
+    void Start()
+    {
         gameObject.SetActive(false);
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }

@@ -5,29 +5,29 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementControllerV2 : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float sprintMultiplier = 2f;
-    [SerializeField] private GameObject weaponHolder;
-    [SerializeField] private Animator animator;
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip[] moveSoundClips;
+    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float sprintMultiplier = 2f;
+    [SerializeField] protected GameObject weaponHolder;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip[] moveSoundClips;
 
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private InputAction sprintAction;
-    private Vector2 moveDir;
-    private Rigidbody2D rb2D;
+    protected PlayerInput playerInput;
+    protected InputAction moveAction;
+    protected InputAction sprintAction;
+    protected Vector2 moveDir;
+    protected Rigidbody2D rb2D;
 
-    private AudioClip lastStepClip;
-    private float nextStepSound;
+    protected AudioClip lastStepClip;
+    protected float nextStepSound;
 
-    void Awake()
+    protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         moveAction = playerInput.actions["Move"];
         moveAction.Enable();
@@ -37,7 +37,7 @@ public class MovementControllerV2 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         moveDir = moveAction.ReadValue<Vector2>();
         ResetAnimatorParameters();
@@ -91,7 +91,7 @@ public class MovementControllerV2 : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         rb2D.MovePosition(rb2D.position + moveDir * moveSpeed * Time.deltaTime);
     }

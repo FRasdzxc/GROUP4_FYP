@@ -21,7 +21,7 @@ MonoBehaviour:
   sellPrice: 25
   buyPrice: 35
   itemIcon: {fileID: 21300000, guid: 02d70b22dcc1c8f44a5ae3cd5a6ff4dd, type: 3}
-  sound: {fileID: 0}
+  useSound: {fileID: 8300000, guid: a2fe0adda30474245bc976e2781596e1, type: 3}
   isUsable: 1
   isBuyable: 1
   effects:

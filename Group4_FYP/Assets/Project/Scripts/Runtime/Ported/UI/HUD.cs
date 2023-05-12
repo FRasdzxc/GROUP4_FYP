@@ -20,6 +20,8 @@ public class HUD : Singleton<HUD>
     [SerializeField] private GameObject hugeMessage;
     [SerializeField] private Text hugeMessageTitleText;
     [SerializeField] private Text hugeMessageSubtitleText;
+    [SerializeField] private Transform hugeMessageContainer;
+
     [SerializeField] private Text regionText;
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
@@ -36,6 +38,8 @@ public class HUD : Singleton<HUD>
     private int m_CurrentHealth;
     private int m_CurrentMana;
     private int m_CurrentXP;
+
+    private GameObject hugeMessageClone;
 
     // Start is called before the first frame update
     void Start()
@@ -169,9 +173,7 @@ public class HUD : Singleton<HUD>
     }
 
     public void UpdateMobCount(int value)
-    {
-        mobCountText.text = $"Mob Count: {value.ToString("n0")}";
-    }
+        => mobCountText.text = $"Mob Count: {value.ToString("n0")}";
 
     #region HugeMessage
     public Task ShowHugeMessageAsync(string title, Color titleColor, float duration = 1.5f) // duration = seconds
@@ -219,11 +221,16 @@ public class HUD : Singleton<HUD>
             hugeMessageSubtitleText.gameObject.SetActive(false);
         }
 
-        hugeMessage.SetActive(true);
-        await hugeMessage.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        if (hugeMessageClone)
+            Destroy(hugeMessageClone);
+        hugeMessageClone = Instantiate(hugeMessage, hugeMessageContainer);
+
+        hugeMessageClone.SetActive(true);
+        await hugeMessageClone.transform.DOScaleX(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         await Task.Delay((int)(duration * 1000));
-        await hugeMessage.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
-        hugeMessage.SetActive(false);
+        await hugeMessageClone.transform.DOScaleX(0, 0.25f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
+        hugeMessageClone.SetActive(false);
+        Destroy(hugeMessageClone);
     }
     #endregion
 

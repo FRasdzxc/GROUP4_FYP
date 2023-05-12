@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,10 +8,19 @@ using PathOfHero.Utilities;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Serializable]
+    public class PlayerTypeEntry
+    {
+        public PlayerType playerType;
+        public GameObject playerGobj;
+    }
+
     [SerializeField]
     private GameMaps maps;
     [SerializeField]
     private string defaultMapId = "map_town";
+    [SerializeField]
+    private PlayerTypeEntry[] playerTypeEntries;
 
     public GameState GameState { get; set; }
     public string MapId { get; set; }
@@ -23,13 +33,16 @@ public class GameManager : Singleton<GameManager>
 
     private MapData currentMapData;
     private GameObject currentMap;
+    private GameObject currentPlayer;
+    
+    public static event Action onPlayerSetUp;
+
     public int MobCount { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
         GameState = GameState.Paused;
-        hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
     }
@@ -39,7 +52,6 @@ public class GameManager : Singleton<GameManager>
         //yield return new WaitUntil(() => DataCollector.Instance != null && DataCollector.Instance.CurrentStats != null);
         LoadMap(MapId, skipFadeIn: true);
         return null;
-
     }
 
     void Update()
@@ -70,9 +82,15 @@ public class GameManager : Singleton<GameManager>
         if (!skipFadeIn)
             await LoadingScreen.Instance.FadeInAsync();
 
+        // save
+        if (saveOnLoaded)
+            SaveSystem.Instance.SaveData(false, false);
+
         // destroy current map and its mobs
         if (currentMap)
             DestroyImmediate(currentMap);
+        if (currentPlayer)
+            DestroyImmediate(currentPlayer);
         foreach (var mob in GameObject.FindGameObjectsWithTag("Mob"))
             Destroy(mob);
         foreach (var chest in GameObject.FindGameObjectsWithTag("Chest"))
@@ -88,7 +106,8 @@ public class GameManager : Singleton<GameManager>
             await Task.Yield();
         
         // spawn hero
-        hero.Spawn();
+        await SetUpPlayer();
+        Hero.Instance.Spawn();
 
         await Task.Delay(50); // make the game look smoother
         await LoadingScreen.Instance.FadeOutAsync();
@@ -97,9 +116,6 @@ public class GameManager : Singleton<GameManager>
 
         GameState = GameState.Playing;
         DirectionArrowController.Instance.Activated = false; // reset arrows indicating mob directions
-
-        if (saveOnLoaded)
-            SaveSystem.Instance.SaveData(true, false);
     }
 
     public MapData FindMap(string mapId)
@@ -117,7 +133,10 @@ public class GameManager : Singleton<GameManager>
     public void GiveUp()
     {
         if (MapType != MapType.Dungeon)
+        {
             Debug.LogWarning("[GameManager] Failed trying to give up in a non-dungeon map");
+            return;
+        }
 
         currentMapData.Stop();
         SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
@@ -127,5 +146,26 @@ public class GameManager : Singleton<GameManager>
     public GameObject GetMap()
     {
         return currentMap;
+    }
+
+    public MapType GetMapType()
+    {
+        return currentMapData.mapType;
+    }
+
+    public async Task SetUpPlayer()
+    {
+        foreach (PlayerTypeEntry entry in playerTypeEntries)
+        {
+            if (entry.playerType.Equals(currentMapData.playerType))
+            {
+                currentPlayer = Instantiate(entry.playerGobj);
+                while (!currentPlayer)
+                    await Task.Yield();
+                break;
+            }
+        }
+
+        onPlayerSetUp?.Invoke();
     }
 }

@@ -113,12 +113,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (!(ItemData is WeaponItemData))
         {
-            // WeaponManager.cs will remove the item instead
             Inventory.Instance.RemoveItem(ItemData);
             StackSize--;
         }
-    }
 
+        // WeaponManager.cs will remove the item instead
+    }
     public void DropItem()
     {
         Debug.Log("drop item: " + ItemData.itemName);
@@ -175,21 +175,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (inventoryMode == InventoryMode.Normal)
         {
             if (ItemData.isUsable) // check whether class is consumableitem instead?
-            {
                 hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Use, TooltipHintType.UseAll });
-            }
             hints.AddRange(new List<TooltipHintType>() { TooltipHintType.Drop, TooltipHintType.DropAll });
         }
         else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
         {
             if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
-            {
                 attributes.Add($"Buy Price: {ItemData.buyPrice}");
-            }
             else
-            {
-                attributes.Add($"Sell Price: {ItemData.sellPrice}");                    
-            }
+                attributes.Add($"Sell Price: {ItemData.sellPrice}");
 
             hints.Add(TooltipHintType.Transfer);
             hints.Add(TooltipHintType.TransferAll);
@@ -200,9 +194,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (inventoryMode == InventoryMode.Normal)
         {
             if (m_Item && m_Item.isUsable)
-            {
                 hint.SetActive(true);
-            }
         }
         else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert || inventoryMode == InventoryMode.Throw) // transfer
         {
@@ -229,41 +221,26 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             if (eventData.button == PointerEventData.InputButton.Left && m_Item.isUsable) // LMB: use item
             {
+                if (ItemData.useSound)
+                    AudioManager.Instance.PlaySound(ItemData.useSound);
+
                 if (Input.GetKey(KeyCode.LeftShift)) // use all
                 {
-                    // while (StackSize > 0)
-                    // {
-                    //     UseItem();
-                    // }
-
                     for (int i = 0; i < tempStackSize; i++)
-                    {
                         UseItem();
-                    }
                 }
                 else // use one
-                {
                     UseItem();
-                }
             }
             else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
             {
                 if (Input.GetKey(KeyCode.LeftShift)) // drop all
                 {
-                    // while (StackSize > 0)
-                    // {
-                    //     DropItem();
-                    // }
-
                     for (int i = 0; i < tempStackSize; i++)
-                    {
                         DropItem();
-                    }
                 }
                 else // drop one
-                { 
                     DropItem();
-                }
             }
         }
         else if (inventoryMode == InventoryMode.Apply) // apply
@@ -273,14 +250,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 if (Input.GetKey(KeyCode.LeftShift)) // apply all
                 {
                     for (int i = 0; i < StackSize; i++)
-                    {
                         BuySellPanel.Instance.ApplyTransfer(ItemData);
-                    }
                 }
                 else // apply one
-                {
                     BuySellPanel.Instance.ApplyTransfer(ItemData);
-                }
             }
         }
         else if (inventoryMode == InventoryMode.Revert) // revert
@@ -290,22 +263,16 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 if (Input.GetKey(KeyCode.LeftShift)) // revert all
                 {
                     for (int i = 0; i < StackSize; i++)
-                    {
                         BuySellPanel.Instance.RevertTransfer(ItemData);
-                    }
                 }
                 else // revert one
-                {
                     BuySellPanel.Instance.RevertTransfer(ItemData);
-                }
             }
         }
         else if (inventoryMode == InventoryMode.Throw)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
-            {
                 BuySellPanel.Instance.ThrowItem(ItemData);
-            }
         }
     }
 }

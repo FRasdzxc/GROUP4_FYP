@@ -17,6 +17,7 @@ public class Hero : Singleton<Hero>
     [SerializeField] private int orbObtainLevel = 2;
     [SerializeField] private AudioClip[] damageSoundClips;
     [SerializeField] private AudioClip[] dieSoundClips;
+    [SerializeField] private bool canRegenerateHealth = true;
 
     private HUD hud;
     private SpriteRenderer sr;
@@ -74,6 +75,7 @@ public class Hero : Singleton<Hero>
 
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+        audioSource = GetComponent<AudioSource>();
 
         playerInput = GetComponent<PlayerInput>();
         takeDamageAction = playerInput.actions["TakeDamage"];
@@ -85,7 +87,6 @@ public class Hero : Singleton<Hero>
     {
         sr = GetComponent<SpriteRenderer>();
         movementController.SetMovementSpeed(heroData.walkspeed);
-        TryGetComponent<AudioSource>(out audioSource);
 
         Setup();
     }
@@ -96,13 +97,15 @@ public class Hero : Singleton<Hero>
         // test respawn
         if (!IsDead)
         {
-            // health
-            if (health < upgradedMaxHealth)
+            if (canRegenerateHealth)
             {
-                health += Time.deltaTime * (healthRegeneration + healthRegenerationUpgrade);
+                // health
+                if (health < upgradedMaxHealth)
+                {
+                    health += Time.deltaTime * (healthRegeneration + healthRegenerationUpgrade);
+                }
             }
             health = Mathf.Clamp(health, 0, upgradedMaxHealth);
-            // hud.UpdateHealth(health);
             hud.UpdateHealth(health, upgradedMaxHealth);
 
             // xp
@@ -110,7 +113,6 @@ public class Hero : Singleton<Hero>
             if(storedExp >= requiredExp)
             {
                 storedExp -= requiredExp;
-                //hud.SetupXP(level, requiredExp);
                 level++;
                 
                 _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
@@ -129,7 +131,6 @@ public class Hero : Singleton<Hero>
             if (GameManager.Instance.IsPlayingHostile())
             {
                 // testonly
-                // if (Input.GetKeyDown(KeyCode.Backspace))
                 if (takeDamageAction.triggered)
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
@@ -147,7 +148,6 @@ public class Hero : Singleton<Hero>
     public void Setup() // useful for respawn
     {
         IsDead = false;
-        // hud.SetupHealth(health, upgradedMaxHealth);
         hud.UpdateHealth(health, upgradedMaxHealth);
         PostProcessController.Instance?.ChangeVolume(PostProcessController.ProfileType.Default, false);
         sr.color = Color.white;
@@ -158,13 +158,12 @@ public class Hero : Singleton<Hero>
 
         // xp
         requiredExp = (int)(level * 100 * 1.25);
-        //hud.SetupXP(level, requiredExp);
         hud.UpdateXP(level, storedExp, requiredExp);
         HeroPanel.Instance.UpdateLevel(level);
         HeroPanel.Instance.UpdateCoin(storedCoin);
     }
 
-    private void TakeDamage(float damage, bool accountForDefenseUpgrade = true)
+    public void TakeDamage(float damage, bool accountForDefenseUpgrade = true)
     {
         if (!IsDead && GameManager.Instance.IsPlayingHostile())
         {
@@ -173,18 +172,17 @@ public class Hero : Singleton<Hero>
             health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
 
             if (damageSoundClips.Length > 0)
-            PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+                PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
 
             if (health <= 0)
                 StartCoroutine(Die());
         }
     }
 
-    private IEnumerator Die()
+    public IEnumerator Die()
     {
         IsDead = true;
         health = 0;
-        // hud.UpdateHealth(health);
         hud.UpdateHealth(health, upgradedMaxHealth);
         PostProcessController.Instance?.ChangeVolume(PostProcessController.ProfileType.Death);
         movementController.ResetAnimatorParameters();
@@ -198,17 +196,20 @@ public class Hero : Singleton<Hero>
         // DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
 
-        var loadingScreen = LoadingScreen.Instance;
-        if (loadingScreen != null)
-            yield return StartCoroutine(loadingScreen.FadeIn());
+        if (!GameManager.Instance.GetMapType().Equals(MapType.Dungeon))
+        {
+            var loadingScreen = LoadingScreen.Instance;
+            if (loadingScreen != null)
+                yield return StartCoroutine(loadingScreen.FadeIn());
 
-        health = upgradedMaxHealth;
-        Setup();
-        Spawn();
+            health = upgradedMaxHealth;
+            Setup();
+            Spawn();
 
+            yield return loadingScreen.FadeOut();
+        }
+        
         GameManager.Instance.GiveUp(); // return to town and lose all progress
-
-        yield return loadingScreen.FadeOut();
     }
 
     public void Spawn()
@@ -397,20 +398,7 @@ public class Hero : Singleton<Hero>
         //    // DataCollector.Instance?.CoinsEarned(coin);
         //else if (coin < 0)
         //    // DataCollector.Instance?.CoinsSpent(coin * -1);
-        
-        // HeroPanel.Instance.UpdateCoin(storedCoin);
     }
-
-    // public void DeductEXP(int exp)
-    // {
-    //     storedExp -= exp;
-    //     hud.UpdateXP(level, storedExp);
-    // }
-
-    // public void DeductCoin(int coin)
-    // {
-    //     storedCoin -= coin;
-    // }
     #endregion
 
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -421,15 +409,19 @@ public class Hero : Singleton<Hero>
             collision.GetComponent<WeaponTrigger>().push(gameObject);
             sr.color = Color.red;
         }
+        else if (collision.CompareTag("MobWeaponTriggerDeadly") && collision.GetComponent<WeaponTrigger>())
+            StartCoroutine(Die());
 
-        if (collision.CompareTag("Coin")) // ?
-        {
+        if (collision.CompareTag("Coin")) // better way?
             AddCoin(15);
-        }
+    }
+    
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("MobWeaponTriggerDeadly") && collision.collider.GetComponent<WeaponTrigger>())
+            StartCoroutine(Die());
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
-    {
-        sr.color = Color.white;
-    }
+        => sr.color = Color.white;
 }

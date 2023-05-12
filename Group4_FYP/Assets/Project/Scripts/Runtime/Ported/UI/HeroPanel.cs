@@ -23,13 +23,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     private InputAction hideInventoryAction;
 
     private static HeroPanel instance;
-    public static HeroPanel Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static HeroPanel Instance => instance;
 
     // protected override void Awake()
     protected override void Awake()
@@ -37,19 +31,19 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         base.Awake();
 
         if (!instance)
-        {
             instance = this;
-        }
     }
 
     private void OnEnable()
     {
         // OnHide += OnHidePanel;
+        GameManager.onPlayerSetUp += SetUp;
     }
 
     private void OnDisable()
     {
         // OnHide -= OnHidePanel;
+        GameManager.onPlayerSetUp -= SetUp;
     }
 
     // Start is called before the first frame update
@@ -67,11 +61,11 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
         heroNameText.text = SaveSystem.Instance.ProfileName;
 
-        showInventoryAction = playerInput.actions["ShowInventory"];
-        hideInventoryAction = playerInput.actions["HideInventory"];
-        showInventoryAction.Enable();
-        hideInventoryAction.Enable();
-        keyHintText.text = showInventoryAction.GetBindingDisplayString();
+        // showInventoryAction = playerInput.actions["ShowInventory"];
+        // hideInventoryAction = playerInput.actions["HideInventory"];
+        // showInventoryAction.Enable();
+        // hideInventoryAction.Enable();
+        // keyHintText.text = showInventoryAction.GetBindingDisplayString();
 
         // temp: will implement the whole thing in the future
         armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
@@ -135,6 +129,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
         }
 
         Inventory.Instance.RefreshInventoryPanel();
+        Orb.Instance.RefreshUpgradeItemContainer();
 
         //HUD.Instance.HideHUDMain();
         heroPanel.SetActive(true);
@@ -207,4 +202,15 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     // {
     //     return heroPanel.activeSelf;
     // }
+
+    protected override void SetUp()
+    {
+        base.SetUp();
+
+        showInventoryAction = playerInput.actions["ShowInventory"];
+        hideInventoryAction = playerInput.actions["HideInventory"];
+        showInventoryAction.Enable();
+        hideInventoryAction.Enable();
+        keyHintText.text = showInventoryAction.GetBindingDisplayString();
+    }
 }

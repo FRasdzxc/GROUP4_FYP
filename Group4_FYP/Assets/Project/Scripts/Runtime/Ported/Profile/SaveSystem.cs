@@ -10,12 +10,12 @@ public class SaveSystem : Singleton<SaveSystem>
 
     //[SerializeField] private Hero hero;
     //[SerializeField] private AbilityManager abilityManager;
-    private Hero hero;
-    private AbilityManager abilityManager;
+    // private Hero hero;
+    // private AbilityManager abilityManager;
     private GameManager gameController;
     private Inventory inventory;
     private Orb orb;
-    private WeaponManager weaponManager;
+    // private WeaponManager weaponManager;
 
     private ProfileData profile;
     private float nextSaveTime;
@@ -27,13 +27,13 @@ public class SaveSystem : Singleton<SaveSystem>
         base.Awake();
         profile = isTestScene ? new() : ProfileManagerJson.GetProfile(PlayerPrefs.GetString("selectedProfileName"));
 
-        hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
-        abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
+        // hero = GameObject.FindGameObjectWithTag("Player").GetComponent<Hero>();
+        // abilityManager = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
         gameController = GetComponent<GameManager>();
         inventory = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Inventory>();
         orb = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Orb>();
-        weaponManager = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>();
-        LoadData();
+        // weaponManager = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>();
+        // LoadData();
 
         autosaveDuration *= 60f;
     }
@@ -54,29 +54,29 @@ public class SaveSystem : Singleton<SaveSystem>
 
     public void LoadData()
     {
-        hero.SetHealth(profile.health);
-        hero.SetMaxHealth(profile.maxHealth);
-        hero.SetHealthRegeneration(profile.healthRegeneration);
-        hero.SetDefense(profile.defense);
-        hero.SetLevel(profile.level);
-        hero.SetStoredExp(profile.storedExp);
-        hero.SetStoredCoin(profile.storedCoin);
-        abilityManager.SetMana(profile.mana);
-        abilityManager.SetMaxMana(profile.maxMana);
-        abilityManager.SetManaRegeneration(profile.manaRegeneration);
+        Hero.Instance.SetHealth(profile.health);
+        Hero.Instance.SetMaxHealth(profile.maxHealth);
+        Hero.Instance.SetHealthRegeneration(profile.healthRegeneration);
+        Hero.Instance.SetDefense(profile.defense);
+        Hero.Instance.SetLevel(profile.level);
+        Hero.Instance.SetStoredExp(profile.storedExp);
+        Hero.Instance.SetStoredCoin(profile.storedCoin);
+        AbilityManager.Instance.SetMana(profile.mana);
+        AbilityManager.Instance.SetMaxMana(profile.maxMana);
+        AbilityManager.Instance.SetManaRegeneration(profile.manaRegeneration);
         // gameController.SetMap(profile.map);
         gameController.MapId = profile.mapId;
         inventory.SetItems(profile.inventory);
         orb.SetOrbs(profile.orbs);
         orb.SetUsedOrbs(profile.usedOrbs);
-        hero.SetMaxHealthUpgrade(profile.maxHealthUpgrade);
-        hero.SetHealthRegenerationUpgrade(profile.healthRegenerationUpgrade);
-        hero.SetDefenseUpgrade(profile.defenseUpgrade);
-        abilityManager.SetMaxManaUpgrade(profile.maxManaUpgrade);
-        abilityManager.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
-        hero.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
-        weaponManager.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
-        abilityManager.SetAbilityDamageUpgrade(profile.abilityDamageUpgrade);
+        Hero.Instance.SetMaxHealthUpgrade(profile.maxHealthUpgrade);
+        Hero.Instance.SetHealthRegenerationUpgrade(profile.healthRegenerationUpgrade);
+        Hero.Instance.SetDefenseUpgrade(profile.defenseUpgrade);
+        AbilityManager.Instance.SetMaxManaUpgrade(profile.maxManaUpgrade);
+        AbilityManager.Instance.SetManaRegenerationUpgrade(profile.manaRegenerationUpgrade);
+        Hero.Instance.SetExpGainMultiplierUpgrade(profile.expGainMultiplierUpgrade);
+        WeaponManager.Instance.SetWeaponTier((HeroClass)Enum.Parse(typeof(HeroClass), profile.heroClass), profile.weaponId, profile.weaponTier);
+        AbilityManager.Instance.SetAbilityDamageUpgrade(profile.abilityDamageUpgrade);
     }
 
     public void SaveData(bool showNotification = true, bool accountForMapType = true)
@@ -90,34 +90,40 @@ public class SaveSystem : Singleton<SaveSystem>
             }
         }
 
-        profile.health = hero.GetHealth();
-        profile.maxHealth = hero.GetMaxHealth();
-        profile.healthRegeneration = hero.GetHealthRegeneration();
-        profile.defense = hero.GetDefense();
-        profile.level = hero.GetLevel();
-        profile.storedExp = hero.GetStoredExp();
-        profile.storedCoin = hero.GetStoredCoin();
-        profile.mana = abilityManager.GetMana();
-        profile.maxMana = abilityManager.GetMaxMana();
-        profile.manaRegeneration = abilityManager.GetManaRegeneration();
+        profile.health = Hero.Instance.GetHealth();
+        profile.maxHealth = Hero.Instance.GetMaxHealth();
+        profile.healthRegeneration = Hero.Instance.GetHealthRegeneration();
+        profile.defense = Hero.Instance.GetDefense();
+        profile.level = Hero.Instance.GetLevel();
+        profile.storedExp = Hero.Instance.GetStoredExp();
+        profile.storedCoin = Hero.Instance.GetStoredCoin();
+        profile.mana = AbilityManager.Instance.GetMana();
+        profile.maxMana = AbilityManager.Instance.GetMaxMana();
+        profile.manaRegeneration = AbilityManager.Instance.GetManaRegeneration();
         // profile.map = gameController.GetMap();
         profile.mapId = gameController.MapId;
         profile.inventory = inventory.GetItems();
         profile.orbs = orb.GetOrbs();
         profile.usedOrbs = orb.GetUsedOrbs();
-        profile.maxHealthUpgrade = hero.GetMaxHealthUpgrade();
-        profile.healthRegenerationUpgrade = hero.GetHealthRegenerationUpgrade();
-        profile.defenseUpgrade = hero.GetDefenseUpgrade();
-        profile.maxManaUpgrade = abilityManager.GetMaxManaUpgrade();
-        profile.manaRegenerationUpgrade = abilityManager.GetManaRegenerationUpgrade();
-        profile.expGainMultiplierUpgrade = hero.GetExpGainMultiplierUpgrade();
-        profile.weaponId = weaponManager.GetWeaponId();
-        profile.weaponTier = weaponManager.GetWeaponTier();
-        profile.abilityDamageUpgrade = abilityManager.GetAbilityDamageUpgrade();
+        profile.maxHealthUpgrade = Hero.Instance.GetMaxHealthUpgrade();
+        profile.healthRegenerationUpgrade = Hero.Instance.GetHealthRegenerationUpgrade();
+        profile.defenseUpgrade = Hero.Instance.GetDefenseUpgrade();
+        profile.maxManaUpgrade = AbilityManager.Instance.GetMaxManaUpgrade();
+        profile.manaRegenerationUpgrade = AbilityManager.Instance.GetManaRegenerationUpgrade();
+        profile.expGainMultiplierUpgrade = Hero.Instance.GetExpGainMultiplierUpgrade();
+        profile.weaponId = WeaponManager.Instance.GetWeaponId();
+        profile.weaponTier = WeaponManager.Instance.GetWeaponTier();
+        profile.abilityDamageUpgrade = AbilityManager.Instance.GetAbilityDamageUpgrade();
 
         ProfileManagerJson.SaveProfile(profile);
 
         if (showNotification)
             _ = Notification.Instance.ShowNotification("Successfully saved data to Profile \"" + profile.profileName + "\"!");
     }
+
+    void OnEnable()
+        => GameManager.onPlayerSetUp += LoadData;
+
+    void OnDisable()
+        => GameManager.onPlayerSetUp -= LoadData;
 }
