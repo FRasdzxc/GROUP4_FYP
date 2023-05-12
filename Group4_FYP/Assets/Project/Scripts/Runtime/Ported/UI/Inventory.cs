@@ -136,7 +136,17 @@ public class Inventory : Singleton<Inventory>
     /* SetItems function */
     public void SetItems(List<InventoryEntry> items)
     {
-        this.items = new List<InventoryEntry>(items);
+        this.items.Clear();
+
+        foreach (InventoryEntry ie in items)
+        {
+            foreach (ItemData i in gameItems.itemList)
+            {
+                if (ie.itemID.Equals(i.itemID))
+                    this.items.Add(new InventoryEntry(i, ie.qty));
+            }
+        }
+
         RefreshInventoryPanel();
     }
 
