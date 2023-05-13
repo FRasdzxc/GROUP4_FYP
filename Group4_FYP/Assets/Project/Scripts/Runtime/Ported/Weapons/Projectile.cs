@@ -6,6 +6,9 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private GameObject smoke;
+    
+    [SerializeField]
+    private Color smokeColor = Color.white;
 
     private bool m_Destroying;
 
@@ -36,7 +39,10 @@ public class Projectile : MonoBehaviour
         m_Destroying = true;
 
         if (smoke)
-            Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+        {
+            GameObject smokeClone = Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+            smokeClone.GetComponent<SpriteRenderer>().color = smokeColor;
+        }
             
         yield return transform.DOScale(Vector3.zero, duration).WaitForCompletion();
         Destroy(gameObject);

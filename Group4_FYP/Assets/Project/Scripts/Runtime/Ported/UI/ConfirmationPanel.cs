@@ -69,12 +69,16 @@ public class ConfirmationPanel : Panel
 
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+
+        isOpened = true;
     }
 
     public async Task HideConfirmationPanel()
     {
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
+
+        isOpened = false;
     }
 
     public override void HidePanel()

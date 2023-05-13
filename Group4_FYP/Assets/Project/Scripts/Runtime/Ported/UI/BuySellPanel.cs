@@ -27,7 +27,6 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
     private CanvasGroup buySellPanelCanvasGroup;
     private RectTransform buySellPanelRectTransform;
-    private bool isOpened;
 
     private List<GameObject> inventorySlots;
     private List<GameObject> shopSlots;
@@ -176,10 +175,10 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         buySellPanelRectTransform.DOAnchorPosY(-buySellPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await buySellPanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         buySellPanel.SetActive(false);
+        
+        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
 
         isOpened = false;
-
-        Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
     private void RefreshInventoryPanel(bool isLeftPanel, InventoryMode inventoryMode)

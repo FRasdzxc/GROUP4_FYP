@@ -11,10 +11,6 @@ public class SelectionPanel : Panel
     [SerializeField] private Text messageText;
     [SerializeField] private Transform contentTransform;
     [SerializeField] private GameObject buttonPrefab;
-    //[SerializeField] private GameObject buttonsPanelNormal;
-    //[SerializeField] private GameObject buttonsPanelImportant;
-    //[SerializeField] private Button confirmButtonNormal;
-    //[SerializeField] private Button confirmButtonImportant;
     [SerializeField] private GameMaps gameMaps;
 
     // these variables prevent AddListener() from piling up?
@@ -45,35 +41,6 @@ public class SelectionPanel : Panel
         gameObject.SetActive(false);
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
-
-    //public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
-    //{
-    //    ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant);
-    //}
-
-    //public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false)
-    //{
-    //    titleText.text = title;
-    //    messageText.text = message;
-    //    this.confirmAction = confirmAction;
-    //    this.cancelAction = cancelAction;
-
-    //    if (!isImportant)
-    //    {
-    //        buttonsPanelNormal.SetActive(true);
-    //        buttonsPanelImportant.SetActive(false);
-    //    }
-    //    else
-    //    {
-    //        buttonsPanelNormal.SetActive(false);
-    //        buttonsPanelImportant.SetActive(true);
-    //    }
-
-    //    gameObject.SetActive(true);
-    //    await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-
-    //    ShowPanel();
-    //}
 
     public void ShowSelectionPanel(SelectionType selectionType)
     {
@@ -194,12 +161,6 @@ public class SelectionPanel : Panel
         Debug.Log(name);
     }
 
-    public async Task HideSelectionPanel()
-    {
-        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-        gameObject.SetActive(false);
-    }
-
     private void RefreshContents()
     {
         foreach (Transform child in contentTransform)
@@ -213,13 +174,16 @@ public class SelectionPanel : Panel
         base.ShowPanel();
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        isOpened = true;
     }
 
-    public override void HidePanel()
+    public async override void HidePanel()
     {
         base.HidePanel();
 
-        _ = HideSelectionPanel();
+        await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        gameObject.SetActive(false);
+        isOpened = false;
     }
 
     //public void Confirm()

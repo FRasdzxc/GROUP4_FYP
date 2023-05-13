@@ -4,9 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
 
-public class HeroPanel : PanelOverride/*, IPanelConflictable*/
+public class HeroPanel : PanelOverride
 {
-    // [SerializeField] private GameObject hudMainPanel;
     [SerializeField] private GameObject heroPanel;
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
@@ -15,9 +14,7 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     [SerializeField] private InventorySlot weaponSlot;
     [SerializeField] private InventorySlot armorSlot;
     [SerializeField] private ArmorItemData tempArmor; // temp
-    // [SerializeField] private bool panelOverridable;
-
-    private bool isOpened;
+    
     private RectTransform heroPanelRectTransform;
     private InputAction showInventoryAction;
     private InputAction hideInventoryAction;
@@ -35,19 +32,12 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     }
 
     private void OnEnable()
-    {
-        // OnHide += OnHidePanel;
-        GameManager.onPlayerSetUp += SetUp;
-    }
+        => GameManager.onPlayerSetUp += SetUp;
 
     private void OnDisable()
-    {
-        // OnHide -= OnHidePanel;
-        GameManager.onPlayerSetUp -= SetUp;
-    }
+        => GameManager.onPlayerSetUp -= SetUp;
 
     // Start is called before the first frame update
-    // protected override void Start()
     void Start()
     {
         // base.Start();
@@ -61,48 +51,17 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
         heroNameText.text = SaveSystem.Instance.ProfileName;
 
-        // showInventoryAction = playerInput.actions["ShowInventory"];
-        // hideInventoryAction = playerInput.actions["HideInventory"];
-        // showInventoryAction.Enable();
-        // hideInventoryAction.Enable();
-        // keyHintText.text = showInventoryAction.GetBindingDisplayString();
-
         // temp: will implement the whole thing in the future
         armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
     }
 
     // Update is called once per frame
-    // protected override void Update()
     void Update()
     {
-        // base.Update();
-
-        ////if (Input.GetKeyDown(KeyCode.Q))
-        //if (showInventoryAction.triggered)
-        //// if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
-        //// if (Input.GetKeyDown(KeyCode.Q) && InputManager.Instance.GetKeyDown(KeyCode.Q))
-        //{
-        //    if (isOpened)
-        //    {
-        //        // HideHeroPanel();
-        //        HidePanel();
-        //    }
-        //    else
-        //    {
-        //        ShowPanel();
-        //    }
-
-        //    // isOpened = !isOpened;
-        //}
-
-        if (showInventoryAction.triggered)
-        {
+        if (!isOpened && showInventoryAction.triggered)
             ShowPanel();
-        }
-        else if (hideInventoryAction.triggered)
-        {
+        else if (isOpened && hideInventoryAction.triggered)
             HidePanel();
-        }
     }
 
     public void UpdateCoin(int coin)
@@ -119,19 +78,12 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     {
         base.ShowPanel();
 
-        // if (!HideConflictingPanels())
-        // {
-        //     return;
-        // }
         if (!OverridePanel())
-        {
             return;
-        }
 
         Inventory.Instance.RefreshInventoryPanel();
         Orb.Instance.RefreshUpgradeItemContainer();
 
-        //HUD.Instance.HideHUDMain();
         heroPanel.SetActive(true);
         heroPanelRectTransform.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
@@ -144,7 +96,6 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     {
         base.HidePanel();
 
-        //HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
@@ -156,7 +107,6 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
 
     public async void OnHidePanel()
     {
-        //HUD.Instance.ShowHUDMain();
         heroPanelRectTransform.DOAnchorPosY(-heroPanelRectTransform.rect.height / 4, 0.25f).SetEase(Ease.OutQuart);
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
@@ -167,41 +117,13 @@ public class HeroPanel : PanelOverride/*, IPanelConflictable*/
     }
 
     protected override GameObject GetPanel()
-    {
-        return heroPanel;
-    }
+        => heroPanel;
 
     public void SetupWeaponSlot(ItemData weaponItem)
     {
         weaponSlot.Clear();
         weaponSlot.Configure(weaponItem, 1, InventoryMode.Preview);
     }
-
-    // public bool HideConflictingPanels()
-    // {
-    //     if (!BuySellPanel.Instance.IsPanelActive())
-    //     {
-    //         return true;
-    //     }
-
-    //     if (BuySellPanel.Instance.IsPanelOverridable())
-    //     {
-    //         BuySellPanel.Instance.HideBuySellPanel();
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-
-    // public bool IsPanelOverridable()
-    // {
-    //     return panelOverridable;
-    // }
-
-    // public bool IsPanelActive()
-    // {
-    //     return heroPanel.activeSelf;
-    // }
 
     protected override void SetUp()
     {

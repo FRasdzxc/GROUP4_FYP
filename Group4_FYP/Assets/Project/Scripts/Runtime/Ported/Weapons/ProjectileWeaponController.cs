@@ -21,12 +21,12 @@ public class ProjectileWeaponController : WeaponController
         projectileOffset = projectileWeaponData.projectileOffset;
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = transform.position.z;
 
-        var projectPos = transform.position + new Vector3(projectileOffset.x * player.localScale.x, projectileOffset.y * player.localScale.y);
+        var projectPos = transform.position + Vector3.Scale(projectileOffset, player.localScale);
         Vector2 projectDir = (mousePos - projectPos).normalized;
         float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 

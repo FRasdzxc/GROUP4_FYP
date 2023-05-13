@@ -18,8 +18,6 @@ public class WeaponUpgradePanel : PanelOverride
     [SerializeField] private Text coinText;
     [SerializeField] private Text costText;
     [SerializeField] private AudioClip weaponUpgradeSound;
-
-    private bool isOpened;
     private CanvasGroup weaponUpgradePanelCanvasGroup;
     private RectTransform weaponUpgradePanelRectTransform;
 
@@ -154,9 +152,9 @@ public class WeaponUpgradePanel : PanelOverride
         await weaponUpgradePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         weaponUpgradePanel.SetActive(false);
 
-        isOpened = false;
-
         Tooltip.Instance.HideTooltip(); // workaround; to be fixed
+
+        isOpened = false;
     }
 
     public void Upgrade()

@@ -38,6 +38,7 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
             panelIsShown = true;
         }
 
+        isOpened = true;
         await DisplayDialogue(dialogue);
     }
 
@@ -58,6 +59,7 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
     {
         base.HidePanel();
         await HideDialoguePanel();
+        isOpened = false;
     }
 
     public void SetAllowHiding(bool allowHiding)

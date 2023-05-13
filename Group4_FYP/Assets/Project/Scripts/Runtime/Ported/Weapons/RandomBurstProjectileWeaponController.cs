@@ -25,14 +25,14 @@ public class RandomBurstProjectileWeaponController : WeaponController
         burstCooldown = burstProjectileWeaponData.burstCooldown;
     }
 
-    protected async override void Attack()
+    public async override void Attack()
     {
         for (int i = 0; i < projectilePerBurst; i++)
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = transform.position.z;
 
-            var projectPos = transform.position + new Vector3(projectileOffset.x * player.localScale.x, projectileOffset.y * player.localScale.y);
+            var projectPos = transform.position + Vector3.Scale(projectileOffset, player.localScale);
             Vector2 projectDir = (mousePos - projectPos).normalized;
             float projectAngle = Mathf.Atan2(projectDir.y, projectDir.x) * Mathf.Rad2Deg;
 

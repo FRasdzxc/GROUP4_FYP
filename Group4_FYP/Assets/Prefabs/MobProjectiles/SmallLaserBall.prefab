@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
+  smokeColor: {r: 1, g: 0.5019608, b: 0.5019608, a: 1}
 --- !u!58 &6955925405830446788
 CircleCollider2D:
   m_ObjectHideFlags: 0

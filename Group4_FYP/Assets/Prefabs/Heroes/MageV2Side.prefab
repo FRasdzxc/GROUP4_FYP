@@ -614,7 +614,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
-  smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
+  smoke: {fileID: 7761475681028594599, guid: d44c989714d3b1c4799a6e02817ce06a, type: 3}
+  smokeOffset: {x: 0, y: -0.5}
 --- !u!70 &6809396680608091847
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ using PathOfHero.Controllers;
 
 public class PauseMenu : Panel
 {
-    private bool isOpened;
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject sideMenuPanel;
@@ -40,60 +39,33 @@ public class PauseMenu : Panel
     // Start is called before the first frame update
     void Start()
     {
-        // base.Start();
-
         isOpened = false;
 
-        // code for showing hudpanel and hiding osdpanel
-        //hudPanel.SetActive(true);
         pauseMenuBackground.SetActive(false);
         pauseMenuPanel.SetActive(false);
 
         pauseMenuBackground.GetComponent<Image>().color = new Color32(0, 0, 0, 0);
         sideMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
         settingsMenuPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(settingsMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0);
-
-        // showPauseAction = playerInput.actions["ShowPause"];
-        // saveGameAction = playerInput.actions["SaveGame"];
-        // exitToMenuAction = playerInput.actions["ExitToMenu"];
-
-        // showPauseAction.Enable();
-        // saveGameAction.Enable();
-        // exitToMenuAction.Enable();
     }
 
     // Update is called once per frame
-    // protected async override void Update()
     void Update()
     {
-        // base.Update();
-
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (isOpened)
-        //    {
-        //        await HidePauseMenu(true);
-        //    }
-        //    else
-        //    {
-        //        /*await */ShowPanel();
-        //    }
-        //}
-
-        if (showPauseAction.triggered)
+        if (isOpened)
         {
-            if (GameManager.Instance.GameState == GameState.Playing)
-                ShowPanel();
-        }
-
-        if (isOpened) // not finished: also check if saving is allowed atm
-        {
-            // if (Input.GetKeyDown(KeyCode.BackQuote))
             if (saveGameAction.triggered)
                 SaveGame();
-            // if (Input.GetKeyDown(KeyCode.End))
             if (exitToMenuAction.triggered)
                 ExitToMenu();
+        }
+        else
+        {
+            if (showPauseAction.triggered)
+            {
+                if (GameManager.Instance.GameState == GameState.Playing)
+                    ShowPanel();
+            }
         }
 
 #if UNITY_EDITOR
@@ -112,11 +84,8 @@ public class PauseMenu : Panel
 
         GameManager.Instance.GameState = GameState.Paused;
 
-        //HUD.Instance.HideHUD();
-
         pauseMenuBackground.SetActive(true);
         pauseMenuPanel.SetActive(true);
-        // hudPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f);
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0.5f, 0.25f).SetEase(Ease.OutQuart);
         sideMenuPanel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 0.25f).SetEase(Ease.OutQuart);
@@ -124,23 +93,15 @@ public class PauseMenu : Panel
 
         await Task.Delay(250);
 
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
-        // hudPanel.SetActive(false);
 
         isOpened = true;
     }
 
-    public async Task HidePauseMenu(bool bShowHudPanel)
+    public async Task HidePauseMenu()
     {
-        Time.timeScale = 1;
-
-        if (bShowHudPanel)
-        {
-            // hudPanel.SetActive(true);
-            // hudPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f);
-            //HUD.Instance.ShowHUD();
-        }
+        // Time.timeScale = 1;
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
         sideMenuPanel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0), 0.25f).SetEase(Ease.OutQuart);
@@ -150,11 +111,6 @@ public class PauseMenu : Panel
 
         pauseMenuBackground.SetActive(false);
         pauseMenuPanel.SetActive(false);
-        // if (bShowHudPanel)
-        // {
-        //     hudPanel.SetActive(true);
-        //     hudPanel.GetComponent<CanvasGroup>().alpha = 1;
-        // }
 
         settingsMenu.SaveSettings();
         GameManager.Instance.GameState = GameState.Playing;
@@ -165,14 +121,8 @@ public class PauseMenu : Panel
     public override void HidePanel()
     {
         base.HidePanel();
-        _ = HidePauseMenu(true);
-        // ResumeGame();
+        _ = HidePauseMenu();
     }
-
-    // public void ResumeGame()
-    // {
-    //     _ = HidePauseMenu(true);
-    // }
 
     public void GiveUp()
     {
@@ -197,8 +147,7 @@ public class PauseMenu : Panel
 
     public async void ExitToMenu()
     {
-        await HidePauseMenu(false);
-        // await Task.Delay(250);
+        await HidePauseMenu();
 
         // save settings to device
         settingsMenu.SaveSettings();
@@ -211,7 +160,6 @@ public class PauseMenu : Panel
         }
 
         // exit to menu
-        //sceneController.ChangeScene("StartScene");
         SceneController.Instance.ChangeScene("StartScene", false);
         AudioManager.Instance.StopMusic();
     }

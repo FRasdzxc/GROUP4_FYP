@@ -1,10 +1,23 @@
+using System;
 using UnityEngine;
+
+[Serializable]
+public class DialogueEntry
+{
+    [TextArea(2, 5)]
+    public string dialogue;
+
+    [Tooltip("Invoke this once this dialogue is shown\nLeave blank if none")]
+    public EventRequestData eventRequestData;
+}
 
 public class DialogueTrigger : Interaction
 {
+    
+
     [SerializeField] private Sprite sprite;
     [SerializeField] private string header;
-    [SerializeField] [TextArea(2, 5)] private string[] dialogues;
+    [SerializeField] private DialogueEntry[] dialogueEntries;
     [SerializeField] private bool canBeSkipped = true;
 
     [SerializeField] private bool triggerOnStart;
@@ -30,6 +43,6 @@ public class DialogueTrigger : Interaction
 
     protected async override void Interact()
     {
-        await DialogueController.Instance.ShowDialogue(header, dialogues, dialogueEndEvents, sprite, canBeSkipped);
+        await DialogueController.Instance.ShowDialogue(header, dialogueEntries, dialogueEndEvents, sprite, canBeSkipped);
     }
 }

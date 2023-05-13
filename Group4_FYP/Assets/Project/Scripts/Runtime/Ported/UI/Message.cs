@@ -9,6 +9,9 @@ public class Message : Singleton<Message>
 
     public void ShowMessage(string message, Sprite sprite = null, float duration = 1.5f)
     {
+        if (!messagePanel.activeSelf)
+            return;
+
         var clone = Instantiate(messageItemPrefab, messagePanel.transform);
         if (clone.TryGetComponent<MessageItem>(out var messageItem))
             messageItem.ShowMessageItem(message, duration, sprite != null ? sprite : defaultMessageSprite);

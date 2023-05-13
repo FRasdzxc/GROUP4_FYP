@@ -34,11 +34,19 @@ MonoBehaviour:
     MinCountItem: 4
     MaxCountItem: 6
   - Weight: 0
+    Drop: {fileID: 3892642743747956806, guid: 3a447896b6c2d4345b32f787132b0a4d, type: 3}
+    MinCountItem: 4
+    MaxCountItem: 6
+  - Weight: 0
     Drop: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
     MinCountItem: 3
     MaxCountItem: 4
   - Weight: 0
     Drop: {fileID: 7226978476898237298, guid: 826b3668e9914ef44b3027fb2c3d7930, type: 3}
+    MinCountItem: 2
+    MaxCountItem: 3
+  - Weight: 0
+    Drop: {fileID: 2588298754920058112, guid: c87f15c90b9705d40894bda5ce10f808, type: 3}
     MinCountItem: 2
     MaxCountItem: 3
   OneItemFromList:

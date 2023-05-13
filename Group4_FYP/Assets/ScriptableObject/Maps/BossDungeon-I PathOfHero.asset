@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f1032bda55bdb4c8d38635bb0cacab, type: 3}
+  m_Name: BossDungeon-I PathOfHero
+  m_EditorClassIdentifier: 
+  mapId: map_bossdungeoni
+  mapName: Path of Hero
+  mapType: 2
+  mapDifficulty: 4
+  objective: Kill all the mobs without dying, then enter the boss room to fight the
+    boss!
+  mapPrefab: {fileID: 554677340539605988, guid: beabb4a24700f3a4e92ebdec1d4f6a2c, type: 3}
+  musics:
+  - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: c46a41e31c93e2b41a3905d27f33cbe3, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 44fe9c981f6248c4e9fd7811368c1c11, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 8cf767292d3d7a64fb3ba1709b81bd32, type: 3}
+    volume: 1
+    pitch: 1
+  playerType: 0
+  dungeonType: 2
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: 73.5, y: 134.5}
+  intermission: 5
+  bossRoomPos: {x: 73.5, y: 120.5}
+  bossPrefab: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
+  bossPos: {x: 73.5, y: 134.5}
+  bossMusics:
+  - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 55874187a9b662b46ad1d07a09c72316, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
+    volume: 1
+    pitch: 1

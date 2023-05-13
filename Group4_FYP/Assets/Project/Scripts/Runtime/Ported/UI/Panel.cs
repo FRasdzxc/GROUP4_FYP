@@ -6,22 +6,27 @@ public abstract class Panel : MonoBehaviour
 {
     protected PlayerInput playerInput;
     protected bool allowHiding = true;
+    protected bool isOpened;
 
     protected virtual void Awake() { }
 
     public virtual void ShowPanel()
-        => PanelManager.Instance.AddPanel(this);
+    {
+        if (!isOpened)
+            PanelManager.Instance.AddPanel(this);
+    }
 
     public virtual void HidePanel()
     {
-        if (allowHiding)
+        if (isOpened && allowHiding)
             PanelManager.Instance.RemovePanel(this);
     }
 
     public bool GetAllowHiding()
-    {
-        return allowHiding;
-    }
+        => allowHiding;
+
+    public bool GetIsOpened()
+        => isOpened;
 
     void OnEnable()
         => GameManager.onPlayerSetUp += SetUp;

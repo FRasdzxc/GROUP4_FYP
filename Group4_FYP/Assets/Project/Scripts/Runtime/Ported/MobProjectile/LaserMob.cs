@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class LaserMob : ProjectileMob
+public class LaserMob : MonoDirectionalProjectileMob
 {
     [SerializeField] private GameObject defaultLaser;
     [SerializeField] private GameObject bigLaserBall;

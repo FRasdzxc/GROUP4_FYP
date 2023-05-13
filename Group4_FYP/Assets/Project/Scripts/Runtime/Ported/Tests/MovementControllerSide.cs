@@ -18,6 +18,8 @@ public class MovementControllerSide : MovementControllerV2
     protected LayerMask groundLayer;
     [SerializeField]
     protected GameObject smoke;
+    [SerializeField]
+    protected Vector2 smokeOffset;
     protected InputAction moveActionSide;
     protected InputAction switchGravityAction;
     protected InputAction jumpAction;
@@ -87,7 +89,7 @@ public class MovementControllerSide : MovementControllerV2
             if (jumpAction.triggered && rb2D.velocity.y <= 0f)
             {
                 rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce * (rb2D.gravityScale < 0 ? -1 : 1));
-                Instantiate(smoke, transform.position, Quaternion.identity);
+                Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
             }
         }
 
@@ -110,7 +112,7 @@ public class MovementControllerSide : MovementControllerV2
     {
         float distance = Vector2.Distance(transform.position, leftGroundPos);
         if (distance > 1f)
-            Instantiate(smoke, transform.position, Quaternion.identity);
+            Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
 
         if (collision2D.collider.CompareTag("Sponge"))
         {
@@ -126,4 +128,7 @@ public class MovementControllerSide : MovementControllerV2
 
     void OnCollisionExit2D(Collision2D collision2D)
         => leftGroundPos = transform.position;
+
+    private Vector2 CalculateSmokeOffset()
+        => ((Vector2)transform.position + Vector2.Scale(smokeOffset, transform.localScale));
 }

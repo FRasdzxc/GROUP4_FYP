@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3412a68019eba844b7e18b47c75d041, type: 3}
+  m_Name: WormWeapon
+  m_EditorClassIdentifier: 
+  weaponName: Worm Weapon
+  weaponId: 
+  weaponTier: 0
+  cooldown: 0.873
+  weaponGobj: {fileID: 7655028130498255923, guid: f541e0c5b9401d84db70101a206a7c00, type: 3}
+  item: {fileID: 0}

@@ -38,14 +38,17 @@ namespace PathOfHero.Gameplay
         {
             if (content.performed && shownPanels.Count > 0)
             {
-                var index = shownPanels.Count - 1;
-                var panel = shownPanels[index];
+                // var index = shownPanels.Count - 1;
+                // var panel = shownPanels[index];
 
-                if (!panel.GetAllowHiding())
-                    return;
+                // if (!panel.GetAllowHiding())
+                //     return;
 
-                shownPanels.RemoveAt(index);
-                panel.HidePanel();
+                // shownPanels.RemoveAt(index);
+                // panel.HidePanel();
+
+                if (shownPanels[shownPanels.Count - 1].GetAllowHiding() && shownPanels[shownPanels.Count - 1].GetIsOpened())
+                    shownPanels[shownPanels.Count - 1].HidePanel();
             }
         }
 
@@ -63,19 +66,20 @@ namespace PathOfHero.Gameplay
             if (!shownPanels.Contains(panel))
                 shownPanels.Add(panel);
 
-            SelectCurrentActionMap();
-
             if (HUD.Instance)
                 HUD.Instance.HideHUDMain();
+
+            SelectCurrentActionMap();
         }
 
         public void RemovePanel(Panel panel)
         {
             shownPanels.Remove(panel);
-            SelectCurrentActionMap();
 
             if (shownPanels.Count <= 0 && HUD.Instance)
                 HUD.Instance.ShowHUDMain();
+
+            SelectCurrentActionMap();
         }
 
         private void SetUp()

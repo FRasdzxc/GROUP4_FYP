@@ -14,6 +14,8 @@ public class MovingPlatform : MonoBehaviour
         [Tooltip("Unit: seconds")]
         public float stayDuration;
         public Ease easeMode = Ease.Linear;
+        public AudioClip[] moveSound;
+        public AudioClip[] stopSound;
     }
 
     [SerializeField]
@@ -21,12 +23,21 @@ public class MovingPlatform : MonoBehaviour
 
     private int currentPos = 0;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         if (posEntries.Length <= 0)
         {
             Debug.LogError($"[MovingPlatform] ({gameObject}): posEntries is empty");
+            return;
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource)
+        {
+            Debug.LogError($"[MovingPlatform] ({gameObject}): no audio source");
             return;
         }
 
@@ -44,8 +55,15 @@ public class MovingPlatform : MonoBehaviour
             foreach (posEntry entry in posEntries)
             {
                 currentPos = currentPos + 1 >= posEntries.Length ? 0 : ++currentPos;
+
+                if (posEntries[currentPos].moveSound.Length > 0)
+                    audioSource.PlayOneShot(posEntries[currentPos].moveSound[UnityEngine.Random.Range(0, posEntries[currentPos].moveSound.Length)]);
+
                 yield return transform.DOMove(posEntries[currentPos].position, posEntries[currentPos].moveDuration).SetEase(posEntries[currentPos].easeMode).WaitForCompletion();
                 yield return new WaitForSeconds(posEntries[currentPos].stayDuration);
+
+                if (posEntries[currentPos].stopSound.Length > 0)
+                    audioSource.PlayOneShot(posEntries[currentPos].stopSound[UnityEngine.Random.Range(0, posEntries[currentPos].stopSound.Length)]);
             }
         }
     }

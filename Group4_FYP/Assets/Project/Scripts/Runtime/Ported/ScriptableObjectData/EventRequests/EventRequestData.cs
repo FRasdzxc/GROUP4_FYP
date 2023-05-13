@@ -1,6 +1,15 @@
 using UnityEngine;
+using System;
 
-public abstract class EventRequestData : ScriptableObject
+public class EventRequestData : ScriptableObject
 {
-    public abstract void Invoke();
+    protected Action actions;
+
+    public virtual void Invoke()
+        => actions?.Invoke();
+        
+    public virtual void AddEvent(Action action)
+        => actions += action;
+    public virtual void RemoveAllEvents()
+        => actions = null;
 }

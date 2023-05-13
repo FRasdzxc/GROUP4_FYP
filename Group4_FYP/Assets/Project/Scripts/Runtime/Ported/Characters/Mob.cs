@@ -16,6 +16,7 @@ public class Mob : MonoBehaviour
     [SerializeField] protected AudioClip[] dieSoundClips;
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected GameObject smoke;
+    [SerializeField] protected Color smokeColor = Color.white;
     protected float health;
     protected float sightDistance;
     protected float attackDistance;
@@ -69,7 +70,10 @@ public class Mob : MonoBehaviour
                 WalkAround();
 
             if (animator)
-            {if (rb2D.velocity.magnitude <= 0f)
+            {
+                ResetAnimatorParameters();
+
+                if (rb2D.velocity.magnitude <= 0f)
                     animator.SetBool("IsMoving", false);
                 else
                     animator.SetBool("IsMoving", true);
@@ -79,14 +83,22 @@ public class Mob : MonoBehaviour
             sr.color = Color.red;
     }
 
-    protected virtual void AttackPlayer() { }
+    protected virtual void AttackPlayer()
+    {
+        if (animator)
+        {
+            ResetAnimatorParameters();
+            animator.SetBool("IsAttacking", true);
+        }
+    }
 
     protected virtual void AttackMethod() { }
 
     protected virtual void ChasePlayer()
     {
         moveDir = ((Vector2)player.transform.position - rb2D.position).normalized;
-        rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
+        // rb2D.MovePosition(rb2D.position + moveDir * movementSpeed * Time.deltaTime);
+        rb2D.velocity = moveDir * movementSpeed;
         
         LookAt();
     }
@@ -127,13 +139,17 @@ public class Mob : MonoBehaviour
         UpdateUI();
 
         if (smoke)
-            Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+        {
+            GameObject smokeClone = Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+            smokeClone.GetComponent<SpriteRenderer>().color = smokeColor;
+        }
 
         await transform.DOScale(0, 0.5f).AsyncWaitForCompletion();
 
         if (this) // trying to prevent MissingReferenceException
         {
-            loot.SpawnDrop(transform, randomDropCount, dropRange);
+            if (loot)
+                loot.SpawnDrop(transform, randomDropCount, dropRange);
             point.SpawnDrop();
             //DataCollector.Instance?.MobsKilled(mobData.characterName);
             Destroy(gameObject);
@@ -172,7 +188,14 @@ public class Mob : MonoBehaviour
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
+        => sr.color = Color.white;
+
+    protected void ResetAnimatorParameters()
     {
-        sr.color = Color.white;
+        foreach (AnimatorControllerParameter acp in animator.parameters)
+        {
+            if (acp.type.Equals(AnimatorControllerParameterType.Bool))
+                animator.SetBool(acp.name, false);
+        }
     }
 }

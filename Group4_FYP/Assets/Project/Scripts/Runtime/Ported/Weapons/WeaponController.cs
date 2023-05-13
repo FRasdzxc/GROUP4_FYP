@@ -30,5 +30,5 @@ public abstract class WeaponController : MonoBehaviour
         }
     }
 
-    protected abstract void Attack();
+    public abstract void Attack();
 }

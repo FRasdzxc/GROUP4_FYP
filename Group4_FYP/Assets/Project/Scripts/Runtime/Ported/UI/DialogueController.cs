@@ -25,7 +25,7 @@ public class DialogueController : Singleton<DialogueController>
     private GameObject clone;
 
     private string header;
-    private string[] dialogues;
+    private DialogueEntry[] dialogueEntries;
     private DialogueEvents dialogueStartEvents;
     private DialogueEvents dialogueEndEvents;
     private Sprite sprite;
@@ -40,27 +40,17 @@ public class DialogueController : Singleton<DialogueController>
     private InputAction nextDialogueAction;
     private InputAction skipDialogueAction;
 
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
-
     // Update is called once per frame
     async void Update()
     {
         if (isInConversation)
         {
-            // if (Input.GetKeyDown(KeyCode.Space))
             if (nextDialogueAction.triggered)
-            {
                 await NextDialogue();
-            }
 
             // if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
-            if (canBeSkipped && skipDialogueAction.triggered)
+            if (canBeSkipped && skipDialogueAction.triggered && dialoguePanel.GetIsOpened())
             {
-                //await dialoguePanel.HideDialoguePanel();
                 dialoguePanel.HidePanel();
                 dialogueEndEvents.Invoke();
 
@@ -71,13 +61,13 @@ public class DialogueController : Singleton<DialogueController>
         }
     }
 
-    public async Task ShowDialogue(string header, string[] dialogues, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
+    public async Task ShowDialogue(string header, DialogueEntry[] dialogueEntries, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
     {
         if (!isInConversation)
         {
-            canShowNextDialogue = false;
+            // canShowNextDialogue = false;
 
-            if (dialogues.Length <= 0)
+            if (dialogueEntries.Length <= 0)
             {
                 Debug.LogWarning("dialogues is empty");
                 dialogueEndEvents.Invoke();
@@ -85,39 +75,34 @@ public class DialogueController : Singleton<DialogueController>
             }
 
             if (clone)
-            {
                 Destroy(clone);
-            }
             clone = Instantiate(dialoguePanelPrefab, dialoguePanelContainer.transform);
             dialoguePanel = clone.GetComponent<DialoguePanel>();
             dialoguePanel.SetAllowHiding(canBeSkipped);
 
             this.header = header;
-            this.dialogues = dialogues;
+            this.dialogueEntries = dialogueEntries;
             this.dialogueEndEvents = dialogueEndEvents;
             this.canBeSkipped = canBeSkipped;
 
             if (sprite)
-            {
                 this.sprite = sprite;
-            }
             else
-            {
                 sprite = defaultSprite;
-            }
 
             // can be written better?
             hint = "[SPACE] Continue";
             if (canBeSkipped)
-            {
                 hint += "; [.] Skip";
-            }
 
-            currentDialogueIndex = 0;
+            currentDialogueIndex = -1;
             isInConversation = true;
-
-            await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite, hint);
             canShowNextDialogue = true;
+            await NextDialogue();
+
+            // dialogueEntries[currentDialogueIndex].eventRequestData?.Invoke();
+            // await dialoguePanel.ShowDialoguePanel(header, dialogueEntries[currentDialogueIndex].dialogue, sprite, hint);
+            // canShowNextDialogue = true;
         }
     }
 
@@ -129,9 +114,10 @@ public class DialogueController : Singleton<DialogueController>
 
             currentDialogueIndex++;
 
-            if (currentDialogueIndex < dialogues.Length)
+            if (currentDialogueIndex < dialogueEntries.Length)
             {
-                await dialoguePanel.ShowDialoguePanel(header, dialogues[currentDialogueIndex], sprite, hint);
+                dialogueEntries[currentDialogueIndex].eventRequestData?.Invoke();
+                await dialoguePanel.ShowDialoguePanel(header, dialogueEntries[currentDialogueIndex].dialogue, sprite, hint);
             }
             else
             {

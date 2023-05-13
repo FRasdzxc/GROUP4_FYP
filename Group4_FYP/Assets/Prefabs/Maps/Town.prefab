@@ -40094,19 +40094,23 @@ MonoBehaviour:
   interactionDistance: 2.5
   sprite: {fileID: 21300000, guid: 0d86040ff534e904c91aeea18df9b519, type: 3}
   header: Village Chief
-  dialogues:
-  - Hey there! Welcome to the town!
-  - We made sure to keep this place as safe as possible! So you can relax here without
-    ever worrying about fighting mobs.
-  - 'You can also do things here such as:
+  dialogueEntries:
+  - dialogue: Hey there! Welcome to the town!
+    eventRequestData: {fileID: 0}
+  - dialogue: We made sure to keep this place as safe as possible! So you can relax
+      here without ever worrying about fighting mobs.
+    eventRequestData: {fileID: 0}
+  - dialogue: 'You can also do things here such as:
 
-    - Go on an adventure / enter dungeons
+      - Go on an adventure /
+      enter dungeons
 
-    -
-    Buying / selling items
+      - Buying / selling items
 
-    - Upgrading your weapons'
-  - You can enter the Tutorial to familiarize yourself!
+      - Upgrading your weapons'
+    eventRequestData: {fileID: 0}
+  - dialogue: You can enter the Tutorial to familiarize yourself!
+    eventRequestData: {fileID: 0}
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 4d87443658a11b948886d9d505ab6e8f, type: 2}
@@ -40892,8 +40896,9 @@ MonoBehaviour:
   interactionDistance: 2.5
   sprite: {fileID: 21300000, guid: 4a9efd92bd67aff43884c7a5661a110e, type: 3}
   header: Sign
-  dialogues:
-  - '"These doorways leads to every available maps."'
+  dialogueEntries:
+  - dialogue: '"These doorways leads to every available maps."'
+    eventRequestData: {fileID: 0}
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 1e5c554e43e795143985be8f3dfbba40, type: 2}
@@ -41997,8 +42002,9 @@ MonoBehaviour:
   interactionDistance: 2.5
   sprite: {fileID: 21300000, guid: 4a9efd92bd67aff43884c7a5661a110e, type: 3}
   header: Sign
-  dialogues:
-  - '"These doorways leads to some dungeons."'
+  dialogueEntries:
+  - dialogue: '"These doorways leads to some dungeons."'
+    eventRequestData: {fileID: 0}
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 332b1359e96cdd9479e83a799d379ec3, type: 2}
@@ -42089,6 +42095,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1222998455637610403}
     m_Modifications:
+    - target: {fileID: 2334503194388927457, guid: 5a4f30990f12680418370a1a00f6ae50, type: 3}
+      propertyPath: dialogueEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334503194388927457, guid: 5a4f30990f12680418370a1a00f6ae50, type: 3}
+      propertyPath: dialogueEntries.Array.data[0].dialogue
+      value: He... hello. Welcome to the shop...
+      objectReference: {fileID: 0}
     - target: {fileID: 2334503194388927459, guid: 5a4f30990f12680418370a1a00f6ae50, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -42213,6 +42227,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1222998455637610403}
     m_Modifications:
+    - target: {fileID: 5895607011714822110, guid: 8aeda28ebbf821b47aced29127948242, type: 3}
+      propertyPath: dialogueEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895607011714822110, guid: 8aeda28ebbf821b47aced29127948242, type: 3}
+      propertyPath: dialogueEntries.Array.data[0].dialogue
+      value: Greetings. What do you want to sell?
+      objectReference: {fileID: 0}
     - target: {fileID: 5895607011714822111, guid: 8aeda28ebbf821b47aced29127948242, type: 3}
       propertyPath: m_Name
       value: MerchantSell
@@ -42341,6 +42363,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1222998455637610403}
     m_Modifications:
+    - target: {fileID: 3923242805205513840, guid: 2114acb758f29c047a0972f23c0a4f89, type: 3}
+      propertyPath: dialogueEntries.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923242805205513840, guid: 2114acb758f29c047a0972f23c0a4f89, type: 3}
+      propertyPath: dialogueEntries.Array.data[0].dialogue
+      value: Good day mah dude! Up for a weapon upgrade?
+      objectReference: {fileID: 0}
     - target: {fileID: 3923242805205513842, guid: 2114acb758f29c047a0972f23c0a4f89, type: 3}
       propertyPath: m_RootOrder
       value: 13
