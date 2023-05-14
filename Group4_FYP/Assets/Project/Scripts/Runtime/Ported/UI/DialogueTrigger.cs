@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class DialogueEntry
 {
-    [TextArea(2, 5)]
+    [TextArea(2, 10)]
     public string dialogue;
 
     [Tooltip("Invoke this once this dialogue is shown\nLeave blank if none")]

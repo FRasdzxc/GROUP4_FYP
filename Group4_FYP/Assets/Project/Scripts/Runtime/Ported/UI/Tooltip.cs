@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 public class Tooltip : Singleton<Tooltip>
 {
@@ -94,22 +95,22 @@ public class Tooltip : Singleton<Tooltip>
                     case TooltipHintType.None:
                         break;
                     case TooltipHintType.Use:
-                        sb.AppendLine("'LMB' - Use");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LMB</color>' - Use");
                         break;
                     case TooltipHintType.Drop:
-                        sb.AppendLine("'RMB' - Drop");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>RMB</color>' - Remove");
                         break;
                     case TooltipHintType.UseAll:
-                        sb.AppendLine("'LShift + LMB' - Use All");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + LMB</color>' - Use All");
                         break;
                     case TooltipHintType.DropAll:
-                        sb.AppendLine("'LShift + RMB' - Drop All");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + RMB</color>' - Remove All");
                         break;
                     case TooltipHintType.Transfer:
-                        sb.AppendLine("'LMB' - Transfer");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LMB</color>' - Transfer");
                         break;
                     case TooltipHintType.TransferAll:
-                        sb.AppendLine("'LShift + LMB' - Transfer All");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + LMB</color>' - Transfer All");
                         break;
                 }
             }

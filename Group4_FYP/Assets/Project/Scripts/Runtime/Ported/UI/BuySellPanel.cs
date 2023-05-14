@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
+using PathOfHero.Others;
 
 public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 {
@@ -460,7 +461,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             }
         }
 
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", "Do you want to buy these items?" + "\n\nCost: " + price.ToString("n0") + " coins",
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", $"Do you want to buy these items?\n\n<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins",
             () =>
             {
                 // buy action here
@@ -504,7 +505,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             }
         }
 
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", "Do you want to sell these items?" + "\n\nGain: " + price.ToString("n0") + " coins",
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", $"Do you want to sell these items?\n\n<color={CustomColorStrings.yellow}>Gain:</color> {price.ToString("n0")} coins",
             () =>
             {
                 // sell action here

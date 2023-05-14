@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 // get every ProfileData attributes then use ProjectManagerJson to save
 public class SaveSystem : Singleton<SaveSystem>
@@ -118,7 +119,7 @@ public class SaveSystem : Singleton<SaveSystem>
         ProfileManagerJson.SaveProfile(profile);
 
         if (showNotification)
-            _ = Notification.Instance.ShowNotification("Successfully saved data to Profile \"" + profile.profileName + "\"!");
+            _ = Notification.Instance.ShowNotification($"Successfully saved data to Profile '<color={CustomColorStrings.green}>{profile.profileName}</color>'!");
     }
 
     void OnEnable()

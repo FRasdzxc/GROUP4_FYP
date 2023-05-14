@@ -1,4 +1,5 @@
 using UnityEngine;
+using PathOfHero.Others;
 
 [CreateAssetMenu(fileName = "New Map Change Event Request Data", menuName = "Game/Event Requests/Map Change")]
 public class MapChangeEventRequestData : EventRequestData
@@ -21,10 +22,12 @@ public class MapChangeEventRequestData : EventRequestData
         {
             if (mapData.mapType == MapType.Dungeon)
             {
+                DungeonMapData dungeonMapData = mapData as DungeonMapData;
+
                 ConfirmationPanel.Instance.ShowConfirmationPanel
                 (
-                    $"Enter {mapData.mapName}",
-                    $"Enter {mapData.mapName}?\n\n[!] Please note that you cannot save/quit in the middle of a dungeon battle! You will have to play through the whole dungeon. Upon death, you will lose all your progress in this dungeon!\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                    $"Enter <color={CustomColorStrings.green}>{mapData.mapName}</color>",
+                    $"<color={CustomColorStrings.red}>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color={CustomColorStrings.red}>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                     () => { GameManager.Instance.LoadMap(mapId, saveOnMapLoaded); },
                     true
                 );
@@ -33,8 +36,8 @@ public class MapChangeEventRequestData : EventRequestData
             {
                 ConfirmationPanel.Instance.ShowConfirmationPanel
                 (
-                    $"Enter {mapData.mapName}",
-                    $"Enter {mapData.mapName}?\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                    $"Enter <color={CustomColorStrings.green}>{mapData.mapName}</color>",
+                    $"<color={CustomColorStrings.yellow}>Type:</color> {mapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {mapData.mapDifficulty}",
                     () => { GameManager.Instance.LoadMap(mapId, saveOnMapLoaded); }
                 );
             }

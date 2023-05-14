@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using PathOfHero.Others;
 
 public class WeaponUpgradePanel : PanelOverride
 {
@@ -165,7 +166,7 @@ public class WeaponUpgradePanel : PanelOverride
             ConfirmationPanel.Instance.ShowConfirmationPanel
             (
                 "Upgrade Weapon",
-                $"Do you want to upgrade this weapon to Tier {targetTier}?\n\nCost: {price.ToString("n0")} coins, Relic (Tier {targetTier})",
+                $"Do you want to upgrade this weapon to <color={CustomColorStrings.green}>Tier {targetTier}</color>?\n\n<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Relic (Tier {targetTier})",
                 () =>
                 {
                     if (Hero.Instance.GetStoredCoin() >= price)

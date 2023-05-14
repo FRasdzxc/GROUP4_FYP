@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PathOfHero.Telemetry;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 public class Orb : Singleton<Orb>
 {
@@ -59,8 +60,8 @@ public class Orb : Singleton<Orb>
 
             TooltipTrigger tooltipTrigger = clone.AddComponent<TooltipTrigger>();
             string[] attributes;
-            string currentAttribute = "Current: ";
-            string upgradedAttribute = "Upgraded: ";
+            string currentAttribute = $"<color={CustomColorStrings.yellow}>Current:</color> ";
+            string upgradedAttribute = $"<color={CustomColorStrings.yellow}>Upgraded:</color> ";
             switch (upgrade.type)
             {
                 case OrbUpgradeType.MaxHealth:

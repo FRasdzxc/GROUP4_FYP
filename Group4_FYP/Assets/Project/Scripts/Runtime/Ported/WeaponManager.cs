@@ -1,4 +1,5 @@
 using UnityEngine;
+using PathOfHero.Others;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class WeaponManager : MonoBehaviour
         weaponTier = weapon.weaponTier;
 
         SetupWeapon();
-        _ = Notification.Instance.ShowNotification($"Equipped {weapon.weaponName}");
+        _ = Notification.Instance.ShowNotification($"Equipped <color={CustomColorStrings.green}>{weapon.weaponName}</color>");
     }
 
     private void SetupWeapon()

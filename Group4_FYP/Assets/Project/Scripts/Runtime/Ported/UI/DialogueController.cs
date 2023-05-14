@@ -4,17 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 [Serializable]
 public class DialogueEvents : UnityEvent {}
-
-// [Serializable]
-// public class DialogueEntry
-// {
-//     [Tooltip("Leave blank to use previous name")] public string name;
-//     [TextArea(2, 5)] public string[] dialogues;
-//     // public DialogueEvents dialogueEvents; // this takes up to much space
-// }
 
 public class DialogueController : Singleton<DialogueController>
 {
@@ -91,9 +84,9 @@ public class DialogueController : Singleton<DialogueController>
                 sprite = defaultSprite;
 
             // can be written better?
-            hint = "[SPACE] Continue";
+            hint = $"'<color={CustomColorStrings.yellow}>{nextDialogueAction.GetBindingDisplayString()}</color>' Continue";
             if (canBeSkipped)
-                hint += "; [.] Skip";
+                hint += $"<color={CustomColorStrings.white}>;</color> '<color={CustomColorStrings.yellow}>{skipDialogueAction.GetBindingDisplayString()}</color>' Skip";
 
             currentDialogueIndex = -1;
             isInConversation = true;

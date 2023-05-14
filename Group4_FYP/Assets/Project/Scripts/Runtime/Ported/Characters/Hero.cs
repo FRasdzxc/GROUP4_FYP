@@ -5,6 +5,7 @@ using System.Collections;
 using PathOfHero.Telemetry;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 public class Hero : Singleton<Hero>
 {
@@ -115,7 +116,7 @@ public class Hero : Singleton<Hero>
                 storedExp -= requiredExp;
                 level++;
                 
-                _ = Notification.Instance.ShowNotification("Level Up! - " + level.ToString("n0"));
+                _ = Notification.Instance.ShowNotification($"Level Up! - <color={CustomColorStrings.green}>{level.ToString("n0")}</color>");
 
                 if (level % orbObtainLevel == 0)
                 {

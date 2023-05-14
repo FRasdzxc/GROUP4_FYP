@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using PathOfHero.Others;
 
 public static class ProfileManagerJson
 {
@@ -14,7 +15,7 @@ public static class ProfileManagerJson
         if (File.Exists(path)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
         {
             // show error
-            _ = Notification.Instance.ShowNotification("\"" + profileName + "\" is not available, please use another name");
+            _ = Notification.Instance.ShowNotification($"'<color={CustomColorStrings.green}>{profileName}</color>' is not available, please use another name");
 
             return false;
         }
@@ -23,7 +24,7 @@ public static class ProfileManagerJson
             ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
             WriteProfile(profileData, path);
 
-            _ = Notification.Instance.ShowNotification("Successfully created Profile \"" + profileName + "\"!");
+            _ = Notification.Instance.ShowNotification($"Successfully created Profile '<color={CustomColorStrings.green}>{profileName}</color>'!");
 
             return true;
         }
@@ -43,9 +44,7 @@ public static class ProfileManagerJson
         string path = heroProfileDirectoryPath + profileName + ".heroprofile";
 
         if (File.Exists(path))
-        {
             return ReadProfile(path);
-        }
 
         return null;
     }
@@ -73,7 +72,7 @@ public static class ProfileManagerJson
             if (File.Exists(newPath)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
             {
                 // show error
-                _ = Notification.Instance.ShowNotification("\"" + newProfileName + "\" is not available, please use another name");
+                _ = Notification.Instance.ShowNotification($"'<color={CustomColorStrings.green}>{newProfileName}</color>' is not available, please use another name");
             }
             else
             {
@@ -81,7 +80,7 @@ public static class ProfileManagerJson
                 WriteProfile(newProfileData, newPath);
                 DeleteProfile(profileName);
 
-                _ = Notification.Instance.ShowNotification("Successfully updated Profile \"" + profileName + "\" to \"" + newProfileName + "\"!");
+                _ = Notification.Instance.ShowNotification($"Successfully updated Profile '<color={CustomColorStrings.green}>{profileName}</color>' to '<color={CustomColorStrings.green}>{newProfileName}</color>'!");
 
                 return true;
             }
@@ -102,9 +101,7 @@ public static class ProfileManagerJson
             File.Delete(path);
 
             if (showNotification)
-            {
-                _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" deleted");
-            }
+                _ = Notification.Instance.ShowNotification($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' deleted");
 
             return true;
         }
@@ -112,9 +109,7 @@ public static class ProfileManagerJson
         {
             // show error
             if (showNotification)
-            {
-                _ = Notification.Instance.ShowNotification("Profile \"" + profileName + "\" does not exist");
-            }
+                _ = Notification.Instance.ShowNotification($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' does not exist");
         }
 
         return false;
@@ -128,24 +123,18 @@ public static class ProfileManagerJson
         List<ProfileData> profiles = new List<ProfileData>();
 
         for (int i = 0; i < fileInfos.Length; i++)
-        {
             profiles.Add(ReadProfile(fileInfos[i].ToString()));
-        }
 
         return profiles.ToArray();
     }
 
     public static string GetHeroProfileDirectoryPath()
-    {
-        return heroProfileDirectoryPath;
-    }
+        => heroProfileDirectoryPath;
 
     private static void CreateHeroProfileDirectory()
     {
         if (!Directory.Exists(heroProfileDirectoryPath))
-        {
             Directory.CreateDirectory(heroProfileDirectoryPath);
-        }
     }
 
     private static void WriteProfile(ProfileData profileData, string path)

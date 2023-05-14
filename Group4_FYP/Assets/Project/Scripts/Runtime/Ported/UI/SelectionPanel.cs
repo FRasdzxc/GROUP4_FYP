@@ -68,8 +68,8 @@ public class SelectionPanel : Panel
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
-                                    $"Enter {dungeonMapData.mapName}",
-                                    $"Enter {dungeonMapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {dungeonMapData.dungeonType} {dungeonMapData.mapType}\nDifficulty: {dungeonMapData.mapDifficulty}",
+                                    $"Enter <color={CustomColorStrings.green}>{dungeonMapData.mapName}</color>",
+                                    $"<color={CustomColorStrings.red}>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color={CustomColorStrings.red}>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);
@@ -84,8 +84,8 @@ public class SelectionPanel : Panel
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
-                                    $"Enter {mapData.mapName}",
-                                    $"Enter {mapData.mapName}?\n\nType: {mapData.mapType}\nDifficulty: {mapData.mapDifficulty}",
+                                    $"Enter <color={CustomColorStrings.green}>{mapData.mapName}</color>",
+                                    $"<color={CustomColorStrings.yellow}>Type:</color> {mapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {mapData.mapDifficulty}",
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(mapData.mapId);
@@ -129,8 +129,8 @@ public class SelectionPanel : Panel
                             {
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
-                                    $"Enter {dungeonMapData.mapName}",
-                                    $"Enter {dungeonMapData.mapName}?\n\n[!] You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n[!] Upon death, you will lose all your progress in this dungeon!\n\nType: {dungeonMapData.dungeonType} {dungeonMapData.mapType}\nDifficulty: {dungeonMapData.mapDifficulty}",
+                                    $"Enter <color={CustomColorStrings.green}>{dungeonMapData.mapName}</color>",
+                                    $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using PathOfHero.Others;
 
 [CreateAssetMenu(fileName = "New Consumable Item Data", menuName = "Game/Items/Consumable Item Data")]
 public class ConsumableItemData : ItemData
@@ -12,7 +13,8 @@ public class ConsumableItemData : ItemData
 
         public override string ToString()
         {
-            return String.Format("+{0} {1}", value.ToString("n0"), effectType.ToString());
+            // return String.Format("+{0} {1}", value.ToString("n0"), effectType.ToString());
+            return $"+{value.ToString()} <color={CustomColorStrings.yellow}>{effectType.ToString()}</color>";
         }
     }
 

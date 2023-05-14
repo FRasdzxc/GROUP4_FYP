@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using PathOfHero.Others;
 
 // rewrite this class?
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -152,24 +153,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         else if (ItemData is WeaponItemData)
         {
             var weapon = ItemData as WeaponItemData;
-            attributes.Add($"Tier: {weapon.weapon.weaponTier}");
-            attributes.Add($"Cooldown: {weapon.weapon.cooldown} seconds");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {weapon.weapon.weaponTier}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Cooldown:</color> {weapon.weapon.cooldown} seconds");
 
             if (weapon.weapon is ProjectileWeaponData)
             {
                 var projectileWeapon = weapon.weapon as ProjectileWeaponData;
-                attributes.Add($"Projectile Speed: {projectileWeapon.projectileSpeed}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Projectile Speed:</color> {projectileWeapon.projectileSpeed}");
             }
         }
         else if (ItemData is ArmorItemData)
         {
             var armor = ItemData as ArmorItemData;
-            attributes.Add($"Defense: {armor.defense}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Defense:</color> {armor.defense}");
         }
         else if (ItemData is RelicItemData)
         {
             var relic = ItemData as RelicItemData;
-            attributes.Add($"Tier: {relic.tier}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {relic.tier}");
         }
 
         if (inventoryMode == InventoryMode.Normal)
@@ -181,9 +182,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
         {
             if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
-                attributes.Add($"Buy Price: {ItemData.buyPrice}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Buy Price:</color> {ItemData.buyPrice}");
             else
-                attributes.Add($"Sell Price: {ItemData.sellPrice}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Sell Price:</color> {ItemData.sellPrice}");
 
             hints.Add(TooltipHintType.Transfer);
             hints.Add(TooltipHintType.TransferAll);
