@@ -94,22 +94,22 @@ public class Tooltip : Singleton<Tooltip>
                     case TooltipHintType.None:
                         break;
                     case TooltipHintType.Use:
-                        sb.AppendLine("[LMB] - Use");
+                        sb.AppendLine("'LMB' - Use");
                         break;
                     case TooltipHintType.Drop:
-                        sb.AppendLine("[RMB] - Drop");
+                        sb.AppendLine("'RMB' - Drop");
                         break;
                     case TooltipHintType.UseAll:
-                        sb.AppendLine("[LShift + LMB] - Use All");
+                        sb.AppendLine("'LShift + LMB' - Use All");
                         break;
                     case TooltipHintType.DropAll:
-                        sb.AppendLine("[LShift + RMB] - Drop All");
+                        sb.AppendLine("'LShift + RMB' - Drop All");
                         break;
                     case TooltipHintType.Transfer:
-                        sb.AppendLine("[LMB] - Transfer");
+                        sb.AppendLine("'LMB' - Transfer");
                         break;
                     case TooltipHintType.TransferAll:
-                        sb.AppendLine("[LShift + LMB] - Transfer All");
+                        sb.AppendLine("'LShift + LMB' - Transfer All");
                         break;
                 }
             }
