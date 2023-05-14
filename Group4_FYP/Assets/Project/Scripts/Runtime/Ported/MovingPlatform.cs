@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(AudioSource))]
 public class MovingPlatform : MonoBehaviour
 {
     [Serializable]
@@ -21,7 +22,13 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField]
     private posEntry[] posEntries;
 
+    [SerializeField]
+    private bool moveAutomatically = true;
+
     private int currentPos = 0;
+
+    [SerializeField] [Tooltip("for debugging only, should be hidden from the inspector by default")]
+    private bool canMove;
 
     private AudioSource audioSource;
 
@@ -45,6 +52,12 @@ public class MovingPlatform : MonoBehaviour
         StartCoroutine(Move());
     }
 
+    void Update()
+    {
+        if (moveAutomatically && !canMove)
+            canMove = true;
+    }
+
     void OnDestroy()
         => StopCoroutine(Move());
 
@@ -54,16 +67,20 @@ public class MovingPlatform : MonoBehaviour
         {
             foreach (posEntry entry in posEntries)
             {
+                while (!canMove)
+                    yield return null;
+
                 currentPos = currentPos + 1 >= posEntries.Length ? 0 : ++currentPos;
 
                 if (posEntries[currentPos].moveSound.Length > 0)
                     audioSource.PlayOneShot(posEntries[currentPos].moveSound[UnityEngine.Random.Range(0, posEntries[currentPos].moveSound.Length)]);
-
                 yield return transform.DOMove(posEntries[currentPos].position, posEntries[currentPos].moveDuration).SetEase(posEntries[currentPos].easeMode).WaitForCompletion();
-                yield return new WaitForSeconds(posEntries[currentPos].stayDuration);
 
                 if (posEntries[currentPos].stopSound.Length > 0)
                     audioSource.PlayOneShot(posEntries[currentPos].stopSound[UnityEngine.Random.Range(0, posEntries[currentPos].stopSound.Length)]);
+                yield return new WaitForSeconds(posEntries[currentPos].stayDuration);
+
+                canMove = false;
             }
         }
     }
@@ -73,4 +90,7 @@ public class MovingPlatform : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision2D)
         => collision2D.transform.SetParent(null);
+
+    public void ActivateMove()
+        => canMove = true;
 }

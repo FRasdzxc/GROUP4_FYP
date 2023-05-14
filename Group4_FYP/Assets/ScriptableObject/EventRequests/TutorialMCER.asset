@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: TutorialMCER
   m_EditorClassIdentifier: 
   mapId: map_tutorial
+  requiresConfirmation: 1
+  saveOnMapLoaded: 1

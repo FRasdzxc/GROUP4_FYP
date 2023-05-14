@@ -158,11 +158,12 @@ MonoBehaviour:
   interactionDistance: 2.5
   sprite: {fileID: -3456532010920386237, guid: 133e6c11b7be2104fb7515bf4b3caecd, type: 3}
   header: Merchant
-  dialogues:
-  - He... hello. Welcome to the shop...
+  dialogueEntries: []
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 7286959151f2dae43b41a70cb17ca4b5, type: 2}
+  dialogueSounds:
+  - {fileID: 8300000, guid: de4d08886e957634f9c6a8df90babf06, type: 3}
 --- !u!95 &4416644252007539845
 Animator:
   serializedVersion: 4

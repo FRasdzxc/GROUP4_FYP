@@ -31,5 +31,19 @@ MonoBehaviour:
   - music: {fileID: 8300000, guid: 8cf767292d3d7a64fb3ba1709b81bd32, type: 3}
     volume: 1
     pitch: 1
+  - music: {fileID: 8300000, guid: bdcdba9209f5aa74ead1f6a120980454, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7cffa329cf032ed448c8ec5fba55eb35, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 8afc5c266e552b647934ac0a93488854, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: af81bf1f5c1d9e7448f8db1f7742d39b, type: 3}
+    volume: 1
+    pitch: 1
+  playerType: 0
+  dungeonType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: -76.5, y: 4.5}

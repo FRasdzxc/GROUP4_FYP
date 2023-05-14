@@ -22,6 +22,7 @@ public class DialogueTrigger : Interaction
 
     [SerializeField] private bool triggerOnStart;
     [SerializeField] private EventRequestData eventRequestData;
+    [SerializeField] private AudioClip[] dialogueSounds;
 
     private DialogueEvents dialogueEndEvents = new DialogueEvents();
 
@@ -31,18 +32,17 @@ public class DialogueTrigger : Interaction
         base.Start();
 
         if (triggerOnStart)
-        {
             Interact();
-        }
 
         if (eventRequestData)
-        {
             dialogueEndEvents.AddListener(eventRequestData.Invoke);
-        }
     }
 
     protected async override void Interact()
     {
+        if (dialogueSounds.Length > 0)
+            AudioManager.Instance.PlaySound(dialogueSounds[UnityEngine.Random.Range(0, dialogueSounds.Length)]);
+
         await DialogueController.Instance.ShowDialogue(header, dialogueEntries, dialogueEndEvents, sprite, canBeSkipped);
     }
 }

@@ -40114,6 +40114,8 @@ MonoBehaviour:
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 4d87443658a11b948886d9d505ab6e8f, type: 2}
+  dialogueSounds:
+  - {fileID: 8300000, guid: fb7f3faa0cb8d44418a5c4986f32257b, type: 3}
 --- !u!1 &3971177676942381249
 GameObject:
   m_ObjectHideFlags: 0
@@ -40902,6 +40904,7 @@ MonoBehaviour:
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 1e5c554e43e795143985be8f3dfbba40, type: 2}
+  dialogueSounds: []
 --- !u!1 &5310651217235935234
 GameObject:
   m_ObjectHideFlags: 0
@@ -42008,6 +42011,7 @@ MonoBehaviour:
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: 332b1359e96cdd9479e83a799d379ec3, type: 2}
+  dialogueSounds: []
 --- !u!1 &9136845737941660665
 GameObject:
   m_ObjectHideFlags: 0

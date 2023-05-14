@@ -186,7 +186,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dd6660b27c4939443813c1dab6bba880, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -322,9 +322,9 @@ MonoBehaviour:
   randomDropCount: 1
   dropRange: 0.5
   damageSoundClips:
-  - {fileID: 8300000, guid: 057bf4f18100b884aa97e1e4fd07fb3d, type: 3}
+  - {fileID: 8300000, guid: afe1b19dceaf8904081b96f8d997b9f2, type: 3}
   dieSoundClips:
-  - {fileID: 8300000, guid: 44c09af41e61e92438ffd8467310cabb, type: 3}
+  - {fileID: 8300000, guid: afe1b19dceaf8904081b96f8d997b9f2, type: 3}
   audioSource: {fileID: 98740894700346254}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}

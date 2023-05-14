@@ -19,7 +19,7 @@ MonoBehaviour:
   objective: 'Press ''C'' to change gravity.
 
     Traverse the whole dungeon without
-    dying, then enter the portal'
+    dying, then enter the portal.'
   mapPrefab: {fileID: 2896789635098870256, guid: 0d4fbbf9457f4404f96f00fb8606d3dc, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}

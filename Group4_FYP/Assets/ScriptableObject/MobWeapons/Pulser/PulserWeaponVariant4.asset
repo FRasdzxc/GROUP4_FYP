@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8b2b67d32bc55f40807e4a951497205, type: 3}
-  m_Name: PulserWeapon
+  m_Name: PulserWeaponVariant4
   m_EditorClassIdentifier: 
-  weaponName: Pulser Weapon
+  weaponName: Pulser Weapon Variant 4
   weaponId: 
   weaponTier: 0
-  cooldown: 1
+  cooldown: 0.67
   weaponGobj: {fileID: 0}
   item: {fileID: 0}
   projectileLifeTime: 3.5
-  projectileSpeed: 50
+  projectileSpeed: 15
   projectileOffset: {x: 0, y: 0}

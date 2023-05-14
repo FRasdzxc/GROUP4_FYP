@@ -90,14 +90,12 @@ public class ConfirmationPanel : Panel
 
     public void Confirm()
     {
-        // await HideConfirmationPanel();
         HidePanel();
         confirmAction.Invoke();
     }
 
     public void Cancel()
     {
-        // await HideConfirmationPanel();
         HidePanel();
         cancelAction.Invoke();
     }

@@ -80,6 +80,9 @@ public class PauseMenu : Panel
     //public async Task ShowPauseMenu()
     public async override void ShowPanel()
     {
+        if (isOpened)
+            return;
+
         base.ShowPanel();
 
         GameManager.Instance.GameState = GameState.Paused;
@@ -93,7 +96,7 @@ public class PauseMenu : Panel
 
         await Task.Delay(250);
 
-        // Time.timeScale = 0;
+        Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
 
         isOpened = true;
@@ -101,7 +104,7 @@ public class PauseMenu : Panel
 
     public async Task HidePauseMenu()
     {
-        // Time.timeScale = 1;
+        Time.timeScale = 1;
 
         pauseMenuBackground.GetComponent<Image>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
         sideMenuPanel.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-sideMenuPanel.GetComponent<RectTransform>().sizeDelta.x, 0), 0.25f).SetEase(Ease.OutQuart);
@@ -120,6 +123,9 @@ public class PauseMenu : Panel
 
     public override void HidePanel()
     {
+        if (!isOpened)
+            return;
+
         base.HidePanel();
         _ = HidePauseMenu();
     }

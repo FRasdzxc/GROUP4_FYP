@@ -403,7 +403,7 @@ public class Hero : Singleton<Hero>
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("MobWeaponTrigger") && collision.GetComponent<WeaponTrigger>())
+        if ((collision.CompareTag("MobWeaponTrigger") || collision.CompareTag("MobWeaponTriggerStronger")) && collision.GetComponent<WeaponTrigger>())
         {
             TakeDamage(collision.GetComponent<WeaponTrigger>().GetDamage(false));
             collision.GetComponent<WeaponTrigger>().push(gameObject);

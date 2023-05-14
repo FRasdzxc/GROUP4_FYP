@@ -135,9 +135,10 @@ public class DialogueController : Singleton<DialogueController>
     }
 
     public void SetIsInConversation(bool value)
-    {
-        isInConversation = value;
-    }
+        => isInConversation = value;
+
+    public bool GetIsInConversation()
+        => isInConversation;
 
     void OnEnable()
         => GameManager.onPlayerSetUp += SetUp;

@@ -158,11 +158,12 @@ MonoBehaviour:
   interactionDistance: 2.5
   sprite: {fileID: -3456532010920386237, guid: 133e6c11b7be2104fb7515bf4b3caecd, type: 3}
   header: Merchant
-  dialogues:
-  - Good day. What do you want to sell?
+  dialogueEntries: []
   canBeSkipped: 1
   triggerOnStart: 0
   eventRequestData: {fileID: 11400000, guid: eaae17b0f881d5e45935ba6f8b05e4ac, type: 2}
+  dialogueSounds:
+  - {fileID: 8300000, guid: de4d08886e957634f9c6a8df90babf06, type: 3}
 --- !u!95 &2143317766570014830
 Animator:
   serializedVersion: 4

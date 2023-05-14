@@ -32,6 +32,7 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] private Transform inventoryContentPanelTransform;
     [SerializeField] private GameObject inventorySlotPrefab;
     [SerializeField] private int inventorySize = 32;
+    [SerializeField] private AudioClip[] addRemoveSounds;
 
     private List<InventoryEntry> items = new List<InventoryEntry>();
     private List<GameObject> inventorySlots = new List<GameObject>();
@@ -78,6 +79,9 @@ public class Inventory : Singleton<Inventory>
             int newQty = Mathf.Clamp(entry.qty + 1, 1, InventorySlot.kMaxStackSize);
             items[slot] = new InventoryEntry(item, newQty);
         }
+
+        if (addRemoveSounds.Length > 0)
+            AudioManager.Instance.PlaySound(addRemoveSounds[UnityEngine.Random.Range(0, addRemoveSounds.Length)]);
         
         RefreshInventoryPanel();
         return true;
@@ -99,6 +103,9 @@ public class Inventory : Singleton<Inventory>
             
             break;
         }
+        
+        if (addRemoveSounds.Length > 0)
+            AudioManager.Instance.PlaySound(addRemoveSounds[UnityEngine.Random.Range(0, addRemoveSounds.Length)]);
 
         RefreshInventoryPanel();
     }

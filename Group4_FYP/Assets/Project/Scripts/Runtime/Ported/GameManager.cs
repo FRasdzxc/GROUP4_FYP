@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
     public bool IsPlayingHostile()
         => GameState == GameState.Playing && MapType != MapType.Peaceful;
 
-    public async void LoadMap(string mapId, bool saveOnLoaded = false, bool skipFadeIn = false)
+    public async void LoadMap(string mapId, bool saveOnLoaded = true, bool skipFadeIn = false)
     {
         if (string.IsNullOrWhiteSpace(mapId))
             mapId = defaultMapId;
@@ -82,9 +82,11 @@ public class GameManager : Singleton<GameManager>
         if (!skipFadeIn)
             await LoadingScreen.Instance.FadeInAsync();
 
-        // save
-        if (saveOnLoaded)
+        if (currentPlayer && saveOnLoaded)
+        {
             SaveSystem.Instance.SaveData(false, false);
+            Debug.Log("saveonloaded");
+        }
 
         // destroy current map and its mobs
         if (currentMap)

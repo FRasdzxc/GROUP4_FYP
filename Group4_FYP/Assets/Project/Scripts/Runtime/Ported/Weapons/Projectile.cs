@@ -29,6 +29,8 @@ public class Projectile : MonoBehaviour
             StartCoroutine(AnimatedDestroy(0.05f));
         else if (CompareTag("MobWeaponTrigger") && (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border")))
             StartCoroutine(AnimatedDestroy(0.05f));
+        else if (CompareTag("MobWeaponTriggerStronger") && (collision.CompareTag("Player") || collision.CompareTag("Border")))
+            StartCoroutine(AnimatedDestroy(0.05f));
     }
 
     public IEnumerator AnimatedDestroy(float duration)

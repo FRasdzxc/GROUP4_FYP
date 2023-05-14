@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
+  smokeColor: {r: 0.9607843, g: 0.9194294, b: 0.8235294, a: 1}
 --- !u!114 &250192973582859999
 MonoBehaviour:
   m_ObjectHideFlags: 0

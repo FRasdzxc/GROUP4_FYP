@@ -8,18 +8,37 @@ public class MovementControllerSide : MovementControllerV2
 {
     [SerializeField]
     protected float jumpForce = 12.5f;
+
     [SerializeField]
     protected float fallDamageDistance = 10f;
+
     [SerializeField]
     protected float fallDamageMultiplier = 3.5f;
+
     [SerializeField]
     protected Transform groundCollider;
+
     [SerializeField]
     protected LayerMask groundLayer;
+
     [SerializeField]
     protected GameObject smoke;
+
     [SerializeField]
     protected Vector2 smokeOffset;
+
+    [SerializeField] [Tooltip("Unit: seconds")]
+    protected float switchGravityDuration = 0.25f;
+
+    [SerializeField]
+    protected AudioClip[] jumpSounds;
+
+    [SerializeField]
+    protected AudioClip[] hitGroundSounds;
+
+    [SerializeField]
+    protected AudioClip[] hitSpongeSounds;
+
     protected InputAction moveActionSide;
     protected InputAction switchGravityAction;
     protected InputAction jumpAction;
@@ -39,6 +58,8 @@ public class MovementControllerSide : MovementControllerV2
 
         jumpAction = playerInput.actions["JumpSide"];
         jumpAction.Enable();
+
+        leftGroundPos = transform.position;
     }
 
     // Update is called once per frame
@@ -83,13 +104,17 @@ public class MovementControllerSide : MovementControllerV2
             if (switchGravityAction.triggered)
             {
                 rb2D.gravityScale *= -1;
-                await transform.DOScaleY(transform.localScale.y * -1, 0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+                await transform.DOScaleY(transform.localScale.y * -1, switchGravityDuration).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
             }
 
             if (jumpAction.triggered && rb2D.velocity.y <= 0f)
             {
                 rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce * (rb2D.gravityScale < 0 ? -1 : 1));
                 Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
+                leftGroundPos = transform.position;
+
+                if (jumpSounds.Length > 0)
+                    audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
             }
         }
 
@@ -97,14 +122,14 @@ public class MovementControllerSide : MovementControllerV2
         if (Input.GetKeyDown(KeyCode.V)) // allow switching gravity even if player is not on ground; editor only
             {
                 rb2D.gravityScale *= -1;
-                await transform.DOScaleY(transform.localScale.y * -1, 0.5f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+                await transform.DOScaleY(transform.localScale.y * -1, switchGravityDuration).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
             }
 #endif
     }
 
     protected override void FixedUpdate()
     {
-        isOnGround = Physics2D.OverlapBox(groundCollider.position, groundCollider.localScale * 1.5f * (rb2D.gravityScale < 0 ? -1 : 1), 0, groundLayer);
+        isOnGround = Physics2D.OverlapBox(groundCollider.position, groundCollider.localScale * 1.75f * (rb2D.gravityScale < 0 ? -1 : 1), 0, groundLayer);
         rb2D.velocity = new Vector2(moveDirSide * moveSpeed, rb2D.velocity.y);
     }
 
@@ -112,18 +137,25 @@ public class MovementControllerSide : MovementControllerV2
     {
         float distance = Vector2.Distance(transform.position, leftGroundPos);
         if (distance > 1f)
+        {
             Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
+
+            if (hitGroundSounds.Length > 0)
+                audioSource.PlayOneShot(hitGroundSounds[Random.Range(0, hitGroundSounds.Length)]);
+        }
 
         if (collision2D.collider.CompareTag("Sponge"))
         {
             leftGroundPos = transform.position;
+
+            if (hitSpongeSounds.Length > 0)
+                audioSource.PlayOneShot(hitSpongeSounds[Random.Range(0, hitSpongeSounds.Length)]);
+
             return;
         }
 
-        if (distance > fallDamageDistance)
+        if (distance > fallDamageDistance && isOnGround)
             Hero.Instance.TakeDamage((distance - fallDamageDistance) * fallDamageMultiplier);
-        
-        Debug.Log(distance);
     }
 
     void OnCollisionExit2D(Collision2D collision2D)

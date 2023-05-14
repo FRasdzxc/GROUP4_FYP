@@ -63,7 +63,10 @@ public class Mob : MonoBehaviour
         if (!isDead)
         {
             if (Vector2.Distance(transform.position, player.transform.position) <= attackDistance)
-                AttackPlayer();
+            {
+                if (!DialogueController.Instance.GetIsInConversation())
+                    AttackPlayer();
+            }
             else if (Vector2.Distance(transform.position, player.transform.position) <= sightDistance)
                 ChasePlayer();
             else
@@ -119,7 +122,7 @@ public class Mob : MonoBehaviour
     private void TakeDamage(float damage)
     {
         if (damageSoundClips.Length > 0)
-            PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+            audioSource.PlayOneShot(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
 
         //DataCollector.Instance?.DamageGiven(damage);
         health = Mathf.Clamp(health - damage, 0, mobData.health);
@@ -134,7 +137,7 @@ public class Mob : MonoBehaviour
         health = 0;
 
         if (dieSoundClips.Length > 0)
-            PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
+                audioSource.PlayOneShot(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
             
         UpdateUI();
 
@@ -170,12 +173,6 @@ public class Mob : MonoBehaviour
             healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
             sliderValue = (int)health;
         }
-    }
-
-    private void PlaySound(AudioClip audioClip)
-    {
-        audioSource.clip = audioClip;
-        audioSource.Play();
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

@@ -236,8 +236,10 @@ MonoBehaviour:
   loot: {fileID: 0}
   randomDropCount: 1
   dropRange: 0.5
-  damageSoundClips: []
-  dieSoundClips: []
+  damageSoundClips:
+  - {fileID: 8300000, guid: afe1b19dceaf8904081b96f8d997b9f2, type: 3}
+  dieSoundClips:
+  - {fileID: 8300000, guid: afe1b19dceaf8904081b96f8d997b9f2, type: 3}
   audioSource: {fileID: 6289756630457185220}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
@@ -282,7 +284,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: dd6660b27c4939443813c1dab6bba880, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -413,7 +413,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0444b6cffc027d24c8752dcf61050a61, type: 3}
   dieSoundClips:
   - {fileID: 8300000, guid: b852ca0f9c6313f43b65ca1bba397b20, type: 3}
-  canRegenerateHealth: 0
+  canRegenerateHealth: 1
 --- !u!114 &2671783106897141962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2671783106897141959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b25fe528eb17bb45ad0db975f6bedd2, type: 3}
   m_Name: 
@@ -616,6 +616,14 @@ MonoBehaviour:
     m_Bits: 1024
   smoke: {fileID: 7761475681028594599, guid: d44c989714d3b1c4799a6e02817ce06a, type: 3}
   smokeOffset: {x: 0, y: -0.5}
+  switchGravityDuration: 0.25
+  jumpSounds:
+  - {fileID: 8300000, guid: 6a958aed166d18c4f9a72d279c9e0012, type: 3}
+  hitGroundSounds:
+  - {fileID: 8300000, guid: fcd353fefbefff141aebb82443f2f973, type: 3}
+  - {fileID: 8300000, guid: 345c30f80744ffe46a4448f0865678d9, type: 3}
+  - {fileID: 8300000, guid: fe9b29e3752759b4f9a1edc2be9d022a, type: 3}
+  hitSpongeSounds: []
 --- !u!70 &6809396680608091847
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

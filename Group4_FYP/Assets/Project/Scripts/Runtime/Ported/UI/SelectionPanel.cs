@@ -74,8 +74,7 @@ public class SelectionPanel : Panel
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
-                                    },
-                                    true
+                                    }
                                 );
                             });
                         }
@@ -91,8 +90,7 @@ public class SelectionPanel : Panel
                                     {
                                         GameManager.Instance.LoadMap(mapData.mapId);
                                         HidePanel();
-                                    },
-                                    true
+                                    }
                                 );
                             });
                         }
@@ -137,8 +135,7 @@ public class SelectionPanel : Panel
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
-                                    },
-                                    true
+                                    }
                                 );
                             });
 

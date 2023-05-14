@@ -208,7 +208,15 @@ public class StartMenu : Singleton<StartMenu>
 
     public void DeleteProfile()
     {
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Delete Profile", "Upon deletion, all your data will be lost. Do you really wish to continue?", () => { ProfileManagerJson.DeleteProfile(selectedProfileName); ShowProfileSelectionPanel(); }, true);
+        ConfirmationPanel.Instance.ShowConfirmationPanel
+        (
+            "Delete Profile",
+            "Upon deletion, all your data will be lost. Do you really wish to continue?",
+            () =>
+            {
+                ProfileManagerJson.DeleteProfile(selectedProfileName);
+                ShowProfileSelectionPanel();
+            }, true);
     }
 
     public void StartGame() // load selected profile data then enter GameScene // not finished

@@ -3831,7 +3831,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 0ea1d748-92df-486d-85a8-08211a48fe31
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &913822229
@@ -3898,6 +3898,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   - music: {fileID: 8300000, guid: 79bb6924b9caca24abe1802fca1b03d9, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: d4f400b17d06bba4dae6aa9ba6c8a11f, type: 3}
     volume: 1
     pitch: 1
 --- !u!82 &913822232

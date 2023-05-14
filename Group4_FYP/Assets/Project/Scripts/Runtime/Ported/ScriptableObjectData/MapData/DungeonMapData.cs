@@ -1,39 +1,12 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
-using System.Threading.Tasks;
 
 [CreateAssetMenu(fileName = "New Dungeon Map Data", menuName = "Game/Map Data/Dungeon Map Data")]
-public class DungeonMapData : MapData
+public class DungeonMapData : HostileMapData
 {
     public DungeonType dungeonType;
-    public GameObject portalPrefab;
-    public Vector2 portalPos;
 
-    public async void SpawnPortal()
-    {
-        if (isStopped)
-            return;
-
-        //SaveSystem.Instance.SaveData(false, false);
-        _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");
-
-        GameObject clone = Instantiate(portalPrefab, portalPos, Quaternion.identity, GameManager.Instance.MapTransform);
-        clone.transform.localScale = Vector2.zero;
-        await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
-        _ = Notification.Instance.ShowNotification("Portal is opened!");
-
-        DirectionArrowController.Instance.AddDirection(DirectionType.ReturnPortal, clone.transform);
-    }
-
-    public async override Task CheckCompletion()
-    {
-        while (GameManager.Instance.MobCount > 0)
-            await Task.Yield();
-
-        if (portalPrefab)
-            SpawnPortal();
-    }
-
-    // public async override Task ShowMapMessage()  // until tutorial uses a custom mapdata or else this function will stay commented
-    //     => await HUD.Instance.ShowHugeMessageAsync(mapName, $"{dungeonType} {mapType} / {mapDifficulty}");
+    public async override Task ShowMapMessage()
+        => await HUD.Instance.ShowHugeMessageAsync(mapName, $"{dungeonType} {mapType} / {mapDifficulty}");
 }

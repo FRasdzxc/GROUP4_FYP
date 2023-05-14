@@ -4,6 +4,9 @@ using PathOfHero.Gameplay;
 
 public abstract class Panel : MonoBehaviour
 {
+    [SerializeField]
+    protected AudioClip[] panelSounds;
+
     protected PlayerInput playerInput;
     protected bool allowHiding = true;
     protected bool isOpened;
@@ -13,13 +16,23 @@ public abstract class Panel : MonoBehaviour
     public virtual void ShowPanel()
     {
         if (!isOpened)
+        {
             PanelManager.Instance.AddPanel(this);
+
+            if (panelSounds.Length > 0)
+                AudioManager.Instance.PlaySound(panelSounds[Random.Range(0, panelSounds.Length)]);
+        }
     }
 
     public virtual void HidePanel()
     {
         if (isOpened && allowHiding)
+        {
             PanelManager.Instance.RemovePanel(this);
+            
+            if (panelSounds.Length > 0)
+                AudioManager.Instance.PlaySound(panelSounds[Random.Range(0, panelSounds.Length)]);
+        }
     }
 
     public bool GetAllowHiding()

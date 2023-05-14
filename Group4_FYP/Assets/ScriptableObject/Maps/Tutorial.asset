@@ -9,19 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02a294cfd518bf4a9981b89db0054cf, type: 3}
+  m_Script: {fileID: 11500000, guid: ead876fed13ddf245bb49ad6a2f26c09, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   mapId: map_tutorial
   mapName: Tutorial
   mapType: 1
   mapDifficulty: 1
-  objective: Kill all the mobs
+  objective: Kill all the mobs.
   mapPrefab: {fileID: 1357543489387916594, guid: 7224317267dd62b489eae6dd2164780a, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 44a0c292a4f42854d8e8afe7ba5a35f7, type: 3}
     volume: 1
     pitch: 1
-  dungeonType: 0
+  - music: {fileID: 8300000, guid: a50b7f0611429e747b25166aa678982b, type: 3}
+    volume: 1
+    pitch: 1
+  playerType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: -108.5, y: -18.5}
