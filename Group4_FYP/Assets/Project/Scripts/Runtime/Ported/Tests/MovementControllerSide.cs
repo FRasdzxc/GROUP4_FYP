@@ -129,7 +129,7 @@ public class MovementControllerSide : MovementControllerV2
 
     protected override void FixedUpdate()
     {
-        isOnGround = Physics2D.OverlapBox(groundCollider.position, groundCollider.localScale * 1.75f * (rb2D.gravityScale < 0 ? -1 : 1), 0, groundLayer);
+        isOnGround = Physics2D.OverlapBox(groundCollider.position, groundCollider.localScale * 2f * (rb2D.gravityScale < 0 ? -1 : 1), 0, groundLayer);
         rb2D.velocity = new Vector2(moveDirSide * moveSpeed, rb2D.velocity.y);
     }
 

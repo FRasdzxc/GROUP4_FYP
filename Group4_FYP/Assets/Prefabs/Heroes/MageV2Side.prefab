@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 8230944044198935833}
   - component: {fileID: 215421334272171998}
   - component: {fileID: 6809396680608091846}
-  - component: {fileID: 6809396680608091847}
+  - component: {fileID: 6312504015211781652}
   m_Layer: 0
   m_Name: MageV2Side
   m_TagString: Player
@@ -624,7 +624,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 345c30f80744ffe46a4448f0865678d9, type: 3}
   - {fileID: 8300000, guid: fe9b29e3752759b4f9a1edc2be9d022a, type: 3}
   hitSpongeSounds: []
---- !u!70 &6809396680608091847
+--- !u!70 &6312504015211781652
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -633,12 +633,12 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2671783106897141959}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: bd180484551bb464db5632e0610b0c8a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.825, y: 1}
+  m_Size: {x: 0.65, y: 1}
   m_Direction: 0
 --- !u!1 &2771834569729222729
 GameObject:

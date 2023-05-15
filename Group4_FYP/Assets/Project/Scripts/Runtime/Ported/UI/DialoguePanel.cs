@@ -9,7 +9,7 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
     [SerializeField] private Text headerText;
     [SerializeField] private Text dialogueText;
     [SerializeField] private Text hintText;
-    [SerializeField] [HideInInspector] private float textDisplayDelay;
+    [SerializeField] private float textDisplayDelay;
 
     private bool panelIsShown;
     private bool isDisplayingDialogue;
@@ -76,8 +76,8 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
             for (int i = 0; i < dialogue.Length; i++)
             {
                 dialogueText.text = dialogue.Substring(0, i + 1);
-                // await Task.Delay((int)(textDisplayDelay * 1000));
-                await Task.Yield();
+                await Task.Delay((int)(textDisplayDelay * 1000));
+                //await Task.Yield();
             }
             dialogueText.text = dialogue;
 

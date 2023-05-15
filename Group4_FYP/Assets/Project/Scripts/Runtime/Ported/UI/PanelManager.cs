@@ -20,6 +20,9 @@ namespace PathOfHero.Gameplay
             shownPanels = new();
         }
 
+        private void Update() // remove this after bug has been fixed
+            => Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}");
+
         private void OnEnable()
         {
             GameManager.onPlayerSetUp += SetUp;
@@ -38,14 +41,14 @@ namespace PathOfHero.Gameplay
         {
             if (content.performed && shownPanels.Count > 0)
             {
-                // var index = shownPanels.Count - 1;
-                // var panel = shownPanels[index];
+                //var index = shownPanels.Count - 1;
+                //var panel = shownPanels[index];
 
-                // if (!panel.GetAllowHiding())
-                //     return;
+                //if (!panel.GetAllowHiding() || !panel.GetIsOpened())
+                //    return;
 
-                // shownPanels.RemoveAt(index);
-                // panel.HidePanel();
+                //shownPanels.RemoveAt(index);
+                //panel.HidePanel();
 
                 if (shownPanels[shownPanels.Count - 1].GetAllowHiding() && shownPanels[shownPanels.Count - 1].GetIsOpened())
                     shownPanels[shownPanels.Count - 1].HidePanel();

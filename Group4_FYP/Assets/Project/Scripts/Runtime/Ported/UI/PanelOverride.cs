@@ -20,14 +20,16 @@ public abstract class PanelOverride : Panel
         // check if panel can show up
         foreach (PanelOverride panel in overridingPanels.blockedBy)
         {
-            if (panel.GetPanel().activeSelf)
+            //if (panel.GetPanel().activeSelf)
+            if (panel.GetIsOpened())
                 return false;
         }
 
         // hide panels
         foreach (PanelOverride panel in overridingPanels.overrides)
         {
-            if (panel.GetPanel().activeSelf)
+            //if (panel.GetPanel().activeSelf)
+            if (panel.GetIsOpened())
                 panel.HidePanel();
         }
 
