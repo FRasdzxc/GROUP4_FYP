@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Whirlwind (Tier 3)
   weaponId: weapon_whirlwind
   weaponTier: 3
-  cooldown: 0.075
+  cooldown: 0.1
   weaponGobj: {fileID: 410454246191453196, guid: 69a4b0c3f6d69814c98cafa95f999444, type: 3}
   item: {fileID: 11400000, guid: 16d2c22810934de40bbda1b8d13c1532, type: 2}
   projectileLifeTime: 5

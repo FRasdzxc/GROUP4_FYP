@@ -101,6 +101,12 @@ public class GameManager : Singleton<GameManager>
             Destroy(drop);
         foreach (var coin in GameObject.FindGameObjectsWithTag("Coin"))
             Destroy(coin);
+        foreach (var mobProj in GameObject.FindGameObjectsWithTag("MobWeaponTrigger"))
+            Destroy(mobProj);
+        foreach (var mobProj in GameObject.FindGameObjectsWithTag("MobWeaponTriggerStronger"))
+            Destroy(mobProj);
+        foreach (var mobProj in GameObject.FindGameObjectsWithTag("MobWeaponTriggerDeadly"))
+            Destroy(mobProj);
 
         // clone new map
         currentMap = Instantiate(currentMapData.mapPrefab); // isn't Instantiate() synchronized?

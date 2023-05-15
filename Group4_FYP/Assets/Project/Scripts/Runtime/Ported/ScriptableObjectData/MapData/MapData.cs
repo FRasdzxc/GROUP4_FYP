@@ -39,11 +39,11 @@ public class MapData : ScriptableObject
         // set music
         AudioManager.Instance.SetMusics(musics);
         AudioManager.Instance.PlayMusic();
-        
-        // show huge message
-        await ShowMapMessage();
 
         isStopped = false;
+
+        // show huge message
+        await ShowMapMessage();
         await CheckCompletion();
     }
 
