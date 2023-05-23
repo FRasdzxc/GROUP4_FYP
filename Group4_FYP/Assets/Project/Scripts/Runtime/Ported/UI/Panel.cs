@@ -8,15 +8,17 @@ public abstract class Panel : MonoBehaviour
     protected AudioClip[] panelSounds;
 
     protected PlayerInput playerInput;
-    protected bool allowHiding = true;
-    protected bool isOpened;
+    protected bool allowsHiding = true;
+    // protected bool isOpened;
+    protected PanelState panelState = PanelState.Hidden;
 
     protected virtual void Awake() { }
 
     public virtual void ShowPanel()
     {
-        if (!isOpened)
+        if (panelState.Equals(PanelState.Hidden))
         {
+            panelState = PanelState.Showing;
             PanelManager.Instance.AddPanel(this);
 
             if (panelSounds.Length > 0)
@@ -26,8 +28,9 @@ public abstract class Panel : MonoBehaviour
 
     public virtual void HidePanel()
     {
-        if (isOpened && allowHiding)
+        if (panelState.Equals(PanelState.Shown) && allowsHiding)
         {
+            panelState = PanelState.Hiding;
             PanelManager.Instance.RemovePanel(this);
             
             if (panelSounds.Length > 0)
@@ -35,11 +38,14 @@ public abstract class Panel : MonoBehaviour
         }
     }
 
-    public bool GetAllowHiding()
-        => allowHiding;
+    public bool GetAllowsHiding()
+        => allowsHiding;
 
-    public bool GetIsOpened()
-        => isOpened;
+    // public bool GetIsOpened()
+    //     => isOpened;
+
+    public PanelState GetPanelState()
+        => panelState;
 
     void OnEnable()
         => GameManager.onPlayerSetUp += SetUp;

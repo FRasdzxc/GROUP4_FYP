@@ -42,7 +42,7 @@ public class DialogueController : Singleton<DialogueController>
                 await NextDialogue();
 
             // if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
-            if (canBeSkipped && skipDialogueAction.triggered && dialoguePanel.GetIsOpened())
+            if (canBeSkipped && skipDialogueAction.triggered && dialoguePanel.GetPanelState().Equals(PanelState.Shown))
             {
                 dialoguePanel.HidePanel();
                 dialogueEndEvents.Invoke();

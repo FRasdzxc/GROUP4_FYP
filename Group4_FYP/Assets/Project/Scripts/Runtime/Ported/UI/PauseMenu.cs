@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using PathOfHero.Controllers;
 
-public class PauseMenu : Panel
+public class PauseMenu : PanelOverride
 {
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject pauseMenuPanel;
@@ -39,7 +39,7 @@ public class PauseMenu : Panel
     // Start is called before the first frame update
     void Start()
     {
-        isOpened = false;
+        // isOpened = false;
 
         pauseMenuBackground.SetActive(false);
         pauseMenuPanel.SetActive(false);
@@ -52,7 +52,8 @@ public class PauseMenu : Panel
     // Update is called once per frame
     void Update()
     {
-        if (isOpened)
+        // if (isOpened)
+        if (panelState.Equals(PanelState.Shown))
         {
             if (saveGameAction.triggered)
                 SaveGame();
@@ -80,7 +81,8 @@ public class PauseMenu : Panel
     //public async Task ShowPauseMenu()
     public async override void ShowPanel()
     {
-        if (isOpened)
+        // if (isOpened)
+        if (panelState.Equals(PanelState.Shown))
             return;
 
         base.ShowPanel();
@@ -99,7 +101,8 @@ public class PauseMenu : Panel
         Time.timeScale = 0;
         pauseMenuPanel.SetActive(true);
 
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async Task HidePauseMenu()
@@ -118,12 +121,14 @@ public class PauseMenu : Panel
         settingsMenu.SaveSettings();
         GameManager.Instance.GameState = GameState.Playing;
 
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     public override void HidePanel()
     {
-        if (!isOpened)
+        // if (!isOpened)
+        if (panelState.Equals(PanelState.Hidden))
             return;
 
         base.HidePanel();
@@ -161,9 +166,7 @@ public class PauseMenu : Panel
         // save data to profile
         SaveSystem.Instance.SaveData(false);
         if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
-        {
             ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
-        }
 
         // exit to menu
         SceneController.Instance.ChangeScene("StartScene", false);
@@ -200,4 +203,7 @@ public class PauseMenu : Panel
         saveGameAction.Enable();
         exitToMenuAction.Enable();
     }
+
+    protected override GameObject GetPanelGobj()
+        => pauseMenuPanel;
 }

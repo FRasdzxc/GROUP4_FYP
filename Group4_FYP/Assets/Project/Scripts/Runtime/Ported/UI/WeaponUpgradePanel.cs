@@ -39,9 +39,7 @@ public class WeaponUpgradePanel : PanelOverride
         base.Awake();
 
         if (!instance)
-        {
             instance = this;
-        }
     }
 
     // Start is called before the first frame update
@@ -62,7 +60,7 @@ public class WeaponUpgradePanel : PanelOverride
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (!isOpened)
+            if (panelState.Equals(PanelState.Hidden))
                 ShowWeaponUpgradePanel();
             else
                 HidePanel();
@@ -72,10 +70,8 @@ public class WeaponUpgradePanel : PanelOverride
 
     public void ShowWeaponUpgradePanel()
     {
-        if (!OverridePanel())
-        {
+        if (!CanShow())
             return;
-        }
 
         // prepare panel here
         ResetPanel();
@@ -141,7 +137,8 @@ public class WeaponUpgradePanel : PanelOverride
         await weaponUpgradePanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         weaponUpgradePanelCanvasGroup.alpha = 1;
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async override void HidePanel()
@@ -155,7 +152,8 @@ public class WeaponUpgradePanel : PanelOverride
 
         Tooltip.Instance.HideTooltip(); // workaround; to be fixed
 
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     public void Upgrade()
@@ -180,9 +178,7 @@ public class WeaponUpgradePanel : PanelOverride
                         AudioManager.Instance.PlaySound(weaponUpgradeSound);
                     }
                     else
-                    {
                         _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
-                    }
                 }
             );
             // ConfirmationPanel.Instance.ShowConfirmationPanel("hi", "hi", () => {});
@@ -238,8 +234,6 @@ public class WeaponUpgradePanel : PanelOverride
         equalsImage.sprite = equalsSprite;
     }
 
-    protected override GameObject GetPanel()
-    {
-        return weaponUpgradePanel;
-    }
+    protected override GameObject GetPanelGobj()
+        => weaponUpgradePanel;
 }

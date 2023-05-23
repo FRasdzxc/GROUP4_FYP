@@ -154,16 +154,12 @@ public class SelectionPanel : Panel
     }
 
     public void DungeonSelected(string name)
-    {
-        Debug.Log(name);
-    }
+        => Debug.Log(name);
 
     private void RefreshContents()
     {
         foreach (Transform child in contentTransform)
-        {
             Destroy(child.gameObject);
-        }
     }
 
     public override async void ShowPanel()
@@ -171,7 +167,8 @@ public class SelectionPanel : Panel
         base.ShowPanel();
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async override void HidePanel()
@@ -180,7 +177,8 @@ public class SelectionPanel : Panel
 
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     //public void Confirm()

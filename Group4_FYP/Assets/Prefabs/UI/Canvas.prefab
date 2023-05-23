@@ -17507,6 +17507,7 @@ MonoBehaviour:
     blockedBy:
     - {fileID: 3422485709956159012}
     - {fileID: 8965038264028937848}
+    - {fileID: 7502825688549925029}
   heroPanel: {fileID: 5335695205203610361}
   heroNameText: {fileID: 8737073838629286760}
   heroLevelText: {fileID: 2241277765993093835}
@@ -17529,6 +17530,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelSounds:
   - {fileID: 8300000, guid: a4ee04197a65a144da914ffb3dbc2baf, type: 3}
+  overridingPanels:
+    overrides:
+    - {fileID: 5461171456818540308}
+    - {fileID: 3422485709956159012}
+    - {fileID: 8965038264028937848}
+    blockedBy: []
   hudPanel: {fileID: 5090246129879329908}
   pauseMenuPanel: {fileID: 5090246128994063948}
   sideMenuPanel: {fileID: 5090246129528231747}
@@ -17701,7 +17708,8 @@ MonoBehaviour:
     overrides:
     - {fileID: 5461171456818540308}
     - {fileID: 8965038264028937848}
-    blockedBy: []
+    blockedBy:
+    - {fileID: 7502825688549925029}
   buySellPanel: {fileID: 3443452719384813029}
   leftPanelTitle: {fileID: 654650507430540828}
   rightPanelTitle: {fileID: 3219829827697011109}
@@ -17735,7 +17743,8 @@ MonoBehaviour:
     overrides:
     - {fileID: 5461171456818540308}
     - {fileID: 3422485709956159012}
-    blockedBy: []
+    blockedBy:
+    - {fileID: 7502825688549925029}
   gameWeapons: {fileID: 11400000, guid: 4bf7eab09e882c04eb8e0f20b2c8c265, type: 2}
   weaponUpgradePanel: {fileID: 5669716911733525658}
   weaponSlot: {fileID: 158154107258672234}
@@ -26296,51 +26305,51 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 305
       objectReference: {fileID: 0}
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 317.5
       objectReference: {fileID: 0}
     - target: {fileID: 1036583249652588388, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -47.5
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1761628359489908839, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -47.5
       objectReference: {fileID: 0}
     - target: {fileID: 6663551094117356644, guid: 25da74caaf2965940a12a6f3c5fc41a3, type: 3}
       propertyPath: m_Name

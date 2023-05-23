@@ -18,22 +18,14 @@ public class ConfirmationPanel : Panel
     private UnityAction cancelAction;
 
     private static ConfirmationPanel instance;
-    public static ConfirmationPanel Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static ConfirmationPanel Instance => instance;
 
     protected override void Awake()
     {
         base.Awake();
 
         if (!instance)
-        {
             instance = this;
-        }
     }
 
     void Start()
@@ -43,9 +35,7 @@ public class ConfirmationPanel : Panel
     }
 
     public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
-    {
-        ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant);
-    }
+        => ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant);
 
     public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false)
     {
@@ -70,7 +60,8 @@ public class ConfirmationPanel : Panel
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async Task HideConfirmationPanel()
@@ -78,13 +69,13 @@ public class ConfirmationPanel : Panel
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
 
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     public override void HidePanel()
     {
         base.HidePanel();
-
         _ = HideConfirmationPanel();
     }
 

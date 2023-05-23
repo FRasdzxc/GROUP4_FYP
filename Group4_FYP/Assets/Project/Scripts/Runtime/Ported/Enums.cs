@@ -17,3 +17,4 @@ public enum EventRequestType { None, ShowBuyPanel, ShowSellPanel, ShowWeaponUpgr
 public enum SelectionType { Map, Dungeon };
 public enum DirectionType { Mob, Object, ReturnPortal };
 public enum PlayerType { TopDown, Side };
+public enum PanelState { None, Showing, Shown, Hiding, Hidden };

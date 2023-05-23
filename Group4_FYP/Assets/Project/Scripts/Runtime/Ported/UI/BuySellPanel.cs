@@ -77,7 +77,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (!isOpened)
+            if (panelState.Equals(PanelState.Hidden))
             {
                 if (Input.GetKey(KeyCode.LeftControl))
                     ShowSellPanel();
@@ -91,27 +91,17 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 #endif
 
     public void ShowBuyPanel()
-    {
-        ShowBuySellPanel(BuySellType.Buy);
-    }
+        => ShowBuySellPanel(BuySellType.Buy);
 
     public void ShowSellPanel()
-    {
-        ShowBuySellPanel(BuySellType.Sell);
-    }
+        => ShowBuySellPanel(BuySellType.Sell);
 
     public async void ShowBuySellPanel(BuySellType buySellType)
-    {
-        ShowPanel();
-
-        // if (!HideConflictingPanels())
-        // {
-        //     return;
-        // }
-        if (!OverridePanel())
-        {
+    {        
+        if (!CanShow())
             return;
-        }
+        
+        ShowPanel();
 
         ResetPanels();
         this.buySellType = buySellType;
@@ -163,7 +153,8 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         await buySellPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         buySellPanelCanvasGroup.alpha = 1;
-        isOpened = true; 
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async override void HidePanel() // public async void HideBuySellPanel()
@@ -179,44 +170,35 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         
         Tooltip.Instance.HideTooltip(); // workaround; to be fixed
 
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     private void RefreshInventoryPanel(bool isLeftPanel, InventoryMode inventoryMode)
     {
         // destroy all the inventory slots
         for (int i = 0; i < inventorySlots.Count; i++)
-        {
             Destroy(inventorySlots[i]);
-        }
         inventorySlots.Clear();
 
         // add inventory slots
         for (int i = 0; i < Inventory.Instance.GetInventorySize(); i++)
         {
             if (isLeftPanel)
-            {
                 inventorySlots.Add(Instantiate(inventorySlotPrefab, leftPanelContentPanel));
-            }
             else
-            {
                 inventorySlots.Add(Instantiate(inventorySlotPrefab, rightPanelContentPanel));
-            }
         }
 
         // assign items to inventory slot
         for (int i = 0; i < tempItems.Count; i++)
-        {
             inventorySlots[i].GetComponent<InventorySlot>().Configure(tempItems[i].itemData, tempItems[i].qty, inventoryMode);
-        }
     }
 
     private void RefreshShopPanel()
     {
         for (int i = 0; i < shopSlots.Count; i++)
-        {
             Destroy(shopSlots[i]);
-        }
         shopSlots.Clear();
 
         // for (int i = 0; i < gameItems.itemList.Length; i++)
@@ -242,9 +224,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     private void RefreshTransferredSlots()
     {
         for (int i = 0; i < transferredSlots.Count; i++)
-        {
             Destroy(transferredSlots[i]);
-        }
         transferredSlots.Clear();
 
         for (int i = 0; i < transferredItems.Count; i++)
@@ -264,13 +244,9 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             for (int i = 0; i < ie.qty; i++)
             {
                 if (buySellType == BuySellType.Buy)
-                {
                     price += ie.itemData.buyPrice;
-                }
                 else
-                {
                     price += ie.itemData.sellPrice;
-                }
             }
         }
         totalText.text = price.ToString("n0");
@@ -400,9 +376,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             foreach (ItemData item in gameItems.itemList)
             {
                 if (item.isBuyable)
-                {
                     ApplyTransfer(item);
-                }
             }
         }
         else
@@ -410,9 +384,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             while (tempItems.Any()) // this works, but very slow
             {
                 for (int i = 0; i < tempItems[0].qty; i++)
-                {
                     ApplyTransfer(tempItems[0].itemData);
-                }
             }
         }
     }
@@ -423,9 +395,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         while (transferredItems.Any())
         {
             for (int i = 0; i < transferredItems[0].qty; i++)
-            {
                 RevertTransfer(transferredItems[0].itemData);
-            }
         }
     }
 
@@ -438,9 +408,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     }
 
     public void Confirm()
-    {
-        confirmAction.Invoke();
-    }
+        => confirmAction.Invoke();
 
     public void Buy()
     {
@@ -456,9 +424,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         foreach (InventoryEntry ie in transferredItems)
         {
             for (int i = 0; i < ie.qty; i++)
-            {
                 price += ie.itemData.buyPrice;
-            }
         }
 
         ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", $"Do you want to buy these items?\n\n<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins",
@@ -480,9 +446,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                     AudioManager.Instance.PlaySound(buySellSound);
                 }
                 else
-                {
                     _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
-                }
             });
     }
 
@@ -500,9 +464,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
         foreach (InventoryEntry ie in transferredItems)
         {
             for (int i = 0; i < ie.qty; i++)
-            {
                 price += ie.itemData.sellPrice;
-            }
         }
 
         ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", $"Do you want to sell these items?\n\n<color={CustomColorStrings.yellow}>Gain:</color> {price.ToString("n0")} coins",
@@ -523,26 +485,18 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     }
 
     public BuySellType GetBuySellType()
-    {
-        return buySellType;
-    }
+        => buySellType;
 
     private void ResetPanels() // clean up left and right content panels by destroying all childs
     {
         foreach (Transform child in leftPanelContentPanel)
-        {
             Destroy(child.gameObject);
-        }
         foreach (Transform child in rightPanelContentPanel)
-        {
             Destroy(child.gameObject);
-        }
     }
 
-    protected override GameObject GetPanel()
-    {
-        return buySellPanel;
-    }
+    protected override GameObject GetPanelGobj()
+        => buySellPanel;
 
     // public bool HideConflictingPanels()
     // {

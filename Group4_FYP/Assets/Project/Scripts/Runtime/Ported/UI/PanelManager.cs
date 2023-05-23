@@ -20,8 +20,8 @@ namespace PathOfHero.Gameplay
             shownPanels = new();
         }
 
-        private void Update() // remove this after bug has been fixed
-            => Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}");
+        private void Update() // remove this after bug is fixed
+            => Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}; panelState = {shownPanels[shownPanels.Count - 1].GetPanelState()}");
 
         private void OnEnable()
         {
@@ -50,7 +50,7 @@ namespace PathOfHero.Gameplay
                 //shownPanels.RemoveAt(index);
                 //panel.HidePanel();
 
-                if (shownPanels[shownPanels.Count - 1].GetAllowHiding() && shownPanels[shownPanels.Count - 1].GetIsOpened())
+                if (shownPanels[shownPanels.Count - 1].GetAllowsHiding() && shownPanels[shownPanels.Count - 1].GetPanelState().Equals(PanelState.Shown))
                     shownPanels[shownPanels.Count - 1].HidePanel();
             }
         }

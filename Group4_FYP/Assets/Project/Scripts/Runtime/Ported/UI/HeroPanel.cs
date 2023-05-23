@@ -42,7 +42,7 @@ public class HeroPanel : PanelOverride
     {
         // base.Start();
 
-        isOpened = false;
+        // isOpened = false;
 
         heroPanel.GetComponent<CanvasGroup>().alpha = 0;
         heroPanelRectTransform = heroPanel.GetComponent<RectTransform>();
@@ -58,9 +58,9 @@ public class HeroPanel : PanelOverride
     // Update is called once per frame
     void Update()
     {
-        if (!isOpened && showInventoryAction.triggered)
+        if (panelState.Equals(PanelState.Hidden) && showInventoryAction.triggered)
             ShowPanel();
-        else if (isOpened && hideInventoryAction.triggered)
+        else if (panelState.Equals(PanelState.Shown) && hideInventoryAction.triggered)
             HidePanel();
     }
 
@@ -76,10 +76,10 @@ public class HeroPanel : PanelOverride
 
     public async override void ShowPanel()
     {
-        base.ShowPanel();
-
-        if (!OverridePanel())
+        if (!CanShow())
             return;
+
+        base.ShowPanel();
 
         Inventory.Instance.RefreshInventoryPanel();
         Orb.Instance.RefreshUpgradeItemContainer();
@@ -89,7 +89,8 @@ public class HeroPanel : PanelOverride
         await heroPanel.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
         heroPanel.GetComponent<CanvasGroup>().alpha = 1;
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
     }
 
     public async override void HidePanel()
@@ -100,9 +101,10 @@ public class HeroPanel : PanelOverride
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
 
-        isOpened = false;
-
         Tooltip.Instance.HideTooltip(); // workaround; to be fixed
+
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     public async void OnHidePanel()
@@ -111,12 +113,13 @@ public class HeroPanel : PanelOverride
         await heroPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         heroPanel.SetActive(false);
 
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
 
         Tooltip.Instance.HideTooltip(); // workaround; to be fixed
     }
 
-    protected override GameObject GetPanel()
+    protected override GameObject GetPanelGobj()
         => heroPanel;
 
     public void SetupWeaponSlot(ItemData weaponItem)

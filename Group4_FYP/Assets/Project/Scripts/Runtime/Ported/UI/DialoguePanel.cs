@@ -30,28 +30,31 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
         image.sprite = sprite;
         hintText.text = hint;
 
-        if (!panelIsShown)
+        // if (!panelIsShown)
+        if (panelState.Equals(PanelState.Hidden))
         {
             ShowPanel();
             gameObject.SetActive(true);
             await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-            panelIsShown = true;
+            // panelIsShown = true;
         }
 
-        isOpened = true;
+        // isOpened = true;
+        panelState = PanelState.Shown;
         await DisplayDialogue(dialogue);
     }
 
     public async Task HideDialoguePanel()
     {
-        if (!panelIsShown)
+        // if (!panelIsShown)
+        if (panelState.Equals(PanelState.Hidden))
             return;
 
         //HidePanel();
 
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
-        panelIsShown = false;
+        // panelIsShown = false;
         DialogueController.Instance.SetIsInConversation(false);
     }
 
@@ -59,13 +62,12 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
     {
         base.HidePanel();
         await HideDialoguePanel();
-        isOpened = false;
+        // isOpened = false;
+        panelState = PanelState.Hidden;
     }
 
     public void SetAllowHiding(bool allowHiding)
-    {
-        this.allowHiding = allowHiding;
-    }
+        => this.allowsHiding = allowHiding;
 
     private async Task DisplayDialogue(string dialogue)
     {
@@ -85,8 +87,6 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
         }
     }
 
-    protected override GameObject GetPanel()
-    {
-        return gameObject;
-    }
+    protected override GameObject GetPanelGobj()
+        => gameObject;
 }

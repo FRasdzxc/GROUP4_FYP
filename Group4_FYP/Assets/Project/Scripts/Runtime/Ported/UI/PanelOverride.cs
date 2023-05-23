@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using PathOfHero.Gameplay;
 
@@ -15,26 +16,40 @@ public abstract class PanelOverride : Panel
 
     [SerializeField] protected OverridingPanels overridingPanels;
 
-    protected bool OverridePanel()
+    protected bool CanShow()
     {
         // check if panel can show up
         foreach (PanelOverride panel in overridingPanels.blockedBy)
         {
             //if (panel.GetPanel().activeSelf)
-            if (panel.GetIsOpened())
+            // if (panel.GetPanelGobj().activeSelf || panel.GetIsOpened())
+            if (panel.GetPanelState().Equals(PanelState.Shown) || panel.GetPanelState().Equals(PanelState.Showing))
                 return false;
         }
 
-        // hide panels
-        foreach (PanelOverride panel in overridingPanels.overrides)
-        {
-            //if (panel.GetPanel().activeSelf)
-            if (panel.GetIsOpened())
-                panel.HidePanel();
-        }
-
+        OverridePanels();
         return true;
     }
 
-    protected abstract GameObject GetPanel();
+    private async void OverridePanels()
+    {
+        // force hide other panels
+        foreach (PanelOverride panel in overridingPanels.overrides)
+        {
+            //if (panel.GetPanel().activeSelf)
+            // if (panel.GetPanelGobj().activeSelf || panel.GetIsOpened())
+            //     panel.HidePanel();
+            if (panel.GetPanelState().Equals(PanelState.Shown))
+                panel.HidePanel();
+            else if (panel.GetPanelState().Equals(PanelState.Showing))
+            {
+                Debug.Log("panel is still showing");
+                while (!panel.GetPanelState().Equals(PanelState.Shown))
+                    await Task.Yield();
+                panel.HidePanel();
+            }
+        }
+    }
+
+    protected abstract GameObject GetPanelGobj();
 }
