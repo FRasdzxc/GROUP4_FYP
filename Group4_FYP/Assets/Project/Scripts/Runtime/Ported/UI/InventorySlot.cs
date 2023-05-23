@@ -146,31 +146,29 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             var consumable = ItemData as ConsumableItemData;
             foreach (var e in consumable.effects)
-            {
                 attributes.Add(e.ToString());
-            }
         }
         else if (ItemData is WeaponItemData)
         {
             var weapon = ItemData as WeaponItemData;
-            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {weapon.weapon.weaponTier}");
-            attributes.Add($"<color={CustomColorStrings.yellow}>Cooldown:</color> {weapon.weapon.cooldown} seconds");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {weapon.weapon.weaponTier.ToString("n0")}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Cooldown:</color> {weapon.weapon.cooldown.ToString("n0")} seconds");
 
             if (weapon.weapon is ProjectileWeaponData)
             {
                 var projectileWeapon = weapon.weapon as ProjectileWeaponData;
-                attributes.Add($"<color={CustomColorStrings.yellow}>Projectile Speed:</color> {projectileWeapon.projectileSpeed}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Projectile Speed:</color> {projectileWeapon.projectileSpeed.ToString("n0")}");
             }
         }
         else if (ItemData is ArmorItemData)
         {
             var armor = ItemData as ArmorItemData;
-            attributes.Add($"<color={CustomColorStrings.yellow}>Defense:</color> {armor.defense}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Defense:</color> {armor.defense.ToString("n0")}");
         }
         else if (ItemData is RelicItemData)
         {
             var relic = ItemData as RelicItemData;
-            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {relic.tier}");
+            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {relic.tier.ToString("n0")}");
         }
 
         if (inventoryMode == InventoryMode.Normal)
@@ -182,9 +180,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         else if (inventoryMode == InventoryMode.Apply || inventoryMode == InventoryMode.Revert)
         {
             if (BuySellPanel.Instance.GetBuySellType() == BuySellType.Buy)
-                attributes.Add($"<color={CustomColorStrings.yellow}>Buy Price:</color> {ItemData.buyPrice}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Buy Price:</color> {ItemData.buyPrice.ToString("n0")}");
             else
-                attributes.Add($"<color={CustomColorStrings.yellow}>Sell Price:</color> {ItemData.sellPrice}");
+                attributes.Add($"<color={CustomColorStrings.yellow}>Sell Price:</color> {ItemData.sellPrice.ToString("n0")}");
 
             hints.Add(TooltipHintType.Transfer);
             hints.Add(TooltipHintType.TransferAll);

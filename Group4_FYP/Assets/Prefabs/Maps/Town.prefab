@@ -5233,6 +5233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1222998455637610403}
   - component: {fileID: 1222998455637610400}
+  - component: {fileID: 3214677033464006473}
   m_Layer: 0
   m_Name: Town
   m_TagString: Untagged
@@ -5285,6 +5286,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &3214677033464006473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222998455637610401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45864a9d7581fbc4691c25e081771883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: a5fa82ad2f23d3e4bac3f5910d82011c, type: 2}
 --- !u!1 &1222998455835972400
 GameObject:
   m_ObjectHideFlags: 0

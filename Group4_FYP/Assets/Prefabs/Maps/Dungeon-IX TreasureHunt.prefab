@@ -45306,6 +45306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8459538900643283097}
   - component: {fileID: 8459538900643283096}
+  - component: {fileID: 6067044263545009587}
   m_Layer: 0
   m_Name: Dungeon-IX TreasureHunt
   m_TagString: Untagged
@@ -45350,6 +45351,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &6067044263545009587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459538900643283103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7034e180bed2beb46bbcdd6b18372884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: c5e554edff558784481fd37b78a2da70, type: 2}
 --- !u!1 &8459538900710575614
 GameObject:
   m_ObjectHideFlags: 0

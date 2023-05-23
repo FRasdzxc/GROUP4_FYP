@@ -6551,6 +6551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3978102400795909882}
   - component: {fileID: 3978102400795909893}
+  - component: {fileID: -1718383314735879121}
   m_Layer: 0
   m_Name: WaveDungeon-I SnowColosseum
   m_TagString: Untagged
@@ -6593,6 +6594,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &-1718383314735879121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978102400795909892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be929b6c5d93a2b4ea0a4a92bf7f2b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: ad3e5091b4fdac142a33f2b66c15fdd8, type: 2}
 --- !u!1 &4848456961544325735
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,19 +18,19 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         if (SelfDestruct && Time.time >= SelfDestructTime)
-            StartCoroutine(AnimatedDestroy(0.25f));
+            DestroyGobj();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (CompareTag("HeroWeaponTrigger") && (collision.CompareTag("Object") || collision.CompareTag("Border")))
-            StartCoroutine(AnimatedDestroy(0.05f));
+            DestroyGobj();
         else if (CompareTag("HeroWeaponTriggerStronger") && collision.CompareTag("Border"))
-            StartCoroutine(AnimatedDestroy(0.05f));
+            DestroyGobj();
         else if (CompareTag("MobWeaponTrigger") && (collision.CompareTag("Object") || collision.CompareTag("Player") || collision.CompareTag("Border")))
-            StartCoroutine(AnimatedDestroy(0.05f));
+            DestroyGobj();
         else if (CompareTag("MobWeaponTriggerStronger") && (collision.CompareTag("Player") || collision.CompareTag("Border")))
-            StartCoroutine(AnimatedDestroy(0.05f));
+            DestroyGobj();
     }
 
     public IEnumerator AnimatedDestroy(float duration)
@@ -47,6 +47,16 @@ public class Projectile : MonoBehaviour
         }
             
         yield return transform.DOScale(Vector3.zero, duration).WaitForCompletion();
+        Destroy(gameObject);
+    }
+
+    public void DestroyGobj()
+    {
+        if (smoke)
+        {
+            GameObject smokeClone = Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+            smokeClone.GetComponent<SpriteRenderer>().color = smokeColor;
+        }
         Destroy(gameObject);
     }
 }

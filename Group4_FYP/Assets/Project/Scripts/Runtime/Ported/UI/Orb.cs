@@ -40,9 +40,7 @@ public class Orb : Singleton<Orb>
     {
         // destroy all the upgrade buttons
         foreach (var b in upgradeButtons)
-        {
             Destroy(b);
-        }
         upgradeButtons.Clear();
 
         // add upgrade buttons
@@ -50,8 +48,8 @@ public class Orb : Singleton<Orb>
         {
             GameObject clone = Instantiate(upgradeItemPrefab, upgradeItemContainer.transform);
 
-            Transform upgradeValueText = RecursiveFindChild(clone.transform, "UpgradeValueText");
-            Transform upgradeItemText = RecursiveFindChild(clone.transform, "UpgradeItemText");
+            Transform upgradeValueText = Common.RecursiveFindChild(clone.transform, "UpgradeValueText");
+            Transform upgradeItemText = Common.RecursiveFindChild(clone.transform, "UpgradeItemText");
 
             upgradeValueText.GetComponent<Text>().text = "+ " + upgrade.value.ToString();
             upgradeItemText.GetComponent<Text>().text = upgrade.orbUpgradeName;
@@ -159,8 +157,8 @@ public class Orb : Singleton<Orb>
         requiredResetPrice = baseResetPrice * (1 + usedOrbs * 0.1f);
 
         ConfirmationPanel.Instance.ShowConfirmationPanel(
-            "Reset Orbs",
-            "This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\nCost: " + requiredResetPrice.ToString("n0") + " Coins",
+            $"Reset Orbs",
+            $"This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\n<color={CustomColorStrings.yellow}>Cost:</color> " + requiredResetPrice.ToString("n0") + " Coins",
             () =>
             {
                 if (Hero.Instance.GetStoredCoin() >= requiredResetPrice)
@@ -181,9 +179,7 @@ public class Orb : Singleton<Orb>
                     _ = Notification.Instance.ShowNotification("Reset Orb upgrades");
                 }
                 else
-                {
                     _ = Notification.Instance.ShowNotification("Insufficient amount of Coins");
-                }
             },
             true);
 
@@ -210,26 +206,26 @@ public class Orb : Singleton<Orb>
     }
     #endregion
 
-    private Transform RecursiveFindChild(Transform parent, string childName)
-    {
-        foreach (Transform child in parent)
-        {
-            if (child.name == childName)
-            {
-                return child;
-            }
-            else
-            {
-                Transform child2 = RecursiveFindChild(child, childName);
-                if (child2 != null)
-                {
-                    return child2;
-                }
-            }
-        }
+    // private Transform RecursiveFindChild(Transform parent, string childName)
+    // {
+    //     foreach (Transform child in parent)
+    //     {
+    //         if (child.name == childName)
+    //         {
+    //             return child;
+    //         }
+    //         else
+    //         {
+    //             Transform child2 = RecursiveFindChild(child, childName);
+    //             if (child2 != null)
+    //             {
+    //                 return child2;
+    //             }
+    //         }
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     void OnEnable()
         => GameManager.onPlayerSetUp += SetUp;

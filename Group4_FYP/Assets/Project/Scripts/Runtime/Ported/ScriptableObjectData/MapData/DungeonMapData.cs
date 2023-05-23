@@ -6,7 +6,4 @@ using DG.Tweening;
 public class DungeonMapData : HostileMapData
 {
     public DungeonType dungeonType;
-
-    public async override Task ShowMapMessage()
-        => await HUD.Instance.ShowHugeMessageAsync(mapName, $"{dungeonType} {mapType} / {mapDifficulty}");
 }

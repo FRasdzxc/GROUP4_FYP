@@ -1190,6 +1190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7514962801444411094}
   - component: {fileID: 7514962801444411095}
+  - component: {fileID: 5183941216755128675}
   m_Layer: 0
   m_Name: Dungeon-VI Spirals
   m_TagString: Untagged
@@ -1230,6 +1231,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &5183941216755128675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514962801444411092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7034e180bed2beb46bbcdd6b18372884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: aceea31f264f1d64899d58c905c8df3d, type: 2}
 --- !u!1 &7514962802083444265
 GameObject:
   m_ObjectHideFlags: 0

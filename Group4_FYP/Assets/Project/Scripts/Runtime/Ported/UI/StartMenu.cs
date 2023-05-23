@@ -152,7 +152,7 @@ public class StartMenu : Singleton<StartMenu>
 
         foreach (var hero in heroList.heros)
         {
-            var buttonObj = Instantiate(heroButtonPrefab);
+            var buttonObj = Instantiate(heroButtonPrefab, profileCreationClassContainer.transform);
             if (buttonObj == null)
             {
                 Debug.LogError("Unable to instantiate prefab");

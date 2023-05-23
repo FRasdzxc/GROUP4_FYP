@@ -14,7 +14,7 @@ public class ConsumableItemData : ItemData
         public override string ToString()
         {
             // return String.Format("+{0} {1}", value.ToString("n0"), effectType.ToString());
-            return $"+{value.ToString()} <color={CustomColorStrings.yellow}>{effectType.ToString()}</color>";
+            return $"+{value.ToString("n0")} <color={CustomColorStrings.yellow}>{effectType.ToString()}</color>";
         }
     }
 
@@ -31,17 +31,11 @@ public class ConsumableItemData : ItemData
         foreach (Effect effect in effects)
         {
             if (effect.effectType == EffectType.Health) // health
-            {
                 hero.AddHealth(effect.value);
-            }
             else if (effect.effectType == EffectType.Mana) // mana
-            {
                 abilityManager.AddMana(effect.value);
-            }
             else // exp
-            {
                 hero.AddEXP((int)effect.value, false);
-            }
         }
     }
 }

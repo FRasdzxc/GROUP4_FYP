@@ -29,12 +29,13 @@ MonoBehaviour:
   - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
     volume: 1
     pitch: 1
-  dungeonType: 1
+  playerType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 0}
+  dungeonType: 1
   waves:
   - {fileID: 11400000, guid: 6271dc8cb8cda364ba94a804cebac882, type: 2}
   - {fileID: 11400000, guid: 9027802581b68054989230264e09aaba, type: 2}
   - {fileID: 11400000, guid: d3380e2c95e7cb545b7a5be490b2e4ed, type: 2}
   - {fileID: 11400000, guid: 924e5d89a6fa19344bd1f0a26d6ac809, type: 2}
-  intermission: 1000
+  intermission: 1

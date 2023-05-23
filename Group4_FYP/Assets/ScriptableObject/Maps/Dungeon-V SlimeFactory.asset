@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02a294cfd518bf4a9981b89db0054cf, type: 3}
+  m_Name: Dungeon-V SlimeFactory
+  m_EditorClassIdentifier: 
+  mapId: map_dungeonv
+  mapName: Slime Factory
+  mapType: 2
+  mapDifficulty: 1
+  objective: Kill all the slimes without dying, then enter the portal
+  mapPrefab: {fileID: 645493463298389015, guid: e1890257b93179a4f833416b02aff0c3, type: 3}
+  musics:
+  - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: c46a41e31c93e2b41a3905d27f33cbe3, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 44fe9c981f6248c4e9fd7811368c1c11, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 8cf767292d3d7a64fb3ba1709b81bd32, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: bdcdba9209f5aa74ead1f6a120980454, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 7cffa329cf032ed448c8ec5fba55eb35, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: 8afc5c266e552b647934ac0a93488854, type: 3}
+    volume: 1
+    pitch: 1
+  - music: {fileID: 8300000, guid: af81bf1f5c1d9e7448f8db1f7742d39b, type: 3}
+    volume: 1
+    pitch: 1
+  playerType: 0
+  dungeonType: 0
+  portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
+  portalPos: {x: 0, y: 15}

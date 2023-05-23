@@ -21,7 +21,10 @@ namespace PathOfHero.Gameplay
         }
 
         private void Update() // remove this after bug is fixed
-            => Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}; panelState = {shownPanels[shownPanels.Count - 1].GetPanelState()}");
+        {
+            if (shownPanels.Count > 0)
+                Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}; panelState = {shownPanels[shownPanels.Count - 1].GetPanelState()}");
+        }
 
         private void OnEnable()
         {

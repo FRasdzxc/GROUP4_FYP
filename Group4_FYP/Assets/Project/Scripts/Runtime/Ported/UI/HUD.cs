@@ -203,6 +203,12 @@ public class HUD : Singleton<HUD>
         yield return new WaitUntil(() => task.IsCompleted);
     }
 
+    public IEnumerator ShowHugeMessage(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
+    {
+        var task = ShowHugeMessageAsync(title, titleColor, subtitle, subtitleColor, duration);
+        yield return new WaitUntil(() => task.IsCompleted);
+    }
+
     public async Task ShowHugeMessageAsync(string title, Color titleColor, string subtitle, Color subtitleColor, float duration = 1.5f)
     {
         hugeMessage.transform.localScale = new Vector2(0, 1);

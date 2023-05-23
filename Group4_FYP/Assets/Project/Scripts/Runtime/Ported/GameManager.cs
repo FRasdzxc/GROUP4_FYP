@@ -117,10 +117,13 @@ public class GameManager : Singleton<GameManager>
         await SetUpPlayer();
         Hero.Instance.Spawn();
 
-        await Task.Delay(50); // make the game look smoother
-        await LoadingScreen.Instance.FadeOutAsync();
+        // these logics are moved to MapController
+        {
+            // await Task.Delay(50); // make the game look smoother
+            // await LoadingScreen.Instance.FadeOutAsync();
 
-        currentMapData.SetUp();
+            // currentMapData.SetUp();
+        }
 
         GameState = GameState.Playing;
         DirectionArrowController.Instance.Activated = false; // reset arrows indicating mob directions
@@ -146,7 +149,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        currentMapData.Stop();
+        // currentMapData.Stop();
         SaveSystem.Instance.LoadData();             // revert all stats earned in dungeon
         GameManager.Instance.LoadMap("map_town");   // cannot respawn in dungeon so player will be teleported back to town
     }

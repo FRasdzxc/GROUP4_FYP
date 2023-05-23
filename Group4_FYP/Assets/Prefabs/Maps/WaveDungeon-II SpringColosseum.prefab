@@ -48963,6 +48963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9189386269216229626}
   - component: {fileID: 9189386269216229627}
+  - component: {fileID: 8189248958705582332}
   m_Layer: 0
   m_Name: WaveDungeon-II SpringColosseum
   m_TagString: Untagged
@@ -49003,6 +49004,19 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &8189248958705582332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189386269216229620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be929b6c5d93a2b4ea0a4a92bf7f2b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: 591e8cbb43c307e4ea56995c238d991c, type: 2}
 --- !u!1 &9189386269692477630
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,14 +11,10 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private TooltipHintType[] hints;
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        Tooltip.Instance.ShowTooltip(header, type, description, attributes, hints);
-    }
+        => Tooltip.Instance.ShowTooltip(header, type, description, attributes, hints);
 
     public void OnPointerExit(PointerEventData eventData)
-    {
-        Tooltip.Instance.HideTooltip();
-    }
+        => Tooltip.Instance.HideTooltip();
 
     public void SetupTooltip(string header, string type = "", string description = "", string[] attributes = null, TooltipHintType[] hints = null)
     {
