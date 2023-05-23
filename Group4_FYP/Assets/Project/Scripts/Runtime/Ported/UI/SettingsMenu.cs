@@ -52,24 +52,16 @@ public class SettingsMenu : MonoBehaviour
     }
 
     public void SetCameraShake(bool isShaking)
-    {
-        cameraShakeToggle.isOn = isShaking;
-    }
+        => cameraShakeToggle.isOn = isShaking;
 
     public void SetVSync(bool value)
-    {
-        QualitySettings.vSyncCount = BoolToInt(value);
-    }
+        => QualitySettings.vSyncCount = BoolToInt(value);
 
     public void SetVolume(float volume)
-    {
-        audioMixer.SetFloat("volume", volume);
-    }
+        => audioMixer.SetFloat("volume", volume);
 
     public void ChangeVolume(float volume)
-    {
-        volumeSlider.value += volume;
-    }
+        => volumeSlider.value += volume;
 
     public void SaveSettings()
     {
@@ -91,24 +83,10 @@ public class SettingsMenu : MonoBehaviour
     }
 
     private bool IntToBool(int value)
-    {
-        if (value > 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
+        => value > 0 ? true : false;
 
     private int BoolToInt(bool value)
-    {
-        if (value)
-        {
-            return 1;
-        }
-
-        return 0;
-    }
+        => value ? 1 : 0;
 
     struct ResolutionEntry
     {
