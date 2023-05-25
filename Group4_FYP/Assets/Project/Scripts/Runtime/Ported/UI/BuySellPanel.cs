@@ -427,7 +427,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 price += ie.itemData.buyPrice;
         }
 
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", $"Do you want to buy these items?\n\n<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins",
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Buy Items", $"Do you want to buy these items?",
             () =>
             {
                 // buy action here
@@ -447,7 +447,10 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 }
                 else
                     _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
-            });
+            },
+            false,
+            $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} Coins"
+            );
     }
 
     public void Sell()
@@ -467,7 +470,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 price += ie.itemData.sellPrice;
         }
 
-        ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", $"Do you want to sell these items?\n\n<color={CustomColorStrings.yellow}>Gain:</color> {price.ToString("n0")} coins",
+        ConfirmationPanel.Instance.ShowConfirmationPanel("Sell Items", $"Do you want to sell these items?",
             () =>
             {
                 // sell action here
@@ -481,7 +484,10 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 HidePanel();
                 _ = Notification.Instance.ShowNotification("Successfully sold items");
                 AudioManager.Instance.PlaySound(buySellSound);
-            });
+            },
+            false,
+            $"<color={CustomColorStrings.yellow}>Gain:</color> {price.ToString("n0")} Coins"
+            );
     }
 
     public BuySellType GetBuySellType()

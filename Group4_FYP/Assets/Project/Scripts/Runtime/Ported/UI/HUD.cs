@@ -1,8 +1,10 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 using System.Collections;
 
 public class HUD : Singleton<HUD>
@@ -32,6 +34,10 @@ public class HUD : Singleton<HUD>
     [SerializeField] private CanvasGroup objectivePanelCanvasGroup;
     [SerializeField] private Text objectiveText;
 
+    [SerializeField] private GameObject timerPanel;
+    [SerializeField] private CanvasGroup timerPanelCanvasGroup;
+    [SerializeField] private Text timerText;
+
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject mainPanel;
 
@@ -47,25 +53,6 @@ public class HUD : Singleton<HUD>
         regionText.text = ""; // temporary?
         profileNameText.text = SaveSystem.Instance.ProfileName;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //mobCountText.text = "MOB COUNT: " + GameObject.FindGameObjectsWithTag("Mob").Length.ToString("n0");
-    }
-
-    // public void SetupHealth(float health, float maxHealth)
-    // {
-    //     healthSlider.maxValue = maxHealth;
-    //     UpdateHealth(health);
-    // }
-
-    // public void SetupMana(float mana, float maxMana)
-    // {
-    //     this.maxMana = maxMana;
-    //     manaSlider.maxValue = maxMana;
-    //     UpdateMana(mana);
-    // }
 
     public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime, string hintText)
     {
@@ -85,12 +72,6 @@ public class HUD : Singleton<HUD>
         m_CurrentXP = maxXP;
     }
 
-    // public void UpdateHealth(float health)
-    // {
-    //     healthSlider.DOValue(health, 0.25f).SetEase(Ease.OutQuart);
-    //     healthText.text = ((int)health).ToString("n0") + " HP";
-    // }
-
     public void UpdateHealth(float health, float upgradedMaxHealth)
     {
         bool forceUpdate = false;
@@ -106,15 +87,8 @@ public class HUD : Singleton<HUD>
             m_CurrentHealth = (int)health;
         }
 
-        // healthText.text = $"{(int)health} HP";
         healthText.text = $"{health.ToString("n0")} HP";
     }
-
-    // public void UpdateMana(float mana)
-    // {
-    //     manaSlider.DOValue(mana, 0.25f).SetEase(Ease.OutQuart);
-    //     manaText.text = ((int)mana).ToString("n0") + "/" + maxMana.ToString("n0") + " MP";
-    // }
 
     public void UpdateMana(float mana, float upgradedMaxMana)
     {
@@ -252,6 +226,30 @@ public class HUD : Singleton<HUD>
     {
         await objectivePanelCanvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         objectivePanel.SetActive(false);
+    }
+
+    public void ShowTimer(int seconds)
+    {
+        timerText.text = TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
+        timerText.color = Color.white;
+
+        timerPanel.SetActive(true);
+        timerPanelCanvasGroup.DOFade(1, 0.25f).SetEase(Ease.OutQuart);
+    }
+
+    public void UpdateTimer(int seconds)
+    {
+        timerText.text = TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
+        if (seconds <= 10)
+            timerText.color = Color.red;
+        else if (seconds <= 30)
+            timerText.color = Color.yellow;
+    }
+
+    public async Task HideTimer(bool instant = false)
+    {
+        await timerPanelCanvasGroup.DOFade(0, instant ? 0f : 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+        timerPanel.SetActive(false);
     }
 
     public async void ShowHUD()

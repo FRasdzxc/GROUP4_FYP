@@ -56,6 +56,6 @@ public class MapController : MonoBehaviour
         yield return null;
     }
 
-    protected void OnDisable()
+    protected virtual void OnDisable()
         => StopCoroutine(CheckCompletion());
 }

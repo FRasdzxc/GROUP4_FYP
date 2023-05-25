@@ -6,4 +6,9 @@ using DG.Tweening;
 public class DungeonMapData : HostileMapData
 {
     public DungeonType dungeonType;
+
+    public bool isTimed = true;
+
+    [HideInInspector]
+    public int timeLimit;
 }

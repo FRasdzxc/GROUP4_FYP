@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using PathOfHero.Controllers;
@@ -69,6 +70,9 @@ public class Hero : Singleton<Hero>
     private InputAction takeDamageAction;
 
     private AudioSource audioSource;
+
+    public static event Action onHeroDeath;
+
 
     protected override void Awake()
     {
@@ -173,7 +177,7 @@ public class Hero : Singleton<Hero>
             health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
 
             if (damageSoundClips.Length > 0)
-                PlaySound(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
+                PlaySound(damageSoundClips[UnityEngine.Random.Range(0, damageSoundClips.Length)]);
 
             if (health <= 0)
                 StartCoroutine(Die());
@@ -182,6 +186,8 @@ public class Hero : Singleton<Hero>
 
     public IEnumerator Die()
     {
+        onHeroDeath?.Invoke();
+
         IsDead = true;
         health = 0;
         hud.UpdateHealth(health, upgradedMaxHealth);
@@ -192,7 +198,7 @@ public class Hero : Singleton<Hero>
         weaponHolder.SetActive(false);
 
         if (dieSoundClips.Length > 0)
-            PlaySound(dieSoundClips[Random.Range(0, dieSoundClips.Length)]);
+            PlaySound(dieSoundClips[UnityEngine.Random.Range(0, dieSoundClips.Length)]);
 
         // DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));

@@ -1,11 +1,11 @@
-using System.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
 using PathOfHero.Others;
 
-public class SelectionPanel : Panel
+public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the future? (not yet written)
 {
     [SerializeField] private Text titleText;
     [SerializeField] private Text messageText;
@@ -17,23 +17,15 @@ public class SelectionPanel : Panel
     private UnityAction confirmAction;
     private UnityAction cancelAction;
 
-    private static SelectionPanel instance;
-    public static SelectionPanel Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    private static MapSelectionPanel instance;
+    public static MapSelectionPanel Instance => instance;
 
     protected override void Awake()
     {
         base.Awake();
 
         if (!instance)
-        {
             instance = this;
-        }
     }
 
     private void Start()
@@ -42,13 +34,13 @@ public class SelectionPanel : Panel
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
 
-    public void ShowSelectionPanel(SelectionType selectionType)
+    public void ShowMapSelectionPanel(MapSelectionType mapSelectionType)
     {
         RefreshContents();
 
-        switch (selectionType)
+        switch (mapSelectionType)
         {
-            case SelectionType.Map:
+            case MapSelectionType.Map:
                 {
                     titleText.text = "Maps";
                     messageText.text = "Select a map from the list below...";
@@ -69,12 +61,16 @@ public class SelectionPanel : Panel
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
                                     $"Enter <color={CustomColorStrings.green}>{dungeonMapData.mapName}</color>",
-                                    $"<color={CustomColorStrings.red}>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color={CustomColorStrings.red}>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                                    $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!",
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
-                                    }
+                                    },
+                                    false,
+                                    $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
+                                    $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                                    dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null
                                 );
                             });
                         }
@@ -85,12 +81,15 @@ public class SelectionPanel : Panel
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
                                     $"Enter <color={CustomColorStrings.green}>{mapData.mapName}</color>",
-                                    $"<color={CustomColorStrings.yellow}>Type:</color> {mapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {mapData.mapDifficulty}",
+                                    null,
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(mapData.mapId);
                                         HidePanel();
-                                    }
+                                    },
+                                    false,
+                                    $"<color={CustomColorStrings.yellow}>Type:</color> {mapData.mapType}",
+                                    $"<color={CustomColorStrings.yellow}>Difficulty:</color> {mapData.mapDifficulty}"
                                 );
                             });
                         }
@@ -113,7 +112,7 @@ public class SelectionPanel : Panel
                     }
                 }
                 break;
-            case SelectionType.Dungeon:
+            case MapSelectionType.Dungeon: // repetitive; rewrite this section maybe?
                 {
                     titleText.text = "Dungeons";
                     messageText.text = "Select a dungeon from the list below...";
@@ -130,12 +129,16 @@ public class SelectionPanel : Panel
                                 ConfirmationPanel.Instance.ShowConfirmationPanel
                                 (
                                     $"Enter <color={CustomColorStrings.green}>{dungeonMapData.mapName}</color>",
-                                    $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                                    $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!",
                                     () =>
                                     {
                                         GameManager.Instance.LoadMap(dungeonMapData.mapId);
                                         HidePanel();
-                                    }
+                                    },
+                                    false,
+                                    $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
+                                    $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                                    dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null
                                 );
                             });
 

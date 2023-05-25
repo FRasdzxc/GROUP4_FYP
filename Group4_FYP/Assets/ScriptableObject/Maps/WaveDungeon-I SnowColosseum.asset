@@ -17,7 +17,7 @@ MonoBehaviour:
   mapType: 2
   mapDifficulty: 2
   objective: Go through all the waves and kill all the mobs without dying, then enter
-    the portal
+    the portal.
   mapPrefab: {fileID: 3978102400795909892, guid: 2803f78b2184afb438859b061f5a18c6, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 09bc4fbe60b01e44686c8fb4748a0805, type: 3}
@@ -33,6 +33,8 @@ MonoBehaviour:
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 0}
   dungeonType: 1
+  isTimed: 0
+  timeLimit: 0
   waves:
   - {fileID: 11400000, guid: 6271dc8cb8cda364ba94a804cebac882, type: 2}
   - {fileID: 11400000, guid: 9027802581b68054989230264e09aaba, type: 2}

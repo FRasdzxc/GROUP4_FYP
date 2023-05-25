@@ -16,7 +16,8 @@ MonoBehaviour:
   mapName: Haunted Mansion
   mapType: 2
   mapDifficulty: 2
-  objective: Kill all the Ghosties without dying, then enter the portal
+  objective: Kill all the Ghosties within the time limit without dying, then enter
+    the portal.
   mapPrefab: {fileID: 6920223518521875086, guid: 80c58fecf9fd6714ba2f0bf50d2eb808, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
@@ -44,6 +45,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerType: 0
-  dungeonType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 33.5, y: 69.5}
+  dungeonType: 0
+  isTimed: 1
+  timeLimit: 165

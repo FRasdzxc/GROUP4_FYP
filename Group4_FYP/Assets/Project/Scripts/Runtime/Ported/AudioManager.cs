@@ -9,8 +9,8 @@ using PathOfHero.Utilities;
 public class MusicEntry
 {
     public AudioClip music;
-    public float volume = 1;
-    public float pitch = 1;
+    public float volume = 1f;
+    public float pitch = 1f;
 }
 
 [RequireComponent(typeof(AudioSource))]
@@ -18,10 +18,10 @@ public class AudioManager : Singleton<AudioManager>
 {
     private AudioSource audioSource;
 
-    [SerializeField] [Tooltip("Unit: seconds")]
+    [SerializeField, Tooltip("Unit: seconds")]
     private float intermission = 1.5f;
 
-    [SerializeField] [Tooltip("Unit: seconds")]
+    [SerializeField, Tooltip("Unit: seconds")]
     private float fadeDuration = 1f;
 
     [SerializeField]
@@ -29,9 +29,9 @@ public class AudioManager : Singleton<AudioManager>
 
     private int lastMusicIndex = -1;
 
-    private bool musicPlaying = false;
+    private bool musicPlaying;
 
-    private bool stopRequested = false;
+    private bool stopRequested = true;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +60,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayMusic() // play random from musics list
     {
-        if (musics.Count <= 0)
+        if (musics.Count <= 0 || musicPlaying)
             return;
 
         // prevent playing the same music again after it has finished
@@ -77,6 +77,9 @@ public class AudioManager : Singleton<AudioManager>
 
     public async void StopMusic()
     {
+        if (stopRequested)
+            return;
+
         stopRequested = true;
         await audioSource.DOFade(0, fadeDuration).AsyncWaitForCompletion();
         audioSource.Stop();

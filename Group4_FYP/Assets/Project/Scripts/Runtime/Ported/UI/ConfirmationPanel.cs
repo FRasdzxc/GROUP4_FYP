@@ -34,18 +34,14 @@ public class ConfirmationPanel : Panel
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
 
-    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false)
-        => ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant);
+    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false, params string[] attributes)
+        => ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant, attributes);
 
-    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false)
+    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false, params string[] attributes)
     {
         ShowPanel();
 
-        titleText.text = title;
-        messageText.text = message;
-        this.confirmAction = confirmAction;
-        this.cancelAction = cancelAction;
-
+        // check if confirmation is important or not
         if (!isImportant)
         {
             buttonsPanelNormal.SetActive(true);
@@ -57,10 +53,28 @@ public class ConfirmationPanel : Panel
             buttonsPanelImportant.SetActive(true);
         }
 
+        // add attributes
+        if (attributes.Length > 0)
+        {
+            message += $"\n\n";
+            foreach (string attr in attributes)
+            {
+                if (attr != null && attr.Trim().Length > 0)
+                    message += $"{attr}\n";
+            }
+            message = message.Trim('\n');
+        }
+
+        // set parameters to the ui
+        titleText.text = title;
+        messageText.text = message;
+        this.confirmAction = confirmAction;
+        this.cancelAction = cancelAction;
+
+        // show confirmation panel
         gameObject.SetActive(true);
         await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
 
-        // isOpened = true;
         panelState = PanelState.Shown;
     }
 
@@ -69,7 +83,6 @@ public class ConfirmationPanel : Panel
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
 
-        // isOpened = false;
         panelState = PanelState.Hidden;
     }
 

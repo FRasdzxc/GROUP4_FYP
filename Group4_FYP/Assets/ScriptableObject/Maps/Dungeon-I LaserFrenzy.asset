@@ -15,8 +15,9 @@ MonoBehaviour:
   mapId: map_dungeoni
   mapName: Laser Frenzy
   mapType: 2
-  mapDifficulty: 3
-  objective: Kill all the Laser Mobs without dying, then enter the portal
+  mapDifficulty: 4
+  objective: Kill all the Laser Mobs within the time limit without dying, then enter
+    the portal.
   mapPrefab: {fileID: 9080937833783401953, guid: 632738989ff713c4a87c8765670c1bbd, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
@@ -44,6 +45,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerType: 0
-  dungeonType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: -5}
+  dungeonType: 0
+  isTimed: 1
+  timeLimit: 195

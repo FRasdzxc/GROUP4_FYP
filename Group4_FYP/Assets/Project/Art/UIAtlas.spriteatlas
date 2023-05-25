@@ -59,6 +59,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 81a79841d9e247f4ea0b77ecebc36927, type: 3}
   - {fileID: 21300000, guid: 2344f5a167566be4b95759dba25b1443, type: 3}
   - {fileID: 21300000, guid: a09320b1e52f0714e9e201155af37457, type: 3}
+  - {fileID: 21300000, guid: 99b94cb1670200b4c94b446268dd9a5e, type: 3}
   - {fileID: 21300000, guid: 17ab7fd16331c2e42a767f8f98fec1a9, type: 3}
   - {fileID: 21300000, guid: 4412c1e13136f284fbbb3ea49a6d63c4, type: 3}
   - {fileID: 21300000, guid: 42e783022f87cfb498ad31111d7fc931, type: 3}
@@ -67,6 +68,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1fa7ae723be295a4e83db6854b86c20d, type: 3}
   - {fileID: 21300000, guid: 3cc5b792ad46da940925b58d78652026, type: 3}
   - {fileID: 21300000, guid: 9eb986a2888fda54084aa031a7b17800, type: 3}
+  - {fileID: 21300000, guid: 50dccbb2319219245b33415ae711b089, type: 3}
   - {fileID: 21300000, guid: 114684d2fa7d0974ab2cebb2e6a2386b, type: 3}
   - {fileID: 21300000, guid: 18d45a1328b8a8147b9e11a4b7c3f9d7, type: 3}
   - {fileID: 21300000, guid: 0948d9432250d6e4fa850f528c000383, type: 3}
@@ -93,6 +95,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7fee907768aad8749843d9324d3a44e7, type: 3}
   - {fileID: 21300000, guid: fc6efae76d15944438045dd238680e74, type: 3}
   - {fileID: 21300000, guid: 95f22f08b64aeff4a9b64b993b86dc84, type: 3}
+  - {fileID: 21300000, guid: f0980c8848d1e794fb063ab071e34d5c, type: 3}
   - {fileID: 21300000, guid: 441d10f8457dfc943aefddeae97ed01e, type: 3}
   - {fileID: 21300000, guid: 834f2429293544a46960fd9d9004fe6c, type: 3}
   - {fileID: 21300000, guid: 2f9e30593a16fd548908d4aa05bb08cb, type: 3}
@@ -121,6 +124,7 @@ SpriteAtlas:
   - Health
   - Exp
   - UIButton1Pressed
+  - Timer
   - RevertAll
   - UIPanel5
   - Divider
@@ -129,6 +133,7 @@ SpriteAtlas:
   - UIButton2Pressed3
   - HealthRegeneration
   - ManaRegeneration
+  - Hourglass
   - UIButton1Selected
   - LeftArrow
   - InventoryItemSlot
@@ -155,6 +160,7 @@ SpriteAtlas:
   - MapPanelBackground
   - UISlider1Background1
   - UIButton2Disabled1
+  - GameIcon2
   - NotEquals
   - UIMask1
   - UIButton2Highlighted2

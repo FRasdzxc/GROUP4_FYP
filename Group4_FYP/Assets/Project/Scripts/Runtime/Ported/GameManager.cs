@@ -88,6 +88,8 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("saveonloaded");
         }
 
+        await hud.HideTimer(true);
+
         // destroy current map and its mobs
         if (currentMap)
             DestroyImmediate(currentMap);
@@ -155,14 +157,10 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GameObject GetMap()
-    {
-        return currentMap;
-    }
+        => currentMap;
 
     public MapType GetMapType()
-    {
-        return currentMapData.mapType;
-    }
+        => currentMapData.mapType;
 
     public async Task SetUpPlayer()
     {

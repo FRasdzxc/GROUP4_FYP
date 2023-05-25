@@ -17,7 +17,7 @@ MonoBehaviour:
   mapType: 2
   mapDifficulty: 3
   objective: Kill all the mobs in the narrow corridor to reach to the treasure hall!
-    Bring all the treasures back without dying
+    Bring all the treasures back without dying.
   mapPrefab: {fileID: 8459538900643283103, guid: 968b190ff06cb36498843a7ad54410ae, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
@@ -45,6 +45,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerType: 0
-  dungeonType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 66, y: 32}
+  dungeonType: 0
+  isTimed: 0
+  timeLimit: 0

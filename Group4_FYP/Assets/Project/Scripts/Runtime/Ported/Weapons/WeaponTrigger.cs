@@ -8,7 +8,6 @@ using UnityEngine;
 public class WeaponTrigger : MonoBehaviour
 {
     [SerializeField] private WeaponTriggerData weaponTriggerData;
-    [TextArea(5, 5)] [SerializeField] private string notes = "Please assign either \"HeroWeaponTrigger\", \"HeroWeaponTriggerStronger\" or \"MobWeaponTrigger\" tag to the GameObject this script is attached to";
 
     private float damage;
     private float critialDamage;

@@ -158,7 +158,7 @@ public class Orb : Singleton<Orb>
 
         ConfirmationPanel.Instance.ShowConfirmationPanel(
             $"Reset Orbs",
-            $"This will reset all your upgrades to health or mana etc. Do you wish to continue?\n\n<color={CustomColorStrings.yellow}>Cost:</color> " + requiredResetPrice.ToString("n0") + " Coins",
+            $"This will reset all your upgrades to health or mana etc. Do you wish to continue?",
             () =>
             {
                 if (Hero.Instance.GetStoredCoin() >= requiredResetPrice)
@@ -181,7 +181,9 @@ public class Orb : Singleton<Orb>
                 else
                     _ = Notification.Instance.ShowNotification("Insufficient amount of Coins");
             },
-            true);
+            true,
+            $"<color={CustomColorStrings.yellow}>Cost:</color> {requiredResetPrice.ToString("n0")} Coins"
+            );
 
         RefreshUpgradeItemContainer();
     }

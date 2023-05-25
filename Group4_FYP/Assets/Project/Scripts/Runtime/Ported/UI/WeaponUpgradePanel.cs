@@ -164,7 +164,7 @@ public class WeaponUpgradePanel : PanelOverride
             ConfirmationPanel.Instance.ShowConfirmationPanel
             (
                 "Upgrade Weapon",
-                $"Do you want to upgrade this weapon to <color={CustomColorStrings.green}>Tier {targetTier}</color>?\n\n<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Relic (Tier {targetTier})",
+                $"Do you want to upgrade this weapon to <color={CustomColorStrings.green}>Tier {targetTier}</color>?",
                 () =>
                 {
                     if (Hero.Instance.GetStoredCoin() >= price)
@@ -179,7 +179,9 @@ public class WeaponUpgradePanel : PanelOverride
                     }
                     else
                         _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
-                }
+                },
+                false,
+                $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Relic (Tier {targetTier})"
             );
             // ConfirmationPanel.Instance.ShowConfirmationPanel("hi", "hi", () => {});
         }

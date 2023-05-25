@@ -16,7 +16,8 @@ MonoBehaviour:
   mapName: Slime Factory
   mapType: 2
   mapDifficulty: 1
-  objective: Kill all the slimes without dying, then enter the portal
+  objective: Kill all the slimes within the time limit without dying, then enter
+    the portal.
   mapPrefab: {fileID: 645493463298389015, guid: e1890257b93179a4f833416b02aff0c3, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
@@ -44,6 +45,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerType: 0
-  dungeonType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 0, y: 15}
+  dungeonType: 0
+  isTimed: 1
+  timeLimit: 105

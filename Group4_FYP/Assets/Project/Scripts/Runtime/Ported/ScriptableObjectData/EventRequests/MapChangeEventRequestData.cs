@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using PathOfHero.Others;
 
@@ -14,9 +15,7 @@ public class MapChangeEventRequestData : EventRequestData
         MapData mapData = GameManager.Instance.FindMap(mapId);
 
         if (!mapData)
-        {
             return;
-        }
         
         if (requiresConfirmation)
         {
@@ -26,10 +25,13 @@ public class MapChangeEventRequestData : EventRequestData
 
                 ConfirmationPanel.Instance.ShowConfirmationPanel
                 (
-                    $"Enter <color={CustomColorStrings.green}>{mapData.mapName}</color>",
-                    $"<color={CustomColorStrings.red}>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color={CustomColorStrings.red}>!!</color> Upon death, you will lose all your progress in this dungeon!\n\n<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}\n<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                    $"Enter <color={CustomColorStrings.green}>{dungeonMapData.mapName}</color>",
+                    $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!",
                     () => { GameManager.Instance.LoadMap(mapId, saveOnMapLoaded); },
-                    true
+                    true,
+                    $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
+                    $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
+                    dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null
                 );
             }
             else

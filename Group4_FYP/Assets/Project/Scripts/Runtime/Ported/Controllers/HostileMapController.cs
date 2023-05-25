@@ -12,7 +12,7 @@ public class HostileMapController : MapController
         base.Start();
     }
 
-    protected async void SpawnPortal()
+    protected async virtual void SpawnPortal()
     {
         //SaveSystem.Instance.SaveData(false, false);
         _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");

@@ -20,11 +20,11 @@ namespace PathOfHero.Gameplay
             shownPanels = new();
         }
 
-        private void Update() // remove this after bug is fixed
-        {
-            if (shownPanels.Count > 0)
-                Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}; panelState = {shownPanels[shownPanels.Count - 1].GetPanelState()}");
-        }
+        // private void Update() // remove this after bug is fixed; temp commented for in case bugs appear again
+        // {
+        //     if (shownPanels.Count > 0)
+        //         Debug.Log($"shownPanels.Count = {shownPanels.Count}; last = {shownPanels[shownPanels.Count - 1].GetType()}; panelState = {shownPanels[shownPanels.Count - 1].GetPanelState()}");
+        // }
 
         private void OnEnable()
         {
