@@ -48,10 +48,10 @@ public class MessageItem : MonoBehaviour
 
     private IEnumerator AnimatedDestroy()
     {
-        m_Visible = false;
         if (TryGetComponent<CanvasGroup>(out var canvasGroup))
             yield return canvasGroup.DOFade(0, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
 
         Destroy(gameObject);
+        m_Visible = false;
     }
 }

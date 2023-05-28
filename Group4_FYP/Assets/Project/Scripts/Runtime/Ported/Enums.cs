@@ -1,6 +1,6 @@
 public enum HeroClass { Knight, Mage, Archer, Hunter, Test };
 //public enum AbilityState { ready, active, cooldown };
-public enum ItemType { Weapon, Armor, Consumable, Misc, Relic }; // might not be used? keep as a reference?
+public enum ItemType { Weapon, Armor, Consumable, Misc, Runic, Gem, Fragment };
 public enum InventorySlotType { Any, Weapon, Armor, Ability };
 public enum InventoryMode { Normal, Apply, Revert, Throw, Preview };
 public enum EffectType { Health, Mana, Exp };

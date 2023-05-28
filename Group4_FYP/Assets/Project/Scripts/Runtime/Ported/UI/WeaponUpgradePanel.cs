@@ -10,7 +10,7 @@ public class WeaponUpgradePanel : PanelOverride
     [SerializeField] private GameWeapons gameWeapons;
     [SerializeField] private GameObject weaponUpgradePanel;
     [SerializeField] private InventorySlot weaponSlot;
-    [SerializeField] private InventorySlot relicSlot;
+    [SerializeField] private InventorySlot runicSlot;
     [SerializeField] private InventorySlot resultSlot;
     [SerializeField] private Image equalsImage;
     [SerializeField] private Sprite equalsSprite;
@@ -96,8 +96,8 @@ public class WeaponUpgradePanel : PanelOverride
                         // if (targetTier < cwe.classWeapons.Length)
                         if (targetTier < we.weaponTiers.Length)
                         {
-                            // if weapon is not at the highest tier, find if tempItems contains relic for weapontier + 1
-                            if (FindRelic())
+                            // if weapon is not at the highest tier, find if tempItems contains runic for weapontier + 1
+                            if (FindRunic())
                             {
                                 warningText.gameObject.SetActive(false);
                                 equalsImage.sprite = equalsSprite;
@@ -106,7 +106,7 @@ public class WeaponUpgradePanel : PanelOverride
                             else
                             {
                                 warningText.gameObject.SetActive(true);
-                                warningText.text = String.Format("You do not have the required relic - \"Relic (Tier {0})\" for this upgrade", targetTier);
+                                warningText.text = String.Format("You do not have the required Runic - \"Runic (Tier {0})\" for this upgrade", targetTier);
                                 equalsImage.sprite = notEqualsSprite;
                             }
                             resultSlot.Configure(we.weaponTiers[targetTier].item, 1, InventoryMode.Preview);
@@ -116,7 +116,7 @@ public class WeaponUpgradePanel : PanelOverride
                             warningText.gameObject.SetActive(true);
                             warningText.text = "Your weapon is of the highest tier already!";
                             equalsImage.sprite = notEqualsSprite;
-                            relicSlot.Clear();
+                            runicSlot.Clear();
                             resultSlot.Clear();
                         }
                     }
@@ -181,7 +181,7 @@ public class WeaponUpgradePanel : PanelOverride
                         _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
                 },
                 false,
-                $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Relic (Tier {targetTier})"
+                $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Runic (Tier {targetTier})"
             );
             // ConfirmationPanel.Instance.ShowConfirmationPanel("hi", "hi", () => {});
         }
@@ -207,18 +207,18 @@ public class WeaponUpgradePanel : PanelOverride
         }
     }
 
-    private bool FindRelic()
+    private bool FindRunic()
     {
         foreach (InventoryEntry ie in tempItems)
         {
-            if (ie.itemData is RelicItemData)
+            if (ie.itemData is RunicItemData)
             {
-                RelicItemData relicItem = ie.itemData as RelicItemData;
-                if (relicItem.tier == targetTier)
+                RunicItemData runicItem = ie.itemData as RunicItemData;
+                if (runicItem.tier == targetTier)
                 {
-                    relicSlot.Configure(relicItem, 1, InventoryMode.Preview);
-                    RemoveItem(relicItem);
-                    price = relicItem.upgradePrice;
+                    runicSlot.Configure(runicItem, 1, InventoryMode.Preview);
+                    RemoveItem(runicItem);
+                    price = runicItem.upgradePrice;
                     costText.text = price.ToString("n0");
                     return true;
                 }
@@ -231,7 +231,7 @@ public class WeaponUpgradePanel : PanelOverride
     private void ResetPanel()
     {
         weaponSlot.Clear();
-        relicSlot.Clear();
+        runicSlot.Clear();
         resultSlot.Clear();
         equalsImage.sprite = equalsSprite;
     }

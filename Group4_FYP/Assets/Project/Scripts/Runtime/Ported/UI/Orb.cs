@@ -154,7 +154,7 @@ public class Orb : Singleton<Orb>
             return;
         }
 
-        requiredResetPrice = baseResetPrice * (1 + usedOrbs * 0.1f);
+        requiredResetPrice = baseResetPrice * (1 + usedOrbs * 0.5f);
 
         ConfirmationPanel.Instance.ShowConfirmationPanel(
             $"Reset Orbs",

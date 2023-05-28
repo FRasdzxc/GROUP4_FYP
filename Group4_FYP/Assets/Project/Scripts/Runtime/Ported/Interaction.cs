@@ -22,10 +22,7 @@ public abstract class Interaction : MonoBehaviour
     protected virtual void Start()
     {
         // automatically position and scale canvas
-        float canvasScale = (1 / transform.localScale.x);
-        float targetScale = canvasScale * 0.01f;
-        keyHintCanvas.transform.localScale = new Vector2(targetScale, targetScale);
-        keyHintCanvas.transform.localPosition = new Vector3(0, (1 + canvasScale) / 2);
+        ApplyModifiedPosition();
 
         keyText.text = interactionKey.ToString();
         if (hint.Length > 0 || hint == null)
@@ -89,4 +86,15 @@ public abstract class Interaction : MonoBehaviour
     }
 
     protected abstract void Interact();
+
+    public void ApplyModifiedPosition()
+    {
+        if (transform.localScale.magnitude > 0)
+        {
+            float canvasScale = (1 / transform.localScale.x);
+            float targetScale = canvasScale * 0.01f;
+            keyHintCanvas.transform.localScale = new Vector2(targetScale, targetScale);
+            keyHintCanvas.transform.localPosition = new Vector3(0, (1 + canvasScale) / 2);
+        }
+    }
 }

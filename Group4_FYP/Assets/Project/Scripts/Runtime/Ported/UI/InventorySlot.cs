@@ -165,10 +165,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             var armor = ItemData as ArmorItemData;
             attributes.Add($"<color={CustomColorStrings.yellow}>Defense:</color> {armor.defense.ToString("n0")}");
         }
-        else if (ItemData is RelicItemData)
+        else if (ItemData is RunicItemData)
         {
-            var relic = ItemData as RelicItemData;
-            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {relic.tier.ToString("n0")}");
+            var runic = ItemData as RunicItemData;
+            attributes.Add($"<color={CustomColorStrings.yellow}>Tier:</color> {runic.tier.ToString("n0")}");
         }
 
         if (inventoryMode == InventoryMode.Normal)

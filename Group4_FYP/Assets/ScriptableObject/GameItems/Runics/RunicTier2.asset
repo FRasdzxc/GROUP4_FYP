@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d4bca7208a4909498060209bf1a5660, type: 3}
-  m_Name: RelicTier2
+  m_Name: RunicTier2
   m_EditorClassIdentifier: 
   itemID: relic_tier2
-  itemName: Relic (Tier 2)
+  itemName: Runic (Tier 2)
   itemType: 4
   itemDescription: Used for upgrading Tier 1 weapons to Tier 2
   minDropSize: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
   sellPrice: 1500
   buyPrice: 4500
   itemIcon: {fileID: 21300000, guid: b2c0e5d5c5d879b40ab6c64f13352aea, type: 3}
-  sound: {fileID: 0}
+  useSound: {fileID: 0}
   isUsable: 0
   isBuyable: 0
   tier: 2

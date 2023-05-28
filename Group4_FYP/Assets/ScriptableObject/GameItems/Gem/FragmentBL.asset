@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbffcbac496b2844afd802185b04be4, type: 3}
+  m_Name: FragmentBL
+  m_EditorClassIdentifier: 
+  itemID: fragment_bl
+  itemName: Gem Fragment
+  itemType: 6
+  itemDescription: One of the four Fragments that is dropped by the Fragment Snail.
+    A Gem can be obtained by fusing this Fragment together with the other three.
+  minDropSize: 1
+  maxDropSize: 1
+  sellPrice: 3400
+  buyPrice: 0
+  itemIcon: {fileID: 21300000, guid: e4252ff041b082a4f8762f54aff78c49, type: 3}
+  useSound: {fileID: 0}
+  isUsable: 0
+  isBuyable: 0

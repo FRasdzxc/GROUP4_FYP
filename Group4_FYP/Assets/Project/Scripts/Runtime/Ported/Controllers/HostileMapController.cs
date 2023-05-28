@@ -21,6 +21,8 @@ public class HostileMapController : MapController
         clone.transform.localScale = Vector2.zero;
         await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
         _ = Notification.Instance.ShowNotification("Portal is opened!");
+        if (clone.TryGetComponent<Interaction>(out Interaction interaction))
+            interaction.ApplyModifiedPosition();
 
         DirectionArrowController.Instance.AddDirection(DirectionType.ReturnPortal, clone.transform);
     }
