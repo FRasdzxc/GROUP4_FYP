@@ -1877,6 +1877,7 @@ GameObject:
   - component: {fileID: 4868193333033776149}
   - component: {fileID: 4623332038812992869}
   - component: {fileID: 7919453829245573705}
+  - component: {fileID: 7919453829245573706}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -2016,6 +2017,7 @@ MonoBehaviour:
     playerGobj: {fileID: 8326585109876766392, guid: b34364de520e44146ad8704681fbb7b2, type: 3}
   - playerType: 1
     playerGobj: {fileID: 2671783106897141959, guid: 8fddfe51c1abfd8448eb23e1b1d4b97b, type: 3}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &7919453829245573702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2060,3 +2062,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultCursorType: 1
   cursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
+--- !u!114 &7919453829245573706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529991195262335111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261cb5fef529af64daa450dc9b34faab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}

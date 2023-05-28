@@ -1,6 +1,6 @@
-using PathOfHero.Telemetry;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PathOfHero.Managers.Data;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementControllerV2 : MonoBehaviour
@@ -11,6 +11,9 @@ public class MovementControllerV2 : MonoBehaviour
     [SerializeField] protected Animator animator;
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected AudioClip[] moveSoundClips;
+
+    [SerializeField]
+    protected ScoreEventChannel m_ScoreEventChannel;
 
     protected PlayerInput playerInput;
     protected InputAction moveAction;
@@ -84,7 +87,7 @@ public class MovementControllerV2 : MonoBehaviour
                 while (newClip == lastStepClip);
 
                 audioSource.PlayOneShot(newClip);
-                //DataCollector.Instance?.StepsTaken();
+                m_ScoreEventChannel.StepTaken();
                 nextStepSound = Time.time + newClip.length * (sprinting ? 0.9f : 1.2f);
                 lastStepClip = newClip;
             }

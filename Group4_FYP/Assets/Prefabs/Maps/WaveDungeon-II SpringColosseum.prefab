@@ -49017,6 +49017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: 591e8cbb43c307e4ea56995c238d991c, type: 2}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!1 &9189386269692477630
 GameObject:
   m_ObjectHideFlags: 0

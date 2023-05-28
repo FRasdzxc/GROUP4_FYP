@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 3223eeb18eef52f489be4571a34a346e, type: 2}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
   projectiles:
   - {fileID: 3710261600020708998, guid: 71b57ff2c465a574c83865d97f001f80, type: 3}
   - {fileID: 5516903138838343467, guid: b186e71b17b85e24fb34e08546046734, type: 3}

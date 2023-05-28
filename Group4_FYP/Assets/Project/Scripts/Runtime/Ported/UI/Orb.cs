@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using PathOfHero.Telemetry;
 using PathOfHero.Utilities;
 using PathOfHero.Others;
 
@@ -114,7 +113,6 @@ public class Orb : Singleton<Orb>
             return;
         }
 
-        //DataCollector.Instance?.OrbUpgradeUsed(orbUpgradeType.ToString());
         switch (orbUpgradeType)
         {
             case OrbUpgradeType.MaxHealth:

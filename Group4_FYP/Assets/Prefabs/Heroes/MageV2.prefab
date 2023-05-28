@@ -580,6 +580,7 @@ MonoBehaviour:
   dieSoundClips:
   - {fileID: 8300000, guid: b852ca0f9c6313f43b65ca1bba397b20, type: 3}
   canRegenerateHealth: 1
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &8326585109876766391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,6 +601,7 @@ MonoBehaviour:
   moveSoundClips:
   - {fileID: 8300000, guid: 547d5f8fd6cabcf46aa5ccd2711a5f97, type: 3}
   - {fileID: 8300000, guid: 299751f9b1ef20048895ad8d6e681164, type: 3}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &8326585109876766389
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 63f257807abc8ac4e91e78bf0bb5b54e, type: 2}
+  m_ScoreEventChannel: {fileID: 0}
   projectile: {fileID: 5278577174866382799, guid: 9d396360e84f2c147b5f44bb6b9a2b3d, type: 3}
 --- !u!1 &2754856138398402107
 GameObject:
@@ -542,6 +543,10 @@ MonoBehaviour:
   movementController: {fileID: 6841578098152819423}
   abilityManager: {fileID: 6841578098152819421}
   orbObtainLevel: 5
+  damageSoundClips: []
+  dieSoundClips: []
+  canRegenerateHealth: 1
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &6841578098152819423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +567,7 @@ MonoBehaviour:
   moveSoundClips:
   - {fileID: 8300000, guid: 547d5f8fd6cabcf46aa5ccd2711a5f97, type: 3}
   - {fileID: 8300000, guid: 299751f9b1ef20048895ad8d6e681164, type: 3}
+  m_ScoreEventChannel: {fileID: 0}
 --- !u!114 &6841578098152819421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +715,7 @@ MonoBehaviour:
   moveSoundClips:
   - {fileID: 8300000, guid: 547d5f8fd6cabcf46aa5ccd2711a5f97, type: 3}
   - {fileID: 8300000, guid: 299751f9b1ef20048895ad8d6e681164, type: 3}
+  m_ScoreEventChannel: {fileID: 0}
 --- !u!1 &6841578098941343457
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PathOfHero.Controllers;
 using System.Collections;
-using PathOfHero.Telemetry;
+using PathOfHero.Managers.Data;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
 using PathOfHero.Others;
@@ -20,6 +20,9 @@ public class Hero : Singleton<Hero>
     [SerializeField] private AudioClip[] damageSoundClips;
     [SerializeField] private AudioClip[] dieSoundClips;
     [SerializeField] private bool canRegenerateHealth = true;
+
+    [SerializeField]
+    private ScoreEventChannel m_ScoreEventChannel;
 
     private HUD hud;
     private SpriteRenderer sr;
@@ -128,7 +131,6 @@ public class Hero : Singleton<Hero>
                 }
             }
             hud.UpdateXP(level, storedExp, requiredExp);
-            // DataCollector.Instance?.HeroLevel(level);
             HeroPanel.Instance.UpdateLevel(level);
             HeroPanel.Instance.UpdateCoin(storedCoin);
 
@@ -173,7 +175,7 @@ public class Hero : Singleton<Hero>
         if (!IsDead && GameManager.Instance.IsPlayingHostile())
         {
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
-            // DataCollector.Instance?.DamageTaken(amount);
+            m_ScoreEventChannel.DamageTaken(amount);
             health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
 
             if (damageSoundClips.Length > 0)
@@ -200,7 +202,6 @@ public class Hero : Singleton<Hero>
         if (dieSoundClips.Length > 0)
             PlaySound(dieSoundClips[UnityEngine.Random.Range(0, dieSoundClips.Length)]);
 
-        // DataCollector.Instance?.PlayerDied();
         yield return StartCoroutine(hud.ShowHugeMessage("You Died", Color.red));
 
         if (!GameManager.Instance.GetMapType().Equals(MapType.Dungeon))
@@ -389,7 +390,6 @@ public class Hero : Singleton<Hero>
     {
         var amount = accountForExpGainMultiplier ? (int)(exp * expGainMultiplierUpgrade) : exp;
         storedExp += amount;
-        // DataCollector.Instance?.ExpGained(amount);
     }
 
     public void AddExpGainMultiplierUpgrade(float value)
@@ -400,11 +400,6 @@ public class Hero : Singleton<Hero>
     public void AddCoin(int coin)
     {
         storedCoin += coin;
-
-        //if (coin > 0)
-        //    // DataCollector.Instance?.CoinsEarned(coin);
-        //else if (coin < 0)
-        //    // DataCollector.Instance?.CoinsSpent(coin * -1);
     }
     #endregion
 

@@ -1,10 +1,13 @@
-using PathOfHero.Telemetry;
 using UnityEngine;
+using PathOfHero.Managers.Data;
 
 public abstract class WeaponController : MonoBehaviour
 {
     [SerializeField]
     protected WeaponData weaponData;
+
+    [SerializeField]
+    protected ScoreEventChannel m_ScoreEventChannel;
 
     public int WeaponTier => weaponData.weaponTier;
 
@@ -25,7 +28,7 @@ public abstract class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time >= nextAttackTime)
         {
             Attack();
-            //DataCollector.Instance?.WeaponUsed(weaponData.item?.itemID);
+            m_ScoreEventChannel.WeaponUsed(weaponData.item?.itemID);
             nextAttackTime = Time.time + weaponData.cooldown;
         }
     }

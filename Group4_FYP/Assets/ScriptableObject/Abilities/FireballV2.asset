@@ -18,7 +18,7 @@ MonoBehaviour:
   cooldownTime: 3
   manaCost: 10
   icon: {fileID: 21300000, guid: 487cbfd40a2cba844988db0bd406b077, type: 3}
-  remainingCooldownTime: 0
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
   fireball: {fileID: 1840668930176803370, guid: b7453b80a3fda5a4d970162c7b95856a, type: 3}
   projectileSpeed: 10
   fireballCount: 16

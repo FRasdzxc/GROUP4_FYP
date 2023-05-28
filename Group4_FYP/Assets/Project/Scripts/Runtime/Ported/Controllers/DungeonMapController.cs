@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class DungeonMapController : HostileMapController
 {
@@ -52,6 +52,7 @@ public class DungeonMapController : HostileMapController
 
     protected override void SpawnPortal()
     {
+        m_ScoreEventChannel.LevelEnded();
         timerRunning = false;
         _ = HUD.Instance.HideTimer();
         base.SpawnPortal();

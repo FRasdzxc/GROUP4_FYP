@@ -329,6 +329,7 @@ MonoBehaviour:
   audioSource: {fileID: 98740894700346254}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
   weapon: {fileID: 98740896381675134}
   projectile: {fileID: 932250173698253653, guid: 251ddb1ac2f53c746a9a2f8fa3d93d3b, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 273e61098b669874db289457dff508e2, type: 2}

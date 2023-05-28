@@ -8294,6 +8294,7 @@ MonoBehaviour:
   audioSource: {fileID: 554677339749085702}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 554677340097414187}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}
@@ -12413,6 +12414,7 @@ MonoBehaviour:
   audioSource: {fileID: 554677339857730906}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 554677341537918645}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}
@@ -41558,6 +41560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: 4558ec96b281b3f4e91f42b7d435422d, type: 2}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!1 &554677340555890102
 GameObject:
   m_ObjectHideFlags: 0
@@ -67526,6 +67529,7 @@ MonoBehaviour:
   audioSource: {fileID: 554677341186377232}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 554677339713247576}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}
@@ -67834,6 +67838,7 @@ MonoBehaviour:
   audioSource: {fileID: 554677341250513662}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 554677341535136485}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}
@@ -70141,6 +70146,7 @@ MonoBehaviour:
   audioSource: {fileID: 554677341639607422}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 554677339939826879}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}
@@ -70759,6 +70765,7 @@ MonoBehaviour:
   audioSource: {fileID: 6499908592549085227}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 0.5019608, g: 1, b: 1, a: 1}
+  m_ScoreEventChannel: {fileID: 0}
   weapon: {fileID: 6499908591428813446}
   projectile: {fileID: 3518947646307993446, guid: a2d106826912ee6439642b4260f4eaab, type: 3}
   projectileWeaponData: {fileID: 11400000, guid: 8faf6b497a0e2714e80966c49716ebad, type: 2}

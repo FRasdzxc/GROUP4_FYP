@@ -250,6 +250,7 @@ MonoBehaviour:
   audioSource: {fileID: 2591473661711781078}
   smoke: {fileID: 3847103182497247175, guid: 9fb1d0271b2ed4540a53bdabb2b0f4da, type: 3}
   smokeColor: {r: 1, g: 0.6551362, b: 0.6551362, a: 1}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &2591473661711781079
 MonoBehaviour:
   m_ObjectHideFlags: 0

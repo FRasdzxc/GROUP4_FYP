@@ -1,5 +1,5 @@
-using PathOfHero.Telemetry;
 using UnityEngine;
+using PathOfHero.Managers.Data;
 
 public class Ability : ScriptableObject
 {
@@ -9,6 +9,7 @@ public class Ability : ScriptableObject
     public float cooldownTime; // seconds until next use
     public float manaCost;
     public Sprite icon;
+    public ScoreEventChannel m_ScoreEventChannel;
 
     public float Cooldown
     {
@@ -27,7 +28,7 @@ public class Ability : ScriptableObject
         if (!IsReady)
             return;
 
-        //DataCollector.Instance?.AbilityUsed(abilityName);
+        m_ScoreEventChannel.AbilityUsed(abilityName);
         nextActivateTime = Time.time + cooldownTime;
 
         abilityDamageUpgrade = AbilityManager.Instance.GetAbilityDamageUpgrade();

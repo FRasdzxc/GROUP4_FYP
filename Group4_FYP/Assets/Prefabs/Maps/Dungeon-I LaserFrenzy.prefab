@@ -6076,6 +6076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: 201f9a86b4d476742b73b8e9fb51a927, type: 2}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!1001 &2462421111640952830
 PrefabInstance:
   m_ObjectHideFlags: 0

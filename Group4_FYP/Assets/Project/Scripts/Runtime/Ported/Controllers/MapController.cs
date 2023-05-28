@@ -2,12 +2,15 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using PathOfHero.UI;
+using PathOfHero.Managers.Data;
 
 public class MapController : MonoBehaviour
 {
     [SerializeField]
     protected MapData mapData;
 
+    [SerializeField]
+    protected ScoreEventChannel m_ScoreEventChannel;
 
     // Start is called before the first frame update
     protected async virtual void Start()
@@ -19,6 +22,7 @@ public class MapController : MonoBehaviour
         // setting up pausemenu mode
         if (mapData.mapType == MapType.Dungeon)
         {
+            m_ScoreEventChannel.OnLevelStart();
             PauseMenu.Instance.SetDungeonMode(true);
             SaveSystem.Instance.SaveData(false, false);
         }

@@ -1,7 +1,7 @@
-using PathOfHero.Telemetry;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using PathOfHero.Managers.Data;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementControllerSide : MovementControllerV2
@@ -94,7 +94,7 @@ public class MovementControllerSide : MovementControllerV2
                 while (newClip == lastStepClip);
 
                 audioSource.PlayOneShot(newClip);
-                //DataCollector.Instance?.StepsTaken();
+                m_ScoreEventChannel.StepTaken();
                 nextStepSound = Time.time + newClip.length * (sprinting ? 0.9f : 1.2f);
                 lastStepClip = newClip;
             }
