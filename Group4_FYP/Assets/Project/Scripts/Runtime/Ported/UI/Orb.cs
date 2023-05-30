@@ -109,7 +109,7 @@ public class Orb : Singleton<Orb>
     {
         if (Orbs <= 0)
         {
-            _ = Notification.Instance.ShowNotification("You do not have any Orbs");
+            _ = Notification.Instance.ShowNotificationAsync("You do not have any Orbs");
             return;
         }
 
@@ -148,7 +148,7 @@ public class Orb : Singleton<Orb>
     {
         if (usedOrbs <= 0)
         {
-            _ = Notification.Instance.ShowNotification("You have not spent any Orbs yet");
+            _ = Notification.Instance.ShowNotificationAsync("You have not spent any Orbs yet");
             return;
         }
 
@@ -174,10 +174,10 @@ public class Orb : Singleton<Orb>
                     Hero.Instance.SetDefenseUpgrade(1);
                     AbilityManager.Instance.SetAbilityDamageUpgrade(1);
 
-                    _ = Notification.Instance.ShowNotification("Reset Orb upgrades");
+                    _ = Notification.Instance.ShowNotificationAsync("Reset Orb upgrades");
                 }
                 else
-                    _ = Notification.Instance.ShowNotification("Insufficient amount of Coins");
+                    _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of Coins");
             },
             true,
             $"<color={CustomColorStrings.yellow}>Cost:</color> {requiredResetPrice.ToString("n0")} Coins"

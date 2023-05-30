@@ -49,7 +49,7 @@ public class DialogueController : Singleton<DialogueController>
 
                 currentDialogueIndex = 0;
                 isInConversation = false;
-                _ = Notification.Instance.ShowNotification("You skipped the conversation");
+                _ = Notification.Instance.ShowNotificationAsync("You skipped the conversation");
             }
         }
     }

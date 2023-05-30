@@ -126,13 +126,13 @@ public class StartMenu : Singleton<StartMenu>
             }
             else
             {
-                _ = Notification.Instance.ShowNotification("Please select a class");
+                _ = Notification.Instance.ShowNotificationAsync("Please select a class");
             }
         }
         else
         {
             // show error
-            _ = Notification.Instance.ShowNotification("Profile name cannot be empty");
+            _ = Notification.Instance.ShowNotificationAsync("Profile name cannot be empty");
         }
     }
 
@@ -202,7 +202,7 @@ public class StartMenu : Singleton<StartMenu>
         else
         {
             // show error
-            _ = Notification.Instance.ShowNotification("Profile name cannot be empty");
+            _ = Notification.Instance.ShowNotificationAsync("Profile name cannot be empty");
         }
     }
 

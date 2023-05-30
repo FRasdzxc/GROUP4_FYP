@@ -174,18 +174,14 @@ public class Inventory : Singleton<Inventory>
         return ((items.Count + alteredValue) >= inventorySize);
     }
 
-    // private bool FindItem(ItemData item)
-    // {
-    //     for (int i = 0; i < inventorySlots.Count; i++)
-    //     {
-    //         if (inventorySlots[i].GetComponent<InventorySlot>().GetItem() && (inventorySlots[i].GetComponent<InventorySlot>().GetItem().itemID == item.itemID))
-    //         {
-    //             Debug.Log("item " + item.itemID + " found");
-    //             return true;
-    //         }
-    //     }
+    public bool FindItem(ItemData item)
+    {
+        foreach (InventoryEntry ie in items)
+        {
+            if (ie.itemData.Equals(item))
+                return true;
+        }
 
-    //     Debug.Log("item not found");        
-    //     return false;
-    // }
+        return false;
+    }
 }

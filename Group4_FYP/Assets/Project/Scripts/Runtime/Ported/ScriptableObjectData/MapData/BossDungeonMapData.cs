@@ -11,4 +11,7 @@ public class BossDungeonMapData : DungeonMapData
     public GameObject bossPrefab;
     public Vector2 bossPos;
     public MusicEntry[] bossMusics;
+    public GemItemData gem;
+    [Tooltip("For when the player does not have a gem, the portal will spawn here instead.")]
+    public Vector2 secondaryPortalPos;
 }

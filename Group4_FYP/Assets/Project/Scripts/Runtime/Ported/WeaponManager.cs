@@ -47,7 +47,7 @@ public class WeaponManager : MonoBehaviour
 
         if (Inventory.Instance.IsFull())
         {
-            _ = Notification.Instance.ShowNotification("Inventory will be full!");
+            _ = Notification.Instance.ShowNotificationAsync("Inventory will be full!");
             Inventory.Instance.AddItem(weapon.item); // add back weapon since inventory is full
             return;
         }
@@ -60,7 +60,7 @@ public class WeaponManager : MonoBehaviour
         weaponTier = weapon.weaponTier;
 
         SetupWeapon();
-        _ = Notification.Instance.ShowNotification($"Equipped <color={CustomColorStrings.green}>{weapon.weaponName}</color>");
+        _ = Notification.Instance.ShowNotificationAsync($"Equipped <color={CustomColorStrings.green}>{weapon.weaponName}</color>");
     }
 
     private void SetupWeapon()

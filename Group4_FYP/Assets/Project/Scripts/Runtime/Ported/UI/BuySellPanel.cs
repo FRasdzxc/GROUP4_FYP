@@ -293,7 +293,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
             {
                 if (GetFreeEntry(item, tempItems) == -1)
                 {
-                    _ = Notification.Instance.ShowNotification("Inventory will be full!");
+                    _ = Notification.Instance.ShowNotificationAsync("Inventory will be full!");
                     return;
                 }
             }
@@ -414,7 +414,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     {
         if (!transferredItems.Any())
         {
-            _ = Notification.Instance.ShowNotification("You are not buying any item");
+            _ = Notification.Instance.ShowNotificationAsync("You are not buying any item");
             return;
         }
 
@@ -442,11 +442,11 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
                     // HideBuySellPanel();
                     HidePanel();
-                    _ = Notification.Instance.ShowNotification("Successfully bought items");
+                    _ = Notification.Instance.ShowNotificationAsync("Successfully bought items");
                     AudioManager.Instance.PlaySound(buySellSound);
                 }
                 else
-                    _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
+                    _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
             },
             false,
             $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} Coins"
@@ -457,7 +457,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
     {
         if (!transferredItems.Any())
         {
-            _ = Notification.Instance.ShowNotification("You are not selling any item");
+            _ = Notification.Instance.ShowNotificationAsync("You are not selling any item");
             return;
         }
 
@@ -482,7 +482,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
 
                 // HideBuySellPanel();
                 HidePanel();
-                _ = Notification.Instance.ShowNotification("Successfully sold items");
+                _ = Notification.Instance.ShowNotificationAsync("Successfully sold items");
                 AudioManager.Instance.PlaySound(buySellSound);
             },
             false,

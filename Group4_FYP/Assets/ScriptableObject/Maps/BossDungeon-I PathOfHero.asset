@@ -16,8 +16,8 @@ MonoBehaviour:
   mapName: Path of Hero
   mapType: 2
   mapDifficulty: 4
-  objective: Kill all the mobs without dying, then enter the boss room to fight the
-    boss!
+  objective: Kill all the mobs without dying, then enter the boss room with a Gem
+    to fight the boss!
   mapPrefab: {fileID: 554677340539605988, guid: beabb4a24700f3a4e92ebdec1d4f6a2c, type: 3}
   musics:
   - music: {fileID: 8300000, guid: 2a70837fd3fc8474fa9d63ea10abc666, type: 3}
@@ -33,9 +33,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerType: 0
-  dungeonType: 2
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 73.5, y: 134.5}
+  dungeonType: 2
+  isTimed: 1
+  timeLimit: 93484
   intermission: 5
   bossRoomPos: {x: 73.5, y: 120.5}
   bossPrefab: {fileID: 507728811023831879, guid: 95d5ccb4dd2ccfe4d8b8a858beac9467, type: 3}
@@ -50,3 +52,5 @@ MonoBehaviour:
   - music: {fileID: 8300000, guid: 7c48fd3599afe774195d98e9839bf01c, type: 3}
     volume: 1
     pitch: 1
+  gem: {fileID: 11400000, guid: 41091e22bbb950a4eb65949f0e77753e, type: 2}
+  secondaryPortalPos: {x: 3.5, y: 184.5}

@@ -15,7 +15,7 @@ public static class ProfileManagerJson
         if (File.Exists(path)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
         {
             // show error
-            _ = Notification.Instance.ShowNotification($"'<color={CustomColorStrings.green}>{profileName}</color>' is not available, please use another name");
+            _ = Notification.Instance.ShowNotificationAsync($"'<color={CustomColorStrings.green}>{profileName}</color>' is not available, please use another name");
 
             return false;
         }
@@ -24,7 +24,7 @@ public static class ProfileManagerJson
             ProfileData profileData = new ProfileData(profileName, heroClass, heroInfo.defaultStats);
             WriteProfile(profileData, path);
 
-            _ = Notification.Instance.ShowNotification($"Successfully created Profile '<color={CustomColorStrings.green}>{profileName}</color>'!");
+            _ = Notification.Instance.ShowNotificationAsync($"Successfully created Profile '<color={CustomColorStrings.green}>{profileName}</color>'!");
 
             return true;
         }
@@ -54,7 +54,7 @@ public static class ProfileManagerJson
         if (profileName.Equals(newProfileName))
         {
             // show error
-            _ = Notification.Instance.ShowNotification("No changes detected");
+            _ = Notification.Instance.ShowNotificationAsync("No changes detected");
 
             return false;
         }
@@ -72,7 +72,7 @@ public static class ProfileManagerJson
             if (File.Exists(newPath)) // prevents overwriting of existing heroprofile; tidy up this structure in the future maybe
             {
                 // show error
-                _ = Notification.Instance.ShowNotification($"'<color={CustomColorStrings.green}>{newProfileName}</color>' is not available, please use another name");
+                _ = Notification.Instance.ShowNotificationAsync($"'<color={CustomColorStrings.green}>{newProfileName}</color>' is not available, please use another name");
             }
             else
             {
@@ -80,7 +80,7 @@ public static class ProfileManagerJson
                 WriteProfile(newProfileData, newPath);
                 DeleteProfile(profileName);
 
-                _ = Notification.Instance.ShowNotification($"Successfully updated Profile '<color={CustomColorStrings.green}>{profileName}</color>' to '<color={CustomColorStrings.green}>{newProfileName}</color>'!");
+                _ = Notification.Instance.ShowNotificationAsync($"Successfully updated Profile '<color={CustomColorStrings.green}>{profileName}</color>' to '<color={CustomColorStrings.green}>{newProfileName}</color>'!");
 
                 return true;
             }
@@ -101,7 +101,7 @@ public static class ProfileManagerJson
             File.Delete(path);
 
             if (showNotification)
-                _ = Notification.Instance.ShowNotification($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' deleted");
+                _ = Notification.Instance.ShowNotificationAsync($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' deleted");
 
             return true;
         }
@@ -109,7 +109,7 @@ public static class ProfileManagerJson
         {
             // show error
             if (showNotification)
-                _ = Notification.Instance.ShowNotification($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' does not exist");
+                _ = Notification.Instance.ShowNotificationAsync($"Profile '<color={CustomColorStrings.green}>{profileName}</color>' does not exist");
         }
 
         return false;

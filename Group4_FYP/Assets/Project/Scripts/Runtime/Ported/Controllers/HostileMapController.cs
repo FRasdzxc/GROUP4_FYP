@@ -12,15 +12,18 @@ public class HostileMapController : MapController
         base.Start();
     }
 
-    protected async virtual void SpawnPortal()
+    protected virtual void SpawnPortal()
+        => SpawnPortal(hostileMapData.portalPos);
+
+    protected async virtual void SpawnPortal(Vector3 position)
     {
         //SaveSystem.Instance.SaveData(false, false);
         _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");
 
-        GameObject clone = Instantiate(hostileMapData.portalPrefab, hostileMapData.portalPos, Quaternion.identity, GameManager.Instance.MapTransform);
+        GameObject clone = Instantiate(hostileMapData.portalPrefab, position, Quaternion.identity, GameManager.Instance.MapTransform);
         clone.transform.localScale = Vector2.zero;
         await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
-        _ = Notification.Instance.ShowNotification("Portal is opened!");
+        _ = Notification.Instance.ShowNotificationAsync("Portal is opened!");
         if (clone.TryGetComponent<Interaction>(out Interaction interaction))
             interaction.ApplyModifiedPosition();
 

@@ -33,7 +33,7 @@ public class DungeonMapController : HostileMapController
             else
             {
                 timerRunning = false;
-                _ = Notification.Instance.ShowNotification("You ran out of time!");
+                _ = Notification.Instance.ShowNotificationAsync("You ran out of time!");
                 StartCoroutine(Hero.Instance.Die());
             }
         }
@@ -53,8 +53,7 @@ public class DungeonMapController : HostileMapController
     protected override void SpawnPortal()
     {
         m_ScoreEventChannel.LevelEnded();
-        timerRunning = false;
-        _ = HUD.Instance.HideTimer();
+        StopTimer();
         base.SpawnPortal();
     }
 
@@ -62,5 +61,11 @@ public class DungeonMapController : HostileMapController
     {
         await HUD.Instance.ShowHugeMessageAsync(dungeonMapData.mapName, $"{dungeonMapData.dungeonType} {dungeonMapData.mapType} / {dungeonMapData.mapDifficulty}");
         timerRunning = true;
+    }
+
+    protected void StopTimer()
+    {
+        timerRunning = false;
+        _ = HUD.Instance.HideTimer();
     }
 }

@@ -25,5 +25,8 @@ MonoBehaviour:
   isUsable: 0
   isBuyable: 0
   fragments:
-  - {fileID: 0}
-  fusePrice: 0
+  - {fileID: 11400000, guid: b304c27e3bb2c1e4d8611f3afefe5575, type: 2}
+  - {fileID: 11400000, guid: 06e31a0817d02274db4048311bd28c6d, type: 2}
+  - {fileID: 11400000, guid: 4df3787b149a2be48871235c5b003206, type: 2}
+  - {fileID: 11400000, guid: 75dcb426830b8f84e889ab2bb7251b35, type: 2}
+  fusePrice: 9750

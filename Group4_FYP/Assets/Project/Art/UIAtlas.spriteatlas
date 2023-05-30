@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e1f64c004c115584a8e784bfedaf4ba4, type: 3}
   - {fileID: 21300000, guid: ab8f415020bfefc499c9eea9e8e000bd, type: 3}
   - {fileID: 21300000, guid: e921b9d0b616d2f43a728bbd2b5593b5, type: 3}
+  - {fileID: 21300000, guid: e3fb2cf06dcb1c14e9f3937f099f9570, type: 3}
   - {fileID: 21300000, guid: 6db4841146cf19641bb584177a555bf4, type: 3}
   - {fileID: 21300000, guid: c74de021c0c53594588251e219cad5ca, type: 3}
   - {fileID: 21300000, guid: a0d110417b60eb74d90ba756552b74d9, type: 3}
@@ -65,6 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 42e783022f87cfb498ad31111d7fc931, type: 3}
   - {fileID: 21300000, guid: 89ca4a22b10c6e441933c4d0164cc7f1, type: 3}
   - {fileID: 21300000, guid: 121a3b4233e7e234e861df3be465dc81, type: 3}
+  - {fileID: 21300000, guid: e7752a726158bd84ea600efc3b27732e, type: 3}
   - {fileID: 21300000, guid: 1fa7ae723be295a4e83db6854b86c20d, type: 3}
   - {fileID: 21300000, guid: 3cc5b792ad46da940925b58d78652026, type: 3}
   - {fileID: 21300000, guid: 9eb986a2888fda54084aa031a7b17800, type: 3}
@@ -76,6 +78,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5dd04804bdb66b3418273852bd96fa34, type: 3}
   - {fileID: 21300000, guid: 3b56d634b1b0d134f819afcb661c47bd, type: 3}
   - {fileID: 21300000, guid: 04ee073454473484bbd7aa700142edd3, type: 3}
+  - {fileID: 21300000, guid: 939465546a1cdf8438c197f945cc7d77, type: 3}
   - {fileID: 21300000, guid: c9b2d1947b507c843be0091d0ff5ddfc, type: 3}
   - {fileID: 21300000, guid: b04350b450279fc439ef2e397499bba3, type: 3}
   - {fileID: 21300000, guid: 8febfbb48a8b70b4d92ecb232c569d0d, type: 3}
@@ -88,6 +91,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b5888795317075a479c8323abd8be175, type: 3}
   - {fileID: 21300000, guid: ac4abe95ee806b44e8d23042c4222c61, type: 3}
   - {fileID: 21300000, guid: 365637c53e21f8c44b5ca92bbda32779, type: 3}
+  - {fileID: 21300000, guid: af9efa26e8af88545bd79b2f8d7b82f2, type: 3}
   - {fileID: 21300000, guid: 770c9c4666ca3834987d93e888be6d8a, type: 3}
   - {fileID: 21300000, guid: 66fae7b67fdebf8449cc30412ff4cfc6, type: 3}
   - {fileID: 21300000, guid: 3f66b7d6b846102499a425e5437f1664, type: 3}
@@ -95,9 +99,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7fee907768aad8749843d9324d3a44e7, type: 3}
   - {fileID: 21300000, guid: fc6efae76d15944438045dd238680e74, type: 3}
   - {fileID: 21300000, guid: 95f22f08b64aeff4a9b64b993b86dc84, type: 3}
+  - {fileID: 21300000, guid: 1510cb282f633db4885c1eab12fb69b8, type: 3}
   - {fileID: 21300000, guid: f0980c8848d1e794fb063ab071e34d5c, type: 3}
   - {fileID: 21300000, guid: 441d10f8457dfc943aefddeae97ed01e, type: 3}
   - {fileID: 21300000, guid: 834f2429293544a46960fd9d9004fe6c, type: 3}
+  - {fileID: 21300000, guid: 1f389a49e1d11e34b9a46d20f2d51c6b, type: 3}
   - {fileID: 21300000, guid: 2f9e30593a16fd548908d4aa05bb08cb, type: 3}
   - {fileID: 21300000, guid: 5cf4a079313c56e4498f1f6c0d18f023, type: 3}
   - {fileID: 21300000, guid: f76a8bb9d831fe34fafc64e2c3b98c9b, type: 3}
@@ -106,8 +112,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ad49664a756d51e489194a7da72b493c, type: 3}
   - {fileID: 21300000, guid: 5feadfba653338546818a912a96a7e24, type: 3}
   - {fileID: 21300000, guid: f7f9530bd73886745946076f78473844, type: 3}
+  - {fileID: 21300000, guid: 4997fa1bd85c1aa44a8657b9e1b094a6, type: 3}
   - {fileID: 21300000, guid: 71401f5b5a052124585f8593b572e05f, type: 3}
   - {fileID: 21300000, guid: 1747d4cb30c482f4f93fcec79edcf7e7, type: 3}
+  - {fileID: 21300000, guid: aaa6abcbe0e18cd43b1a9248af392ca4, type: 3}
   - {fileID: 21300000, guid: 03fef0ebb53adbe4d95fa71ec9663205, type: 3}
   - {fileID: 21300000, guid: 17037a5dbe80b494c8b3a3fede1f96f1, type: 3}
   - {fileID: 21300000, guid: 4abb91fd479e5664e80858756247cd1c, type: 3}
@@ -118,6 +126,7 @@ SpriteAtlas:
   - UIButton2Pressed1
   - DialogueBubble
   - MobDirectionArrow
+  - CrossButton1Selected1
   - Mana
   - AbilitySlotBackground
   - Gradient
@@ -130,6 +139,7 @@ SpriteAtlas:
   - Divider
   - ApplyAll
   - DirectionArrow
+  - CrossButton1Disabled1
   - UIButton2Pressed3
   - HealthRegeneration
   - ManaRegeneration
@@ -141,6 +151,7 @@ SpriteAtlas:
   - UIPanel1
   - UIButton3Disabled1
   - UIPanel3
+  - CrossButton1Highlighted
   - UIButton1Normal
   - HeroStatsBarSliderBackground
   - AbilitySlotCooldown
@@ -153,6 +164,7 @@ SpriteAtlas:
   - UIPanel4
   - HeroStatsBarSliderFill
   - UIButton3Pressed1
+  - TabButtonInactive
   - UIButton2Pressed2
   - UISlider1Fill1
   - UIButton2Highlighted3
@@ -160,9 +172,11 @@ SpriteAtlas:
   - MapPanelBackground
   - UISlider1Background1
   - UIButton2Disabled1
+  - CrossButton1Pressed1
   - GameIcon2
   - NotEquals
   - UIMask1
+  - CrossButton1Default1
   - UIButton2Highlighted2
   - UIToggle1Checkmark1
   - UIButton3Default1
@@ -171,8 +185,10 @@ SpriteAtlas:
   - MessageBackground
   - button
   - UIButton1Disabled
+  - TabContent
   - GameIcon
   - DefaultMessageSprite
+  - TabButtonActive
   - UIButton3Highlighted1
   - UIScrollbarHandle1Normal
   - HeroStatsPanelBackground

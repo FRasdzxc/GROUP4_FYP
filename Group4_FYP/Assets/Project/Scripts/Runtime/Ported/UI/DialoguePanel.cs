@@ -79,7 +79,6 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
             {
                 dialogueText.text = dialogue.Substring(0, i + 1);
                 await Task.Delay((int)(textDisplayDelay * 1000));
-                //await Task.Yield();
             }
             dialogueText.text = dialogue;
 

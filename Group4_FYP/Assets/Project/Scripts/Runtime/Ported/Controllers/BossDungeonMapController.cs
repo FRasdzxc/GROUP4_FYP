@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using PathOfHero.UI;
+using PathOfHero.Others;
 
 public class BossDungeonMapController : DungeonMapController
 {
@@ -18,17 +19,35 @@ public class BossDungeonMapController : DungeonMapController
         while (GameManager.Instance.MobCount > 0)
             yield return null;
 
-        // await Notification.Instance.ShowNotification($"You will be teleported to the boss room in {intermission} seconds");
-        yield return HUD.Instance.ShowHugeMessageAsync("Intermission", $"Teleporting in {bossDungeonMapData.intermission} seconds", 2.5f);
-        yield return new WaitForSeconds(bossDungeonMapData.intermission);
-        yield return StartCoroutine(FightBoss());
+        StopTimer();
 
-        if (bossDungeonMapData.portalPrefab)
-            SpawnPortal();
+        if (Inventory.Instance.FindItem(bossDungeonMapData.gem))
+        {
+            ConfirmationPanel.Instance.ShowConfirmationPanel
+            (
+                $"Boss Battle",
+                $"You have a Gem in your Inventory! Do you want to participate in the Boss Battle?",
+                () => StartCoroutine(FightBoss()),
+                () => SpawnPortal(bossDungeonMapData.secondaryPortalPos),
+                false,
+                $"<color={CustomColorStrings.yellow}>Cost:</color> 1 Gem"
+            );
+        }
+        else
+        {
+            yield return Notification.Instance.ShowNotification($"You do not have a Gem, so you will not be participating in the Boss Battle", 5f);
+            SpawnPortal(bossDungeonMapData.secondaryPortalPos);
+        }
     }
 
     protected IEnumerator FightBoss()
     {
+        Inventory.Instance.RemoveItem(bossDungeonMapData.gem);
+
+        // intermission
+        yield return HUD.Instance.ShowHugeMessage("Intermission", $"Teleporting in {bossDungeonMapData.intermission} seconds", 2.5f);
+        yield return new WaitForSeconds(bossDungeonMapData.intermission);
+
         // teleport player
         AudioManager.Instance.StopMusic();
         yield return LoadingScreen.Instance.FadeIn();
@@ -50,11 +69,17 @@ public class BossDungeonMapController : DungeonMapController
         else
         {
             Debug.LogError("[BossDungeonMapData]: no boss found");
+            if (bossDungeonMapData.portalPrefab)
+                SpawnPortal();
             yield break;
         }
 
         // wait until all mobs are killed
         while (GameManager.Instance.MobCount > 0)
             yield return null;
+
+        // spawn portal if all mobs are killed
+        if (bossDungeonMapData.portalPrefab)
+            SpawnPortal();
     }
 }

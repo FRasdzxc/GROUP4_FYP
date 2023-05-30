@@ -86,7 +86,7 @@ public class SaveSystem : Singleton<SaveSystem>
         {
             if (GameManager.Instance.MapType == MapType.Dungeon)
             {
-                _ = Notification.Instance.ShowNotification("You cannot save game while engaged in a dungeon battle!");
+                _ = Notification.Instance.ShowNotificationAsync("You cannot save game while engaged in a dungeon battle!");
                 return;
             }
         }
@@ -119,7 +119,7 @@ public class SaveSystem : Singleton<SaveSystem>
         ProfileManagerJson.SaveProfile(profile);
 
         if (showNotification)
-            _ = Notification.Instance.ShowNotification($"Successfully saved data to Profile '<color={CustomColorStrings.green}>{profile.profileName}</color>'!");
+            _ = Notification.Instance.ShowNotificationAsync($"Successfully saved data to Profile '<color={CustomColorStrings.green}>{profile.profileName}</color>'!");
     }
 
     void OnEnable()

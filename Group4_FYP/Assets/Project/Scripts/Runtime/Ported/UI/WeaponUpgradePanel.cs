@@ -51,8 +51,6 @@ public class WeaponUpgradePanel : PanelOverride
         weaponUpgradePanelCanvasGroup.alpha = 0;
         weaponUpgradePanelRectTransform.anchoredPosition = new Vector2(0, -weaponUpgradePanelRectTransform.rect.height / 4);
         weaponUpgradePanel.SetActive(false);
-
-        tempItems = new List<InventoryEntry>();
     }
 
 #if UNITY_EDITOR
@@ -75,7 +73,7 @@ public class WeaponUpgradePanel : PanelOverride
 
         // prepare panel here
         ResetPanel();
-        tempItems = new List<InventoryEntry>(Inventory.Instance.GetItems());
+        tempItems = Inventory.Instance.GetItems();
         coinText.text = Hero.Instance.GetStoredCoin().ToString("n0");
         upgradable = false;
 
@@ -174,19 +172,16 @@ public class WeaponUpgradePanel : PanelOverride
                         Inventory.Instance.SetItems(tempItems);
 
                         HidePanel();
-                        _ = Notification.Instance.ShowNotification("Successfully upgraded weapon!");
+                        _ = Notification.Instance.ShowNotificationAsync("Successfully upgraded weapon!");
                         AudioManager.Instance.PlaySound(weaponUpgradeSound);
                     }
                     else
-                        _ = Notification.Instance.ShowNotification("Insufficient amount of coins");
+                        _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
                 },
                 false,
                 $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Runic (Tier {targetTier})"
             );
-            // ConfirmationPanel.Instance.ShowConfirmationPanel("hi", "hi", () => {});
         }
-
-        // do WeaponManager.Instance.UpgradeWeapon();
     }
 
     private void RemoveItem(ItemData item)

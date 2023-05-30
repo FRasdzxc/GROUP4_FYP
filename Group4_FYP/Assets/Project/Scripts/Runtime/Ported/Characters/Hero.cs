@@ -123,7 +123,7 @@ public class Hero : Singleton<Hero>
                 storedExp -= requiredExp;
                 level++;
                 
-                _ = Notification.Instance.ShowNotification($"Level Up! - <color={CustomColorStrings.green}>{level.ToString("n0")}</color>");
+                _ = Notification.Instance.ShowNotificationAsync($"Level Up! - <color={CustomColorStrings.green}>{level.ToString("n0")}</color>");
 
                 if (level % orbObtainLevel == 0)
                 {
