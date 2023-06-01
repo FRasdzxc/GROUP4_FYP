@@ -29,6 +29,7 @@ public class MapChangeEventRequestData : EventRequestData
                     $"<color=red>!!</color> You cannot save/quit in a dungeon battle! You must play through the whole dungeon.\n<color=red>!!</color> Upon death, you will lose all your progress in this dungeon!",
                     () => { GameManager.Instance.LoadMap(mapId, saveOnMapLoaded); },
                     true,
+                    true,
                     $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
                     $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                     dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null

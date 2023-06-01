@@ -98,13 +98,13 @@ public class Tooltip : Singleton<Tooltip>
                         sb.AppendLine($"'<color={CustomColorStrings.white}>LMB</color>' - Use");
                         break;
                     case TooltipHintType.Drop:
-                        sb.AppendLine($"'<color={CustomColorStrings.white}>RMB</color>' - Remove");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>MMB</color>' - Remove");
                         break;
                     case TooltipHintType.UseAll:
                         sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + LMB</color>' - Use All");
                         break;
                     case TooltipHintType.DropAll:
-                        sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + RMB</color>' - Remove All");
+                        sb.AppendLine($"'<color={CustomColorStrings.white}>LShift + MMB</color>' - Remove All");
                         break;
                     case TooltipHintType.Transfer:
                         sb.AppendLine($"'<color={CustomColorStrings.white}>LMB</color>' - Transfer");

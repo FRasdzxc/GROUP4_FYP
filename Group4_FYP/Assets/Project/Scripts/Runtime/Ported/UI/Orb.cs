@@ -180,6 +180,7 @@ public class Orb : Singleton<Orb>
                     _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of Coins");
             },
             true,
+            true,
             $"<color={CustomColorStrings.yellow}>Cost:</color> {requiredResetPrice.ToString("n0")} Coins"
             );
 

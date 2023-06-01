@@ -95,6 +95,7 @@ public class GemFuseTab : Tab
                         _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
                 },
                 false,
+                true,
                 $"<color={CustomColorStrings.yellow}>You have:</color> {Hero.Instance.GetStoredCoin().ToString("n0")} coins",
                 $"<color={CustomColorStrings.yellow}>Cost:</color> {gemItem.fusePrice.ToString("n0")} coins, {gemItem.fragments.Length} Fragments"
             );

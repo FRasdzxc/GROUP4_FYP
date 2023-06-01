@@ -68,6 +68,7 @@ public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the fu
                                         HidePanel();
                                     },
                                     false,
+                                    true,
                                     $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
                                     $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                                     dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null
@@ -88,6 +89,7 @@ public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the fu
                                         HidePanel();
                                     },
                                     false,
+                                    true,
                                     $"<color={CustomColorStrings.yellow}>Type:</color> {mapData.mapType}",
                                     $"<color={CustomColorStrings.yellow}>Difficulty:</color> {mapData.mapDifficulty}"
                                 );
@@ -136,6 +138,7 @@ public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the fu
                                         HidePanel();
                                     },
                                     false,
+                                    true,
                                     $"<color={CustomColorStrings.yellow}>Type:</color> {dungeonMapData.dungeonType} {dungeonMapData.mapType}",
                                     $"<color={CustomColorStrings.yellow}>Difficulty:</color> {dungeonMapData.mapDifficulty}",
                                     dungeonMapData.isTimed ? $"<color={CustomColorStrings.yellow}>Time Limit:</color> {TimeSpan.FromSeconds(dungeonMapData.timeLimit).ToString("mm':'ss")}" : null

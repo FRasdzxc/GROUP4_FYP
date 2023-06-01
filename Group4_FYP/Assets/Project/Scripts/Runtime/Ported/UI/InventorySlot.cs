@@ -231,7 +231,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 else // use one
                     UseItem();
             }
-            else if (eventData.button == PointerEventData.InputButton.Right) // RMB: drop item
+            else if (eventData.button == PointerEventData.InputButton.Middle) // RMB: drop item
             {
                 if (Input.GetKey(KeyCode.LeftShift)) // drop all
                 {

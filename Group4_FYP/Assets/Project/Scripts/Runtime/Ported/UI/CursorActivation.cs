@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using PathOfHero.Controllers;
 
-public class CursorActivation : MonoBehaviour, IPointerEnterHandler/*, IPointerExitHandler*/
+public class CursorActivation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CursorController.CursorType cursorType;
     [SerializeField] private CursorController cursorController;
@@ -10,9 +10,7 @@ public class CursorActivation : MonoBehaviour, IPointerEnterHandler/*, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (eventData.pointerEnter == gameObject)
-        {
             cursorController.ChangeCursor(cursorType);
-        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -449,6 +449,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                     _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
             },
             false,
+            true,
             $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} Coins"
             );
     }
@@ -486,6 +487,7 @@ public class BuySellPanel : PanelOverride/*, IPanelConflictable*/
                 AudioManager.Instance.PlaySound(buySellSound);
             },
             false,
+            true,
             $"<color={CustomColorStrings.yellow}>Gain:</color> {price.ToString("n0")} Coins"
             );
     }

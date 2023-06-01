@@ -34,10 +34,10 @@ public class ConfirmationPanel : Panel
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
     }
 
-    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false, params string[] attributes)
-        => ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant, attributes);
+    public void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, bool isImportant = false, bool allowsHiding = true, params string[] attributes)
+        => ShowConfirmationPanel(title, message, confirmAction, () => { _ = HideConfirmationPanel(); }, isImportant, allowsHiding, attributes);
 
-    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false, params string[] attributes)
+    public async void ShowConfirmationPanel(string title, string message, UnityAction confirmAction, UnityAction cancelAction, bool isImportant = false, bool allowsHiding = true, params string[] attributes)
     {
         ShowPanel();
 
@@ -70,6 +70,7 @@ public class ConfirmationPanel : Panel
         messageText.text = message;
         this.confirmAction = confirmAction;
         this.cancelAction = cancelAction;
+        this.allowsHiding = allowsHiding;
 
         // show confirmation panel
         gameObject.SetActive(true);
@@ -94,12 +95,14 @@ public class ConfirmationPanel : Panel
 
     public void Confirm()
     {
+        allowsHiding = true;
         HidePanel();
         confirmAction.Invoke();
     }
 
     public void Cancel()
     {
+        allowsHiding = true;
         HidePanel();
         cancelAction.Invoke();
     }

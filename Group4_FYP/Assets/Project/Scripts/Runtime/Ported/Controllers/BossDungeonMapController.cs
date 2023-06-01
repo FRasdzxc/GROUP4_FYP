@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using PathOfHero.UI;
 using PathOfHero.Others;
 
 public class BossDungeonMapController : DungeonMapController
 {
+    [SerializeField]
+    protected Tilemap bossRoomTilemap;
+
     protected BossDungeonMapData bossDungeonMapData;
 
     protected override void Start()
@@ -20,15 +24,17 @@ public class BossDungeonMapController : DungeonMapController
             yield return null;
 
         StopTimer();
+        yield return new WaitForSeconds(1f);
 
         if (Inventory.Instance.FindItem(bossDungeonMapData.gem))
         {
             ConfirmationPanel.Instance.ShowConfirmationPanel
             (
-                $"Boss Battle",
-                $"You have a Gem in your Inventory! Do you want to participate in the Boss Battle?",
+                $"<color=magenta>Boss Battle</color>",
+                $"You have a Gem in your Inventory! Do you want to participate in the Boss Battle?\n\nIf you participate, your data will be saved before you enter the Boss Room.",
                 () => StartCoroutine(FightBoss()),
                 () => SpawnPortal(bossDungeonMapData.secondaryPortalPos),
+                false,
                 false,
                 $"<color={CustomColorStrings.yellow}>Cost:</color> 1 Gem"
             );
@@ -43,6 +49,7 @@ public class BossDungeonMapController : DungeonMapController
     protected IEnumerator FightBoss()
     {
         Inventory.Instance.RemoveItem(bossDungeonMapData.gem);
+        SaveSystem.Instance.SaveData(true, false);
 
         // intermission
         yield return HUD.Instance.ShowHugeMessage("Intermission", $"Teleporting in {bossDungeonMapData.intermission} seconds", 2.5f);
@@ -60,7 +67,7 @@ public class BossDungeonMapController : DungeonMapController
         if (bossDungeonMapData.bossPrefab)
         {
             yield return HUD.Instance.ShowHugeMessage("Boss", Color.magenta, "Battle", Color.white);
-            Instantiate(bossDungeonMapData.bossPrefab, bossDungeonMapData.bossPos, Quaternion.identity);
+            GameObject boss = Instantiate(bossDungeonMapData.bossPrefab, bossDungeonMapData.bossPos, Quaternion.identity);
 
             // wait for boss to spawn
             while (GameManager.Instance.MobCount <= 0)

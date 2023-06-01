@@ -100,6 +100,7 @@ public class WeaponUpgradeTab : Tab
                         _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
                 },
                 false,
+                true,
                 $"<color={CustomColorStrings.yellow}>You have:</color> {Hero.Instance.GetStoredCoin().ToString("n0")} coins",
                 $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Runic (Tier {targetTier})"
             );

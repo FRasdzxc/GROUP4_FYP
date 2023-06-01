@@ -56,6 +56,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e3fb2cf06dcb1c14e9f3937f099f9570, type: 3}
   - {fileID: 21300000, guid: 6db4841146cf19641bb584177a555bf4, type: 3}
   - {fileID: 21300000, guid: c74de021c0c53594588251e219cad5ca, type: 3}
+  - {fileID: 21300000, guid: 50a896216ebbc9f478666798062c097a, type: 3}
   - {fileID: 21300000, guid: a0d110417b60eb74d90ba756552b74d9, type: 3}
   - {fileID: 21300000, guid: 81a79841d9e247f4ea0b77ecebc36927, type: 3}
   - {fileID: 21300000, guid: 2344f5a167566be4b95759dba25b1443, type: 3}
@@ -117,6 +118,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1747d4cb30c482f4f93fcec79edcf7e7, type: 3}
   - {fileID: 21300000, guid: aaa6abcbe0e18cd43b1a9248af392ca4, type: 3}
   - {fileID: 21300000, guid: 03fef0ebb53adbe4d95fa71ec9663205, type: 3}
+  - {fileID: 21300000, guid: a3fbea2d0de0b274c992319d303fe79e, type: 3}
   - {fileID: 21300000, guid: 17037a5dbe80b494c8b3a3fede1f96f1, type: 3}
   - {fileID: 21300000, guid: 4abb91fd479e5664e80858756247cd1c, type: 3}
   - {fileID: 21300000, guid: 08e8badea7656de4aafdaca1e2d549b7, type: 3}
@@ -129,6 +131,7 @@ SpriteAtlas:
   - CrossButton1Selected1
   - Mana
   - AbilitySlotBackground
+  - BossHealthBarBackground
   - Gradient
   - Health
   - Exp
@@ -190,6 +193,7 @@ SpriteAtlas:
   - DefaultMessageSprite
   - TabButtonActive
   - UIButton3Highlighted1
+  - BossHealthBarFill
   - UIScrollbarHandle1Normal
   - HeroStatsPanelBackground
   - Plus

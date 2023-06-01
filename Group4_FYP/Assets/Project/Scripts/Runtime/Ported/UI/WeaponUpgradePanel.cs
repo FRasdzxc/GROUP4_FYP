@@ -179,6 +179,7 @@ public class WeaponUpgradePanel : PanelOverride
                         _ = Notification.Instance.ShowNotificationAsync("Insufficient amount of coins");
                 },
                 false,
+                true,
                 $"<color={CustomColorStrings.yellow}>Cost:</color> {price.ToString("n0")} coins, Runic (Tier {targetTier})"
             );
         }
