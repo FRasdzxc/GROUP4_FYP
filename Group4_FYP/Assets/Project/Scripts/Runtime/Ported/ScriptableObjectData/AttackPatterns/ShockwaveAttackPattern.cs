@@ -11,8 +11,8 @@ public class ShockwaveAttackPattern : AttackPattern
     public float expandFactor;
     [Tooltip("Unit: seconds")]
     public float expandDuration;
-    [Tooltip("How much Shockwaves when this Attack Pattern invokes.")]
-    public int repeatCount;
+    [Tooltip("How much Shockwaves when this Attack Pattern invokes.\nX = Min inclusive, Y = Max inclusive.")]
+    public Vector2Int repeatCount;
     [Tooltip("Unit: seconds")]
     public float repeatInterval;
 
@@ -22,7 +22,7 @@ public class ShockwaveAttackPattern : AttackPattern
 
     public async override Task Invoke(Transform origin)
     {
-        for (int i = 0; i < repeatCount; i++)
+        for (int i = 0; i < Random.Range(repeatCount.x, repeatCount.y + 1); i++)
         {
             // boss jumping
             await origin.DOLocalJump(origin.position, jumpPower, 1, 0.5f).AsyncWaitForCompletion();

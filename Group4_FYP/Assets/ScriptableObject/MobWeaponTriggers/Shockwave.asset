@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Shockwave
   m_EditorClassIdentifier: 
   weaponTriggerName: Shockwave
-  damage: 50
-  criticalDamage: 65
+  damage: 10
+  criticalDamage: 15
   projectileSpeed: 0
   force: 0
   splitable: 0

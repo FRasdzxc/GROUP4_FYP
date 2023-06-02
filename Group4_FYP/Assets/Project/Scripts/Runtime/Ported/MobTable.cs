@@ -73,7 +73,7 @@ namespace HugeScript
         }
 
 
-        public void SpawnDrop(Tilemap _tileMap, int _count, float _rangeX, float _rangeY)
+        public void SpawnDrop(Tilemap _tileMap, int _count, float _rangeX, float _rangeY, GameObject smoke = null)
         {
             List<GameObject> guaranteed = GetGuaranteeedLoot();
             List<GameObject> randomLoot = GetRandomLoot(_count);
@@ -96,14 +96,18 @@ namespace HugeScript
             {
                 int temp = Random.Range(0, availableTiles.Count);
                 Vector3 _position = new Vector3(availableTiles[temp].x + 0.5f, availableTiles[temp].y + 0.5f, availableTiles[temp].z);
-                Instantiate(guaranteed[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
+                GameObject guaranteedClone = Instantiate(guaranteed[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
+                if (smoke)
+                    Instantiate(smoke, guaranteedClone.transform.position, Quaternion.identity);
             }
 
             for (int i = 0; i < randomLoot.Count; i++)
             {
                 int temp = Random.Range(0, availableTiles.Count);
                 Vector3 _position = new Vector3(availableTiles[temp].x + 0.5f, availableTiles[temp].y + 0.5f, availableTiles[temp].z);
-                Instantiate(randomLoot[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
+                GameObject randomClone = Instantiate(randomLoot[i], new Vector3(_position.x + Random.Range(-_rangeX, _rangeX), _position.y + Random.Range(-_rangeY, _rangeY), -1), Quaternion.identity);
+                if (smoke)
+                    Instantiate(smoke, randomClone.transform.position, Quaternion.identity);
             }
         }
     }

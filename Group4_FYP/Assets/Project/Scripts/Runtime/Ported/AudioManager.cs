@@ -33,6 +33,10 @@ public class AudioManager : Singleton<AudioManager>
 
     private bool stopRequested = true;
 
+    public static event Action onMusicPlay;
+
+    public static event Action onMusicStop;
+
     // Start is called before the first frame update
     void Start()
         => TryGetComponent<AudioSource>(out audioSource);
@@ -56,6 +60,7 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.volume = 0f;
         audioSource.DOFade(musicEntry.volume, fadeDuration);
         audioSource.Play();
+        onMusicPlay?.Invoke();
     }
 
     public void PlayMusic() // play random from musics list
@@ -85,6 +90,7 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.Stop();
         await Task.Delay((int)(intermission * 1000));
         musicPlaying = false;
+        onMusicStop?.Invoke();
     }
 
     public void SetMusics(MusicEntry[] musics)

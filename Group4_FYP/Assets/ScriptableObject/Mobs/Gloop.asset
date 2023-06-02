@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gloop
   m_EditorClassIdentifier: 
   characterName: Gloop
-  health: 3240
+  health: 5600
   moveSpeed: 0
   sprintMultiplier: 0
   defense: 0
@@ -23,7 +23,8 @@ MonoBehaviour:
   attackDistance: 250
   walkAroundDistance: 0
   attackPatterns:
-  - {fileID: 11400000, guid: eb78b279dfbd3ae408df3f2eebc77c78, type: 2}
-  - {fileID: 11400000, guid: b6af4adcd6d44314197acf829699a927, type: 2}
   - {fileID: 11400000, guid: 6949b83a67094f249b9341f12b420df8, type: 2}
+  - {fileID: 11400000, guid: eb78b279dfbd3ae408df3f2eebc77c78, type: 2}
+  - {fileID: 11400000, guid: c1bfc5e5de5a6724ea087ee72b636457, type: 2}
+  - {fileID: 11400000, guid: b6af4adcd6d44314197acf829699a927, type: 2}
   patternCooldown: 3.5

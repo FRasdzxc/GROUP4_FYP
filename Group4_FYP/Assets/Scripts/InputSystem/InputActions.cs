@@ -513,7 +513,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d83e10de-1b1a-48b7-b74e-59c8745d1d51"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",

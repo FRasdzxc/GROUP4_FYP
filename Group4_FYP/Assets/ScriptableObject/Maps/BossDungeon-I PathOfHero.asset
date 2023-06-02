@@ -37,7 +37,7 @@ MonoBehaviour:
   portalPos: {x: 73.5, y: 134.5}
   dungeonType: 2
   isTimed: 1
-  timeLimit: 93484
+  timeLimit: 615
   intermission: 5
   bossRoomPos: {x: 73.5, y: 120.5}
   bossPrefab: {fileID: 8255672162006616318, guid: 1522165631d13ff4b8b5657fe4c8b111, type: 3}

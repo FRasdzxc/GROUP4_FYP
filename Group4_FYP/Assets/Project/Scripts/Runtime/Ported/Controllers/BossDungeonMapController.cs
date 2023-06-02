@@ -75,7 +75,7 @@ public class BossDungeonMapController : DungeonMapController
         }
         else
         {
-            Debug.LogError("[BossDungeonMapData]: no boss found");
+            Debug.LogError("[Boss Dungeon Map Data] no boss found");
             if (bossDungeonMapData.portalPrefab)
                 SpawnPortal();
             yield break;

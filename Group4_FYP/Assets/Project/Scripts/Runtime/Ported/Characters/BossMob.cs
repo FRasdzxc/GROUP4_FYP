@@ -27,13 +27,13 @@ public class BossMob : Mob
             Debug.Log("[Boss Mob] No Attack Patterns found.");
             return;
         }
-        StartCoroutine(Attack());
+        StartCoroutine(DoAttackPattern());
     }
 
     void OnDisable()
-        => StopCoroutine(Attack());
+        => StopCoroutine(DoAttackPattern());
 
-    protected IEnumerator Attack()
+    protected IEnumerator DoAttackPattern()
     {
         while (true)
         {

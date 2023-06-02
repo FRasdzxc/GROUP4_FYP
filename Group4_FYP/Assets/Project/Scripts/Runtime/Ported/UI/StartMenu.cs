@@ -10,6 +10,7 @@ using DG.Tweening;
 using PathOfHero.UI;
 using PathOfHero.Controllers;
 using PathOfHero.Utilities;
+using PathOfHero.Others;
 
 public class StartMenu : Singleton<StartMenu>
 {
@@ -37,7 +38,7 @@ public class StartMenu : Singleton<StartMenu>
     [SerializeField] private AudioClip enterGameSound;
 
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
-    private bool bHasEntered;
+    private bool hasEntered;
     // make variable to store profile buttons index
     private List<GameObject> profileButtons;
     private string selectedProfileName;
@@ -57,7 +58,7 @@ public class StartMenu : Singleton<StartMenu>
     // Start is called before the first frame update
     void Start()
     {
-        bHasEntered = false;
+        hasEntered = false;
         profileButtons = new List<GameObject>();
         PrepareClassContainer();
         SetBottomButtonsInteractable(false);
@@ -81,6 +82,7 @@ public class StartMenu : Singleton<StartMenu>
         enterGameAction.Enable();
         enterGameHintText.text = $"- Press {enterGameAction.GetBindingDisplayString()} to Continue -";
 
+
         onPlayerSetUp?.Invoke();
     }
 
@@ -90,15 +92,15 @@ public class StartMenu : Singleton<StartMenu>
         // if (Input.GetKeyDown(KeyCode.Space))
         if (enterGameAction.triggered)
         {
-            if (!bHasEntered)
-            {
+            if (!hasEntered)
                 EnterGame();
-            }
         }
     }
 
     private async void EnterGame() // hide startPanel then show profileSelectionPanel
     {
+        hasEntered = true;
+
         // play some sound effects maybe
         AudioManager.Instance.PlaySound(enterGameSound);
 
@@ -107,8 +109,6 @@ public class StartMenu : Singleton<StartMenu>
 
         RefreshProfileSelectionPanel();
         await ShowPanel(PanelType.profileSelection);
-
-        bHasEntered = true;
     }
 
     public void CreateProfile()
@@ -125,9 +125,7 @@ public class StartMenu : Singleton<StartMenu>
                 }
             }
             else
-            {
                 _ = Notification.Instance.ShowNotificationAsync("Please select a class");
-            }
         }
         else
         {
@@ -163,11 +161,11 @@ public class StartMenu : Singleton<StartMenu>
             if (button != null)
                 button.onClick.AddListener(() => { SelectClass(hero.heroClass); });
 
-            var image = RecursiveFindChild(buttonObj.transform, "Image");
+            var image = Common.RecursiveFindChild(buttonObj.transform, "Image");
             if (image != null)
                 (image.GetComponent<Image>()).sprite = hero.heroInfo.heroSprite;
 
-            var text = RecursiveFindChild(buttonObj.transform, "Text");
+            var text = Common.RecursiveFindChild(buttonObj.transform, "Text");
             if (text != null)
                 (text.GetComponent<Text>()).text = hero.heroInfo.heroName;
 
@@ -176,9 +174,7 @@ public class StartMenu : Singleton<StartMenu>
     }
 
     public void SelectClass(HeroClass type)
-    {
-        selectedClassType = type;
-    }
+        => selectedClassType = type;
 
     public void SelectProfile(string profileName)
     {
@@ -276,9 +272,7 @@ public class StartMenu : Singleton<StartMenu>
                 panels[i].GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart);
             }
             else
-            {
                 panels[i].GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart);
-            }
         }
 
         await Task.Delay(250);
@@ -309,14 +303,10 @@ public class StartMenu : Singleton<StartMenu>
     private void RefreshProfileSelectionPanel() // destroy buttons, get profiles and add buttons back
     {
         if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
-        {
             ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
-        }
 
         for (int i = 0; i < profileButtons.Count; i++) // this loop destroy all buttons
-        {
             Destroy(profileButtons[i]);
-        }
 
         profileButtons.Clear();
         ProfileData[] profiles = ProfileManagerJson.GetProfiles();
@@ -325,17 +315,15 @@ public class StartMenu : Singleton<StartMenu>
         {
             GameObject clone = Instantiate(profileButtonTemplate, profileSelectionContentPanel);
 
-            RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
-            RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
-            RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
+            Common.RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
+            Common.RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
+            Common.RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
 
             // assigning image
             for (int j = 0; j < heroList.heros.Length; j++)
             {
                 if ((HeroClass)Enum.Parse(typeof(HeroClass), profiles[i].heroClass) == heroList.heros[j].heroClass)
-                {
-                    RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = heroList.heros[j].heroInfo.heroSprite;
-                }
+                    Common.RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = heroList.heros[j].heroInfo.heroSprite;
             }
 
             int i2 = i; // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
@@ -343,27 +331,6 @@ public class StartMenu : Singleton<StartMenu>
             clone.SetActive(true);
             profileButtons.Add(clone);
         }
-    }
-
-    private Transform RecursiveFindChild(Transform parent, string childName)
-    {
-        foreach (Transform child in parent)
-        {
-            if (child.name == childName)
-            {
-                return child;
-            }
-            else
-            {
-                Transform child2 = RecursiveFindChild(child, childName);
-                if (child2 != null)
-                {
-                    return child2;
-                }
-            }
-        }
-
-        return null;
     }
 
     private void SetBottomButtonsInteractable(bool value)

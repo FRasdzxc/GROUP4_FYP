@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9859240a1b538d64cb534a7906255914, type: 3}
-  m_Name: Shockwave
+  m_Name: ShockwaveAP
   m_EditorClassIdentifier: 
   shockwavePrefab: {fileID: 526335289382314519, guid: a8d8a28d78ddad7409788c30c229ded9, type: 3}
   expandFactor: 150
   expandDuration: 1.5
-  repeatCount: 2
+  repeatCount: {x: 1, y: 3}
   repeatInterval: 0.5
-  jumpHeight: 1
+  jumpHeight: 2.5
   jumpPower: 1

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 812984cd3e081614f9f533fcde4c2080, type: 3}
-  m_Name: AimedLaser
+  m_Name: AimedLaserAP
   m_EditorClassIdentifier: 
   projectileGobj: {fileID: 3197065079261907766, guid: 9f787891ce6b46a4da90b6b1403fea2a, type: 3}
   projectileLifeTime: 5
   projectileSpeed: 45
-  repeatCount: 5
+  randomRepeatCount: {x: 2, y: 4}
   repeatInterval: 1
   aimTime: 0.5

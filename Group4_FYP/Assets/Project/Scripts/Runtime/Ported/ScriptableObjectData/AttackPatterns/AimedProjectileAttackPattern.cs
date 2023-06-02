@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "New Aimed Projectile Attack Pattern", menuName = "Game/Attack Patterns/Aimed Projectile")]
 public class AimedProjectileAttackPattern : AttackPattern
@@ -13,8 +11,8 @@ public class AimedProjectileAttackPattern : AttackPattern
 
     public float projectileSpeed;
 
-    [Tooltip("How much Aimed Projectiles when this Attack Pattern invokes.")]
-    public int repeatCount;
+    [Tooltip("How much Aimed Projectiles when this Attack Pattern invokes.\nX = Min inclusive, Y = Max inclusive.")]
+    public Vector2Int randomRepeatCount;
 
     [Tooltip("Unit: seconds")]
     public float repeatInterval;
@@ -29,7 +27,7 @@ public class AimedProjectileAttackPattern : AttackPattern
         lineRenderer.SetPosition(0, origin.position);
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        for (int i = 0; i < repeatCount; i++)
+        for (int i = 0; i < Random.Range(randomRepeatCount.x, randomRepeatCount.y + 1); i++)
         {
             lineRenderer.SetPosition(1, player.position);
 
