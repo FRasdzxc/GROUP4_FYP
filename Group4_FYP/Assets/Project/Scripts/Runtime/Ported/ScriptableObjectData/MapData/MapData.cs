@@ -14,4 +14,5 @@ public class MapData : ScriptableObject
     public GameObject mapPrefab;
     public MusicEntry[] musics;
     public PlayerType playerType = PlayerType.TopDown;
+    public bool hideFromSelection;
 }

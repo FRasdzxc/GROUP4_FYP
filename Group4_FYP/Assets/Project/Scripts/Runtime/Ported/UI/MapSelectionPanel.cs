@@ -47,7 +47,7 @@ public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the fu
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
-                        if (mapData.mapId == GameManager.Instance.MapId)
+                        if (mapData.mapId == GameManager.Instance.MapId || mapData.hideFromSelection)
                             continue;
 
                         // set up confirmation panel when button is clicked
@@ -121,6 +121,9 @@ public class MapSelectionPanel : Panel // maybe inherit SelectionPanel in the fu
 
                     foreach (MapData mapData in gameMaps.maps)
                     {
+                        if (mapData.hideFromSelection)
+                            continue;
+
                         if (mapData.mapType == MapType.Dungeon)
                         {
                             DungeonMapData dungeonMapData = mapData as DungeonMapData;
