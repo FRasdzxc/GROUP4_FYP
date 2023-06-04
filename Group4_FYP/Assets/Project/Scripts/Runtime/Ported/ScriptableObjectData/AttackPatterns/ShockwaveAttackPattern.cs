@@ -29,6 +29,11 @@ public class ShockwaveAttackPattern : AttackPattern
 
             // spawn shockwave
             GameObject shockwaveClone = GameObject.Instantiate(shockwavePrefab, origin.position, Quaternion.identity);
+            if (shockwaveClone.TryGetComponent<AreaEffector2D>(out AreaEffector2D ae2D))
+            {
+                Vector2 forceDir = GameObject.FindGameObjectWithTag("Player").transform.position - origin.position;
+                ae2D.forceAngle = Mathf.Atan2(forceDir.y, forceDir.x) * Mathf.Rad2Deg;
+            }
 
             // scale shockwave to expandFactor
             shockwaveClone.transform.DOScale(shockwaveClone.transform.localScale * expandFactor, expandDuration).SetEase(Ease.InSine);

@@ -18,11 +18,13 @@ public class HostileMapController : MapController
     protected async virtual void SpawnPortal(Vector3 position)
     {
         //SaveSystem.Instance.SaveData(false, false);
+        if (hostileMapData.completeSound)
+            AudioManager.Instance.PlaySound(hostileMapData.completeSound);
         _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");
 
         GameObject clone = Instantiate(hostileMapData.portalPrefab, position, Quaternion.identity, GameManager.Instance.MapTransform);
         clone.transform.localScale = Vector2.zero;
-        await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.InQuart).AsyncWaitForCompletion();
+        await clone.transform.DOScale(Vector2.one, 1f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         _ = Notification.Instance.ShowNotificationAsync("Portal is opened!");
         if (clone.TryGetComponent<Interaction>(out Interaction interaction))
             interaction.ApplyModifiedPosition();

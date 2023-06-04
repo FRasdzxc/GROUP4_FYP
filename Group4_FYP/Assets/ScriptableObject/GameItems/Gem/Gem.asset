@@ -23,7 +23,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 040fbbf953cdf9d489f58443dbe41ddb, type: 3}
   useSound: {fileID: 0}
   isUsable: 0
-  isBuyable: 1
+  isBuyable: 0
   fragments:
   - {fileID: 11400000, guid: b304c27e3bb2c1e4d8611f3afefe5575, type: 2}
   - {fileID: 11400000, guid: 06e31a0817d02274db4048311bd28c6d, type: 2}

@@ -85,6 +85,11 @@ public class BossDungeonMapController : DungeonMapController
         while (GameManager.Instance.MobCount > 0)
             yield return null;
 
+        // AudioManager.Instance.PlayMusic(bossDungeonMapData.bossDefeatMusic);
+        // yield return HUD.Instance.ShowHugeMessage("Boss", Color.magenta, "Defeated", Color.white, 5f);
+        // give player a reward maybe
+        // AudioManager.Instance.PlaySound(bossDungeonMapData.badgeObtainSound);
+
         // spawn portal if all mobs are killed
         if (bossDungeonMapData.portalPrefab)
             SpawnPortal();

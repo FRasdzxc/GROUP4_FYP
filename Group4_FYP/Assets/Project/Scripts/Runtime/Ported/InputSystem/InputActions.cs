@@ -293,64 +293,36 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveSide"",
+                    ""type"": ""Button"",
+                    ""id"": ""3904497c-9fa0-4798-8c38-7d28b4d3e2a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JumpSide"",
+                    ""type"": ""Button"",
+                    ""id"": ""63b000fe-ce50-46f5-bb01-b75b06939976"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchGravity"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c157199-bc73-46e9-ac6d-4281b2e182e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""Keyboard Arrows"",
-                    ""id"": ""9bec042e-5275-4c41-89d1-879ca869ba4a"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""782ce819-e2d0-4153-92b9-2a76075985cc"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""367c84b2-4e21-4d70-bfd4-d8b546610dee"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""0d5c7ddd-aa12-47cc-9f37-e64cc6949816"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""bb7968a6-eec0-4811-8e52-29e42ed63a53"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": ""Keyboard WASD"",
                     ""id"": ""77b8b4ed-6113-403d-b5c0-40c15de9d13a"",
@@ -541,11 +513,66 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d83e10de-1b1a-48b7-b74e-59c8745d1d51"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""EnterGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard AD"",
+                    ""id"": ""c090bc62-8f81-46bc-9d26-f2aa4acb823e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSide"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f9e38cd7-f621-4da7-83fc-aefc0a2892f5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""5bb53edb-8a68-4523-aace-e06a34cba2e7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05e5edcc-c557-497d-b820-f0f31c6c946e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpSide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""978c2ac3-16a4-4df1-ac49-4c51a70d5abc"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchGravity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -653,6 +680,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Gameplay_ShowPause = m_Gameplay.FindAction("ShowPause", throwIfNotFound: true);
         m_Gameplay_ShowInventory = m_Gameplay.FindAction("ShowInventory", throwIfNotFound: true);
         m_Gameplay_EnterGame = m_Gameplay.FindAction("EnterGame", throwIfNotFound: true);
+        m_Gameplay_MoveSide = m_Gameplay.FindAction("MoveSide", throwIfNotFound: true);
+        m_Gameplay_JumpSide = m_Gameplay.FindAction("JumpSide", throwIfNotFound: true);
+        m_Gameplay_SwitchGravity = m_Gameplay.FindAction("SwitchGravity", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_TakeDamage = m_Testing.FindAction("TakeDamage", throwIfNotFound: true);
@@ -816,6 +846,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ShowPause;
     private readonly InputAction m_Gameplay_ShowInventory;
     private readonly InputAction m_Gameplay_EnterGame;
+    private readonly InputAction m_Gameplay_MoveSide;
+    private readonly InputAction m_Gameplay_JumpSide;
+    private readonly InputAction m_Gameplay_SwitchGravity;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -831,6 +864,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @ShowPause => m_Wrapper.m_Gameplay_ShowPause;
         public InputAction @ShowInventory => m_Wrapper.m_Gameplay_ShowInventory;
         public InputAction @EnterGame => m_Wrapper.m_Gameplay_EnterGame;
+        public InputAction @MoveSide => m_Wrapper.m_Gameplay_MoveSide;
+        public InputAction @JumpSide => m_Wrapper.m_Gameplay_JumpSide;
+        public InputAction @SwitchGravity => m_Wrapper.m_Gameplay_SwitchGravity;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -873,6 +909,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @EnterGame.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
                 @EnterGame.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
                 @EnterGame.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEnterGame;
+                @MoveSide.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSide;
+                @MoveSide.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSide;
+                @MoveSide.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSide;
+                @JumpSide.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJumpSide;
+                @JumpSide.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJumpSide;
+                @JumpSide.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJumpSide;
+                @SwitchGravity.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
+                @SwitchGravity.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
+                @SwitchGravity.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -910,6 +955,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @EnterGame.started += instance.OnEnterGame;
                 @EnterGame.performed += instance.OnEnterGame;
                 @EnterGame.canceled += instance.OnEnterGame;
+                @MoveSide.started += instance.OnMoveSide;
+                @MoveSide.performed += instance.OnMoveSide;
+                @MoveSide.canceled += instance.OnMoveSide;
+                @JumpSide.started += instance.OnJumpSide;
+                @JumpSide.performed += instance.OnJumpSide;
+                @JumpSide.canceled += instance.OnJumpSide;
+                @SwitchGravity.started += instance.OnSwitchGravity;
+                @SwitchGravity.performed += instance.OnSwitchGravity;
+                @SwitchGravity.canceled += instance.OnSwitchGravity;
             }
         }
     }
@@ -997,6 +1051,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnShowPause(InputAction.CallbackContext context);
         void OnShowInventory(InputAction.CallbackContext context);
         void OnEnterGame(InputAction.CallbackContext context);
+        void OnMoveSide(InputAction.CallbackContext context);
+        void OnJumpSide(InputAction.CallbackContext context);
+        void OnSwitchGravity(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {
