@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using PathOfHero.Managers;
 using PathOfHero.UI;
 using PathOfHero.Others;
 
@@ -49,7 +50,7 @@ public class BossDungeonMapController : DungeonMapController
     protected IEnumerator FightBoss()
     {
         Inventory.Instance.RemoveItem(bossDungeonMapData.gem);
-        SaveSystem.Instance.SaveData(true, false);
+        SaveManager.Instance.SaveProfile(true, false);
 
         // intermission
         yield return HUD.Instance.ShowHugeMessage("Intermission", $"Teleporting in {bossDungeonMapData.intermission} seconds", 2.5f);

@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +5,7 @@ using UnityEngine.InputSystem;
 using PathOfHero.Utilities;
 using PathOfHero.Others;
 
-[Serializable]
+[System.Serializable]
 public class DialogueEvents : UnityEvent {}
 
 public class DialogueController : Singleton<DialogueController>
@@ -14,6 +13,10 @@ public class DialogueController : Singleton<DialogueController>
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private GameObject dialoguePanelPrefab;
     [SerializeField] private GameObject dialoguePanelContainer;
+    [SerializeField] private InputReader m_InputReader;
+    [SerializeField] private InputActionReference nextDialogueAction;
+    [SerializeField] private InputActionReference skipDialogueAction;
+
     private DialoguePanel dialoguePanel;
     private GameObject clone;
 
@@ -25,38 +28,14 @@ public class DialogueController : Singleton<DialogueController>
     private string hint;
 
     private int currentDialogueIndex;
-    private bool isInConversation;
     private bool canShowNextDialogue;
     private bool canBeSkipped;
 
-    private PlayerInput playerInput;
-    private InputAction nextDialogueAction;
-    private InputAction skipDialogueAction;
-
-    // Update is called once per frame
-    async void Update()
-    {
-        if (isInConversation)
-        {
-            if (nextDialogueAction.triggered)
-                await NextDialogue();
-
-            // if (canBeSkipped && Input.GetKeyDown(KeyCode.Period))
-            if (canBeSkipped && skipDialogueAction.triggered && dialoguePanel.GetPanelState().Equals(PanelState.Shown))
-            {
-                dialoguePanel.HidePanel();
-                dialogueEndEvents.Invoke();
-
-                currentDialogueIndex = 0;
-                isInConversation = false;
-                _ = Notification.Instance.ShowNotificationAsync("You skipped the conversation");
-            }
-        }
-    }
+    public bool IsInConversation { get; set; }
 
     public async Task ShowDialogue(string header, DialogueEntry[] dialogueEntries, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
     {
-        if (!isInConversation)
+        if (!IsInConversation)
         {
             // canShowNextDialogue = false;
 
@@ -84,12 +63,12 @@ public class DialogueController : Singleton<DialogueController>
                 sprite = defaultSprite;
 
             // can be written better?
-            hint = $"'<color={CustomColorStrings.yellow}>{nextDialogueAction.GetBindingDisplayString()}</color>' Continue";
+            hint = $"'<color={CustomColorStrings.yellow}>{nextDialogueAction.action.GetBindingDisplayString()}</color>' Continue";
             if (canBeSkipped)
-                hint += $"<color={CustomColorStrings.white}>;</color> '<color={CustomColorStrings.yellow}>{skipDialogueAction.GetBindingDisplayString()}</color>' Skip";
+                hint += $"<color={CustomColorStrings.white}>;</color> '<color={CustomColorStrings.yellow}>{skipDialogueAction.action.GetBindingDisplayString()}</color>' Skip";
 
             currentDialogueIndex = -1;
-            isInConversation = true;
+            IsInConversation = true;
             canShowNextDialogue = true;
             await NextDialogue();
 
@@ -120,34 +99,46 @@ public class DialogueController : Singleton<DialogueController>
                 dialogueEndEvents.Invoke();
 
                 currentDialogueIndex = 0;
-                isInConversation = false;
+                IsInConversation = false;
             }
 
             canShowNextDialogue = true;
         }
     }
 
-    public void SetIsInConversation(bool value)
-        => isInConversation = value;
-
-    public bool GetIsInConversation()
-        => isInConversation;
-
     void OnEnable()
-        => GameManager.onPlayerSetUp += SetUp;
-    
-    void OnDisable()
-        => GameManager.onPlayerSetUp -= SetUp;
-
-    public void SetUp()
     {
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
-
-        nextDialogueAction = playerInput.actions["NextDialogue"];
-        skipDialogueAction = playerInput.actions["SkipDialogue"];
-
-        nextDialogueAction.Enable();
-        skipDialogueAction.Enable();
+        m_InputReader.NextDialogue += OnNextDialogue;
+        m_InputReader.SkipDialogue += OnSkipDialogue;
     }
-    
+
+    void OnDisable()
+    {
+        m_InputReader.NextDialogue -= OnNextDialogue;
+        m_InputReader.SkipDialogue -= OnSkipDialogue;
+    }
+
+    private void OnNextDialogue()
+    {
+        if (!IsInConversation)
+            return;
+
+        _ = NextDialogue();
+    }
+
+    private void OnSkipDialogue()
+    {
+        if (!IsInConversation || !canBeSkipped)
+            return;
+
+        if (dialoguePanel.PanelState == PanelState.Shown)
+        {
+            dialoguePanel.HidePanel();
+            dialogueEndEvents.Invoke();
+
+            currentDialogueIndex = 0;
+            IsInConversation = false;
+            _ = Notification.Instance.ShowNotificationAsync("You skipped the conversation");
+        }
+    }
 }

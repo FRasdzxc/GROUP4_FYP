@@ -44,12 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3999e76b46f6fd246be1f3e3cfe49986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControllerSceneName: Controllers
-  m_GameplaySceneName: Gameplay
-  m_IsGameplay: 0
-  m_CursorController: {fileID: 11400000, guid: 39b8353cd9fd04d4daa97bcc76d34db8, type: 2}
-  m_PlayerProfileController: {fileID: 11400000, guid: feb2a76803b2bb34985c64435006c5f2, type: 2}
-  m_EditorProfile:
-    name: Editor
-    level: 10
-    coins: 1000
+  m_RuntimeProfile: {fileID: 11400000, guid: 58860a0bf0f31534f993fc242b317f13, type: 2}
+  m_EditorProfile: {fileID: 11400000, guid: 5ad8399fbfa7b3a4391351db5757ffb5, type: 2}

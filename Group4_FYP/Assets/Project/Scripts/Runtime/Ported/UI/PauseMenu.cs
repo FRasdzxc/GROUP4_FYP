@@ -2,9 +2,9 @@ using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using DG.Tweening;
 using PathOfHero.Controllers;
+using PathOfHero.Managers;
 
 public class PauseMenu : PanelOverride
 {
@@ -21,9 +21,8 @@ public class PauseMenu : PanelOverride
     [SerializeField] private Button exitButton;
     [SerializeField] private GameObject warning;
 
-    private InputAction showPauseAction;
-    private InputAction saveGameAction;
-    private InputAction exitToMenuAction;
+    [SerializeField]
+    private InputReader m_InputReader;
 
     private static PauseMenu m_instance;
     public static PauseMenu Instance => m_instance;
@@ -34,6 +33,20 @@ public class PauseMenu : PanelOverride
 
         if (!m_instance)
             m_instance = this;
+    }
+
+    private void OnEnable()
+    {
+        m_InputReader.ShowPause += OnShowPause;
+        m_InputReader.SaveGame += SaveGame;
+        m_InputReader.ExitToMenu += ExitToMenu;
+    }
+
+    private void OnDisable()
+    {
+        m_InputReader.ShowPause -= OnShowPause;
+        m_InputReader.SaveGame -= SaveGame;
+        m_InputReader.ExitToMenu -= ExitToMenu;
     }
 
     // Start is called before the first frame update
@@ -52,23 +65,6 @@ public class PauseMenu : PanelOverride
     // Update is called once per frame
     void Update()
     {
-        // if (isOpened)
-        if (panelState.Equals(PanelState.Shown))
-        {
-            if (saveGameAction.triggered)
-                SaveGame();
-            if (exitToMenuAction.triggered)
-                ExitToMenu();
-        }
-        else
-        {
-            if (showPauseAction.triggered)
-            {
-                if (GameManager.Instance.GameState == GameState.Playing)
-                    ShowPanel();
-            }
-        }
-
 #if UNITY_EDITOR
         // test only
         if (Input.GetKeyDown(KeyCode.Alpha9))
@@ -148,25 +144,38 @@ public class PauseMenu : PanelOverride
         );
     }
 
+    public void OnShowPause()
+    {
+        if (panelState != PanelState.Hidden ||
+            GameManager.Instance.GameState != GameState.Playing)
+            return;
+
+        ShowPanel();
+    }
+
     public void SaveGame()
     {
+        if (panelState != PanelState.Shown)
+            return;
+
         // await HidePauseMenu(true);
         HidePanel();
         settingsMenu.SaveSettings();
-        SaveSystem.Instance.SaveData();
+        SaveManager.Instance.SaveProfile();
     }
 
     public async void ExitToMenu()
     {
+        if (panelState != PanelState.Shown)
+            return;
+
         await HidePauseMenu();
 
         // save settings to device
         settingsMenu.SaveSettings();
 
         // save data to profile
-        SaveSystem.Instance.SaveData(false);
-        if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
-            ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
+        SaveManager.Instance.SaveProfile(false);
 
         // exit to menu
         SceneController.Instance.ChangeScene("StartScene", false);
@@ -189,19 +198,6 @@ public class PauseMenu : PanelOverride
             exitButton.interactable = true;
             warning.SetActive(false);
         }
-    }
-
-    protected override void SetUp()
-    {
-        base.SetUp();
-
-        showPauseAction = playerInput.actions["ShowPause"];
-        saveGameAction = playerInput.actions["SaveGame"];
-        exitToMenuAction = playerInput.actions["ExitToMenu"];
-
-        showPauseAction.Enable();
-        saveGameAction.Enable();
-        exitToMenuAction.Enable();
     }
 
     protected override GameObject GetPanelGobj()

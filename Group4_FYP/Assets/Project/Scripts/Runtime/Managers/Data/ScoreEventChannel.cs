@@ -6,7 +6,7 @@ namespace PathOfHero.Managers.Data
     [CreateAssetMenu(fileName = "NewScoreEventChannel", menuName = "Path of Hero/Score Event Channel")]
     public class ScoreEventChannel : ScriptableObject
     {
-        public UnityAction OnLevelStart;
+        public UnityAction<string> OnLevelStart;
         public UnityAction OnLevelEnd;
 
         public UnityAction OnStepTaken;
@@ -16,7 +16,7 @@ namespace PathOfHero.Managers.Data
         public UnityAction<float> OnDamageGiven;
         public UnityAction<string> OnMobKilled;
 
-        public void LevelStarted() => OnLevelStart?.Invoke();
+        public void LevelStarted(string mapId) => OnLevelStart?.Invoke(mapId);
         public void LevelEnded() => OnLevelEnd?.Invoke();
         public void StepTaken() => OnStepTaken?.Invoke();
         public void WeaponUsed(string weaponId) => OnWeaponUsed?.Invoke(weaponId);

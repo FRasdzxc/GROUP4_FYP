@@ -2,6 +2,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using PathOfHero.UI;
+using PathOfHero.Managers;
 using PathOfHero.Managers.Data;
 
 public class MapController : MonoBehaviour
@@ -22,9 +23,9 @@ public class MapController : MonoBehaviour
         // setting up pausemenu mode
         if (mapData.mapType == MapType.Dungeon)
         {
-            m_ScoreEventChannel.OnLevelStart();
+            m_ScoreEventChannel.LevelStarted(mapData.mapId);
             PauseMenu.Instance.SetDungeonMode(true);
-            SaveSystem.Instance.SaveData(false, false);
+            SaveManager.Instance.SaveProfile(false, false);
         }
         else
             PauseMenu.Instance.SetDungeonMode(false);

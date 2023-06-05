@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab32be7ad802624419afa22ca3349270, type: 3}
-  m_Name: PlayerProfileController
+  m_Script: {fileID: 11500000, guid: 5803f103ab7806c42a7cc1b252224ee3, type: 3}
+  m_Name: InputReader
   m_EditorClassIdentifier: 
-  m_CurrentProfile:
-    name: 
-    level: 0
-    coins: 0

@@ -1,12 +1,24 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
+using Newtonsoft.Json;
 using PathOfHero.Managers.Data;
+using PathOfHero.PersistentData;
 
 namespace PathOfHero.Managers
 {
     public class ScoreManager : MonoBehaviour
     {
+        private static readonly string k_Endpoint = "http://127.0.0.1:8000/api/v1/poh";
+        private static readonly string k_RecordEndpoint = k_Endpoint + "/record";
+        private static readonly Encoding k_Encoding = new UTF8Encoding();
+
+        [SerializeField]
+        private HeroProfile m_HeroProfile;
+
         [SerializeField]
         private ScoreEventChannel m_EventChannel;
 
@@ -42,6 +54,21 @@ namespace PathOfHero.Managers
             m_EventChannel.OnMobKilled -= MobKilled;
         }
 
+#if UNITY_EDITOR
+        // Debug use only
+        private void Start()
+        {
+            var session = new SessionStats()
+            {
+                playerName = "Editor",
+                mapId = "map_dungeoni",
+
+                timeTaken = 42.0f
+            };
+            StartCoroutine(UploadSession(session));
+        }
+#endif
+
         private void Update()
         {
             if (!m_InLevel)
@@ -50,12 +77,12 @@ namespace PathOfHero.Managers
             m_CurrentStats.timeTaken += Time.deltaTime;
         }
 
-        private void LevelStarted()
+        private void LevelStarted(string mapId)
         {
             if (m_InLevel)
                 return;
 
-            m_CurrentStats = new();
+            m_CurrentStats = new() { mapId = mapId };
             m_InLevel = true;
         }
 
@@ -65,6 +92,7 @@ namespace PathOfHero.Managers
                 return;
 
             m_InLevel = false;
+            StartCoroutine(UploadSession(m_CurrentStats));
         }
 
         private void StepsTaken()
@@ -135,8 +163,30 @@ namespace PathOfHero.Managers
             }
         }
 
+        private IEnumerator UploadSession(SessionStats session)
+        {
+            session.playerName = m_HeroProfile.DisplayName;
+
+            var rawJson = JsonConvert.SerializeObject(session);
+
+            // Create a custom web request that send JSON body
+            using UnityWebRequest www = new UnityWebRequest($"{k_RecordEndpoint}", "POST");
+            www.uploadHandler = new UploadHandlerRaw(k_Encoding.GetBytes(rawJson));
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success)
+                Debug.LogWarning($"[Score Manager] Upload session stats failed\n{www.result}: {www.error}");
+            else
+                Debug.Log($"[Score Manager] Uploaded session stats successfully.");
+        }
+
+        [System.Serializable]
         public class SessionStats
         {
+            public string mapId;
+            public string playerName;
             public float timeTaken;
             public int stepsTaken;
             public float damageGiven;
@@ -146,9 +196,13 @@ namespace PathOfHero.Managers
             public Dictionary<string, int> mobsKilled;
             public Dictionary<string, int> chestsFound;
 
+            [JsonIgnore]
             public int WeaponUsage => weaponUsage.Sum(w => w.Value);
+            [JsonIgnore]
             public int AbilityUsage => abilityUsage.Sum(a => a.Value);
+            [JsonIgnore]
             public int MobsKilled => mobsKilled.Sum(m => m.Value);
+            [JsonIgnore]
             public int ChestsFound => chestsFound.Sum(d => d.Value);
 
             public SessionStats()

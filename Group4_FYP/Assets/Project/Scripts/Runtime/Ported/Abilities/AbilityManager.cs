@@ -1,15 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using PathOfHero.Utilities;
 
 public class AbilityManager : Singleton<AbilityManager>
 {
+    [SerializeField] private InputReader m_InputReader;
+    [SerializeField] private InputActionReference[] m_AbilityActions;
     [SerializeField] private Ability[] abilities;
 
     private Ability[] equippedAbilities;
     private HUD hud;
-    private HeroData heroData;
     private float mana;
     private float maxMana;
     private float _maxManaUpgrade;
@@ -27,73 +27,33 @@ public class AbilityManager : Singleton<AbilityManager>
     private float manaRegenerationUpgrade;
     private float abilityDamageUpgrade;
 
-    private PlayerInput playerInput;
-    private List<InputAction> abilityActions;
-
-    // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
-
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
+    }
 
-        playerInput = GetComponent<PlayerInput>();
-        abilityActions = new List<InputAction>();
-        abilityActions.Add(playerInput.actions["Ability1"]);
-        abilityActions.Add(playerInput.actions["Ability2"]);
-        abilityActions.Add(playerInput.actions["Ability3"]);
-        abilityActions.Add(playerInput.actions["AbilityU"]);
+    private void OnEnable()
+    {
+        m_InputReader.Ability1 += OnAbility1;
+        m_InputReader.Ability2 += OnAbility2;
+        m_InputReader.Ability3 += OnAbility3;
+    }
 
-        foreach (InputAction action in abilityActions)
-            action.Enable();
+    private void OnDisable()
+    {
+        m_InputReader.Ability1 -= OnAbility1;
+        m_InputReader.Ability2 -= OnAbility2;
+        m_InputReader.Ability3 -= OnAbility3;
     }
 
     void Start()
-    {
-        Setup();
-    }
+        => Setup();
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.IsPlayingHostile())
         {
-            // if (Input.GetKeyDown(KeyCode.Z))
-            // if (ability1Action.ReadValue<float>() == 1)
-            if (abilityActions[0].ReadValue<float>() == 1)
-            {
-                // should be rewritten better
-                if (equippedAbilities[0].IsReady && (mana - equippedAbilities[0].manaCost) >= 0)
-                {
-                    mana -= equippedAbilities[0].manaCost;
-                    equippedAbilities[0].Activate(gameObject); // test 
-                }
-            }
-
-            // if (Input.GetKeyDown(KeyCode.X))
-            // if (ability2Action.ReadValue<float>() == 1)
-            if (abilityActions[1].ReadValue<float>() == 1)
-            {
-                // should be rewritten better
-                if (equippedAbilities[1].IsReady && (mana - equippedAbilities[1].manaCost) >= 0)
-                {
-                    mana -= equippedAbilities[1].manaCost;
-                    equippedAbilities[1].Activate(gameObject); // test
-                }
-            }
-
-            // if (Input.GetKeyDown(KeyCode.C))
-            // if (ability3Action.ReadValue<float>() == 1)
-            if (abilityActions[2].ReadValue<float>() == 1)
-            {
-                // should be rewritten better
-                if (equippedAbilities[2].IsReady && (mana - equippedAbilities[2].manaCost) >= 0)
-                {
-                    mana -= equippedAbilities[2].manaCost;
-                    equippedAbilities[2].Activate(gameObject); // test
-                }
-            }
-
 #if UNITY_EDITOR
             // test refill mana
             if (Input.GetKeyDown(KeyCode.Backslash))
@@ -107,29 +67,21 @@ public class AbilityManager : Singleton<AbilityManager>
         }
 
         if (mana < upgradedMaxMana)
-        {
             mana += Time.deltaTime * (manaRegeneration + manaRegenerationUpgrade);
-        }
         mana = Mathf.Clamp(mana, 0, upgradedMaxMana);
-        // hud.UpdateMana(mana);
         hud.UpdateMana(mana, upgradedMaxMana);
 
         for (int i = 0; i < equippedAbilities.Length; i++)
-        {
             hud.UpdateAbility(i, equippedAbilities[i].Cooldown);
-        }
     }
 
     public void Setup()
     {
-        // hud.SetupMana(mana, upgradedMaxMana);
         hud.UpdateMana(mana, upgradedMaxMana);
         equippedAbilities = abilities; // not final: should be changed to be equipped inside inventory later on
 
         for (int i = 0; i < equippedAbilities.Length; i++)
-        {
-            hud.SetupAbility(i, equippedAbilities[i].icon, equippedAbilities[i].cooldownTime, abilityActions[i].GetBindingDisplayString());
-        }
+            hud.SetupAbility(i, equippedAbilities[i].icon, equippedAbilities[i].cooldownTime, m_AbilityActions[i].action.GetBindingDisplayString());
 
         ReadyEquippedAbilities();
     }
@@ -219,6 +171,24 @@ public class AbilityManager : Singleton<AbilityManager>
         abilityDamageUpgrade += value;
     }
     #endregion
+    
+    private void OnAbility1()
+        => ActivateAbility(0);
+
+    private void OnAbility2()
+        => ActivateAbility(1);
+
+    private void OnAbility3()
+        => ActivateAbility(2);
+
+    private void ActivateAbility(int index)
+    {
+        if (equippedAbilities[index].IsReady && (mana - equippedAbilities[index].manaCost) >= 0)
+        {
+            mana -= equippedAbilities[index].manaCost;
+            equippedAbilities[index].Activate(gameObject); 
+        }
+    }
 
     private void ReadyEquippedAbilities()
     {

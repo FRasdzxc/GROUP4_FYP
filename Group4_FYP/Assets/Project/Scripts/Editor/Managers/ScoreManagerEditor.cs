@@ -8,7 +8,9 @@ namespace PathOfHero.Managers
         public override void OnInspectorGUI()
         {
             serializedObject.UpdateIfRequiredOrScript();
+            DrawDefaultInspector();
 
+            EditorGUILayout.LabelField("State", EditorStyles.boldLabel);
             var instance = target as ScoreManager;
             if (instance.InLevel)
             {
@@ -26,7 +28,7 @@ namespace PathOfHero.Managers
                 }
             }
             else
-                EditorGUILayout.LabelField("Inactive", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("Inactive");
 
             serializedObject.ApplyModifiedProperties();
         }

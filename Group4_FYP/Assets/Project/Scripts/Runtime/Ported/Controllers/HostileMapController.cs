@@ -17,7 +17,6 @@ public class HostileMapController : MapController
 
     protected async virtual void SpawnPortal(Vector3 position)
     {
-        //SaveSystem.Instance.SaveData(false, false);
         _ = HUD.Instance.ShowHugeMessageAsync("All", "cleared");
 
         GameObject clone = Instantiate(hostileMapData.portalPrefab, position, Quaternion.identity, GameManager.Instance.MapTransform);

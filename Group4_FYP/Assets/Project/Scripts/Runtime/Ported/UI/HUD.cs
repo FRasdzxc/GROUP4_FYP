@@ -1,14 +1,15 @@
-using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using PathOfHero.PersistentData;
 using PathOfHero.Utilities;
-using PathOfHero.Others;
-using System.Collections;
 
 public class HUD : Singleton<HUD>
 {
+    [SerializeField] private HeroProfile m_HeroProfile;
+
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
     [SerializeField] private Slider xpSlider;
@@ -47,11 +48,20 @@ public class HUD : Singleton<HUD>
 
     private GameObject hugeMessageClone;
 
+    private void OnEnable()
+    {
+        m_HeroProfile.OnProfileLoaded += OnProfileLoaded;
+    }
+
+    private void OnDisable()
+    {
+        m_HeroProfile.OnProfileLoaded -= OnProfileLoaded;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         regionText.text = ""; // temporary?
-        profileNameText.text = SaveSystem.Instance.ProfileName;
     }
 
     public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime, string hintText)
@@ -230,7 +240,7 @@ public class HUD : Singleton<HUD>
 
     public void ShowTimer(int seconds)
     {
-        timerText.text = TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
+        timerText.text = System.TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
         timerText.color = Color.white;
 
         timerPanel.SetActive(true);
@@ -239,7 +249,7 @@ public class HUD : Singleton<HUD>
 
     public void UpdateTimer(int seconds)
     {
-        timerText.text = TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
+        timerText.text = System.TimeSpan.FromSeconds(seconds).ToString("mm':'ss");
         if (seconds <= 10)
             timerText.color = Color.red;
         else if (seconds <= 30)
@@ -277,6 +287,11 @@ public class HUD : Singleton<HUD>
     {
         await mainPanel.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         mainPanel.GetComponent<CanvasGroup>().alpha = 0f;
-        mainPanel.SetActive(false);   
+        mainPanel.SetActive(false);
+    }
+
+    private void OnProfileLoaded()
+    {
+        profileNameText.text = m_HeroProfile.DisplayName;
     }
 }

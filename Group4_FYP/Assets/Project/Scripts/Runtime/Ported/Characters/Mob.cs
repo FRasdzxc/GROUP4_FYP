@@ -69,7 +69,7 @@ public class Mob : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, player.transform.position) <= attackDistance)
             {
-                if (!DialogueController.Instance.GetIsInConversation())
+                if (!DialogueController.Instance.IsInConversation)
                     AttackPlayer();
             }
             else if (Vector2.Distance(transform.position, player.transform.position) <= sightDistance)

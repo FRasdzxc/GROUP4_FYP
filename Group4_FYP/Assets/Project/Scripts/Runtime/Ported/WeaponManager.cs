@@ -1,7 +1,8 @@
 using UnityEngine;
 using PathOfHero.Others;
+using PathOfHero.Utilities;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : Singleton<WeaponManager>
 {
     [SerializeField] private GameWeapons gameWeapons;
     [SerializeField] private Transform weaponHolder;
@@ -13,19 +14,9 @@ public class WeaponManager : MonoBehaviour
     private GameObject weaponClone;
     private WeaponData weapon;
 
-    private static WeaponManager instance;
-    public static WeaponManager Instance
+    protected override void Awake()
     {
-        get => instance;
-    }
-
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-
+        base.Awake();
         gameWeapons.AssignWeaponId();
     }
 

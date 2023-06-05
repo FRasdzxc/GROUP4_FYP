@@ -9,7 +9,9 @@ public class Ability : ScriptableObject
     public float cooldownTime; // seconds until next use
     public float manaCost;
     public Sprite icon;
-    public ScoreEventChannel m_ScoreEventChannel;
+
+    [SerializeField]
+    private ScoreEventChannel m_ScoreEventChannel;
 
     public float Cooldown
     {

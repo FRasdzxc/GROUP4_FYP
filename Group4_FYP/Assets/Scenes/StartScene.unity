@@ -1878,6 +1878,9 @@ MonoBehaviour:
   heroList: {fileID: 11400000, guid: b9d53cb8a800e654b97ad46253e85fec, type: 2}
   heroButtonPrefab: {fileID: 5950124309927006245, guid: ff4edb5ca11100c4796801cd45b22033, type: 3}
   enterGameSound: {fileID: 8300000, guid: 3a223c9846b3bad419e0f90b5a2f0e1c, type: 3}
+  m_InputReader: {fileID: 11400000, guid: e74f96d4ed5bb3c4daffdc31d9e53750, type: 2}
+  m_EnterGameAction: {fileID: 7983858554454414082, guid: 94383b0e47c200e498d519e677790a3d, type: 3}
+  m_HeroProfile: {fileID: 11400000, guid: 58860a0bf0f31534f993fc242b317f13, type: 2}
 --- !u!114 &401310886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3881,6 +3884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecac19e72c6d2a2408ccde330b458197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InputReader: {fileID: 11400000, guid: e74f96d4ed5bb3c4daffdc31d9e53750, type: 2}
 --- !u!114 &913822230
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System;
-using UnityEngine;
 using UnityEditor;
 using PathOfHero.Characters.Data;
 
@@ -41,7 +39,7 @@ namespace PathOfHero.Tool
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            serializedObject.UpdateIfRequiredOrScript();
 
             EditorGUILayout.LabelField("Character", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_Class);

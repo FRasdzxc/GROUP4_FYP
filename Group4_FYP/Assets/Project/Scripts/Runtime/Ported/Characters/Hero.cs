@@ -1,12 +1,11 @@
-using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using PathOfHero.Controllers;
 using System.Collections;
+using UnityEngine;
+using PathOfHero.Controllers;
 using PathOfHero.Managers.Data;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
 using PathOfHero.Others;
+using PathOfHero.PersistentData;
 
 public class Hero : Singleton<Hero>
 {
@@ -28,8 +27,6 @@ public class Hero : Singleton<Hero>
     private SpriteRenderer sr;
     public bool IsDead { get; private set; }
     private GameObject spawnPoint;
-    private string profileName;
-    private ProfileData profile;
 
     // mana
     private float mana;
@@ -69,12 +66,9 @@ public class Hero : Singleton<Hero>
     }
     private float upgradedDefense;
 
-    private PlayerInput playerInput;
-    private InputAction takeDamageAction;
-
     private AudioSource audioSource;
 
-    public static event Action onHeroDeath;
+    public static event System.Action onHeroDeath;
 
 
     protected override void Awake()
@@ -84,10 +78,6 @@ public class Hero : Singleton<Hero>
         hud = GameObject.FindGameObjectWithTag("Canvas").GetComponent<HUD>();
         spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
         audioSource = GetComponent<AudioSource>();
-
-        playerInput = GetComponent<PlayerInput>();
-        takeDamageAction = playerInput.actions["TakeDamage"];
-        takeDamageAction.Enable();
     }
 
     // Start is called before the first frame update
@@ -109,9 +99,7 @@ public class Hero : Singleton<Hero>
             {
                 // health
                 if (health < upgradedMaxHealth)
-                {
                     health += Time.deltaTime * (healthRegeneration + healthRegenerationUpgrade);
-                }
             }
             health = Mathf.Clamp(health, 0, upgradedMaxHealth);
             hud.UpdateHealth(health, upgradedMaxHealth);
@@ -126,9 +114,7 @@ public class Hero : Singleton<Hero>
                 _ = Notification.Instance.ShowNotificationAsync($"Level Up! - <color={CustomColorStrings.green}>{level.ToString("n0")}</color>");
 
                 if (level % orbObtainLevel == 0)
-                {
                     Orb.Instance.AddOrbs(1);
-                }
             }
             hud.UpdateXP(level, storedExp, requiredExp);
             HeroPanel.Instance.UpdateLevel(level);
@@ -138,7 +124,7 @@ public class Hero : Singleton<Hero>
             if (GameManager.Instance.IsPlayingHostile())
             {
                 // testonly
-                if (takeDamageAction.triggered)
+                if (Input.GetKey(KeyCode.Backspace))
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                         TakeDamage(health, false);
@@ -233,11 +219,7 @@ public class Hero : Singleton<Hero>
     }
 
     private void PlaySound(AudioClip audioClip)
-    {
-        audioSource.clip = audioClip;
-        audioSource.Play();
-    }
-
+        => audioSource.PlayOneShot(audioClip);
     #region Setters
     public void SetHealth(float health)
     {

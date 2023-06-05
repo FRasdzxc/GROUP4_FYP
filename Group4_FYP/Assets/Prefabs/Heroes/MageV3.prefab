@@ -373,9 +373,8 @@ GameObject:
   - component: {fileID: 6841578098152819418}
   - component: {fileID: 6841578098152819423}
   - component: {fileID: 6841578098152819421}
-  - component: {fileID: 2709453559717242066}
   - component: {fileID: 4928983950003432878}
-  - component: {fileID: 8049573322664647850}
+  - component: {fileID: 2709453559717242066}
   m_Layer: 0
   m_Name: MageV3
   m_TagString: Player
@@ -567,7 +566,7 @@ MonoBehaviour:
   moveSoundClips:
   - {fileID: 8300000, guid: 547d5f8fd6cabcf46aa5ccd2711a5f97, type: 3}
   - {fileID: 8300000, guid: 299751f9b1ef20048895ad8d6e681164, type: 3}
-  m_ScoreEventChannel: {fileID: 0}
+  m_ScoreEventChannel: {fileID: 11400000, guid: 70fb380d2c1e3b441b968aa9c23bc646, type: 2}
 --- !u!114 &6841578098152819421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +583,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 979e565f8fecdbe4f934c643f22743af, type: 2}
   - {fileID: 11400000, guid: fafd1217067643b4f81d8dadab4e97cb, type: 2}
   - {fileID: 11400000, guid: bf0287cb9bd723641a0b4d4c7e239f6a, type: 2}
+--- !u!114 &4928983950003432878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6841578098152819408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09d16ae05ebb8c40992d712428ba705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HeroProfile: {fileID: 11400000, guid: 58860a0bf0f31534f993fc242b317f13, type: 2}
+  gameWeapons: {fileID: 11400000, guid: 4bf7eab09e882c04eb8e0f20b2c8c265, type: 2}
+  weaponHolder: {fileID: 2754856137835292751}
+  defaultWeapon: {fileID: 2479174408548472528, guid: d21427122ed038c44965cc3b945302cd, type: 3}
 --- !u!82 &2709453559717242066
 AudioSource:
   m_ObjectHideFlags: 0
@@ -680,42 +695,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4928983950003432878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841578098152819408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c09d16ae05ebb8c40992d712428ba705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameWeapons: {fileID: 11400000, guid: 4bf7eab09e882c04eb8e0f20b2c8c265, type: 2}
-  weaponHolder: {fileID: 2754856137835292751}
-  defaultWeapon: {fileID: 2479174408548472528, guid: d21427122ed038c44965cc3b945302cd, type: 3}
---- !u!114 &8049573322664647850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841578098152819408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b447a8d655b1a4fbd6c3aaa4d276a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  sprintMultiplier: 2
-  weaponHolder: {fileID: 2754856137835292750}
-  animator: {fileID: 6841578098152819409}
-  audioSource: {fileID: 2709453559717242066}
-  moveSoundClips:
-  - {fileID: 8300000, guid: 547d5f8fd6cabcf46aa5ccd2711a5f97, type: 3}
-  - {fileID: 8300000, guid: 299751f9b1ef20048895ad8d6e681164, type: 3}
-  m_ScoreEventChannel: {fileID: 0}
 --- !u!1 &6841578098941343457
 GameObject:
   m_ObjectHideFlags: 0

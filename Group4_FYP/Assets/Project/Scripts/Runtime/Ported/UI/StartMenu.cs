@@ -1,16 +1,18 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEditor;
+using UnityEngine.UI;
 using DG.Tweening;
-using PathOfHero.UI;
 using PathOfHero.Controllers;
-using PathOfHero.Utilities;
 using PathOfHero.Others;
+using PathOfHero.PersistentData;
+using PathOfHero.UI;
+using PathOfHero.Utilities;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class StartMenu : Singleton<StartMenu>
 {
@@ -37,6 +39,9 @@ public class StartMenu : Singleton<StartMenu>
     [SerializeField] private GameObject heroButtonPrefab;
     [SerializeField] private AudioClip enterGameSound;
 
+    [SerializeField] private InputReader m_InputReader;
+    [SerializeField] private InputActionReference m_EnterGameAction;
+
     public enum PanelType { start, profileSelection, profileCreation, profileEdit };
     private bool hasEntered;
     // make variable to store profile buttons index
@@ -44,20 +49,19 @@ public class StartMenu : Singleton<StartMenu>
     private string selectedProfileName;
     private HeroClass? selectedClassType;
 
-    private PlayerInput playerInput;
-    private InputAction enterGameAction;
-
-    public static event Action onPlayerSetUp;
-
-    protected override void Awake()
+    private void OnEnable()
     {
-        base.Awake();
-        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        m_InputReader.EnterGame += EnterGame;
     }
 
-    // Start is called before the first frame update
+    private void OnDisable()
+    {
+        m_InputReader.EnterGame -= EnterGame;
+    }
+
     void Start()
     {
+        m_InputReader.EnableInput(InputReader.ActionMapType.Gameplay);
         hasEntered = false;
         profileButtons = new List<GameObject>();
         PrepareClassContainer();
@@ -78,27 +82,14 @@ public class StartMenu : Singleton<StartMenu>
             }
         }
 
-        enterGameAction = playerInput.actions["EnterGame"];
-        enterGameAction.Enable();
-        enterGameHintText.text = $"- Press {enterGameAction.GetBindingDisplayString()} to Continue -";
-
-
-        onPlayerSetUp?.Invoke();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // if (Input.GetKeyDown(KeyCode.Space))
-        if (enterGameAction.triggered)
-        {
-            if (!hasEntered)
-                EnterGame();
-        }
+        enterGameHintText.text = $"- Press {m_EnterGameAction.action.GetBindingDisplayString()} to Continue -";
     }
 
     private async void EnterGame() // hide startPanel then show profileSelectionPanel
     {
+        if (hasEntered)
+            return;
+
         hasEntered = true;
 
         // play some sound effects maybe
@@ -113,25 +104,23 @@ public class StartMenu : Singleton<StartMenu>
 
     public void CreateProfile()
     {
-        if (profileCreationInputField.text != null && profileCreationInputField.text != "")
+        if (string.IsNullOrWhiteSpace(profileCreationInputField.text))
         {
-            if (selectedClassType.HasValue)
-            {
-                if (ProfileManagerJson.CreateProfile(profileCreationInputField.text, selectedClassType.Value, heroList.GetHeroInfo(selectedClassType.Value)))
-                {
-                    //sceneController.ChangeScene("PlayScene"); // see comment @SceneController for this function
-
-                    ShowProfileSelectionPanel();
-                }
-            }
-            else
-                _ = Notification.Instance.ShowNotificationAsync("Please select a class");
-        }
-        else
-        {
-            // show error
             _ = Notification.Instance.ShowNotificationAsync("Profile name cannot be empty");
+            return;
         }
+
+        if (!selectedClassType.HasValue)
+        {
+            _ = Notification.Instance.ShowNotificationAsync("Please select a class");
+            return;
+        }
+
+        var name = profileCreationInputField.text;
+        var heroClass = selectedClassType.Value;
+        var classDefault = heroList.GetHeroInfo(heroClass)?.defaultStats;
+        if (HeroProfile.Create(name, heroClass, classDefault, out _))
+            ShowProfileSelectionPanel();
     }
 
     private void PrepareClassContainer()
@@ -188,18 +177,14 @@ public class StartMenu : Singleton<StartMenu>
 
     public void UpdateProfile()
     {
-        if (profileEditInputField.text != null && profileEditInputField.text != "")
+        if (profileEditInputField == null || string.IsNullOrWhiteSpace(profileEditInputField.text))
         {
-            if (ProfileManagerJson.UpdateProfile(selectedProfileName, profileEditInputField.text))
-            {
-                ShowProfileSelectionPanel();
-            }
-        }
-        else
-        {
-            // show error
             _ = Notification.Instance.ShowNotificationAsync("Profile name cannot be empty");
+            return;
         }
+
+        if (HeroProfile.Update(selectedProfileName, profileEditInputField.text))
+            ShowProfileSelectionPanel();
     }
 
     public void DeleteProfile()
@@ -210,14 +195,13 @@ public class StartMenu : Singleton<StartMenu>
             "Upon deletion, all your data will be lost. Do you really wish to continue?",
             () =>
             {
-                ProfileManagerJson.DeleteProfile(selectedProfileName);
+                HeroProfile.Delete(selectedProfileName);
                 ShowProfileSelectionPanel();
             }, true);
     }
 
     public void StartGame() // load selected profile data then enter GameScene // not finished
     {
-        //SceneController.Instance.ChangeScene("PlayScene", true);
         SceneController.Instance.ChangeScene("InGameScene", true);
         AudioManager.Instance.StopMusic();
     }
@@ -302,32 +286,27 @@ public class StartMenu : Singleton<StartMenu>
 
     private void RefreshProfileSelectionPanel() // destroy buttons, get profiles and add buttons back
     {
-        if (File.Exists(ProfileManagerJson.GetHeroProfileDirectoryPath() + "_testprofile.heroprofile"))
-            ProfileManagerJson.DeleteProfile("_testprofile", false); // test only
-
         for (int i = 0; i < profileButtons.Count; i++) // this loop destroy all buttons
             Destroy(profileButtons[i]);
 
         profileButtons.Clear();
-        ProfileData[] profiles = ProfileManagerJson.GetProfiles();
-
-        for (int i = 0; i < profiles.Length; i++)
+        var profiles = HeroProfile.GetSavedProfiles();
+        foreach (var profile in profiles)
         {
             GameObject clone = Instantiate(profileButtonTemplate, profileSelectionContentPanel);
 
-            Common.RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profiles[i].profileName;
-            Common.RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profiles[i].heroClass;
-            Common.RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profiles[i].level;
+            Common.RecursiveFindChild(clone.transform, "Name").GetComponent<Text>().text = profile.DisplayName;
+            Common.RecursiveFindChild(clone.transform, "Class").GetComponent<Text>().text = "Class " + profile.Class;
+            Common.RecursiveFindChild(clone.transform, "Level").GetComponent<Text>().text = "Level " + profile.Level;
 
             // assigning image
             for (int j = 0; j < heroList.heros.Length; j++)
             {
-                if ((HeroClass)Enum.Parse(typeof(HeroClass), profiles[i].heroClass) == heroList.heros[j].heroClass)
+                if (profile.Class == heroList.heros[j].heroClass)
                     Common.RecursiveFindChild(clone.transform, "Image").GetComponent<Image>().sprite = heroList.heros[j].heroInfo.heroSprite;
             }
 
-            int i2 = i; // https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
-            clone.GetComponent<Button>().onClick.AddListener(() => SelectProfile(profiles[i2].profileName));
+            clone.GetComponent<Button>().onClick.AddListener(() => SelectProfile(profile.DisplayName));
             clone.SetActive(true);
             profileButtons.Add(clone);
         }

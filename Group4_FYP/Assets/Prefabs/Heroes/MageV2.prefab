@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 8326585109876766389}
   - component: {fileID: 3763058550287891040}
   - component: {fileID: 641265602092210362}
-  - component: {fileID: 2640167529940822886}
   - component: {fileID: 6081188879579859361}
   m_Layer: 0
   m_Name: MageV2
@@ -593,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b447a8d655b1a4fbd6c3aaa4d276a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InputReader: {fileID: 11400000, guid: e74f96d4ed5bb3c4daffdc31d9e53750, type: 2}
   moveSpeed: 5
   sprintMultiplier: 2
   weaponHolder: {fileID: 812025677363876902}
@@ -614,6 +614,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a3fcea4342c8a42b8426b14986ff19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InputReader: {fileID: 11400000, guid: e74f96d4ed5bb3c4daffdc31d9e53750, type: 2}
+  m_AbilityActions:
+  - {fileID: 2351185866653722857, guid: 94383b0e47c200e498d519e677790a3d, type: 3}
+  - {fileID: 2784721139309712885, guid: 94383b0e47c200e498d519e677790a3d, type: 3}
+  - {fileID: 5573557062639828474, guid: 94383b0e47c200e498d519e677790a3d, type: 3}
   abilities:
   - {fileID: 11400000, guid: 979e565f8fecdbe4f934c643f22743af, type: 2}
   - {fileID: 11400000, guid: fafd1217067643b4f81d8dadab4e97cb, type: 2}
@@ -632,7 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameWeapons: {fileID: 11400000, guid: 4bf7eab09e882c04eb8e0f20b2c8c265, type: 2}
   weaponHolder: {fileID: 812025677363876903}
-  defaultWeapon: {fileID: 2479174408548472528, guid: d21427122ed038c44965cc3b945302cd, type: 3}
+  defaultWeapon: {fileID: 4564162177879936318, guid: d21427122ed038c44965cc3b945302cd, type: 3}
 --- !u!82 &641265602092210362
 AudioSource:
   m_ObjectHideFlags: 0
@@ -729,36 +734,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2640167529940822886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8326585109876766392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 94383b0e47c200e498d519e677790a3d, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: KeyboardAndMouse
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &6081188879579859361
 MonoBehaviour:
   m_ObjectHideFlags: 0

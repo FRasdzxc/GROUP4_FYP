@@ -14,7 +14,7 @@ public class Orb : Singleton<Orb>
     [SerializeField] private Sprite orbSprite;
 
     private float requiredResetPrice;
-    private List<GameObject> upgradeButtons;
+    private readonly List<GameObject> upgradeButtons = new();
  
     private int _orbs;
     public int Orbs
@@ -28,12 +28,6 @@ public class Orb : Singleton<Orb>
     }
 
     private int usedOrbs;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        upgradeButtons = new List<GameObject>();
-    }
 
     public void RefreshUpgradeItemContainer()
     {
@@ -206,34 +200,4 @@ public class Orb : Singleton<Orb>
         Message.Instance.ShowMessage("+" + value + " Orb", orbSprite);
     }
     #endregion
-
-    // private Transform RecursiveFindChild(Transform parent, string childName)
-    // {
-    //     foreach (Transform child in parent)
-    //     {
-    //         if (child.name == childName)
-    //         {
-    //             return child;
-    //         }
-    //         else
-    //         {
-    //             Transform child2 = RecursiveFindChild(child, childName);
-    //             if (child2 != null)
-    //             {
-    //                 return child2;
-    //             }
-    //         }
-    //     }
-
-    //     return null;
-    // }
-
-    void OnEnable()
-        => GameManager.onPlayerSetUp += SetUp;
-
-    void OnDisable()
-        => GameManager.onPlayerSetUp -= SetUp;
-
-    private void SetUp()
-        => RefreshUpgradeItemContainer();
 }

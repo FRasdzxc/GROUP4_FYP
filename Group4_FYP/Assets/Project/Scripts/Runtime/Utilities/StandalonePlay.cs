@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using PathOfHero.Controllers;
-using PathOfHero.Telemetry;
 
 namespace PathOfHero.Utilities
 {
@@ -23,14 +22,6 @@ namespace PathOfHero.Utilities
 
         private IEnumerator OnLoadComplete(AsyncOperation handle)
         {
-            // var dataCollector = DataCollector.Instance;
-            // if (dataCollector == null)
-            // {
-            //     Debug.LogError("[Bootstrap] Data collector missing! Unable to continue.");
-            //     yield break;
-            // }
-            // yield return StartCoroutine(dataCollector.Activate());
-
             var sceneController = SceneController.Instance;
             if (sceneController == null)
             {

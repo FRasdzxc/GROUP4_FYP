@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using PathOfHero.Managers.Data;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementControllerV2 : MonoBehaviour
 {
+    [SerializeField] protected InputReader m_InputReader;
     [SerializeField] protected float moveSpeed = 5f;
     [SerializeField] protected float sprintMultiplier = 2f;
     [SerializeField] protected GameObject weaponHolder;
@@ -15,10 +15,9 @@ public class MovementControllerV2 : MonoBehaviour
     [SerializeField]
     protected ScoreEventChannel m_ScoreEventChannel;
 
-    protected PlayerInput playerInput;
-    protected InputAction moveAction;
-    protected InputAction sprintAction;
+    protected Vector2 newDir;
     protected Vector2 moveDir;
+    protected bool sprinting;
     protected Rigidbody2D rb2D;
 
     protected AudioClip lastStepClip;
@@ -26,23 +25,27 @@ public class MovementControllerV2 : MonoBehaviour
 
     protected virtual void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
-        moveAction = playerInput.actions["Move"];
-        moveAction.Enable();
+        m_InputReader.Move += OnMove;
+        m_InputReader.Sprint += OnSprint;
+        m_InputReader.SprintCanceled += OnSprintCanceled;
+    }
 
-        sprintAction = playerInput.actions["Sprint"];
-        sprintAction.Enable();
+    protected virtual void OnDisable()
+    {
+        m_InputReader.Move -= OnMove;
+        m_InputReader.Sprint -= OnSprint;
+        m_InputReader.SprintCanceled -= OnSprintCanceled;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        moveDir = moveAction.ReadValue<Vector2>();
+        moveDir = newDir;
         ResetAnimatorParameters();
 
         if (moveDir.magnitude > 0)
@@ -74,7 +77,6 @@ public class MovementControllerV2 : MonoBehaviour
             // if (moveDir.x < -0.5f && moveDir.y > 0.5f)
             //     animator?.SetBool("Left", true); //AW
 
-            var sprinting = sprintAction.ReadValue<float>() == 1;
             if (sprinting)
                 moveDir *= sprintMultiplier;
 
@@ -98,6 +100,15 @@ public class MovementControllerV2 : MonoBehaviour
     {
         rb2D.MovePosition(rb2D.position + moveDir * moveSpeed * Time.deltaTime);
     }
+
+    private void OnMove(Vector2 direction)
+        => newDir = direction;
+
+    private void OnSprint()
+        => sprinting = true;
+
+    private void OnSprintCanceled()
+        => sprinting = false;
 
     public void ResetAnimatorParameters()
     {

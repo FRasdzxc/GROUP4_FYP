@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using PathOfHero.Gameplay;
 
 public abstract class PanelOverride : Panel
 {
@@ -23,7 +22,7 @@ public abstract class PanelOverride : Panel
         {
             //if (panel.GetPanel().activeSelf)
             // if (panel.GetPanelGobj().activeSelf || panel.GetIsOpened())
-            if (panel.GetPanelState().Equals(PanelState.Shown) || panel.GetPanelState().Equals(PanelState.Showing))
+            if (panel.PanelState == PanelState.Shown || panel.PanelState == PanelState.Showing)
                 return false;
         }
 
@@ -39,12 +38,12 @@ public abstract class PanelOverride : Panel
             //if (panel.GetPanel().activeSelf)
             // if (panel.GetPanelGobj().activeSelf || panel.GetIsOpened())
             //     panel.HidePanel();
-            if (panel.GetPanelState().Equals(PanelState.Shown))
+            if (panel.PanelState == PanelState.Shown)
                 panel.HidePanel();
-            else if (panel.GetPanelState().Equals(PanelState.Showing))
+            else if (panel.PanelState == PanelState.Showing)
             {
                 Debug.Log("panel is still showing");
-                while (!panel.GetPanelState().Equals(PanelState.Shown))
+                while (panel.PanelState != PanelState.Shown)
                     await Task.Yield();
                 panel.HidePanel();
             }

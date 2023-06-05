@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using DG.Tweening;
-using PathOfHero.Managers.Data;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovementControllerSide : MovementControllerV2
@@ -39,33 +37,34 @@ public class MovementControllerSide : MovementControllerV2
     [SerializeField]
     protected AudioClip[] hitSpongeSounds;
 
-    protected InputAction moveActionSide;
-    protected InputAction switchGravityAction;
-    protected InputAction jumpAction;
     protected float moveDirSide;
     protected bool isOnGround;
     protected Vector2 leftGroundPos;
 
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
-
-        moveActionSide = playerInput.actions["MoveSide"];
-        moveActionSide.Enable();
-
-        switchGravityAction = playerInput.actions["SwitchGravity"];
-        switchGravityAction.Enable();
-
-        jumpAction = playerInput.actions["JumpSide"];
-        jumpAction.Enable();
-
         leftGroundPos = transform.position;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        m_InputReader.MoveSide += OnMoveSide;
+        m_InputReader.JumpSide += OnJumpSide;
+        m_InputReader.SwitchGravity += OnSwitchGravity;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        m_InputReader.MoveSide -= OnMoveSide;
+        m_InputReader.JumpSide -= OnJumpSide;
+        m_InputReader.SwitchGravity -= OnSwitchGravity;
     }
 
     // Update is called once per frame
     protected async override void Update()
     {
-        moveDirSide = moveActionSide.ReadValue<float>();
         ResetAnimatorParameters();
 
         if (moveDirSide != 0)
@@ -81,7 +80,6 @@ public class MovementControllerSide : MovementControllerV2
                 animator?.SetBool("Right", true); //D
             }
 
-            var sprinting = sprintAction.ReadValue<float>() == 1;
             if (sprinting)
                 moveDirSide *= sprintMultiplier;
 
@@ -97,24 +95,6 @@ public class MovementControllerSide : MovementControllerV2
                 m_ScoreEventChannel.StepTaken();
                 nextStepSound = Time.time + newClip.length * (sprinting ? 0.9f : 1.2f);
                 lastStepClip = newClip;
-            }
-        }
-
-        if (isOnGround) {
-            if (switchGravityAction.triggered)
-            {
-                rb2D.gravityScale *= -1;
-                await transform.DOScaleY(transform.localScale.y * -1, switchGravityDuration).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-            }
-
-            if (jumpAction.triggered && rb2D.velocity.y <= 0f)
-            {
-                rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce * (rb2D.gravityScale < 0 ? -1 : 1));
-                Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
-                leftGroundPos = transform.position;
-
-                if (jumpSounds.Length > 0)
-                    audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
             }
         }
 
@@ -163,4 +143,32 @@ public class MovementControllerSide : MovementControllerV2
 
     private Vector2 CalculateSmokeOffset()
         => ((Vector2)transform.position + Vector2.Scale(smokeOffset, transform.localScale));
+
+    private void OnMoveSide(float direction)
+        => moveDirSide = direction;
+
+    private void OnJumpSide()
+    {
+        if (!isOnGround)
+            return;
+
+        if (rb2D.velocity.y <= 0f)
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce * (rb2D.gravityScale < 0 ? -1 : 1));
+            Instantiate(smoke, CalculateSmokeOffset(), Quaternion.identity);
+            leftGroundPos = transform.position;
+
+            if (jumpSounds.Length > 0)
+                audioSource.PlayOneShot(jumpSounds[Random.Range(0, jumpSounds.Length)]);
+        }
+    }
+
+    private async void OnSwitchGravity()
+    {
+        if (!isOnGround)
+            return;
+
+        rb2D.gravityScale *= -1;
+        await transform.DOScaleY(transform.localScale.y * -1, switchGravityDuration).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
+    }
 }

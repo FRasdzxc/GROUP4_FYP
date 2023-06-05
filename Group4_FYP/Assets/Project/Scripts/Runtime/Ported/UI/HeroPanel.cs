@@ -1,11 +1,12 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using PathOfHero.PersistentData;
 
 public class HeroPanel : PanelOverride
 {
+    [SerializeField] private HeroProfile m_HeroProfile;
     [SerializeField] private GameObject heroPanel;
     [SerializeField] private Text heroNameText;
     [SerializeField] private Text heroLevelText;
@@ -14,10 +15,13 @@ public class HeroPanel : PanelOverride
     [SerializeField] private InventorySlot weaponSlot;
     [SerializeField] private InventorySlot armorSlot;
     [SerializeField] private ArmorItemData tempArmor; // temp
-    
+
+    [SerializeField]
+    private InputReader m_InputReader;
+    [SerializeField]
+    private InputActionReference m_ShowInventoryAction;
+
     private RectTransform heroPanelRectTransform;
-    private InputAction showInventoryAction;
-    private InputAction hideInventoryAction;
 
     private static HeroPanel instance;
     public static HeroPanel Instance => instance;
@@ -32,10 +36,18 @@ public class HeroPanel : PanelOverride
     }
 
     private void OnEnable()
-        => GameManager.onPlayerSetUp += SetUp;
+    {
+        m_InputReader.ShowInventory += ToggleInventory;
+        m_InputReader.HideInventory += ToggleInventory;
+        m_HeroProfile.OnProfileLoaded += OnProfileLoaded;
+    }
 
     private void OnDisable()
-        => GameManager.onPlayerSetUp -= SetUp;
+    {
+        m_InputReader.ShowInventory -= ToggleInventory;
+        m_InputReader.HideInventory -= ToggleInventory;
+        m_HeroProfile.OnProfileLoaded -= OnProfileLoaded;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -49,18 +61,17 @@ public class HeroPanel : PanelOverride
         heroPanelRectTransform.anchoredPosition = new Vector2(0, -heroPanelRectTransform.rect.height / 4);
         heroPanel.SetActive(false);
 
-        heroNameText.text = SaveSystem.Instance.ProfileName;
+        keyHintText.text = m_ShowInventoryAction.action.GetBindingDisplayString();
 
         // temp: will implement the whole thing in the future
         armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ToggleInventory()
     {
-        if (panelState.Equals(PanelState.Hidden) && showInventoryAction.triggered)
+        if (panelState.Equals(PanelState.Hidden))
             ShowPanel();
-        else if (panelState.Equals(PanelState.Shown) && hideInventoryAction.triggered)
+        else if (panelState.Equals(PanelState.Shown))
             HidePanel();
     }
 
@@ -128,14 +139,8 @@ public class HeroPanel : PanelOverride
         weaponSlot.Configure(weaponItem, 1, InventoryMode.Preview);
     }
 
-    protected override void SetUp()
+    private void OnProfileLoaded()
     {
-        base.SetUp();
-
-        showInventoryAction = playerInput.actions["ShowInventory"];
-        hideInventoryAction = playerInput.actions["HideInventory"];
-        showInventoryAction.Enable();
-        hideInventoryAction.Enable();
-        keyHintText.text = showInventoryAction.GetBindingDisplayString();
+        heroNameText.text = m_HeroProfile.DisplayName;
     }
 }
