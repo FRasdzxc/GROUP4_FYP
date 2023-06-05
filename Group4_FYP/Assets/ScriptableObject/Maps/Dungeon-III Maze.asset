@@ -49,6 +49,7 @@ MonoBehaviour:
   playerType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 4, y: 0}
+  completeSound: {fileID: 8300000, guid: 80e25959150eff841932e6a5fdd825bd, type: 3}
   dungeonType: 0
   isTimed: 1
   timeLimit: 435

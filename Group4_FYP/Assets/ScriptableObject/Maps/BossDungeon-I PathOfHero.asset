@@ -35,6 +35,7 @@ MonoBehaviour:
   playerType: 0
   portalPrefab: {fileID: 4646789231267082167, guid: 49a988f47026570489dd87897ebb628e, type: 3}
   portalPos: {x: 73.5, y: 134.5}
+  completeSound: {fileID: 8300000, guid: 80e25959150eff841932e6a5fdd825bd, type: 3}
   dungeonType: 2
   isTimed: 1
   timeLimit: 615
@@ -54,3 +55,8 @@ MonoBehaviour:
     pitch: 1
   gem: {fileID: 11400000, guid: 41091e22bbb950a4eb65949f0e77753e, type: 2}
   secondaryPortalPos: {x: 3.5, y: 184.5}
+  bossDefeatMusic:
+    music: {fileID: 8300000, guid: 1eaf957a79ad955408adb9e2195424f1, type: 3}
+    volume: 1
+    pitch: 1
+  badgeObtainSound: {fileID: 8300000, guid: 80e25959150eff841932e6a5fdd825bd, type: 3}

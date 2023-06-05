@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Threading.Tasks;
-using PathOfHero.UI;
 
 [CreateAssetMenu(fileName = "New Boss Dungeon Map Data", menuName = "Game/Map Data/Boss Dungeon Map Data")]
 public class BossDungeonMapData : DungeonMapData
@@ -14,4 +12,6 @@ public class BossDungeonMapData : DungeonMapData
     public GemItemData gem;
     [Tooltip("For when the player does not have a gem, the portal will spawn here instead.")]
     public Vector2 secondaryPortalPos;
+    public MusicEntry bossDefeatMusic;
+    public AudioClip badgeObtainSound;
 }
