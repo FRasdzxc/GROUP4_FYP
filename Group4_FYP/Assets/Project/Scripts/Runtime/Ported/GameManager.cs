@@ -141,7 +141,7 @@ public class GameManager : Singleton<GameManager>
             return;
 
         // revert all stats earned in dungeon and go back to town
-        SaveManager.Instance.LoadSelectedProfile(); 
+        SaveManager.Instance.ApplyProfile(); 
         LoadMap("map_town");
     }
 
