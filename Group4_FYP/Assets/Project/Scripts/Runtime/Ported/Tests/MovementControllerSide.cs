@@ -37,6 +37,7 @@ public class MovementControllerSide : MovementControllerV2
     [SerializeField]
     protected AudioClip[] hitSpongeSounds;
 
+    protected float newDirSide;
     protected float moveDirSide;
     protected bool isOnGround;
     protected Vector2 leftGroundPos;
@@ -65,6 +66,7 @@ public class MovementControllerSide : MovementControllerV2
     // Update is called once per frame
     protected async override void Update()
     {
+        moveDirSide = newDirSide;
         ResetAnimatorParameters();
 
         if (moveDirSide != 0)
@@ -145,7 +147,7 @@ public class MovementControllerSide : MovementControllerV2
         => ((Vector2)transform.position + Vector2.Scale(smokeOffset, transform.localScale));
 
     private void OnMoveSide(float direction)
-        => moveDirSide = direction;
+        => newDirSide = direction;
 
     private void OnJumpSide()
     {
