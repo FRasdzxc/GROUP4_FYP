@@ -320,6 +320,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMinimap"",
+                    ""type"": ""Button"",
+                    ""id"": ""c1e16125-c055-4393-ba88-814212561832"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -575,6 +584,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchGravity"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0d7b827-6067-4f12-9c4c-95a7f86642c2"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMinimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -683,6 +703,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Gameplay_MoveSide = m_Gameplay.FindAction("MoveSide", throwIfNotFound: true);
         m_Gameplay_JumpSide = m_Gameplay.FindAction("JumpSide", throwIfNotFound: true);
         m_Gameplay_SwitchGravity = m_Gameplay.FindAction("SwitchGravity", throwIfNotFound: true);
+        m_Gameplay_ToggleMinimap = m_Gameplay.FindAction("ToggleMinimap", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_TakeDamage = m_Testing.FindAction("TakeDamage", throwIfNotFound: true);
@@ -849,6 +870,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MoveSide;
     private readonly InputAction m_Gameplay_JumpSide;
     private readonly InputAction m_Gameplay_SwitchGravity;
+    private readonly InputAction m_Gameplay_ToggleMinimap;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -867,6 +889,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @MoveSide => m_Wrapper.m_Gameplay_MoveSide;
         public InputAction @JumpSide => m_Wrapper.m_Gameplay_JumpSide;
         public InputAction @SwitchGravity => m_Wrapper.m_Gameplay_SwitchGravity;
+        public InputAction @ToggleMinimap => m_Wrapper.m_Gameplay_ToggleMinimap;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -918,6 +941,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @SwitchGravity.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
                 @SwitchGravity.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
                 @SwitchGravity.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGravity;
+                @ToggleMinimap.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleMinimap;
+                @ToggleMinimap.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleMinimap;
+                @ToggleMinimap.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleMinimap;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -964,6 +990,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @SwitchGravity.started += instance.OnSwitchGravity;
                 @SwitchGravity.performed += instance.OnSwitchGravity;
                 @SwitchGravity.canceled += instance.OnSwitchGravity;
+                @ToggleMinimap.started += instance.OnToggleMinimap;
+                @ToggleMinimap.performed += instance.OnToggleMinimap;
+                @ToggleMinimap.canceled += instance.OnToggleMinimap;
             }
         }
     }
@@ -1054,6 +1083,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnMoveSide(InputAction.CallbackContext context);
         void OnJumpSide(InputAction.CallbackContext context);
         void OnSwitchGravity(InputAction.CallbackContext context);
+        void OnToggleMinimap(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

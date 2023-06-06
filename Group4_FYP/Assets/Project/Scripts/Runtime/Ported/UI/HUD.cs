@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,7 @@ using PathOfHero.Utilities;
 public class HUD : Singleton<HUD>
 {
     [SerializeField] private HeroProfile m_HeroProfile;
+    [SerializeField] private InputReader m_InputReader;
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider manaSlider;
@@ -39,6 +41,11 @@ public class HUD : Singleton<HUD>
     [SerializeField] private CanvasGroup timerPanelCanvasGroup;
     [SerializeField] private Text timerText;
 
+    [SerializeField] private Image mapPanel;
+    [SerializeField] private Text minimapHintText;
+    [SerializeField] private float minimapToggleDuration = 0.5f;
+    [SerializeField] private AudioClip[] toggleMinimapSounds;
+
     [SerializeField] private GameObject hudPanel;
     [SerializeField] private GameObject mainPanel;
 
@@ -48,20 +55,27 @@ public class HUD : Singleton<HUD>
 
     private GameObject hugeMessageClone;
 
+    private bool minimapExpanded;
+    private bool togglingMinimap;
+    public static event Action<bool, float> onMinimapToggled;
+
     private void OnEnable()
     {
         m_HeroProfile.OnProfileLoaded += OnProfileLoaded;
+        m_InputReader.ToggleMinimap += ToggleMinimap;
     }
 
     private void OnDisable()
     {
         m_HeroProfile.OnProfileLoaded -= OnProfileLoaded;
+        m_InputReader.ToggleMinimap -= ToggleMinimap;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         regionText.text = ""; // temporary?
+        minimapHintText.text = "'M' Expand";
     }
 
     public void SetupAbility(int slotNumber, Sprite icon, float cooldownTime, string hintText)
@@ -294,4 +308,53 @@ public class HUD : Singleton<HUD>
     {
         profileNameText.text = m_HeroProfile.DisplayName;
     }
+
+    public void ToggleMinimap()
+        => StartCoroutine(AnimatedMinimap());
+
+    public IEnumerator AnimatedMinimap()
+    {
+        if (togglingMinimap)
+            yield break;
+
+        if (toggleMinimapSounds.Length > 0)
+            AudioManager.Instance.PlaySound(toggleMinimapSounds[UnityEngine.Random.Range(0, toggleMinimapSounds.Length)]);
+
+        onMinimapToggled?.Invoke(minimapExpanded, minimapToggleDuration);
+        togglingMinimap = true;
+        Sequence tweenSequence = DOTween.Sequence();
+        tweenSequence.SetEase(Ease.OutQuart);
+
+        if (minimapExpanded)
+        {
+            yield return tweenSequence.Append(mapPanel.DOFade(1, minimapToggleDuration))
+                    .Join(mapPanel.transform.DOScale(Vector2.one, minimapToggleDuration))
+                    .Join(mobCountText.transform.DOScale(Vector2.one, minimapToggleDuration))
+                    .Join(minimapHintText.transform.DOScale(Vector2.one, minimapToggleDuration))
+                    .WaitForCompletion();
+            mapPanel.GetComponent<Mask>().enabled = true;
+            minimapHintText.text = "'M' Expand";
+        }
+        else
+        {
+            float targetScale = mainPanel.GetComponent<RectTransform>().rect.height / mapPanel.GetComponent<RectTransform>().rect.height;
+
+            mapPanel.GetComponent<Mask>().enabled = false;
+            yield return tweenSequence.Append(mapPanel.DOFade(0, minimapToggleDuration))
+                    .Join(mapPanel.transform.DOScale(new Vector2(targetScale, targetScale), minimapToggleDuration))
+                    .Join(mobCountText.transform.DOScale(new Vector2(1 / targetScale, 1 / targetScale), minimapToggleDuration))
+                    .Join(minimapHintText.transform.DOScale(new Vector2(1 / targetScale, 1 / targetScale), minimapToggleDuration))
+                    .WaitForCompletion();
+            minimapHintText.text = "'M' Retract";
+        }
+        
+        minimapExpanded = !minimapExpanded;
+        togglingMinimap = false;
+    }
+
+    public bool IsMinimapExpanded()
+        => minimapExpanded;
+
+    public float GetMinimapToggleDuration()
+        => minimapToggleDuration;
 }

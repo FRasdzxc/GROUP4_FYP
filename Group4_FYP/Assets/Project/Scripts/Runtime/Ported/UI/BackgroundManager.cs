@@ -42,7 +42,7 @@ public class BackgroundManager : MonoBehaviour
 
     private async void ChangeTilemapBackground(float duration = 1f)
     {
-        if (tilemapBackgrounds.Length <= 0)
+        if (tilemapBackgrounds.Length <= 0 || !tilemapBackgroundContainer)
             return;
 
         await backgroundCanvasGroup.DOFade(1, duration).SetEase(Ease.OutQuart).AsyncWaitForCompletion();

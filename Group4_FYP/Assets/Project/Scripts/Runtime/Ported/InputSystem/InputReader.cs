@@ -21,6 +21,7 @@ public class InputReader : ScriptableObject, InputActions.IGameplayActions, Inpu
     public event UnityAction<float> MoveSide = delegate { };
     public event UnityAction JumpSide = delegate { };
     public event UnityAction SwitchGravity = delegate { };
+    public event UnityAction ToggleMinimap = delegate { };
 
     // UI
     public event UnityAction HidePanel = delegate { };
@@ -122,6 +123,9 @@ public class InputReader : ScriptableObject, InputActions.IGameplayActions, Inpu
 
     public void OnSwitchGravity(InputAction.CallbackContext context)
         => GenericAction(context, SwitchGravity);
+
+    public void OnToggleMinimap(InputAction.CallbackContext context)
+        => GenericAction(context, ToggleMinimap);
     #endregion
 
     #region UI

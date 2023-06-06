@@ -42,7 +42,7 @@ public class BossDungeonMapController : DungeonMapController
         }
         else
         {
-            yield return Notification.Instance.ShowNotification($"You do not have a Gem, so you will not be participating in the Boss Battle", 5f);
+            yield return Notification.Instance.ShowNotification($"You do not have a Gem, so you will not be participating in the Boss Battle. A Return Portal will spawn.", 5f);
             SpawnPortal(bossDungeonMapData.secondaryPortalPos);
         }
     }
