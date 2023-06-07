@@ -52,9 +52,9 @@ public class AbilityManager : Singleton<AbilityManager>
 
     void Update()
     {
+#if UNITY_EDITOR
         if (GameManager.Instance.IsPlayingHostile())
         {
-#if UNITY_EDITOR
             // test refill mana
             if (Input.GetKeyDown(KeyCode.Backslash))
             {
@@ -63,8 +63,8 @@ public class AbilityManager : Singleton<AbilityManager>
                 hud.UpdateMana(mana, upgradedMaxMana);
                 ReadyEquippedAbilities();
             }
-#endif
         }
+#endif
 
         if (mana < upgradedMaxMana)
             mana += Time.deltaTime * (manaRegeneration + manaRegenerationUpgrade);

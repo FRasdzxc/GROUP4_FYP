@@ -27,7 +27,7 @@ public class HUD : Singleton<HUD>
     [SerializeField] private Text hugeMessageSubtitleText;
     [SerializeField] private Transform hugeMessageContainer;
 
-    [SerializeField] private Text regionText;
+    //[SerializeField] private Text regionText;
     [SerializeField] private Slider[] abilitySliders;
     [SerializeField] private Image[] abilityImages;
     [SerializeField] private GameObject[] abilityCooldownText;
@@ -74,7 +74,7 @@ public class HUD : Singleton<HUD>
     // Start is called before the first frame update
     void Start()
     {
-        regionText.text = ""; // temporary?
+        //regionText.text = ""; // temporary?
         minimapHintText.text = "'M' Expand";
     }
 
