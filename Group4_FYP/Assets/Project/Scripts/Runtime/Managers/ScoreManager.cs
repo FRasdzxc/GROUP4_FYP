@@ -7,13 +7,14 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using PathOfHero.Managers.Data;
 using PathOfHero.PersistentData;
+using PathOfHero.Utilities;
 
 namespace PathOfHero.Managers
 {
-    public class ScoreManager : MonoBehaviour
+    public class ScoreManager : Singleton<ScoreManager>
     {
-        private static readonly string k_Endpoint = "http://127.0.0.1:8000/api/v1/poh";
-        private static readonly string k_RecordEndpoint = k_Endpoint + "/record";
+        private static readonly string k_Endpoint = "http://127.0.0.1:8000/";
+        private static readonly string k_RecordEndpoint = "/api/v1/poh/record";
         private static readonly Encoding k_Encoding = new UTF8Encoding();
 
         [SerializeField]
@@ -23,15 +24,17 @@ namespace PathOfHero.Managers
         private ScoreEventChannel m_EventChannel;
 
         private bool m_InLevel;
+        private SessionStats m_PrevStats;
         private SessionStats m_CurrentStats;
 
         public bool InLevel => m_InLevel;
         public SessionStats CurrentStats => m_CurrentStats;
+        public SessionStats PrevStats => m_PrevStats;
 
         private void OnEnable()
         {
             m_EventChannel.OnLevelStart += LevelStarted;
-            m_EventChannel.OnLevelEnd += LevelEnded;
+            m_EventChannel.OnLevelComplete += LevelComplete;
 
             m_EventChannel.OnStepTaken += StepsTaken;
             m_EventChannel.OnWeaponUsed += WeaponUsed;
@@ -44,7 +47,7 @@ namespace PathOfHero.Managers
         private void OnDisable()
         {
             m_EventChannel.OnLevelStart -= LevelStarted;
-            m_EventChannel.OnLevelEnd -= LevelEnded;
+            m_EventChannel.OnLevelComplete -= LevelComplete;
 
             m_EventChannel.OnStepTaken -= StepsTaken;
             m_EventChannel.OnWeaponUsed -= WeaponUsed;
@@ -58,14 +61,14 @@ namespace PathOfHero.Managers
         // Debug use only
         private void Start()
         {
-            var session = new SessionStats()
+            m_CurrentStats = new SessionStats()
             {
                 playerName = "Editor",
                 mapId = "map_dungeoni",
 
                 timeTaken = 42.0f
             };
-            StartCoroutine(UploadSession(session));
+            StartCoroutine(UploadSession(m_CurrentStats));
         }
 #endif
 
@@ -82,17 +85,21 @@ namespace PathOfHero.Managers
             if (m_InLevel)
                 return;
 
-            m_CurrentStats = new() { mapId = mapId };
+            m_CurrentStats = new() { 
+                mapId = mapId,
+                playerName = m_HeroProfile.DisplayName
+            };
             m_InLevel = true;
         }
 
-        private void LevelEnded()
+        private void LevelComplete(bool success)
         {
             if (!m_InLevel)
                 return;
 
             m_InLevel = false;
-            StartCoroutine(UploadSession(m_CurrentStats));
+            if (!success)
+                m_CurrentStats = null;
         }
 
         private void StepsTaken()
@@ -143,10 +150,10 @@ namespace PathOfHero.Managers
 
         private void MobKilled(string mobName)
         {
-            if (!m_InLevel || string.IsNullOrWhiteSpace(mobName))
+            if (string.IsNullOrWhiteSpace(mobName))
                 return;
 
-            // Check if the mob is a chest
+            // Check if the mob is a chest - can be done after beating a level
             if (mobName.EndsWith("Chest"))
             {
                 if (!m_CurrentStats.chestsFound.ContainsKey(mobName))
@@ -154,7 +161,7 @@ namespace PathOfHero.Managers
 
                 m_CurrentStats.chestsFound[mobName]++;
             }
-            else
+            else if (m_InLevel)
             {
                 if (!m_CurrentStats.mobsKilled.ContainsKey(mobName))
                     m_CurrentStats.mobsKilled[mobName] = 0;
@@ -163,14 +170,17 @@ namespace PathOfHero.Managers
             }
         }
 
+        public void UploadRecord()
+            => StartCoroutine(UploadSession(m_CurrentStats));
+
         private IEnumerator UploadSession(SessionStats session)
         {
-            session.playerName = m_HeroProfile.DisplayName;
-
+            // NOTE: Hack for gradshow - allow changing of endpoint address without rebuilding the game 
+            var endpoint = PlayerPrefs.GetString("recordsEndpoint", k_Endpoint);
             var rawJson = JsonConvert.SerializeObject(session);
 
             // Create a custom web request that send JSON body
-            using UnityWebRequest www = new UnityWebRequest($"{k_RecordEndpoint}", "POST");
+            using UnityWebRequest www = new UnityWebRequest($"{endpoint}{k_RecordEndpoint}", "POST");
             www.uploadHandler = new UploadHandlerRaw(k_Encoding.GetBytes(rawJson));
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
@@ -179,7 +189,11 @@ namespace PathOfHero.Managers
             if (www.result != UnityWebRequest.Result.Success)
                 Debug.LogWarning($"[Score Manager] Upload session stats failed\n{www.result}: {www.error}");
             else
+            {
                 Debug.Log($"[Score Manager] Uploaded session stats successfully.");
+                m_PrevStats = session;
+                m_CurrentStats = null;
+            }
         }
 
         [System.Serializable]

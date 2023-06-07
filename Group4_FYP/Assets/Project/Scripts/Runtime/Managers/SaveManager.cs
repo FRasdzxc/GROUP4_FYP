@@ -28,8 +28,7 @@ namespace PathOfHero.Managers
                 Time.unscaledTime < m_NextAutoSaveUnscaledTime)
                 return;
 
-            SaveProfile();
-            m_NextAutoSaveUnscaledTime = Time.unscaledTime + (m_AutoSaveInterval * 60f);
+            SaveProfile(accountForMapType: false);
         }
 
         public void LoadSelectedProfile()
@@ -80,6 +79,7 @@ namespace PathOfHero.Managers
                 _ = Notification.Instance.ShowNotificationAsync($"Successfully saved data to Profile '<color={CustomColorStrings.green}>{m_RuntimeProfile.DisplayName}</color>'!");
         }
 
+        // TODO: This also handles reverting on failing/giving up in dungeons
         public void ApplyProfile()
         {
             GameManager.Instance.MapId = m_RuntimeProfile.MapId;

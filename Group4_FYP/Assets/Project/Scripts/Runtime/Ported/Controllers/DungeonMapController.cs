@@ -52,7 +52,7 @@ public class DungeonMapController : HostileMapController
 
     protected override void SpawnPortal()
     {
-        m_ScoreEventChannel.LevelEnded();
+        m_ScoreEventChannel.LevelCompleted(true);
         StopTimer();
         base.SpawnPortal();
     }

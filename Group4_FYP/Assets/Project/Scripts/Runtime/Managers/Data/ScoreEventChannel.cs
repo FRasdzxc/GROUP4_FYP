@@ -7,7 +7,7 @@ namespace PathOfHero.Managers.Data
     public class ScoreEventChannel : ScriptableObject
     {
         public UnityAction<string> OnLevelStart;
-        public UnityAction OnLevelEnd;
+        public UnityAction<bool> OnLevelComplete;
 
         public UnityAction OnStepTaken;
         public UnityAction<string> OnWeaponUsed;
@@ -17,7 +17,7 @@ namespace PathOfHero.Managers.Data
         public UnityAction<string> OnMobKilled;
 
         public void LevelStarted(string mapId) => OnLevelStart?.Invoke(mapId);
-        public void LevelEnded() => OnLevelEnd?.Invoke();
+        public void LevelCompleted(bool success) => OnLevelComplete?.Invoke(success);
         public void StepTaken() => OnStepTaken?.Invoke();
         public void WeaponUsed(string weaponId) => OnWeaponUsed?.Invoke(weaponId);
         public void AbilityUsed(string abilityId) => OnAbilityUsed?.Invoke(abilityId);

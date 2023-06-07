@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using PathOfHero.Managers;
+using PathOfHero.Managers.Data;
 using PathOfHero.UI;
 using PathOfHero.Utilities;
 
@@ -21,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     private string defaultMapId = "map_town";
     [SerializeField]
     private PlayerTypeEntry[] playerTypeEntries;
+    [SerializeField]
+    private ScoreEventChannel m_ScoreEventChannel;
 
     public GameState GameState { get; set; }
     public string MapId { get; set; }
@@ -140,6 +143,8 @@ public class GameManager : Singleton<GameManager>
         if (MapType != MapType.Dungeon)
             return;
 
+        m_ScoreEventChannel.LevelCompleted(false);
+
         // revert all stats earned in dungeon and go back to town
         SaveManager.Instance.ApplyProfile(); 
         LoadMap("map_town");
@@ -165,5 +170,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         SaveManager.Instance.ApplyProfile();
+
+        // Display record
+        var scoreManager = ScoreManager.Instance;
+        if (MapType == MapType.Peaceful && scoreManager?.CurrentStats != null)
+            DungeonResultPanel.Instance.ShowDungeonResultPanel(scoreManager.CurrentStats);
     }
 }
