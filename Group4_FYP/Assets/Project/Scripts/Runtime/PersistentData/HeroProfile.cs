@@ -128,7 +128,7 @@ namespace PathOfHero.PersistentData
         [SerializeField]
         private int m_Coins;
         [SerializeField]
-        private bool m_badgeObtained;
+        private bool m_BadgeObtained;
 
         // Health
         [SerializeField]
@@ -215,8 +215,8 @@ namespace PathOfHero.PersistentData
         }
         public bool BadgeObtained
         {
-            get => m_badgeObtained;
-            set => m_badgeObtained = value;
+            get => m_BadgeObtained;
+            set => m_BadgeObtained = value;
         }
 
         public float Health
@@ -352,7 +352,7 @@ namespace PathOfHero.PersistentData
             m_Level = profile.m_Level;
             m_Experience = profile.m_Experience;
             m_Coins = profile.m_Coins;
-            m_badgeObtained = profile.m_badgeObtained;
+            m_BadgeObtained = profile.m_BadgeObtained;
             m_Health = profile.m_Health;
             m_MaxHealth = profile.m_MaxHealth;
             m_HealthRegeneration = profile.m_HealthRegeneration;
