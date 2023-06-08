@@ -72,7 +72,6 @@ namespace PathOfHero.Managers
 
                 timeTaken = 42.0f
             };
-            StartCoroutine(UploadSession(m_CurrentStats));
 #endif
         }
 
