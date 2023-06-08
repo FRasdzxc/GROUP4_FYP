@@ -1,43 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PointMovement : MonoBehaviour
 {
-
-    GameObject player;
     string storedType;
     int storedValue;
     public float speed;
-    float velocity;
-    // Start is called before the first frame update
-    void Start()
+
+    private Rigidbody2D m_Rigidbody2D;
+    private Transform m_MoveTarget;
+
+    private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if (player != null)
-        {
-            velocity = speed * Time.deltaTime;
-            float distance = Vector2.Distance(transform.position, player.transform.position);
-            if(distance <= 0.5f)
-            {
-                if(storedType == "coin")
-                    player.GetComponent<Hero>().AddCoin(storedValue);
-                if(storedType == "xp")
-                    player.GetComponent<Hero>().AddEXP(storedValue);
-                if(storedType == "hp")
-                    player.GetComponent<Hero>().AddHealth(storedValue);
-                if(storedType == "mp")
-                    player.GetComponent<AbilityManager>().AddMana(storedValue);
-                Destroy(gameObject);
-            }
-        }
+        if (m_MoveTarget == null)
+            return;
 
-        //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocity);
+        float distance = Vector2.Distance(transform.position, m_MoveTarget.position);
+        if (distance < 0.5f && m_MoveTarget.TryGetComponent<Hero>(out var hero) && m_MoveTarget.TryGetComponent<AbilityManager>(out var abilityManager))
+        {
+            switch (storedType)
+            {
+                case "coin":
+                    hero.AddCoin(storedValue);
+                    break;
+                case "xp":
+                    hero.AddEXP(storedValue);
+                    break;
+                case "hp":
+                    hero.AddHealth(storedValue);
+                    break;
+                case "mp":
+                    abilityManager.AddMana(storedValue);
+                    break;
+            }
+            Destroy(gameObject);
+        }
+        else
+            m_Rigidbody2D.MovePosition(Vector2.Lerp(transform.position, m_MoveTarget.position, speed * Time.fixedDeltaTime));
     }
 
     public void SetValue(string type, int value)
@@ -46,11 +49,15 @@ public class PointMovement : MonoBehaviour
         storedValue = value;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocity);
-        }
+        if (m_MoveTarget == null && collision.CompareTag("Player"))
+            m_MoveTarget = collision.transform;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (m_MoveTarget == collision.transform)
+            m_MoveTarget = null;
     }
 }
