@@ -6,15 +6,41 @@ using PathOfHero.PersistentData;
 
 public class HeroPanel : PanelOverride
 {
-    [SerializeField] private HeroProfile m_HeroProfile;
-    [SerializeField] private GameObject heroPanel;
-    [SerializeField] private Text heroNameText;
-    [SerializeField] private Text heroLevelText;
-    [SerializeField] private Text coinText;
-    [SerializeField] private Text keyHintText;
-    [SerializeField] private InventorySlot weaponSlot;
-    [SerializeField] private InventorySlot armorSlot;
-    [SerializeField] private ArmorItemData tempArmor; // temp
+    [SerializeField]
+    private HeroProfile m_HeroProfile;
+
+    [SerializeField]
+    private GameObject heroPanel;
+
+    [SerializeField]
+    private Text heroNameText;
+
+    [SerializeField]
+    private Text heroLevelText;
+
+    [SerializeField]
+    private Text coinText;
+
+    [SerializeField]
+    private Text keyHintText;
+
+    [SerializeField]
+    private InventorySlot weaponSlot;
+
+    [SerializeField]
+    private InventorySlot armorSlot;
+
+    [SerializeField]
+    private ArmorItemData tempArmor; // temp
+
+    [SerializeField]
+    private InventorySlot badgeSlot;
+
+    [SerializeField]
+    private ItemData badge;
+
+    [SerializeField]
+    private ItemData placeholderBadge;
 
     [SerializeField]
     private InputReader m_InputReader;
@@ -65,6 +91,7 @@ public class HeroPanel : PanelOverride
 
         // temp: will implement the whole thing in the future
         armorSlot.Configure(tempArmor, 1, InventoryMode.Preview);
+        badgeSlot.Configure(placeholderBadge, 1, InventoryMode.Preview);
     }
 
     private void ToggleInventory()
@@ -137,6 +164,16 @@ public class HeroPanel : PanelOverride
     {
         weaponSlot.Clear();
         weaponSlot.Configure(weaponItem, 1, InventoryMode.Preview);
+    }
+
+    public void SetupBadgeSlot(bool badgeObtained)
+    {
+        badgeSlot.Clear();
+
+        if (badgeObtained)
+            badgeSlot.Configure(badge, 1, InventoryMode.Preview);
+        else
+            badgeSlot.Configure(placeholderBadge, 1, InventoryMode.Preview);
     }
 
     private void OnProfileLoaded()

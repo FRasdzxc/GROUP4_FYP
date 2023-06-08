@@ -41,6 +41,7 @@ namespace PathOfHero.PersistentData
 
             createdProfile.Class = heroClass;
             createdProfile.Level = 1;
+            createdProfile.BadgeObtained = false;
 
             createdProfile.Health = classDefault.health;
             createdProfile.MaxHealth = classDefault.health;
@@ -126,6 +127,8 @@ namespace PathOfHero.PersistentData
         private int m_Experience;
         [SerializeField]
         private int m_Coins;
+        [SerializeField]
+        private bool m_badgeObtained;
 
         // Health
         [SerializeField]
@@ -209,6 +212,11 @@ namespace PathOfHero.PersistentData
         {
             get => m_Coins;
             set => m_Coins = value;
+        }
+        public bool BadgeObtained
+        {
+            get => m_badgeObtained;
+            set => m_badgeObtained = value;
         }
 
         public float Health
@@ -344,6 +352,7 @@ namespace PathOfHero.PersistentData
             m_Level = profile.m_Level;
             m_Experience = profile.m_Experience;
             m_Coins = profile.m_Coins;
+            m_badgeObtained = profile.m_badgeObtained;
             m_Health = profile.m_Health;
             m_MaxHealth = profile.m_MaxHealth;
             m_HealthRegeneration = profile.m_HealthRegeneration;

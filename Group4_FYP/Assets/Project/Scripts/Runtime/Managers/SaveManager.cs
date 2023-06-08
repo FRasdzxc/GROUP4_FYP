@@ -57,6 +57,7 @@ namespace PathOfHero.Managers
             m_RuntimeProfile.HealthRegenerationUpgrade = Hero.Instance.GetHealthRegenerationUpgrade();
             m_RuntimeProfile.DefenseUpgrade = Hero.Instance.GetDefenseUpgrade();
             m_RuntimeProfile.ExpGainMultiplierUpgrade = Hero.Instance.GetExpGainMultiplierUpgrade();
+            m_RuntimeProfile.BadgeObtained = Hero.Instance.GetBadgeObtained();
 
             m_RuntimeProfile.Mana = AbilityManager.Instance.GetMana();
             m_RuntimeProfile.MaxMana = AbilityManager.Instance.GetMaxMana();
@@ -95,6 +96,7 @@ namespace PathOfHero.Managers
             Hero.Instance.SetMaxHealthUpgrade(m_RuntimeProfile.MaxHealthUpgrade);
             Hero.Instance.SetStoredCoin(m_RuntimeProfile.Coins);
             Hero.Instance.SetStoredExp(m_RuntimeProfile.Experience);
+            Hero.Instance.SetBadgeObtained(m_RuntimeProfile.BadgeObtained);
 
             Orb.Instance.SetOrbs(m_RuntimeProfile.Orbs);
             Orb.Instance.SetUsedOrbs(m_RuntimeProfile.UsedOrbs);

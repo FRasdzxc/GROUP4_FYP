@@ -68,6 +68,8 @@ public class Hero : Singleton<Hero>
 
     private AudioSource audioSource;
 
+    private bool badgeObtained;
+
     public static event System.Action onHeroDeath;
 
 
@@ -222,135 +224,94 @@ public class Hero : Singleton<Hero>
         => audioSource.PlayOneShot(audioClip);
     #region Setters
     public void SetHealth(float health)
-    {
-        this.health = health;
-    }
+        => this.health = health;
 
     public void SetMaxHealth(float maxHealth)
-    {
-        this.maxHealth = maxHealth;
-    }
+        => this.maxHealth = maxHealth;
 
     public void SetMaxHealthUpgrade(float value)
-    {
-        this.MaxHealthUpgrade = value;
-    }
+        => this.MaxHealthUpgrade = value;
 
     public void SetHealthRegeneration(float healthRegeneration)
-    {
-        this.healthRegeneration = healthRegeneration;
-    }
+        => this.healthRegeneration = healthRegeneration;
 
     public void SetHealthRegenerationUpgrade(float value)
-    {
-        this.healthRegenerationUpgrade = value;
-    }
+        => this.healthRegenerationUpgrade = value;
 
     public void SetDefense(float value)
     {
         if (value < 1f) // preventive
-        {
             defense = 1f;
-        }
         else
-        {
             defense = value;
-        }
     }
 
     public void SetDefenseUpgrade(float value)
-    {
-        DefenseUpgrade = value;
-    }
+        => DefenseUpgrade = value;
 
     public void SetLevel(int level)
-    {
-        this.level = level;
-    }
+        => this.level = level;
 
     public void SetStoredExp(int storedExp)
-    {
-        this.storedExp = storedExp;
-    }
+        => this.storedExp = storedExp;
 
     public void SetExpGainMultiplierUpgrade(float value)
-    {
-        this.expGainMultiplierUpgrade = value;
-    }
+        => this.expGainMultiplierUpgrade = value;
 
     public void SetStoredCoin(int coin)
+        => this.storedCoin = coin;
+
+    public void SetBadgeObtained(bool value)
     {
-        this.storedCoin = coin;
+        badgeObtained = value;
+        HeroPanel.Instance.SetupBadgeSlot(value);
     }
     #endregion
 
     #region Getters
     public float GetHealth()
-    {
-        return health;
-    }
+        => health;
 
     public float GetMaxHealth()
-    {
-        return maxHealth;
-    }
+        => maxHealth;
 
     public float GetUpgradedMaxHealth()
-    {
-        return upgradedMaxHealth;
-    }
+        => upgradedMaxHealth;
 
     public float GetMaxHealthUpgrade()
-    {
-        return MaxHealthUpgrade;
-    }
+        => MaxHealthUpgrade;
 
     public float GetHealthRegeneration()
-    {
-        return healthRegeneration;
-    }
+        => healthRegeneration;
 
     public float GetHealthRegenerationUpgrade()
-    {
-        return healthRegenerationUpgrade;
-    }
+        => healthRegenerationUpgrade;
 
     public float GetDefense()
-    {
-        return defense;
-    }
+        => defense;
 
     public float GetDefenseUpgrade()
-    {
-        return DefenseUpgrade;
-    }
+        => DefenseUpgrade;
 
     public int GetLevel()
-    {
-        return level;
-    }
+        => level;
     
     public int GetStoredExp()
-    {
-        return storedExp;
-    }
+        => storedExp;
 
     public float GetExpGainMultiplierUpgrade()
-    {
-        return expGainMultiplierUpgrade;
-    }
+        => expGainMultiplierUpgrade;
 
     public int GetStoredCoin()
-    {
-        return storedCoin;
-    }
+        => storedCoin;
+
+    public bool GetBadgeObtained()
+        => badgeObtained;
     #endregion
 
     #region AddDeduct
     public void AddHealth(float value)
-    {
-        health += value;
-    }
+        => health += value;
 
     public void AddMaxHealthUpgrade(float value)
     {
@@ -359,14 +320,10 @@ public class Hero : Singleton<Hero>
     }
 
     public void AddHealthRegenerationUpgrade(float value)
-    {
-        healthRegenerationUpgrade += value;
-    }
+        => healthRegenerationUpgrade += value;
 
     public void AddDefenseUpgrade(float value)
-    {
-        DefenseUpgrade += value;
-    }
+        => DefenseUpgrade += value;
 
     public void AddEXP(int exp, bool accountForExpGainMultiplier = true)
     {
@@ -375,14 +332,10 @@ public class Hero : Singleton<Hero>
     }
 
     public void AddExpGainMultiplierUpgrade(float value)
-    {
-        expGainMultiplierUpgrade += value;
-    }
+        => expGainMultiplierUpgrade += value;
 
     public void AddCoin(int coin)
-    {
-        storedCoin += coin;
-    }
+        => storedCoin += coin;
     #endregion
 
     protected void OnTriggerEnter2D(Collider2D collision)

@@ -175,6 +175,7 @@ public class Orb : Singleton<Orb>
             },
             true,
             true,
+            $"<color={CustomColorStrings.yellow}>You have spent:</color> {usedOrbs.ToString("n0")} Orbs",
             $"<color={CustomColorStrings.yellow}>Cost:</color> {requiredResetPrice.ToString("n0")} Coins"
             );
 
