@@ -13,7 +13,7 @@ namespace PathOfHero.Managers
 {
     public class ScoreManager : Singleton<ScoreManager>
     {
-        private static readonly string k_Endpoint = "http://127.0.0.1:8000/";
+        private static readonly string k_Endpoint = "http://127.0.0.1:8000";
         private static readonly string k_RecordEndpoint = "/api/v1/poh/record";
         private static readonly Encoding k_Encoding = new UTF8Encoding();
 
@@ -57,10 +57,14 @@ namespace PathOfHero.Managers
             m_EventChannel.OnMobKilled -= MobKilled;
         }
 
-#if UNITY_EDITOR
-        // Debug use only
         private void Start()
         {
+            // Expose default value
+            if (string.IsNullOrWhiteSpace(PlayerPrefs.GetString("recordsEndpoint", null)))
+                PlayerPrefs.SetString("recordsEndpoint", k_Endpoint);
+
+#if UNITY_EDITOR
+            // Debug use only
             m_CurrentStats = new SessionStats()
             {
                 playerName = "Editor",
@@ -69,8 +73,8 @@ namespace PathOfHero.Managers
                 timeTaken = 42.0f
             };
             StartCoroutine(UploadSession(m_CurrentStats));
-        }
 #endif
+        }
 
         private void Update()
         {
@@ -170,8 +174,8 @@ namespace PathOfHero.Managers
             }
         }
 
-        public void UploadRecord()
-            => StartCoroutine(UploadSession(m_CurrentStats));
+        public void UploadRecord(SessionStats session)
+            => StartCoroutine(UploadSession(session));
 
         private IEnumerator UploadSession(SessionStats session)
         {
@@ -187,7 +191,7 @@ namespace PathOfHero.Managers
 
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
-                Debug.LogWarning($"[Score Manager] Upload session stats failed\n{www.result}: {www.error}");
+                Debug.LogWarning($"[Score Manager] Upload session stats to {endpoint} failed\n{www.result}: {www.error}");
             else
             {
                 Debug.Log($"[Score Manager] Uploaded session stats successfully.");

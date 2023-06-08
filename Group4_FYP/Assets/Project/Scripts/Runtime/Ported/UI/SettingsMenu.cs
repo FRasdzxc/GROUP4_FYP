@@ -15,6 +15,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider volumeSlider;
 
+    private bool ignore;
     private List<ResolutionEntry> resolutions;
 
     private void Awake()
@@ -34,12 +35,17 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(resolutions.Select(r => r.ToString()).ToList());
         resolutionDropdown.RefreshShownValue();
 
-        // load settings
+        // Note: Hack for gradshow - dont switch resolutions when loading settings
+        ignore = true;
         LoadSettings();
+        ignore = false;
     }
 
     public void SetResolution(int resolutionIndex)
     {
+        if (ignore)
+            return;
+
         var resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         resolutionDropdown.value = resolutionIndex;
@@ -47,6 +53,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
+        if (ignore)
+            return;
+
         Screen.fullScreen = isFullscreen;
         fullscreenToggle.isOn = isFullscreen;
     }

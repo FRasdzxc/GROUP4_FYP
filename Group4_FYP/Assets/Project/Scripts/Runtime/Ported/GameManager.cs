@@ -174,6 +174,9 @@ public class GameManager : Singleton<GameManager>
         // Display record
         var scoreManager = ScoreManager.Instance;
         if (MapType == MapType.Peaceful && scoreManager?.CurrentStats != null)
+        {
             DungeonResultPanel.Instance.ShowDungeonResultPanel(scoreManager.CurrentStats);
+            ScoreManager.Instance.UploadRecord(scoreManager.CurrentStats);
+        }
     }
 }
