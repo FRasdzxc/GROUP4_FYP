@@ -165,7 +165,7 @@ public class Orb : Singleton<Orb>
                     AbilityManager.Instance.SetMaxManaUpgrade(0);
                     AbilityManager.Instance.SetManaRegenerationUpgrade(0);
                     Hero.Instance.SetExpGainMultiplierUpgrade(1);
-                    Hero.Instance.SetDefenseUpgrade(1);
+                    Hero.Instance.SetDefenseUpgrade(1); // BUG: Should get default value from class data
                     AbilityManager.Instance.SetAbilityDamageUpgrade(1);
 
                     _ = Notification.Instance.ShowNotificationAsync("Reset Orb upgrades");
