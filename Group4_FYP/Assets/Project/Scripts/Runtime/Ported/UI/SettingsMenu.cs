@@ -35,10 +35,7 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(resolutions.Select(r => r.ToString()).ToList());
         resolutionDropdown.RefreshShownValue();
 
-        // Note: Hack for gradshow - dont switch resolutions when loading settings
-        ignore = true;
         LoadSettings();
-        ignore = false;
     }
 
     public void SetResolution(int resolutionIndex)
@@ -82,8 +79,7 @@ public class SettingsMenu : MonoBehaviour
     private void LoadSettings()
     {
         // Resolution
-        var currentResolution = Screen.currentResolution;
-        resolutionDropdown.value = resolutions.FindIndex(r => r.width == currentResolution.width && r.height == currentResolution.height);
+        resolutionDropdown.value = resolutions.FindIndex(r => r.width == Screen.width && r.height == Screen.height);
         fullscreenToggle.isOn = Screen.fullScreen;
         SetVSync(IntToBool(PlayerPrefs.GetInt("vSync")));
 
