@@ -1,11 +1,12 @@
-using System.Threading.Tasks;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using PathOfHero.Utilities;
 using PathOfHero.Others;
 
-[System.Serializable]
+[Serializable]
 public class DialogueEvents : UnityEvent {}
 
 public class DialogueController : Singleton<DialogueController>
@@ -33,17 +34,15 @@ public class DialogueController : Singleton<DialogueController>
 
     public bool IsInConversation { get; set; }
 
-    public async Task ShowDialogue(string header, DialogueEntry[] dialogueEntries, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
+    public IEnumerator ShowDialogue(string header, DialogueEntry[] dialogueEntries, DialogueEvents dialogueEndEvents, Sprite sprite = null, bool canBeSkipped = true)
     {
         if (!IsInConversation)
         {
-            // canShowNextDialogue = false;
-
             if (dialogueEntries.Length <= 0)
             {
                 Debug.LogWarning("dialogues is empty");
                 dialogueEndEvents.Invoke();
-                return;
+                yield break;
             }
 
             if (clone)
@@ -70,15 +69,11 @@ public class DialogueController : Singleton<DialogueController>
             currentDialogueIndex = -1;
             IsInConversation = true;
             canShowNextDialogue = true;
-            await NextDialogue();
-
-            // dialogueEntries[currentDialogueIndex].eventRequestData?.Invoke();
-            // await dialoguePanel.ShowDialoguePanel(header, dialogueEntries[currentDialogueIndex].dialogue, sprite, hint);
-            // canShowNextDialogue = true;
+            yield return NextDialogue();
         }
     }
 
-    public async Task NextDialogue()
+    public IEnumerator NextDialogue()
     {
         if (canShowNextDialogue)
         {
@@ -89,12 +84,11 @@ public class DialogueController : Singleton<DialogueController>
             if (currentDialogueIndex < dialogueEntries.Length)
             {
                 dialogueEntries[currentDialogueIndex].eventRequestData?.Invoke();
-                await dialoguePanel.ShowDialoguePanel(header, dialogueEntries[currentDialogueIndex].dialogue, sprite, hint);
+                yield return dialoguePanel.ShowDialoguePanel(header, dialogueEntries[currentDialogueIndex].dialogue, sprite, hint);
             }
             else
             {
                 dialoguePanel.SetAllowHiding(true);
-                //await dialoguePanel.HideDialoguePanel();
                 dialoguePanel.HidePanel();
                 dialogueEndEvents.Invoke();
 
@@ -123,7 +117,7 @@ public class DialogueController : Singleton<DialogueController>
         if (!IsInConversation)
             return;
 
-        _ = NextDialogue();
+        StartCoroutine(NextDialogue());
     }
 
     private void OnSkipDialogue()

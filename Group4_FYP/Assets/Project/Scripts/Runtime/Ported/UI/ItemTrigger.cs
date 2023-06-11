@@ -14,7 +14,7 @@ public class ItemTrigger : Interaction
         StartCoroutine(TimeoutDestroy(Time.time + lifeTime));
     }
 
-    protected override void Interact() // previously: public void PickUpItem()
+    protected override IEnumerator Interact() // previously: public void PickUpItem()
     {
         int random = Random.Range(item.minDropSize, item.maxDropSize);
         int addedItemCount = 0;
@@ -32,6 +32,8 @@ public class ItemTrigger : Interaction
             Message.Instance.ShowMessage("+" + addedItemCount + " " + item.itemName, item.itemIcon);
             Destroy(gameObject);
         }
+
+        yield break; // haha
     }
 
     private IEnumerator TimeoutDestroy(float lifeTime)

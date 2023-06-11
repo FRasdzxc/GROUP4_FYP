@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -32,17 +33,17 @@ public class DialogueTrigger : Interaction
         base.Start();
 
         if (triggerOnStart)
-            Interact();
+            StartCoroutine(Interact());
 
         if (eventRequestData)
             dialogueEndEvents.AddListener(eventRequestData.Invoke);
     }
 
-    protected async override void Interact()
+    protected override IEnumerator Interact()
     {
         if (dialogueSounds.Length > 0)
             AudioManager.Instance.PlaySound(dialogueSounds[UnityEngine.Random.Range(0, dialogueSounds.Length)]);
 
-        await DialogueController.Instance.ShowDialogue(header, dialogueEntries, dialogueEndEvents, sprite, canBeSkipped);
+        yield return DialogueController.Instance.ShowDialogue(header, dialogueEntries, dialogueEndEvents, sprite, canBeSkipped);
     }
 }

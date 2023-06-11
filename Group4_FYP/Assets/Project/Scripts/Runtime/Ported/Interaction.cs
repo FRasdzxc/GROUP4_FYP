@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -62,7 +63,7 @@ public abstract class Interaction : MonoBehaviour
             }
 
             if (Input.GetKeyDown(interactionKey))
-                Interact();
+                StartCoroutine(Interact());
         }
         else
         {
@@ -80,12 +81,13 @@ public abstract class Interaction : MonoBehaviour
         }
     }
 
-    protected bool IsInInteractionDistance() // is this resource-heavy?
-    {
-        return (Vector2.Distance(transform.position, player.position) <= interactionDistance);
-    }
+    void OnDisable()
+        => StopCoroutine(Interact());
 
-    protected abstract void Interact();
+    protected bool IsInInteractionDistance() // is this expensive?
+        => (Vector2.Distance(transform.position, player.position) <= interactionDistance);
+
+    protected abstract IEnumerator Interact();
 
     public void ApplyModifiedPosition()
     {

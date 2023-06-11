@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,38 +24,31 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
         isDisplayingDialogue = false; // preventive
     }
 
-    public async Task ShowDialoguePanel(string header, string dialogue, Sprite sprite, string hint)
+    public IEnumerator ShowDialoguePanel(string header, string dialogue, Sprite sprite, string hint)
     {
         headerText.text = header;
         dialogueText.text = null;
         image.sprite = sprite;
         hintText.text = hint;
 
-        // if (!panelIsShown)
         if (panelState.Equals(PanelState.Hidden))
         {
             ShowPanel();
             gameObject.SetActive(true);
-            await gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
-            // panelIsShown = true;
+            yield return gameObject.GetComponent<CanvasGroup>().DOFade(1, 0.25f).SetEase(Ease.OutQuart).WaitForCompletion();
         }
 
-        // isOpened = true;
         panelState = PanelState.Shown;
-        await DisplayDialogue(dialogue);
+        yield return DisplayDialogue(dialogue);
     }
 
     public async Task HideDialoguePanel()
     {
-        // if (!panelIsShown)
         if (panelState.Equals(PanelState.Hidden))
             return;
 
-        //HidePanel();
-
         await gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.25f).SetEase(Ease.OutQuart).AsyncWaitForCompletion();
         gameObject.SetActive(false);
-        // panelIsShown = false;
         DialogueController.Instance.IsInConversation = false;
     }
 
@@ -62,26 +56,19 @@ public class DialoguePanel : PanelOverride /*MonoBehaviour*/
     {
         base.HidePanel();
         await HideDialoguePanel();
-        // isOpened = false;
         panelState = PanelState.Hidden;
     }
 
     public void SetAllowHiding(bool allowHiding)
         => this.allowsHiding = allowHiding;
 
-    private async Task DisplayDialogue(string dialogue)
+    private IEnumerator DisplayDialogue(string dialogue)
     {
         if (!isDisplayingDialogue)
         {
             isDisplayingDialogue = true;
-
-            for (int i = 0; i < dialogue.Length; i++)
-            {
-                dialogueText.text = dialogue.Substring(0, i + 1);
-                await Task.Delay((int)(textDisplayDelay * 1000));
-            }
-            dialogueText.text = dialogue;
-
+            yield return dialogueText.DOText(dialogue, dialogue.Length * textDisplayDelay).SetEase(Ease.Linear).WaitForCompletion();
+            dialogueText.text = dialogue; // preventive
             isDisplayingDialogue = false;
         }
     }

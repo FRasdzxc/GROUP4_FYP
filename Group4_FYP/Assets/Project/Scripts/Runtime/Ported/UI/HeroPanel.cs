@@ -169,11 +169,7 @@ public class HeroPanel : PanelOverride
     public void SetupBadgeSlot(bool badgeObtained)
     {
         badgeSlot.Clear();
-
-        if (badgeObtained)
-            badgeSlot.Configure(badge, 1, InventoryMode.Preview);
-        else
-            badgeSlot.Configure(placeholderBadge, 1, InventoryMode.Preview);
+        badgeSlot.Configure(badgeObtained ? badge : placeholderBadge, 1, InventoryMode.Preview);
     }
 
     private void OnProfileLoaded()
