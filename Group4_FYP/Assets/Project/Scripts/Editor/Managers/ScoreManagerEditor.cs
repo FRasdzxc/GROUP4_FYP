@@ -14,7 +14,7 @@ namespace PathOfHero.Managers
             var instance = target as ScoreManager;
             if (instance.InLevel)
             {
-                var stats = instance.CurrentStats;
+                var stats = instance.Session;
                 using (new EditorGUI.DisabledScope(true))
                 {
                     EditorGUILayout.TextField("Time Taken", System.TimeSpan.FromSeconds(stats.timeTaken).ToString(@"mm\:ss"));

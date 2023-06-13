@@ -163,7 +163,6 @@ public class Hero : Singleton<Hero>
         if (!IsDead && GameManager.Instance.IsPlayingHostile())
         {
             var amount = accountForDefenseUpgrade ? damage / upgradedDefense : damage;
-            m_ScoreEventChannel.DamageTaken(amount);
             health = Mathf.Clamp(health - damage, 0, upgradedMaxHealth);
 
             if (damageSoundClips.Length > 0)
@@ -171,6 +170,8 @@ public class Hero : Singleton<Hero>
 
             if (health <= 0)
                 StartCoroutine(Die());
+
+            m_ScoreEventChannel?.DamageTaken(amount);
         }
     }
 

@@ -13,7 +13,8 @@ namespace PathOfHero.Managers
 {
     public class ScoreManager : Singleton<ScoreManager>
     {
-        private static readonly string k_Endpoint = "http://127.0.0.1:8000";
+        private static readonly string k_Endpoint = "http://172.18.39.114:8000";
+        //private static readonly string k_Endpoint = "http://localhost:8000";
         private static readonly string k_RecordEndpoint = "/api/v1/poh/record";
         private static readonly Encoding k_Encoding = new UTF8Encoding();
 
@@ -24,12 +25,12 @@ namespace PathOfHero.Managers
         private ScoreEventChannel m_EventChannel;
 
         private bool m_InLevel;
-        private SessionStats m_PrevStats;
-        private SessionStats m_CurrentStats;
+        private bool m_Success;
+        private SessionStats m_Session;
 
         public bool InLevel => m_InLevel;
-        public SessionStats CurrentStats => m_CurrentStats;
-        public SessionStats PrevStats => m_PrevStats;
+        public bool Success => m_Success;
+        public SessionStats Session => m_Session;
 
         private void OnEnable()
         {
@@ -59,36 +60,23 @@ namespace PathOfHero.Managers
 
         private void Start()
         {
-            // Expose default value
+            // Note: Hack for gradshow - Expose default value
             if (string.IsNullOrWhiteSpace(PlayerPrefs.GetString("recordsEndpoint", null)))
                 PlayerPrefs.SetString("recordsEndpoint", k_Endpoint);
-
-#if UNITY_EDITOR
-            // Debug use only
-            m_CurrentStats = new SessionStats()
-            {
-                playerName = "Editor",
-                mapId = "map_dungeoni",
-
-                timeTaken = 42.0f
-            };
-#endif
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!m_InLevel)
                 return;
 
-            m_CurrentStats.timeTaken += Time.deltaTime;
+            if (m_Session != null)
+                m_Session.timeTaken += Time.fixedDeltaTime;
         }
 
         private void LevelStarted(string mapId)
         {
-            if (m_InLevel)
-                return;
-
-            m_CurrentStats = new() { 
+            m_Session = new() { 
                 mapId = mapId,
                 playerName = m_HeroProfile.DisplayName
             };
@@ -97,12 +85,8 @@ namespace PathOfHero.Managers
 
         private void LevelComplete(bool success)
         {
-            if (!m_InLevel)
-                return;
-
             m_InLevel = false;
-            if (!success)
-                m_CurrentStats = null;
+            m_Success = success;
         }
 
         private void StepsTaken()
@@ -110,7 +94,7 @@ namespace PathOfHero.Managers
             if (!m_InLevel)
                 return;
 
-            m_CurrentStats.stepsTaken++;
+            m_Session.stepsTaken++;
         }
 
         private void DamageGiven(float amount)
@@ -118,7 +102,7 @@ namespace PathOfHero.Managers
             if (!m_InLevel)
                 return;
 
-            m_CurrentStats.damageGiven += amount;
+            m_Session.damageGiven += amount;
         }
 
         private void DamageTaken(float amount)
@@ -126,7 +110,7 @@ namespace PathOfHero.Managers
             if (!m_InLevel)
                 return;
 
-            m_CurrentStats.damageTaken += amount;
+            m_Session.damageTaken += amount;
         }
 
         private void WeaponUsed(string weponName)
@@ -134,10 +118,10 @@ namespace PathOfHero.Managers
             if (!m_InLevel || string.IsNullOrWhiteSpace(weponName))
                 return;
 
-            if (!m_CurrentStats.weaponUsage.ContainsKey(weponName))
-                m_CurrentStats.weaponUsage[weponName] = 0;
+            if (!m_Session.weaponUsage.ContainsKey(weponName))
+                m_Session.weaponUsage[weponName] = 0;
 
-            m_CurrentStats.weaponUsage[weponName]++;
+            m_Session.weaponUsage[weponName]++;
         }
 
         private void AbilityUsed(string abilityName)
@@ -145,10 +129,10 @@ namespace PathOfHero.Managers
             if (!m_InLevel || string.IsNullOrWhiteSpace(abilityName))
                 return;
 
-            if (!m_CurrentStats.abilityUsage.ContainsKey(abilityName))
-                m_CurrentStats.abilityUsage[abilityName] = 0;
+            if (!m_Session.abilityUsage.ContainsKey(abilityName))
+                m_Session.abilityUsage[abilityName] = 0;
 
-            m_CurrentStats.abilityUsage[abilityName]++;
+            m_Session.abilityUsage[abilityName]++;
         }
 
         private void MobKilled(string mobName)
@@ -159,21 +143,21 @@ namespace PathOfHero.Managers
             // Check if the mob is a chest - can be done after beating a level
             if (mobName.EndsWith("Chest"))
             {
-                if (!m_CurrentStats.chestsFound.ContainsKey(mobName))
-                    m_CurrentStats.chestsFound[mobName] = 0;
+                if (!m_Session.chestsFound.ContainsKey(mobName))
+                    m_Session.chestsFound[mobName] = 0;
 
-                m_CurrentStats.chestsFound[mobName]++;
+                m_Session.chestsFound[mobName]++;
             }
             else if (m_InLevel)
             {
-                if (!m_CurrentStats.mobsKilled.ContainsKey(mobName))
-                    m_CurrentStats.mobsKilled[mobName] = 0;
+                if (!m_Session.mobsKilled.ContainsKey(mobName))
+                    m_Session.mobsKilled[mobName] = 0;
 
-                m_CurrentStats.mobsKilled[mobName]++;
+                m_Session.mobsKilled[mobName]++;
             }
         }
 
-        public void UploadRecord(SessionStats session)
+        public void UploadResult(SessionStats session)
             => StartCoroutine(UploadSession(session));
 
         private IEnumerator UploadSession(SessionStats session)
@@ -192,11 +176,7 @@ namespace PathOfHero.Managers
             if (www.result != UnityWebRequest.Result.Success)
                 Debug.LogWarning($"[Score Manager] Upload session stats to {endpoint} failed\n{www.result}: {www.error}");
             else
-            {
                 Debug.Log($"[Score Manager] Uploaded session stats successfully.");
-                m_PrevStats = session;
-                m_CurrentStats = null;
-            }
         }
 
         [System.Serializable]

@@ -127,11 +127,12 @@ public class Mob : MonoBehaviour
         if (damageSoundClips.Length > 0)
             audioSource.PlayOneShot(damageSoundClips[Random.Range(0, damageSoundClips.Length)]);
 
-        m_ScoreEventChannel.DamageGiven(damage);
         health = Mathf.Clamp(health - damage, 0, mobData.health);
         UpdateUI();
         if (health <= 0)
             Die();
+
+        m_ScoreEventChannel?.DamageGiven(damage);
     }
 
     private async void Die()
@@ -157,7 +158,7 @@ public class Mob : MonoBehaviour
             if (loot)
                 loot.SpawnDrop(transform, randomDropCount, dropRange);
             point.SpawnDrop();
-            m_ScoreEventChannel.MobKilled(mobData.characterName);
+            m_ScoreEventChannel?.MobKilled(mobData.characterName);
             Destroy(gameObject);
         }
     }

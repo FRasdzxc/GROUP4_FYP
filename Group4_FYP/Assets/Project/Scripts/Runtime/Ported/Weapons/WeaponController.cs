@@ -28,8 +28,8 @@ public abstract class WeaponController : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time >= nextAttackTime)
         {
             Attack();
-            m_ScoreEventChannel.WeaponUsed(weaponData.item?.itemID);
             nextAttackTime = Time.time + weaponData.cooldown;
+            m_ScoreEventChannel?.WeaponUsed(weaponData.item?.itemID);
         }
     }
 

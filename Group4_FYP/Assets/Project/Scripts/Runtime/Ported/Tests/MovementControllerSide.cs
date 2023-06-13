@@ -94,9 +94,10 @@ public class MovementControllerSide : MovementControllerV2
                 while (newClip == lastStepClip);
 
                 audioSource.PlayOneShot(newClip);
-                m_ScoreEventChannel.StepTaken();
                 nextStepSound = Time.time + newClip.length * (sprinting ? 0.9f : 1.2f);
                 lastStepClip = newClip;
+
+                m_ScoreEventChannel?.StepTaken();
             }
         }
 
